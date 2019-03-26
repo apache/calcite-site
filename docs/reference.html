@@ -275,6 +275,7 @@ form.</p>
 
 <span class="n">tableReference</span><span class="p">:</span>
       <span class="n">tablePrimary</span>
+      <span class="p">[</span> <span class="k">FOR</span> <span class="n">SYSTEM_TIME</span> <span class="k">AS</span> <span class="k">OF</span> <span class="n">expression</span> <span class="p">]</span>
       <span class="p">[</span> <span class="n">matchRecognize</span> <span class="p">]</span>
       <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="k">alias</span> <span class="p">[</span> <span class="s1">'('</span> <span class="n">columnAlias</span> <span class="p">[,</span> <span class="n">columnAlias</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="p">]</span> <span class="p">]</span>
 
@@ -642,10 +643,13 @@ JAVA,
 JSON,
 <strong>JSON_ARRAY</strong>,
 <strong>JSON_ARRAYAGG</strong>,
+JSON_DEPTH,
 <strong>JSON_EXISTS</strong>,
 <strong>JSON_OBJECT</strong>,
 <strong>JSON_OBJECTAGG</strong>,
+JSON_PRETTY,
 <strong>JSON_QUERY</strong>,
+JSON_TYPE,
 <strong>JSON_VALUE</strong>,
 K,
 KEY,
@@ -2348,13 +2352,16 @@ standard SQL. Calls with parentheses, such as <code class="highlighter-rouge">CU
       <td style="text-align: left">{fn REPLACE(string, search, replacement)}</td>
       <td style="text-align: left">Returns a string in which all the occurrences of <em>search</em> in <em>string</em> are replaced with <em>replacement</em>; if <em>replacement</em> is the empty string, the occurrences of <em>search</em> are removed</td>
     </tr>
+    <tr>
+      <td style="text-align: left">{fn ASCII(string)}</td>
+      <td style="text-align: left">Returns the corresponding ASCII code of the first character of <em>string</em>; Returns 0 if <em>string</em> is empty; Returns NULL if <em>string</em> is NULL; Returns the Unicode code point for non-ASCII character</td>
+    </tr>
   </tbody>
 </table>
 
 <p>Not implemented:</p>
 
 <ul>
-  <li>{fn ASCII(string)} - Convert a single-character string to the corresponding ASCII code, an integer between 0 and 255</li>
   <li>{fn CHAR(string)}</li>
   <li>{fn DIFFERENCE(string, string)}</li>
   <li>{fn LEFT(string, integer)}</li>
@@ -2556,6 +2563,14 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
     <tr>
       <td style="text-align: left">ANY_VALUE( [ ALL | DISTINCT ] value)</td>
       <td style="text-align: left">Returns one of the values of <em>value</em> across all input values; this is NOT specified in the SQL standard</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BIT_AND( [ ALL | DISTINCT ] value)</td>
+      <td style="text-align: left">Returns the bitwise AND of all non-null input values, or null if none</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BIT_OR( [ ALL | DISTINCT ] value)</td>
+      <td style="text-align: left">Returns the bitwise OR of all non-null input values, or null if none</td>
     </tr>
     <tr>
       <td style="text-align: left">STDDEV_POP( [ ALL | DISTINCT ] numeric)</td>
@@ -3458,7 +3473,7 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
       <td style="text-align: left">Construct json array using a series of values (<strong>value</strong>)</td>
     </tr>
     <tr>
-      <td style="text-align: left">JSON_ARRAYAGG( value [ FORMAT JSON ] [ { NULL | ABSENT } ON NULL ] )</td>
+      <td style="text-align: left">JSON_ARRAYAGG( value [ FORMAT JSON ] [ ORDER BY orderItem [, orderItem ]* ] [ { NULL | ABSENT } ON NULL ] )</td>
       <td style="text-align: left">Aggregate function to construct json array using a value (<strong>value</strong>)</td>
     </tr>
   </tbody>
@@ -3469,6 +3484,7 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
 <ul>
   <li>The flag <strong>FORMAT JSON</strong> indicates the value is formatted as JSON character string. When <strong>FORMAT JSON</strong> is used, value should be de-parse from JSON character string to SQL structured value.</li>
   <li><strong>ON NULL</strong> clause defines how the JSON output represents null value. The default null behavior of <strong>JSON_OBJECT</strong> and <strong>JSON_OBJECTAGG</strong> is <em>NULL ON NULL</em>, and for <strong>JSON_ARRAY</strong> and <strong>JSON_ARRAYAGG</strong> it is <em>ABSENT ON NULL</em>.</li>
+  <li>If <strong>ORDER BY</strong> clause is provided, <strong>JSON_ARRAYAGG</strong> will sort the input rows by the specified order before performing aggregation.</li>
 </ul>
 
 <h4 id="comparison-operators-1">Comparison Operators</h4>
@@ -3512,6 +3528,101 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
     <tr>
       <td style="text-align: left">value IS NOT JSON ARRAY</td>
       <td style="text-align: left">Whether <em>value</em> is not a json array, <em>value</em> is in character string type</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="mysql-specific-operators">MySQL Specific Operators</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Operator syntax</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">JSON_TYPE(value)</td>
+      <td style="text-align: left">Returns a string indicating the type of a JSON <strong>value</strong>. This can be an object, an array, or a scalar type</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">JSON_DEPTH(value)</td>
+      <td style="text-align: left">Returns a integer indicating the depth of a JSON <strong>value</strong>. This can be an object, an array, or a scalar type</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">JSON_PRETTY(value)</td>
+      <td style="text-align: left">Returns a pretty-printing of JSON <strong>value</strong>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>JSON_TYPE</li>
+</ul>
+
+<p>Example SQL:</p>
+
+<pre><code class="language-SQL">SELECT JSON_TYPE(v) AS c1
+,JSON_TYPE(JSON_VALUE(v, 'lax $.b' ERROR ON ERROR)) AS c2
+,JSON_TYPE(JSON_VALUE(v, 'strict $.a[0]' ERROR ON ERROR)) AS c3
+,JSON_TYPE(JSON_VALUE(v, 'strict $.a[1]' ERROR ON ERROR)) AS c4
+FROM (VALUES ('{"a": [10, true],"b": "[10, true]"}')) AS t(v)
+LIMIT 10;
+</code></pre>
+
+<p>Result:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>c1</th>
+      <th>c2</th>
+      <th>c3</th>
+      <th>c4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OBJECT</td>
+      <td>ARRAY</td>
+      <td>INTEGER</td>
+      <td>BOOLEAN</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>JSON_DEPTH</li>
+</ul>
+
+<p>Example SQL:</p>
+
+<pre><code class="language-SQL">SELECT JSON_DEPTH(v) AS c1
+,JSON_DEPTH(JSON_VALUE(v, 'lax $.b' ERROR ON ERROR)) AS c2
+,JSON_DEPTH(JSON_VALUE(v, 'strict $.a[0]' ERROR ON ERROR)) AS c3
+,JSON_DEPTH(JSON_VALUE(v, 'strict $.a[1]' ERROR ON ERROR)) AS c4
+FROM (VALUES ('{"a": [10, true],"b": "[10, true]"}')) AS t(v)
+LIMIT 10;
+</code></pre>
+
+<p>Result:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>c1</th>
+      <th>c2</th>
+      <th>c3</th>
+      <th>c4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>

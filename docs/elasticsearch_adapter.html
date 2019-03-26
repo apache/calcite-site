@@ -207,12 +207,14 @@ Elasticsearch in ascending order.</p>
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="k">SELECT</span> <span class="n">_MAP</span><span class="p">[</span><span class="s1">'city'</span><span class="p">],</span> <span class="n">_MAP</span><span class="p">[</span><span class="s1">'state'</span><span class="p">]</span> <span class="k">from</span> <span class="nv">"elasticsearch"</span><span class="p">.</span><span class="nv">"zips"</span> <span class="k">order</span> <span class="k">by</span> <span class="n">_MAP</span><span class="p">[</span><span class="s1">'state'</span><span class="p">];</span></code></pre></figure>
 
 <h3 id="use-of-scrolling-api">Use of Scrolling API</h3>
-<p>For queries without aggregate functions (like <code class="highlighter-rouge">COUNT</code>, <code class="highlighter-rouge">MAX</code> etc.) elastic adapter 
-uses <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html">scroll API</a>, by default. 
+
+<p>For queries without aggregate functions (like <code class="highlighter-rouge">COUNT</code>, <code class="highlighter-rouge">MAX</code> etc.) elastic adapter
+uses <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html">scroll API</a>, by default.
 This ensures that consistent and full data-set is returned to end user (lazily and in batches). Please note that
 scroll is automatically cleared (removed) when all query resuts are consumed.</p>
 
 <h3 id="supported-versions">Supported versions</h3>
+
 <p>Currently this adapter supports ElasticSearch versions 2.x (or newer). Generally
 we try to follow official <a href="https://www.elastic.co/support/eol">support schedule</a>.</p>
 

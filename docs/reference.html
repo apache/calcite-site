@@ -2046,7 +2046,7 @@ standard SQL. Calls with parentheses, such as <code class="highlighter-rouge">CU
   <tbody>
     <tr>
       <td style="text-align: left">ELEMENT(value)</td>
-      <td style="text-align: left">Returns the sole element of a array or multiset; null if the collection is empty; throws if it has more than one element.</td>
+      <td style="text-align: left">Returns the sole element of an array or multiset; null if the collection is empty; throws if it has more than one element.</td>
     </tr>
     <tr>
       <td style="text-align: left">CARDINALITY(value)</td>
@@ -3246,7 +3246,7 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
 
 <ul>
   <li>ST_AddZ(geom, zToAdd) Adds <em>zToAdd</em> to the z-coordinate of <em>geom</em></li>
-  <li>ST_Interpolate3DLine(geom) Returns <em>geom</em> with a interpolation of z values, or null if it is not a line-string or MULTILINESTRING</li>
+  <li>ST_Interpolate3DLine(geom) Returns <em>geom</em> with an interpolation of z values, or null if it is not a line-string or MULTILINESTRING</li>
   <li>ST_MultiplyZ(geom, zFactor) Returns <em>geom</em> with its z-values multiplied by <em>zFactor</em></li>
   <li>ST_Reverse3DLine(geom [, sortOrder ]) Potentially reverses <em>geom</em> according to the z-values of its first and last coordinates</li>
   <li>ST_UpdateZ(geom, newZ [, updateCondition ]) Updates the z-values of <em>geom</em></li>
@@ -3367,7 +3367,14 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
 
 <h3 id="json-functions">JSON Functions</h3>
 
-<h4 id="query-functions">Query Functions</h4>
+<p>In the following:</p>
+
+<ul>
+  <li><em>jsonValue</em> is a character string containing a JSON value;</li>
+  <li><em>path</em> is a character string containing a JSON path expression; mode flag <code class="highlighter-rouge">strict</code> or <code class="highlighter-rouge">lax</code> should be specified in the beginning of <em>path</em>.</li>
+</ul>
+
+<h4 id="json-query-functions">JSON query functions</h4>
 
 <table>
   <thead>
@@ -3378,16 +3385,16 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">JSON_EXISTS(value, path [ { TRUE | FALSE | UNKNOWN | ERROR ) ON ERROR } )</td>
-      <td style="text-align: left">Test whether a JSON <strong>value</strong> satisfies a search criterion described using JSON path expression <strong>path</strong></td>
+      <td style="text-align: left">JSON_EXISTS(jsonValue, path [ { TRUE | FALSE | UNKNOWN | ERROR ) ON ERROR } )</td>
+      <td style="text-align: left">Whether a <em>jsonValue</em> satisfies a search criterion described using JSON path expression <em>path</em></td>
     </tr>
     <tr>
-      <td style="text-align: left">JSON_VALUE(value, path [ RETURNING type ] [ { ERROR | NULL | DEFAULT expr } ON EMPTY ] [ { ERROR | NULL | DEFAULT expr } ON ERROR ] )</td>
-      <td style="text-align: left">Extract an SQL scalar from a JSON <strong>value</strong> using JSON path expression <strong>path</strong></td>
+      <td style="text-align: left">JSON_VALUE(jsonValue, path [ RETURNING type ] [ { ERROR | NULL | DEFAULT expr } ON EMPTY ] [ { ERROR | NULL | DEFAULT expr } ON ERROR ] )</td>
+      <td style="text-align: left">Extract an SQL scalar from a <em>jsonValue</em> using JSON path expression <em>path</em></td>
     </tr>
     <tr>
-      <td style="text-align: left">JSON_QUERY(value, path [ { WITHOUT [ ARRAY ] | WITH [ CONDITIONAL | UNCONDITIONAL ] [ ARRAY ] } WRAPPER ] [ { ERROR | NULL | EMPTY ARRAY | EMPTY OBJECT } ON EMPTY ] [ { ERROR | NULL | EMPTY ARRAY | EMPTY OBJECT } ON ERROR ] )</td>
-      <td style="text-align: left">Extract an JSON object or an JSON array from a JSON <strong>value</strong> using JSON path expression <strong>path</strong></td>
+      <td style="text-align: left">JSON_QUERY(jsonValue, path [ { WITHOUT [ ARRAY ] | WITH [ CONDITIONAL | UNCONDITIONAL ] [ ARRAY ] } WRAPPER ] [ { ERROR | NULL | EMPTY ARRAY | EMPTY OBJECT } ON EMPTY ] [ { ERROR | NULL | EMPTY ARRAY | EMPTY OBJECT } ON ERROR ] )</td>
+      <td style="text-align: left">Extract a JSON object or JSON array from <em>jsonValue</em> using the <em>path</em> JSON path expression</td>
     </tr>
   </tbody>
 </table>
@@ -3395,14 +3402,17 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
 <p>Note:</p>
 
 <ul>
-  <li>The common structure <code class="highlighter-rouge">value, path</code> is JSON API common syntax. <strong>value</strong> is a character string type json input, and <strong>path</strong> is a JSON path expression (in character string type too), mode flag <strong>strict</strong> or <strong>lax</strong> should be specified in the beginning of <strong>path</strong>.</li>
-  <li><strong>ON ERROR</strong> clause, and <strong>ON EMPTY</strong> clause define the fallback behavior of the function when an error is thrown or a null value is about to be returned.</li>
-  <li><strong>ARRAY WRAPPER</strong> clause defines how to represent JSON array result in JSON_QUERY function. Following is a comparision to demonstrate the difference among different wrapper behaviors.</li>
+  <li>The <code class="highlighter-rouge">ON ERROR</code> and <code class="highlighter-rouge">ON EMPTY</code> clauses define the fallback
+behavior of the function when an error is thrown or a null value
+is about to be returned.</li>
+  <li>The <code class="highlighter-rouge">ARRAY WRAPPER</code> clause defines how to represent a JSON array result
+in <code class="highlighter-rouge">JSON_QUERY</code> function. The following examples compare the wrapper
+behaviors.</li>
 </ul>
 
 <p>Example Data:</p>
 
-<pre><code class="language-JSON">{ "a": "[1,2]", "b": [1,2], "c": "hi"}
+<pre><code class="language-JSON">{"a": "[1,2]", "b": [1,2], "c": "hi"}
 </code></pre>
 
 <p>Comparison:</p>
@@ -3450,7 +3460,7 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
   <li>JSON_TABLE</li>
 </ul>
 
-<h4 id="constructor-functions">Constructor Functions</h4>
+<h4 id="json-constructor-functions">JSON constructor functions</h4>
 
 <table>
   <thead>
@@ -3462,19 +3472,19 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
   <tbody>
     <tr>
       <td style="text-align: left">JSON_OBJECT( { [ KEY ] name VALUE value [ FORMAT JSON ] | name : value [ FORMAT JSON ] } * [ { NULL | ABSENT } ON NULL ] )</td>
-      <td style="text-align: left">Construct json object using a series of key (<strong>name</strong>) value (<strong>value</strong>) pairs</td>
+      <td style="text-align: left">Construct JSON object using a series of key (<em>name</em>) value (<em>value</em>) pairs</td>
     </tr>
     <tr>
       <td style="text-align: left">JSON_OBJECTAGG( { [ KEY ] name VALUE value [ FORMAT JSON ] | name : value [ FORMAT JSON ] } [ { NULL | ABSENT } ON NULL ] )</td>
-      <td style="text-align: left">Aggregate function to construct json object using a key (<strong>name</strong>) value (<strong>value</strong>) pair</td>
+      <td style="text-align: left">Aggregate function to construct a JSON object using a key (<em>name</em>) value (<em>value</em>) pair</td>
     </tr>
     <tr>
       <td style="text-align: left">JSON_ARRAY( { value [ FORMAT JSON ] } * [ { NULL | ABSENT } ON NULL ] )</td>
-      <td style="text-align: left">Construct json array using a series of values (<strong>value</strong>)</td>
+      <td style="text-align: left">Construct a JSON array using a series of values (<em>value</em>)</td>
     </tr>
     <tr>
       <td style="text-align: left">JSON_ARRAYAGG( value [ FORMAT JSON ] [ ORDER BY orderItem [, orderItem ]* ] [ { NULL | ABSENT } ON NULL ] )</td>
-      <td style="text-align: left">Aggregate function to construct json array using a value (<strong>value</strong>)</td>
+      <td style="text-align: left">Aggregate function to construct a JSON array using a value (<em>value</em>)</td>
     </tr>
   </tbody>
 </table>
@@ -3482,12 +3492,18 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
 <p>Note:</p>
 
 <ul>
-  <li>The flag <strong>FORMAT JSON</strong> indicates the value is formatted as JSON character string. When <strong>FORMAT JSON</strong> is used, value should be de-parse from JSON character string to SQL structured value.</li>
-  <li><strong>ON NULL</strong> clause defines how the JSON output represents null value. The default null behavior of <strong>JSON_OBJECT</strong> and <strong>JSON_OBJECTAGG</strong> is <em>NULL ON NULL</em>, and for <strong>JSON_ARRAY</strong> and <strong>JSON_ARRAYAGG</strong> it is <em>ABSENT ON NULL</em>.</li>
-  <li>If <strong>ORDER BY</strong> clause is provided, <strong>JSON_ARRAYAGG</strong> will sort the input rows by the specified order before performing aggregation.</li>
+  <li>The flag <code class="highlighter-rouge">FORMAT JSON</code> indicates the value is formatted as JSON
+character string. When <code class="highlighter-rouge">FORMAT JSON</code> is used, the value should be
+de-parse from JSON character string to a SQL structured value.</li>
+  <li><code class="highlighter-rouge">ON NULL</code> clause defines how the JSON output represents null
+values. The default null behavior of <code class="highlighter-rouge">JSON_OBJECT</code> and
+<code class="highlighter-rouge">JSON_OBJECTAGG</code> is <code class="highlighter-rouge">NULL ON NULL</code>, and for <code class="highlighter-rouge">JSON_ARRAY</code> and
+<code class="highlighter-rouge">JSON_ARRAYAGG</code> it is <code class="highlighter-rouge">ABSENT ON NULL</code>.</li>
+  <li>If <code class="highlighter-rouge">ORDER BY</code> clause is provided, <code class="highlighter-rouge">JSON_ARRAYAGG</code> sorts the
+input rows into the specified order before performing aggregation.</li>
 </ul>
 
-<h4 id="comparison-operators-1">Comparison Operators</h4>
+<h4 id="json-comparison-operators">JSON comparison operators</h4>
 
 <table>
   <thead>
@@ -3498,41 +3514,41 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">value IS JSON [ VALUE ]</td>
-      <td style="text-align: left">Whether <em>value</em> is a json value, <em>value</em> is in character string type</td>
+      <td style="text-align: left">jsonValue IS JSON [ VALUE ]</td>
+      <td style="text-align: left">Whether <em>jsonValue</em> is a JSON value</td>
     </tr>
     <tr>
-      <td style="text-align: left">value IS NOT JSON [ VALUE ]</td>
-      <td style="text-align: left">Whether <em>value</em> is not a json value, <em>value</em> is in character string type</td>
+      <td style="text-align: left">jsonValue IS NOT JSON [ VALUE ]</td>
+      <td style="text-align: left">Whether <em>jsonValue</em> is not a JSON value</td>
     </tr>
     <tr>
-      <td style="text-align: left">value IS JSON SCALAR</td>
-      <td style="text-align: left">Whether <em>value</em> is a json scalar value, <em>value</em> is in character string type</td>
+      <td style="text-align: left">jsonValue IS JSON SCALAR</td>
+      <td style="text-align: left">Whether <em>jsonValue</em> is a JSON scalar value</td>
     </tr>
     <tr>
-      <td style="text-align: left">value IS NOT JSON SCALAR</td>
-      <td style="text-align: left">Whether <em>value</em> is not a json scalar value, <em>value</em> is in character string type</td>
+      <td style="text-align: left">jsonValue IS NOT JSON SCALAR</td>
+      <td style="text-align: left">Whether <em>jsonValue</em> is not a JSON scalar value</td>
     </tr>
     <tr>
-      <td style="text-align: left">value IS JSON OBJECT</td>
-      <td style="text-align: left">Whether <em>value</em> is a json object, <em>value</em> is in character string type</td>
+      <td style="text-align: left">jsonValue IS JSON OBJECT</td>
+      <td style="text-align: left">Whether <em>jsonValue</em> is a JSON object</td>
     </tr>
     <tr>
-      <td style="text-align: left">value IS NOT JSON OBJECT</td>
-      <td style="text-align: left">Whether <em>value</em> is not a json object, <em>value</em> is in character string type</td>
+      <td style="text-align: left">jsonValue IS NOT JSON OBJECT</td>
+      <td style="text-align: left">Whether <em>jsonValue</em> is not a JSON object</td>
     </tr>
     <tr>
-      <td style="text-align: left">value IS JSON ARRAY</td>
-      <td style="text-align: left">Whether <em>value</em> is a json array, <em>value</em> is in character string type</td>
+      <td style="text-align: left">jsonValue IS JSON ARRAY</td>
+      <td style="text-align: left">Whether <em>jsonValue</em> is a JSON array</td>
     </tr>
     <tr>
-      <td style="text-align: left">value IS NOT JSON ARRAY</td>
-      <td style="text-align: left">Whether <em>value</em> is not a json array, <em>value</em> is in character string type</td>
+      <td style="text-align: left">jsonValue IS NOT JSON ARRAY</td>
+      <td style="text-align: left">Whether <em>jsonValue</em> is not a JSON array</td>
     </tr>
   </tbody>
 </table>
 
-<h4 id="mysql-specific-operators">MySQL Specific Operators</h4>
+<h4 id="mysql-specific-json-operators">MySQL-specific JSON operators</h4>
 
 <table>
   <thead>
@@ -3543,25 +3559,53 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">JSON_TYPE(value)</td>
-      <td style="text-align: left">Returns a string indicating the type of a JSON <strong>value</strong>. This can be an object, an array, or a scalar type</td>
+      <td style="text-align: left">JSON_TYPE(jsonValue)</td>
+      <td style="text-align: left">Returns a string value indicating the type of a <em>jsonValue</em></td>
     </tr>
     <tr>
-      <td style="text-align: left">JSON_DEPTH(value)</td>
-      <td style="text-align: left">Returns a integer indicating the depth of a JSON <strong>value</strong>. This can be an object, an array, or a scalar type</td>
+      <td style="text-align: left">JSON_DEPTH(jsonValue)</td>
+      <td style="text-align: left">Returns an integer value indicating the depth of a <em>jsonValue</em></td>
     </tr>
     <tr>
-      <td style="text-align: left">JSON_PRETTY(value)</td>
-      <td style="text-align: left">Returns a pretty-printing of JSON <strong>value</strong>.</td>
+      <td style="text-align: left">JSON_PRETTY(jsonValue)</td>
+      <td style="text-align: left">Returns a pretty-printing of <em>jsonValue</em></td>
     </tr>
   </tbody>
 </table>
+
+<p>Note:</p>
 
 <ul>
-  <li>JSON_TYPE</li>
+  <li><code class="highlighter-rouge">JSON_TYPE</code> / <code class="highlighter-rouge">JSON_DEPTH</code> return null if the argument is null</li>
+  <li><code class="highlighter-rouge">JSON_TYPE</code> / <code class="highlighter-rouge">JSON_DEPTH</code> / <code class="highlighter-rouge">JSON_PRETTY</code> throw error if the argument is not a valid JSON value</li>
+  <li><code class="highlighter-rouge">JSON_TYPE</code> generally returns an upper-case string flag indicating the type of the JSON input. Currently supported supported type flags are:
+    <ul>
+      <li>INTEGER</li>
+      <li>STRING</li>
+      <li>FLOAT</li>
+      <li>DOUBLE</li>
+      <li>LONG</li>
+      <li>BOOLEAN</li>
+      <li>DATE</li>
+      <li>OBJECT</li>
+      <li>ARRAY</li>
+      <li>NULL</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">JSON_DEPTH</code> defines a JSON values’s depth as follows:
+    <ul>
+      <li>An empty array, empty object, or scalar value has depth 1;</li>
+      <li>A non-empty array containing only elements of depth 1 or non-empty object containing only member values of depth 1 has depth 2;</li>
+      <li>Otherwise, a JSON document has depth greater than 2.</li>
+    </ul>
+  </li>
 </ul>
 
-<p>Example SQL:</p>
+<p>Usage Examples:</p>
+
+<h5 id="json_type-example">JSON_TYPE example</h5>
+
+<p>SQL</p>
 
 <pre><code class="language-SQL">SELECT JSON_TYPE(v) AS c1
 ,JSON_TYPE(JSON_VALUE(v, 'lax $.b' ERROR ON ERROR)) AS c2
@@ -3571,7 +3615,7 @@ FROM (VALUES ('{"a": [10, true],"b": "[10, true]"}')) AS t(v)
 LIMIT 10;
 </code></pre>
 
-<p>Result:</p>
+<p>Result</p>
 
 <table>
   <thead>
@@ -3592,11 +3636,9 @@ LIMIT 10;
   </tbody>
 </table>
 
-<ul>
-  <li>JSON_DEPTH</li>
-</ul>
+<h5 id="json_depth-example">JSON_DEPTH example</h5>
 
-<p>Example SQL:</p>
+<p>SQL</p>
 
 <pre><code class="language-SQL">SELECT JSON_DEPTH(v) AS c1
 ,JSON_DEPTH(JSON_VALUE(v, 'lax $.b' ERROR ON ERROR)) AS c2
@@ -3606,7 +3648,7 @@ FROM (VALUES ('{"a": [10, true],"b": "[10, true]"}')) AS t(v)
 LIMIT 10;
 </code></pre>
 
-<p>Result:</p>
+<p>Result</p>
 
 <table>
   <thead>
@@ -3626,6 +3668,17 @@ LIMIT 10;
     </tr>
   </tbody>
 </table>
+
+<p>Not implemented:</p>
+
+<ul>
+  <li>JSON_LENGTH</li>
+  <li>JSON_INSERT</li>
+  <li>JSON_SET</li>
+  <li>JSON_REPLACE</li>
+  <li>JSON_REMOVE</li>
+  <li>JSON_KEYS</li>
+</ul>
 
 <h2 id="user-defined-functions">User-defined functions</h2>
 

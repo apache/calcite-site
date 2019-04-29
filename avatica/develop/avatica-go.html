@@ -89,15 +89,15 @@
 <ul id="markdown-toc">
   <li><a href="#issues" id="markdown-toc-issues">Issues</a></li>
   <li><a href="#updating-protobuf-definitions" id="markdown-toc-updating-protobuf-definitions">Updating protobuf definitions</a></li>
+  <li><a href="#live-reload-during-development" id="markdown-toc-live-reload-during-development">Live reload during development</a>    <ul>
+      <li><a href="#set-up" id="markdown-toc-set-up">Set up</a></li>
+    </ul>
+  </li>
   <li><a href="#testing" id="markdown-toc-testing">Testing</a>    <ul>
       <li><a href="#easy-way" id="markdown-toc-easy-way">Easy way</a></li>
       <li><a href="#manual-set-up" id="markdown-toc-manual-set-up">Manual set up</a></li>
     </ul>
   </li>
-  <li><a href="#releasing" id="markdown-toc-releasing">Releasing</a></li>
-  <li><a href="#important-things-to-note-before-uploading-a-release" id="markdown-toc-important-things-to-note-before-uploading-a-release">Important things to note before uploading a release</a></li>
-  <li><a href="#uploading-release-artifacts-to-dev-for-voting" id="markdown-toc-uploading-release-artifacts-to-dev-for-voting">Uploading release artifacts to dev for voting</a></li>
-  <li><a href="#promoting-a-release-after-voting" id="markdown-toc-promoting-a-release-after-voting">Promoting a release after voting</a></li>
 </ul>
 
 <h2 id="issues">Issues</h2>
@@ -106,12 +106,30 @@
 as the component.</p>
 
 <h2 id="updating-protobuf-definitions">Updating protobuf definitions</h2>
+<ol>
+  <li>Install <a href="https://docs.docker.com/install/">docker</a> and <a href="https://docs.docker.com/compose/install/">docker-compose</a>.</li>
+  <li>From the root of the repository, run <code class="highlighter-rouge">docker-compose run compile-protobuf</code></li>
+</ol>
 
-<p>To update the procotol buffer definitions, update <code class="highlighter-rouge">AVATICA_VER</code> in <code class="highlighter-rouge">gen-protobuf.bat</code> and <code class="highlighter-rouge">gen-protobuf.sh</code> to match
-the version you want to generate protobufs for and then run the appropriate script for your platform.</p>
+<h2 id="live-reload-during-development">Live reload during development</h2>
+<p>It is possible to reload the code in real-time during development. This executes the test suite every time a <code class="highlighter-rouge">.go</code> or
+<code class="highlighter-rouge">.mod</code> file is updated. The test suite takes a while to run, so the tests will not complete instantly, but live-reloading
+during development allows us to not have to manually execute the test suite on save.</p>
+
+<h3 id="set-up">Set up</h3>
+<ol>
+  <li>
+    <p>Install <a href="https://docs.docker.com/install/">docker</a> and <a href="https://docs.docker.com/compose/install/">docker-compose</a>.</p>
+  </li>
+  <li>
+    <p>From the root of the repository, run <code class="highlighter-rouge">docker-compose run dev</code>.</p>
+  </li>
+  <li>
+    <p>After terminating the container, stop all the containers and remove them using: <code class="highlighter-rouge">docker-compose down</code></p>
+  </li>
+</ol>
 
 <h2 id="testing">Testing</h2>
-
 <p>The test suite takes around 4 minutes to run if you run both the Avatica HSQLDB and Apache Phoenix tests.</p>
 
 <h3 id="easy-way">Easy way</h3>
@@ -120,7 +138,10 @@ the version you want to generate protobufs for and then run the appropriate scri
     <p>Install <a href="https://docs.docker.com/install/">docker</a> and <a href="https://docs.docker.com/compose/install/">docker-compose</a>.</p>
   </li>
   <li>
-    <p>From the root of the repository, run <code class="highlighter-rouge">docker-compose up --build</code>.</p>
+    <p>From the root of the repository, run <code class="highlighter-rouge">docker-compose run test</code>.</p>
+  </li>
+  <li>
+    <p>After the tests complete, stop all the containers and remove them using: <code class="highlighter-rouge">docker-compose down</code></p>
   </li>
 </ol>
 
@@ -150,78 +171,6 @@ PHOENIX_HOST: http://phoenix:8765</code></pre></figure>
   </li>
   <li>
     <p>Then run <code class="highlighter-rouge">go test -v ./...</code> from the root of the repository to execute the test suite.</p>
-  </li>
-</ol>
-
-<h2 id="releasing">Releasing</h2>
-<p>If you have not set up a GPG signing key, set one up by following these <a href="https://www.apache.org/dev/openpgp.html#generate-key">instructions</a>.</p>
-
-<p>If this release is a new major version (we are releasing 4.0.0 vs the current version 3.0.0), update the version in the
-import path in <code class="highlighter-rouge">go.mod</code>. The import paths in the various sample code snippets should also be updated.</p>
-
-<p>Since we need to support Go modules, tags must be prefixed with a <code class="highlighter-rouge">v</code>. For example, tag as <code class="highlighter-rouge">v3.1.0</code> rather than <code class="highlighter-rouge">3.1.0</code>.</p>
-
-<p>From the root of the repository, run <code class="highlighter-rouge">./make-release-artifacts.sh</code>.</p>
-
-<p>You will be asked to select the tag to build release artifacts for. The latest tag is automatically selected if no tag is selected.</p>
-
-<p>The release artifacts will be placed in a folder named for the release within the <code class="highlighter-rouge">dist/</code> folder.</p>
-
-<h2 id="important-things-to-note-before-uploading-a-release">Important things to note before uploading a release</h2>
-<p>The name of the release folder must be in the following format: <code class="highlighter-rouge">apache-calcite-avatica-go-$version</code>. The version must 
-include release candidate identifiers such as <code class="highlighter-rouge">-rc0</code>, if they are present.</p>
-
-<p>The files inside the release folder must have any release candidate identifiers such as <code class="highlighter-rouge">-rc1</code> removed, even if the
-release is a release candidate. <code class="highlighter-rouge">src</code> must also be added to the filename.</p>
-
-<p>For example, if we are uploading the <code class="highlighter-rouge">apache-calcite-avatica-go-3.0.0-rc1</code> folder, the files must be named 
-<code class="highlighter-rouge">apache-calcite-acatica-go-3.0.0.-srctar.gz</code>. Note the inclusion of <code class="highlighter-rouge">src</code> in the filename.</p>
-
-<p>The tar.gz must be named <code class="highlighter-rouge">apache-calcite-avatica-go-$version-src.tar.gz</code>.</p>
-
-<p>There must be a GPG signature for the tar.gz named: <code class="highlighter-rouge">apache-calcite-avatica-go-$version-src.tar.gz.asc</code></p>
-
-<p>There must be a SHA256 hash for the tar.gz named: <code class="highlighter-rouge">apache-calcite-avatica-go-$version-src.tar.gz.sha256</code></p>
-
-<h2 id="uploading-release-artifacts-to-dev-for-voting">Uploading release artifacts to dev for voting</h2>
-<p><code class="highlighter-rouge">svn</code> must be installed in order to upload release artifacts.</p>
-
-<ol>
-  <li>
-    <p>Check out the Calcite dev release subdirectory: <code class="highlighter-rouge">svn co "https://dist.apache.org/repos/dist/dev/calcite/" calcite-dev</code>.</p>
-  </li>
-  <li>
-    <p>Move the release folder under <code class="highlighter-rouge">dist/</code> into the <code class="highlighter-rouge">calcite-dev</code> folder.</p>
-  </li>
-  <li>
-    <p>Add the new release to the svn repository: <code class="highlighter-rouge">svn add apache-calcite-avatica-go-3.0.0-rc0</code>. Remember to change the folder name to the
-correct release in the command.</p>
-  </li>
-  <li>
-    <p>Commit to upload the artifacts: <code class="highlighter-rouge">svn commit -m "apache-calcite-avatica-go-3.0.0-rc0" --username yourapacheusername --force-log</code>
-Note the use of <code class="highlighter-rouge">--force-log</code> to suppress the svn warning, because the commit message is the same as the name of the directory.</p>
-  </li>
-</ol>
-
-<h2 id="promoting-a-release-after-voting">Promoting a release after voting</h2>
-<p><code class="highlighter-rouge">svn</code> must be installed in order to upload release artifacts.</p>
-
-<p>NOTE: Only official releases that has passed a vote may be uploaded to the release directory.</p>
-
-<ol>
-  <li>
-    <p>Check out the Calcite release directory: <code class="highlighter-rouge">svn co "https://dist.apache.org/repos/dist/release/calcite/" calcite-release</code>.</p>
-  </li>
-  <li>
-    <p>Copy the release into the <code class="highlighter-rouge">calcite-release</code> folder. Remember to check the name of the release’s folder to ensure that it is in
-the correct format.</p>
-  </li>
-  <li>
-    <p>Add the release to the svn repository: <code class="highlighter-rouge">svn add apache-calcite-avatica-go-3.0.0</code>. Remember to change the folder name to the
-correct release in the command.</p>
-  </li>
-  <li>
-    <p>Commit to upload the artifacts: <code class="highlighter-rouge">svn commit -m "Release apache-calcite-avatica-go-3.0.0" --username yourapacheusername</code>.</p>
   </li>
 </ol>
 

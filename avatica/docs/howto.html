@@ -800,12 +800,19 @@
           <li><a href="#if-you-are-building-using-docker" id="markdown-toc-if-you-are-building-using-docker">If you are building using docker:</a></li>
           <li><a href="#to-build-directly-in-your-environment" id="markdown-toc-to-build-directly-in-your-environment">To build directly in your environment:</a></li>
           <li><a href="#to-build-using-docker" id="markdown-toc-to-build-using-docker">To build using docker:</a></li>
+          <li><a href="#to-upload-the-artifacts-directly-in-your-environment" id="markdown-toc-to-upload-the-artifacts-directly-in-your-environment">To upload the artifacts directly in your environment:</a></li>
+          <li><a href="#to-upload-the-artifacts-using-docker" id="markdown-toc-to-upload-the-artifacts-using-docker">To upload the artifacts using docker:</a></li>
         </ul>
       </li>
       <li><a href="#cleaning-up-after-a-failed-release-attempt-for-calcite-committers" id="markdown-toc-cleaning-up-after-a-failed-release-attempt-for-calcite-committers">Cleaning up after a failed release attempt (for Calcite committers)</a></li>
       <li><a href="#validate-a-release" id="markdown-toc-validate-a-release">Validate a release</a></li>
       <li><a href="#get-approval-for-a-release-via-apache-voting-process-for-calcite-committers" id="markdown-toc-get-approval-for-a-release-via-apache-voting-process-for-calcite-committers">Get approval for a release via Apache voting process (for Calcite committers)</a></li>
-      <li><a href="#publishing-a-release-for-calcite-committers" id="markdown-toc-publishing-a-release-for-calcite-committers">Publishing a release (for Calcite committers)</a></li>
+      <li><a href="#publishing-a-release-for-calcite-committers" id="markdown-toc-publishing-a-release-for-calcite-committers">Publishing a release (for Calcite committers)</a>        <ul>
+          <li><a href="#publishing-directly-in-your-environment" id="markdown-toc-publishing-directly-in-your-environment">Publishing directly in your environment:</a></li>
+          <li><a href="#publishing-a-release-using-docker" id="markdown-toc-publishing-a-release-using-docker">Publishing a release using docker:</a></li>
+        </ul>
+      </li>
+      <li><a href="#add-release-notes-and-announce-the-release" id="markdown-toc-add-release-notes-and-announce-the-release">Add release notes and announce the release</a></li>
       <li><a href="#publish-the-web-site" id="markdown-toc-publish-the-web-site">Publishing the web site (for Calcite committers)</a></li>
     </ul>
   </li>
@@ -820,8 +827,8 @@ and Java (JDK 8 or later) on your path.</p>
 <code class="highlighter-rouge">cd</code> to the root directory of the unpacked source,
 then build using maven:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz apache-calcite-avatica-1.14.0-src.tar.gz
-<span class="nv">$ </span><span class="nb">cd </span>apache-calcite-avatica-1.14.0-src
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz apache-calcite-avatica-1.15.0-src.tar.gz
+<span class="nv">$ </span><span class="nb">cd </span>apache-calcite-avatica-1.15.0-src
 <span class="nv">$ </span>./mvnw install</code></pre></figure>
 
 <p><a href="#running-tests">Running tests</a> describes how to run more or fewer
@@ -994,10 +1001,10 @@ start again from the top.</p>
 git clean <span class="nt">-xn</span>
 
 <span class="c"># Do a dry run of the release:prepare step, which sets version numbers.</span>
-<span class="c"># Typically we increment minor version: If X.Y.Z is 1.14.0, X2.Y2.Z2 is 1.15.0.</span>
+<span class="c"># Typically we increment minor version: If X.Y.Z is 1.15.0, X2.Y2.Z2 is 1.16.0.</span>
 <span class="c"># Note X.Y.Z is the current version we're trying to release, and X2.Y2.Z2 is the next development version.</span>
 
-<span class="c"># For example, if I am currently building a release for 1.14.0, X.Y.Z would be 1.14.0 and X2.Y2.Z2 would be 1.15.0.</span>
+<span class="c"># For example, if I am currently building a release for 1.15.0, X.Y.Z would be 1.15.0 and X2.Y2.Z2 would be 1.16.0.</span>
 ./mvnw <span class="nt">-DdryRun</span><span class="o">=</span><span class="nb">true</span> <span class="nt">-DreleaseVersion</span><span class="o">=</span>X.Y.Z <span class="nt">-DdevelopmentVersion</span><span class="o">=</span>X2.Y2.Z2-SNAPSHOT <span class="nt">-Dtag</span><span class="o">=</span>avatica-X.Y.Z-rcN <span class="nt">-Papache-release</span> <span class="nt">-Duser</span>.name<span class="o">=</span><span class="k">${</span><span class="nv">asf</span><span class="p">.username</span><span class="k">}</span> release:prepare
 
 <span class="c"># If you have multiple GPG keys, you can select the key used to sign the release by appending `-Dgpg.keyname=${your.key.id}` to `-Darguments`:</span>
@@ -1069,9 +1076,9 @@ generated files from your workspace:</p>
 <h3 id="to-build-directly-in-your-environment">To build directly in your environment:</h3>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Prepare sets the version numbers, creates a tag, and pushes it to git.</span>
-<span class="c"># Typically we increment minor version: If X.Y.Z is 1.14.0, X2.Y2.Z2 is 1.15.0.</span>
+<span class="c"># Typically we increment minor version: If X.Y.Z is 1.15.0, X2.Y2.Z2 is 1.16.0.</span>
 <span class="c"># Note X.Y.Z is the current version we're trying to release, and X2.Y2.Z2 is the next development version.</span>
-<span class="c"># For example, if I am currently building a release for 1.14.0, X.Y.Z would be 1.14.0 and X2.Y2.Z2 would be 1.15.0.</span>
+<span class="c"># For example, if I am currently building a release for 1.15.0, X.Y.Z would be 1.15.0 and X2.Y2.Z2 would be 1.16.0.</span>
 ./mvnw <span class="nt">-DreleaseVersion</span><span class="o">=</span>X.Y.Z <span class="nt">-DdevelopmentVersion</span><span class="o">=</span>X2.Y2.Z2-SNAPSHOT <span class="nt">-Dtag</span><span class="o">=</span>avatica-X.Y.Z-rcN <span class="nt">-Papache-release</span> <span class="nt">-Duser</span>.name<span class="o">=</span><span class="k">${</span><span class="nv">asf</span><span class="p">.username</span><span class="k">}</span> release:prepare
 
 <span class="c"># If you have multiple GPG keys, you can select the key used to sign the release by appending `-Darguments=-Dgpg.keyname=${your.key.id}`:</span>
@@ -1101,6 +1108,7 @@ https://repository.apache.org/content/repositories/orgapachecalcite-1000
 (or a similar URL)</li>
 </ul>
 
+<h3 id="to-upload-the-artifacts-directly-in-your-environment">To upload the artifacts directly in your environment:</h3>
 <p>Upload the artifacts via subversion to a staging area,
 https://dist.apache.org/repos/dist/dev/calcite/apache-calcite-avatica-X.Y.Z-rcN:</p>
 
@@ -1119,6 +1127,14 @@ mv apache-calcite-avatica-<span class="k">*</span> ~/dist/dev/calcite/apache-cal
 <span class="nb">cd</span> ~/dist/dev/calcite
 svn add apache-calcite-avatica-X.Y.Z-rcN
 svn ci</code></pre></figure>
+
+<h3 id="to-upload-the-artifacts-using-docker">To upload the artifacts using docker:</h3>
+<p>This assumes that a release was built and the artifacts are in the <code class="highlighter-rouge">target</code> folder.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose run publish-release-for-voting</code></pre></figure>
+
+<p>The automated process also generates a vote email that can be sent to the list. Please check the email and amend the
+contents as necessary.</p>
 
 <h2 id="cleaning-up-after-a-failed-release-attempt-for-calcite-committers">Cleaning up after a failed release attempt (for Calcite committers)</h2>
 
@@ -1279,8 +1295,10 @@ Uncheck “Send mail for this update”.</p>
 
 <p>Tip: Push the git tag only after the staged nexus artifacts are promoted in the repository. This is because pushing the
 tag triggers Docker Hub to start building the docker images immediately and the build will pull in the promoted artifacts.
-If the artifacts are not yet available, the build on Docker Hub will fail.</p>
+If the artifacts are not yet available, the build on Docker Hub will fail. It’s best to continue with the following steps
+after you have confirmed that the nexus artifacts were promoted properly.</p>
 
+<h3 id="publishing-directly-in-your-environment">Publishing directly in your environment:</h3>
 <p>Copy the Git tag:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">git tag rel/avatica-X.Y.X avatica-X.Y.Z-rcN
@@ -1317,6 +1335,18 @@ svn ci</code></pre></figure>
 <p>The old releases will remain available in the
 <a href="http://archive.apache.org/dist/calcite/">release archive</a>.</p>
 
+<p>Merge the release branch back to master and push it:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">git checkout master
+git merge branch-X.Y <span class="nt">--ff-only</span>
+git push origin master</code></pre></figure>
+
+<h3 id="publishing-a-release-using-docker">Publishing a release using docker:</h3>
+<p>This assumes that a rc release was tagged and pushed to the git repository.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose run promote-release</code></pre></figure>
+
+<h2 id="add-release-notes-and-announce-the-release">Add release notes and announce the release</h2>
 <p>Add a release note by copying
 <a href="https://github.com/apache/calcite-avatica/tree/master/site/_posts/2016-11-01-release-1.9.0.md">site/_posts/2016-11-01-release-1.9.0.md</a>,
 generate the javadoc and copy to <code class="highlighter-rouge">site/target/avatica/apidocs</code>

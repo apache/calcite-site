@@ -369,9 +369,11 @@ You can modify the level for the rootLogger to increase verbosity or change the 
 for a specific class if you so choose.</p>
 
 <figure class="highlight"><pre><code class="language-properties" data-lang="properties"><span class="c"># Change rootLogger level to WARN
-</span><span class="py">log4j.rootLogger</span><span class="p">=</span><span class="s">WARN, A1</span>
+</span><span class="py">log4j.rootLogger</span><span class="p">=</span><span class="s">WARN, A1
+</span>
 <span class="c"># Increase level to DEBUG for RelOptPlanner
-</span><span class="py">log4j.logger.org.apache.calcite.plan.RelOptPlanner</span><span class="p">=</span><span class="s">DEBUG</span>
+</span><span class="py">log4j.logger.org.apache.calcite.plan.RelOptPlanner</span><span class="p">=</span><span class="s">DEBUG
+</span>
 <span class="c"># Increase level to TRACE for HepPlanner
 </span><span class="py">log4j.logger.org.apache.calcite.plan.hep.HepPlanner</span><span class="p">=</span><span class="s">TRACE</span></code></pre></figure>
 
@@ -478,13 +480,15 @@ queries. It is also necessary if you intend to run the test suite, using
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AdapterContext</span> <span class="kd">implements</span> <span class="n">CalcitePrepare</span><span class="o">.</span><span class="na">Context</span> <span class="o">{</span>
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="n">JavaTypeFactory</span> <span class="nf">getTypeFactory</span><span class="o">()</span> <span class="o">{</span>
-    <span class="c1">// adapter implementation</span>
+    <span class="c1">// adapter implementation
+</span>
     <span class="k">return</span> <span class="n">typeFactory</span><span class="o">;</span>
   <span class="o">}</span>
 
   <span class="nd">@Override</span>
   <span class="kd">public</span> <span class="n">CalciteSchema</span> <span class="nf">getRootSchema</span><span class="o">()</span> <span class="o">{</span>
-    <span class="c1">// adapter implementation</span>
+    <span class="c1">// adapter implementation
+</span>
     <span class="k">return</span> <span class="n">rootSchema</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
@@ -512,7 +516,8 @@ specific implementation.</p>
     <span class="n">CalcitePrepare</span><span class="o">.</span><span class="na">PrepareResult</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">prepared</span> <span class="o">=</span>
         <span class="k">new</span> <span class="nf">CalcitePrepareImpl</span><span class="o">().</span><span class="na">prepareSql</span><span class="o">(</span><span class="n">ctx</span><span class="o">,</span> <span class="n">sql</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">elementType</span><span class="o">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">);</span>
     <span class="n">Object</span> <span class="n">enumerable</span> <span class="o">=</span> <span class="n">prepared</span><span class="o">.</span><span class="na">getExecutable</span><span class="o">();</span>
-    <span class="c1">// etc.</span>
+    <span class="c1">// etc.
+</span>
   <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
@@ -626,10 +631,12 @@ ball because that would be
   <li>Make sure build and tests succeed with <code class="highlighter-rouge">-Dcalcite.test.db=hsqldb</code> (the default)</li>
 </ul>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Tell GPG how to read a password from your terminal</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Tell GPG how to read a password from your terminal
+</span>
 <span class="nb">export </span><span class="nv">GPG_TTY</span><span class="o">=</span><span class="k">$(</span>tty<span class="k">)</span>
 
-<span class="c"># Make sure that there are no junk files in the sandbox</span>
+<span class="c"># Make sure that there are no junk files in the sandbox
+</span>
 git clean <span class="nt">-xn</span>
 ./mvnw clean
 
@@ -688,11 +695,14 @@ just about to release)</li>
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="err">$</span> <span class="p">.</span><span class="o">/</span><span class="n">sqlline</span>
 <span class="o">&gt;</span> <span class="o">!</span><span class="k">connect</span> <span class="n">jdbc</span><span class="p">:</span><span class="n">calcite</span><span class="p">:</span><span class="n">fun</span><span class="o">=</span><span class="n">spatial</span><span class="p">,</span><span class="n">oracle</span> <span class="nv">"sa"</span> <span class="nv">""</span>
 <span class="k">SELECT</span> <span class="n">NVL</span><span class="p">(</span><span class="n">ST_Is3D</span><span class="p">(</span><span class="n">ST_PointFromText</span><span class="p">(</span><span class="s1">'POINT(-71.064544 42.28787)'</span><span class="p">)),</span> <span class="k">TRUE</span><span class="p">);</span>
-<span class="o">+</span><span class="c1">--------+</span>
+<span class="o">+</span><span class="c1">--------+
+</span>
 <span class="o">|</span> <span class="n">EXPR</span><span class="err">$</span><span class="mi">0</span> <span class="o">|</span>
-<span class="o">+</span><span class="c1">--------+</span>
+<span class="o">+</span><span class="c1">--------+
+</span>
 <span class="o">|</span> <span class="k">false</span>  <span class="o">|</span>
-<span class="o">+</span><span class="c1">--------+</span>
+<span class="o">+</span><span class="c1">--------+
+</span>
 <span class="mi">1</span> <span class="k">row</span> <span class="n">selected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">039</span> <span class="n">seconds</span><span class="p">)</span>
 <span class="o">&gt;</span> <span class="o">!</span><span class="n">quit</span></code></pre></figure>
 
@@ -716,20 +726,27 @@ that the release process will complete as expected.</p>
 <p>If any of the steps fail, clean up (see below), fix the problem, and
 start again from the top.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Tell GPG how to read a password from your terminal</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Tell GPG how to read a password from your terminal
+</span>
 <span class="nb">export </span><span class="nv">GPG_TTY</span><span class="o">=</span><span class="k">$(</span>tty<span class="k">)</span>
 
-<span class="c"># Make sure that there are no junk files in the sandbox</span>
+<span class="c"># Make sure that there are no junk files in the sandbox
+</span>
 git clean <span class="nt">-xn</span>
 ./mvnw clean
 
-<span class="c"># Do a dry run of the release:prepare step, which sets version numbers</span>
-<span class="c"># (accept the default tag name of calcite-X.Y.Z).</span>
-<span class="c"># Note X.Y.Z is the current version we're trying to release (e.g. 1.8.0),</span>
-<span class="c"># and X.(Y+1).Z is the next development version (e.g. 1.9.0).</span>
+<span class="c"># Do a dry run of the release:prepare step, which sets version numbers
+</span>
+<span class="c"># (accept the default tag name of calcite-X.Y.Z).
+</span>
+<span class="c"># Note X.Y.Z is the current version we're trying to release (e.g. 1.8.0),
+</span>
+<span class="c"># and X.(Y+1).Z is the next development version (e.g. 1.9.0).
+</span>
 ./mvnw <span class="nt">-DdryRun</span><span class="o">=</span><span class="nb">true</span> <span class="nt">-DskipTests</span> <span class="nt">-DreleaseVersion</span><span class="o">=</span>X.Y.Z <span class="nt">-DdevelopmentVersion</span><span class="o">=</span>X.<span class="o">(</span>Y+1<span class="o">)</span>.Z-SNAPSHOT <span class="nt">-Papache-release</span> <span class="nt">-Darguments</span><span class="o">=</span><span class="nt">-DskipTests</span> release:prepare 2&gt;&amp;1 | tee /tmp/prepare-dry.log
 
-<span class="c"># If you have multiple GPG keys, you can select the key used to sign the release by adding `-Dgpg.keyname=${GPG_KEY_ID}` to `-Darguments`:</span>
+<span class="c"># If you have multiple GPG keys, you can select the key used to sign the release by adding `-Dgpg.keyname=${GPG_KEY_ID}` to `-Darguments`:
+</span>
 ./mvnw <span class="nt">-DdryRun</span><span class="o">=</span><span class="nb">true</span> <span class="nt">-DskipTests</span> <span class="nt">-DreleaseVersion</span><span class="o">=</span>X.Y.Z <span class="nt">-DdevelopmentVersion</span><span class="o">=</span>X.<span class="o">(</span>Y+1<span class="o">)</span>.Z-SNAPSHOT <span class="nt">-Papache-release</span> <span class="nt">-Darguments</span><span class="o">=</span><span class="s2">"-DskipTests -Dgpg.keyname=</span><span class="k">${</span><span class="nv">GPG_KEY_ID</span><span class="k">}</span><span class="s2">"</span> release:prepare 2&gt;&amp;1 | tee /tmp/prepare-dry.log</code></pre></figure>
 
 <p>Check the artifacts.
@@ -770,15 +787,20 @@ present and does not contain un-substituted <code class="highlighter-rouge">${..
 <p>Now, remove the <code class="highlighter-rouge">-DdryRun</code> flag and run the release for real.
 For this step you’ll have to add the <a href="https://maven.apache.org/developers/committer-settings.html">Apache servers</a> to <code class="highlighter-rouge">~/.m2/settings.xml</code>.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Prepare sets the version numbers, creates a tag, and pushes it to git</span>
-<span class="c"># Note X.Y.Z is the current version we're trying to release, and X.Y+1.Z is the next development version.</span>
-<span class="c"># For example, if I am currently building a release for 1.16.0, X.Y.Z would be 1.16.0 and X.Y+1.Z would be 1.17.0.</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Prepare sets the version numbers, creates a tag, and pushes it to git
+</span>
+<span class="c"># Note X.Y.Z is the current version we're trying to release, and X.Y+1.Z is the next development version.
+</span>
+<span class="c"># For example, if I am currently building a release for 1.16.0, X.Y.Z would be 1.16.0 and X.Y+1.Z would be 1.17.0.
+</span>
 ./mvnw <span class="nt">-DdryRun</span><span class="o">=</span><span class="nb">false</span> <span class="nt">-DskipTests</span> <span class="nt">-DreleaseVersion</span><span class="o">=</span>X.Y.Z <span class="nt">-DdevelopmentVersion</span><span class="o">=</span>X.Y+1.Z-SNAPSHOT <span class="nt">-Papache-release</span> <span class="nt">-Darguments</span><span class="o">=</span><span class="nt">-DskipTests</span> release:prepare 2&gt;&amp;1 | tee /tmp/prepare.log
 
-<span class="c"># If you have multiple GPG keys, you can select the key used to sign the release by adding `-Dgpg.keyname=${GPG_KEY_ID}` to `-Darguments`:</span>
+<span class="c"># If you have multiple GPG keys, you can select the key used to sign the release by adding `-Dgpg.keyname=${GPG_KEY_ID}` to `-Darguments`:
+</span>
 ./mvnw <span class="nt">-DdryRun</span><span class="o">=</span><span class="nb">false</span> <span class="nt">-DskipTests</span> <span class="nt">-DreleaseVersion</span><span class="o">=</span>X.Y.Z <span class="nt">-DdevelopmentVersion</span><span class="o">=</span>X.Y+1.Z-SNAPSHOT <span class="nt">-Papache-release</span> <span class="nt">-Darguments</span><span class="o">=</span><span class="s2">"-DskipTests -Dgpg.keyname=</span><span class="k">${</span><span class="nv">GPG_KEY_ID</span><span class="k">}</span><span class="s2">"</span> release:prepare 2&gt;&amp;1 | tee /tmp/prepare.log
 
-<span class="c"># Perform checks out the tagged version, builds, and deploys to the staging repository</span>
+<span class="c"># Perform checks out the tagged version, builds, and deploys to the staging repository
+</span>
 ./mvnw <span class="nt">-DskipTests</span> <span class="nt">-Papache-release</span> release:perform 2&gt;&amp;1 | tee /tmp/perform.log</code></pre></figure>
 
 <p>Verify the staged artifacts in the Nexus repository:</p>
@@ -797,49 +819,62 @@ https://repository.apache.org/content/repositories/orgapachecalcite-1000
 <p>Upload the artifacts via subversion to a staging area,
 https://dist.apache.org/repos/dist/dev/calcite/apache-calcite-X.Y.Z-rcN:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Create a subversion workspace, if you haven't already</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Create a subversion workspace, if you haven't already
+</span>
 mkdir <span class="nt">-p</span> ~/dist/dev
 <span class="nb">pushd</span> ~/dist/dev
 svn co https://dist.apache.org/repos/dist/dev/calcite
 <span class="nb">popd</span>
 
-<span class="c"># Move the files into a directory</span>
+<span class="c"># Move the files into a directory
+</span>
 mkdir ~/dist/dev/calcite/apache-calcite-X.Y.Z-rcN
 mv apache-calcite-<span class="k">*</span> ~/dist/dev/calcite/apache-calcite-X.Y.Z-rcN
 
-<span class="c"># Check in</span>
+<span class="c"># Check in
+</span>
 <span class="nb">cd</span> ~/dist/dev/calcite
 svn add apache-calcite-X.Y.Z-rcN
 svn ci</code></pre></figure>
 
 <h2 id="cleaning-up-after-a-failed-release-attempt-for-calcite-committers">Cleaning up after a failed release attempt (for Calcite committers)</h2>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Make sure that the tag you are about to generate does not already</span>
-<span class="c"># exist (due to a failed release attempt)</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Make sure that the tag you are about to generate does not already
+</span>
+<span class="c"># exist (due to a failed release attempt)
+</span>
 git tag
 
-<span class="c"># If the tag exists, delete it locally and remotely</span>
+<span class="c"># If the tag exists, delete it locally and remotely
+</span>
 git tag <span class="nt">-d</span> calcite-X.Y.Z
 git push origin :refs/tags/calcite-X.Y.Z
 
-<span class="c"># Remove modified files</span>
+<span class="c"># Remove modified files
+</span>
 ./mvnw release:clean
 
-<span class="c"># Check whether there are modified files and if so, go back to the</span>
-<span class="c"># original git commit</span>
+<span class="c"># Check whether there are modified files and if so, go back to the
+</span>
+<span class="c"># original git commit
+</span>
 git status
 git reset <span class="nt">--hard</span> HEAD</code></pre></figure>
 
 <h2 id="validate-a-release">Validate a release</h2>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Check that the signing key (e.g. DDB6E9812AD3FAE3) is pushed</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Check that the signing key (e.g. DDB6E9812AD3FAE3) is pushed
+</span>
 gpg <span class="nt">--recv-keys</span> key
 
-<span class="c"># Check keys</span>
+<span class="c"># Check keys
+</span>
 curl <span class="nt">-O</span> https://dist.apache.org/repos/dist/release/calcite/KEYS
 
-<span class="c"># Sign/check sha256 hashes</span>
-<span class="c"># (Assumes your O/S has a 'shasum' command.)</span>
+<span class="c"># Sign/check sha256 hashes
+</span>
+<span class="c"># (Assumes your O/S has a 'shasum' command.)
+</span>
 <span class="k">function </span>checkHash<span class="o">()</span> <span class="o">{</span>
   <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
   <span class="k">for </span>i <span class="k">in</span> <span class="k">*</span>.<span class="o">{</span>pom,gz<span class="o">}</span><span class="p">;</span> <span class="k">do
@@ -971,12 +1006,14 @@ Uncheck “Send mail for this update”.</p>
 
 <p>Check the artifacts into svn.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Get the release candidate.</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Get the release candidate.
+</span>
 mkdir <span class="nt">-p</span> ~/dist/dev
 <span class="nb">cd</span> ~/dist/dev
 svn co https://dist.apache.org/repos/dist/dev/calcite
 
-<span class="c"># Copy the artifacts. Note that the copy does not have '-rcN' suffix.</span>
+<span class="c"># Copy the artifacts. Note that the copy does not have '-rcN' suffix.
+</span>
 mkdir <span class="nt">-p</span> ~/dist/release
 <span class="nb">cd</span> ~/dist/release
 svn co https://dist.apache.org/repos/dist/release/calcite
@@ -984,7 +1021,8 @@ svn co https://dist.apache.org/repos/dist/release/calcite
 cp <span class="nt">-rp</span> ../../dev/calcite/apache-calcite-X.Y.Z-rcN apache-calcite-X.Y.Z
 svn add apache-calcite-X.Y.Z
 
-<span class="c"># Check in.</span>
+<span class="c"># Check in.
+</span>
 svn ci</code></pre></figure>
 
 <p>Svnpubsub will publish to the

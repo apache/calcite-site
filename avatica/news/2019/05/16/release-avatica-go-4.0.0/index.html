@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>Release Avatica Go 3.2.0</title>
+  <title>Release Avatica Go 4.0.0</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.7.3">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -123,8 +123,8 @@
       <div class="unit four-fifths">
         <article>
   <h2>
-    Release Avatica Go 3.2.0
-    <a href="/news/2018/09/18/release-avatica-go-3.2.0/" class="permalink" title="Permalink">∞</a>
+    Release Avatica Go 4.0.0
+    <a href="/news/2019/05/16/release-avatica-go-4.0.0/" class="permalink" title="Permalink">∞</a>
   </h2>
   <span class="post-category">
     <span class="label">
@@ -133,7 +133,7 @@
   </span>
   <div class="post-meta">
     <span class="post-date">
-      18 Sep 2018
+      16 May 2019
     </span>
     
     
@@ -150,19 +150,27 @@
 
 -->
 
-<p>Apache Calcite Avatica Go 3.2.0 is a minor release of Avatica Go with fixes to the import paths after enabling
-support for Go modules.</p>
+<p>Apache Calcite Avatica Go 4.0.0 is a major release with numerous improvements and a breaking change for Apache Phoenix.
+As this a a new major version, users of this package will need to upgrade their import paths to 
+<code class="highlighter-rouge">"github.com/apache/calcite-avatica-go/v4"</code>.</p>
 
-<p>The 3.1.0 release contained a bug where packages within the library used the <code class="highlighter-rouge">"github.com/apache/calcite-avatica-go"</code>
-import path rather than the <code class="highlighter-rouge">"github.com/apache/calcite-avatica-go/v3"</code> import path. This resulted in an issue where
-2 versions of the library are being used at the same time, causing some programs to not build.</p>
+<p><strong>Breaking change for Apache Phoenix (<a href="https://issues.apache.org/jira/browse/CALCITE-2724">CALCITE-2763</a>):</strong> 
+In Apache Phoenix, null and empty strings are equivalent. For some background on why this is the case, see
+<a href="https://issues.apache.org/jira/browse/PHOENIX-947">PHOENIX-947</a>. In version 3 of Avatica-Go and below, null and empty
+strings are returned as an empty string <code class="highlighter-rouge">""</code> to the client. This prevented database/sql’s built in NullString type from
+working correctly. From 4.0.0 onwards, null and empty strings will be returned as a <code class="highlighter-rouge">nil</code>. This allows the usage of the
+<code class="highlighter-rouge">sql.NullString</code> type.</p>
 
-<p><strong>The Calcite team recommends consumers of the Avatica Go library to not use the 3.1.0 release and ensure that the
-3.2.0 release is being used.</strong></p>
+<p>For this release, both <a href="https://github.com/golang/dep">dep</a> and Go modules are supported for package management. As 
+Go modules will be turned on by default in Go 1.13.0 (estimated to be released in September/October 2019), it is highly
+recommended that users of this package start migrating to using Go modules to ease the transition.</p>
+
+<p>The Calcite team recommends users of this package to upgrade to this version, where practical, as the dependencies being
+used by this package have also been upgraded.</p>
 
     
       
-        <p>See the <a href="/avatica/docs/history.html#v3-2-0">release notes</a>;
+        <p>See the <a href="/avatica/docs/history.html#v4-0-0">release notes</a>;
             <a href="/avatica/downloads/avatica.html#source-releases">download</a> the release.</p>
       
     
@@ -187,7 +195,7 @@ import path rather than the <code class="highlighter-rouge">"github.com/apache/c
     <h4>Recent Releases</h4>
     <ul>
       
-      <li class="">
+      <li class="current">
         <a href="/avatica/news/2019/05/16/release-avatica-go-4.0.0/">avatica-go 4.0.0</a>
       </li>
       
@@ -203,7 +211,7 @@ import path rather than the <code class="highlighter-rouge">"github.com/apache/c
         <a href="/avatica/news/2018/12/04/release-1.13.0/">avatica 1.13.0</a>
       </li>
       
-      <li class="current">
+      <li class="">
         <a href="/avatica/news/2018/09/18/release-avatica-go-3.2.0/">avatica-go 3.2.0</a>
       </li>
       

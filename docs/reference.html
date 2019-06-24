@@ -177,6 +177,9 @@ form.</p>
   <span class="o">|</span>   <span class="k">delete</span>
   <span class="o">|</span>   <span class="n">query</span>
 
+<span class="n">statementList</span><span class="p">:</span>
+      <span class="k">statement</span> <span class="p">[</span> <span class="s1">';'</span> <span class="k">statement</span> <span class="p">]</span><span class="o">*</span> <span class="p">[</span> <span class="s1">';'</span> <span class="p">]</span>
+
 <span class="n">setStatement</span><span class="p">:</span>
       <span class="p">[</span> <span class="k">ALTER</span> <span class="p">(</span> <span class="k">SYSTEM</span> <span class="o">|</span> <span class="k">SESSION</span> <span class="p">)</span> <span class="p">]</span> <span class="k">SET</span> <span class="n">identifier</span> <span class="s1">'='</span> <span class="n">expression</span>
 
@@ -301,13 +304,13 @@ form.</p>
   <span class="o">|</span>   <span class="k">ROLLUP</span> <span class="s1">'('</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
   <span class="o">|</span>   <span class="k">GROUPING</span> <span class="k">SETS</span> <span class="s1">'('</span> <span class="n">groupItem</span> <span class="p">[,</span> <span class="n">groupItem</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
 
-<span class="n">windowRef</span><span class="p">:</span>
+<span class="n">window</span><span class="p">:</span>
       <span class="n">windowName</span>
   <span class="o">|</span>   <span class="n">windowSpec</span>
 
 <span class="n">windowSpec</span><span class="p">:</span>
-      <span class="p">[</span> <span class="n">windowName</span> <span class="p">]</span>
       <span class="s1">'('</span>
+      <span class="p">[</span> <span class="n">windowName</span> <span class="p">]</span>
       <span class="p">[</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">orderItem</span> <span class="p">[,</span> <span class="n">orderItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
       <span class="p">[</span> <span class="n">PARTITION</span> <span class="k">BY</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
       <span class="p">[</span>
@@ -610,6 +613,7 @@ HIERARCHY,
 <strong>HOLD</strong>,
 <strong>HOUR</strong>,
 <strong>IDENTITY</strong>,
+IGNORE,
 IMMEDIATE,
 IMMEDIATELY,
 IMPLEMENTATION,
@@ -643,13 +647,10 @@ JAVA,
 JSON,
 <strong>JSON_ARRAY</strong>,
 <strong>JSON_ARRAYAGG</strong>,
-JSON_DEPTH,
 <strong>JSON_EXISTS</strong>,
 <strong>JSON_OBJECT</strong>,
 <strong>JSON_OBJECTAGG</strong>,
-JSON_PRETTY,
 <strong>JSON_QUERY</strong>,
-JSON_TYPE,
 <strong>JSON_VALUE</strong>,
 K,
 KEY,
@@ -821,6 +822,7 @@ RELATIVE,
 REPEATABLE,
 REPLACE,
 <strong>RESET</strong>,
+RESPECT,
 RESTART,
 RESTRICT,
 <strong>RESULT</strong>,
@@ -1895,6 +1897,10 @@ for example <code class="highlighter-rouge">ST_GeomFromText('POINT (30 10)')</co
       <td style="text-align: left">TIMESTAMPDIFF(timeUnit, datetime, datetime2)</td>
       <td style="text-align: left">Returns the (signed) number of <em>timeUnit</em> intervals between <em>datetime</em> and <em>datetime2</em>. Equivalent to <code class="highlighter-rouge">(datetime2 - datetime) timeUnit</code></td>
     </tr>
+    <tr>
+      <td style="text-align: left">LAST_DAY(date)</td>
+      <td style="text-align: left">Returns the date of the last day of the month in a value of datatype DATE; For example, it returns DATE’2020-02-29’ for both DATE’2020-02-10’ and TIMESTAMP’2020-02-10 10:10:10’</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1947,6 +1953,10 @@ standard SQL. Calls with parentheses, such as <code class="highlighter-rouge">CU
     <tr>
       <td style="text-align: left">CURRENT_ROLE</td>
       <td style="text-align: left">Returns the current active role</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CURRENT_SCHEMA</td>
+      <td style="text-align: left">Returns the current schema</td>
     </tr>
   </tbody>
 </table>
@@ -2313,6 +2323,10 @@ standard SQL. Calls with parentheses, such as <code class="highlighter-rouge">CU
   </thead>
   <tbody>
     <tr>
+      <td style="text-align: left">{fn ASCII(string)}</td>
+      <td style="text-align: left">Returns the ASCII code of the first character of <em>string</em>; if the first character is a non-ASCII character, returns its Unicode code point; returns 0 if <em>string</em> is empty</td>
+    </tr>
+    <tr>
       <td style="text-align: left">{fn CONCAT(character, character)}</td>
       <td style="text-align: left">Returns the concatenation of character strings</td>
     </tr>
@@ -2333,8 +2347,24 @@ standard SQL. Calls with parentheses, such as <code class="highlighter-rouge">CU
       <td style="text-align: left">Returns the position in <em>string2</em> of the first occurrence of <em>string1</em>. Searches from the beginning of <em>string2</em>, unless <em>integer</em> is specified.</td>
     </tr>
     <tr>
+      <td style="text-align: left">{fn LEFT(string, length)}</td>
+      <td style="text-align: left">Returns the leftmost <em>length</em> characters from <em>string</em></td>
+    </tr>
+    <tr>
       <td style="text-align: left">{fn LTRIM(string)}</td>
       <td style="text-align: left">Returns <em>string</em> with leading space characters removed</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">{fn REPLACE(string, search, replacement)}</td>
+      <td style="text-align: left">Returns a string in which all the occurrences of <em>search</em> in <em>string</em> are replaced with <em>replacement</em>; if <em>replacement</em> is the empty string, the occurrences of <em>search</em> are removed</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">{fn REVERSE(string)}</td>
+      <td style="text-align: left">Returns <em>string</em> with the order of the characters reversed</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">{fn RIGHT(string, integer)}</td>
+      <td style="text-align: left">Returns the rightmost <em>length</em> characters from <em>string</em></td>
     </tr>
     <tr>
       <td style="text-align: left">{fn RTRIM(string)}</td>
@@ -2348,14 +2378,6 @@ standard SQL. Calls with parentheses, such as <code class="highlighter-rouge">CU
       <td style="text-align: left">{fn UCASE(string)}</td>
       <td style="text-align: left">Returns a string in which all alphabetic characters in <em>string</em> have been converted to upper case</td>
     </tr>
-    <tr>
-      <td style="text-align: left">{fn REPLACE(string, search, replacement)}</td>
-      <td style="text-align: left">Returns a string in which all the occurrences of <em>search</em> in <em>string</em> are replaced with <em>replacement</em>; if <em>replacement</em> is the empty string, the occurrences of <em>search</em> are removed</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">{fn ASCII(string)}</td>
-      <td style="text-align: left">Returns the corresponding ASCII code of the first character of <em>string</em>; Returns 0 if <em>string</em> is empty; Returns NULL if <em>string</em> is NULL; Returns the Unicode code point for non-ASCII character</td>
-    </tr>
   </tbody>
 </table>
 
@@ -2363,12 +2385,6 @@ standard SQL. Calls with parentheses, such as <code class="highlighter-rouge">CU
 
 <ul>
   <li>{fn CHAR(string)}</li>
-  <li>{fn DIFFERENCE(string, string)}</li>
-  <li>{fn LEFT(string, integer)}</li>
-  <li>{fn REPEAT(string, integer)}</li>
-  <li>{fn RIGHT(string, integer)}</li>
-  <li>{fn SOUNDEX(string)}</li>
-  <li>{fn SPACE(integer)}</li>
 </ul>
 
 <h4 id="datetime">Date/time</h4>
@@ -2503,6 +2519,9 @@ standard SQL. Calls with parentheses, such as <code class="highlighter-rouge">CU
         <span class="p">[</span> <span class="n">FILTER</span> <span class="p">(</span><span class="k">WHERE</span> <span class="n">condition</span><span class="p">)</span> <span class="p">]</span>
     <span class="o">|</span>   <span class="n">agg</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="p">[</span> <span class="n">FILTER</span> <span class="p">(</span><span class="k">WHERE</span> <span class="n">condition</span><span class="p">)</span> <span class="p">]</span></code></pre></figure>
 
+<p>where <em>agg</em> is one of the operators in the following table, or a user-defined
+aggregate function.</p>
+
 <p>If <code class="highlighter-rouge">FILTER</code> is present, the aggregate function only considers rows for which
 <em>condition</em> evaluates to TRUE.</p>
 
@@ -2529,6 +2548,10 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
       <td style="text-align: left">Returns a multiset of the values</td>
     </tr>
     <tr>
+      <td style="text-align: left">LISTAGG( [ ALL | DISTINCT ] value [, separator])</td>
+      <td style="text-align: left">Returns values concatenated into a string, delimited by separator (default ‘,’)</td>
+    </tr>
+    <tr>
       <td style="text-align: left">COUNT( [ ALL | DISTINCT ] value [, value ]*)</td>
       <td style="text-align: left">Returns the number of input rows for which <em>value</em> is not null (wholly not null if <em>value</em> is composite)</td>
     </tr>
@@ -2537,7 +2560,7 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
       <td style="text-align: left">Returns the number of input rows</td>
     </tr>
     <tr>
-      <td style="text-align: left">FUSION( multiset )</td>
+      <td style="text-align: left">FUSION(multiset)</td>
       <td style="text-align: left">Returns the multiset union of <em>multiset</em> across all input values</td>
     </tr>
     <tr>
@@ -2581,6 +2604,10 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
       <td style="text-align: left">Returns the sample standard deviation of <em>numeric</em> across all input values</td>
     </tr>
     <tr>
+      <td style="text-align: left">STDDEV( [ ALL | DISTINCT ] numeric)</td>
+      <td style="text-align: left">Synonym for <code class="highlighter-rouge">STDDEV_SAMP</code></td>
+    </tr>
+    <tr>
       <td style="text-align: left">VAR_POP( [ ALL | DISTINCT ] value)</td>
       <td style="text-align: left">Returns the population variance (square of the population standard deviation) of <em>numeric</em> across all input values</td>
     </tr>
@@ -2614,7 +2641,6 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
 <p>Not implemented:</p>
 
 <ul>
-  <li>LISTAGG(string)</li>
   <li>REGR_AVGX(numeric1, numeric2)</li>
   <li>REGR_AVGY(numeric1, numeric2)</li>
   <li>REGR_INTERCEPT(numeric1, numeric2)</li>
@@ -2624,6 +2650,24 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
 </ul>
 
 <h3 id="window-functions">Window functions</h3>
+
+<p>Syntax:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">windowedAggregateCall</span><span class="p">:</span>
+        <span class="n">agg</span><span class="p">(</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span> <span class="n">value</span> <span class="p">[,</span> <span class="n">value</span> <span class="p">]</span><span class="o">*</span><span class="p">)</span>
+        <span class="p">[</span> <span class="n">RESPECT</span> <span class="n">NULLS</span> <span class="o">|</span> <span class="k">IGNORE</span> <span class="n">NULLS</span> <span class="p">]</span>
+        <span class="p">[</span> <span class="n">WITHIN</span> <span class="k">GROUP</span> <span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">orderItem</span> <span class="p">[,</span> <span class="n">orderItem</span> <span class="p">]</span><span class="o">*</span><span class="p">)</span> <span class="p">]</span>
+        <span class="p">[</span> <span class="n">FILTER</span> <span class="p">(</span><span class="k">WHERE</span> <span class="n">condition</span><span class="p">)</span> <span class="p">]</span>
+        <span class="n">OVER</span> <span class="n">window</span>
+    <span class="o">|</span>   <span class="n">agg</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+        <span class="p">[</span> <span class="n">FILTER</span> <span class="p">(</span><span class="k">WHERE</span> <span class="n">condition</span><span class="p">)</span> <span class="p">]</span>
+        <span class="n">OVER</span> <span class="n">window</span></code></pre></figure>
+
+<p>where <em>agg</em> is one of the operators in the following table, or a user-defined
+aggregate function.</p>
+
+<p><code class="highlighter-rouge">DISTINCT</code>, <code class="highlighter-rouge">FILTER</code> and <code class="highlighter-rouge">WITHIN GROUP</code> are as described for aggregate
+functions.</p>
 
 <table>
   <thead>
@@ -2696,16 +2740,22 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
   </tbody>
 </table>
 
+<p>Note:</p>
+
+<ul>
+  <li>You may specify null treatment (<code class="highlighter-rouge">IGNORE NULLS</code>, <code class="highlighter-rouge">RESPECT NULLS</code>) for
+<code class="highlighter-rouge">FIRST_VALUE</code>, <code class="highlighter-rouge">LAST_VALUE</code>, <code class="highlighter-rouge">NTH_VALUE</code>, <code class="highlighter-rouge">LEAD</code> and <code class="highlighter-rouge">LAG</code> functions. The
+syntax handled by the parser, but only <code class="highlighter-rouge">RESPECT NULLS</code> is implemented at
+runtime.</li>
+</ul>
+
 <p>Not implemented:</p>
 
 <ul>
   <li>COUNT(DISTINCT value [, value ]*) OVER window</li>
   <li>APPROX_COUNT_DISTINCT(value [, value ]*) OVER window</li>
-  <li>FIRST_VALUE(value) IGNORE NULLS OVER window</li>
-  <li>LAST_VALUE(value) IGNORE NULLS OVER window</li>
   <li>PERCENT_RANK(value) OVER window</li>
   <li>CUME_DIST(value) OVER window</li>
-  <li>NTH_VALUE(value, nth) [ FROM { FIRST | LAST } ] IGNORE NULLS OVER window</li>
 </ul>
 
 <h3 id="grouping-functions">Grouping functions</h3>
@@ -3374,7 +3424,7 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
   <li><em>path</em> is a character string containing a JSON path expression; mode flag <code class="highlighter-rouge">strict</code> or <code class="highlighter-rouge">lax</code> should be specified in the beginning of <em>path</em>.</li>
 </ul>
 
-<h4 id="json-query-functions">JSON query functions</h4>
+<h4 id="query-functions">Query Functions</h4>
 
 <table>
   <thead>
@@ -3460,7 +3510,7 @@ behaviors.</li>
   <li>JSON_TABLE</li>
 </ul>
 
-<h4 id="json-constructor-functions">JSON constructor functions</h4>
+<h4 id="constructor-functions">Constructor Functions</h4>
 
 <table>
   <thead>
@@ -3503,7 +3553,7 @@ values. The default null behavior of <code class="highlighter-rouge">JSON_OBJECT
 input rows into the specified order before performing aggregation.</li>
 </ul>
 
-<h4 id="json-comparison-operators">JSON comparison operators</h4>
+<h4 id="comparison-operators-1">Comparison Operators</h4>
 
 <table>
   <thead>
@@ -3548,27 +3598,142 @@ input rows into the specified order before performing aggregation.</li>
   </tbody>
 </table>
 
-<h4 id="mysql-specific-json-operators">MySQL-specific JSON operators</h4>
+<h3 id="dialect-specific-operators">Dialect-specific Operators</h3>
+
+<p>The following operators are not in the SQL standard, and are not enabled in
+Calcite’s default operator table. They are only available for use in queries
+if your session has enabled an extra operator table.</p>
+
+<p>To enable an operator table, set the
+<a href="/docs/adapter.html#jdbc-connect-string-parameters">fun</a>
+connect string parameter.</p>
+
+<p>The ‘C’ (compatibility) column contains value
+‘m’ for MySQL (‘fun=mysql’ in the connect string),
+‘o’ for Oracle (‘fun=oracle’ in the connect string),
+‘p’ for PostgreSQL (‘fun=postgresql’ in the connect string).</p>
+
+<p>One operator name may correspond to multiple SQL dialects, but with different
+semantics.</p>
 
 <table>
   <thead>
     <tr>
+      <th style="text-align: left">C</th>
       <th style="text-align: left">Operator syntax</th>
       <th style="text-align: left">Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <td style="text-align: left">o</td>
+      <td style="text-align: left">DECODE(value, value1, result1 [, valueN, resultN ]* [, default ])</td>
+      <td style="text-align: left">Compares <em>value</em> to each <em>valueN</em> value one by one; if <em>value</em> is equal to a <em>valueN</em>, returns the corresponding <em>resultN</em>, else returns <em>default</em>, or NULL if <em>default</em> is not specified</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">DIFFERENCE(string, string)</td>
+      <td style="text-align: left">Returns a measure of the similarity of two strings, namely the number of character positions that their <code class="highlighter-rouge">SOUNDEX</code> values have in common: 4 if the <code class="highlighter-rouge">SOUNDEX</code> values are same and 0 if the <code class="highlighter-rouge">SOUNDEX</code> values are totally different</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">o</td>
+      <td style="text-align: left">GREATEST(expr [, expr ]*)</td>
+      <td style="text-align: left">Returns the greatest of the expressions</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
       <td style="text-align: left">JSON_TYPE(jsonValue)</td>
       <td style="text-align: left">Returns a string value indicating the type of a <em>jsonValue</em></td>
     </tr>
     <tr>
+      <td style="text-align: left">m</td>
       <td style="text-align: left">JSON_DEPTH(jsonValue)</td>
       <td style="text-align: left">Returns an integer value indicating the depth of a <em>jsonValue</em></td>
     </tr>
     <tr>
+      <td style="text-align: left">m</td>
       <td style="text-align: left">JSON_PRETTY(jsonValue)</td>
       <td style="text-align: left">Returns a pretty-printing of <em>jsonValue</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
+      <td style="text-align: left">JSON_LENGTH(jsonValue [, path ])</td>
+      <td style="text-align: left">Returns a integer indicating the length of <em>jsonValue</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
+      <td style="text-align: left">JSON_KEYS(jsonValue [, path ])</td>
+      <td style="text-align: left">Returns a string indicating the keys of a JSON <em>jsonValue</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
+      <td style="text-align: left">JSON_REMOVE(jsonValue, path[, path])</td>
+      <td style="text-align: left">Removes data from <em>jsonValue</em> using a series of <em>path</em> expressions and returns the result</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
+      <td style="text-align: left">JSON_STORAGE_SIZE(jsonValue)</td>
+      <td style="text-align: left">Returns the number of bytes used to store the binary representation of a <em>jsonValue</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">o</td>
+      <td style="text-align: left">LEAST(expr [, expr ]* )</td>
+      <td style="text-align: left">Returns the least of the expressions</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m p</td>
+      <td style="text-align: left">LEFT(string, length)</td>
+      <td style="text-align: left">Returns the leftmost <em>length</em> characters from the <em>string</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">o</td>
+      <td style="text-align: left">LTRIM(string)</td>
+      <td style="text-align: left">Returns <em>string</em> with all blanks removed from the start</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">o</td>
+      <td style="text-align: left">NVL(value1, value2)</td>
+      <td style="text-align: left">Returns <em>value1</em> if <em>value1</em> is not null, otherwise <em>value2</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m p</td>
+      <td style="text-align: left">REPEAT(string, integer)</td>
+      <td style="text-align: left">Returns a string consisting of <em>string</em> repeated of <em>integer</em> times; returns an empty string if <em>integer</em> is less than 1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
+      <td style="text-align: left">REVERSE(string)</td>
+      <td style="text-align: left">Returns <em>string</em> with the order of the characters reversed</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m p</td>
+      <td style="text-align: left">RIGHT(string, length)</td>
+      <td style="text-align: left">Returns the rightmost <em>length</em> characters from the <em>string</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">o</td>
+      <td style="text-align: left">RTRIM(string)</td>
+      <td style="text-align: left">Returns <em>string</em> with all blanks removed from the end</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m o p</td>
+      <td style="text-align: left">SOUNDEX(string)</td>
+      <td style="text-align: left">Returns the phonetic representation of <em>string</em>; throws if <em>string</em> is encoded with multi-byte encoding such as UTF-8</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
+      <td style="text-align: left">SPACE(integer)</td>
+      <td style="text-align: left">Returns a string of <em>integer</em> spaces; returns an empty string if <em>integer</em> is less than 1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">o</td>
+      <td style="text-align: left">SUBSTR(string, position [, substring_length ])</td>
+      <td style="text-align: left">Returns a portion of <em>string</em>, beginning at character <em>position</em>, <em>substring_length</em> characters long. SUBSTR calculates lengths using characters as defined by the input character set</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">o p</td>
+      <td style="text-align: left">TRANSLATE(expr, fromString, toString)</td>
+      <td style="text-align: left">Returns <em>expr</em> with all occurrences of each character in <em>fromString</em> replaced by its corresponding character in <em>toString</em>. Characters in <em>expr</em> that are not in <em>fromString</em> are not replaced</td>
     </tr>
   </tbody>
 </table>
@@ -3576,8 +3741,8 @@ input rows into the specified order before performing aggregation.</li>
 <p>Note:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">JSON_TYPE</code> / <code class="highlighter-rouge">JSON_DEPTH</code> return null if the argument is null</li>
-  <li><code class="highlighter-rouge">JSON_TYPE</code> / <code class="highlighter-rouge">JSON_DEPTH</code> / <code class="highlighter-rouge">JSON_PRETTY</code> throw error if the argument is not a valid JSON value</li>
+  <li><code class="highlighter-rouge">JSON_TYPE</code> / <code class="highlighter-rouge">JSON_DEPTH</code> / <code class="highlighter-rouge">JSON_PRETTY</code> / <code class="highlighter-rouge">JSON_STORAGE_SIZE</code> return null if the argument is null</li>
+  <li><code class="highlighter-rouge">JSON_LENGTH</code> / <code class="highlighter-rouge">JSON_KEYS</code> / <code class="highlighter-rouge">JSON_REMOVE</code> return null if the first argument is null</li>
   <li><code class="highlighter-rouge">JSON_TYPE</code> generally returns an upper-case string flag indicating the type of the JSON input. Currently supported supported type flags are:
     <ul>
       <li>INTEGER</li>
@@ -3592,11 +3757,17 @@ input rows into the specified order before performing aggregation.</li>
       <li>NULL</li>
     </ul>
   </li>
-  <li><code class="highlighter-rouge">JSON_DEPTH</code> defines a JSON values’s depth as follows:
+  <li><code class="highlighter-rouge">JSON_DEPTH</code> defines a JSON value’s depth as follows:
     <ul>
       <li>An empty array, empty object, or scalar value has depth 1;</li>
       <li>A non-empty array containing only elements of depth 1 or non-empty object containing only member values of depth 1 has depth 2;</li>
       <li>Otherwise, a JSON document has depth greater than 2.</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">JSON_LENGTH</code> defines a JSON value’s length as follows:
+    <ul>
+      <li>A scalar value has length 1;</li>
+      <li>The length of array or object is the number of elements is contains.</li>
     </ul>
   </li>
 </ul>
@@ -3607,10 +3778,10 @@ input rows into the specified order before performing aggregation.</li>
 
 <p>SQL</p>
 
-<pre><code class="language-SQL">SELECT JSON_TYPE(v) AS c1
-,JSON_TYPE(JSON_VALUE(v, 'lax $.b' ERROR ON ERROR)) AS c2
-,JSON_TYPE(JSON_VALUE(v, 'strict $.a[0]' ERROR ON ERROR)) AS c3
-,JSON_TYPE(JSON_VALUE(v, 'strict $.a[1]' ERROR ON ERROR)) AS c4
+<pre><code class="language-SQL">SELECT JSON_TYPE(v) AS c1,
+  JSON_TYPE(JSON_VALUE(v, 'lax $.b' ERROR ON ERROR)) AS c2,
+  JSON_TYPE(JSON_VALUE(v, 'strict $.a[0]' ERROR ON ERROR)) AS c3,
+  JSON_TYPE(JSON_VALUE(v, 'strict $.a[1]' ERROR ON ERROR)) AS c4
 FROM (VALUES ('{"a": [10, true],"b": "[10, true]"}')) AS t(v)
 LIMIT 10;
 </code></pre>
@@ -3640,10 +3811,10 @@ LIMIT 10;
 
 <p>SQL</p>
 
-<pre><code class="language-SQL">SELECT JSON_DEPTH(v) AS c1
-,JSON_DEPTH(JSON_VALUE(v, 'lax $.b' ERROR ON ERROR)) AS c2
-,JSON_DEPTH(JSON_VALUE(v, 'strict $.a[0]' ERROR ON ERROR)) AS c3
-,JSON_DEPTH(JSON_VALUE(v, 'strict $.a[1]' ERROR ON ERROR)) AS c4
+<pre><code class="language-SQL">SELECT JSON_DEPTH(v) AS c1,
+  JSON_DEPTH(JSON_VALUE(v, 'lax $.b' ERROR ON ERROR)) AS c2,
+  JSON_DEPTH(JSON_VALUE(v, 'strict $.a[0]' ERROR ON ERROR)) AS c3,
+  JSON_DEPTH(JSON_VALUE(v, 'strict $.a[1]' ERROR ON ERROR)) AS c4
 FROM (VALUES ('{"a": [10, true],"b": "[10, true]"}')) AS t(v)
 LIMIT 10;
 </code></pre>
@@ -3669,15 +3840,205 @@ LIMIT 10;
   </tbody>
 </table>
 
+<h5 id="json_length-example">JSON_LENGTH example</h5>
+
+<p>SQL</p>
+
+<pre><code class="language-SQL">SELECT JSON_LENGTH(v) AS c1,
+  JSON_LENGTH(v, 'lax $.a') AS c2,
+  JSON_LENGTH(v, 'strict $.a[0]') AS c3,
+  JSON_LENGTH(v, 'strict $.a[1]') AS c4
+FROM (VALUES ('{"a": [10, true]}')) AS t(v)
+LIMIT 10;
+</code></pre>
+
+<p>Result</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>c1</th>
+      <th>c2</th>
+      <th>c3</th>
+      <th>c4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="json_keys-example">JSON_KEYS example</h5>
+
+<p>SQL</p>
+
+<pre><code class="language-SQL">SELECT JSON_KEYS(v) AS c1,
+  JSON_KEYS(v, 'lax $.a') AS c2,
+  JSON_KEYS(v, 'lax $.b') AS c2,
+  JSON_KEYS(v, 'strict $.a[0]') AS c3,
+  JSON_KEYS(v, 'strict $.a[1]') AS c4
+FROM (VALUES ('{"a": [10, true],"b": {"c": 30}}')) AS t(v)
+LIMIT 10;
+</code></pre>
+
+<p>Result</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>c1</th>
+      <th>c2</th>
+      <th>c3</th>
+      <th>c4</th>
+      <th>c5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>[“a”, “b”]</td>
+      <td>NULL</td>
+      <td>[“c”]</td>
+      <td>NULL</td>
+      <td>NULL</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="json_remove-example">JSON_REMOVE example</h5>
+
+<p>SQL</p>
+
+<pre><code class="language-SQL">SELECT JSON_REMOVE(v, '$[1]') AS c1
+FROM (VALUES ('["a", ["b", "c"], "d"]')) AS t(v)
+LIMIT 10;
+</code></pre>
+
+<p>Result</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>c1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>[“a”, “d”]</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="json_storage_size-example">JSON_STORAGE_SIZE example</h5>
+
+<p>SQL</p>
+
+<pre><code class="language-SQL">SELECT
+JSON_STORAGE_SIZE('[100, \"sakila\", [1, 3, 5], 425.05]') AS c1,
+JSON_STORAGE_SIZE('{\"a\": 10, \"b\": \"a\", \"c\": \"[1, 3, 5, 7]\"}') AS c2,
+JSON_STORAGE_SIZE('{\"a\": 10, \"b\": \"xyz\", \"c\": \"[1, 3, 5, 7]\"}') AS c3,
+JSON_STORAGE_SIZE('[100, \"json\", [[10, 20, 30], 3, 5], 425.05]') AS c4
+limit 10;
+</code></pre>
+
+<p>Result</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>c1</th>
+      <th>c2</th>
+      <th>c3</th>
+      <th>c4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>29</td>
+      <td>35</td>
+      <td>37</td>
+      <td>36</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="decode-example">DECODE example</h4>
+
+<p>SQL</p>
+
+<pre><code class="language-SQL">SELECT DECODE(f1, 1, 'aa', 2, 'bb', 3, 'cc', 4, 'dd', 'ee') as c1,
+  DECODE(f2, 1, 'aa', 2, 'bb', 3, 'cc', 4, 'dd', 'ee') as c2,
+  DECODE(f3, 1, 'aa', 2, 'bb', 3, 'cc', 4, 'dd', 'ee') as c3,
+  DECODE(f4, 1, 'aa', 2, 'bb', 3, 'cc', 4, 'dd', 'ee') as c4,
+  DECODE(f5, 1, 'aa', 2, 'bb', 3, 'cc', 4, 'dd', 'ee') as c5
+FROM (VALUES (1, 2, 3, 4, 5)) AS t(f1, f2, f3, f4, f5);
+
+</code></pre>
+<p>Result</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>c1</th>
+      <th>c2</th>
+      <th>c3</th>
+      <th>c4</th>
+      <th>c5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>aa</td>
+      <td>bb</td>
+      <td>cc</td>
+      <td>dd</td>
+      <td>ee</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="translate-example">TRANSLATE example</h4>
+
+<p>SQL</p>
+
+<pre><code class="language-SQL">SELECT TRANSLATE('Aa*Bb*Cc''D*d', ' */''%', '_') as c1,
+  TRANSLATE('Aa/Bb/Cc''D/d', ' */''%', '_') as c2,
+  TRANSLATE('Aa Bb Cc''D d', ' */''%', '_') as c3,
+  TRANSLATE('Aa%Bb%Cc''D%d', ' */''%', '_') as c4
+FROM (VALUES (true)) AS t(f0);
+</code></pre>
+
+<p>Result</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>c1</th>
+      <th>c2</th>
+      <th>c3</th>
+      <th>c4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Aa_Bb_CcD_d</td>
+      <td>Aa_Bb_CcD_d</td>
+      <td>Aa_Bb_CcD_d</td>
+      <td>Aa_Bb_CcD_d</td>
+    </tr>
+  </tbody>
+</table>
+
 <p>Not implemented:</p>
 
 <ul>
-  <li>JSON_LENGTH</li>
   <li>JSON_INSERT</li>
   <li>JSON_SET</li>
   <li>JSON_REPLACE</li>
-  <li>JSON_REMOVE</li>
-  <li>JSON_KEYS</li>
 </ul>
 
 <h2 id="user-defined-functions">User-defined functions</h2>

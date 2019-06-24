@@ -115,9 +115,7 @@ of the Elasticsearch adapter. The models can contain
 definitions of
 <a href="/docs/model.html#materialization">materializations</a>.
 The name of the tables defined in the model definition corresponds to
-<a href="https://www.elastic.co/blog/what-is-an-elasticsearch-index">types</a> in
-Elasticsearch. The schema/database is represented by the <code class="highlighter-rouge">index</code> parameter
-in the model definition.</p>
+indices in Elasticsearch.</p>
 
 <p>A basic example of a model file is given below:</p>
 
@@ -130,8 +128,7 @@ in the model definition.</p>
       </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"elasticsearch"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.elasticsearch.ElasticsearchSchemaFactory"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{'127.0.0.1': 9300}"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usa"</span><span class="w">
+        </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{'127.0.0.1': 9200}"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -144,18 +141,26 @@ follows:</p>
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./sqlline
 sqlline&gt; <span class="o">!</span>connect jdbc:calcite:model<span class="o">=</span>model.json admin admin</code></pre></figure>
 
-<p><code class="highlighter-rouge">sqlline</code> will now accept SQL queries which access your Elasticsearch types.
+<p>You can also specify the index name that is represented by the <code class="highlighter-rouge">index</code> parameter in the model definition:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="err">...</span><span class="w">
+
+      </span><span class="s2">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{'127.0.0.1': 9200}"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usa"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+
+</span><span class="err">...</span></code></pre></figure>
+
+<p><code class="highlighter-rouge">sqlline</code> will now accept SQL queries which access your Elasticsearch.
 The purpose of this adapter is to compile the query into the most efficient
 Elasticsearch SEARCH JSON possible by exploiting filtering and sorting directly
 in Elasticsearch where possible.</p>
 
-<p>For example, in the example dataset there is an Elasticsearch type
-named <code class="highlighter-rouge">zips</code> under index named <code class="highlighter-rouge">usa</code>.</p>
-
 <p>We can issue a simple query to fetch the names of all the states
-stored in the type <code class="highlighter-rouge">zips</code>.</p>
+stored in the index <code class="highlighter-rouge">usa</code>.</p>
 
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="k">SELECT</span> <span class="o">*</span> <span class="k">from</span> <span class="nv">"zips"</span><span class="p">;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="k">SELECT</span> <span class="o">*</span> <span class="k">from</span> <span class="nv">"usa"</span><span class="p">;</span></code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="err">_MAP=</span><span class="p">{</span><span class="err">pop=</span><span class="mi">13367</span><span class="p">,</span><span class="w"> </span><span class="err">loc=</span><span class="p">[</span><span class="mf">-72.505565</span><span class="p">,</span><span class="w"> </span><span class="mf">42.067203</span><span class="p">],</span><span class="w"> </span><span class="err">city=EAST</span><span class="w"> </span><span class="err">LONGMEADOW</span><span class="p">,</span><span class="w"> </span><span class="err">id=</span><span class="mi">01028</span><span class="p">,</span><span class="w"> </span><span class="err">state=MA</span><span class="p">}</span><span class="w">
 </span><span class="err">_MAP=</span><span class="p">{</span><span class="err">pop=</span><span class="mi">1652</span><span class="p">,</span><span class="w"> </span><span class="err">loc=</span><span class="p">[</span><span class="mf">-72.908793</span><span class="p">,</span><span class="w"> </span><span class="mf">42.070234</span><span class="p">],</span><span class="w"> </span><span class="err">city=TOLLAND</span><span class="p">,</span><span class="w"> </span><span class="err">id=</span><span class="mi">01034</span><span class="p">,</span><span class="w"> </span><span class="err">state=MA</span><span class="p">}</span><span class="w">
@@ -204,7 +209,7 @@ Elasticsearch in ascending order.</p>
 
 <p>You can also query elastic search index without prior view definition:</p>
 
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="k">SELECT</span> <span class="n">_MAP</span><span class="p">[</span><span class="s1">'city'</span><span class="p">],</span> <span class="n">_MAP</span><span class="p">[</span><span class="s1">'state'</span><span class="p">]</span> <span class="k">from</span> <span class="nv">"elasticsearch"</span><span class="p">.</span><span class="nv">"zips"</span> <span class="k">order</span> <span class="k">by</span> <span class="n">_MAP</span><span class="p">[</span><span class="s1">'state'</span><span class="p">];</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="k">SELECT</span> <span class="n">_MAP</span><span class="p">[</span><span class="s1">'city'</span><span class="p">],</span> <span class="n">_MAP</span><span class="p">[</span><span class="s1">'state'</span><span class="p">]</span> <span class="k">from</span> <span class="nv">"elasticsearch"</span><span class="p">.</span><span class="nv">"usa"</span> <span class="k">order</span> <span class="k">by</span> <span class="n">_MAP</span><span class="p">[</span><span class="s1">'state'</span><span class="p">];</span></code></pre></figure>
 
 <h3 id="use-of-scrolling-api">Use of Scrolling API</h3>
 
@@ -215,8 +220,9 @@ scroll is automatically cleared (removed) when all query resuts are consumed.</p
 
 <h3 id="supported-versions">Supported versions</h3>
 
-<p>Currently this adapter supports ElasticSearch versions 2.x (or newer). Generally
-we try to follow official <a href="https://www.elastic.co/support/eol">support schedule</a>.</p>
+<p>Currently this adapter supports ElasticSearch versions 6.x (or newer). Generally
+we try to follow official <a href="https://www.elastic.co/support/eol">support schedule</a>.
+Also, types are not supported (this adapter only supports indices).</p>
 
 
           

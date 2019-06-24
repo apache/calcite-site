@@ -131,8 +131,7 @@ point it at some data.</p>
 <span class="n">CalciteConnection</span> <span class="n">calciteConnection</span> <span class="o">=</span>
     <span class="n">connection</span><span class="o">.</span><span class="na">unwrap</span><span class="o">(</span><span class="n">CalciteConnection</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 <span class="n">SchemaPlus</span> <span class="n">rootSchema</span> <span class="o">=</span> <span class="n">calciteConnection</span><span class="o">.</span><span class="na">getRootSchema</span><span class="o">();</span>
-<span class="n">Schema</span> <span class="n">schema</span> <span class="o">=</span> <span class="n">ReflectiveSchema</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">calciteConnection</span><span class="o">,</span>
-    <span class="n">rootSchema</span><span class="o">,</span> <span class="s">"hr"</span><span class="o">,</span> <span class="k">new</span> <span class="n">HrSchema</span><span class="o">());</span>
+<span class="n">Schema</span> <span class="n">schema</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReflectiveSchema</span><span class="o">(</span><span class="k">new</span> <span class="n">HrSchema</span><span class="o">());</span>
 <span class="n">rootSchema</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"hr"</span><span class="o">,</span> <span class="n">schema</span><span class="o">);</span>
 <span class="n">Statement</span> <span class="n">statement</span> <span class="o">=</span> <span class="n">calciteConnection</span><span class="o">.</span><span class="na">createStatement</span><span class="o">();</span>
 <span class="n">ResultSet</span> <span class="n">resultSet</span> <span class="o">=</span> <span class="n">statement</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">(</span>
@@ -148,7 +147,7 @@ point it at some data.</p>
 <span class="n">connection</span><span class="o">.</span><span class="na">close</span><span class="o">();</span></code></pre></figure>
 
 <p>Where is the database? There is no database. The connection is
-completely empty until <code class="highlighter-rouge">ReflectiveSchema.create</code> registers a Java
+completely empty until <code class="highlighter-rouge">new ReflectiveSchema</code> registers a Java
 object as a schema and its collection fields <code class="highlighter-rouge">emps</code> and <code class="highlighter-rouge">depts</code> as
 tables.</p>
 
@@ -158,8 +157,7 @@ using operators such as <code class="highlighter-rouge">groupBy</code> and <code
 library. But Calcite can also process data in other data formats, such
 as JDBC. In the first example, replace</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Schema</span> <span class="n">schema</span> <span class="o">=</span> <span class="n">ReflectiveSchema</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">calciteConnection</span><span class="o">,</span>
-    <span class="n">rootSchema</span><span class="o">,</span> <span class="s">"hr"</span><span class="o">,</span> <span class="k">new</span> <span class="n">HrSchema</span><span class="o">());</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Schema</span> <span class="n">schema</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReflectiveSchema</span><span class="o">(</span><span class="k">new</span> <span class="n">HrSchema</span><span class="o">());</span></code></pre></figure>
 
 <p>with</p>
 

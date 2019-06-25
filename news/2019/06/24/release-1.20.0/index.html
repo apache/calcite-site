@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>Algebra builder</title>
+  <title>Release 1.20.0</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v3.7.3">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -127,26 +127,26 @@
       <div class="unit four-fifths">
         <article>
   <h2>
-    Algebra builder
-    <a href="/news/2015/06/05/algebra-builder/" class="permalink" title="Permalink">∞</a>
+    Release 1.20.0
+    <a href="/news/2019/06/24/release-1.20.0/" class="permalink" title="Permalink">∞</a>
   </h2>
   <span class="post-category">
     <span class="label">
-      new features
+      release
     </span>
   </span>
   <div class="post-meta">
     <span class="post-date">
-      05 Jun 2015
+      24 Jun 2019
     </span>
     
     
     
-    <a href="http://people.apache.org/~jhyde" class="post-author">
-      <img src="http://github.com/julianhyde.png"
-           class="avatar" alt="jhyde avatar"
+    <a href="https://michael.mior.ca/" class="post-author">
+      <img src="http://github.com/michaelmior.png"
+           class="avatar" alt="mmior avatar"
            width="24" height="24">
-      jhyde
+      mmior
     </a>
   </div>
   <div class="post-content">
@@ -154,62 +154,16 @@
 
 -->
 
-<p>Calcite’s foundation is a comprehensive implementation of relational
-algebra (together with transformation rules, cost model, and metadata)
-but to create algebra expressions you had to master a complex API.</p>
+<p>The <a href="">Apache Calcite PMC</a>
+is pleased to announce
+<a href="/docs/history.html#v1-20-0">Apache Calcite release 1.20.0</a>.</p>
 
-<p>We’re solving this problem by introducing an
-<a href="/apidocs/org/apache/calcite/tools/RelBuilder.html">algebra builder</a>,
-a single class with all the methods you need to build any relational
-expression.</p>
+<p>This release comes three months after 1.19.0. It includes more than 130 resolved issues, comprising of a few new features as well as general improvements and bug-fixes.
+It includes support for anti-joins, recursive queries, new functions, a new adapter, and many more bug fixes and improvements.</p>
 
-<p>For example,</p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">final</span> <span class="n">FrameworkConfig</span> <span class="n">config</span><span class="o">;</span>
-<span class="kd">final</span> <span class="n">RelBuilder</span> <span class="n">builder</span> <span class="o">=</span> <span class="n">RelBuilder</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">config</span><span class="o">);</span>
-<span class="kd">final</span> <span class="n">RelNode</span> <span class="n">node</span> <span class="o">=</span> <span class="n">builder</span>
-  <span class="o">.</span><span class="na">scan</span><span class="o">(</span><span class="s">"EMP"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">aggregate</span><span class="o">(</span><span class="n">builder</span><span class="o">.</span><span class="na">groupKey</span><span class="o">(</span><span class="s">"DEPTNO"</span><span class="o">),</span>
-      <span class="n">builder</span><span class="o">.</span><span class="na">count</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="s">"C"</span><span class="o">),</span>
-      <span class="n">builder</span><span class="o">.</span><span class="na">sum</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="s">"S"</span><span class="o">,</span> <span class="n">builder</span><span class="o">.</span><span class="na">field</span><span class="o">(</span><span class="s">"SAL"</span><span class="o">)))</span>
-  <span class="o">.</span><span class="na">filter</span><span class="o">(</span>
-      <span class="n">builder</span><span class="o">.</span><span class="na">call</span><span class="o">(</span><span class="n">SqlStdOperatorTable</span><span class="o">.</span><span class="na">GREATER_THAN</span><span class="o">,</span>
-          <span class="n">builder</span><span class="o">.</span><span class="na">field</span><span class="o">(</span><span class="s">"C"</span><span class="o">),</span>
-          <span class="n">builder</span><span class="o">.</span><span class="na">literal</span><span class="o">(</span><span class="mi">10</span><span class="o">)))</span>
-  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">RelOptUtil</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">node</span><span class="o">));</span></code></pre></figure>
-
-<p>creates the algebra</p>
-
-<figure class="highlight"><pre><code class="language-text" data-lang="text">LogicalFilter(condition=[&gt;($1, 10)])
-  LogicalAggregate(group=[{7}], C=[COUNT()], S=[SUM($5)])
-    LogicalTableScan(table=[[scott, EMP]])</code></pre></figure>
-
-<p>which is equivalent to the SQL</p>
-
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="k">c</span><span class="p">,</span> <span class="k">sum</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
-<span class="k">FROM</span> <span class="n">emp</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span>
-<span class="k">HAVING</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span></code></pre></figure>
-
-<p>The <a href="/docs/algebra.html">algebra builder documentation</a> describes the
-full API and has lots of examples.</p>
-
-<p>We’re still working on the algebra builder, but plan to release it
-with Calcite 1.4 (see
-[<a href="https://issues.apache.org/jira/browse/CALCITE-748">CALCITE-748</a>]).</p>
-
-<p>The algebra builder will make some existing tasks easier (such as
-writing planner rules), but will also enable new things, such as
-writing applications directly on top of Calcite, or implementing
-non-SQL query languages. These applications and languages will be able
-to take advantage of Calcite’s existing back-ends (including
-Hive-on-Tez, Drill, MongoDB, Splunk, Spark, JDBC data sources) and
-extensive set of query-optimization rules.</p>
-
-<p>If you have questions or comments, please post to the
-<a href="/develop">mailing list</a>.</p>
-
+    
+    <p>See the <a href="/docs/history.html#v1-20-0">release notes</a>;
+      <a href="/downloads#source-releases">download</a> the release.</p>
     
   </div>
 </article>
@@ -229,7 +183,7 @@ extensive set of query-optimization rules.</p>
     <h4>Recent Releases</h4>
     <ul>
       
-      <li class="">
+      <li class="current">
         <a href="/news/2019/06/24/release-1.20.0/">1.20.0</a>
       </li>
       
@@ -281,7 +235,7 @@ extensive set of query-optimization rules.</p>
           <a href="/news/2015/07/31/xldb-best-lightning-talk/">XLDB 2015 best lightning talk</a>
         </li>
           
-        <li class="current">
+        <li class="">
           <a href="/news/2015/06/05/algebra-builder/">Algebra builder</a>
         </li>
           

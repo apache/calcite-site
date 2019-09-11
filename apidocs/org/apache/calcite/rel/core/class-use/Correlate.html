@@ -132,6 +132,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </td>
 </tr>
 <tr class="altColor">
+<th class="colFirst" scope="row"><a href="#org.apache.calcite.rel.rel2sql">org.apache.calcite.rel.rel2sql</a></th>
+<td class="colLast">
+<div class="block">Translates a relational expression to SQL parse tree.</div>
+</td>
+</tr>
+<tr class="rowColor">
 <th class="colFirst" scope="row"><a href="#org.apache.calcite.sql2rel">org.apache.calcite.sql2rel</a></th>
 <td class="colLast">
 <div class="block">Translates a SQL parse tree to relational expression.</div>
@@ -257,10 +263,47 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </section>
 </li>
 <li class="blockList">
+<section role="region"><a id="org.apache.calcite.rel.rel2sql">
+<!--   -->
+</a>
+<h3>Uses of <a href="../Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a> in <a href="../../rel2sql/package-summary.html">org.apache.calcite.rel.rel2sql</a></h3>
+<table class="useSummary">
+<caption><span>Methods in <a href="../../rel2sql/package-summary.html">org.apache.calcite.rel.rel2sql</a> with parameters of type <a href="../Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a></span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../rel2sql/SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">RelToSqlConverter.</span><code><span class="memberNameLink"><a href="../../rel2sql/RelToSqlConverter.html#visit(org.apache.calcite.rel.core.Correlate)">visit</a></span>&#8203;(<a href="../Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&nbsp;e)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</section>
+</li>
+<li class="blockList">
 <section role="region"><a id="org.apache.calcite.sql2rel">
 <!--   -->
 </a>
 <h3>Uses of <a href="../Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a> in <a href="../../../sql2rel/package-summary.html">org.apache.calcite.sql2rel</a></h3>
+<table class="useSummary">
+<caption><span>Fields in <a href="../../../sql2rel/package-summary.html">org.apache.calcite.sql2rel</a> with type parameters of type <a href="../Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a></span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Field</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><code>private java.util.HashSet&lt;<a href="../Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&gt;</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">RelDecorrelator.</span><code><span class="memberNameLink"><a href="../../../sql2rel/RelDecorrelator.html#generatedCorRels">generatedCorRels</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</tbody>
+</table>
 <table class="useSummary">
 <caption><span>Methods in <a href="../../../sql2rel/package-summary.html">org.apache.calcite.sql2rel</a> with parameters of type <a href="../Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a></span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
@@ -271,12 +314,50 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><code>private <a href="../../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
-<th class="colSecond" scope="row"><span class="typeNameLabel">RelDecorrelator.</span><code><span class="memberNameLink"><a href="../../../sql2rel/RelDecorrelator.html#aggregateCorrelatorOutput(org.apache.calcite.rel.core.Correlate,org.apache.calcite.rel.logical.LogicalProject,java.util.Set)">aggregateCorrelatorOutput</a></span>&#8203;(<a href="../Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&nbsp;correlate,
-                         <a href="../../logical/LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a>&nbsp;project,
+<th class="colSecond" scope="row"><span class="typeNameLabel">RelDecorrelator.</span><code><span class="memberNameLink"><a href="../../../sql2rel/RelDecorrelator.html#aggregateCorrelatorOutput(org.apache.calcite.rel.core.Correlate,org.apache.calcite.rel.core.Project,java.util.Set)">aggregateCorrelatorOutput</a></span>&#8203;(<a href="../Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&nbsp;correlate,
+                         <a href="../Project.html" title="class in org.apache.calcite.rel.core">Project</a>&nbsp;project,
                          java.util.Set&lt;java.lang.Integer&gt;&nbsp;isCount)</code></th>
 <td class="colLast">
 <div class="block">Pulls a <a href="../Project.html" title="class in org.apache.calcite.rel.core"><code>Project</code></a> above a <a href="../Correlate.html" title="class in org.apache.calcite.rel.core"><code>Correlate</code></a> from its RHS input.</div>
 </td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>private boolean</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">RelDecorrelator.</span><code><span class="memberNameLink"><a href="../../../sql2rel/RelDecorrelator.html#checkCorVars(org.apache.calcite.rel.core.Correlate,org.apache.calcite.rel.core.Project,org.apache.calcite.rel.core.Filter,java.util.List)">checkCorVars</a></span>&#8203;(<a href="../Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&nbsp;correlate,
+            <a href="../Project.html" title="class in org.apache.calcite.rel.core">Project</a>&nbsp;project,
+            <a href="../Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;filter,
+            java.util.List&lt;<a href="../../../rex/RexFieldAccess.html" title="class in org.apache.calcite.rex">RexFieldAccess</a>&gt;&nbsp;correlatedJoinKeys)</code></th>
+<td class="colLast">
+<div class="block">Checks whether the correlations in projRel and filter are related to
+ the correlated variables provided by corRel.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../sql2rel/RelDecorrelator.Frame.html" title="class in org.apache.calcite.sql2rel">RelDecorrelator.Frame</a></code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">RelDecorrelator.</span><code><span class="memberNameLink"><a href="../../../sql2rel/RelDecorrelator.html#decorrelateRel(org.apache.calcite.rel.core.Correlate)">decorrelateRel</a></span>&#8203;(<a href="../Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&nbsp;rel)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>private void</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">RelDecorrelator.AdjustProjectForCountAggregateRule.</span><code><span class="memberNameLink"><a href="../../../sql2rel/RelDecorrelator.AdjustProjectForCountAggregateRule.html#onMatch2(org.apache.calcite.plan.RelOptRuleCall,org.apache.calcite.rel.core.Correlate,org.apache.calcite.rel.RelNode,org.apache.calcite.rel.core.Project,org.apache.calcite.rel.core.Aggregate)">onMatch2</a></span>&#8203;(<a href="../../../plan/RelOptRuleCall.html" title="class in org.apache.calcite.plan">RelOptRuleCall</a>&nbsp;call,
+        <a href="../Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&nbsp;correlate,
+        <a href="../../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;leftInput,
+        <a href="../Project.html" title="class in org.apache.calcite.rel.core">Project</a>&nbsp;aggOutputProject,
+        <a href="../Aggregate.html" title="class in org.apache.calcite.rel.core">Aggregate</a>&nbsp;aggregate)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>private void</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">RelDecorrelator.</span><code><span class="memberNameLink"><a href="../../../sql2rel/RelDecorrelator.html#removeCorVarFromTree(org.apache.calcite.rel.core.Correlate)">removeCorVarFromTree</a></span>&#8203;(<a href="../Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&nbsp;correlate)</code></th>
+<td class="colLast">
+<div class="block">Remove correlated variables from the tree at root corRel</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>private void</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">RelDecorrelator.</span><code><span class="memberNameLink"><a href="../../../sql2rel/RelDecorrelator.html#setCurrent(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.core.Correlate)">setCurrent</a></span>&#8203;(<a href="../../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;root,
+          <a href="../Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&nbsp;corRel)</code></th>
+<td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
 </table>

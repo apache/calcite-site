@@ -190,8 +190,9 @@ implements <a href="RelFactories.FilterFactory.html" title="interface in org.apa
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createFilter(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode)">createFilter</a></span>&#8203;(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
-            <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createFilter(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode,java.util.Set)">createFilter</a></span>&#8203;(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+            <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition,
+            java.util.Set&lt;<a href="CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>&gt;&nbsp;variablesSet)</code></th>
 <td class="colLast">
 <div class="block">Creates a filter.</div>
 </td>
@@ -203,6 +204,13 @@ implements <a href="RelFactories.FilterFactory.html" title="interface in org.apa
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a id="methods.inherited.from.class.org.apache.calcite.rel.core.RelFactories.FilterFactory">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;org.apache.calcite.rel.core.<a href="RelFactories.FilterFactory.html" title="interface in org.apache.calcite.rel.core">RelFactories.FilterFactory</a></h3>
+<code><a href="RelFactories.FilterFactory.html#createFilter(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode)">createFilter</a></code></li>
 </ul>
 </li>
 </ul>
@@ -239,19 +247,31 @@ implements <a href="RelFactories.FilterFactory.html" title="interface in org.apa
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="createFilter(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode)">
+<a id="createFilter(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode,java.util.Set)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>createFilter</h4>
 <pre class="methodSignature">public&nbsp;<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;createFilter&#8203;(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
-                            <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="RelFactories.FilterFactory.html#createFilter(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode)">RelFactories.FilterFactory</a></code></span></div>
-<div class="block">Creates a filter.</div>
+                            <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition,
+                            java.util.Set&lt;<a href="CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>&gt;&nbsp;variablesSet)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="RelFactories.FilterFactory.html#createFilter(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode,java.util.Set)">RelFactories.FilterFactory</a></code></span></div>
+<div class="block">Creates a filter.
+
+ <p>Some implementations of <code>Filter</code> do not support correlation
+ variables, and for these, this method will throw if <code>variablesSet</code>
+ is not empty.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="RelFactories.FilterFactory.html#createFilter(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode)">createFilter</a></code>&nbsp;in interface&nbsp;<code><a href="RelFactories.FilterFactory.html" title="interface in org.apache.calcite.rel.core">RelFactories.FilterFactory</a></code></dd>
+<dd><code><a href="RelFactories.FilterFactory.html#createFilter(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode,java.util.Set)">createFilter</a></code>&nbsp;in interface&nbsp;<code><a href="RelFactories.FilterFactory.html" title="interface in org.apache.calcite.rel.core">RelFactories.FilterFactory</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>input</code> - Input relational expression</dd>
+<dd><code>condition</code> - Filter condition; only rows for which this condition
+   evaluates to TRUE will be emitted</dd>
+<dd><code>variablesSet</code> - Correlating variables that are set when reading
+   a row from the input, and which may be referenced from inside the
+   condition</dd>
 </dl>
 </li>
 </ul>

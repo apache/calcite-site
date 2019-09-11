@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -182,13 +182,20 @@ extends <a href="../SqlDialect.html" title="class in org.apache.calcite.sql">Sql
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#DEFAULT">DEFAULT</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
+<tr class="rowColor">
+<td class="colFirst"><code>private static <a href="../../rel/type/RelDataTypeSystem.html" title="interface in org.apache.calcite.rel.type">RelDataTypeSystem</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#ORACLE_TYPE_SYSTEM">ORACLE_TYPE_SYSTEM</a></span></code></th>
+<td class="colLast">
+<div class="block">OracleDB type system.</div>
+</td>
+</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a id="fields.inherited.from.class.org.apache.calcite.sql.SqlDialect">
 <!--   -->
 </a>
 <h3>Fields inherited from class&nbsp;org.apache.calcite.sql.<a href="../SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a></h3>
-<code><a href="../SqlDialect.html#BUILT_IN_OPERATORS_LIST">BUILT_IN_OPERATORS_LIST</a>, <a href="../SqlDialect.html#CALCITE">CALCITE</a>, <a href="../SqlDialect.html#DUMMY">DUMMY</a>, <a href="../SqlDialect.html#EMPTY_CONTEXT">EMPTY_CONTEXT</a>, <a href="../SqlDialect.html#LOGGER">LOGGER</a>, <a href="../SqlDialect.html#nullCollation">nullCollation</a></code></li>
+<code><a href="../SqlDialect.html#BUILT_IN_OPERATORS_LIST">BUILT_IN_OPERATORS_LIST</a>, <a href="../SqlDialect.html#CALCITE">CALCITE</a>, <a href="../SqlDialect.html#DUMMY">DUMMY</a>, <a href="../SqlDialect.html#EMPTY_CONTEXT">EMPTY_CONTEXT</a>, <a href="../SqlDialect.html#identifierEndQuoteString">identifierEndQuoteString</a>, <a href="../SqlDialect.html#identifierEscapedQuote">identifierEscapedQuote</a>, <a href="../SqlDialect.html#identifierQuoteString">identifierQuoteString</a>, <a href="../SqlDialect.html#literalEndQuoteString">literalEndQuoteString</a>, <a href="../SqlDialect.html#literalEscapedQuote">literalEscapedQuote</a>, <a href="../SqlDialect.html#literalQuoteString">literalQuoteString</a>, <a href="../SqlDialect.html#LOGGER">LOGGER</a>, <a href="../SqlDialect.html#nullCollation">nullCollation</a></code></li>
 </ul>
 </li>
 </ul>
@@ -236,6 +243,18 @@ extends <a href="../SqlDialect.html" title="class in org.apache.calcite.sql">Sql
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCastSpec(org.apache.calcite.rel.type.RelDataType)">getCastSpec</a></span>&#8203;(<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;java.lang.String&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSingleRowTableName()">getSingleRowTableName</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the name of the system table that has precisely one row.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#supportsAliasedValues()">supportsAliasedValues</a></span>()</code></th>
 <td class="colLast">
@@ -243,7 +262,7 @@ extends <a href="../SqlDialect.html" title="class in org.apache.calcite.sql">Sql
  and an "AS t(column, ...)" values to define column names.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#supportsCharSet()">supportsCharSet</a></span>()</code></th>
 <td class="colLast">
@@ -251,12 +270,27 @@ extends <a href="../SqlDialect.html" title="class in org.apache.calcite.sql">Sql
  data type, for instance <code>VARCHAR(30) CHARACTER SET `ISO-8859-1`</code>.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#supportsDataType(org.apache.calcite.rel.type.RelDataType)">supportsDataType</a></span>&#8203;(<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type)</code></th>
+<td class="colLast">
+<div class="block">Returns whether this dialect supports a given type.</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unparseCall(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,int,int)">unparseCall</a></span>&#8203;(<a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
            <a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
            int&nbsp;leftPrec,
            int&nbsp;rightPrec)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unparseDateTimeLiteral(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlAbstractDateTimeLiteral,int,int)">unparseDateTimeLiteral</a></span>&#8203;(<a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+                      <a href="../SqlAbstractDateTimeLiteral.html" title="class in org.apache.calcite.sql">SqlAbstractDateTimeLiteral</a>&nbsp;literal,
+                      int&nbsp;leftPrec,
+                      int&nbsp;rightPrec)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </table>
@@ -265,7 +299,7 @@ extends <a href="../SqlDialect.html" title="class in org.apache.calcite.sql">Sql
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;org.apache.calcite.sql.<a href="../SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a></h3>
-<code><a href="../SqlDialect.html#configureParser(org.apache.calcite.sql.parser.SqlParser.ConfigBuilder)">configureParser</a>, <a href="../SqlDialect.html#create(java.sql.DatabaseMetaData)">create</a>, <a href="../SqlDialect.html#defaultNullDirection(org.apache.calcite.rel.RelFieldCollation.Direction)">defaultNullDirection</a>, <a href="../SqlDialect.html#emptyContext()">emptyContext</a>, <a href="../SqlDialect.html#emulateJoinTypeForCrossJoin()">emulateJoinTypeForCrossJoin</a>, <a href="../SqlDialect.html#emulateNullDirection(org.apache.calcite.sql.SqlNode,boolean,boolean)">emulateNullDirection</a>, <a href="../SqlDialect.html#emulateNullDirectionWithIsNull(org.apache.calcite.sql.SqlNode,boolean,boolean)">emulateNullDirectionWithIsNull</a>, <a href="../SqlDialect.html#getCalendarPolicy()">getCalendarPolicy</a>, <a href="../SqlDialect.html#getCastSpec(org.apache.calcite.rel.type.RelDataType)">getCastSpec</a>, <a href="../SqlDialect.html#getConformance()">getConformance</a>, <a href="../SqlDialect.html#getDatabaseProduct()">getDatabaseProduct</a>, <a href="../SqlDialect.html#getNullCollation()">getNullCollation</a>, <a href="../SqlDialect.html#getProduct(java.lang.String,java.lang.String)">getProduct</a>, <a href="../SqlDialect.html#getQuotedCasing()">getQuotedCasing</a>, <a href="../SqlDialect.html#getQuoting()">getQuoting</a>, <a href="../SqlDialect.html#getTypeSystem()">getTypeSystem</a>, <a href="../SqlDialect.html#getUnquotedCasing()">getUnquotedCasing</a>, <a href="../SqlDialect.html#hasImplicitTableAlias()">hasImplicitTableAlias</a>, <a href="../SqlDialect.html#isCaseSensitive()">isCaseSensitive</a>, <a href="../SqlDialect.html#quoteIdentifier(java.lang.String)">quoteIdentifier</a>, <a href="../SqlDialect.html#quoteIdentifier(java.lang.StringBuilder,java.lang.String)">quoteIdentifier</a>, <a href="../SqlDialect.html#quoteIdentifier(java.lang.StringBuilder,java.util.List)">quoteIdentifier</a>, <a href="../SqlDialect.html#quoteStringLiteral(java.lang.String)">quoteStringLiteral</a>, <a href="../SqlDialect.html#quoteStringLiteralUnicode(java.lang.StringBuilder,java.lang.String)">quoteStringLiteralUnicode</a>, <a href="../SqlDialect.html#quoteTimestampLiteral(java.sql.Timestamp)">quoteTimestampLiteral</a>, <a href="../SqlDialect.html#requiresAliasForFromItems()">requiresAliasForFromItems</a>, <a href="../SqlDialect.html#rewriteSingleValueExpr(org.apache.calcite.sql.SqlNode)">rewriteSingleValueExpr</a>, <a href="../SqlDialect.html#supportsAggregateFunction(org.apache.calcite.sql.SqlKind)">supportsAggregateFunction</a>, <a href="../SqlDialect.html#supportsFunction(org.apache.calcite.sql.SqlOperator,org.apache.calcite.rel.type.RelDataType,java.util.List)">supportsFunction</a>, <a href="../SqlDialect.html#supportsGroupByWithCube()">supportsGroupByWithCube</a>, <a href="../SqlDialect.html#supportsGroupByWithRollup()">supportsGroupByWithRollup</a>, <a href="../SqlDialect.html#supportsNestedAggregations()">supportsNestedAggregations</a>, <a href="../SqlDialect.html#supportsOffsetFetch()">supportsOffsetFetch</a>, <a href="../SqlDialect.html#supportsWindowFunctions()">supportsWindowFunctions</a>, <a href="../SqlDialect.html#unparseDateTimeLiteral(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlAbstractDateTimeLiteral,int,int)">unparseDateTimeLiteral</a>, <a href="../SqlDialect.html#unparseFetchUsingAnsi(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)">unparseFetchUsingAnsi</a>, <a href="../SqlDialect.html#unparseFetchUsingLimit(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)">unparseFetchUsingLimit</a>, <a href="../SqlDialect.html#unparseOffsetFetch(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)">unparseOffsetFetch</a>, <a href="../SqlDialect.html#unparseSqlDatetimeArithmetic(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.SqlKind,int,int)">unparseSqlDatetimeArithmetic</a>, <a href="../SqlDialect.html#unparseSqlIntervalLiteral(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlIntervalLiteral,int,int)">unparseSqlIntervalLiteral</a>, <a href="../SqlDialect.html#unparseSqlIntervalQualifier(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlIntervalQualifier,org.apache.calcite.rel.type.RelDataTypeSystem)">unparseSqlIntervalQualifier</a>, <a href="../SqlDialect.html#unquoteStringLiteral(java.lang.String)">unquoteStringLiteral</a></code></li>
+<code><a href="../SqlDialect.html#configureParser(org.apache.calcite.sql.parser.SqlParser.ConfigBuilder)">configureParser</a>, <a href="../SqlDialect.html#containsNonAscii(java.lang.String)">containsNonAscii</a>, <a href="../SqlDialect.html#create(java.sql.DatabaseMetaData)">create</a>, <a href="../SqlDialect.html#defaultNullDirection(org.apache.calcite.rel.RelFieldCollation.Direction)">defaultNullDirection</a>, <a href="../SqlDialect.html#emptyContext()">emptyContext</a>, <a href="../SqlDialect.html#emulateJoinTypeForCrossJoin()">emulateJoinTypeForCrossJoin</a>, <a href="../SqlDialect.html#emulateNullDirection(org.apache.calcite.sql.SqlNode,boolean,boolean)">emulateNullDirection</a>, <a href="../SqlDialect.html#emulateNullDirectionWithIsNull(org.apache.calcite.sql.SqlNode,boolean,boolean)">emulateNullDirectionWithIsNull</a>, <a href="../SqlDialect.html#getCalendarPolicy()">getCalendarPolicy</a>, <a href="../SqlDialect.html#getConformance()">getConformance</a>, <a href="../SqlDialect.html#getDatabaseProduct()">getDatabaseProduct</a>, <a href="../SqlDialect.html#getNullCollation()">getNullCollation</a>, <a href="../SqlDialect.html#getProduct(java.lang.String,java.lang.String)">getProduct</a>, <a href="../SqlDialect.html#getQuotedCasing()">getQuotedCasing</a>, <a href="../SqlDialect.html#getQuoting()">getQuoting</a>, <a href="../SqlDialect.html#getTypeSystem()">getTypeSystem</a>, <a href="../SqlDialect.html#getUnquotedCasing()">getUnquotedCasing</a>, <a href="../SqlDialect.html#hasImplicitTableAlias()">hasImplicitTableAlias</a>, <a href="../SqlDialect.html#identifierNeedsQuote(java.lang.String)">identifierNeedsQuote</a>, <a href="../SqlDialect.html#isCaseSensitive()">isCaseSensitive</a>, <a href="../SqlDialect.html#quoteIdentifier(java.lang.String)">quoteIdentifier</a>, <a href="../SqlDialect.html#quoteIdentifier(java.lang.StringBuilder,java.lang.String)">quoteIdentifier</a>, <a href="../SqlDialect.html#quoteIdentifier(java.lang.StringBuilder,java.util.List)">quoteIdentifier</a>, <a href="../SqlDialect.html#quoteStringLiteral(java.lang.String)">quoteStringLiteral</a>, <a href="../SqlDialect.html#quoteStringLiteral(java.lang.StringBuilder,java.lang.String,java.lang.String)">quoteStringLiteral</a>, <a href="../SqlDialect.html#quoteStringLiteralUnicode(java.lang.StringBuilder,java.lang.String)">quoteStringLiteralUnicode</a>, <a href="../SqlDialect.html#quoteTimestampLiteral(java.sql.Timestamp)">quoteTimestampLiteral</a>, <a href="../SqlDialect.html#requiresAliasForFromItems()">requiresAliasForFromItems</a>, <a href="../SqlDialect.html#rewriteSingleValueExpr(org.apache.calcite.sql.SqlNode)">rewriteSingleValueExpr</a>, <a href="../SqlDialect.html#supportsAggregateFunction(org.apache.calcite.sql.SqlKind)">supportsAggregateFunction</a>, <a href="../SqlDialect.html#supportsFunction(org.apache.calcite.sql.SqlOperator,org.apache.calcite.rel.type.RelDataType,java.util.List)">supportsFunction</a>, <a href="../SqlDialect.html#supportsGroupByWithCube()">supportsGroupByWithCube</a>, <a href="../SqlDialect.html#supportsGroupByWithRollup()">supportsGroupByWithRollup</a>, <a href="../SqlDialect.html#supportsNestedAggregations()">supportsNestedAggregations</a>, <a href="../SqlDialect.html#supportsOffsetFetch()">supportsOffsetFetch</a>, <a href="../SqlDialect.html#supportsWindowFunctions()">supportsWindowFunctions</a>, <a href="../SqlDialect.html#unparseFetchUsingAnsi(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)">unparseFetchUsingAnsi</a>, <a href="../SqlDialect.html#unparseFetchUsingLimit(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)">unparseFetchUsingLimit</a>, <a href="../SqlDialect.html#unparseOffsetFetch(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)">unparseOffsetFetch</a>, <a href="../SqlDialect.html#unparseSqlDatetimeArithmetic(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.SqlKind,int,int)">unparseSqlDatetimeArithmetic</a>, <a href="../SqlDialect.html#unparseSqlIntervalLiteral(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlIntervalLiteral,int,int)">unparseSqlIntervalLiteral</a>, <a href="../SqlDialect.html#unparseSqlIntervalQualifier(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlIntervalQualifier,org.apache.calcite.rel.type.RelDataTypeSystem)">unparseSqlIntervalQualifier</a>, <a href="../SqlDialect.html#unquoteStringLiteral(java.lang.String)">unquoteStringLiteral</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
@@ -290,6 +324,16 @@ extends <a href="../SqlDialect.html" title="class in org.apache.calcite.sql">Sql
 <!--   -->
 </a>
 <h3>Field Detail</h3>
+<a id="ORACLE_TYPE_SYSTEM">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ORACLE_TYPE_SYSTEM</h4>
+<pre>private static final&nbsp;<a href="../../rel/type/RelDataTypeSystem.html" title="interface in org.apache.calcite.rel.type">RelDataTypeSystem</a> ORACLE_TYPE_SYSTEM</pre>
+<div class="block">OracleDB type system.</div>
+</li>
+</ul>
 <a id="DEFAULT">
 <!--   -->
 </a>
@@ -345,6 +389,34 @@ extends <a href="../SqlDialect.html" title="class in org.apache.calcite.sql">Sql
 </dl>
 </li>
 </ul>
+<a id="supportsDataType(org.apache.calcite.rel.type.RelDataType)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>supportsDataType</h4>
+<pre class="methodSignature">public&nbsp;boolean&nbsp;supportsDataType&#8203;(<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../SqlDialect.html#supportsDataType(org.apache.calcite.rel.type.RelDataType)">SqlDialect</a></code></span></div>
+<div class="block">Returns whether this dialect supports a given type.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../SqlDialect.html#supportsDataType(org.apache.calcite.rel.type.RelDataType)">supportsDataType</a></code>&nbsp;in class&nbsp;<code><a href="../SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="getCastSpec(org.apache.calcite.rel.type.RelDataType)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getCastSpec</h4>
+<pre class="methodSignature">public&nbsp;<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;getCastSpec&#8203;(<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../SqlDialect.html#getCastSpec(org.apache.calcite.rel.type.RelDataType)">getCastSpec</a></code>&nbsp;in class&nbsp;<code><a href="../SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a></code></dd>
+</dl>
+</li>
+</ul>
 <a id="allowsAs()">
 <!--   -->
 </a>
@@ -375,6 +447,43 @@ extends <a href="../SqlDialect.html" title="class in org.apache.calcite.sql">Sql
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="../SqlDialect.html#supportsAliasedValues()">supportsAliasedValues</a></code>&nbsp;in class&nbsp;<code><a href="../SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="unparseDateTimeLiteral(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlAbstractDateTimeLiteral,int,int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>unparseDateTimeLiteral</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;unparseDateTimeLiteral&#8203;(<a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+                                   <a href="../SqlAbstractDateTimeLiteral.html" title="class in org.apache.calcite.sql">SqlAbstractDateTimeLiteral</a>&nbsp;literal,
+                                   int&nbsp;leftPrec,
+                                   int&nbsp;rightPrec)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../SqlDialect.html#unparseDateTimeLiteral(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlAbstractDateTimeLiteral,int,int)">unparseDateTimeLiteral</a></code>&nbsp;in class&nbsp;<code><a href="../SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="getSingleRowTableName()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getSingleRowTableName</h4>
+<pre class="methodSignature">public&nbsp;java.util.List&lt;java.lang.String&gt;&nbsp;getSingleRowTableName()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../SqlDialect.html#getSingleRowTableName()">SqlDialect</a></code></span></div>
+<div class="block">Returns the name of the system table that has precisely one row.
+ If there is no such table, returns null, and we will generate SELECT with
+ no FROM clause.
+
+ <p>For <code>VALUES 1</code>,
+ Oracle returns ["DUAL"] and we generate "SELECT 1 FROM DUAL";
+ MySQL returns null and we generate "SELECT 1".</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../SqlDialect.html#getSingleRowTableName()">getSingleRowTableName</a></code>&nbsp;in class&nbsp;<code><a href="../SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a></code></dd>
 </dl>
 </li>
 </ul>

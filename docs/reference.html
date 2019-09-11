@@ -1183,35 +1183,49 @@ it will rely on the supplied time zone to provide correct semantics.</li>
     <tr>
       <th style="text-align: left">Type</th>
       <th style="text-align: left">Description</th>
+      <th style="text-align: left">Example literals</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td style="text-align: left">ANY</td>
       <td style="text-align: left">A value of an unknown type</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
       <td style="text-align: left">ROW</td>
       <td style="text-align: left">Row with 1 or more columns</td>
+      <td style="text-align: left">Example: Row(f0 int null, f1 varchar)</td>
     </tr>
     <tr>
       <td style="text-align: left">MAP</td>
       <td style="text-align: left">Collection of keys mapped to values</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
       <td style="text-align: left">MULTISET</td>
       <td style="text-align: left">Unordered collection that may contain duplicates</td>
+      <td style="text-align: left">Example: int multiset</td>
     </tr>
     <tr>
       <td style="text-align: left">ARRAY</td>
       <td style="text-align: left">Ordered, contiguous collection that may contain duplicates</td>
+      <td style="text-align: left">Example: varchar(10) array</td>
     </tr>
     <tr>
       <td style="text-align: left">CURSOR</td>
       <td style="text-align: left">Cursor over the result of executing a query</td>
+      <td style="text-align: left"> </td>
     </tr>
   </tbody>
 </table>
+
+<p>Note:</p>
+
+<ul>
+  <li>Every <code class="highlighter-rouge">ROW</code> column type can have an optional [ NULL | NOT NULL ] suffix
+to indicate if this column type is nullable, default is not nullable.</li>
+</ul>
 
 <h3 id="spatial-types">Spatial types</h3>
 
@@ -1319,6 +1333,10 @@ for example <code class="highlighter-rouge">ST_GeomFromText('POINT (30 10)')</co
       <td style="text-align: left">left</td>
     </tr>
     <tr>
+      <td style="text-align: left">::</td>
+      <td style="text-align: left">left</td>
+    </tr>
+    <tr>
       <td style="text-align: left">[ ] (array element)</td>
       <td style="text-align: left">left</td>
     </tr>
@@ -1327,7 +1345,7 @@ for example <code class="highlighter-rouge">ST_GeomFromText('POINT (30 10)')</co
       <td style="text-align: left">right</td>
     </tr>
     <tr>
-      <td style="text-align: left">* / %</td>
+      <td style="text-align: left">* / % ||</td>
       <td style="text-align: left">left</td>
     </tr>
     <tr>
@@ -1360,6 +1378,9 @@ for example <code class="highlighter-rouge">ST_GeomFromText('POINT (30 10)')</co
     </tr>
   </tbody>
 </table>
+
+<p>Note that <code class="highlighter-rouge">::</code> is dialect-specific, but is shown in this table for
+completeness.</p>
 
 <h3 id="comparison-operators">Comparison operators</h3>
 
@@ -1969,6 +1990,22 @@ standard SQL. Calls with parentheses, such as <code class="highlighter-rouge">CU
 
 <h3 id="type-conversion">Type conversion</h3>
 
+<p>Generally an expression cannot contain values of different datatypes. For example, an expression cannot multiply 5 by 10 and then add ‘JULIAN’.
+However, Calcite supports both implicit and explicit conversion of values from one datatype to another.</p>
+
+<h4 id="implicit-and-explicit-type-conversion">Implicit and Explicit Type Conversion</h4>
+<p>Calcite recommends that you specify explicit conversions, rather than rely on implicit or automatic conversions, for these reasons:</p>
+
+<ul>
+  <li>SQL statements are easier to understand when you use explicit datatype conversion functions.</li>
+  <li>Implicit datatype conversion can have a negative impact on performance, especially if the datatype of a column value is converted to that of a constant rather than the other way around.</li>
+  <li>Implicit conversion depends on the context in which it occurs and may not work the same way in every case. For example, implicit conversion from a datetime value to a VARCHAR value may return an unexpected format.</li>
+</ul>
+
+<p>Algorithms for implicit conversion are subject to change across Calcite releases. Behavior of explicit conversions is more predictable.</p>
+
+<h4 id="explicit-type-conversion">Explicit Type Conversion</h4>
+
 <table>
   <thead>
     <tr>
@@ -1983,6 +2020,425 @@ standard SQL. Calls with parentheses, such as <code class="highlighter-rouge">CU
     </tr>
   </tbody>
 </table>
+
+<p>Supported data types syntax:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">type</span><span class="p">:</span>
+      <span class="n">typeName</span>
+      <span class="p">[</span> <span class="n">collectionsTypeName</span> <span class="p">]</span><span class="o">*</span>
+
+<span class="n">typeName</span><span class="p">:</span>
+      <span class="n">sqlTypeName</span>
+  <span class="o">|</span>   <span class="n">rowTypeName</span>
+  <span class="o">|</span>   <span class="n">compoundIdentifier</span>
+
+<span class="n">sqlTypeName</span><span class="p">:</span>
+      <span class="n">char</span> <span class="p">[</span> <span class="k">precision</span> <span class="p">]</span> <span class="p">[</span> <span class="n">charSet</span> <span class="p">]</span>
+  <span class="o">|</span>   <span class="n">varchar</span> <span class="p">[</span> <span class="k">precision</span> <span class="p">]</span> <span class="p">[</span> <span class="n">charSet</span> <span class="p">]</span>
+  <span class="o">|</span>   <span class="n">DATE</span>
+  <span class="o">|</span>   <span class="n">time</span>
+  <span class="o">|</span>   <span class="k">timestamp</span>
+  <span class="o">|</span>   <span class="n">GEOMETRY</span>
+  <span class="o">|</span>   <span class="n">decimal</span> <span class="p">[</span> <span class="k">precision</span> <span class="p">[,</span> <span class="k">scale</span><span class="p">]</span> <span class="p">]</span>
+  <span class="o">|</span>   <span class="n">BOOLEAN</span>
+  <span class="o">|</span>   <span class="n">integer</span>
+  <span class="o">|</span>   <span class="n">BINARY</span> <span class="p">[</span> <span class="k">precision</span> <span class="p">]</span>
+  <span class="o">|</span>   <span class="n">varbinary</span> <span class="p">[</span> <span class="k">precision</span> <span class="p">]</span>
+  <span class="o">|</span>   <span class="n">TINYINT</span>
+  <span class="o">|</span>   <span class="n">SMALLINT</span>
+  <span class="o">|</span>   <span class="n">BIGINT</span>
+  <span class="o">|</span>   <span class="n">REAL</span>
+  <span class="o">|</span>   <span class="n">double</span>
+  <span class="o">|</span>   <span class="n">FLOAT</span>
+  <span class="o">|</span>   <span class="k">ANY</span> <span class="p">[</span> <span class="k">precision</span> <span class="p">[,</span> <span class="k">scale</span><span class="p">]</span> <span class="p">]</span>
+
+<span class="n">collectionsTypeName</span><span class="p">:</span>
+      <span class="n">ARRAY</span> <span class="o">|</span> <span class="n">MULTISET</span>
+
+<span class="n">rowTypeName</span><span class="p">:</span>
+      <span class="k">ROW</span> <span class="s1">'('</span>
+      <span class="n">fieldName1</span> <span class="n">fieldType1</span> <span class="p">[</span> <span class="k">NULL</span> <span class="o">|</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">]</span>
+      <span class="p">[</span> <span class="p">,</span> <span class="n">fieldName2</span> <span class="n">fieldType2</span> <span class="p">[</span> <span class="k">NULL</span> <span class="o">|</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">]</span> <span class="p">]</span><span class="o">*</span>
+      <span class="s1">')'</span>
+
+<span class="n">char</span><span class="p">:</span>
+      <span class="n">CHARACTER</span> <span class="o">|</span> <span class="n">CHAR</span>
+
+<span class="n">varchar</span><span class="p">:</span>
+      <span class="n">char</span> <span class="n">VARYING</span> <span class="o">|</span> <span class="n">VARCHAR</span>
+
+<span class="n">decimal</span><span class="p">:</span>
+      <span class="n">DECIMAL</span> <span class="o">|</span> <span class="n">DEC</span> <span class="o">|</span> <span class="n">NUMERIC</span>
+
+<span class="n">integer</span><span class="p">:</span>
+      <span class="n">INTEGER</span> <span class="o">|</span> <span class="n">INT</span>
+
+<span class="n">varbinary</span><span class="p">:</span>
+      <span class="n">BINARY</span> <span class="n">VARYING</span> <span class="o">|</span> <span class="n">VARBINARY</span>
+
+<span class="n">double</span><span class="p">:</span>
+      <span class="n">DOUBLE</span> <span class="p">[</span> <span class="k">PRECISION</span> <span class="p">]</span>
+
+<span class="n">time</span><span class="p">:</span>
+      <span class="n">TIME</span> <span class="p">[</span> <span class="k">precision</span> <span class="p">]</span> <span class="p">[</span> <span class="n">timeZone</span> <span class="p">]</span>
+
+<span class="k">timestamp</span><span class="p">:</span>
+      <span class="k">TIMESTAMP</span> <span class="p">[</span> <span class="k">precision</span> <span class="p">]</span> <span class="p">[</span> <span class="n">timeZone</span> <span class="p">]</span>
+
+<span class="n">charSet</span><span class="p">:</span>
+      <span class="n">CHARACTER</span> <span class="k">SET</span> <span class="n">charSetName</span>
+
+<span class="n">timeZone</span><span class="p">:</span>
+      <span class="k">WITHOUT</span> <span class="n">TIME</span> <span class="k">ZONE</span>
+  <span class="o">|</span>   <span class="k">WITH</span> <span class="k">LOCAL</span> <span class="n">TIME</span> <span class="k">ZONE</span></code></pre></figure>
+
+<h4 id="implicit-type-conversion">Implicit Type Conversion</h4>
+
+<p>Calcite automatically converts a value from one datatype to another
+when such a conversion makes sense. The table below is a matrix of
+Calcite type conversions. The table shows all possible conversions,
+without regard to the context in which it is made. The rules governing
+these details follow the table.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">FROM - TO</th>
+      <th style="text-align: left">NULL</th>
+      <th style="text-align: left">BOOLEAN</th>
+      <th style="text-align: left">TINYINT</th>
+      <th style="text-align: left">SMALLINT</th>
+      <th style="text-align: left">INT</th>
+      <th style="text-align: left">BIGINT</th>
+      <th style="text-align: left">DECIMAL</th>
+      <th style="text-align: left">FLOAT or REAL</th>
+      <th style="text-align: left">DOUBLE</th>
+      <th style="text-align: left">INTERVAL</th>
+      <th style="text-align: left">DATE</th>
+      <th style="text-align: left">TIME</th>
+      <th style="text-align: left">TIMESTAMP</th>
+      <th style="text-align: left">CHAR or VARCHAR</th>
+      <th style="text-align: left">BINARY or VARBINARY</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">NULL</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BOOLEAN</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">TINYINT</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SMALLINT</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">INT</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BIGINT</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DECIMAL</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">FLOAT/REAL</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DOUBLE</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">INTERVAL</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">x</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DATE</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">TIME</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">TIMESTAMP</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CHAR or VARCHAR</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BINARY or VARBINARY</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">e</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>i: implicit cast / e: explicit cast / x: not allowed</p>
+
+<h5 id="conversion-contexts-and-strategies">Conversion Contexts and Strategies</h5>
+
+<ul>
+  <li>Set operation (<code class="highlighter-rouge">UNION</code>, <code class="highlighter-rouge">EXCEPT</code>, <code class="highlighter-rouge">INTERSECT</code>): Compare every branch
+row data type and find the common type of each fields pair;</li>
+  <li>Binary arithmetic expression (<code class="highlighter-rouge">+</code>, <code class="highlighter-rouge">-</code>, <code class="highlighter-rouge">&amp;</code>, <code class="highlighter-rouge">^</code>, <code class="highlighter-rouge">/</code>, <code class="highlighter-rouge">%</code>): promote
+string operand to data type of the other numeric operand;</li>
+  <li>Binary comparison (<code class="highlighter-rouge">=</code>, <code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&lt;=</code>, <code class="highlighter-rouge">&lt;&gt;</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">&gt;=</code>):
+if operands are <code class="highlighter-rouge">STRING</code> and <code class="highlighter-rouge">TIMESTAMP</code>, promote to <code class="highlighter-rouge">TIMESTAMP</code>;
+make <code class="highlighter-rouge">1 = true</code> and <code class="highlighter-rouge">0 = false</code> always evaluate to <code class="highlighter-rouge">TRUE</code>;
+if there is numeric type operand, find common type for both operands.</li>
+  <li><code class="highlighter-rouge">IN</code> sub-query: compare type of LHS and RHS, and find the common type;
+if it is struct type, find wider type for every field;</li>
+  <li><code class="highlighter-rouge">IN</code> expression list: compare every expression to find the common type;</li>
+  <li><code class="highlighter-rouge">CASE WHEN</code> expression or <code class="highlighter-rouge">COALESCE</code>: find the common wider type of the <code class="highlighter-rouge">THEN</code>
+and <code class="highlighter-rouge">ELSE</code> operands;</li>
+  <li>Character + <code class="highlighter-rouge">INTERVAL</code> or character - <code class="highlighter-rouge">INTERVAL</code>: Promote character to
+<code class="highlighter-rouge">TIMESTAMP</code>;</li>
+  <li>Built-in function: Look up the type families registered in the checker,
+find the family default type if checker rules allow it;</li>
+  <li>User-defined function (UDF): Coerce based on the declared argument types
+of the <code class="highlighter-rouge">eval()</code> method.</li>
+</ul>
+
+<h5 id="strategies-for-finding-common-type">Strategies for Finding Common Type</h5>
+
+<ul>
+  <li>If the operator has expected data types, just take them as the
+desired one. (e.g. the UDF would have <code class="highlighter-rouge">eval()</code> method which has
+reflection argument types);</li>
+  <li>If there is no expected data type but the data type families are
+registered, try to coerce the arguments to the family’s default data
+type, i.e. the String family will have a <code class="highlighter-rouge">VARCHAR</code> type;</li>
+  <li>If neither expected data type nor families are specified, try to
+find the tightest common type of the node types, i.e. <code class="highlighter-rouge">INTEGER</code> and
+<code class="highlighter-rouge">DOUBLE</code> will return <code class="highlighter-rouge">DOUBLE</code>, the numeric precision does not lose
+for this case;</li>
+  <li>If no tightest common type is found, try to find a wider type,
+i.e. <code class="highlighter-rouge">VARCHAR</code> and <code class="highlighter-rouge">INTEGER</code> will return <code class="highlighter-rouge">INTEGER</code>,
+we allow some precision loss when widening decimal to fractional,
+or promote to <code class="highlighter-rouge">VARCHAR</code> type.</li>
+</ul>
 
 <h3 id="value-constructors">Value constructors</h3>
 
@@ -2092,7 +2548,7 @@ standard SQL. Calls with parentheses, such as <code class="highlighter-rouge">CU
     <th>Description</th>
   </tr>
   <tr>
-    <td>period1 CONTAINS dateTime</td>
+    <td>period1 CONTAINS datetime</td>
     <td>
       <div class="container">
         <div class="gray"><div class="r15"></div><div class="r2"></div></div>
@@ -2173,10 +2629,10 @@ standard SQL. Calls with parentheses, such as <code class="highlighter-rouge">CU
 <p>Where <em>period1</em> and <em>period2</em> are period expressions:</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">period</span><span class="p">:</span>
-      <span class="p">(</span><span class="n">dateTime</span><span class="p">,</span> <span class="n">dateTime</span><span class="p">)</span>
-  <span class="o">|</span>   <span class="p">(</span><span class="n">dateTime</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span>
-  <span class="o">|</span>   <span class="n">PERIOD</span> <span class="p">(</span><span class="n">dateTime</span><span class="p">,</span> <span class="n">dateTime</span><span class="p">)</span>
-  <span class="o">|</span>   <span class="n">PERIOD</span> <span class="p">(</span><span class="n">dateTime</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span></code></pre></figure>
+      <span class="p">(</span><span class="n">datetime</span><span class="p">,</span> <span class="n">datetime</span><span class="p">)</span>
+  <span class="o">|</span>   <span class="p">(</span><span class="n">datetime</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span>
+  <span class="o">|</span>   <span class="n">PERIOD</span> <span class="p">(</span><span class="n">datetime</span><span class="p">,</span> <span class="n">datetime</span><span class="p">)</span>
+  <span class="o">|</span>   <span class="n">PERIOD</span> <span class="p">(</span><span class="n">datetime</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span></code></pre></figure>
 
 <h3 id="jdbc-function-escape">JDBC function escape</h3>
 
@@ -2436,13 +2892,6 @@ standard SQL. Calls with parentheses, such as <code class="highlighter-rouge">CU
     </tr>
   </tbody>
 </table>
-
-<p>Not implemented:</p>
-
-<ul>
-  <li>{fn DAYNAME(date)}</li>
-  <li>{fn MONTHNAME(date)}</li>
-</ul>
 
 <h4 id="system">System</h4>
 
@@ -2779,16 +3228,16 @@ For example, if a query is grouped using
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">HOP(dateTime, slide, size [, time ])</td>
-      <td style="text-align: left">Indicates a hopping window for <em>dateTime</em>, covering rows within the interval of <em>size</em>, shifting every <em>slide</em>, and optionally aligned at <em>time</em></td>
+      <td style="text-align: left">HOP(datetime, slide, size [, time ])</td>
+      <td style="text-align: left">Indicates a hopping window for <em>datetime</em>, covering rows within the interval of <em>size</em>, shifting every <em>slide</em>, and optionally aligned at <em>time</em></td>
     </tr>
     <tr>
-      <td style="text-align: left">SESSION(dateTime, interval [, time ])</td>
-      <td style="text-align: left">Indicates a session window of <em>interval</em> for <em>dateTime</em>, optionally aligned at <em>time</em></td>
+      <td style="text-align: left">SESSION(datetime, interval [, time ])</td>
+      <td style="text-align: left">Indicates a session window of <em>interval</em> for <em>datetime</em>, optionally aligned at <em>time</em></td>
     </tr>
     <tr>
-      <td style="text-align: left">TUMBLE(dateTime, interval [, time ])</td>
-      <td style="text-align: left">Indicates a tumbling window of <em>interval</em> for <em>dateTime</em>, optionally aligned at <em>time</em></td>
+      <td style="text-align: left">TUMBLE(datetime, interval [, time ])</td>
+      <td style="text-align: left">Indicates a tumbling window of <em>interval</em> for <em>datetime</em>, optionally aligned at <em>time</em></td>
     </tr>
   </tbody>
 </table>
@@ -3603,6 +4052,31 @@ semantics.</p>
   </thead>
   <tbody>
     <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">expr :: type</td>
+      <td style="text-align: left">Casts <em>expr</em> to <em>type</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">o</td>
+      <td style="text-align: left">CHR(integer)</td>
+      <td style="text-align: left">Returns the character having the binary equivalent to <em>integer</em> as a CHAR value</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m o p</td>
+      <td style="text-align: left">CONCAT(string [, string ]*)</td>
+      <td style="text-align: left">Concatenates two or more strings</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">CONVERT_TIMEZONE(tz1, tz2, datetime)</td>
+      <td style="text-align: left">Converts the timezone of <em>datetime</em> from <em>tz1</em> to <em>tz2</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
+      <td style="text-align: left">DAYNAME(datetime)</td>
+      <td style="text-align: left">Returns the name, in the connection’s locale, of the weekday in <em>datetime</em>; for example, it returns ‘星期日’ for both DATE ‘2020-02-10’ and TIMESTAMP ‘2020-02-10 10:10:10’</td>
+    </tr>
+    <tr>
       <td style="text-align: left">o</td>
       <td style="text-align: left">DECODE(value, value1, result1 [, valueN, resultN ]* [, default ])</td>
       <td style="text-align: left">Compares <em>value</em> to each <em>valueN</em> value one by one; if <em>value</em> is equal to a <em>valueN</em>, returns the corresponding <em>resultN</em>, else returns <em>default</em>, or NULL if <em>default</em> is not specified</td>
@@ -3663,14 +4137,39 @@ semantics.</p>
       <td style="text-align: left">Returns the leftmost <em>length</em> characters from the <em>string</em></td>
     </tr>
     <tr>
+      <td style="text-align: left">m</td>
+      <td style="text-align: left">TO_BASE64(string)</td>
+      <td style="text-align: left">Converts the <em>string</em> to base-64 encoded form and returns a encoded string</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
+      <td style="text-align: left">FROM_BASE64(string)</td>
+      <td style="text-align: left">Returns the decoded result of a base-64 <em>string</em> as a string</td>
+    </tr>
+    <tr>
       <td style="text-align: left">o</td>
       <td style="text-align: left">LTRIM(string)</td>
       <td style="text-align: left">Returns <em>string</em> with all blanks removed from the start</td>
     </tr>
     <tr>
+      <td style="text-align: left">m p</td>
+      <td style="text-align: left">MD5(string)</td>
+      <td style="text-align: left">Calculates an MD5 128-bit checksum of <em>string</em> and returns it as a hex string</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
+      <td style="text-align: left">MONTHNAME(date)</td>
+      <td style="text-align: left">Returns the name, in the connection’s locale, of the month in <em>datetime</em>; for example, it returns ‘二月’ for both DATE ‘2020-02-10’ and TIMESTAMP ‘2020-02-10 10:10:10’</td>
+    </tr>
+    <tr>
       <td style="text-align: left">o</td>
       <td style="text-align: left">NVL(value1, value2)</td>
       <td style="text-align: left">Returns <em>value1</em> if <em>value1</em> is not null, otherwise <em>value2</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m o</td>
+      <td style="text-align: left">REGEXP_REPLACE(string, regexp, rep, [, pos [, occurrence [, matchType]]])</td>
+      <td style="text-align: left">Replaces all substrings of <em>string</em> that match <em>regexp</em> with <em>rep</em> at the starting <em>pos</em> in expr (if omitted, the default is 1), <em>occurrence</em> means which occurrence of a match to search for (if omitted, the default is 1), <em>matchType</em> specifies how to perform matching</td>
     </tr>
     <tr>
       <td style="text-align: left">m p</td>
@@ -3693,6 +4192,11 @@ semantics.</p>
       <td style="text-align: left">Returns <em>string</em> with all blanks removed from the end</td>
     </tr>
     <tr>
+      <td style="text-align: left">m p</td>
+      <td style="text-align: left">SHA1(string)</td>
+      <td style="text-align: left">Calculates a SHA-1 hash value of <em>string</em> and returns it as a hex string</td>
+    </tr>
+    <tr>
       <td style="text-align: left">m o p</td>
       <td style="text-align: left">SOUNDEX(string)</td>
       <td style="text-align: left">Returns the phonetic representation of <em>string</em>; throws if <em>string</em> is encoded with multi-byte encoding such as UTF-8</td>
@@ -3704,8 +4208,18 @@ semantics.</p>
     </tr>
     <tr>
       <td style="text-align: left">o</td>
-      <td style="text-align: left">SUBSTR(string, position [, substring_length ])</td>
-      <td style="text-align: left">Returns a portion of <em>string</em>, beginning at character <em>position</em>, <em>substring_length</em> characters long. SUBSTR calculates lengths using characters as defined by the input character set</td>
+      <td style="text-align: left">SUBSTR(string, position [, substringLength ])</td>
+      <td style="text-align: left">Returns a portion of <em>string</em>, beginning at character <em>position</em>, <em>substringLength</em> characters long. SUBSTR calculates lengths using characters as defined by the input character set</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">o p</td>
+      <td style="text-align: left">TO_DATE(string, format)</td>
+      <td style="text-align: left">Converts <em>string</em> to a date using the format <em>format</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">o p</td>
+      <td style="text-align: left">TO_TIMESTAMP(string, format)</td>
+      <td style="text-align: left">Converts <em>string</em> to a timestamp using the format <em>format</em></td>
     </tr>
     <tr>
       <td style="text-align: left">o p</td>

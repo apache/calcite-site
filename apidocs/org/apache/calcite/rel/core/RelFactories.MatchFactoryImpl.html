@@ -190,7 +190,7 @@ implements <a href="RelFactories.MatchFactory.html" title="interface in org.apac
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createMatch(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode,org.apache.calcite.rel.type.RelDataType,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,java.util.List,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">createMatch</a></span>&#8203;(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createMatch(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode,org.apache.calcite.rel.type.RelDataType,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,org.apache.calcite.util.ImmutableBitSet,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">createMatch</a></span>&#8203;(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
            <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;pattern,
            <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
            boolean&nbsp;strictStart,
@@ -200,7 +200,7 @@ implements <a href="RelFactories.MatchFactory.html" title="interface in org.apac
            <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;after,
            java.util.Map&lt;java.lang.String,&#8203;? extends java.util.SortedSet&lt;java.lang.String&gt;&gt;&nbsp;subsets,
            boolean&nbsp;allRows,
-           java.util.List&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;partitionKeys,
+           <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&nbsp;partitionKeys,
            <a href="../RelCollation.html" title="interface in org.apache.calcite.rel">RelCollation</a>&nbsp;orderKeys,
            <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;interval)</code></th>
 <td class="colLast">
@@ -250,7 +250,7 @@ implements <a href="RelFactories.MatchFactory.html" title="interface in org.apac
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="createMatch(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode,org.apache.calcite.rel.type.RelDataType,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,java.util.List,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">
+<a id="createMatch(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode,org.apache.calcite.rel.type.RelDataType,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,org.apache.calcite.util.ImmutableBitSet,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">
 <!--   -->
 </a>
 <ul class="blockListLast">
@@ -266,14 +266,14 @@ implements <a href="RelFactories.MatchFactory.html" title="interface in org.apac
                            <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;after,
                            java.util.Map&lt;java.lang.String,&#8203;? extends java.util.SortedSet&lt;java.lang.String&gt;&gt;&nbsp;subsets,
                            boolean&nbsp;allRows,
-                           java.util.List&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;partitionKeys,
+                           <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&nbsp;partitionKeys,
                            <a href="../RelCollation.html" title="interface in org.apache.calcite.rel">RelCollation</a>&nbsp;orderKeys,
                            <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;interval)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="RelFactories.MatchFactory.html#createMatch(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode,org.apache.calcite.rel.type.RelDataType,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,java.util.List,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">RelFactories.MatchFactory</a></code></span></div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="RelFactories.MatchFactory.html#createMatch(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode,org.apache.calcite.rel.type.RelDataType,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,org.apache.calcite.util.ImmutableBitSet,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">RelFactories.MatchFactory</a></code></span></div>
 <div class="block">Creates a <a href="Match.html" title="class in org.apache.calcite.rel.core"><code>Match</code></a>.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="RelFactories.MatchFactory.html#createMatch(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode,org.apache.calcite.rel.type.RelDataType,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,java.util.List,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">createMatch</a></code>&nbsp;in interface&nbsp;<code><a href="RelFactories.MatchFactory.html" title="interface in org.apache.calcite.rel.core">RelFactories.MatchFactory</a></code></dd>
+<dd><code><a href="RelFactories.MatchFactory.html#createMatch(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode,org.apache.calcite.rel.type.RelDataType,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,org.apache.calcite.util.ImmutableBitSet,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">createMatch</a></code>&nbsp;in interface&nbsp;<code><a href="RelFactories.MatchFactory.html" title="interface in org.apache.calcite.rel.core">RelFactories.MatchFactory</a></code></dd>
 </dl>
 </li>
 </ul>

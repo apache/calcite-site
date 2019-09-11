@@ -148,7 +148,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <tr class="rowColor">
 <th class="colFirst" scope="row"><a href="RelFactories.FilterFactory.html" title="interface in org.apache.calcite.rel.core">RelFactories.FilterFactory</a></th>
 <td class="colLast">
-<div class="block">Can create a <a href="../logical/LogicalFilter.html" title="class in org.apache.calcite.rel.logical"><code>LogicalFilter</code></a> of the appropriate type
+<div class="block">Can create a <a href="Filter.html" title="class in org.apache.calcite.rel.core"><code>Filter</code></a> of the appropriate type
  for this rule's calling convention.</div>
 </td>
 </tr>
@@ -304,8 +304,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </tr>
 <tr class="rowColor">
 <th class="colFirst" scope="row"><a href="EquiJoin.html" title="class in org.apache.calcite.rel.core">EquiJoin</a></th>
-<td class="colLast">
-<div class="block">Base class for any join whose condition is based on column equality.</div>
+<td class="colLast">Deprecated.
+<div class="deprecationComment">This class is no longer needed; if you are writing a sub-class of
+ Join that only accepts equi conditions, it is sufficient that it extends
+ <a href="Join.html" title="class in org.apache.calcite.rel.core"><code>Join</code></a>.</div>
 </td>
 </tr>
 <tr class="altColor">
@@ -341,18 +343,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <th class="colFirst" scope="row"><a href="JoinInfo.html" title="class in org.apache.calcite.rel.core">JoinInfo</a></th>
 <td class="colLast">
 <div class="block">An analyzed join condition.</div>
-</td>
-</tr>
-<tr class="rowColor">
-<th class="colFirst" scope="row"><a href="JoinInfo.EquiJoinInfo.html" title="class in org.apache.calcite.rel.core">JoinInfo.EquiJoinInfo</a></th>
-<td class="colLast">
-<div class="block">JoinInfo that represents an equi-join.</div>
-</td>
-</tr>
-<tr class="altColor">
-<th class="colFirst" scope="row"><a href="JoinInfo.NonEquiJoinInfo.html" title="class in org.apache.calcite.rel.core">JoinInfo.NonEquiJoinInfo</a></th>
-<td class="colLast">
-<div class="block">JoinInfo that represents a non equi-join.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -541,105 +531,97 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </td>
 </tr>
 <tr class="altColor">
-<th class="colFirst" scope="row"><a href="SemiJoin.html" title="class in org.apache.calcite.rel.core">SemiJoin</a></th>
-<td class="colLast">Deprecated.
-<div class="deprecationComment">This class is deprecated, please use
- <a href="../logical/LogicalJoin.html" title="class in org.apache.calcite.rel.logical"><code>LogicalJoin</code></a> with join type <a href="JoinRelType.html#SEMI"><code>JoinRelType.SEMI</code></a>
- instead.</div>
-</td>
-</tr>
-<tr class="rowColor">
 <th class="colFirst" scope="row"><a href="SetOp.html" title="class in org.apache.calcite.rel.core">SetOp</a></th>
 <td class="colLast">
 <div class="block"><code>SetOp</code> is an abstract base for relational set operators such
  as UNION, MINUS (aka EXCEPT), and INTERSECT.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <th class="colFirst" scope="row"><a href="Snapshot.html" title="class in org.apache.calcite.rel.core">Snapshot</a></th>
 <td class="colLast">
 <div class="block">Relational expression that returns the contents of a relation expression as
  it was at a given time in the past.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <th class="colFirst" scope="row"><a href="Sort.html" title="class in org.apache.calcite.rel.core">Sort</a></th>
 <td class="colLast">
 <div class="block">Relational expression that imposes a particular sort order on its input
  without otherwise changing its content.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <th class="colFirst" scope="row"><a href="SortExchange.html" title="class in org.apache.calcite.rel.core">SortExchange</a></th>
 <td class="colLast">
 <div class="block">Relational expression that performs <a href="Exchange.html" title="class in org.apache.calcite.rel.core"><code>Exchange</code></a> and <a href="Sort.html" title="class in org.apache.calcite.rel.core"><code>Sort</code></a>
  simultaneously.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <th class="colFirst" scope="row"><a href="Spool.html" title="class in org.apache.calcite.rel.core">Spool</a></th>
 <td class="colLast">
 <div class="block">Relational expression that iterates over its input and, in addition to
  returning its results, will forward them into other consumers.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <th class="colFirst" scope="row"><a href="TableFunctionScan.html" title="class in org.apache.calcite.rel.core">TableFunctionScan</a></th>
 <td class="colLast">
 <div class="block">Relational expression that calls a table-valued function.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <th class="colFirst" scope="row"><a href="TableModify.html" title="class in org.apache.calcite.rel.core">TableModify</a></th>
 <td class="colLast">
 <div class="block">Relational expression that modifies a table.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <th class="colFirst" scope="row"><a href="TableScan.html" title="class in org.apache.calcite.rel.core">TableScan</a></th>
 <td class="colLast">
 <div class="block">Relational operator that returns the contents of a table.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <th class="colFirst" scope="row"><a href="TableSpool.html" title="class in org.apache.calcite.rel.core">TableSpool</a></th>
 <td class="colLast">
 <div class="block">Spool that writes into a table.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <th class="colFirst" scope="row"><a href="Uncollect.html" title="class in org.apache.calcite.rel.core">Uncollect</a></th>
 <td class="colLast">
 <div class="block">Relational expression that unnests its input's columns into a relation.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <th class="colFirst" scope="row"><a href="Union.html" title="class in org.apache.calcite.rel.core">Union</a></th>
 <td class="colLast">
 <div class="block">Relational expression that returns the union of the rows of its inputs,
  optionally eliminating duplicates.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <th class="colFirst" scope="row"><a href="Values.html" title="class in org.apache.calcite.rel.core">Values</a></th>
 <td class="colLast">
 <div class="block">Relational expression whose value is a sequence of zero or more literal row
  values.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <th class="colFirst" scope="row"><a href="Window.html" title="class in org.apache.calcite.rel.core">Window</a></th>
 <td class="colLast">
 <div class="block">A relational expression representing a set of window aggregates.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <th class="colFirst" scope="row"><a href="Window.Group.html" title="class in org.apache.calcite.rel.core">Window.Group</a></th>
 <td class="colLast">
 <div class="block">Group of windowed aggregate calls that have the same window specification.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <th class="colFirst" scope="row"><a href="Window.RexWinAggCall.html" title="class in org.apache.calcite.rel.core">Window.RexWinAggCall</a></th>
 <td class="colLast">
 <div class="block">A call to a windowed aggregate function.</div>

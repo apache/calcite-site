@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10,"i31":10,"i32":10,"i33":10,"i34":10,"i35":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -142,7 +142,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="../../adapter/jdbc/JdbcImplementor.html" title="class in org.apache.calcite.adapter.jdbc">JdbcImplementor</a></code></dd>
+<dd><code><a href="../../adapter/jdbc/JdbcImplementor.html" title="class in org.apache.calcite.adapter.jdbc">JdbcImplementor</a></code>, <code><a href="../../piglet/PigRelToSqlConverter.html" title="class in org.apache.calcite.piglet">PigRelToSqlConverter</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">RelToSqlConverter</span>
@@ -280,6 +280,48 @@ implements <a href="../../util/ReflectiveVisitor.html" title="interface in org.a
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code>protected void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#buildAggGroupList(org.apache.calcite.rel.core.Aggregate,org.apache.calcite.rel.rel2sql.SqlImplementor.Builder,java.util.List,java.util.List)">buildAggGroupList</a></span>&#8203;(<a href="../core/Aggregate.html" title="class in org.apache.calcite.rel.core">Aggregate</a>&nbsp;e,
+                 <a href="SqlImplementor.Builder.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Builder</a>&nbsp;builder,
+                 java.util.List&lt;<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;groupByList,
+                 java.util.List&lt;<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;selectList)</code></th>
+<td class="colLast">
+<div class="block">Builds the group list for an Aggregate node.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>protected <a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#buildAggregate(org.apache.calcite.rel.core.Aggregate,org.apache.calcite.rel.rel2sql.SqlImplementor.Builder,java.util.List,java.util.List)">buildAggregate</a></span>&#8203;(<a href="../core/Aggregate.html" title="class in org.apache.calcite.rel.core">Aggregate</a>&nbsp;e,
+              <a href="SqlImplementor.Builder.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Builder</a>&nbsp;builder,
+              java.util.List&lt;<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;selectList,
+              java.util.List&lt;<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;groupByList)</code></th>
+<td class="colLast">
+<div class="block">Builds an aggregate query.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>private <a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#castNullType(org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.type.RelDataTypeField)">castNullType</a></span>&#8203;(<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;sqlNodeNull,
+            <a href="../type/RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a>&nbsp;field)</code></th>
+<td class="colLast">
+<div class="block">Wrap the <code>sqlNodeNull</code> in a CAST operator with target type as <code>field</code>.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>private <a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createAlwaysFalseCondition()">createAlwaysFalseCondition</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createAsFullOperands(org.apache.calcite.rel.type.RelDataType,org.apache.calcite.sql.SqlNode,java.lang.String)">createAsFullOperands</a></span>&#8203;(<a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
+                    <a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;leftOperand,
+                    java.lang.String&nbsp;alias)</code></th>
+<td class="colLast">
+<div class="block">Creates operands for a full AS operator.</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>protected <a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#dispatch(org.apache.calcite.rel.RelNode)">dispatch</a></span>&#8203;(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;e)</code></th>
 <td class="colLast">
@@ -287,7 +329,7 @@ implements <a href="../../util/ReflectiveVisitor.html" title="interface in org.a
  most closely matches the runtime type of the argument.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>private <a href="../../sql/SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#exprList(org.apache.calcite.rel.rel2sql.SqlImplementor.Context,java.util.List)">exprList</a></span>&#8203;(<a href="SqlImplementor.Context.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Context</a>&nbsp;context,
         java.util.List&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;exprs)</code></th>
@@ -296,7 +338,7 @@ implements <a href="../../util/ReflectiveVisitor.html" title="interface in org.a
  expressions.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>private java.util.List&lt;<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#generateGroupList(org.apache.calcite.rel.rel2sql.SqlImplementor.Builder,java.util.List,org.apache.calcite.rel.core.Aggregate,java.util.List)">generateGroupList</a></span>&#8203;(<a href="SqlImplementor.Builder.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Builder</a>&nbsp;builder,
                  java.util.List&lt;<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;selectList,
@@ -307,20 +349,35 @@ implements <a href="../../util/ReflectiveVisitor.html" title="interface in org.a
  <code>GROUP BY CUBE (x, y)</code> or <code>GROUP BY ROLLUP (x, y)</code>.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i10" class="altColor">
+<td class="colFirst"><code>protected <a href="SqlImplementor.Builder.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Builder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAggregateBuilder(org.apache.calcite.rel.core.Aggregate,org.apache.calcite.rel.rel2sql.SqlImplementor.Result,boolean)">getAggregateBuilder</a></span>&#8203;(<a href="../core/Aggregate.html" title="class in org.apache.calcite.rel.core">Aggregate</a>&nbsp;e,
+                   <a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a>&nbsp;inputResult,
+                   boolean&nbsp;inputIsProject)</code></th>
+<td class="colLast">
+<div class="block">Gets the <a href="SqlImplementor.Builder.html" title="class in org.apache.calcite.rel.rel2sql"><code>SqlImplementor.Builder</code></a> for
+ the given <a href="../core/Aggregate.html" title="class in org.apache.calcite.rel.core"><code>Aggregate</code></a> node.</div>
+</td>
+</tr>
+<tr id="i11" class="rowColor">
+<td class="colFirst"><code>private <a href="../../sql/SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDual()">getDual</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>private <a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#groupItem(java.util.List,org.apache.calcite.util.ImmutableBitSet,org.apache.calcite.util.ImmutableBitSet)">groupItem</a></span>&#8203;(java.util.List&lt;<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;groupKeys,
          <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&nbsp;groupSet,
          <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&nbsp;wholeGroupSet)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hasTrickyRollup(org.apache.calcite.rel.core.Sort,org.apache.calcite.rel.core.Aggregate)">hasTrickyRollup</a></span>&#8203;(<a href="../core/Sort.html" title="class in org.apache.calcite.rel.core">Sort</a>&nbsp;e,
                <a href="../core/Aggregate.html" title="class in org.apache.calcite.rel.core">Aggregate</a>&nbsp;aggregate)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>private <a href="../../sql/SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#identifierList(java.util.List)">identifierList</a></span>&#8203;(java.util.List&lt;java.lang.String&gt;&nbsp;names)</code></th>
 <td class="colLast">
@@ -328,100 +385,110 @@ implements <a href="../../util/ReflectiveVisitor.html" title="interface in org.a
  <a href="../../sql/SqlIdentifier.html" title="class in org.apache.calcite.sql"><code>SqlIdentifier</code></a>s.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>private boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isCrossJoin(org.apache.calcite.rel.core.Join)">isCrossJoin</a></span>&#8203;(<a href="../core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&nbsp;e)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>(package private) <a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#offsetFetch(org.apache.calcite.rel.core.Sort,org.apache.calcite.rel.rel2sql.SqlImplementor.Result)">offsetFetch</a></span>&#8203;(<a href="../core/Sort.html" title="class in org.apache.calcite.rel.core">Sort</a>&nbsp;e,
            <a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a>&nbsp;x)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>private void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#parseCorrelTable(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.rel2sql.SqlImplementor.Result)">parseCorrelTable</a></span>&#8203;(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;relNode,
                 <a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a>&nbsp;x)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Aggregate)">visit</a></span>&#8203;(<a href="../core/Aggregate.html" title="class in org.apache.calcite.rel.core">Aggregate</a>&nbsp;e)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Calc)">visit</a></span>&#8203;(<a href="../core/Calc.html" title="class in org.apache.calcite.rel.core">Calc</a>&nbsp;e)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
-<td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Filter)">visit</a></span>&#8203;(<a href="../core/Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;e)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i14" class="altColor">
-<td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Intersect)">visit</a></span>&#8203;(<a href="../core/Intersect.html" title="class in org.apache.calcite.rel.core">Intersect</a>&nbsp;e)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i15" class="rowColor">
-<td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Join)">visit</a></span>&#8203;(<a href="../core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&nbsp;e)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i16" class="altColor">
-<td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Match)">visit</a></span>&#8203;(<a href="../core/Match.html" title="class in org.apache.calcite.rel.core">Match</a>&nbsp;e)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i17" class="rowColor">
-<td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Minus)">visit</a></span>&#8203;(<a href="../core/Minus.html" title="class in org.apache.calcite.rel.core">Minus</a>&nbsp;e)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i18" class="altColor">
-<td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Project)">visit</a></span>&#8203;(<a href="../core/Project.html" title="class in org.apache.calcite.rel.core">Project</a>&nbsp;e)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i19" class="rowColor">
-<td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Sort)">visit</a></span>&#8203;(<a href="../core/Sort.html" title="class in org.apache.calcite.rel.core">Sort</a>&nbsp;e)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
 <tr id="i20" class="altColor">
 <td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.TableModify)">visit</a></span>&#8203;(<a href="../core/TableModify.html" title="class in org.apache.calcite.rel.core">TableModify</a>&nbsp;modify)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Correlate)">visit</a></span>&#8203;(<a href="../core/Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&nbsp;e)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i21" class="rowColor">
 <td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.TableScan)">visit</a></span>&#8203;(<a href="../core/TableScan.html" title="class in org.apache.calcite.rel.core">TableScan</a>&nbsp;e)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Filter)">visit</a></span>&#8203;(<a href="../core/Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;e)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i22" class="altColor">
 <td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Union)">visit</a></span>&#8203;(<a href="../core/Union.html" title="class in org.apache.calcite.rel.core">Union</a>&nbsp;e)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Intersect)">visit</a></span>&#8203;(<a href="../core/Intersect.html" title="class in org.apache.calcite.rel.core">Intersect</a>&nbsp;e)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i23" class="rowColor">
 <td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Values)">visit</a></span>&#8203;(<a href="../core/Values.html" title="class in org.apache.calcite.rel.core">Values</a>&nbsp;e)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Join)">visit</a></span>&#8203;(<a href="../core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&nbsp;e)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i24" class="altColor">
 <td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.RelNode)">visit</a></span>&#8203;(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;e)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Match)">visit</a></span>&#8203;(<a href="../core/Match.html" title="class in org.apache.calcite.rel.core">Match</a>&nbsp;e)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i25" class="rowColor">
+<td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Minus)">visit</a></span>&#8203;(<a href="../core/Minus.html" title="class in org.apache.calcite.rel.core">Minus</a>&nbsp;e)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i26" class="altColor">
+<td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Project)">visit</a></span>&#8203;(<a href="../core/Project.html" title="class in org.apache.calcite.rel.core">Project</a>&nbsp;e)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i27" class="rowColor">
+<td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Sort)">visit</a></span>&#8203;(<a href="../core/Sort.html" title="class in org.apache.calcite.rel.core">Sort</a>&nbsp;e)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i28" class="altColor">
+<td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.TableModify)">visit</a></span>&#8203;(<a href="../core/TableModify.html" title="class in org.apache.calcite.rel.core">TableModify</a>&nbsp;modify)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i29" class="rowColor">
+<td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.TableScan)">visit</a></span>&#8203;(<a href="../core/TableScan.html" title="class in org.apache.calcite.rel.core">TableScan</a>&nbsp;e)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i30" class="altColor">
+<td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Uncollect)">visit</a></span>&#8203;(<a href="../core/Uncollect.html" title="class in org.apache.calcite.rel.core">Uncollect</a>&nbsp;e)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i31" class="rowColor">
+<td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Union)">visit</a></span>&#8203;(<a href="../core/Union.html" title="class in org.apache.calcite.rel.core">Union</a>&nbsp;e)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i32" class="altColor">
+<td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.core.Values)">visit</a></span>&#8203;(<a href="../core/Values.html" title="class in org.apache.calcite.rel.core">Values</a>&nbsp;e)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i33" class="rowColor">
+<td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.RelNode)">visit</a></span>&#8203;(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;e)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i34" class="altColor">
 <td class="colFirst"><code>private <a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visitAggregate(org.apache.calcite.rel.core.Aggregate,java.util.List)">visitAggregate</a></span>&#8203;(<a href="../core/Aggregate.html" title="class in org.apache.calcite.rel.core">Aggregate</a>&nbsp;e,
               java.util.List&lt;java.lang.Integer&gt;&nbsp;groupKeyList)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i26" class="altColor">
+<tr id="i35" class="rowColor">
 <td class="colFirst"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visitChild(int,org.apache.calcite.rel.RelNode)">visitChild</a></span>&#8203;(int&nbsp;i,
           <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;e)</code></th>
@@ -433,7 +500,7 @@ implements <a href="../../util/ReflectiveVisitor.html" title="interface in org.a
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;org.apache.calcite.rel.rel2sql.<a href="SqlImplementor.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor</a></h3>
-<code><a href="SqlImplementor.html#aliasContext(java.util.Map,boolean)">aliasContext</a>, <a href="SqlImplementor.html#convertConditionToSqlNode(org.apache.calcite.rex.RexNode,org.apache.calcite.rel.rel2sql.SqlImplementor.Context,org.apache.calcite.rel.rel2sql.SqlImplementor.Context,int)">convertConditionToSqlNode</a>, <a href="SqlImplementor.html#isStar(java.util.List,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rel.type.RelDataType)">isStar</a>, <a href="SqlImplementor.html#isStar(org.apache.calcite.rex.RexProgram)">isStar</a>, <a href="SqlImplementor.html#joinContext(org.apache.calcite.rel.rel2sql.SqlImplementor.Context,org.apache.calcite.rel.rel2sql.SqlImplementor.Context)">joinContext</a>, <a href="SqlImplementor.html#joinType(org.apache.calcite.rel.core.JoinRelType)">joinType</a>, <a href="SqlImplementor.html#matchRecognizeContext(org.apache.calcite.rel.rel2sql.SqlImplementor.Context)">matchRecognizeContext</a>, <a href="SqlImplementor.html#result(org.apache.calcite.sql.SqlNode,java.util.Collection,org.apache.calcite.rel.RelNode,java.util.Map)">result</a>, <a href="SqlImplementor.html#result(org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.rel2sql.SqlImplementor.Result,org.apache.calcite.rel.rel2sql.SqlImplementor.Result)">result</a>, <a href="SqlImplementor.html#setOpToSql(org.apache.calcite.sql.SqlSetOperator,org.apache.calcite.rel.RelNode)">setOpToSql</a>, <a href="SqlImplementor.html#wrapSelect(org.apache.calcite.sql.SqlNode)">wrapSelect</a></code></li>
+<code><a href="SqlImplementor.html#aliasContext(java.util.Map,boolean)">aliasContext</a>, <a href="SqlImplementor.html#as(org.apache.calcite.sql.SqlNode,java.lang.String,java.lang.String...)">as</a>, <a href="SqlImplementor.html#convertConditionToSqlNode(org.apache.calcite.rex.RexNode,org.apache.calcite.rel.rel2sql.SqlImplementor.Context,org.apache.calcite.rel.rel2sql.SqlImplementor.Context,int)">convertConditionToSqlNode</a>, <a href="SqlImplementor.html#isStar(java.util.List,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rel.type.RelDataType)">isStar</a>, <a href="SqlImplementor.html#isStar(org.apache.calcite.rex.RexProgram)">isStar</a>, <a href="SqlImplementor.html#joinContext(org.apache.calcite.rel.rel2sql.SqlImplementor.Context,org.apache.calcite.rel.rel2sql.SqlImplementor.Context)">joinContext</a>, <a href="SqlImplementor.html#joinType(org.apache.calcite.rel.core.JoinRelType)">joinType</a>, <a href="SqlImplementor.html#matchRecognizeContext(org.apache.calcite.rel.rel2sql.SqlImplementor.Context)">matchRecognizeContext</a>, <a href="SqlImplementor.html#result(org.apache.calcite.sql.SqlNode,java.util.Collection,org.apache.calcite.rel.RelNode,java.util.Map)">result</a>, <a href="SqlImplementor.html#result(org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.rel2sql.SqlImplementor.Result,org.apache.calcite.rel.rel2sql.SqlImplementor.Result)">result</a>, <a href="SqlImplementor.html#setOpToSql(org.apache.calcite.sql.SqlSetOperator,org.apache.calcite.rel.RelNode)">setOpToSql</a>, <a href="SqlImplementor.html#wrapSelect(org.apache.calcite.sql.SqlNode)">wrapSelect</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
@@ -576,6 +643,19 @@ implements <a href="../../util/ReflectiveVisitor.html" title="interface in org.a
 <pre class="methodSignature">private&nbsp;boolean&nbsp;isCrossJoin&#8203;(<a href="../core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&nbsp;e)</pre>
 </li>
 </ul>
+<a id="visit(org.apache.calcite.rel.core.Correlate)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>visit</h4>
+<pre class="methodSignature">public&nbsp;<a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a>&nbsp;visit&#8203;(<a href="../core/Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&nbsp;e)</pre>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="#dispatch(org.apache.calcite.rel.RelNode)"><code>dispatch(org.apache.calcite.rel.RelNode)</code></a></dd>
+</dl>
+</li>
+</ul>
 <a id="visit(org.apache.calcite.rel.core.Filter)">
 <!--   -->
 </a>
@@ -602,6 +682,24 @@ implements <a href="../../util/ReflectiveVisitor.html" title="interface in org.a
 </dl>
 </li>
 </ul>
+<a id="castNullType(org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.type.RelDataTypeField)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>castNullType</h4>
+<pre class="methodSignature">private&nbsp;<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;castNullType&#8203;(<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;sqlNodeNull,
+                             <a href="../type/RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a>&nbsp;field)</pre>
+<div class="block">Wrap the <code>sqlNodeNull</code> in a CAST operator with target type as <code>field</code>.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>sqlNodeNull</code> - NULL literal</dd>
+<dd><code>field</code> - field description of <code>sqlNodeNull</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>null literal wrapped in CAST call.</dd>
+</dl>
+</li>
+</ul>
 <a id="visit(org.apache.calcite.rel.core.Aggregate)">
 <!--   -->
 </a>
@@ -623,6 +721,69 @@ implements <a href="../../util/ReflectiveVisitor.html" title="interface in org.a
 <h4>visitAggregate</h4>
 <pre class="methodSignature">private&nbsp;<a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a>&nbsp;visitAggregate&#8203;(<a href="../core/Aggregate.html" title="class in org.apache.calcite.rel.core">Aggregate</a>&nbsp;e,
                                              java.util.List&lt;java.lang.Integer&gt;&nbsp;groupKeyList)</pre>
+</li>
+</ul>
+<a id="getAggregateBuilder(org.apache.calcite.rel.core.Aggregate,org.apache.calcite.rel.rel2sql.SqlImplementor.Result,boolean)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getAggregateBuilder</h4>
+<pre class="methodSignature">protected&nbsp;<a href="SqlImplementor.Builder.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Builder</a>&nbsp;getAggregateBuilder&#8203;(<a href="../core/Aggregate.html" title="class in org.apache.calcite.rel.core">Aggregate</a>&nbsp;e,
+                                                     <a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a>&nbsp;inputResult,
+                                                     boolean&nbsp;inputIsProject)</pre>
+<div class="block">Gets the <a href="SqlImplementor.Builder.html" title="class in org.apache.calcite.rel.rel2sql"><code>SqlImplementor.Builder</code></a> for
+ the given <a href="../core/Aggregate.html" title="class in org.apache.calcite.rel.core"><code>Aggregate</code></a> node.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>e</code> - Aggregate node</dd>
+<dd><code>inputResult</code> - Result from the input</dd>
+<dd><code>inputIsProject</code> - Whether the input is a Project</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>A SQL builder</dd>
+</dl>
+</li>
+</ul>
+<a id="buildAggGroupList(org.apache.calcite.rel.core.Aggregate,org.apache.calcite.rel.rel2sql.SqlImplementor.Builder,java.util.List,java.util.List)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>buildAggGroupList</h4>
+<pre class="methodSignature">protected&nbsp;void&nbsp;buildAggGroupList&#8203;(<a href="../core/Aggregate.html" title="class in org.apache.calcite.rel.core">Aggregate</a>&nbsp;e,
+                                 <a href="SqlImplementor.Builder.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Builder</a>&nbsp;builder,
+                                 java.util.List&lt;<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;groupByList,
+                                 java.util.List&lt;<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;selectList)</pre>
+<div class="block">Builds the group list for an Aggregate node.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>e</code> - The Aggregate node</dd>
+<dd><code>builder</code> - The SQL builder</dd>
+<dd><code>groupByList</code> - output group list</dd>
+<dd><code>selectList</code> - output select list</dd>
+</dl>
+</li>
+</ul>
+<a id="buildAggregate(org.apache.calcite.rel.core.Aggregate,org.apache.calcite.rel.rel2sql.SqlImplementor.Builder,java.util.List,java.util.List)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>buildAggregate</h4>
+<pre class="methodSignature">protected&nbsp;<a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a>&nbsp;buildAggregate&#8203;(<a href="../core/Aggregate.html" title="class in org.apache.calcite.rel.core">Aggregate</a>&nbsp;e,
+                                               <a href="SqlImplementor.Builder.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Builder</a>&nbsp;builder,
+                                               java.util.List&lt;<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;selectList,
+                                               java.util.List&lt;<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;groupByList)</pre>
+<div class="block">Builds an aggregate query.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>e</code> - The Aggregate node</dd>
+<dd><code>builder</code> - The SQL builder</dd>
+<dd><code>selectList</code> - The precomputed group list</dd>
+<dd><code>groupByList</code> - The precomputed select list</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The aggregate query result</dd>
+</dl>
 </li>
 </ul>
 <a id="generateGroupList(org.apache.calcite.rel.rel2sql.SqlImplementor.Builder,java.util.List,org.apache.calcite.rel.core.Aggregate,java.util.List)">
@@ -733,6 +894,24 @@ implements <a href="../../util/ReflectiveVisitor.html" title="interface in org.a
 </dl>
 </li>
 </ul>
+<a id="getDual()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDual</h4>
+<pre class="methodSignature">private&nbsp;<a href="../../sql/SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;getDual()</pre>
+</li>
+</ul>
+<a id="createAlwaysFalseCondition()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>createAlwaysFalseCondition</h4>
+<pre class="methodSignature">private&nbsp;<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;createAlwaysFalseCondition()</pre>
+</li>
+</ul>
 <a id="visit(org.apache.calcite.rel.core.Sort)">
 <!--   -->
 </a>
@@ -823,6 +1002,33 @@ implements <a href="../../util/ReflectiveVisitor.html" title="interface in org.a
 <h4>as</h4>
 <pre class="methodSignature">private&nbsp;<a href="../../sql/SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;as&#8203;(<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;e,
                    java.lang.String&nbsp;alias)</pre>
+</li>
+</ul>
+<a id="visit(org.apache.calcite.rel.core.Uncollect)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>visit</h4>
+<pre class="methodSignature">public&nbsp;<a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a>&nbsp;visit&#8203;(<a href="../core/Uncollect.html" title="class in org.apache.calcite.rel.core">Uncollect</a>&nbsp;e)</pre>
+</li>
+</ul>
+<a id="createAsFullOperands(org.apache.calcite.rel.type.RelDataType,org.apache.calcite.sql.SqlNode,java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>createAsFullOperands</h4>
+<pre class="methodSignature">public&nbsp;java.util.List&lt;<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;createAsFullOperands&#8203;(<a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
+                                                    <a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;leftOperand,
+                                                    java.lang.String&nbsp;alias)</pre>
+<div class="block">Creates operands for a full AS operator. Format SqlNode AS alias(col_1, col_2,... ,col_n).</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>rowType</code> - Row type of the SqlNode</dd>
+<dd><code>leftOperand</code> - SqlNode</dd>
+<dd><code>alias</code> - alias</dd>
+</dl>
 </li>
 </ul>
 <a id="addSelect(java.util.List,org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.type.RelDataType)">

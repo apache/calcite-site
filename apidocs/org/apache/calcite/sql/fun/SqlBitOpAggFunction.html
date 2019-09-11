@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10};
+var data = {"i0":10,"i1":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -219,6 +219,14 @@ extends <a href="../SqlAggFunction.html" title="class in org.apache.calcite.sql"
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="../../util/Optionality.html" title="enum in org.apache.calcite.util">Optionality</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDistinctOptionality()">getDistinctOptionality</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns whether this aggregate function allows the <code>DISTINCT</code>
+ keyword.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unwrap(java.lang.Class)">unwrap</a></span>&#8203;(java.lang.Class&lt;T&gt;&nbsp;clazz)</code></th>
 <td class="colLast">
@@ -294,7 +302,7 @@ extends <a href="../SqlAggFunction.html" title="class in org.apache.calcite.sql"
 <a id="unwrap(java.lang.Class)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>unwrap</h4>
 <pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;unwrap&#8203;(java.lang.Class&lt;T&gt;&nbsp;clazz)</pre>
@@ -306,6 +314,31 @@ extends <a href="../SqlAggFunction.html" title="class in org.apache.calcite.sql"
 <dd><code><a href="../../schema/Wrapper.html#unwrap(java.lang.Class)">unwrap</a></code>&nbsp;in interface&nbsp;<code><a href="../../schema/Wrapper.html" title="interface in org.apache.calcite.schema">Wrapper</a></code></dd>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="../SqlAggFunction.html#unwrap(java.lang.Class)">unwrap</a></code>&nbsp;in class&nbsp;<code><a href="../SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="getDistinctOptionality()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getDistinctOptionality</h4>
+<pre class="methodSignature">public&nbsp;<a href="../../util/Optionality.html" title="enum in org.apache.calcite.util">Optionality</a>&nbsp;getDistinctOptionality()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../SqlAggFunction.html#getDistinctOptionality()">SqlAggFunction</a></code></span></div>
+<div class="block">Returns whether this aggregate function allows the <code>DISTINCT</code>
+ keyword.
+
+ <p>The default implementation returns <a href="../../util/Optionality.html#OPTIONAL"><code>Optionality.OPTIONAL</code></a>,
+ which is appropriate for most aggregate functions, including <code>SUM</code>
+ and <code>COUNT</code>.
+
+ <p>Some aggregate functions, for example <code>MIN</code>, produce the same
+ result with or without <code>DISTINCT</code>, and therefore return
+ <a href="../../util/Optionality.html#IGNORED"><code>Optionality.IGNORED</code></a> to indicate this. For such functions,
+ Calcite will probably remove <code>DISTINCT</code> while optimizing the query.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../SqlAggFunction.html#getDistinctOptionality()">getDistinctOptionality</a></code>&nbsp;in class&nbsp;<code><a href="../SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a></code></dd>
 </dl>
 </li>
 </ul>

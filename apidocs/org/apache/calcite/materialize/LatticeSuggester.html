@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":9,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":9};
+var data = {"i0":10,"i1":10,"i2":9,"i3":10,"i4":10,"i5":10,"i6":10,"i7":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -316,6 +316,16 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code>private void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#copyMeasures(org.apache.calcite.materialize.Lattice.Builder,org.apache.calcite.materialize.Lattice)">copyMeasures</a></span>&#8203;(<a href="Lattice.Builder.html" title="class in org.apache.calcite.materialize">Lattice.Builder</a>&nbsp;builder,
+            <a href="Lattice.html" title="class in org.apache.calcite.materialize">Lattice</a>&nbsp;lattice)</code></th>
+<td class="colLast">
+<div class="block">Copies measures and column usages from an existing lattice into a builder,
+ using a mapper to translate old-to-new columns, so that the new lattice can
+ inherit from the old.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>private static java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#deriveAlias(org.apache.calcite.materialize.LatticeSuggester.MutableMeasure,org.apache.calcite.materialize.LatticeSuggester.DerivedColRef)">deriveAlias</a></span>&#8203;(<a href="LatticeSuggester.MutableMeasure.html" title="class in org.apache.calcite.materialize">LatticeSuggester.MutableMeasure</a>&nbsp;measure,
            <a href="LatticeSuggester.DerivedColRef.html" title="class in org.apache.calcite.materialize">LatticeSuggester.DerivedColRef</a>&nbsp;derivedColRef)</code></th>
@@ -323,7 +333,7 @@ extends java.lang.Object</pre>
 <div class="block">Derives the alias of an expression that is the argument to a measure.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>private <a href="Lattice.html" title="class in org.apache.calcite.materialize">Lattice</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findMatch(org.apache.calcite.materialize.Lattice,org.apache.calcite.materialize.MutableNode)">findMatch</a></span>&#8203;(<a href="Lattice.html" title="class in org.apache.calcite.materialize">Lattice</a>&nbsp;lattice,
          <a href="MutableNode.html" title="class in org.apache.calcite.materialize">MutableNode</a>&nbsp;mutableNode)</code></th>
@@ -331,25 +341,19 @@ extends java.lang.Object</pre>
 <div class="block">Returns the best match for a lattice.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>private <a href="LatticeSuggester.Frame.html" title="class in org.apache.calcite.materialize">LatticeSuggester.Frame</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#frame(org.apache.calcite.materialize.LatticeSuggester.Query,org.apache.calcite.rel.RelNode)">frame</a></span>&#8203;(<a href="LatticeSuggester.Query.html" title="class in org.apache.calcite.materialize">LatticeSuggester.Query</a>&nbsp;q,
      <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;r)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.util.Set&lt;<a href="Lattice.html" title="class in org.apache.calcite.materialize">Lattice</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLatticeSet()">getLatticeSet</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the minimal set of lattices necessary to cover all of the queries
  seen.</div>
 </td>
-</tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code>private java.util.function.Function&lt;<a href="Lattice.Column.html" title="class in org.apache.calcite.materialize">Lattice.Column</a>,&#8203;<a href="Lattice.Column.html" title="class in org.apache.calcite.materialize">Lattice.Column</a>&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#mapper(org.apache.calcite.materialize.Lattice,org.apache.calcite.materialize.Lattice.Builder)">mapper</a></span>&#8203;(<a href="Lattice.html" title="class in org.apache.calcite.materialize">Lattice</a>&nbsp;lattice,
-      <a href="Lattice.Builder.html" title="class in org.apache.calcite.materialize">Lattice.Builder</a>&nbsp;builder)</code></th>
-<td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>private int</code></td>
@@ -523,14 +527,17 @@ extends java.lang.Object</pre>
  and returns it. Never returns null.</div>
 </li>
 </ul>
-<a id="mapper(org.apache.calcite.materialize.Lattice,org.apache.calcite.materialize.Lattice.Builder)">
+<a id="copyMeasures(org.apache.calcite.materialize.Lattice.Builder,org.apache.calcite.materialize.Lattice)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>mapper</h4>
-<pre class="methodSignature">private&nbsp;java.util.function.Function&lt;<a href="Lattice.Column.html" title="class in org.apache.calcite.materialize">Lattice.Column</a>,&#8203;<a href="Lattice.Column.html" title="class in org.apache.calcite.materialize">Lattice.Column</a>&gt;&nbsp;mapper&#8203;(<a href="Lattice.html" title="class in org.apache.calcite.materialize">Lattice</a>&nbsp;lattice,
-                                                                                <a href="Lattice.Builder.html" title="class in org.apache.calcite.materialize">Lattice.Builder</a>&nbsp;builder)</pre>
+<h4>copyMeasures</h4>
+<pre class="methodSignature">private&nbsp;void&nbsp;copyMeasures&#8203;(<a href="Lattice.Builder.html" title="class in org.apache.calcite.materialize">Lattice.Builder</a>&nbsp;builder,
+                          <a href="Lattice.html" title="class in org.apache.calcite.materialize">Lattice</a>&nbsp;lattice)</pre>
+<div class="block">Copies measures and column usages from an existing lattice into a builder,
+ using a mapper to translate old-to-new columns, so that the new lattice can
+ inherit from the old.</div>
 </li>
 </ul>
 <a id="matchQuality(org.apache.calcite.materialize.Lattice,org.apache.calcite.materialize.Lattice)">

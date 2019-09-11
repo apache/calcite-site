@@ -228,6 +228,15 @@ extends <a href="../../plan/RelOptRule.html" title="class in org.apache.calcite.
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>private static <a href="FilterJoinRule.Predicate.html" title="interface in org.apache.calcite.rel.rules">FilterJoinRule.Predicate</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#NOT_ENUMERABLE">NOT_ENUMERABLE</a></span></code></th>
+<td class="colLast">
+<div class="block">Predicate that returns true if the join is not Enumerable convention,
+ will be replaced by <a href="#TRUE_PREDICATE"><code>TRUE_PREDICATE</code></a> once enumerable join supports
+ non-equi join.</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>private <a href="FilterJoinRule.Predicate.html" title="interface in org.apache.calcite.rel.rules">FilterJoinRule.Predicate</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#predicate">predicate</a></span></code></th>
 <td class="colLast">
@@ -235,14 +244,14 @@ extends <a href="../../plan/RelOptRule.html" title="class in org.apache.calcite.
  join for this particular kind of join.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>private boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#smart">smart</a></span></code></th>
 <td class="colLast">
 <div class="block">Whether to try to strengthen join-type.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="FilterJoinRule.Predicate.html" title="interface in org.apache.calcite.rel.rules">FilterJoinRule.Predicate</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#TRUE_PREDICATE">TRUE_PREDICATE</a></span></code></th>
 <td class="colLast">
@@ -328,11 +337,11 @@ extends <a href="../../plan/RelOptRule.html" title="class in org.apache.calcite.
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>private boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#needsPushInto(org.apache.calcite.rel.core.Join)">needsPushInto</a></span>&#8203;(<a href="../core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&nbsp;join)</code></th>
+<td class="colFirst"><code>private java.util.List&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getConjunctions(org.apache.calcite.rel.core.Filter)">getConjunctions</a></span>&#8203;(<a href="../core/Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;filter)</code></th>
 <td class="colLast">
-<div class="block">Returns if it is needed to push the filter condition above join
- into the join condition.</div>
+<div class="block">Get conjunctions of filter's condition but with collapsed
+ <code>IS NOT DISTINCT FROM</code> expressions if needed.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -392,6 +401,18 @@ extends <a href="../../plan/RelOptRule.html" title="class in org.apache.calcite.
 <pre>public static final&nbsp;<a href="FilterJoinRule.Predicate.html" title="interface in org.apache.calcite.rel.rules">FilterJoinRule.Predicate</a> TRUE_PREDICATE</pre>
 <div class="block">Predicate that always returns true. With this predicate, every filter
  will be pushed into the ON clause.</div>
+</li>
+</ul>
+<a id="NOT_ENUMERABLE">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>NOT_ENUMERABLE</h4>
+<pre>private static final&nbsp;<a href="FilterJoinRule.Predicate.html" title="interface in org.apache.calcite.rel.rules">FilterJoinRule.Predicate</a> NOT_ENUMERABLE</pre>
+<div class="block">Predicate that returns true if the join is not Enumerable convention,
+ will be replaced by <a href="#TRUE_PREDICATE"><code>TRUE_PREDICATE</code></a> once enumerable join supports
+ non-equi join.</div>
 </li>
 </ul>
 <a id="FILTER_ON_JOIN">
@@ -518,17 +539,6 @@ protected&nbsp;FilterJoinRule&#8203;(<a href="../../plan/RelOptRuleOperand.html"
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="needsPushInto(org.apache.calcite.rel.core.Join)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>needsPushInto</h4>
-<pre class="methodSignature">private&nbsp;boolean&nbsp;needsPushInto&#8203;(<a href="../core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&nbsp;join)</pre>
-<div class="block">Returns if it is needed to push the filter condition above join
- into the join condition.</div>
-</li>
-</ul>
 <a id="perform(org.apache.calcite.plan.RelOptRuleCall,org.apache.calcite.rel.core.Filter,org.apache.calcite.rel.core.Join)">
 <!--   -->
 </a>
@@ -538,6 +548,26 @@ protected&nbsp;FilterJoinRule&#8203;(<a href="../../plan/RelOptRuleOperand.html"
 <pre class="methodSignature">protected&nbsp;void&nbsp;perform&#8203;(<a href="../../plan/RelOptRuleCall.html" title="class in org.apache.calcite.plan">RelOptRuleCall</a>&nbsp;call,
                        <a href="../core/Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;filter,
                        <a href="../core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&nbsp;join)</pre>
+</li>
+</ul>
+<a id="getConjunctions(org.apache.calcite.rel.core.Filter)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getConjunctions</h4>
+<pre class="methodSignature">private&nbsp;java.util.List&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;getConjunctions&#8203;(<a href="../core/Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;filter)</pre>
+<div class="block">Get conjunctions of filter's condition but with collapsed
+ <code>IS NOT DISTINCT FROM</code> expressions if needed.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>filter</code> - filter containing condition</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>condition conjunctions with collapsed <code>IS NOT DISTINCT FROM</code>
+ expressions if any</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../plan/RelOptUtil.html#conjunctions(org.apache.calcite.rex.RexNode)"><code>RelOptUtil.conjunctions(RexNode)</code></a></dd>
+</dl>
 </li>
 </ul>
 <a id="validateJoinFilters(java.util.List,java.util.List,org.apache.calcite.rel.core.Join,org.apache.calcite.rel.core.JoinRelType)">

@@ -361,8 +361,8 @@ return the <code class="highlighter-rouge">RelBuilder</code>.</p>
       <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Values.html">Values</a>.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">filter(expr...)</code><br /><code class="highlighter-rouge">filter(exprList)</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Filter.html">Filter</a> over the AND of the given predicates.</td>
+      <td style="text-align: left"><code class="highlighter-rouge">filter([variablesSet, ] exprList)</code><br /><code class="highlighter-rouge">filter([variablesSet, ] expr...)</code></td>
+      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Filter.html">Filter</a> over the AND of the given predicates; if <code class="highlighter-rouge">variablesSet</code> is specified, the predicates may reference those variables.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">project(expr...)</code><br /><code class="highlighter-rouge">project(exprList [, fieldNames])</code></td>
@@ -409,6 +409,10 @@ return the <code class="highlighter-rouge">RelBuilder</code>.</p>
       <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/SortExchange.html">SortExchange</a>.</td>
     </tr>
     <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">correlate(joinType, correlationId, requiredField...)</code><br /><code class="highlighter-rouge">correlate(joinType, correlationId, requiredFieldList)</code></td>
+      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Correlate.html">Correlate</a> of the two most recent relational expressions, with a variable name and required field expressions for the left relation.</td>
+    </tr>
+    <tr>
       <td style="text-align: left"><code class="highlighter-rouge">join(joinType, expr...)</code><br /><code class="highlighter-rouge">join(joinType, exprList)</code><br /><code class="highlighter-rouge">join(joinType, fieldName...)</code></td>
       <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Join.html">Join</a> of the two most recent relational expressions.<br /><br />The first form joins on a boolean expression (multiple conditions are combined using AND).<br /><br />The last form joins on named fields; each side must have a field of each name.</td>
     </tr>
@@ -451,8 +455,10 @@ return the <code class="highlighter-rouge">RelBuilder</code>.</p>
 
 <ul>
   <li><code class="highlighter-rouge">expr</code>, <code class="highlighter-rouge">interval</code> <a href="/apidocs/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
-  <li><code class="highlighter-rouge">expr...</code> Array of <a href="/apidocs/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
-  <li><code class="highlighter-rouge">exprList</code>, <code class="highlighter-rouge">measureList</code>, <code class="highlighter-rouge">partitionKeys</code>, <code class="highlighter-rouge">orderKeys</code> Iterable of
+  <li><code class="highlighter-rouge">expr...</code>, <code class="highlighter-rouge">requiredField...</code> Array of
+<a href="/apidocs/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
+  <li><code class="highlighter-rouge">exprList</code>, <code class="highlighter-rouge">measureList</code>, <code class="highlighter-rouge">partitionKeys</code>, <code class="highlighter-rouge">orderKeys</code>,
+<code class="highlighter-rouge">requiredFieldList</code> Iterable of
 <a href="/apidocs/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
   <li><code class="highlighter-rouge">fieldOrdinal</code> Ordinal of a field within its row (starting from 0)</li>
   <li><code class="highlighter-rouge">fieldName</code> Name of a field, unique within its row</li>
@@ -467,12 +473,16 @@ return the <code class="highlighter-rouge">RelBuilder</code>.</p>
   <li><code class="highlighter-rouge">tupleList</code> Iterable of List of <a href="/apidocs/org/apache/calcite/rex/RexLiteral.html">RexLiteral</a></li>
   <li><code class="highlighter-rouge">all</code>, <code class="highlighter-rouge">distinct</code>, <code class="highlighter-rouge">strictStart</code>, <code class="highlighter-rouge">strictEnd</code>, <code class="highlighter-rouge">allRows</code> boolean</li>
   <li><code class="highlighter-rouge">alias</code> String</li>
+  <li><code class="highlighter-rouge">correlationId</code> <a href="/apidocs/org/apache/calcite/rel/core/CorrelationId.html">CorrelationId</a></li>
+  <li><code class="highlighter-rouge">variablesSet</code> Iterable of
+<a href="/apidocs/org/apache/calcite/rel/core/CorrelationId.html">CorrelationId</a></li>
   <li><code class="highlighter-rouge">varHolder</code> <a href="/apidocs/org/apache/calcite/util/Holder.html">Holder</a> of <a href="/apidocs/org/apache/calcite/rex/RexCorrelVariable.html">RexCorrelVariable</a></li>
   <li><code class="highlighter-rouge">patterns</code> Map whose key is String, value is <a href="/apidocs/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
   <li><code class="highlighter-rouge">subsets</code> Map whose key is String, value is a sorted set of String</li>
   <li><code class="highlighter-rouge">distribution</code> <a href="/apidocs/org/apache/calcite/rel/RelDistribution.html">RelDistribution</a></li>
   <li><code class="highlighter-rouge">collation</code> <a href="/apidocs/org/apache/calcite/rel/RelCollation.html">RelCollation</a></li>
   <li><code class="highlighter-rouge">operator</code> <a href="/apidocs/org/apache/calcite/sql/SqlOperator.html">SqlOperator</a></li>
+  <li><code class="highlighter-rouge">joinType</code> <a href="/apidocs/org/apache/calcite/rel/core/JoinRelType.html">JoinRelType</a></li>
 </ul>
 
 <p>The builder methods perform various optimizations, including:</p>

@@ -27,8 +27,8 @@
     catch(err) {
     }
 //-->
-var data = {"i0":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var data = {"i0":50,"i1":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -133,7 +133,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 <hr>
 <pre>public static interface <span class="typeNameLabel">RelFactories.FilterFactory</span></pre>
-<div class="block">Can create a <a href="../logical/LogicalFilter.html" title="class in org.apache.calcite.rel.logical"><code>LogicalFilter</code></a> of the appropriate type
+<div class="block">Can create a <a href="Filter.html" title="class in org.apache.calcite.rel.core"><code>Filter</code></a> of the appropriate type
  for this rule's calling convention.</div>
 </li>
 </ul>
@@ -149,16 +149,25 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colSecond" scope="col">Method</th>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
+<td class="colFirst"><code>default <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createFilter(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode)">createFilter</a></span>&#8203;(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
             <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition)</code></th>
+<td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createFilter(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode,java.util.Set)">createFilter</a></span>&#8203;(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+            <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition,
+            java.util.Set&lt;<a href="CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>&gt;&nbsp;variablesSet)</code></th>
 <td class="colLast">
 <div class="block">Creates a filter.</div>
 </td>
@@ -180,15 +189,41 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a id="createFilter(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode,java.util.Set)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>createFilter</h4>
+<pre class="methodSignature"><a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;createFilter&#8203;(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+                     <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition,
+                     java.util.Set&lt;<a href="CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>&gt;&nbsp;variablesSet)</pre>
+<div class="block">Creates a filter.
+
+ <p>Some implementations of <code>Filter</code> do not support correlation
+ variables, and for these, this method will throw if <code>variablesSet</code>
+ is not empty.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>input</code> - Input relational expression</dd>
+<dd><code>condition</code> - Filter condition; only rows for which this condition
+   evaluates to TRUE will be emitted</dd>
+<dd><code>variablesSet</code> - Correlating variables that are set when reading
+   a row from the input, and which may be referenced from inside the
+   condition</dd>
+</dl>
+</li>
+</ul>
 <a id="createFilter(org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>createFilter</h4>
-<pre class="methodSignature"><a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;createFilter&#8203;(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
-                     <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition)</pre>
-<div class="block">Creates a filter.</div>
+<pre class="methodSignature">@Deprecated
+default&nbsp;<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;createFilter&#8203;(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+                             <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition)</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 </li>
 </ul>
 </li>

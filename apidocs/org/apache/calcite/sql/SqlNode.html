@@ -563,20 +563,21 @@ public static&nbsp;<a href="SqlNode.html" title="class in org.apache.calcite.sql
 <pre class="methodSignature">public&nbsp;<a href="util/SqlString.html" title="class in org.apache.calcite.sql.util">SqlString</a>&nbsp;toSqlString&#8203;(<a href="SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a>&nbsp;dialect,
                              boolean&nbsp;forceParens)</pre>
 <div class="block">Returns the SQL text of the tree of which this <code>SqlNode</code> is
- the root.</div>
+ the root.
+
+ <p>Typical return values are:
+
+ <ul>
+ <li>'It''s a bird!'
+ <li>NULL
+ <li>12.3
+ <li>DATE '1969-04-29'
+ </ul></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>dialect</code> - Dialect</dd>
-<dd><code>forceParens</code> - wraps all expressions in parentheses; good for parse
-                    test, but false by default.
-
-                    <p>Typical return values are:</p>
-                    <ul>
-                    <li>'It''s a bird!'</li>
-                    <li>NULL</li>
-                    <li>12.3</li>
-                    <li>DATE '1969-04-29'</li>
-                    </ul></dd>
+<dd><code>dialect</code> - Dialect (null for ANSI SQL)</dd>
+<dd><code>forceParens</code> - Whether to wrap all expressions in parentheses;
+                    useful for parse test, but false by default</dd>
 </dl>
 </li>
 </ul>

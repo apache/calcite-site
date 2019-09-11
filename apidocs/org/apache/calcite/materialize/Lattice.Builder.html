@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -210,36 +210,41 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>private com.google.common.collect.Multimap&lt;java.lang.Integer,&#8203;java.lang.Boolean&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#columnUses">columnUses</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>private java.util.SortedSet&lt;<a href="Lattice.Measure.html" title="class in org.apache.calcite.materialize">Lattice.Measure</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#defaultMeasureSet">defaultMeasureSet</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>private java.util.Map&lt;java.lang.String,&#8203;<a href="Lattice.DerivedColumn.html" title="class in org.apache.calcite.materialize">Lattice.DerivedColumn</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#derivedColumnsByName">derivedColumnsByName</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>private <a href="LatticeRootNode.html" title="class in org.apache.calcite.materialize">LatticeRootNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rootNode">rootNode</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>private <a href="../jdbc/CalciteSchema.html" title="class in org.apache.calcite.jdbc">CalciteSchema</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rootSchema">rootSchema</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>private java.lang.Double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rowCountEstimate">rowCountEstimate</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>private java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#statisticProvider">statisticProvider</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>private com.google.common.collect.ImmutableList.Builder&lt;<a href="Lattice.Tile.html" title="class in org.apache.calcite.materialize">Lattice.Tile</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#tileListBuilder">tileListBuilder</a></span></code></th>
 <td class="colLast">&nbsp;</td>
@@ -407,6 +412,14 @@ extends java.lang.Object</pre>
 <div class="block">Sets the "statisticProvider" attribute.</div>
 </td>
 </tr>
+<tr id="i17" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#use(org.apache.calcite.materialize.Lattice.Column,boolean)">use</a></span>&#8203;(<a href="Lattice.Column.html" title="class in org.apache.calcite.materialize">Lattice.Column</a>&nbsp;column,
+   boolean&nbsp;measure)</code></th>
+<td class="colLast">
+<div class="block">Records a use of a column.</div>
+</td>
+</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
@@ -474,6 +487,15 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>tileListBuilder</h4>
 <pre>private final&nbsp;com.google.common.collect.ImmutableList.Builder&lt;<a href="Lattice.Tile.html" title="class in org.apache.calcite.materialize">Lattice.Tile</a>&gt; tileListBuilder</pre>
+</li>
+</ul>
+<a id="columnUses">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>columnUses</h4>
+<pre>private final&nbsp;com.google.common.collect.Multimap&lt;java.lang.Integer,&#8203;java.lang.Boolean&gt; columnUses</pre>
 </li>
 </ul>
 <a id="rootSchema">
@@ -752,7 +774,7 @@ extends java.lang.Object</pre>
 <a id="expression(org.apache.calcite.rex.RexNode,java.lang.String,java.util.List)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>expression</h4>
 <pre class="methodSignature">public&nbsp;<a href="Lattice.Column.html" title="class in org.apache.calcite.materialize">Lattice.Column</a>&nbsp;expression&#8203;(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;e,
@@ -760,6 +782,24 @@ extends java.lang.Object</pre>
                                  java.util.List&lt;java.lang.String&gt;&nbsp;tableAliases)</pre>
 <div class="block">Adds a lattice column based on a SQL expression,
  or returns a column based on the same expression seen previously.</div>
+</li>
+</ul>
+<a id="use(org.apache.calcite.materialize.Lattice.Column,boolean)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>use</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;use&#8203;(<a href="Lattice.Column.html" title="class in org.apache.calcite.materialize">Lattice.Column</a>&nbsp;column,
+                boolean&nbsp;measure)</pre>
+<div class="block">Records a use of a column.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>column</code> - Column</dd>
+<dd><code>measure</code> - Whether this use is as an argument to a measure;
+                e.g. "sum(x + y)" is a measure use of the expression
+                "x + y"; "group by x + y" is not</dd>
+</dl>
 </li>
 </ul>
 </li>

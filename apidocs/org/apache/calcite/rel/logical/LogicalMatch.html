@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":9};
+var data = {"i0":10,"i1":10,"i2":9,"i3":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -226,13 +226,11 @@ extends <a href="../core/Match.html" title="class in org.apache.calcite.rel.core
 <table class="memberSummary">
 <caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colFirst" scope="col">Modifier</th>
-<th class="colSecond" scope="col">Constructor</th>
+<th class="colFirst" scope="col">Constructor</th>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private </code></td>
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexNode,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,java.util.List,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">LogicalMatch</a></span>&#8203;(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexNode,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,org.apache.calcite.util.ImmutableBitSet,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">LogicalMatch</a></span>&#8203;(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
             <a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
             <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
             <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
@@ -244,7 +242,7 @@ extends <a href="../core/Match.html" title="class in org.apache.calcite.rel.core
             <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;after,
             java.util.Map&lt;java.lang.String,&#8203;? extends java.util.SortedSet&lt;java.lang.String&gt;&gt;&nbsp;subsets,
             boolean&nbsp;allRows,
-            java.util.List&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;partitionKeys,
+            <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&nbsp;partitionKeys,
             <a href="../RelCollation.html" title="interface in org.apache.calcite.rel">RelCollation</a>&nbsp;orderKeys,
             <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;interval)</code></th>
 <td class="colLast">
@@ -277,25 +275,19 @@ extends <a href="../core/Match.html" title="class in org.apache.calcite.rel.core
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../core/Match.html" title="class in org.apache.calcite.rel.core">Match</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#copy(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexNode,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,java.util.List,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">copy</a></span>&#8203;(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
-    <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
-    <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;pattern,
-    boolean&nbsp;strictStart,
-    boolean&nbsp;strictEnd,
-    java.util.Map&lt;java.lang.String,&#8203;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;patternDefinitions,
-    java.util.Map&lt;java.lang.String,&#8203;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;measures,
-    <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;after,
-    java.util.Map&lt;java.lang.String,&#8203;? extends java.util.SortedSet&lt;java.lang.String&gt;&gt;&nbsp;subsets,
-    boolean&nbsp;allRows,
-    java.util.List&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;partitionKeys,
-    <a href="../RelCollation.html" title="interface in org.apache.calcite.rel">RelCollation</a>&nbsp;orderKeys,
-    <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;interval)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colFirst"><code><a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#copy(org.apache.calcite.plan.RelTraitSet,java.util.List)">copy</a></span>&#8203;(<a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
+    java.util.List&lt;<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&gt;&nbsp;inputs)</code></th>
+<td class="colLast">
+<div class="block">Creates a copy of this relational expression, perhaps changing traits and
+ inputs.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="LogicalMatch.html" title="class in org.apache.calcite.rel.logical">LogicalMatch</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#create(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexNode,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,java.util.List,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">create</a></span>&#8203;(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#create(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexNode,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,org.apache.calcite.util.ImmutableBitSet,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">create</a></span>&#8203;(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
+      <a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
+      <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
       <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
       <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;pattern,
       boolean&nbsp;strictStart,
@@ -305,7 +297,26 @@ extends <a href="../core/Match.html" title="class in org.apache.calcite.rel.core
       <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;after,
       java.util.Map&lt;java.lang.String,&#8203;? extends java.util.SortedSet&lt;java.lang.String&gt;&gt;&nbsp;subsets,
       boolean&nbsp;allRows,
-      java.util.List&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;partitionKeys,
+      <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&nbsp;partitionKeys,
+      <a href="../RelCollation.html" title="interface in org.apache.calcite.rel">RelCollation</a>&nbsp;orderKeys,
+      <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;interval)</code></th>
+<td class="colLast">
+<div class="block">Creates a LogicalMatch.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>static <a href="LogicalMatch.html" title="class in org.apache.calcite.rel.logical">LogicalMatch</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#create(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexNode,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,org.apache.calcite.util.ImmutableBitSet,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">create</a></span>&#8203;(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+      <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
+      <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;pattern,
+      boolean&nbsp;strictStart,
+      boolean&nbsp;strictEnd,
+      java.util.Map&lt;java.lang.String,&#8203;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;patternDefinitions,
+      java.util.Map&lt;java.lang.String,&#8203;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;measures,
+      <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;after,
+      java.util.Map&lt;java.lang.String,&#8203;? extends java.util.SortedSet&lt;java.lang.String&gt;&gt;&nbsp;subsets,
+      boolean&nbsp;allRows,
+      <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&nbsp;partitionKeys,
       <a href="../RelCollation.html" title="interface in org.apache.calcite.rel">RelCollation</a>&nbsp;orderKeys,
       <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;interval)</code></th>
 <td class="colLast">
@@ -318,7 +329,7 @@ extends <a href="../core/Match.html" title="class in org.apache.calcite.rel.core
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;org.apache.calcite.rel.core.<a href="../core/Match.html" title="class in org.apache.calcite.rel.core">Match</a></h3>
-<code><a href="../core/Match.html#copy(org.apache.calcite.plan.RelTraitSet,java.util.List)">copy</a>, <a href="../core/Match.html#explainTerms(org.apache.calcite.rel.RelWriter)">explainTerms</a>, <a href="../core/Match.html#getAfter()">getAfter</a>, <a href="../core/Match.html#getInterval()">getInterval</a>, <a href="../core/Match.html#getMeasures()">getMeasures</a>, <a href="../core/Match.html#getOrderKeys()">getOrderKeys</a>, <a href="../core/Match.html#getPartitionKeys()">getPartitionKeys</a>, <a href="../core/Match.html#getPattern()">getPattern</a>, <a href="../core/Match.html#getPatternDefinitions()">getPatternDefinitions</a>, <a href="../core/Match.html#getSubsets()">getSubsets</a>, <a href="../core/Match.html#isAllRows()">isAllRows</a>, <a href="../core/Match.html#isStrictEnd()">isStrictEnd</a>, <a href="../core/Match.html#isStrictStart()">isStrictStart</a></code></li>
+<code><a href="../core/Match.html#explainTerms(org.apache.calcite.rel.RelWriter)">explainTerms</a>, <a href="../core/Match.html#getAfter()">getAfter</a>, <a href="../core/Match.html#getInterval()">getInterval</a>, <a href="../core/Match.html#getMeasures()">getMeasures</a>, <a href="../core/Match.html#getOrderKeys()">getOrderKeys</a>, <a href="../core/Match.html#getPartitionKeys()">getPartitionKeys</a>, <a href="../core/Match.html#getPattern()">getPattern</a>, <a href="../core/Match.html#getPatternDefinitions()">getPatternDefinitions</a>, <a href="../core/Match.html#getSubsets()">getSubsets</a>, <a href="../core/Match.html#isAllRows()">isAllRows</a>, <a href="../core/Match.html#isStrictEnd()">isStrictEnd</a>, <a href="../core/Match.html#isStrictStart()">isStrictStart</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.org.apache.calcite.rel.SingleRel">
@@ -332,14 +343,14 @@ extends <a href="../core/Match.html" title="class in org.apache.calcite.rel.core
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;org.apache.calcite.rel.<a href="../AbstractRelNode.html" title="class in org.apache.calcite.rel">AbstractRelNode</a></h3>
-<code><a href="../AbstractRelNode.html#accept(org.apache.calcite.rex.RexShuttle)">accept</a>, <a href="../AbstractRelNode.html#collectVariablesSet(java.util.Set)">collectVariablesSet</a>, <a href="../AbstractRelNode.html#collectVariablesUsed(java.util.Set)">collectVariablesUsed</a>, <a href="../AbstractRelNode.html#computeDigest()">computeDigest</a>, <a href="../AbstractRelNode.html#computeSelfCost(org.apache.calcite.plan.RelOptPlanner)">computeSelfCost</a>, <a href="../AbstractRelNode.html#computeSelfCost(org.apache.calcite.plan.RelOptPlanner,org.apache.calcite.rel.metadata.RelMetadataQuery)">computeSelfCost</a>, <a href="../AbstractRelNode.html#explain(org.apache.calcite.rel.RelWriter)">explain</a>, <a href="../AbstractRelNode.html#getChildExps()">getChildExps</a>, <a href="../AbstractRelNode.html#getCluster()">getCluster</a>, <a href="../AbstractRelNode.html#getCollationList()">getCollationList</a>, <a href="../AbstractRelNode.html#getConvention()">getConvention</a>, <a href="../AbstractRelNode.html#getCorrelVariable()">getCorrelVariable</a>, <a href="../AbstractRelNode.html#getDescription()">getDescription</a>, <a href="../AbstractRelNode.html#getDigest()">getDigest</a>, <a href="../AbstractRelNode.html#getExpectedInputRowType(int)">getExpectedInputRowType</a>, <a href="../AbstractRelNode.html#getId()">getId</a>, <a href="../AbstractRelNode.html#getInput(int)">getInput</a>, <a href="../AbstractRelNode.html#getQuery()">getQuery</a>, <a href="../AbstractRelNode.html#getRelTypeName()">getRelTypeName</a>, <a href="../AbstractRelNode.html#getRows()">getRows</a>, <a href="../AbstractRelNode.html#getRowType()">getRowType</a>, <a href="../AbstractRelNode.html#getTable()">getTable</a>, <a href="../AbstractRelNode.html#getTraitSet()">getTraitSet</a>, <a href="../AbstractRelNode.html#getVariablesSet()">getVariablesSet</a>, <a href="../AbstractRelNode.html#getVariablesStopped()">getVariablesStopped</a>, <a href="../AbstractRelNode.html#isDistinct()">isDistinct</a>, <a href="../AbstractRelNode.html#isKey(org.apache.calcite.util.ImmutableBitSet)">isKey</a>, <a href="../AbstractRelNode.html#isValid(boolean)">isValid</a>, <a href="../AbstractRelNode.html#isValid(org.apache.calcite.util.Litmus,org.apache.calcite.rel.RelNode.Context)">isValid</a>, <a href="../AbstractRelNode.html#metadata(java.lang.Class,org.apache.calcite.rel.metadata.RelMetadataQuery)">metadata</a>, <a href="../AbstractRelNode.html#onRegister(org.apache.calcite.plan.RelOptPlanner)">onRegister</a>, <a href="../AbstractRelNode.html#recomputeDigest()">recomputeDigest</a>, <a href="../AbstractRelNode.html#register(org.apache.calcite.plan.RelOptPlanner)">register</a>, <a href="../AbstractRelNode.html#sole(java.util.List)">sole</a>, <a href="../AbstractRelNode.html#toString()">toString</a></code></li>
+<code><a href="../AbstractRelNode.html#accept(org.apache.calcite.rex.RexShuttle)">accept</a>, <a href="../AbstractRelNode.html#collectVariablesSet(java.util.Set)">collectVariablesSet</a>, <a href="../AbstractRelNode.html#collectVariablesUsed(java.util.Set)">collectVariablesUsed</a>, <a href="../AbstractRelNode.html#computeDigest()">computeDigest</a>, <a href="../AbstractRelNode.html#computeSelfCost(org.apache.calcite.plan.RelOptPlanner)">computeSelfCost</a>, <a href="../AbstractRelNode.html#computeSelfCost(org.apache.calcite.plan.RelOptPlanner,org.apache.calcite.rel.metadata.RelMetadataQuery)">computeSelfCost</a>, <a href="../AbstractRelNode.html#equals(java.lang.Object)">equals</a>, <a href="../AbstractRelNode.html#explain(org.apache.calcite.rel.RelWriter)">explain</a>, <a href="../AbstractRelNode.html#getChildExps()">getChildExps</a>, <a href="../AbstractRelNode.html#getCluster()">getCluster</a>, <a href="../AbstractRelNode.html#getCollationList()">getCollationList</a>, <a href="../AbstractRelNode.html#getConvention()">getConvention</a>, <a href="../AbstractRelNode.html#getCorrelVariable()">getCorrelVariable</a>, <a href="../AbstractRelNode.html#getDescription()">getDescription</a>, <a href="../AbstractRelNode.html#getDigest()">getDigest</a>, <a href="../AbstractRelNode.html#getExpectedInputRowType(int)">getExpectedInputRowType</a>, <a href="../AbstractRelNode.html#getId()">getId</a>, <a href="../AbstractRelNode.html#getInput(int)">getInput</a>, <a href="../AbstractRelNode.html#getQuery()">getQuery</a>, <a href="../AbstractRelNode.html#getRelTypeName()">getRelTypeName</a>, <a href="../AbstractRelNode.html#getRows()">getRows</a>, <a href="../AbstractRelNode.html#getRowType()">getRowType</a>, <a href="../AbstractRelNode.html#getTable()">getTable</a>, <a href="../AbstractRelNode.html#getTraitSet()">getTraitSet</a>, <a href="../AbstractRelNode.html#getVariablesSet()">getVariablesSet</a>, <a href="../AbstractRelNode.html#getVariablesStopped()">getVariablesStopped</a>, <a href="../AbstractRelNode.html#hashCode()">hashCode</a>, <a href="../AbstractRelNode.html#isDistinct()">isDistinct</a>, <a href="../AbstractRelNode.html#isKey(org.apache.calcite.util.ImmutableBitSet)">isKey</a>, <a href="../AbstractRelNode.html#isValid(boolean)">isValid</a>, <a href="../AbstractRelNode.html#isValid(org.apache.calcite.util.Litmus,org.apache.calcite.rel.RelNode.Context)">isValid</a>, <a href="../AbstractRelNode.html#metadata(java.lang.Class,org.apache.calcite.rel.metadata.RelMetadataQuery)">metadata</a>, <a href="../AbstractRelNode.html#onRegister(org.apache.calcite.plan.RelOptPlanner)">onRegister</a>, <a href="../AbstractRelNode.html#recomputeDigest()">recomputeDigest</a>, <a href="../AbstractRelNode.html#register(org.apache.calcite.plan.RelOptPlanner)">register</a>, <a href="../AbstractRelNode.html#sole(java.util.List)">sole</a>, <a href="../AbstractRelNode.html#toString()">toString</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</code></li>
+<code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
 </ul>
 </li>
 </ul>
@@ -357,31 +368,33 @@ extends <a href="../core/Match.html" title="class in org.apache.calcite.rel.core
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexNode,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,java.util.List,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">
+<a id="&lt;init&gt;(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexNode,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,org.apache.calcite.util.ImmutableBitSet,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>LogicalMatch</h4>
-<pre>private&nbsp;LogicalMatch&#8203;(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
-                     <a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
-                     <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
-                     <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
-                     <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;pattern,
-                     boolean&nbsp;strictStart,
-                     boolean&nbsp;strictEnd,
-                     java.util.Map&lt;java.lang.String,&#8203;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;patternDefinitions,
-                     java.util.Map&lt;java.lang.String,&#8203;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;measures,
-                     <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;after,
-                     java.util.Map&lt;java.lang.String,&#8203;? extends java.util.SortedSet&lt;java.lang.String&gt;&gt;&nbsp;subsets,
-                     boolean&nbsp;allRows,
-                     java.util.List&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;partitionKeys,
-                     <a href="../RelCollation.html" title="interface in org.apache.calcite.rel">RelCollation</a>&nbsp;orderKeys,
-                     <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;interval)</pre>
-<div class="block">Creates a LogicalMatch.</div>
+<pre>public&nbsp;LogicalMatch&#8203;(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
+                    <a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
+                    <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+                    <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
+                    <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;pattern,
+                    boolean&nbsp;strictStart,
+                    boolean&nbsp;strictEnd,
+                    java.util.Map&lt;java.lang.String,&#8203;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;patternDefinitions,
+                    java.util.Map&lt;java.lang.String,&#8203;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;measures,
+                    <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;after,
+                    java.util.Map&lt;java.lang.String,&#8203;? extends java.util.SortedSet&lt;java.lang.String&gt;&gt;&nbsp;subsets,
+                    boolean&nbsp;allRows,
+                    <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&nbsp;partitionKeys,
+                    <a href="../RelCollation.html" title="interface in org.apache.calcite.rel">RelCollation</a>&nbsp;orderKeys,
+                    <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;interval)</pre>
+<div class="block">Creates a LogicalMatch.
+
+ <p>Use <a href="#create(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexNode,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,org.apache.calcite.util.ImmutableBitSet,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)"><code>create(org.apache.calcite.rel.RelNode, org.apache.calcite.rel.type.RelDataType, org.apache.calcite.rex.RexNode, boolean, boolean, java.util.Map&lt;java.lang.String, org.apache.calcite.rex.RexNode&gt;, java.util.Map&lt;java.lang.String, org.apache.calcite.rex.RexNode&gt;, org.apache.calcite.rex.RexNode, java.util.Map&lt;java.lang.String, ? extends java.util.SortedSet&lt;java.lang.String&gt;&gt;, boolean, org.apache.calcite.util.ImmutableBitSet, org.apache.calcite.rel.RelCollation, org.apache.calcite.rex.RexNode)</code></a> unless you know what you're doing.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>cluster</code> - cluster</dd>
+<dd><code>cluster</code> - Cluster</dd>
 <dd><code>traitSet</code> - Trait set</dd>
 <dd><code>input</code> - Input relational expression</dd>
 <dd><code>rowType</code> - Row type</dd>
@@ -409,7 +422,7 @@ extends <a href="../core/Match.html" title="class in org.apache.calcite.rel.core
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="create(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexNode,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,java.util.List,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">
+<a id="create(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexNode,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,org.apache.calcite.util.ImmutableBitSet,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -425,34 +438,61 @@ extends <a href="../core/Match.html" title="class in org.apache.calcite.rel.core
                                   <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;after,
                                   java.util.Map&lt;java.lang.String,&#8203;? extends java.util.SortedSet&lt;java.lang.String&gt;&gt;&nbsp;subsets,
                                   boolean&nbsp;allRows,
-                                  java.util.List&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;partitionKeys,
+                                  <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&nbsp;partitionKeys,
                                   <a href="../RelCollation.html" title="interface in org.apache.calcite.rel">RelCollation</a>&nbsp;orderKeys,
                                   <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;interval)</pre>
 <div class="block">Creates a LogicalMatch.</div>
 </li>
 </ul>
-<a id="copy(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexNode,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,java.util.List,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">
+<a id="create(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexNode,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,org.apache.calcite.util.ImmutableBitSet,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>create</h4>
+<pre class="methodSignature">public static&nbsp;<a href="LogicalMatch.html" title="class in org.apache.calcite.rel.logical">LogicalMatch</a>&nbsp;create&#8203;(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
+                                  <a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
+                                  <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+                                  <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
+                                  <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;pattern,
+                                  boolean&nbsp;strictStart,
+                                  boolean&nbsp;strictEnd,
+                                  java.util.Map&lt;java.lang.String,&#8203;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;patternDefinitions,
+                                  java.util.Map&lt;java.lang.String,&#8203;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;measures,
+                                  <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;after,
+                                  java.util.Map&lt;java.lang.String,&#8203;? extends java.util.SortedSet&lt;java.lang.String&gt;&gt;&nbsp;subsets,
+                                  boolean&nbsp;allRows,
+                                  <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&nbsp;partitionKeys,
+                                  <a href="../RelCollation.html" title="interface in org.apache.calcite.rel">RelCollation</a>&nbsp;orderKeys,
+                                  <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;interval)</pre>
+<div class="block">Creates a LogicalMatch.</div>
+</li>
+</ul>
+<a id="copy(org.apache.calcite.plan.RelTraitSet,java.util.List)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>copy</h4>
-<pre class="methodSignature">public&nbsp;<a href="../core/Match.html" title="class in org.apache.calcite.rel.core">Match</a>&nbsp;copy&#8203;(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
-                  <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
-                  <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;pattern,
-                  boolean&nbsp;strictStart,
-                  boolean&nbsp;strictEnd,
-                  java.util.Map&lt;java.lang.String,&#8203;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;patternDefinitions,
-                  java.util.Map&lt;java.lang.String,&#8203;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;measures,
-                  <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;after,
-                  java.util.Map&lt;java.lang.String,&#8203;? extends java.util.SortedSet&lt;java.lang.String&gt;&gt;&nbsp;subsets,
-                  boolean&nbsp;allRows,
-                  java.util.List&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;partitionKeys,
-                  <a href="../RelCollation.html" title="interface in org.apache.calcite.rel">RelCollation</a>&nbsp;orderKeys,
-                  <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;interval)</pre>
+<pre class="methodSignature">public&nbsp;<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;copy&#8203;(<a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
+                    java.util.List&lt;<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&gt;&nbsp;inputs)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../RelNode.html#copy(org.apache.calcite.plan.RelTraitSet,java.util.List)">RelNode</a></code></span></div>
+<div class="block">Creates a copy of this relational expression, perhaps changing traits and
+ inputs.
+
+ <p>Sub-classes with other important attributes are encouraged to create
+ variants of this method with more parameters.</p></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../core/Match.html#copy(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexNode,boolean,boolean,java.util.Map,java.util.Map,org.apache.calcite.rex.RexNode,java.util.Map,boolean,java.util.List,org.apache.calcite.rel.RelCollation,org.apache.calcite.rex.RexNode)">copy</a></code>&nbsp;in class&nbsp;<code><a href="../core/Match.html" title="class in org.apache.calcite.rel.core">Match</a></code></dd>
+<dd><code><a href="../RelNode.html#copy(org.apache.calcite.plan.RelTraitSet,java.util.List)">copy</a></code>&nbsp;in interface&nbsp;<code><a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></dd>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../AbstractRelNode.html#copy(org.apache.calcite.plan.RelTraitSet,java.util.List)">copy</a></code>&nbsp;in class&nbsp;<code><a href="../AbstractRelNode.html" title="class in org.apache.calcite.rel">AbstractRelNode</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>traitSet</code> - Trait set</dd>
+<dd><code>inputs</code> - Inputs</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Copy of this relational expression, substituting traits and
+ inputs</dd>
 </dl>
 </li>
 </ul>

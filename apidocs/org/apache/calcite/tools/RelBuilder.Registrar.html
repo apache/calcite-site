@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -173,6 +173,11 @@ extends java.lang.Object</pre>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#names">names</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
+<tr class="altColor">
+<td class="colFirst"><code>(package private) java.util.List&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#originalExtraNodes">originalExtraNodes</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
 </table>
 </li>
 </ul>
@@ -187,13 +192,16 @@ extends java.lang.Object</pre>
 <table class="memberSummary">
 <caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colFirst" scope="col">Modifier</th>
-<th class="colSecond" scope="col">Constructor</th>
+<th class="colFirst" scope="col">Constructor</th>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private </code></td>
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">Registrar</a></span>()</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.Iterable)">Registrar</a></span>&#8203;(java.lang.Iterable&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;fields)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.Iterable,java.util.List)">Registrar</a></span>&#8203;(java.lang.Iterable&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;fields,
+         java.util.List&lt;java.lang.String&gt;&nbsp;fieldNames)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </table>
@@ -216,12 +224,24 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>(package private) int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addedFieldCount()">addedFieldCount</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the number of fields added.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>(package private) int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerExpression(org.apache.calcite.rex.RexNode)">registerExpression</a></span>&#8203;(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>(package private) java.util.List&lt;java.lang.Integer&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerExpressions(java.lang.Iterable)">registerExpressions</a></span>&#8203;(java.lang.Iterable&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nodes)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>(package private) java.util.List&lt;<a href="../rel/RelFieldCollation.html" title="class in org.apache.calcite.rel">RelFieldCollation</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerFieldCollations(java.lang.Iterable)">registerFieldCollations</a></span>&#8203;(java.lang.Iterable&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;orderKeys)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </table>
@@ -248,6 +268,15 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Field Detail</h3>
+<a id="originalExtraNodes">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>originalExtraNodes</h4>
+<pre>final&nbsp;java.util.List&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt; originalExtraNodes</pre>
+</li>
+</ul>
 <a id="extraNodes">
 <!--   -->
 </a>
@@ -276,13 +305,23 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;()">
+<a id="&lt;init&gt;(java.lang.Iterable)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>Registrar</h4>
+<pre>Registrar&#8203;(java.lang.Iterable&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;fields)</pre>
+</li>
+</ul>
+<a id="&lt;init&gt;(java.lang.Iterable,java.util.List)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>Registrar</h4>
-<pre>private&nbsp;Registrar()</pre>
+<pre>Registrar&#8203;(java.lang.Iterable&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;fields,
+          java.util.List&lt;java.lang.String&gt;&nbsp;fieldNames)</pre>
 </li>
 </ul>
 </li>
@@ -307,10 +346,29 @@ extends java.lang.Object</pre>
 <a id="registerExpressions(java.lang.Iterable)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>registerExpressions</h4>
 <pre class="methodSignature">java.util.List&lt;java.lang.Integer&gt;&nbsp;registerExpressions&#8203;(java.lang.Iterable&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nodes)</pre>
+</li>
+</ul>
+<a id="registerFieldCollations(java.lang.Iterable)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>registerFieldCollations</h4>
+<pre class="methodSignature">java.util.List&lt;<a href="../rel/RelFieldCollation.html" title="class in org.apache.calcite.rel">RelFieldCollation</a>&gt;&nbsp;registerFieldCollations&#8203;(java.lang.Iterable&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;orderKeys)</pre>
+</li>
+</ul>
+<a id="addedFieldCount()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>addedFieldCount</h4>
+<pre class="methodSignature">int&nbsp;addedFieldCount()</pre>
+<div class="block">Returns the number of fields added.</div>
 </li>
 </ul>
 </li>

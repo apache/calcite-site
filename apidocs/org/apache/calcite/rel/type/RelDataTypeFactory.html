@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":38,"i16":6,"i17":6,"i18":6,"i19":6,"i20":6,"i21":6,"i22":6,"i23":6};
+var data = {"i0":6,"i1":6,"i2":6,"i3":38,"i4":38,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":38,"i16":6,"i17":6,"i18":6,"i19":6,"i20":6,"i21":6,"i22":6,"i23":6,"i24":38};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -129,7 +129,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><code><a href="../../adapter/geode/util/JavaTypeFactoryExtImpl.html" title="class in org.apache.calcite.adapter.geode.util">JavaTypeFactoryExtImpl</a></code>, <code><a href="../../jdbc/JavaTypeFactoryImpl.html" title="class in org.apache.calcite.jdbc">JavaTypeFactoryImpl</a></code>, <code><a href="RelDataTypeFactoryImpl.html" title="class in org.apache.calcite.rel.type">RelDataTypeFactoryImpl</a></code>, <code><a href="../../sql/type/SqlTypeFactoryImpl.html" title="class in org.apache.calcite.sql.type">SqlTypeFactoryImpl</a></code></dd>
+<dd><code><a href="../../adapter/geode/util/JavaTypeFactoryExtImpl.html" title="class in org.apache.calcite.adapter.geode.util">JavaTypeFactoryExtImpl</a></code>, <code><a href="../../jdbc/JavaTypeFactoryImpl.html" title="class in org.apache.calcite.jdbc">JavaTypeFactoryImpl</a></code>, <code><a href="../../piglet/PigTypes.PigRelDataTypeFactory.html" title="class in org.apache.calcite.piglet">PigTypes.PigRelDataTypeFactory</a></code>, <code><a href="RelDataTypeFactoryImpl.html" title="class in org.apache.calcite.rel.type">RelDataTypeFactoryImpl</a></code>, <code><a href="../../sql/type/SqlTypeFactoryImpl.html" title="class in org.apache.calcite.sql.type">SqlTypeFactoryImpl</a></code></dd>
 </dl>
 <hr>
 <pre>public interface <span class="typeNameLabel">RelDataTypeFactory</span></pre>
@@ -231,7 +231,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createDecimalProduct(org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rel.type.RelDataType)">createDecimalProduct</a></span>&#8203;(<a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type1,
                     <a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type2)</code></th>
 <td class="colLast">
-<div class="block">Infers the return type of a decimal multiplication.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use
+ <a href="RelDataTypeSystem.html#deriveDecimalMultiplyType(org.apache.calcite.rel.type.RelDataTypeFactory,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rel.type.RelDataType)"><code>RelDataTypeSystem.deriveDecimalMultiplyType(RelDataTypeFactory, RelDataType, RelDataType)</code></a></div>
+</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
@@ -239,7 +242,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createDecimalQuotient(org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rel.type.RelDataType)">createDecimalQuotient</a></span>&#8203;(<a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type1,
                      <a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type2)</code></th>
 <td class="colLast">
-<div class="block">Infers the return type of a decimal division.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use
+ <a href="RelDataTypeSystem.html#deriveDecimalDivideType(org.apache.calcite.rel.type.RelDataTypeFactory,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rel.type.RelDataType)"><code>RelDataTypeSystem.deriveDecimalDivideType(RelDataTypeFactory, RelDataType, RelDataType)</code></a></div>
+</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
@@ -363,18 +369,27 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </td>
 </tr>
 <tr id="i20" class="altColor">
+<td class="colFirst"><code><a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decimalOf(org.apache.calcite.rel.type.RelDataType)">decimalOf</a></span>&#8203;(<a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type)</code></th>
+<td class="colLast">
+<div class="block">Create a decimal type equivalent to the numeric <code>type</code>,
+ this is related to specific system implementation,
+ you can override this logic if it is required.</div>
+</td>
+</tr>
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code>java.nio.charset.Charset</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDefaultCharset()">getDefaultCharset</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code><a href="RelDataTypeSystem.html" title="interface in org.apache.calcite.rel.type">RelDataTypeSystem</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTypeSystem()">getTypeSystem</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the type system.</div>
 </td>
 </tr>
-<tr id="i22" class="altColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code><a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#leastRestrictive(java.util.List)">leastRestrictive</a></span>&#8203;(java.util.List&lt;<a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;types)</code></th>
 <td class="colLast">
@@ -382,13 +397,15 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  they can all be cast), or null if conversion is not possible.</div>
 </td>
 </tr>
-<tr id="i23" class="rowColor">
+<tr id="i24" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#useDoubleMultiplication(org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rel.type.RelDataType)">useDoubleMultiplication</a></span>&#8203;(<a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type1,
                        <a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type2)</code></th>
 <td class="colLast">
-<div class="block">Returns whether a decimal multiplication should be implemented by casting
- arguments to double values.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use
+ <a href="RelDataTypeSystem.html#shouldUseDoubleMultiplication(org.apache.calcite.rel.type.RelDataTypeFactory,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rel.type.RelDataType)"><code>RelDataTypeSystem.shouldUseDoubleMultiplication(RelDataTypeFactory, RelDataType, RelDataType)</code></a></div>
+</div>
 </td>
 </tr>
 </table>
@@ -779,8 +796,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <h4>createDecimalProduct</h4>
-<pre class="methodSignature"><a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;createDecimalProduct&#8203;(<a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type1,
+<pre class="methodSignature">@Deprecated
+<a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;createDecimalProduct&#8203;(<a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type1,
                                  <a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type2)</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use
+ <a href="RelDataTypeSystem.html#deriveDecimalMultiplyType(org.apache.calcite.rel.type.RelDataTypeFactory,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rel.type.RelDataType)"><code>RelDataTypeSystem.deriveDecimalMultiplyType(RelDataTypeFactory, RelDataType, RelDataType)</code></a></div>
+</div>
 <div class="block">Infers the return type of a decimal multiplication. Decimal
  multiplication involves at least one decimal operand and requires both
  operands to have exact numeric types.</div>
@@ -800,8 +822,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <h4>useDoubleMultiplication</h4>
-<pre class="methodSignature">boolean&nbsp;useDoubleMultiplication&#8203;(<a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type1,
+<pre class="methodSignature">@Deprecated
+boolean&nbsp;useDoubleMultiplication&#8203;(<a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type1,
                                 <a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type2)</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use
+ <a href="RelDataTypeSystem.html#shouldUseDoubleMultiplication(org.apache.calcite.rel.type.RelDataTypeFactory,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rel.type.RelDataType)"><code>RelDataTypeSystem.shouldUseDoubleMultiplication(RelDataTypeFactory, RelDataType, RelDataType)</code></a></div>
+</div>
 <div class="block">Returns whether a decimal multiplication should be implemented by casting
  arguments to double values.
 
@@ -814,8 +841,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <h4>createDecimalQuotient</h4>
-<pre class="methodSignature"><a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;createDecimalQuotient&#8203;(<a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type1,
+<pre class="methodSignature">@Deprecated
+<a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;createDecimalQuotient&#8203;(<a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type1,
                                   <a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type2)</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">Use
+ <a href="RelDataTypeSystem.html#deriveDecimalDivideType(org.apache.calcite.rel.type.RelDataTypeFactory,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rel.type.RelDataType)"><code>RelDataTypeSystem.deriveDecimalDivideType(RelDataTypeFactory, RelDataType, RelDataType)</code></a></div>
+</div>
 <div class="block">Infers the return type of a decimal division. Decimal division involves
  at least one decimal operand and requires both operands to have exact
  numeric types.</div>
@@ -826,6 +858,24 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the result type for a decimal division, or null if decimal
  division should not be applied to the operands.</dd>
+</dl>
+</li>
+</ul>
+<a id="decimalOf(org.apache.calcite.rel.type.RelDataType)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>decimalOf</h4>
+<pre class="methodSignature"><a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;decimalOf&#8203;(<a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type)</pre>
+<div class="block">Create a decimal type equivalent to the numeric <code>type</code>,
+ this is related to specific system implementation,
+ you can override this logic if it is required.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>type</code> - the numeric type to create decimal type with</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>decimal equivalence of the numeric type.</dd>
 </dl>
 </li>
 </ul>

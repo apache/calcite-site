@@ -629,22 +629,36 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>&lt;TInner,&#8203;TResult&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TResult&gt;</code></td>
-<th class="colSecond" scope="row"><span class="typeNameLabel">DefaultEnumerable.</span><code><span class="memberNameLink"><a href="../../DefaultEnumerable.html#correlateJoin(org.apache.calcite.linq4j.CorrelateJoinType,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function2)">correlateJoin</a></span>&#8203;(<a href="../../CorrelateJoinType.html" title="enum in org.apache.calcite.linq4j">CorrelateJoinType</a>&nbsp;correlateJoinType,
-             <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&gt;&nbsp;inner,
-             <a href="../Function2.html" title="interface in org.apache.calcite.linq4j.function">Function2</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TInner,&#8203;TResult&gt;&nbsp;resultSelector)</code></th>
-<td class="colLast">
-<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
-</td>
+<td class="colFirst"><code>static &lt;TSource,&#8203;TInner,&#8203;TKey&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#antiJoin(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.EqualityComparer,org.apache.calcite.linq4j.function.Predicate2)">antiJoin</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;outer,
+        <a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&nbsp;inner,
+        <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;outerKeySelector,
+        <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TInner,&#8203;TKey&gt;&nbsp;innerKeySelector,
+        <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer,
+        <a href="../Predicate2.html" title="interface in org.apache.calcite.linq4j.function">Predicate2</a>&lt;TSource,&#8203;TInner&gt;&nbsp;nonEquiPredicate)</code></th>
+<td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>static &lt;TSource,&#8203;TInner,&#8203;TResult&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TResult&gt;</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#correlateBatchJoin(org.apache.calcite.linq4j.JoinType,org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function2,org.apache.calcite.linq4j.function.Predicate2,int)">correlateBatchJoin</a></span>&#8203;(<a href="../../JoinType.html" title="enum in org.apache.calcite.linq4j">JoinType</a>&nbsp;joinType,
+                  <a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;outer,
+                  <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;java.util.List&lt;TSource&gt;,&#8203;<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&gt;&nbsp;inner,
+                  <a href="../Function2.html" title="interface in org.apache.calcite.linq4j.function">Function2</a>&lt;TSource,&#8203;TInner,&#8203;TResult&gt;&nbsp;resultSelector,
+                  <a href="../Predicate2.html" title="interface in org.apache.calcite.linq4j.function">Predicate2</a>&lt;TSource,&#8203;TInner&gt;&nbsp;predicate,
+                  int&nbsp;batchSize)</code></th>
+<td class="colLast">
+<div class="block">Fetches blocks of size <code>batchSize</code> from <code>outer</code>,
+ storing each block into a list (<code>outerValues</code>).</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>&lt;TInner,&#8203;TResult&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TResult&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">DefaultEnumerable.</span><code><span class="memberNameLink"><a href="../../DefaultEnumerable.html#correlateJoin(org.apache.calcite.linq4j.JoinType,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function2)">correlateJoin</a></span>&#8203;(<a href="../../JoinType.html" title="enum in org.apache.calcite.linq4j">JoinType</a>&nbsp;joinType,
              <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&gt;&nbsp;inner,
              <a href="../Function2.html" title="interface in org.apache.calcite.linq4j.function">Function2</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TInner,&#8203;TResult&gt;&nbsp;resultSelector)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static &lt;TSource,&#8203;TInner,&#8203;TResult&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TResult&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#correlateJoin(org.apache.calcite.linq4j.JoinType,org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function2)">correlateJoin</a></span>&#8203;(<a href="../../JoinType.html" title="enum in org.apache.calcite.linq4j">JoinType</a>&nbsp;joinType,
              <a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;outer,
@@ -655,19 +669,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  from the <code>inner</code> enumerable.</div>
 </td>
 </tr>
-<tr class="rowColor">
-<td class="colFirst"><code>&lt;TInner,&#8203;TResult&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TResult&gt;</code></td>
-<th class="colSecond" scope="row"><span class="typeNameLabel">ExtendedEnumerable.</span><code><span class="memberNameLink"><a href="../../ExtendedEnumerable.html#correlateJoin(org.apache.calcite.linq4j.CorrelateJoinType,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function2)">correlateJoin</a></span>&#8203;(<a href="../../CorrelateJoinType.html" title="enum in org.apache.calcite.linq4j">CorrelateJoinType</a>&nbsp;joinType,
-             <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&gt;&nbsp;inner,
-             <a href="../Function2.html" title="interface in org.apache.calcite.linq4j.function">Function2</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TInner,&#8203;TResult&gt;&nbsp;resultSelector)</code></th>
-<td class="colLast">
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>
-<div class="deprecationComment">Use <a href="../../ExtendedEnumerable.html#correlateJoin(org.apache.calcite.linq4j.JoinType,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function2)"><code>ExtendedEnumerable.correlateJoin(JoinType, Function1, Function2)</code></a></div>
-</div>
-</td>
-</tr>
 <tr class="altColor">
-<td class="colFirst"><code>default &lt;TInner,&#8203;TResult&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TResult&gt;</code></td>
+<td class="colFirst"><code>&lt;TInner,&#8203;TResult&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TResult&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ExtendedEnumerable.</span><code><span class="memberNameLink"><a href="../../ExtendedEnumerable.html#correlateJoin(org.apache.calcite.linq4j.JoinType,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function2)">correlateJoin</a></span>&#8203;(<a href="../../JoinType.html" title="enum in org.apache.calcite.linq4j">JoinType</a>&nbsp;joinType,
              <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&gt;&nbsp;inner,
              <a href="../Function2.html" title="interface in org.apache.calcite.linq4j.function">Function2</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TInner,&#8203;TResult&gt;&nbsp;resultSelector)</code></th>
@@ -1094,6 +1097,21 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>private static &lt;TSource,&#8203;TInner,&#8203;TKey,&#8203;TResult&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TResult&gt;</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#hashEquiJoin_(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function2,org.apache.calcite.linq4j.function.EqualityComparer,boolean,boolean)">hashEquiJoin_</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;outer,
+             <a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&nbsp;inner,
+             <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;outerKeySelector,
+             <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TInner,&#8203;TKey&gt;&nbsp;innerKeySelector,
+             <a href="../Function2.html" title="interface in org.apache.calcite.linq4j.function">Function2</a>&lt;TSource,&#8203;TInner,&#8203;TResult&gt;&nbsp;resultSelector,
+             <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer,
+             boolean&nbsp;generateNullsOnLeft,
+             boolean&nbsp;generateNullsOnRight)</code></th>
+<td class="colLast">
+<div class="block">Implementation of join that builds the right input and probes with the
+ left.</div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>&lt;TInner,&#8203;TKey,&#8203;TResult&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TResult&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">DefaultEnumerable.</span><code><span class="memberNameLink"><a href="../../DefaultEnumerable.html#hashJoin(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function2)">hashJoin</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&nbsp;inner,
         <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TKey&gt;&nbsp;outerKeySelector,
@@ -1101,7 +1119,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
         <a href="../Function2.html" title="interface in org.apache.calcite.linq4j.function">Function2</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TInner,&#8203;TResult&gt;&nbsp;resultSelector)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>&lt;TInner,&#8203;TKey,&#8203;TResult&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TResult&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">DefaultEnumerable.</span><code><span class="memberNameLink"><a href="../../DefaultEnumerable.html#hashJoin(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function2,org.apache.calcite.linq4j.function.EqualityComparer)">hashJoin</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&nbsp;inner,
         <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TKey&gt;&nbsp;outerKeySelector,
@@ -1110,7 +1128,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
         <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>&lt;TInner,&#8203;TKey,&#8203;TResult&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TResult&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">DefaultEnumerable.</span><code><span class="memberNameLink"><a href="../../DefaultEnumerable.html#hashJoin(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function2,org.apache.calcite.linq4j.function.EqualityComparer,boolean,boolean)">hashJoin</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&nbsp;inner,
         <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TKey&gt;&nbsp;outerKeySelector,
@@ -1119,6 +1137,18 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
         <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer,
         boolean&nbsp;generateNullsOnLeft,
         boolean&nbsp;generateNullsOnRight)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>&lt;TInner,&#8203;TKey,&#8203;TResult&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TResult&gt;</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">DefaultEnumerable.</span><code><span class="memberNameLink"><a href="../../DefaultEnumerable.html#hashJoin(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function2,org.apache.calcite.linq4j.function.EqualityComparer,boolean,boolean,org.apache.calcite.linq4j.function.Predicate2)">hashJoin</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&nbsp;inner,
+        <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TKey&gt;&nbsp;outerKeySelector,
+        <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TInner,&#8203;TKey&gt;&nbsp;innerKeySelector,
+        <a href="../Function2.html" title="interface in org.apache.calcite.linq4j.function">Function2</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TInner,&#8203;TResult&gt;&nbsp;resultSelector,
+        <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer,
+        boolean&nbsp;generateNullsOnLeft,
+        boolean&nbsp;generateNullsOnRight,
+        <a href="../Predicate2.html" title="interface in org.apache.calcite.linq4j.function">Predicate2</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TInner&gt;&nbsp;predicate)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -1162,6 +1192,22 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>static &lt;TSource,&#8203;TInner,&#8203;TKey,&#8203;TResult&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TResult&gt;</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#hashJoin(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function2,org.apache.calcite.linq4j.function.EqualityComparer,boolean,boolean,org.apache.calcite.linq4j.function.Predicate2)">hashJoin</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;outer,
+        <a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&nbsp;inner,
+        <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;outerKeySelector,
+        <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TInner,&#8203;TKey&gt;&nbsp;innerKeySelector,
+        <a href="../Function2.html" title="interface in org.apache.calcite.linq4j.function">Function2</a>&lt;TSource,&#8203;TInner,&#8203;TResult&gt;&nbsp;resultSelector,
+        <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer,
+        boolean&nbsp;generateNullsOnLeft,
+        boolean&nbsp;generateNullsOnRight,
+        <a href="../Predicate2.html" title="interface in org.apache.calcite.linq4j.function">Predicate2</a>&lt;TSource,&#8203;TInner&gt;&nbsp;predicate)</code></th>
+<td class="colLast">
+<div class="block">Correlates the elements of two sequences based on
+ matching keys.</div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>&lt;TInner,&#8203;TKey,&#8203;TResult&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TResult&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ExtendedEnumerable.</span><code><span class="memberNameLink"><a href="../../ExtendedEnumerable.html#hashJoin(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function2)">hashJoin</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&nbsp;inner,
         <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TKey&gt;&nbsp;outerKeySelector,
@@ -1172,7 +1218,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  matching keys.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>&lt;TInner,&#8203;TKey,&#8203;TResult&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TResult&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ExtendedEnumerable.</span><code><span class="memberNameLink"><a href="../../ExtendedEnumerable.html#hashJoin(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function2,org.apache.calcite.linq4j.function.EqualityComparer)">hashJoin</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&nbsp;inner,
         <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TKey&gt;&nbsp;outerKeySelector,
@@ -1184,7 +1230,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  matching keys.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>&lt;TInner,&#8203;TKey,&#8203;TResult&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TResult&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ExtendedEnumerable.</span><code><span class="memberNameLink"><a href="../../ExtendedEnumerable.html#hashJoin(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function2,org.apache.calcite.linq4j.function.EqualityComparer,boolean,boolean)">hashJoin</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&nbsp;inner,
         <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TKey&gt;&nbsp;outerKeySelector,
@@ -1198,19 +1244,35 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  optional outer join semantics.</div>
 </td>
 </tr>
+<tr class="altColor">
+<td class="colFirst"><code>&lt;TInner,&#8203;TKey,&#8203;TResult&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TResult&gt;</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">ExtendedEnumerable.</span><code><span class="memberNameLink"><a href="../../ExtendedEnumerable.html#hashJoin(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function2,org.apache.calcite.linq4j.function.EqualityComparer,boolean,boolean,org.apache.calcite.linq4j.function.Predicate2)">hashJoin</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&nbsp;inner,
+        <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TKey&gt;&nbsp;outerKeySelector,
+        <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TInner,&#8203;TKey&gt;&nbsp;innerKeySelector,
+        <a href="../Function2.html" title="interface in org.apache.calcite.linq4j.function">Function2</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TInner,&#8203;TResult&gt;&nbsp;resultSelector,
+        <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer,
+        boolean&nbsp;generateNullsOnLeft,
+        boolean&nbsp;generateNullsOnRight,
+        <a href="../Predicate2.html" title="interface in org.apache.calcite.linq4j.function">Predicate2</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TInner&gt;&nbsp;predicate)</code></th>
+<td class="colLast">
+<div class="block">Correlates the elements of two sequences based on matching keys, with
+ optional outer join semantics.</div>
+</td>
+</tr>
 <tr class="rowColor">
 <td class="colFirst"><code>private static &lt;TSource,&#8203;TInner,&#8203;TKey,&#8203;TResult&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TResult&gt;</code></td>
-<th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#hashJoin_(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function2,org.apache.calcite.linq4j.function.EqualityComparer,boolean,boolean)">hashJoin_</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;outer,
-         <a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&nbsp;inner,
-         <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;outerKeySelector,
-         <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TInner,&#8203;TKey&gt;&nbsp;innerKeySelector,
-         <a href="../Function2.html" title="interface in org.apache.calcite.linq4j.function">Function2</a>&lt;TSource,&#8203;TInner,&#8203;TResult&gt;&nbsp;resultSelector,
-         <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer,
-         boolean&nbsp;generateNullsOnLeft,
-         boolean&nbsp;generateNullsOnRight)</code></th>
+<th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#hashJoinWithPredicate_(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function2,org.apache.calcite.linq4j.function.EqualityComparer,boolean,boolean,org.apache.calcite.linq4j.function.Predicate2)">hashJoinWithPredicate_</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;outer,
+                      <a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&nbsp;inner,
+                      <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;outerKeySelector,
+                      <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TInner,&#8203;TKey&gt;&nbsp;innerKeySelector,
+                      <a href="../Function2.html" title="interface in org.apache.calcite.linq4j.function">Function2</a>&lt;TSource,&#8203;TInner,&#8203;TResult&gt;&nbsp;resultSelector,
+                      <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer,
+                      boolean&nbsp;generateNullsOnLeft,
+                      boolean&nbsp;generateNullsOnRight,
+                      <a href="../Predicate2.html" title="interface in org.apache.calcite.linq4j.function">Predicate2</a>&lt;TSource,&#8203;TInner&gt;&nbsp;predicate)</code></th>
 <td class="colLast">
 <div class="block">Implementation of join that builds the right input and probes with the
- left.</div>
+ left</div>
 </td>
 </tr>
 <tr class="altColor">
@@ -1443,6 +1505,19 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>private static &lt;TSource,&#8203;TInner,&#8203;TKey&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#semiEquiJoin_(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.EqualityComparer,boolean)">semiEquiJoin_</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;outer,
+             <a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&nbsp;inner,
+             <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;outerKeySelector,
+             <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TInner,&#8203;TKey&gt;&nbsp;innerKeySelector,
+             <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer,
+             boolean&nbsp;anti)</code></th>
+<td class="colLast">
+<div class="block">Returns elements of <code>outer</code> for which there is (semi-join) / is not (anti-semi-join)
+ a member of <code>inner</code> with a matching key.</div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>static &lt;TSource,&#8203;TInner,&#8203;TKey&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#semiJoin(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1)">semiJoin</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;outer,
         <a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&nbsp;inner,
@@ -1453,7 +1528,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  <code>inner</code> with a matching key.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static &lt;TSource,&#8203;TInner,&#8203;TKey&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#semiJoin(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.EqualityComparer)">semiJoin</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;outer,
         <a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&nbsp;inner,
@@ -1462,31 +1537,53 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
         <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
-<td class="colFirst"><code>private static &lt;TSource,&#8203;TInner,&#8203;TKey&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;</code></td>
-<th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#semiJoin(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.EqualityComparer,boolean)">semiJoin</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;outer,
+<tr class="rowColor">
+<td class="colFirst"><code>static &lt;TSource,&#8203;TInner,&#8203;TKey&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#semiJoin(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.EqualityComparer,boolean,org.apache.calcite.linq4j.function.Predicate2)">semiJoin</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;outer,
         <a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&nbsp;inner,
         <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;outerKeySelector,
         <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TInner,&#8203;TKey&gt;&nbsp;innerKeySelector,
         <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer,
-        boolean&nbsp;anti)</code></th>
+        boolean&nbsp;anti,
+        <a href="../Predicate2.html" title="interface in org.apache.calcite.linq4j.function">Predicate2</a>&lt;TSource,&#8203;TInner&gt;&nbsp;nonEquiPredicate)</code></th>
 <td class="colLast">
 <div class="block">Returns elements of <code>outer</code> for which there is (semi-join) / is not (anti-semi-join)
  a member of <code>inner</code> with a matching key.</div>
 </td>
 </tr>
+<tr class="altColor">
+<td class="colFirst"><code>static &lt;TSource,&#8203;TInner,&#8203;TKey&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#semiJoin(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.EqualityComparer,org.apache.calcite.linq4j.function.Predicate2)">semiJoin</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;outer,
+        <a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&nbsp;inner,
+        <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;outerKeySelector,
+        <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TInner,&#8203;TKey&gt;&nbsp;innerKeySelector,
+        <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer,
+        <a href="../Predicate2.html" title="interface in org.apache.calcite.linq4j.function">Predicate2</a>&lt;TSource,&#8203;TInner&gt;&nbsp;nonEquiPredicate)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
 <tr class="rowColor">
+<td class="colFirst"><code>private static &lt;TSource,&#8203;TInner,&#8203;TKey&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#semiJoinWithPredicate_(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.EqualityComparer,boolean,org.apache.calcite.linq4j.function.Predicate2)">semiJoinWithPredicate_</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;outer,
+                      <a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TInner&gt;&nbsp;inner,
+                      <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;outerKeySelector,
+                      <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TInner,&#8203;TKey&gt;&nbsp;innerKeySelector,
+                      <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer,
+                      boolean&nbsp;anti,
+                      <a href="../Predicate2.html" title="interface in org.apache.calcite.linq4j.function">Predicate2</a>&lt;TSource,&#8203;TInner&gt;&nbsp;nonEquiPredicate)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>&lt;TKey extends java.lang.Comparable&lt;TKey&gt;&gt;<br><a href="../../OrderedEnumerable.html" title="interface in org.apache.calcite.linq4j">OrderedEnumerable</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">DefaultEnumerable.</span><code><span class="memberNameLink"><a href="../../DefaultEnumerable.html#thenBy(org.apache.calcite.linq4j.function.Function1)">thenBy</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TKey&gt;&nbsp;keySelector)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>&lt;TKey&gt;&nbsp;<a href="../../OrderedEnumerable.html" title="interface in org.apache.calcite.linq4j">OrderedEnumerable</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">DefaultEnumerable.</span><code><span class="memberNameLink"><a href="../../DefaultEnumerable.html#thenBy(org.apache.calcite.linq4j.function.Function1,java.util.Comparator)">thenBy</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TKey&gt;&nbsp;keySelector,
       java.util.Comparator&lt;TKey&gt;&nbsp;comparator)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static &lt;TSource,&#8203;TKey extends java.lang.Comparable&lt;TKey&gt;&gt;<br><a href="../../OrderedEnumerable.html" title="interface in org.apache.calcite.linq4j">OrderedEnumerable</a>&lt;TSource&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#thenBy(org.apache.calcite.linq4j.OrderedEnumerable,org.apache.calcite.linq4j.function.Function1)">thenBy</a></span>&#8203;(<a href="../../OrderedEnumerable.html" title="interface in org.apache.calcite.linq4j">OrderedEnumerable</a>&lt;TSource&gt;&nbsp;source,
       <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;keySelector)</code></th>
@@ -1495,7 +1592,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  ascending order according to a key.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static &lt;TSource,&#8203;TKey&gt;<br><a href="../../OrderedEnumerable.html" title="interface in org.apache.calcite.linq4j">OrderedEnumerable</a>&lt;TSource&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#thenBy(org.apache.calcite.linq4j.OrderedEnumerable,org.apache.calcite.linq4j.function.Function1,java.util.Comparator)">thenBy</a></span>&#8203;(<a href="../../OrderedEnumerable.html" title="interface in org.apache.calcite.linq4j">OrderedEnumerable</a>&lt;TSource&gt;&nbsp;source,
       <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;keySelector,
@@ -1505,7 +1602,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  ascending order according to a key, using a specified comparator.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>&lt;TKey extends java.lang.Comparable&lt;TKey&gt;&gt;<br><a href="../../OrderedEnumerable.html" title="interface in org.apache.calcite.linq4j">OrderedEnumerable</a>&lt;<a href="../../ExtendedOrderedEnumerable.html" title="type parameter in ExtendedOrderedEnumerable">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ExtendedOrderedEnumerable.</span><code><span class="memberNameLink"><a href="../../ExtendedOrderedEnumerable.html#thenBy(org.apache.calcite.linq4j.function.Function1)">thenBy</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedOrderedEnumerable.html" title="type parameter in ExtendedOrderedEnumerable">T</a>,&#8203;TKey&gt;&nbsp;keySelector)</code></th>
 <td class="colLast">
@@ -1513,7 +1610,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  ascending order according to a key.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>&lt;TKey&gt;&nbsp;<a href="../../OrderedEnumerable.html" title="interface in org.apache.calcite.linq4j">OrderedEnumerable</a>&lt;<a href="../../ExtendedOrderedEnumerable.html" title="type parameter in ExtendedOrderedEnumerable">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ExtendedOrderedEnumerable.</span><code><span class="memberNameLink"><a href="../../ExtendedOrderedEnumerable.html#thenBy(org.apache.calcite.linq4j.function.Function1,java.util.Comparator)">thenBy</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedOrderedEnumerable.html" title="type parameter in ExtendedOrderedEnumerable">T</a>,&#8203;TKey&gt;&nbsp;keySelector,
       java.util.Comparator&lt;TKey&gt;&nbsp;comparator)</code></th>
@@ -1522,18 +1619,18 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  ascending order according to a key, using a specified comparator.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>&lt;TKey extends java.lang.Comparable&lt;TKey&gt;&gt;<br><a href="../../OrderedEnumerable.html" title="interface in org.apache.calcite.linq4j">OrderedEnumerable</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">DefaultEnumerable.</span><code><span class="memberNameLink"><a href="../../DefaultEnumerable.html#thenByDescending(org.apache.calcite.linq4j.function.Function1)">thenByDescending</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TKey&gt;&nbsp;keySelector)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>&lt;TKey&gt;&nbsp;<a href="../../OrderedEnumerable.html" title="interface in org.apache.calcite.linq4j">OrderedEnumerable</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">DefaultEnumerable.</span><code><span class="memberNameLink"><a href="../../DefaultEnumerable.html#thenByDescending(org.apache.calcite.linq4j.function.Function1,java.util.Comparator)">thenByDescending</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TKey&gt;&nbsp;keySelector,
                 java.util.Comparator&lt;TKey&gt;&nbsp;comparator)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static &lt;TSource,&#8203;TKey extends java.lang.Comparable&lt;TKey&gt;&gt;<br><a href="../../OrderedEnumerable.html" title="interface in org.apache.calcite.linq4j">OrderedEnumerable</a>&lt;TSource&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#thenByDescending(org.apache.calcite.linq4j.OrderedEnumerable,org.apache.calcite.linq4j.function.Function1)">thenByDescending</a></span>&#8203;(<a href="../../OrderedEnumerable.html" title="interface in org.apache.calcite.linq4j">OrderedEnumerable</a>&lt;TSource&gt;&nbsp;source,
                 <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;keySelector)</code></th>
@@ -1542,7 +1639,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  descending order according to a key.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static &lt;TSource,&#8203;TKey&gt;<br><a href="../../OrderedEnumerable.html" title="interface in org.apache.calcite.linq4j">OrderedEnumerable</a>&lt;TSource&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#thenByDescending(org.apache.calcite.linq4j.OrderedEnumerable,org.apache.calcite.linq4j.function.Function1,java.util.Comparator)">thenByDescending</a></span>&#8203;(<a href="../../OrderedEnumerable.html" title="interface in org.apache.calcite.linq4j">OrderedEnumerable</a>&lt;TSource&gt;&nbsp;source,
                 <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;keySelector,
@@ -1552,7 +1649,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  descending order according to a key, using a specified comparator.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>&lt;TKey extends java.lang.Comparable&lt;TKey&gt;&gt;<br><a href="../../OrderedEnumerable.html" title="interface in org.apache.calcite.linq4j">OrderedEnumerable</a>&lt;<a href="../../ExtendedOrderedEnumerable.html" title="type parameter in ExtendedOrderedEnumerable">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ExtendedOrderedEnumerable.</span><code><span class="memberNameLink"><a href="../../ExtendedOrderedEnumerable.html#thenByDescending(org.apache.calcite.linq4j.function.Function1)">thenByDescending</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedOrderedEnumerable.html" title="type parameter in ExtendedOrderedEnumerable">T</a>,&#8203;TKey&gt;&nbsp;keySelector)</code></th>
 <td class="colLast">
@@ -1560,7 +1657,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  descending order according to a key.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>&lt;TKey&gt;&nbsp;<a href="../../OrderedEnumerable.html" title="interface in org.apache.calcite.linq4j">OrderedEnumerable</a>&lt;<a href="../../ExtendedOrderedEnumerable.html" title="type parameter in ExtendedOrderedEnumerable">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ExtendedOrderedEnumerable.</span><code><span class="memberNameLink"><a href="../../ExtendedOrderedEnumerable.html#thenByDescending(org.apache.calcite.linq4j.function.Function1,java.util.Comparator)">thenByDescending</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedOrderedEnumerable.html" title="type parameter in ExtendedOrderedEnumerable">T</a>,&#8203;TKey&gt;&nbsp;keySelector,
                 java.util.Comparator&lt;TKey&gt;&nbsp;comparator)</code></th>
@@ -1569,31 +1666,31 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  descending order according to a key, using a specified comparator.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>&lt;TKey&gt;&nbsp;<a href="../../Lookup.html" title="interface in org.apache.calcite.linq4j">Lookup</a>&lt;TKey,&#8203;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">DefaultEnumerable.</span><code><span class="memberNameLink"><a href="../../DefaultEnumerable.html#toLookup(org.apache.calcite.linq4j.function.Function1)">toLookup</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TKey&gt;&nbsp;keySelector)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>&lt;TKey&gt;&nbsp;<a href="../../Lookup.html" title="interface in org.apache.calcite.linq4j">Lookup</a>&lt;TKey,&#8203;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">DefaultEnumerable.</span><code><span class="memberNameLink"><a href="../../DefaultEnumerable.html#toLookup(org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.EqualityComparer)">toLookup</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TKey&gt;&nbsp;keySelector,
         <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>&lt;TKey,&#8203;TElement&gt;<br><a href="../../Lookup.html" title="interface in org.apache.calcite.linq4j">Lookup</a>&lt;TKey,&#8203;TElement&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">DefaultEnumerable.</span><code><span class="memberNameLink"><a href="../../DefaultEnumerable.html#toLookup(org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1)">toLookup</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TKey&gt;&nbsp;keySelector,
         <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TElement&gt;&nbsp;elementSelector)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>&lt;TKey,&#8203;TElement&gt;<br><a href="../../Lookup.html" title="interface in org.apache.calcite.linq4j">Lookup</a>&lt;TKey,&#8203;TElement&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">DefaultEnumerable.</span><code><span class="memberNameLink"><a href="../../DefaultEnumerable.html#toLookup(org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.EqualityComparer)">toLookup</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TKey&gt;&nbsp;keySelector,
         <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TElement&gt;&nbsp;elementSelector,
         <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static &lt;TSource,&#8203;TKey&gt;<br><a href="../../Lookup.html" title="interface in org.apache.calcite.linq4j">Lookup</a>&lt;TKey,&#8203;TSource&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#toLookup(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1)">toLookup</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;source,
         <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;keySelector)</code></th>
@@ -1603,7 +1700,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  function.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static &lt;TSource,&#8203;TKey&gt;<br><a href="../../Lookup.html" title="interface in org.apache.calcite.linq4j">Lookup</a>&lt;TKey,&#8203;TSource&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#toLookup(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.EqualityComparer)">toLookup</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;source,
         <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;keySelector,
@@ -1614,7 +1711,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  and key comparer.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static &lt;TSource,&#8203;TKey,&#8203;TElement&gt;<br><a href="../../Lookup.html" title="interface in org.apache.calcite.linq4j">Lookup</a>&lt;TKey,&#8203;TElement&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#toLookup(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1)">toLookup</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;source,
         <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;keySelector,
@@ -1625,7 +1722,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  selector functions.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static &lt;TSource,&#8203;TKey,&#8203;TElement&gt;<br><a href="../../Lookup.html" title="interface in org.apache.calcite.linq4j">Lookup</a>&lt;TKey,&#8203;TElement&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#toLookup(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.EqualityComparer)">toLookup</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;source,
         <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;keySelector,
@@ -1637,7 +1734,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  a comparer and an element selector function.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>&lt;TKey&gt;&nbsp;<a href="../../Lookup.html" title="interface in org.apache.calcite.linq4j">Lookup</a>&lt;TKey,&#8203;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ExtendedEnumerable.</span><code><span class="memberNameLink"><a href="../../ExtendedEnumerable.html#toLookup(org.apache.calcite.linq4j.function.Function1)">toLookup</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TKey&gt;&nbsp;keySelector)</code></th>
 <td class="colLast">
@@ -1646,7 +1743,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  function.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>&lt;TKey&gt;&nbsp;<a href="../../Lookup.html" title="interface in org.apache.calcite.linq4j">Lookup</a>&lt;TKey,&#8203;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ExtendedEnumerable.</span><code><span class="memberNameLink"><a href="../../ExtendedEnumerable.html#toLookup(org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.EqualityComparer)">toLookup</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TKey&gt;&nbsp;keySelector,
         <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer)</code></th>
@@ -1656,7 +1753,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  and key comparer.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>&lt;TKey,&#8203;TElement&gt;<br><a href="../../Lookup.html" title="interface in org.apache.calcite.linq4j">Lookup</a>&lt;TKey,&#8203;TElement&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ExtendedEnumerable.</span><code><span class="memberNameLink"><a href="../../ExtendedEnumerable.html#toLookup(org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1)">toLookup</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TKey&gt;&nbsp;keySelector,
         <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TElement&gt;&nbsp;elementSelector)</code></th>
@@ -1666,7 +1763,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  selector functions.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>&lt;TKey,&#8203;TElement&gt;<br><a href="../../Lookup.html" title="interface in org.apache.calcite.linq4j">Lookup</a>&lt;TKey,&#8203;TElement&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ExtendedEnumerable.</span><code><span class="memberNameLink"><a href="../../ExtendedEnumerable.html#toLookup(org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.EqualityComparer)">toLookup</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TKey&gt;&nbsp;keySelector,
         <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TElement&gt;&nbsp;elementSelector,
@@ -1677,7 +1774,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  a comparer and an element selector function.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>(package private) static &lt;TSource,&#8203;TKey,&#8203;TElement&gt;<br><a href="../../LookupImpl.html" title="class in org.apache.calcite.linq4j">LookupImpl</a>&lt;TKey,&#8203;TElement&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#toLookup_(java.util.Map,org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1)">toLookup_</a></span>&#8203;(java.util.Map&lt;TKey,&#8203;java.util.List&lt;TElement&gt;&gt;&nbsp;map,
          <a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;source,
@@ -1685,31 +1782,31 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
          <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TElement&gt;&nbsp;elementSelector)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>&lt;TKey&gt;&nbsp;java.util.Map&lt;TKey,&#8203;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">DefaultEnumerable.</span><code><span class="memberNameLink"><a href="../../DefaultEnumerable.html#toMap(org.apache.calcite.linq4j.function.Function1)">toMap</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TKey&gt;&nbsp;keySelector)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>&lt;TKey&gt;&nbsp;java.util.Map&lt;TKey,&#8203;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">DefaultEnumerable.</span><code><span class="memberNameLink"><a href="../../DefaultEnumerable.html#toMap(org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.EqualityComparer)">toMap</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TKey&gt;&nbsp;keySelector,
      <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>&lt;TKey,&#8203;TElement&gt;<br>java.util.Map&lt;TKey,&#8203;TElement&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">DefaultEnumerable.</span><code><span class="memberNameLink"><a href="../../DefaultEnumerable.html#toMap(org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1)">toMap</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TKey&gt;&nbsp;keySelector,
      <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TElement&gt;&nbsp;elementSelector)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>&lt;TKey,&#8203;TElement&gt;<br>java.util.Map&lt;TKey,&#8203;TElement&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">DefaultEnumerable.</span><code><span class="memberNameLink"><a href="../../DefaultEnumerable.html#toMap(org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.EqualityComparer)">toMap</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TKey&gt;&nbsp;keySelector,
      <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../DefaultEnumerable.html" title="type parameter in DefaultEnumerable">T</a>,&#8203;TElement&gt;&nbsp;elementSelector,
      <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static &lt;TSource,&#8203;TKey&gt;<br>java.util.Map&lt;TKey,&#8203;TSource&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#toMap(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1)">toMap</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;source,
      <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;keySelector)</code></th>
@@ -1719,7 +1816,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  function.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static &lt;TSource,&#8203;TKey&gt;<br>java.util.Map&lt;TKey,&#8203;TSource&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#toMap(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.EqualityComparer)">toMap</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;source,
      <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;keySelector,
@@ -1730,7 +1827,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  and key comparer.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static &lt;TSource,&#8203;TKey,&#8203;TElement&gt;<br>java.util.Map&lt;TKey,&#8203;TElement&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#toMap(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1)">toMap</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;source,
      <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;keySelector,
@@ -1741,7 +1838,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  selector functions.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static &lt;TSource,&#8203;TKey,&#8203;TElement&gt;<br>java.util.Map&lt;TKey,&#8203;TElement&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">EnumerableDefaults.</span><code><span class="memberNameLink"><a href="../../EnumerableDefaults.html#toMap(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.EqualityComparer)">toMap</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TSource&gt;&nbsp;source,
      <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;TSource,&#8203;TKey&gt;&nbsp;keySelector,
@@ -1753,7 +1850,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  a comparer, and an element selector function.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>&lt;TKey&gt;&nbsp;java.util.Map&lt;TKey,&#8203;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ExtendedEnumerable.</span><code><span class="memberNameLink"><a href="../../ExtendedEnumerable.html#toMap(org.apache.calcite.linq4j.function.Function1)">toMap</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TKey&gt;&nbsp;keySelector)</code></th>
 <td class="colLast">
@@ -1762,7 +1859,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  function.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>&lt;TKey&gt;&nbsp;java.util.Map&lt;TKey,&#8203;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ExtendedEnumerable.</span><code><span class="memberNameLink"><a href="../../ExtendedEnumerable.html#toMap(org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.EqualityComparer)">toMap</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TKey&gt;&nbsp;keySelector,
      <a href="../EqualityComparer.html" title="interface in org.apache.calcite.linq4j.function">EqualityComparer</a>&lt;TKey&gt;&nbsp;comparer)</code></th>
@@ -1772,7 +1869,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  and key comparer.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>&lt;TKey,&#8203;TElement&gt;<br>java.util.Map&lt;TKey,&#8203;TElement&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ExtendedEnumerable.</span><code><span class="memberNameLink"><a href="../../ExtendedEnumerable.html#toMap(org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1)">toMap</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TKey&gt;&nbsp;keySelector,
      <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TElement&gt;&nbsp;elementSelector)</code></th>
@@ -1782,7 +1879,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  selector functions.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>&lt;TKey,&#8203;TElement&gt;<br>java.util.Map&lt;TKey,&#8203;TElement&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ExtendedEnumerable.</span><code><span class="memberNameLink"><a href="../../ExtendedEnumerable.html#toMap(org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.linq4j.function.EqualityComparer)">toMap</a></span>&#8203;(<a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TKey&gt;&nbsp;keySelector,
      <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;<a href="../../ExtendedEnumerable.html" title="type parameter in ExtendedEnumerable">TSource</a>,&#8203;TElement&gt;&nbsp;elementSelector,
@@ -1793,7 +1890,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  a comparer, and an element selector function.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static &lt;F,&#8203;E&gt;<br><a href="../../Enumerator.html" title="interface in org.apache.calcite.linq4j">Enumerator</a>&lt;E&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">Linq4j.</span><code><span class="memberNameLink"><a href="../../Linq4j.html#transform(org.apache.calcite.linq4j.Enumerator,org.apache.calcite.linq4j.function.Function1)">transform</a></span>&#8203;(<a href="../../Enumerator.html" title="interface in org.apache.calcite.linq4j">Enumerator</a>&lt;F&gt;&nbsp;enumerator,
          <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;F,&#8203;E&gt;&nbsp;func)</code></th>
@@ -3833,6 +3930,16 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>static &lt;E,&#8203;TKey,&#8203;TResult&gt;<br><a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;TResult&gt;</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">Enumerables.</span><code><span class="memberNameLink"><a href="../../../runtime/Enumerables.html#match(org.apache.calcite.linq4j.Enumerable,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.runtime.Matcher,org.apache.calcite.runtime.Enumerables.Emitter,int,int)">match</a></span>&#8203;(<a href="../../Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;E&gt;&nbsp;enumerable,
+     <a href="../Function1.html" title="interface in org.apache.calcite.linq4j.function">Function1</a>&lt;E,&#8203;TKey&gt;&nbsp;keySelector,
+     <a href="../../../runtime/Matcher.html" title="class in org.apache.calcite.runtime">Matcher</a>&lt;E&gt;&nbsp;matcher,
+     <a href="../../../runtime/Enumerables.Emitter.html" title="interface in org.apache.calcite.runtime">Enumerables.Emitter</a>&lt;E,&#8203;TResult&gt;&nbsp;emitter,
+     int&nbsp;history,
+     int&nbsp;future)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../runtime/ResultSetEnumerable.html" title="class in org.apache.calcite.runtime">ResultSetEnumerable</a>&lt;T&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ResultSetEnumerable.</span><code><span class="memberNameLink"><a href="../../../runtime/ResultSetEnumerable.html#of(javax.sql.DataSource,java.lang.String,org.apache.calcite.linq4j.function.Function1)">of</a></span>&#8203;(javax.sql.DataSource&nbsp;dataSource,
   java.lang.String&nbsp;sql,
@@ -3842,7 +3949,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  row builder to convert JDBC column values into rows.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../runtime/ResultSetEnumerable.html" title="class in org.apache.calcite.runtime">ResultSetEnumerable</a>&lt;T&gt;</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ResultSetEnumerable.</span><code><span class="memberNameLink"><a href="../../../runtime/ResultSetEnumerable.html#of(javax.sql.DataSource,java.lang.String,org.apache.calcite.linq4j.function.Function1,org.apache.calcite.runtime.ResultSetEnumerable.PreparedStatementEnricher)">of</a></span>&#8203;(javax.sql.DataSource&nbsp;dataSource,
   java.lang.String&nbsp;sql,
@@ -3853,7 +3960,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  row builder to convert JDBC column values into rows.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static &lt;T,&#8203;K&gt;<br>int</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">BinarySearch.</span><code><span class="memberNameLink"><a href="../../../runtime/BinarySearch.html#upperBound(T%5B%5D,K,int,int,org.apache.calcite.linq4j.function.Function1,java.util.Comparator)">upperBound</a></span>&#8203;(T[]&nbsp;a,
           K&nbsp;key,
@@ -3867,7 +3974,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  Adapted to find upper bound.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static &lt;T,&#8203;K&gt;<br>int</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">BinarySearch.</span><code><span class="memberNameLink"><a href="../../../runtime/BinarySearch.html#upperBound(T%5B%5D,K,org.apache.calcite.linq4j.function.Function1,java.util.Comparator)">upperBound</a></span>&#8203;(T[]&nbsp;a,
           K&nbsp;key,

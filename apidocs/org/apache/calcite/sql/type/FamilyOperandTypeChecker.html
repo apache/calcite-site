@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -133,12 +133,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a></code>, <code><a href="SqlSingleOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlSingleOperandTypeChecker</a></code></dd>
+<dd><code><a href="ImplicitCastOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">ImplicitCastOperandTypeChecker</a></code>, <code><a href="SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a></code>, <code><a href="SqlSingleOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlSingleOperandTypeChecker</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">FamilyOperandTypeChecker</span>
 extends java.lang.Object
-implements <a href="SqlSingleOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlSingleOperandTypeChecker</a></pre>
+implements <a href="SqlSingleOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlSingleOperandTypeChecker</a>, <a href="ImplicitCastOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">ImplicitCastOperandTypeChecker</a></pre>
 <div class="block">Operand type-checking strategy which checks operands for inclusion in type
  families.</div>
 </li>
@@ -240,6 +240,14 @@ implements <a href="SqlSingleOperandTypeChecker.html" title="interface in org.ap
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#checkOperandTypesWithoutTypeCoercion(org.apache.calcite.sql.SqlCallBinding,boolean)">checkOperandTypesWithoutTypeCoercion</a></span>&#8203;(<a href="../SqlCallBinding.html" title="class in org.apache.calcite.sql">SqlCallBinding</a>&nbsp;callBinding,
+                                    boolean&nbsp;throwOnFailure)</code></th>
+<td class="colLast">
+<div class="block">Checks the types of an operator's all operands, but without type coercion.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#checkSingleOperandType(org.apache.calcite.sql.SqlCallBinding,org.apache.calcite.sql.SqlNode,int,boolean)">checkSingleOperandType</a></span>&#8203;(<a href="../SqlCallBinding.html" title="class in org.apache.calcite.sql">SqlCallBinding</a>&nbsp;callBinding,
                       <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
                       int&nbsp;iFormalOperand,
@@ -249,7 +257,7 @@ implements <a href="SqlSingleOperandTypeChecker.html" title="interface in org.ap
  within a formal operator signature.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getAllowedSignatures(org.apache.calcite.sql.SqlOperator,java.lang.String)">getAllowedSignatures</a></span>&#8203;(<a href="../SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>&nbsp;op,
                     java.lang.String&nbsp;opName)</code></th>
@@ -257,19 +265,26 @@ implements <a href="SqlSingleOperandTypeChecker.html" title="interface in org.ap
 <div class="block">Returns a string describing the allowed formal signatures of a call, e.g.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="SqlOperandTypeChecker.Consistency.html" title="enum in org.apache.calcite.sql.type">SqlOperandTypeChecker.Consistency</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getConsistency()">getConsistency</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the strategy for making the arguments have consistency types.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../SqlOperandCountRange.html" title="interface in org.apache.calcite.sql">SqlOperandCountRange</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getOperandCountRange()">getOperandCountRange</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
+<td class="colFirst"><code><a href="SqlTypeFamily.html" title="enum in org.apache.calcite.sql.type">SqlTypeFamily</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getOperandSqlTypeFamily(int)">getOperandSqlTypeFamily</a></span>&#8203;(int&nbsp;iFormalOperand)</code></th>
+<td class="colLast">
+<div class="block">Get the operand SqlTypeFamily of formal index <code>iFormalOperand</code>.</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isOptional(int)">isOptional</a></span>&#8203;(int&nbsp;i)</code></th>
 <td class="colLast">
@@ -426,6 +441,52 @@ implements <a href="SqlSingleOperandTypeChecker.html" title="interface in org.ap
                        (otherwise returns false in that case)</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>whether check succeeded</dd>
+</dl>
+</li>
+</ul>
+<a id="checkOperandTypesWithoutTypeCoercion(org.apache.calcite.sql.SqlCallBinding,boolean)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>checkOperandTypesWithoutTypeCoercion</h4>
+<pre class="methodSignature">public&nbsp;boolean&nbsp;checkOperandTypesWithoutTypeCoercion&#8203;(<a href="../SqlCallBinding.html" title="class in org.apache.calcite.sql">SqlCallBinding</a>&nbsp;callBinding,
+                                                    boolean&nbsp;throwOnFailure)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="ImplicitCastOperandTypeChecker.html#checkOperandTypesWithoutTypeCoercion(org.apache.calcite.sql.SqlCallBinding,boolean)">ImplicitCastOperandTypeChecker</a></code></span></div>
+<div class="block">Checks the types of an operator's all operands, but without type coercion.
+ This is mainly used as a pre-check when this checker is included as one of the rules in
+ <a href="CompositeOperandTypeChecker.html" title="class in org.apache.calcite.sql.type"><code>CompositeOperandTypeChecker</code></a> and the composite predicate is `OR`.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="ImplicitCastOperandTypeChecker.html#checkOperandTypesWithoutTypeCoercion(org.apache.calcite.sql.SqlCallBinding,boolean)">checkOperandTypesWithoutTypeCoercion</a></code>&nbsp;in interface&nbsp;<code><a href="ImplicitCastOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">ImplicitCastOperandTypeChecker</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>callBinding</code> - description of the call to be checked</dd>
+<dd><code>throwOnFailure</code> - whether to throw an exception if check fails
+                       (otherwise returns false in that case)</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>whether check succeeded</dd>
+</dl>
+</li>
+</ul>
+<a id="getOperandSqlTypeFamily(int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getOperandSqlTypeFamily</h4>
+<pre class="methodSignature">public&nbsp;<a href="SqlTypeFamily.html" title="enum in org.apache.calcite.sql.type">SqlTypeFamily</a>&nbsp;getOperandSqlTypeFamily&#8203;(int&nbsp;iFormalOperand)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="ImplicitCastOperandTypeChecker.html#getOperandSqlTypeFamily(int)">ImplicitCastOperandTypeChecker</a></code></span></div>
+<div class="block">Get the operand SqlTypeFamily of formal index <code>iFormalOperand</code>.
+ This is mainly used to get the operand SqlTypeFamily when this checker is included as
+ one of the rules in <a href="CompositeOperandTypeChecker.html" title="class in org.apache.calcite.sql.type"><code>CompositeOperandTypeChecker</code></a> and the
+ composite predicate is `SEQUENCE`.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="ImplicitCastOperandTypeChecker.html#getOperandSqlTypeFamily(int)">getOperandSqlTypeFamily</a></code>&nbsp;in interface&nbsp;<code><a href="ImplicitCastOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">ImplicitCastOperandTypeChecker</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>iFormalOperand</code> - the formal operand index.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>SqlTypeFamily of the operand.</dd>
 </dl>
 </li>
 </ul>

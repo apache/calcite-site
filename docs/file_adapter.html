@@ -313,6 +313,53 @@ sqlline&gt; <span class="k">select </span>distinct deptno from depts<span class=
 +--------+
 3 rows selected <span class="o">(</span>0.985 seconds<span class="o">)</span></code></pre></figure>
 
+<h2 id="json-files-and-model-free-browsing">JSON files and model-free browsing</h2>
+
+<p>Some files are describe their own schema, and for these files, we do not need a model. For example, <code class="highlighter-rouge">DEPTS.json</code> has an integer <code class="highlighter-rouge">DEPTNO</code> column and a string <code class="highlighter-rouge">NAME</code> column:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"DEPTNO"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"NAME"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sales"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"DEPTNO"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"NAME"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Marketing"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"DEPTNO"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"NAME"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Accounts"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span></code></pre></figure>
+
+<p>You can launch <code class="highlighter-rouge">sqlline</code>, and pointing the file adapter that directory,
+and every JSON file becomes a table:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">ls </span>file/src/test/resources/sales-json
+ <span class="nt">-rw-r--r--</span> 1 jhyde jhyde  62 Mar 15 10:16 DEPTS.json
+
+<span class="nv">$ </span>./sqlline <span class="nt">-u</span> <span class="s2">"jdbc:calcite:schemaFactory=org.apache.calcite.adapter.file.FileSchemaFactory;schema.directory=file/src/test/resources/sales-json"</span>
+sqlline&gt; <span class="o">!</span>tables
++-----------+-------------+------------+------------+
+| TABLE_CAT | TABLE_SCHEM | TABLE_NAME | TABLE_TYPE |
++-----------+-------------+------------+------------+
+|           | adhoc       | DATE       | TABLE      |
+|           | adhoc       | DEPTS      | TABLE      |
+|           | adhoc       | EMPS       | TABLE      |
+|           | adhoc       | EMPTY      | TABLE      |
+|           | adhoc       | SDEPTS     | TABLE      |
++-----------+-------------+------------+------------+
+
+sqlline&gt; <span class="k">select </span>distinct deptno from depts<span class="p">;</span>
++--------+
+| DEPTNO |
++--------+
+| 20     |
+| 10     |
+| 30     |
++--------+
+3 rows selected <span class="o">(</span>0.985 seconds<span class="o">)</span></code></pre></figure>
+
 <h2 id="future-improvements">Future improvements</h2>
 
 <p>We are continuing to enhance the adapter, and would welcome

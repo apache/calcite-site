@@ -572,6 +572,24 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
  aggregates.</div>
 </td>
 </tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="../../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">RelOptUtil.</span><code><span class="memberNameLink"><a href="../../../plan/RelOptUtil.html#splitCorrelatedFilterCondition(org.apache.calcite.rel.core.Filter,java.util.List,java.util.List,boolean)">splitCorrelatedFilterCondition</a></span>&#8203;(<a href="../Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;filter,
+                              java.util.List&lt;<a href="../../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;joinKeys,
+                              java.util.List&lt;<a href="../../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;correlatedJoinKeys,
+                              boolean&nbsp;extractCorrelatedFieldAccess)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>private static void</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">RelOptUtil.</span><code><span class="memberNameLink"><a href="../../../plan/RelOptUtil.html#splitCorrelatedFilterCondition(org.apache.calcite.rel.core.Filter,org.apache.calcite.rex.RexNode,java.util.List,java.util.List,java.util.List,boolean)">splitCorrelatedFilterCondition</a></span>&#8203;(<a href="../Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;filter,
+                              <a href="../../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition,
+                              java.util.List&lt;<a href="../../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;joinKeys,
+                              java.util.List&lt;<a href="../../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;correlatedJoinKeys,
+                              java.util.List&lt;<a href="../../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nonEquiList,
+                              boolean&nbsp;extractCorrelatedFieldAccess)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -837,13 +855,21 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>private java.util.List&lt;<a href="../../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">FilterJoinRule.</span><code><span class="memberNameLink"><a href="../../rules/FilterJoinRule.html#getConjunctions(org.apache.calcite.rel.core.Filter)">getConjunctions</a></span>&#8203;(<a href="../Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;filter)</code></th>
+<td class="colLast">
+<div class="block">Get conjunctions of filter's condition but with collapsed
+ <code>IS NOT DISTINCT FROM</code> expressions if needed.</div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">FilterJoinRule.</span><code><span class="memberNameLink"><a href="../../rules/FilterJoinRule.html#perform(org.apache.calcite.plan.RelOptRuleCall,org.apache.calcite.rel.core.Filter,org.apache.calcite.rel.core.Join)">perform</a></span>&#8203;(<a href="../../../plan/RelOptRuleCall.html" title="class in org.apache.calcite.plan">RelOptRuleCall</a>&nbsp;call,
        <a href="../Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;filter,
        <a href="../Join.html" title="class in org.apache.calcite.rel.core">Join</a>&nbsp;join)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>private void</code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">ReduceExpressionsRule.FilterReduceExpressionsRule.</span><code><span class="memberNameLink"><a href="../../rules/ReduceExpressionsRule.FilterReduceExpressionsRule.html#reduceNotNullableFilter(org.apache.calcite.plan.RelOptRuleCall,org.apache.calcite.rel.core.Filter,org.apache.calcite.rex.RexNode,boolean)">reduceNotNullableFilter</a></span>&#8203;(<a href="../../../plan/RelOptRuleCall.html" title="class in org.apache.calcite.plan">RelOptRuleCall</a>&nbsp;call,
                        <a href="../Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;filter,
@@ -974,6 +1000,22 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tbody>
+<tr class="altColor">
+<td class="colFirst"><code>private boolean</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">RelDecorrelator.</span><code><span class="memberNameLink"><a href="../../../sql2rel/RelDecorrelator.html#checkCorVars(org.apache.calcite.rel.core.Correlate,org.apache.calcite.rel.core.Project,org.apache.calcite.rel.core.Filter,java.util.List)">checkCorVars</a></span>&#8203;(<a href="../Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&nbsp;correlate,
+            <a href="../Project.html" title="class in org.apache.calcite.rel.core">Project</a>&nbsp;project,
+            <a href="../Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;filter,
+            java.util.List&lt;<a href="../../../rex/RexFieldAccess.html" title="class in org.apache.calcite.rex">RexFieldAccess</a>&gt;&nbsp;correlatedJoinKeys)</code></th>
+<td class="colLast">
+<div class="block">Checks whether the correlations in projRel and filter are related to
+ the correlated variables provided by corRel.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../sql2rel/RelDecorrelator.Frame.html" title="class in org.apache.calcite.sql2rel">RelDecorrelator.Frame</a></code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">RelDecorrelator.</span><code><span class="memberNameLink"><a href="../../../sql2rel/RelDecorrelator.html#decorrelateRel(org.apache.calcite.rel.core.Filter)">decorrelateRel</a></span>&#8203;(<a href="../Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;rel)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../sql2rel/RelFieldTrimmer.TrimResult.html" title="class in org.apache.calcite.sql2rel">RelFieldTrimmer.TrimResult</a></code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">RelFieldTrimmer.</span><code><span class="memberNameLink"><a href="../../../sql2rel/RelFieldTrimmer.html#trimFields(org.apache.calcite.rel.core.Filter,org.apache.calcite.util.ImmutableBitSet,java.util.Set)">trimFields</a></span>&#8203;(<a href="../Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;filter,

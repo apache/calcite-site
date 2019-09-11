@@ -242,20 +242,24 @@ as implemented by Avatica’s
       <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#UNQUOTED_CASING">unquotedCasing</a></td>
       <td style="text-align: left">How identifiers are stored if they are not quoted. Values are UNCHANGED, TO_UPPER, TO_LOWER. If not specified, value from <code class="highlighter-rouge">lex</code> is used.</td>
     </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#TYPE_COERCION">typeCoercion</a></td>
+      <td style="text-align: left">Whether to make implicit type coercion when type mismatch during sql node validation, default is true.</td>
+    </tr>
   </tbody>
 </table>
 
 <p>To make a connection to a single schema based on a built-in schema type, you don’t need to specify
 a model. For example,</p>
 
-<p>jdbc:calcite:schemaType=JDBC; schema.jdbcUser=SCOTT; schema.jdbcPassword=TIGER; schema.jdbcUrl=jdbc:hsqldb:res:foodmart</p>
+<p><code class="highlighter-rouge">jdbc:calcite:schemaType=JDBC; schema.jdbcUser=SCOTT; schema.jdbcPassword=TIGER; schema.jdbcUrl=jdbc:hsqldb:res:foodmart</code></p>
 
 <p>creates a connection with a schema mapped via the JDBC schema adapter to the foodmart database.</p>
 
 <p>Similarly, you can connect to a single schema based on a user-defined schema adapter.
 For example,</p>
 
-<p>jdbc:calcite:schemaFactory=org.apache.calcite.adapter.cassandra.CassandraSchemaFactory; schema.host=localhost; schema.keyspace=twissandra</p>
+<p><code class="highlighter-rouge">jdbc:calcite:schemaFactory=org.apache.calcite.adapter.cassandra.CassandraSchemaFactory; schema.host=localhost; schema.keyspace=twissandra</code></p>
 
 <p>makes a connection to the Cassandra adapter, equivalent to writing the following model file:</p>
 
@@ -296,6 +300,8 @@ adding some DDL commands:</p>
   <li><code class="highlighter-rouge">CREATE</code> and <code class="highlighter-rouge">DROP TABLE</code> (including <code class="highlighter-rouge">CREATE TABLE ... AS SELECT</code>)</li>
   <li><code class="highlighter-rouge">CREATE</code> and <code class="highlighter-rouge">DROP MATERIALIZED VIEW</code></li>
   <li><code class="highlighter-rouge">CREATE</code> and <code class="highlighter-rouge">DROP VIEW</code></li>
+  <li><code class="highlighter-rouge">CREATE</code> and <code class="highlighter-rouge">DROP FUNCTION</code></li>
+  <li><code class="highlighter-rouge">CREATE</code> and <code class="highlighter-rouge">DROP TYPE</code></li>
 </ul>
 
 <p>Commands are described in the <a href="reference.html#ddl-extensions">SQL reference</a>.</p>

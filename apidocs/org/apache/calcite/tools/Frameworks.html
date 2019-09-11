@@ -27,8 +27,8 @@
     catch(err) {
     }
 //-->
-var data = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
+var data = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":41};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -157,6 +157,14 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>static interface&nbsp;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Frameworks.BasePrepareAction.html" title="interface in org.apache.calcite.tools">Frameworks.BasePrepareAction</a>&lt;<a href="Frameworks.BasePrepareAction.html" title="type parameter in Frameworks.BasePrepareAction">R</a>&gt;</span></code></th>
+<td class="colLast">
+<div class="block">Piece of code to be run in a context where a planner and statement are
+ available.</div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>static class&nbsp;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Frameworks.ConfigBuilder.html" title="class in org.apache.calcite.tools">Frameworks.ConfigBuilder</a></span></code></th>
 <td class="colLast">
@@ -164,22 +172,21 @@ extends java.lang.Object</pre>
  where values aren't required.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static interface&nbsp;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Frameworks.PlannerAction.html" title="interface in org.apache.calcite.tools">Frameworks.PlannerAction</a>&lt;<a href="Frameworks.PlannerAction.html" title="type parameter in Frameworks.PlannerAction">R</a>&gt;</span></code></th>
 <td class="colLast">
 <div class="block">Piece of code to be run in a context where a planner is available.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static class&nbsp;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Frameworks.PrepareAction.html" title="class in org.apache.calcite.tools">Frameworks.PrepareAction</a>&lt;<a href="Frameworks.PrepareAction.html" title="type parameter in Frameworks.PrepareAction">R</a>&gt;</span></code></th>
 <td class="colLast">
-<div class="block">Piece of code to be run in a context where a planner and statement are
- available.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>(package private) static class&nbsp;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Frameworks.StdFrameworkConfig.html" title="class in org.apache.calcite.tools">Frameworks.StdFrameworkConfig</a></span></code></th>
 <td class="colLast">
@@ -222,7 +229,7 @@ extends java.lang.Object</pre>
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colSecond" scope="col">Method</th>
@@ -275,10 +282,26 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>static &lt;R&gt;&nbsp;R</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withPrepare(org.apache.calcite.tools.Frameworks.PrepareAction)">withPrepare</a></span>&#8203;(<a href="Frameworks.PrepareAction.html" title="class in org.apache.calcite.tools">Frameworks.PrepareAction</a>&lt;R&gt;&nbsp;action)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withPrepare(org.apache.calcite.tools.FrameworkConfig,org.apache.calcite.tools.Frameworks.BasePrepareAction)">withPrepare</a></span>&#8203;(<a href="FrameworkConfig.html" title="interface in org.apache.calcite.tools">FrameworkConfig</a>&nbsp;config,
+           <a href="Frameworks.BasePrepareAction.html" title="interface in org.apache.calcite.tools">Frameworks.BasePrepareAction</a>&lt;R&gt;&nbsp;action)</code></th>
 <td class="colLast">
 <div class="block">Initializes a container then calls user-specified code with a planner
  and statement.</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>static &lt;R&gt;&nbsp;R</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withPrepare(org.apache.calcite.tools.Frameworks.BasePrepareAction)">withPrepare</a></span>&#8203;(<a href="Frameworks.BasePrepareAction.html" title="interface in org.apache.calcite.tools">Frameworks.BasePrepareAction</a>&lt;R&gt;&nbsp;action)</code></th>
+<td class="colLast">
+<div class="block">As <a href="#withPrepare(org.apache.calcite.tools.FrameworkConfig,org.apache.calcite.tools.Frameworks.BasePrepareAction)"><code>withPrepare(FrameworkConfig, BasePrepareAction)</code></a> but using a
+ default configuration.</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>static &lt;R&gt;&nbsp;R</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withPrepare(org.apache.calcite.tools.Frameworks.PrepareAction)">withPrepare</a></span>&#8203;(<a href="Frameworks.PrepareAction.html" title="class in org.apache.calcite.tools">Frameworks.PrepareAction</a>&lt;R&gt;&nbsp;action)</code></th>
+<td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 </td>
 </tr>
 </table>
@@ -380,7 +403,30 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>withPrepare</h4>
-<pre class="methodSignature">public static&nbsp;&lt;R&gt;&nbsp;R&nbsp;withPrepare&#8203;(<a href="Frameworks.PrepareAction.html" title="class in org.apache.calcite.tools">Frameworks.PrepareAction</a>&lt;R&gt;&nbsp;action)</pre>
+<pre class="methodSignature">@Deprecated
+public static&nbsp;&lt;R&gt;&nbsp;R&nbsp;withPrepare&#8203;(<a href="Frameworks.PrepareAction.html" title="class in org.apache.calcite.tools">Frameworks.PrepareAction</a>&lt;R&gt;&nbsp;action)</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
+</li>
+</ul>
+<a id="withPrepare(org.apache.calcite.tools.Frameworks.BasePrepareAction)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withPrepare</h4>
+<pre class="methodSignature">public static&nbsp;&lt;R&gt;&nbsp;R&nbsp;withPrepare&#8203;(<a href="Frameworks.BasePrepareAction.html" title="interface in org.apache.calcite.tools">Frameworks.BasePrepareAction</a>&lt;R&gt;&nbsp;action)</pre>
+<div class="block">As <a href="#withPrepare(org.apache.calcite.tools.FrameworkConfig,org.apache.calcite.tools.Frameworks.BasePrepareAction)"><code>withPrepare(FrameworkConfig, BasePrepareAction)</code></a> but using a
+ default configuration.</div>
+</li>
+</ul>
+<a id="withPrepare(org.apache.calcite.tools.FrameworkConfig,org.apache.calcite.tools.Frameworks.BasePrepareAction)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withPrepare</h4>
+<pre class="methodSignature">public static&nbsp;&lt;R&gt;&nbsp;R&nbsp;withPrepare&#8203;(<a href="FrameworkConfig.html" title="interface in org.apache.calcite.tools">FrameworkConfig</a>&nbsp;config,
+                                <a href="Frameworks.BasePrepareAction.html" title="interface in org.apache.calcite.tools">Frameworks.BasePrepareAction</a>&lt;R&gt;&nbsp;action)</pre>
 <div class="block">Initializes a container then calls user-specified code with a planner
  and statement.</div>
 <dl>

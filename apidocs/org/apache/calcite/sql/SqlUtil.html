@@ -259,10 +259,11 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>private static java.util.Iterator&lt;<a href="SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#filterRoutinesByParameterType(org.apache.calcite.sql.SqlSyntax,java.util.Iterator,java.util.List,java.util.List)">filterRoutinesByParameterType</a></span>&#8203;(<a href="SqlSyntax.html" title="enum in org.apache.calcite.sql">SqlSyntax</a>&nbsp;syntax,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#filterRoutinesByParameterType(org.apache.calcite.sql.SqlSyntax,java.util.Iterator,java.util.List,java.util.List,boolean)">filterRoutinesByParameterType</a></span>&#8203;(<a href="SqlSyntax.html" title="enum in org.apache.calcite.sql">SqlSyntax</a>&nbsp;syntax,
                              java.util.Iterator&lt;<a href="SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>&gt;&nbsp;routines,
                              java.util.List&lt;<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;argTypes,
-                             java.util.List&lt;java.lang.String&gt;&nbsp;argNames)</code></th>
+                             java.util.List&lt;java.lang.String&gt;&nbsp;argNames,
+                             boolean&nbsp;coerce)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
@@ -384,14 +385,15 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i23" class="rowColor">
 <td class="colFirst"><code>static <a href="SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#lookupRoutine(org.apache.calcite.sql.SqlOperatorTable,org.apache.calcite.sql.SqlIdentifier,java.util.List,java.util.List,org.apache.calcite.sql.SqlFunctionCategory,org.apache.calcite.sql.SqlSyntax,org.apache.calcite.sql.SqlKind,org.apache.calcite.sql.validate.SqlNameMatcher)">lookupRoutine</a></span>&#8203;(<a href="SqlOperatorTable.html" title="interface in org.apache.calcite.sql">SqlOperatorTable</a>&nbsp;opTab,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#lookupRoutine(org.apache.calcite.sql.SqlOperatorTable,org.apache.calcite.sql.SqlIdentifier,java.util.List,java.util.List,org.apache.calcite.sql.SqlFunctionCategory,org.apache.calcite.sql.SqlSyntax,org.apache.calcite.sql.SqlKind,org.apache.calcite.sql.validate.SqlNameMatcher,boolean)">lookupRoutine</a></span>&#8203;(<a href="SqlOperatorTable.html" title="interface in org.apache.calcite.sql">SqlOperatorTable</a>&nbsp;opTab,
              <a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;funcName,
              java.util.List&lt;<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;argTypes,
              java.util.List&lt;java.lang.String&gt;&nbsp;argNames,
              <a href="SqlFunctionCategory.html" title="enum in org.apache.calcite.sql">SqlFunctionCategory</a>&nbsp;category,
              <a href="SqlSyntax.html" title="enum in org.apache.calcite.sql">SqlSyntax</a>&nbsp;syntax,
              <a href="SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&nbsp;sqlKind,
-             <a href="validate/SqlNameMatcher.html" title="interface in org.apache.calcite.sql.validate">SqlNameMatcher</a>&nbsp;nameMatcher)</code></th>
+             <a href="validate/SqlNameMatcher.html" title="interface in org.apache.calcite.sql.validate">SqlNameMatcher</a>&nbsp;nameMatcher,
+             boolean&nbsp;coerce)</code></th>
 <td class="colLast">
 <div class="block">Looks up a (possibly overloaded) routine based on name and argument
  types.</div>
@@ -399,14 +401,15 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i24" class="altColor">
 <td class="colFirst"><code>static java.util.Iterator&lt;<a href="SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#lookupSubjectRoutines(org.apache.calcite.sql.SqlOperatorTable,org.apache.calcite.sql.SqlIdentifier,java.util.List,java.util.List,org.apache.calcite.sql.SqlSyntax,org.apache.calcite.sql.SqlKind,org.apache.calcite.sql.SqlFunctionCategory,org.apache.calcite.sql.validate.SqlNameMatcher)">lookupSubjectRoutines</a></span>&#8203;(<a href="SqlOperatorTable.html" title="interface in org.apache.calcite.sql">SqlOperatorTable</a>&nbsp;opTab,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#lookupSubjectRoutines(org.apache.calcite.sql.SqlOperatorTable,org.apache.calcite.sql.SqlIdentifier,java.util.List,java.util.List,org.apache.calcite.sql.SqlSyntax,org.apache.calcite.sql.SqlKind,org.apache.calcite.sql.SqlFunctionCategory,org.apache.calcite.sql.validate.SqlNameMatcher,boolean)">lookupSubjectRoutines</a></span>&#8203;(<a href="SqlOperatorTable.html" title="interface in org.apache.calcite.sql">SqlOperatorTable</a>&nbsp;opTab,
                      <a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;funcName,
                      java.util.List&lt;<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;argTypes,
                      java.util.List&lt;java.lang.String&gt;&nbsp;argNames,
                      <a href="SqlSyntax.html" title="enum in org.apache.calcite.sql">SqlSyntax</a>&nbsp;sqlSyntax,
                      <a href="SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&nbsp;sqlKind,
                      <a href="SqlFunctionCategory.html" title="enum in org.apache.calcite.sql">SqlFunctionCategory</a>&nbsp;category,
-                     <a href="validate/SqlNameMatcher.html" title="interface in org.apache.calcite.sql.validate">SqlNameMatcher</a>&nbsp;nameMatcher)</code></th>
+                     <a href="validate/SqlNameMatcher.html" title="interface in org.apache.calcite.sql.validate">SqlNameMatcher</a>&nbsp;nameMatcher,
+                     boolean&nbsp;coerce)</code></th>
 <td class="colLast">
 <div class="block">Looks up all subject routines matching the given name and argument types.</div>
 </td>
@@ -782,7 +785,7 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a id="lookupRoutine(org.apache.calcite.sql.SqlOperatorTable,org.apache.calcite.sql.SqlIdentifier,java.util.List,java.util.List,org.apache.calcite.sql.SqlFunctionCategory,org.apache.calcite.sql.SqlSyntax,org.apache.calcite.sql.SqlKind,org.apache.calcite.sql.validate.SqlNameMatcher)">
+<a id="lookupRoutine(org.apache.calcite.sql.SqlOperatorTable,org.apache.calcite.sql.SqlIdentifier,java.util.List,java.util.List,org.apache.calcite.sql.SqlFunctionCategory,org.apache.calcite.sql.SqlSyntax,org.apache.calcite.sql.SqlKind,org.apache.calcite.sql.validate.SqlNameMatcher,boolean)">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -795,7 +798,8 @@ extends java.lang.Object</pre>
                                         <a href="SqlFunctionCategory.html" title="enum in org.apache.calcite.sql">SqlFunctionCategory</a>&nbsp;category,
                                         <a href="SqlSyntax.html" title="enum in org.apache.calcite.sql">SqlSyntax</a>&nbsp;syntax,
                                         <a href="SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&nbsp;sqlKind,
-                                        <a href="validate/SqlNameMatcher.html" title="interface in org.apache.calcite.sql.validate">SqlNameMatcher</a>&nbsp;nameMatcher)</pre>
+                                        <a href="validate/SqlNameMatcher.html" title="interface in org.apache.calcite.sql.validate">SqlNameMatcher</a>&nbsp;nameMatcher,
+                                        boolean&nbsp;coerce)</pre>
 <div class="block">Looks up a (possibly overloaded) routine based on name and argument
  types.</div>
 <dl>
@@ -807,6 +811,8 @@ extends java.lang.Object</pre>
 <dd><code>category</code> - whether a function or a procedure. (If a procedure is
                       being invoked, the overload rules are simpler.)</dd>
 <dd><code>nameMatcher</code> - Whether to look up the function case-sensitively</dd>
+<dd><code>coerce</code> - Whether to allow type coercion when do filter routines
+                      by parameter types</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>matching routine, or null if none found</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
@@ -824,7 +830,7 @@ extends java.lang.Object</pre>
                                                                             <a href="SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&nbsp;sqlKind)</pre>
 </li>
 </ul>
-<a id="lookupSubjectRoutines(org.apache.calcite.sql.SqlOperatorTable,org.apache.calcite.sql.SqlIdentifier,java.util.List,java.util.List,org.apache.calcite.sql.SqlSyntax,org.apache.calcite.sql.SqlKind,org.apache.calcite.sql.SqlFunctionCategory,org.apache.calcite.sql.validate.SqlNameMatcher)">
+<a id="lookupSubjectRoutines(org.apache.calcite.sql.SqlOperatorTable,org.apache.calcite.sql.SqlIdentifier,java.util.List,java.util.List,org.apache.calcite.sql.SqlSyntax,org.apache.calcite.sql.SqlKind,org.apache.calcite.sql.SqlFunctionCategory,org.apache.calcite.sql.validate.SqlNameMatcher,boolean)">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -837,7 +843,8 @@ extends java.lang.Object</pre>
                                                                     <a href="SqlSyntax.html" title="enum in org.apache.calcite.sql">SqlSyntax</a>&nbsp;sqlSyntax,
                                                                     <a href="SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&nbsp;sqlKind,
                                                                     <a href="SqlFunctionCategory.html" title="enum in org.apache.calcite.sql">SqlFunctionCategory</a>&nbsp;category,
-                                                                    <a href="validate/SqlNameMatcher.html" title="interface in org.apache.calcite.sql.validate">SqlNameMatcher</a>&nbsp;nameMatcher)</pre>
+                                                                    <a href="validate/SqlNameMatcher.html" title="interface in org.apache.calcite.sql.validate">SqlNameMatcher</a>&nbsp;nameMatcher,
+                                                                    boolean&nbsp;coerce)</pre>
 <div class="block">Looks up all subject routines matching the given name and argument types.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -849,6 +856,8 @@ extends java.lang.Object</pre>
 <dd><code>sqlKind</code> - the SqlKind of the SqlOperator being looked up</dd>
 <dd><code>category</code> - Category of routine to look up</dd>
 <dd><code>nameMatcher</code> - Whether to look up the function case-sensitively</dd>
+<dd><code>coerce</code> - Whether to allow type coercion when do filter routine
+                    by parameter types</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>list of matching routines</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
@@ -904,7 +913,7 @@ extends java.lang.Object</pre>
                                                                               java.util.List&lt;<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;argTypes)</pre>
 </li>
 </ul>
-<a id="filterRoutinesByParameterType(org.apache.calcite.sql.SqlSyntax,java.util.Iterator,java.util.List,java.util.List)">
+<a id="filterRoutinesByParameterType(org.apache.calcite.sql.SqlSyntax,java.util.Iterator,java.util.List,java.util.List,boolean)">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -913,7 +922,8 @@ extends java.lang.Object</pre>
 <pre class="methodSignature">private static&nbsp;java.util.Iterator&lt;<a href="SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>&gt;&nbsp;filterRoutinesByParameterType&#8203;(<a href="SqlSyntax.html" title="enum in org.apache.calcite.sql">SqlSyntax</a>&nbsp;syntax,
                                                                              java.util.Iterator&lt;<a href="SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>&gt;&nbsp;routines,
                                                                              java.util.List&lt;<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;argTypes,
-                                                                             java.util.List&lt;java.lang.String&gt;&nbsp;argNames)</pre>
+                                                                             java.util.List&lt;java.lang.String&gt;&nbsp;argNames,
+                                                                             boolean&nbsp;coerce)</pre>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../util/Glossary.html#SQL99"><code>SQL:1999 Part 2 Section 10.4 Syntax Rule 6.b.iii.2.B</code></a></dd>

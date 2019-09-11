@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10,"i31":10,"i32":10,"i33":10,"i34":10,"i35":10,"i36":10,"i37":10,"i38":10,"i39":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10,"i31":10,"i32":10,"i33":10,"i34":10,"i35":10,"i36":10,"i37":10,"i38":10,"i39":10,"i40":10,"i41":10,"i42":10,"i43":10,"i44":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -327,9 +327,10 @@ implements <a href="../util/ReflectiveVisitor.html" title="interface in org.apac
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>private int</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#calculateFlattenedOffset(org.apache.calcite.rel.type.RelDataType,int)">calculateFlattenedOffset</a></span>&#8203;(<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
-                        int&nbsp;ordinal)</code></th>
+<td class="colFirst"><code>private java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#extractName(java.util.List,java.lang.String,int)">extractName</a></span>&#8203;(java.util.List&lt;java.lang.String&gt;&nbsp;fieldNames,
+           java.lang.String&nbsp;prefix,
+           int&nbsp;i)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -366,6 +367,13 @@ implements <a href="../util/ReflectiveVisitor.html" title="interface in org.apac
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
+<td class="colFirst"><code>private void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#flattenResultTypeOfRexCall(org.apache.calcite.rex.RexNode,java.lang.String,java.util.List)">flattenResultTypeOfRexCall</a></span>&#8203;(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;newExp,
+                          java.lang.String&nbsp;fieldName,
+                          java.util.List&lt;<a href="../util/Pair.html" title="class in org.apache.calcite.util">Pair</a>&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>,&#8203;java.lang.String&gt;&gt;&nbsp;flattenedExps)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>protected <a href="../linq4j/Ord.html" title="class in org.apache.calcite.linq4j">Ord</a>&lt;<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNewFieldForOldInput(int)">getNewFieldForOldInput</a></span>&#8203;(int&nbsp;oldOrdinal)</code></th>
 <td class="colLast">
@@ -373,16 +381,16 @@ implements <a href="../util/ReflectiveVisitor.html" title="interface in org.apac
  corresponding field post-flattening, and also returns its type.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>private <a href="../linq4j/Ord.html" title="class in org.apache.calcite.linq4j">Ord</a>&lt;<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNewFieldForOldInput(int,int)">getNewFieldForOldInput</a></span>&#8203;(int&nbsp;oldOrdinal,
-                      int&nbsp;existingOffset)</code></th>
+                      int&nbsp;innerOrdinal)</code></th>
 <td class="colLast">
-<div class="block">Maps the ordinal of a field pre-flattening to the ordinal of the
- corresponding field post-flattening, and also returns its type.</div>
+<div class="block">Finds type and new ordinal relative to new inputs by oldOrdinal and
+ innerOrdinal indexes.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>protected int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNewForOldInput(int)">getNewForOldInput</a></span>&#8203;(int&nbsp;oldOrdinal)</code></th>
 <td class="colLast">
@@ -390,165 +398,191 @@ implements <a href="../util/ReflectiveVisitor.html" title="interface in org.apac
  corresponding field post-flattening.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>private <a href="../util/mapping/Mappings.TargetMapping.html" title="interface in org.apache.calcite.util.mapping">Mappings.TargetMapping</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNewForOldInputMapping(org.apache.calcite.rel.RelNode)">getNewForOldInputMapping</a></span>&#8203;(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;oldRel)</code></th>
 <td class="colLast">
 <div class="block">Returns a mapping between old and new fields.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>protected <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNewForOldRel(org.apache.calcite.rel.RelNode)">getNewForOldRel</a></span>&#8203;(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;oldRel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
+<td class="colFirst"><code>private int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNewInnerOrdinal(org.apache.calcite.rex.RexNode,java.lang.String)">getNewInnerOrdinal</a></span>&#8203;(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;firstOp,
+                  java.lang.String&nbsp;literalString)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i12" class="altColor">
+<td class="colFirst"><code>private <a href="../rel/type/RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNewInputFieldByNewOrdinal(int)">getNewInputFieldByNewOrdinal</a></span>&#8203;(int&nbsp;newOrdinal)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i13" class="rowColor">
+<td class="colFirst"><code>private int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPostFlatteningOrdinal(org.apache.calcite.rel.type.RelDataType,int)">getPostFlatteningOrdinal</a></span>&#8203;(<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;preFlattenRowType,
+                        int&nbsp;preFlattenOrdinal)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>private boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isConstructor(org.apache.calcite.rex.RexNode)">isConstructor</a></span>&#8203;(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;rexNode)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i15" class="rowColor">
+<td class="colFirst"><code>private int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#postFlattenSize(org.apache.calcite.rel.type.RelDataType)">postFlattenSize</a></span>&#8203;(<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>private <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#restructure(org.apache.calcite.rel.type.RelDataType)">restructure</a></span>&#8203;(<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;structuredType)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>private java.util.List&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#restructureFields(org.apache.calcite.rel.type.RelDataType)">restructureFields</a></span>&#8203;(<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;structuredType)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">When called with old root rowType it's known that flattened root (which may become input)
+ returns flat fields, so it simply refers flat fields by increasing index and collects them
+ back into struct constructor expressions if necessary.</div>
+</td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewrite(org.apache.calcite.rel.RelNode)">rewrite</a></span>&#8203;(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;root)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteGeneric(org.apache.calcite.rel.RelNode)">rewriteGeneric</a></span>&#8203;(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.core.Collect)">rewriteRel</a></span>&#8203;(<a href="../rel/core/Collect.html" title="class in org.apache.calcite.rel.core">Collect</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.core.Sample)">rewriteRel</a></span>&#8203;(<a href="../rel/core/Sample.html" title="class in org.apache.calcite.rel.core">Sample</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.core.Sort)">rewriteRel</a></span>&#8203;(<a href="../rel/core/Sort.html" title="class in org.apache.calcite.rel.core">Sort</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.core.TableScan)">rewriteRel</a></span>&#8203;(<a href="../rel/core/TableScan.html" title="class in org.apache.calcite.rel.core">TableScan</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i24" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.core.Uncollect)">rewriteRel</a></span>&#8203;(<a href="../rel/core/Uncollect.html" title="class in org.apache.calcite.rel.core">Uncollect</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i25" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.logical.LogicalAggregate)">rewriteRel</a></span>&#8203;(<a href="../rel/logical/LogicalAggregate.html" title="class in org.apache.calcite.rel.logical">LogicalAggregate</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i26" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.logical.LogicalCalc)">rewriteRel</a></span>&#8203;(<a href="../rel/logical/LogicalCalc.html" title="class in org.apache.calcite.rel.logical">LogicalCalc</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i22" class="altColor">
+<tr id="i27" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.logical.LogicalCorrelate)">rewriteRel</a></span>&#8203;(<a href="../rel/logical/LogicalCorrelate.html" title="class in org.apache.calcite.rel.logical">LogicalCorrelate</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i23" class="rowColor">
+<tr id="i28" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.logical.LogicalFilter)">rewriteRel</a></span>&#8203;(<a href="../rel/logical/LogicalFilter.html" title="class in org.apache.calcite.rel.logical">LogicalFilter</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i24" class="altColor">
+<tr id="i29" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.logical.LogicalIntersect)">rewriteRel</a></span>&#8203;(<a href="../rel/logical/LogicalIntersect.html" title="class in org.apache.calcite.rel.logical">LogicalIntersect</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i25" class="rowColor">
+<tr id="i30" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.logical.LogicalJoin)">rewriteRel</a></span>&#8203;(<a href="../rel/logical/LogicalJoin.html" title="class in org.apache.calcite.rel.logical">LogicalJoin</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i26" class="altColor">
+<tr id="i31" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.logical.LogicalMatch)">rewriteRel</a></span>&#8203;(<a href="../rel/logical/LogicalMatch.html" title="class in org.apache.calcite.rel.logical">LogicalMatch</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i27" class="rowColor">
+<tr id="i32" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.logical.LogicalMinus)">rewriteRel</a></span>&#8203;(<a href="../rel/logical/LogicalMinus.html" title="class in org.apache.calcite.rel.logical">LogicalMinus</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i28" class="altColor">
+<tr id="i33" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.logical.LogicalProject)">rewriteRel</a></span>&#8203;(<a href="../rel/logical/LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i29" class="rowColor">
+<tr id="i34" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.logical.LogicalSnapshot)">rewriteRel</a></span>&#8203;(<a href="../rel/logical/LogicalSnapshot.html" title="class in org.apache.calcite.rel.logical">LogicalSnapshot</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i30" class="altColor">
+<tr id="i35" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.logical.LogicalTableFunctionScan)">rewriteRel</a></span>&#8203;(<a href="../rel/logical/LogicalTableFunctionScan.html" title="class in org.apache.calcite.rel.logical">LogicalTableFunctionScan</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i31" class="rowColor">
+<tr id="i36" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.logical.LogicalTableModify)">rewriteRel</a></span>&#8203;(<a href="../rel/logical/LogicalTableModify.html" title="class in org.apache.calcite.rel.logical">LogicalTableModify</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i32" class="altColor">
+<tr id="i37" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.logical.LogicalUnion)">rewriteRel</a></span>&#8203;(<a href="../rel/logical/LogicalUnion.html" title="class in org.apache.calcite.rel.logical">LogicalUnion</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i33" class="rowColor">
+<tr id="i38" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.logical.LogicalValues)">rewriteRel</a></span>&#8203;(<a href="../rel/logical/LogicalValues.html" title="class in org.apache.calcite.rel.logical">LogicalValues</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i34" class="altColor">
+<tr id="i39" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.stream.LogicalChi)">rewriteRel</a></span>&#8203;(<a href="../rel/stream/LogicalChi.html" title="class in org.apache.calcite.rel.stream">LogicalChi</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i35" class="rowColor">
+<tr id="i40" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.rel.stream.LogicalDelta)">rewriteRel</a></span>&#8203;(<a href="../rel/stream/LogicalDelta.html" title="class in org.apache.calcite.rel.stream">LogicalDelta</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i36" class="altColor">
+<tr id="i41" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rewriteRel(org.apache.calcite.sql2rel.RelStructuredTypeFlattener.SelfFlatteningRel)">rewriteRel</a></span>&#8203;(<a href="RelStructuredTypeFlattener.SelfFlatteningRel.html" title="interface in org.apache.calcite.sql2rel">RelStructuredTypeFlattener.SelfFlatteningRel</a>&nbsp;rel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i37" class="rowColor">
+<tr id="i42" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setNewForOldRel(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode)">setNewForOldRel</a></span>&#8203;(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;oldRel,
                <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;newRel)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i38" class="altColor">
+<tr id="i43" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#updateRelInMap(com.google.common.collect.SortedSetMultimap)">updateRelInMap</a></span>&#8203;(com.google.common.collect.SortedSetMultimap&lt;<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>,&#8203;<a href="../rel/core/CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>&gt;&nbsp;mapRefRelToCorVar)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i39" class="rowColor">
+<tr id="i44" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#updateRelInMap(java.util.SortedMap)">updateRelInMap</a></span>&#8203;(java.util.SortedMap&lt;<a href="../rel/core/CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>,&#8203;<a href="../rel/logical/LogicalCorrelate.html" title="class in org.apache.calcite.rel.logical">LogicalCorrelate</a>&gt;&nbsp;mapCorVarToCorRel)</code></th>
 <td class="colLast">&nbsp;</td>
@@ -737,6 +771,16 @@ public&nbsp;RelStructuredTypeFlattener&#8203;(<a href="../rex/RexBuilder.html" t
 <li class="blockList">
 <h4>restructureFields</h4>
 <pre class="methodSignature">private&nbsp;java.util.List&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;restructureFields&#8203;(<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;structuredType)</pre>
+<div class="block">When called with old root rowType it's known that flattened root (which may become input)
+ returns flat fields, so it simply refers flat fields by increasing index and collects them
+ back into struct constructor expressions if necessary.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>structuredType</code> - old root rowType or it's nested struct</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>list of rex nodes, some of them may collect flattened struct's fields back
+         into original structure to return correct type for client</dd>
+</dl>
 </li>
 </ul>
 <a id="restructure(org.apache.calcite.rel.type.RelDataType)">
@@ -791,17 +835,29 @@ public&nbsp;RelStructuredTypeFlattener&#8203;(<a href="../rex/RexBuilder.html" t
 <li class="blockList">
 <h4>getNewFieldForOldInput</h4>
 <pre class="methodSignature">private&nbsp;<a href="../linq4j/Ord.html" title="class in org.apache.calcite.linq4j">Ord</a>&lt;<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;getNewFieldForOldInput&#8203;(int&nbsp;oldOrdinal,
-                                                int&nbsp;existingOffset)</pre>
-<div class="block">Maps the ordinal of a field pre-flattening to the ordinal of the
- corresponding field post-flattening, and also returns its type.</div>
+                                                int&nbsp;innerOrdinal)</pre>
+<div class="block">Finds type and new ordinal relative to new inputs by oldOrdinal and
+ innerOrdinal indexes.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>oldOrdinal</code> - Pre-flattening ordinal</dd>
-<dd><code>existingOffset</code> - offset already calculated the target column inside the oldOrdinal column.
-                       For unnested column, it should be 0.</dd>
+<dd><code>oldOrdinal</code> - ordinal of the field relative to old inputs</dd>
+<dd><code>innerOrdinal</code> - when oldOrdinal points to struct and target field
+                     is inner field of struct, this argument should contain
+                     calculated field's ordinal within struct after flattening.
+                     Otherwise when oldOrdinal points to primitive field, this
+                     argument should be zero.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>Post-flattening ordinal and type</dd>
+<dd>flat type with new ordinal relative to new inputs</dd>
 </dl>
+</li>
+</ul>
+<a id="getNewInputFieldByNewOrdinal(int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getNewInputFieldByNewOrdinal</h4>
+<pre class="methodSignature">private&nbsp;<a href="../rel/type/RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a>&nbsp;getNewInputFieldByNewOrdinal&#8203;(int&nbsp;newOrdinal)</pre>
 </li>
 </ul>
 <a id="getNewFieldForOldInput(int)">
@@ -837,14 +893,23 @@ public&nbsp;RelStructuredTypeFlattener&#8203;(<a href="../rex/RexBuilder.html" t
 </dl>
 </li>
 </ul>
-<a id="calculateFlattenedOffset(org.apache.calcite.rel.type.RelDataType,int)">
+<a id="getPostFlatteningOrdinal(org.apache.calcite.rel.type.RelDataType,int)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>calculateFlattenedOffset</h4>
-<pre class="methodSignature">private&nbsp;int&nbsp;calculateFlattenedOffset&#8203;(<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
-                                     int&nbsp;ordinal)</pre>
+<h4>getPostFlatteningOrdinal</h4>
+<pre class="methodSignature">private&nbsp;int&nbsp;getPostFlatteningOrdinal&#8203;(<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;preFlattenRowType,
+                                     int&nbsp;preFlattenOrdinal)</pre>
+</li>
+</ul>
+<a id="postFlattenSize(org.apache.calcite.rel.type.RelDataType)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>postFlattenSize</h4>
+<pre class="methodSignature">private&nbsp;int&nbsp;postFlattenSize&#8203;(<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type)</pre>
 </li>
 </ul>
 <a id="rewriteRel(org.apache.calcite.rel.logical.LogicalTableModify)">
@@ -1022,6 +1087,17 @@ public&nbsp;RelStructuredTypeFlattener&#8203;(<a href="../rex/RexBuilder.html" t
                                 java.util.List&lt;<a href="../util/Pair.html" title="class in org.apache.calcite.util">Pair</a>&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>,&#8203;java.lang.String&gt;&gt;&nbsp;flattenedExps)</pre>
 </li>
 </ul>
+<a id="extractName(java.util.List,java.lang.String,int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>extractName</h4>
+<pre class="methodSignature">private&nbsp;java.lang.String&nbsp;extractName&#8203;(java.util.List&lt;java.lang.String&gt;&nbsp;fieldNames,
+                                     java.lang.String&nbsp;prefix,
+                                     int&nbsp;i)</pre>
+</li>
+</ul>
 <a id="flattenProjection(org.apache.calcite.sql2rel.RelStructuredTypeFlattener.RewriteRexShuttle,org.apache.calcite.rex.RexNode,java.lang.String,java.util.List)">
 <!--   -->
 </a>
@@ -1032,6 +1108,17 @@ public&nbsp;RelStructuredTypeFlattener&#8203;(<a href="../rex/RexBuilder.html" t
                                <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;exp,
                                java.lang.String&nbsp;fieldName,
                                java.util.List&lt;<a href="../util/Pair.html" title="class in org.apache.calcite.util">Pair</a>&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>,&#8203;java.lang.String&gt;&gt;&nbsp;flattenedExps)</pre>
+</li>
+</ul>
+<a id="flattenResultTypeOfRexCall(org.apache.calcite.rex.RexNode,java.lang.String,java.util.List)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>flattenResultTypeOfRexCall</h4>
+<pre class="methodSignature">private&nbsp;void&nbsp;flattenResultTypeOfRexCall&#8203;(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;newExp,
+                                        java.lang.String&nbsp;fieldName,
+                                        java.util.List&lt;<a href="../util/Pair.html" title="class in org.apache.calcite.util">Pair</a>&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>,&#8203;java.lang.String&gt;&gt;&nbsp;flattenedExps)</pre>
 </li>
 </ul>
 <a id="flattenNullLiteral(org.apache.calcite.rel.type.RelDataType,java.util.List)">
@@ -1101,7 +1188,7 @@ public&nbsp;RelStructuredTypeFlattener&#8203;(<a href="../rex/RexBuilder.html" t
 <a id="flattenInputs(java.util.List,org.apache.calcite.rex.RexNode,java.util.List)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>flattenInputs</h4>
 <pre class="methodSignature">private&nbsp;void&nbsp;flattenInputs&#8203;(java.util.List&lt;<a href="../rel/type/RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a>&gt;&nbsp;fieldList,
@@ -1109,6 +1196,16 @@ public&nbsp;RelStructuredTypeFlattener&#8203;(<a href="../rex/RexBuilder.html" t
                            java.util.List&lt;<a href="../util/Pair.html" title="class in org.apache.calcite.util">Pair</a>&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>,&#8203;java.lang.String&gt;&gt;&nbsp;flattenedExpList)</pre>
 <div class="block">Generates expressions that reference the flattened input fields from
  a given row type.</div>
+</li>
+</ul>
+<a id="getNewInnerOrdinal(org.apache.calcite.rex.RexNode,java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getNewInnerOrdinal</h4>
+<pre class="methodSignature">private&nbsp;int&nbsp;getNewInnerOrdinal&#8203;(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;firstOp,
+                               java.lang.String&nbsp;literalString)</pre>
 </li>
 </ul>
 </li>

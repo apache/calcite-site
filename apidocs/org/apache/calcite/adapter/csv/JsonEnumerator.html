@@ -27,8 +27,8 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var data = {"i0":10,"i1":10,"i2":9,"i3":10,"i4":10};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -89,7 +89,7 @@ loadScripts(document, 'script');</script>
 <div>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
-<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#nested.class.summary">Nested</a>&nbsp;|&nbsp;</li>
 <li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
@@ -136,16 +136,41 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd><code>java.lang.AutoCloseable</code>, <code><a href="../../linq4j/Enumerator.html" title="interface in org.apache.calcite.linq4j">Enumerator</a>&lt;java.lang.Object[]&gt;</code></dd>
 </dl>
 <hr>
-<pre>class <span class="typeNameLabel">JsonEnumerator</span>
+<pre>public class <span class="typeNameLabel">JsonEnumerator</span>
 extends java.lang.Object
 implements <a href="../../linq4j/Enumerator.html" title="interface in org.apache.calcite.linq4j">Enumerator</a>&lt;java.lang.Object[]&gt;</pre>
-<div class="block">Enumerator that reads from a JSON file.</div>
+<div class="block">Enumerator that reads from a Object List.</div>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+<section role="region">
+<ul class="blockList">
+<li class="blockList"><a id="nested.class.summary">
+<!--   -->
+</a>
+<h3>Nested Class Summary</h3>
+<table class="memberSummary">
+<caption><span>Nested Classes</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Class</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>(package private) static class&nbsp;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="JsonEnumerator.JsonDataConverter.html" title="class in org.apache.calcite.adapter.csv">JsonEnumerator.JsonDataConverter</a></span></code></th>
+<td class="colLast">
+<div class="block">Json data and relDataType Converter.</div>
+</td>
+</tr>
+</table>
+</li>
+</ul>
+</section>
 <!-- =========== FIELD SUMMARY =========== -->
 <section role="region">
 <ul class="blockList">
@@ -161,7 +186,7 @@ implements <a href="../../linq4j/Enumerator.html" title="interface in org.apache
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private <a href="../../linq4j/Enumerator.html" title="interface in org.apache.calcite.linq4j">Enumerator</a>&lt;java.lang.Object&gt;</code></td>
+<td class="colFirst"><code>private <a href="../../linq4j/Enumerator.html" title="interface in org.apache.calcite.linq4j">Enumerator</a>&lt;java.lang.Object[]&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#enumerator">enumerator</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -183,7 +208,7 @@ implements <a href="../../linq4j/Enumerator.html" title="interface in org.apache
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.util.Source)">JsonEnumerator</a></span>&#8203;(<a href="../../util/Source.html" title="interface in org.apache.calcite.util">Source</a>&nbsp;source)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.util.List)">JsonEnumerator</a></span>&#8203;(java.util.List&lt;java.lang.Object&gt;&nbsp;list)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </table>
@@ -198,7 +223,7 @@ implements <a href="../../linq4j/Enumerator.html" title="interface in org.apache
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colSecond" scope="col">Method</th>
@@ -219,13 +244,22 @@ implements <a href="../../linq4j/Enumerator.html" title="interface in org.apache
 </td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code>(package private) static <a href="JsonEnumerator.JsonDataConverter.html" title="class in org.apache.calcite.adapter.csv">JsonEnumerator.JsonDataConverter</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#deduceRowType(org.apache.calcite.rel.type.RelDataTypeFactory,org.apache.calcite.util.Source)">deduceRowType</a></span>&#8203;(<a href="../../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory,
+             <a href="../../util/Source.html" title="interface in org.apache.calcite.util">Source</a>&nbsp;source)</code></th>
+<td class="colLast">
+<div class="block">Deduces the names and types of a table's columns by reading the first line
+ of a JSON file.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#moveNext()">moveNext</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Advances the enumerator to the next element of the collection.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#reset()">reset</a></span>()</code></th>
 <td class="colLast">
@@ -263,7 +297,7 @@ implements <a href="../../linq4j/Enumerator.html" title="interface in org.apache
 <ul class="blockListLast">
 <li class="blockList">
 <h4>enumerator</h4>
-<pre>private final&nbsp;<a href="../../linq4j/Enumerator.html" title="interface in org.apache.calcite.linq4j">Enumerator</a>&lt;java.lang.Object&gt; enumerator</pre>
+<pre>private&nbsp;<a href="../../linq4j/Enumerator.html" title="interface in org.apache.calcite.linq4j">Enumerator</a>&lt;java.lang.Object[]&gt; enumerator</pre>
 </li>
 </ul>
 </li>
@@ -276,13 +310,13 @@ implements <a href="../../linq4j/Enumerator.html" title="interface in org.apache
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(org.apache.calcite.util.Source)">
+<a id="&lt;init&gt;(java.util.List)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>JsonEnumerator</h4>
-<pre>JsonEnumerator&#8203;(<a href="../../util/Source.html" title="interface in org.apache.calcite.util">Source</a>&nbsp;source)</pre>
+<pre>public&nbsp;JsonEnumerator&#8203;(java.util.List&lt;java.lang.Object&gt;&nbsp;list)</pre>
 </li>
 </ul>
 </li>
@@ -295,6 +329,18 @@ implements <a href="../../linq4j/Enumerator.html" title="interface in org.apache
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a id="deduceRowType(org.apache.calcite.rel.type.RelDataTypeFactory,org.apache.calcite.util.Source)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>deduceRowType</h4>
+<pre class="methodSignature">static&nbsp;<a href="JsonEnumerator.JsonDataConverter.html" title="class in org.apache.calcite.adapter.csv">JsonEnumerator.JsonDataConverter</a>&nbsp;deduceRowType&#8203;(<a href="../../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory,
+                                                      <a href="../../util/Source.html" title="interface in org.apache.calcite.util">Source</a>&nbsp;source)</pre>
+<div class="block">Deduces the names and types of a table's columns by reading the first line
+ of a JSON file.</div>
+</li>
+</ul>
 <a id="current()">
 <!--   -->
 </a>
@@ -480,7 +526,7 @@ implements <a href="../../linq4j/Enumerator.html" title="interface in org.apache
 <div>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
-<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#nested.class.summary">Nested</a>&nbsp;|&nbsp;</li>
 <li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>

@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":9,"i3":9,"i4":9,"i5":9,"i6":10,"i7":10,"i8":10,"i9":9,"i10":10,"i11":10,"i12":9,"i13":9,"i14":9,"i15":9,"i16":10,"i17":9,"i18":9,"i19":9,"i20":9,"i21":9,"i22":9,"i23":9};
+var data = {"i0":10,"i1":10,"i2":9,"i3":9,"i4":9,"i5":9,"i6":10,"i7":10,"i8":10,"i9":9,"i10":10,"i11":10,"i12":9,"i13":9,"i14":9,"i15":9,"i16":10,"i17":9,"i18":9,"i19":9,"i20":10,"i21":9,"i22":9,"i23":9,"i24":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -161,12 +161,12 @@ extends java.lang.Object</pre>
  At each level, returns the residue.</p>
 
  <p>The inputs must only include the core relational operators:
- <a href="../rel/logical/LogicalTableScan.html" title="class in org.apache.calcite.rel.logical"><code>LogicalTableScan</code></a>,
- <a href="../rel/logical/LogicalFilter.html" title="class in org.apache.calcite.rel.logical"><code>LogicalFilter</code></a>,
- <a href="../rel/logical/LogicalProject.html" title="class in org.apache.calcite.rel.logical"><code>LogicalProject</code></a>,
- <a href="../rel/logical/LogicalJoin.html" title="class in org.apache.calcite.rel.logical"><code>LogicalJoin</code></a>,
- <a href="../rel/logical/LogicalUnion.html" title="class in org.apache.calcite.rel.logical"><code>LogicalUnion</code></a>,
- <a href="../rel/logical/LogicalAggregate.html" title="class in org.apache.calcite.rel.logical"><code>LogicalAggregate</code></a>.</p></div>
+ <a href="../rel/core/TableScan.html" title="class in org.apache.calcite.rel.core"><code>TableScan</code></a>,
+ <a href="../rel/core/Filter.html" title="class in org.apache.calcite.rel.core"><code>Filter</code></a>,
+ <a href="../rel/core/Project.html" title="class in org.apache.calcite.rel.core"><code>Project</code></a>,
+ <a href="../rel/core/Join.html" title="class in org.apache.calcite.rel.core"><code>Join</code></a>,
+ <a href="../rel/core/Union.html" title="class in org.apache.calcite.rel.core"><code>Union</code></a>,
+ <a href="../rel/core/Aggregate.html" title="class in org.apache.calcite.rel.core"><code>Aggregate</code></a>.</p></div>
 </li>
 </ul>
 </div>
@@ -208,8 +208,8 @@ extends java.lang.Object</pre>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="SubstitutionVisitor.AggregateToAggregateUnifyRule.html" title="class in org.apache.calcite.plan">SubstitutionVisitor.AggregateToAggregateUnifyRule</a></span></code></th>
 <td class="colLast">
 <div class="block">Implementation of <a href="SubstitutionVisitor.UnifyRule.html" title="class in org.apache.calcite.plan"><code>SubstitutionVisitor.UnifyRule</code></a> that matches a
- <a href="../rel/logical/LogicalAggregate.html" title="class in org.apache.calcite.rel.logical"><code>LogicalAggregate</code></a> to a
- <a href="../rel/logical/LogicalAggregate.html" title="class in org.apache.calcite.rel.logical"><code>LogicalAggregate</code></a>, provided
+ <a href="../rel/core/Aggregate.html" title="class in org.apache.calcite.rel.core"><code>Aggregate</code></a> to a
+ <a href="../rel/core/Aggregate.html" title="class in org.apache.calcite.rel.core"><code>Aggregate</code></a>, provided
  that they have the same child.</div>
 </td>
 </tr>
@@ -281,7 +281,7 @@ extends java.lang.Object</pre>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="SubstitutionVisitor.ProjectToProjectUnifyRule.html" title="class in org.apache.calcite.plan">SubstitutionVisitor.ProjectToProjectUnifyRule</a></span></code></th>
 <td class="colLast">
 <div class="block">Implementation of <a href="SubstitutionVisitor.UnifyRule.html" title="class in org.apache.calcite.plan"><code>SubstitutionVisitor.UnifyRule</code></a> that matches
- <a href="../rel/logical/LogicalProject.html" title="class in org.apache.calcite.rel.logical"><code>LogicalProject</code></a>.</div>
+ <a href="../rel/core/Project.html" title="class in org.apache.calcite.rel.core"><code>Project</code></a>.</div>
 </td>
 </tr>
 <tr class="altColor">
@@ -303,7 +303,7 @@ extends java.lang.Object</pre>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="SubstitutionVisitor.ScanToProjectUnifyRule.html" title="class in org.apache.calcite.plan">SubstitutionVisitor.ScanToProjectUnifyRule</a></span></code></th>
 <td class="colLast">
 <div class="block">Implementation of <a href="SubstitutionVisitor.UnifyRule.html" title="class in org.apache.calcite.plan"><code>SubstitutionVisitor.UnifyRule</code></a> that matches
- <a href="../rel/logical/LogicalTableScan.html" title="class in org.apache.calcite.rel.logical"><code>LogicalTableScan</code></a>.</div>
+ <a href="../rel/core/TableScan.html" title="class in org.apache.calcite.rel.core"><code>TableScan</code></a>.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -665,6 +665,15 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i20" class="altColor">
+<td class="colFirst"><code>private boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rowTypesAreEquivalent(org.apache.calcite.rel.mutable.MutableRel,org.apache.calcite.rel.mutable.MutableRel,org.apache.calcite.util.Litmus)">rowTypesAreEquivalent</a></span>&#8203;(<a href="../rel/mutable/MutableRel.html" title="class in org.apache.calcite.rel.mutable">MutableRel</a>&nbsp;rel0,
+                     <a href="../rel/mutable/MutableRel.html" title="class in org.apache.calcite.rel.mutable">MutableRel</a>&nbsp;rel1,
+                     <a href="../util/Litmus.html" title="interface in org.apache.calcite.util">Litmus</a>&nbsp;litmus)</code></th>
+<td class="colLast">
+<div class="block">Equivalence checking for row types, but except for the field names.</div>
+</td>
+</tr>
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code>static <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#splitFilter(org.apache.calcite.rex.RexSimplify,org.apache.calcite.rex.RexNode,org.apache.calcite.rex.RexNode)">splitFilter</a></span>&#8203;(<a href="../rex/RexSimplify.html" title="class in org.apache.calcite.rex">RexSimplify</a>&nbsp;simplify,
            <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition,
@@ -673,19 +682,19 @@ extends java.lang.Object</pre>
 <div class="block">Maps a condition onto a target.</div>
 </td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code>private static <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#splitOr(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexNode,org.apache.calcite.rex.RexNode)">splitOr</a></span>&#8203;(<a href="../rex/RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
        <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition,
        <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;target)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i22" class="altColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code>private static void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#undoReplacement(java.util.List)">undoReplacement</a></span>&#8203;(java.util.List&lt;<a href="SubstitutionVisitor.Replacement.html" title="class in org.apache.calcite.plan">SubstitutionVisitor.Replacement</a>&gt;&nbsp;replacement)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i23" class="rowColor">
+<tr id="i24" class="altColor">
 <td class="colFirst"><code>static <a href="../rel/mutable/MutableRel.html" title="class in org.apache.calcite.rel.mutable">MutableRel</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unifyAggregates(org.apache.calcite.rel.mutable.MutableAggregate,org.apache.calcite.rel.mutable.MutableAggregate)">unifyAggregates</a></span>&#8203;(<a href="../rel/mutable/MutableAggregate.html" title="class in org.apache.calcite.rel.mutable">MutableAggregate</a>&nbsp;query,
                <a href="../rel/mutable/MutableAggregate.html" title="class in org.apache.calcite.rel.mutable">MutableAggregate</a>&nbsp;target)</code></th>
@@ -1069,6 +1078,18 @@ extends java.lang.Object</pre>
  replacement, so that in later processing stage, the replacement can be
  recovered individually to produce a list of all possible rels with
  substitution in different places.</div>
+</li>
+</ul>
+<a id="rowTypesAreEquivalent(org.apache.calcite.rel.mutable.MutableRel,org.apache.calcite.rel.mutable.MutableRel,org.apache.calcite.util.Litmus)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>rowTypesAreEquivalent</h4>
+<pre class="methodSignature">private&nbsp;boolean&nbsp;rowTypesAreEquivalent&#8203;(<a href="../rel/mutable/MutableRel.html" title="class in org.apache.calcite.rel.mutable">MutableRel</a>&nbsp;rel0,
+                                      <a href="../rel/mutable/MutableRel.html" title="class in org.apache.calcite.rel.mutable">MutableRel</a>&nbsp;rel1,
+                                      <a href="../util/Litmus.html" title="interface in org.apache.calcite.util">Litmus</a>&nbsp;litmus)</pre>
+<div class="block">Equivalence checking for row types, but except for the field names.</div>
 </li>
 </ul>
 <a id="replace(org.apache.calcite.rel.mutable.MutableRel,org.apache.calcite.rel.mutable.MutableRel,org.apache.calcite.rel.mutable.MutableRel)">

@@ -131,22 +131,34 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </td>
 </tr>
 <tr class="altColor">
+<th class="colFirst" scope="row"><a href="#org.apache.calcite.sql.ddl">org.apache.calcite.sql.ddl</a></th>
+<td class="colLast">
+<div class="block">Parse tree for SQL DDL statements.</div>
+</td>
+</tr>
+<tr class="rowColor">
 <th class="colFirst" scope="row"><a href="#org.apache.calcite.sql.fun">org.apache.calcite.sql.fun</a></th>
 <td class="colLast">
 <div class="block">Defines the set of standard SQL row-level functions and
  operators.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <th class="colFirst" scope="row"><a href="#org.apache.calcite.sql.type">org.apache.calcite.sql.type</a></th>
 <td class="colLast">
 <div class="block">SQL type system.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <th class="colFirst" scope="row"><a href="#org.apache.calcite.sql.validate">org.apache.calcite.sql.validate</a></th>
 <td class="colLast">
 <div class="block">SQL validation.</div>
+</td>
+</tr>
+<tr class="altColor">
+<th class="colFirst" scope="row"><a href="#org.apache.calcite.sql.validate.implicit">org.apache.calcite.sql.validate.implicit</a></th>
+<td class="colLast">
+<div class="block">Sql implicit type cast.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -165,6 +177,24 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!--   -->
 </a>
 <h3>Uses of <a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a> in <a href="../../../jdbc/package-summary.html">org.apache.calcite.jdbc</a></h3>
+<table class="useSummary">
+<caption><span>Classes in <a href="../../../jdbc/package-summary.html">org.apache.calcite.jdbc</a> that implement <a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a></span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Class</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><code>class&nbsp;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../../../jdbc/ContextSqlValidator.html" title="class in org.apache.calcite.jdbc">ContextSqlValidator</a></span></code></th>
+<td class="colLast">
+<div class="block">A SqlValidator with schema and type factory of the given
+ <a href="../../../jdbc/CalcitePrepare.Context.html" title="interface in org.apache.calcite.jdbc"><code>CalcitePrepare.Context</code></a>.</div>
+</td>
+</tr>
+</tbody>
+</table>
 <table class="useSummary">
 <caption><span>Constructors in <a href="../../../jdbc/package-summary.html">org.apache.calcite.jdbc</a> with parameters of type <a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a></span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
@@ -460,33 +490,51 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">SqlBasicTypeNameSpec.</span><code><span class="memberNameLink"><a href="../../SqlBasicTypeNameSpec.html#deriveType(org.apache.calcite.sql.validate.SqlValidator)">deriveType</a></span>&#8203;(<a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">SqlBinaryOperator.</span><code><span class="memberNameLink"><a href="../../SqlBinaryOperator.html#deriveType(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall)">deriveType</a></span>&#8203;(<a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
           <a href="../SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
           <a href="../../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">SqlCollectionTypeNameSpec.</span><code><span class="memberNameLink"><a href="../../SqlCollectionTypeNameSpec.html#deriveType(org.apache.calcite.sql.validate.SqlValidator)">deriveType</a></span>&#8203;(<a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">SqlDataTypeSpec.</span><code><span class="memberNameLink"><a href="../../SqlDataTypeSpec.html#deriveType(org.apache.calcite.sql.validate.SqlValidator)">deriveType</a></span>&#8203;(<a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator)</code></th>
 <td class="colLast">
-<div class="block">Throws an error if the type is not found.</div>
+<div class="block">Converts this type specification to a <a href="../../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type"><code>RelDataType</code></a>.</div>
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code><a href="../../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">SqlDataTypeSpec.</span><code><span class="memberNameLink"><a href="../../SqlDataTypeSpec.html#deriveType(org.apache.calcite.sql.validate.SqlValidator,boolean)">deriveType</a></span>&#8203;(<a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
+          boolean&nbsp;nullable)</code></th>
+<td class="colLast">
+<div class="block">Converts this type specification to a <a href="../../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type"><code>RelDataType</code></a>.</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">SqlFilterOperator.</span><code><span class="memberNameLink"><a href="../../SqlFilterOperator.html#deriveType(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall)">deriveType</a></span>&#8203;(<a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
           <a href="../SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
           <a href="../../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">SqlFunction.</span><code><span class="memberNameLink"><a href="../../SqlFunction.html#deriveType(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall)">deriveType</a></span>&#8203;(<a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
           <a href="../SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
           <a href="../../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>private <a href="../../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">SqlFunction.</span><code><span class="memberNameLink"><a href="../../SqlFunction.html#deriveType(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall,boolean)">deriveType</a></span>&#8203;(<a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
           <a href="../SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
@@ -494,21 +542,21 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
           boolean&nbsp;convertRowArgToColumnList)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">SqlInternalOperator.</span><code><span class="memberNameLink"><a href="../../SqlInternalOperator.html#deriveType(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall)">deriveType</a></span>&#8203;(<a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
           <a href="../SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
           <a href="../../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">SqlJdbcFunctionCall.</span><code><span class="memberNameLink"><a href="../../SqlJdbcFunctionCall.html#deriveType(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall)">deriveType</a></span>&#8203;(<a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
           <a href="../SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
           <a href="../../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">SqlOperator.</span><code><span class="memberNameLink"><a href="../../SqlOperator.html#deriveType(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall)">deriveType</a></span>&#8203;(<a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
           <a href="../SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
@@ -517,11 +565,28 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Derives the type of a call to this operator.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
 <th class="colSecond" scope="row"><span class="typeNameLabel">SqlOverOperator.</span><code><span class="memberNameLink"><a href="../../SqlOverOperator.html#deriveType(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall)">deriveType</a></span>&#8203;(<a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
           <a href="../SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
           <a href="../../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">SqlRowTypeNameSpec.</span><code><span class="memberNameLink"><a href="../../SqlRowTypeNameSpec.html#deriveType(org.apache.calcite.sql.validate.SqlValidator)">deriveType</a></span>&#8203;(<a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;sqlValidator)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>abstract <a href="../../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">SqlTypeNameSpec.</span><code><span class="memberNameLink"><a href="../../SqlTypeNameSpec.html#deriveType(org.apache.calcite.sql.validate.SqlValidator)">deriveType</a></span>&#8203;(<a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator)</code></th>
+<td class="colLast">
+<div class="block">Derive type from this SqlTypeNameSpec.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">SqlUserDefinedTypeNameSpec.</span><code><span class="memberNameLink"><a href="../../SqlUserDefinedTypeNameSpec.html#deriveType(org.apache.calcite.sql.validate.SqlValidator)">deriveType</a></span>&#8203;(<a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
@@ -896,6 +961,32 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </section>
 </li>
 <li class="blockList">
+<section role="region"><a id="org.apache.calcite.sql.ddl">
+<!--   -->
+</a>
+<h3>Uses of <a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a> in <a href="../../ddl/package-summary.html">org.apache.calcite.sql.ddl</a></h3>
+<table class="useSummary">
+<caption><span>Methods in <a href="../../ddl/package-summary.html">org.apache.calcite.sql.ddl</a> that return <a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a></span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><code>(package private) static <a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a></code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">SqlDdlNodes.</span><code><span class="memberNameLink"><a href="../../ddl/SqlDdlNodes.html#validator(org.apache.calcite.jdbc.CalcitePrepare.Context,boolean)">validator</a></span>&#8203;(<a href="../../../jdbc/CalcitePrepare.Context.html" title="interface in org.apache.calcite.jdbc">CalcitePrepare.Context</a>&nbsp;context,
+         boolean&nbsp;mutable)</code></th>
+<td class="colLast">
+<div class="block">Returns the SqlValidator with the given <code>context</code> schema
+ and type factory.</div>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</li>
+<li class="blockList">
 <section role="region"><a id="org.apache.calcite.sql.fun">
 <!--   -->
 </a>
@@ -1202,6 +1293,18 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Returns the validator which created this scope.</div>
 </td>
 </tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a></code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">SqlValidator.</span><code><span class="memberNameLink"><a href="../SqlValidator.html#setEnableTypeCoercion(boolean)">setEnableTypeCoercion</a></span>&#8203;(boolean&nbsp;enabled)</code></th>
+<td class="colLast">
+<div class="block">Set if implicit type coercion is allowed when the validator does validation.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a></code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">SqlValidatorImpl.</span><code><span class="memberNameLink"><a href="../SqlValidatorImpl.html#setEnableTypeCoercion(boolean)">setEnableTypeCoercion</a></span>&#8203;(boolean&nbsp;enabled)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
 </tbody>
 </table>
 <table class="useSummary">
@@ -1225,6 +1328,85 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <th class="colSecond" scope="row"><span class="typeNameLabel">SqlValidatorImpl.</span><code><span class="memberNameLink"><a href="../SqlValidatorImpl.html#findAllValidUdfNames(java.util.List,org.apache.calcite.sql.validate.SqlValidator,java.util.Collection)">findAllValidUdfNames</a></span>&#8203;(java.util.List&lt;java.lang.String&gt;&nbsp;names,
                     <a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
                     java.util.Collection&lt;<a href="../SqlMoniker.html" title="interface in org.apache.calcite.sql.validate">SqlMoniker</a>&gt;&nbsp;result)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static java.util.List&lt;<a href="../../../rel/type/RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a>&gt;</code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">SqlValidatorUtil.</span><code><span class="memberNameLink"><a href="../SqlValidatorUtil.html#getExtendedColumns(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorTable,org.apache.calcite.sql.SqlNodeList)">getExtendedColumns</a></span>&#8203;(<a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
+                  <a href="../SqlValidatorTable.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorTable</a>&nbsp;table,
+                  <a href="../../SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;extendedColumns)</code></th>
+<td class="colLast">
+<div class="block">Gets a list of extended columns with field indices to the underlying table.</div>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</li>
+<li class="blockList">
+<section role="region"><a id="org.apache.calcite.sql.validate.implicit">
+<!--   -->
+</a>
+<h3>Uses of <a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a> in <a href="../implicit/package-summary.html">org.apache.calcite.sql.validate.implicit</a></h3>
+<table class="useSummary">
+<caption><span>Fields in <a href="../implicit/package-summary.html">org.apache.calcite.sql.validate.implicit</a> declared as <a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a></span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Field</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><code>protected <a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a></code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">AbstractTypeCoercion.</span><code><span class="memberNameLink"><a href="../implicit/AbstractTypeCoercion.html#validator">validator</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<table class="useSummary">
+<caption><span>Methods in <a href="../implicit/package-summary.html">org.apache.calcite.sql.validate.implicit</a> that return <a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a></span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a></code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">AbstractTypeCoercion.</span><code><span class="memberNameLink"><a href="../implicit/AbstractTypeCoercion.html#getValidator()">getValidator</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<table class="useSummary">
+<caption><span>Methods in <a href="../implicit/package-summary.html">org.apache.calcite.sql.validate.implicit</a> with parameters of type <a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a></span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="../implicit/TypeCoercion.html" title="interface in org.apache.calcite.sql.validate.implicit">TypeCoercion</a></code></td>
+<th class="colSecond" scope="row"><span class="typeNameLabel">TypeCoercions.</span><code><span class="memberNameLink"><a href="../implicit/TypeCoercions.html#getTypeCoercion(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlConformance)">getTypeCoercion</a></span>&#8203;(<a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
+               <a href="../SqlConformance.html" title="interface in org.apache.calcite.sql.validate">SqlConformance</a>&nbsp;conformance)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<table class="useSummary">
+<caption><span>Constructors in <a href="../implicit/package-summary.html">org.apache.calcite.sql.validate.implicit</a> with parameters of type <a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a></span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Constructor</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../implicit/AbstractTypeCoercion.html#%3Cinit%3E(org.apache.calcite.sql.validate.SqlValidator)">AbstractTypeCoercion</a></span>&#8203;(<a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="../implicit/TypeCoercionImpl.html#%3Cinit%3E(org.apache.calcite.sql.validate.SqlValidator)">TypeCoercionImpl</a></span>&#8203;(<a href="../SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>

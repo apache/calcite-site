@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10};
+var data = {"i0":10,"i1":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -138,12 +138,15 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../../schema/ScannableTable.html" title="interface in org.apache.calcite.schema">ScannableTable</a></code>, <code><a href="../../schema/Table.html" title="interface in org.apache.calcite.schema">Table</a></code>, <code><a href="../../schema/Wrapper.html" title="interface in org.apache.calcite.schema">Wrapper</a></code></dd>
+<dd><code><a href="../../schema/Table.html" title="interface in org.apache.calcite.schema">Table</a></code>, <code><a href="../../schema/Wrapper.html" title="interface in org.apache.calcite.schema">Wrapper</a></code></dd>
+</dl>
+<dl>
+<dt>Direct Known Subclasses:</dt>
+<dd><code><a href="JsonScannableTable.html" title="class in org.apache.calcite.adapter.csv">JsonScannableTable</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">JsonTable</span>
-extends <a href="../../schema/impl/AbstractTable.html" title="class in org.apache.calcite.schema.impl">AbstractTable</a>
-implements <a href="../../schema/ScannableTable.html" title="interface in org.apache.calcite.schema">ScannableTable</a></pre>
+extends <a href="../../schema/impl/AbstractTable.html" title="class in org.apache.calcite.schema.impl">AbstractTable</a></pre>
 <div class="block">Table based on a JSON file.</div>
 </li>
 </ul>
@@ -166,6 +169,11 @@ implements <a href="../../schema/ScannableTable.html" title="interface in org.ap
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>protected java.util.List&lt;java.lang.Object&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#list">list</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>private <a href="../../util/Source.html" title="interface in org.apache.calcite.util">Source</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#source">source</a></span></code></th>
 <td class="colLast">&nbsp;</td>
@@ -189,9 +197,7 @@ implements <a href="../../schema/ScannableTable.html" title="interface in org.ap
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.util.Source)">JsonTable</a></span>&#8203;(<a href="../../util/Source.html" title="interface in org.apache.calcite.util">Source</a>&nbsp;source)</code></th>
-<td class="colLast">
-<div class="block">Creates a JsonTable.</div>
-</td>
+<td class="colLast">&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -219,16 +225,11 @@ implements <a href="../../schema/ScannableTable.html" title="interface in org.ap
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../linq4j/Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;java.lang.Object[]&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#scan(org.apache.calcite.DataContext)">scan</a></span>&#8203;(<a href="../../DataContext.html" title="interface in org.apache.calcite">DataContext</a>&nbsp;root)</code></th>
+<td class="colFirst"><code><a href="../../schema/Statistic.html" title="interface in org.apache.calcite.schema">Statistic</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getStatistic()">getStatistic</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Returns an enumerator over the rows in this Table.</div>
+<div class="block">Returns a provider of statistics about this table.</div>
 </td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -236,21 +237,14 @@ implements <a href="../../schema/ScannableTable.html" title="interface in org.ap
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;org.apache.calcite.schema.impl.<a href="../../schema/impl/AbstractTable.html" title="class in org.apache.calcite.schema.impl">AbstractTable</a></h3>
-<code><a href="../../schema/impl/AbstractTable.html#getJdbcTableType()">getJdbcTableType</a>, <a href="../../schema/impl/AbstractTable.html#getStatistic()">getStatistic</a>, <a href="../../schema/impl/AbstractTable.html#isRolledUp(java.lang.String)">isRolledUp</a>, <a href="../../schema/impl/AbstractTable.html#rolledUpColumnValidInsideAgg(java.lang.String,org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.SqlNode,org.apache.calcite.config.CalciteConnectionConfig)">rolledUpColumnValidInsideAgg</a>, <a href="../../schema/impl/AbstractTable.html#unwrap(java.lang.Class)">unwrap</a></code></li>
+<code><a href="../../schema/impl/AbstractTable.html#getJdbcTableType()">getJdbcTableType</a>, <a href="../../schema/impl/AbstractTable.html#isRolledUp(java.lang.String)">isRolledUp</a>, <a href="../../schema/impl/AbstractTable.html#rolledUpColumnValidInsideAgg(java.lang.String,org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.SqlNode,org.apache.calcite.config.CalciteConnectionConfig)">rolledUpColumnValidInsideAgg</a>, <a href="../../schema/impl/AbstractTable.html#unwrap(java.lang.Class)">unwrap</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a id="methods.inherited.from.class.org.apache.calcite.schema.Table">
-<!--   -->
-</a>
-<h3>Methods inherited from interface&nbsp;org.apache.calcite.schema.<a href="../../schema/Table.html" title="interface in org.apache.calcite.schema">Table</a></h3>
-<code><a href="../../schema/Table.html#getJdbcTableType()">getJdbcTableType</a>, <a href="../../schema/Table.html#getStatistic()">getStatistic</a>, <a href="../../schema/Table.html#isRolledUp(java.lang.String)">isRolledUp</a>, <a href="../../schema/Table.html#rolledUpColumnValidInsideAgg(java.lang.String,org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.SqlNode,org.apache.calcite.config.CalciteConnectionConfig)">rolledUpColumnValidInsideAgg</a></code></li>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
 </ul>
 </li>
 </ul>
@@ -271,10 +265,19 @@ implements <a href="../../schema/ScannableTable.html" title="interface in org.ap
 <a id="source">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>source</h4>
 <pre>private final&nbsp;<a href="../../util/Source.html" title="interface in org.apache.calcite.util">Source</a> source</pre>
+</li>
+</ul>
+<a id="list">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>list</h4>
+<pre>protected&nbsp;java.util.List&lt;java.lang.Object&gt; list</pre>
 </li>
 </ul>
 </li>
@@ -294,7 +297,6 @@ implements <a href="../../schema/ScannableTable.html" title="interface in org.ap
 <li class="blockList">
 <h4>JsonTable</h4>
 <pre>public&nbsp;JsonTable&#8203;(<a href="../../util/Source.html" title="interface in org.apache.calcite.util">Source</a>&nbsp;source)</pre>
-<div class="block">Creates a JsonTable.</div>
 </li>
 </ul>
 </li>
@@ -307,19 +309,6 @@ implements <a href="../../schema/ScannableTable.html" title="interface in org.ap
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="toString()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>toString</h4>
-<pre class="methodSignature">public&nbsp;java.lang.String&nbsp;toString()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code>toString</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
-</dl>
-</li>
-</ul>
 <a id="getRowType(org.apache.calcite.rel.type.RelDataTypeFactory)">
 <!--   -->
 </a>
@@ -337,8 +326,6 @@ implements <a href="../../schema/ScannableTable.html" title="interface in org.ap
  the type is converted into a canonical form; other equal types in the same
  query will use the same object.</p></div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../schema/Table.html#getRowType(org.apache.calcite.rel.type.RelDataTypeFactory)">getRowType</a></code>&nbsp;in interface&nbsp;<code><a href="../../schema/Table.html" title="interface in org.apache.calcite.schema">Table</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>typeFactory</code> - Type factory with which to create the type</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -346,19 +333,20 @@ implements <a href="../../schema/ScannableTable.html" title="interface in org.ap
 </dl>
 </li>
 </ul>
-<a id="scan(org.apache.calcite.DataContext)">
+<a id="getStatistic()">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>scan</h4>
-<pre class="methodSignature">public&nbsp;<a href="../../linq4j/Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;java.lang.Object[]&gt;&nbsp;scan&#8203;(<a href="../../DataContext.html" title="interface in org.apache.calcite">DataContext</a>&nbsp;root)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../schema/ScannableTable.html#scan(org.apache.calcite.DataContext)">ScannableTable</a></code></span></div>
-<div class="block">Returns an enumerator over the rows in this Table. Each row is represented
- as an array of its column values.</div>
+<h4>getStatistic</h4>
+<pre class="methodSignature">public&nbsp;<a href="../../schema/Statistic.html" title="interface in org.apache.calcite.schema">Statistic</a>&nbsp;getStatistic()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../schema/Table.html#getStatistic()">Table</a></code></span></div>
+<div class="block">Returns a provider of statistics about this table.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../schema/ScannableTable.html#scan(org.apache.calcite.DataContext)">scan</a></code>&nbsp;in interface&nbsp;<code><a href="../../schema/ScannableTable.html" title="interface in org.apache.calcite.schema">ScannableTable</a></code></dd>
+<dd><code><a href="../../schema/Table.html#getStatistic()">getStatistic</a></code>&nbsp;in interface&nbsp;<code><a href="../../schema/Table.html" title="interface in org.apache.calcite.schema">Table</a></code></dd>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../schema/impl/AbstractTable.html#getStatistic()">getStatistic</a></code>&nbsp;in class&nbsp;<code><a href="../../schema/impl/AbstractTable.html" title="class in org.apache.calcite.schema.impl">AbstractTable</a></code></dd>
 </dl>
 </li>
 </ul>

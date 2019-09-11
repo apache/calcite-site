@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":9,"i1":9,"i2":10,"i3":10,"i4":9,"i5":10,"i6":10,"i7":10,"i8":9,"i9":9,"i10":9,"i11":9,"i12":9,"i13":9,"i14":10,"i15":9,"i16":10,"i17":9,"i18":9,"i19":9,"i20":9};
+var data = {"i0":9,"i1":9,"i2":10,"i3":10,"i4":9,"i5":10,"i6":10,"i7":10,"i8":9,"i9":9,"i10":9,"i11":9,"i12":9,"i13":9,"i14":10,"i15":9,"i16":10,"i17":9,"i18":9,"i19":9,"i20":9,"i21":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -202,16 +202,30 @@ implements java.lang.Comparable&lt;<a href="Pair.html" title="class in org.apach
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>private static class&nbsp;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Pair.MutableZipList.html" title="class in org.apache.calcite.util">Pair.MutableZipList</a>&lt;<a href="Pair.MutableZipList.html" title="type parameter in Pair.MutableZipList">K</a>,&#8203;<a href="Pair.MutableZipList.html" title="type parameter in Pair.MutableZipList">V</a>&gt;</span></code></th>
+<td class="colLast">
+<div class="block">A mutable list of pairs backed by a pair of mutable lists.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>private static class&nbsp;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Pair.RightIterator.html" title="class in org.apache.calcite.util">Pair.RightIterator</a>&lt;<a href="Pair.RightIterator.html" title="type parameter in Pair.RightIterator">L</a>,&#8203;<a href="Pair.RightIterator.html" title="type parameter in Pair.RightIterator">R</a>&gt;</span></code></th>
 <td class="colLast">
 <div class="block">Iterator that returns the right field of each pair.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>private static class&nbsp;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Pair.ZipIterator.html" title="class in org.apache.calcite.util">Pair.ZipIterator</a>&lt;<a href="Pair.ZipIterator.html" title="type parameter in Pair.ZipIterator">L</a>,&#8203;<a href="Pair.ZipIterator.html" title="type parameter in Pair.ZipIterator">R</a>&gt;</span></code></th>
 <td class="colLast">
 <div class="block">Iterator that pairs elements from two iterators.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>private static class&nbsp;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="Pair.ZipList.html" title="class in org.apache.calcite.util">Pair.ZipList</a>&lt;<a href="Pair.ZipList.html" title="type parameter in Pair.ZipList">K</a>,&#8203;<a href="Pair.ZipList.html" title="type parameter in Pair.ZipList">V</a>&gt;</span></code></th>
+<td class="colLast">
+<div class="block">Unmodifiable list of pairs, backed by a pair of lists.</div>
 </td>
 </tr>
 </table>
@@ -420,6 +434,14 @@ implements java.lang.Comparable&lt;<a href="Pair.html" title="class in org.apach
    V[]&nbsp;vs)</code></th>
 <td class="colLast">
 <div class="block">Converts two arrays into a list of <a href="Pair.html" title="class in org.apache.calcite.util"><code>Pair</code></a>s.</div>
+</td>
+</tr>
+<tr id="i21" class="rowColor">
+<td class="colFirst"><code>static &lt;K,&#8203;V&gt;<br>java.util.List&lt;<a href="Pair.html" title="class in org.apache.calcite.util">Pair</a>&lt;K,&#8203;V&gt;&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#zipMutable(java.util.List,java.util.List)">zipMutable</a></span>&#8203;(java.util.List&lt;K&gt;&nbsp;ks,
+          java.util.List&lt;V&gt;&nbsp;vs)</code></th>
+<td class="colLast">
+<div class="block">Returns a mutable list of pairs backed by a pair of mutable lists.</div>
 </td>
 </tr>
 </table>
@@ -773,6 +795,25 @@ implements java.lang.Comparable&lt;<a href="Pair.html" title="class in org.apach
 <dd><code>vs</code> - Right array</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>List of pairs</dd>
+</dl>
+</li>
+</ul>
+<a id="zipMutable(java.util.List,java.util.List)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>zipMutable</h4>
+<pre class="methodSignature">public static&nbsp;&lt;K,&#8203;V&gt;&nbsp;java.util.List&lt;<a href="Pair.html" title="class in org.apache.calcite.util">Pair</a>&lt;K,&#8203;V&gt;&gt;&nbsp;zipMutable&#8203;(java.util.List&lt;K&gt;&nbsp;ks,
+                                                                     java.util.List&lt;V&gt;&nbsp;vs)</pre>
+<div class="block">Returns a mutable list of pairs backed by a pair of mutable lists.
+
+ <p>Modifications to this list are reflected in the backing lists, and vice
+ versa.</div>
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>K</code> - Key (left) value type</dd>
+<dd><code>V</code> - Value (right) value type</dd>
 </dl>
 </li>
 </ul>

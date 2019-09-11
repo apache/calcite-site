@@ -27,8 +27,8 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":6,"i2":6,"i3":10,"i4":10,"i5":9,"i6":9,"i7":10,"i8":10};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
+var data = {"i0":10,"i1":42,"i2":10,"i3":10,"i4":10,"i5":9,"i6":9,"i7":10,"i8":10};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -89,7 +89,7 @@ loadScripts(document, 'script');</script>
 <div>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
-<li><a href="#nested.class.summary">Nested</a>&nbsp;|&nbsp;</li>
+<li>Nested&nbsp;|&nbsp;</li>
 <li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
@@ -131,22 +131,17 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
-<dl>
-<dt>Direct Known Subclasses:</dt>
-<dd><code><a href="JoinInfo.EquiJoinInfo.html" title="class in org.apache.calcite.rel.core">JoinInfo.EquiJoinInfo</a></code>, <code><a href="JoinInfo.NonEquiJoinInfo.html" title="class in org.apache.calcite.rel.core">JoinInfo.NonEquiJoinInfo</a></code></dd>
-</dl>
 <hr>
-<pre>public abstract class <span class="typeNameLabel">JoinInfo</span>
+<pre>public class <span class="typeNameLabel">JoinInfo</span>
 extends java.lang.Object</pre>
 <div class="block">An analyzed join condition.
 
- <p>It is useful for the many algorithms that care whether a join is an
- equi-join.
+ <p>It is useful for the many algorithms that care whether a join has an
+ equi-join condition.
 
  <p>You can create one using <a href="#of(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode)"><code>of(org.apache.calcite.rel.RelNode, org.apache.calcite.rel.RelNode, org.apache.calcite.rex.RexNode)</code></a>, or call
  <a href="Join.html#analyzeCondition()"><code>Join.analyzeCondition()</code></a>; many kinds of join cache their
- join info, especially those that are equi-joins and sub-class
- <a href="EquiJoin.html" title="class in org.apache.calcite.rel.core"><code>EquiJoin</code></a>.</p></div>
+ join info, especially those that are equi-joins.</p></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="Join.html#analyzeCondition()"><code>Join.analyzeCondition()</code></a></dd>
@@ -157,38 +152,6 @@ extends java.lang.Object</pre>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- ======== NESTED CLASS SUMMARY ======== -->
-<section role="region">
-<ul class="blockList">
-<li class="blockList"><a id="nested.class.summary">
-<!--   -->
-</a>
-<h3>Nested Class Summary</h3>
-<table class="memberSummary">
-<caption><span>Nested Classes</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colFirst" scope="col">Modifier and Type</th>
-<th class="colSecond" scope="col">Class</th>
-<th class="colLast" scope="col">Description</th>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code>private static class&nbsp;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="JoinInfo.EquiJoinInfo.html" title="class in org.apache.calcite.rel.core">JoinInfo.EquiJoinInfo</a></span></code></th>
-<td class="colLast">
-<div class="block">JoinInfo that represents an equi-join.</div>
-</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>private static class&nbsp;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="JoinInfo.NonEquiJoinInfo.html" title="class in org.apache.calcite.rel.core">JoinInfo.NonEquiJoinInfo</a></span></code></th>
-<td class="colLast">
-<div class="block">JoinInfo that represents a non equi-join.</div>
-</td>
-</tr>
-</table>
-</li>
-</ul>
-</section>
 <!-- =========== FIELD SUMMARY =========== -->
 <section role="region">
 <ul class="blockList">
@@ -209,6 +172,11 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>com.google.common.collect.ImmutableList&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#nonEquiConditions">nonEquiConditions</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rightKeys">rightKeys</a></span></code></th>
 <td class="colLast">&nbsp;</td>
@@ -233,8 +201,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected </code></td>
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.util.ImmutableIntList,org.apache.calcite.util.ImmutableIntList)">JoinInfo</a></span>&#8203;(<a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;leftKeys,
-        <a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;rightKeys)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.util.ImmutableIntList,org.apache.calcite.util.ImmutableIntList,com.google.common.collect.ImmutableList)">JoinInfo</a></span>&#8203;(<a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;leftKeys,
+        <a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;rightKeys,
+        com.google.common.collect.ImmutableList&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nonEquiConditions)</code></th>
 <td class="colLast">
 <div class="block">Creates a JoinInfo.</div>
 </td>
@@ -251,7 +220,7 @@ extends java.lang.Object</pre>
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colSecond" scope="col">Method</th>
@@ -265,12 +234,14 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>abstract <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></td>
+<td class="colFirst"><code><a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRemaining(org.apache.calcite.rex.RexBuilder)">getRemaining</a></span>&#8203;(<a href="../../rex/RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>abstract boolean</code></td>
+<td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isEqui()">isEqui</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns whether this is an equi-join.</div>
@@ -351,10 +322,19 @@ extends java.lang.Object</pre>
 <a id="rightKeys">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>rightKeys</h4>
 <pre>public final&nbsp;<a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a> rightKeys</pre>
+</li>
+</ul>
+<a id="nonEquiConditions">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>nonEquiConditions</h4>
+<pre>public final&nbsp;com.google.common.collect.ImmutableList&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt; nonEquiConditions</pre>
 </li>
 </ul>
 </li>
@@ -367,14 +347,15 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(org.apache.calcite.util.ImmutableIntList,org.apache.calcite.util.ImmutableIntList)">
+<a id="&lt;init&gt;(org.apache.calcite.util.ImmutableIntList,org.apache.calcite.util.ImmutableIntList,com.google.common.collect.ImmutableList)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>JoinInfo</h4>
 <pre>protected&nbsp;JoinInfo&#8203;(<a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;leftKeys,
-                   <a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;rightKeys)</pre>
+                   <a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;rightKeys,
+                   com.google.common.collect.ImmutableList&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nonEquiConditions)</pre>
 <div class="block">Creates a JoinInfo.</div>
 </li>
 </ul>
@@ -417,7 +398,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>isEqui</h4>
-<pre class="methodSignature">public abstract&nbsp;boolean&nbsp;isEqui()</pre>
+<pre class="methodSignature">public&nbsp;boolean&nbsp;isEqui()</pre>
 <div class="block">Returns whether this is an equi-join.</div>
 </li>
 </ul>
@@ -455,7 +436,9 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getRemaining</h4>
-<pre class="methodSignature">public abstract&nbsp;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;getRemaining&#8203;(<a href="../../rex/RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder)</pre>
+<pre class="methodSignature">@Deprecated
+public&nbsp;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;getRemaining&#8203;(<a href="../../rex/RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder)</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 </li>
 </ul>
 <a id="getEquiCondition(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexBuilder)">
@@ -530,7 +513,7 @@ extends java.lang.Object</pre>
 <div>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
-<li><a href="#nested.class.summary">Nested</a>&nbsp;|&nbsp;</li>
+<li>Nested&nbsp;|&nbsp;</li>
 <li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>

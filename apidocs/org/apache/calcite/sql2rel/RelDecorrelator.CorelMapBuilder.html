@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -127,7 +127,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li><a href="../rel/RelShuttleImpl.html" title="class in org.apache.calcite.rel">org.apache.calcite.rel.RelShuttleImpl</a></li>
 <li>
 <ul class="inheritance">
+<li><a href="../rel/RelHomogeneousShuttle.html" title="class in org.apache.calcite.rel">org.apache.calcite.rel.RelHomogeneousShuttle</a></li>
+<li>
+<ul class="inheritance">
 <li>org.apache.calcite.sql2rel.RelDecorrelator.CorelMapBuilder</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -145,8 +150,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd><a href="RelDecorrelator.html" title="class in org.apache.calcite.sql2rel">RelDecorrelator</a></dd>
 </dl>
 <hr>
-<pre>private static class <span class="typeNameLabel">RelDecorrelator.CorelMapBuilder</span>
-extends <a href="../rel/RelShuttleImpl.html" title="class in org.apache.calcite.rel">RelShuttleImpl</a></pre>
+<pre>public static class <span class="typeNameLabel">RelDecorrelator.CorelMapBuilder</span>
+extends <a href="../rel/RelHomogeneousShuttle.html" title="class in org.apache.calcite.rel">RelHomogeneousShuttle</a></pre>
 <div class="block">Builds a <a href="RelDecorrelator.CorelMap.html" title="class in org.apache.calcite.sql2rel"><code>RelDecorrelator.CorelMap</code></a>.</div>
 </li>
 </ul>
@@ -214,12 +219,10 @@ extends <a href="../rel/RelShuttleImpl.html" title="class in org.apache.calcite.
 <table class="memberSummary">
 <caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colFirst" scope="col">Modifier</th>
-<th class="colSecond" scope="col">Constructor</th>
+<th class="colFirst" scope="col">Constructor</th>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private </code></td>
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">CorelMapBuilder</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -242,7 +245,7 @@ extends <a href="../rel/RelShuttleImpl.html" title="class in org.apache.calcite.
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>(package private) <a href="RelDecorrelator.CorelMap.html" title="class in org.apache.calcite.sql2rel">RelDecorrelator.CorelMap</a></code></td>
+<td class="colFirst"><code><a href="RelDecorrelator.CorelMap.html" title="class in org.apache.calcite.sql2rel">RelDecorrelator.CorelMap</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#build(org.apache.calcite.rel.RelNode...)">build</a></span>&#8203;(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>...&nbsp;rels)</code></th>
 <td class="colLast">
 <div class="block">Creates a CorelMap by iterating over a <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel"><code>RelNode</code></a> tree.</div>
@@ -255,25 +258,10 @@ extends <a href="../rel/RelShuttleImpl.html" title="class in org.apache.calcite.
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.logical.LogicalCorrelate)">visit</a></span>&#8203;(<a href="../rel/logical/LogicalCorrelate.html" title="class in org.apache.calcite.rel.logical">LogicalCorrelate</a>&nbsp;correlate)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.RelNode)">visit</a></span>&#8203;(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;other)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.logical.LogicalFilter)">visit</a></span>&#8203;(<a href="../rel/logical/LogicalFilter.html" title="class in org.apache.calcite.rel.logical">LogicalFilter</a>&nbsp;filter)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.logical.LogicalJoin)">visit</a></span>&#8203;(<a href="../rel/logical/LogicalJoin.html" title="class in org.apache.calcite.rel.logical">LogicalJoin</a>&nbsp;join)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.rel.logical.LogicalProject)">visit</a></span>&#8203;(<a href="../rel/logical/LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a>&nbsp;project)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i6" class="altColor">
 <td class="colFirst"><code>protected <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visitChild(org.apache.calcite.rel.RelNode,int,org.apache.calcite.rel.RelNode)">visitChild</a></span>&#8203;(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;parent,
           int&nbsp;i,
@@ -282,18 +270,25 @@ extends <a href="../rel/RelShuttleImpl.html" title="class in org.apache.calcite.
 <div class="block">Visits a particular child of a parent.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>private <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visitJoin(org.apache.calcite.rel.BiRel)">visitJoin</a></span>&#8203;(<a href="../rel/BiRel.html" title="class in org.apache.calcite.rel">BiRel</a>&nbsp;join)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
+<li class="blockList"><a id="methods.inherited.from.class.org.apache.calcite.rel.RelHomogeneousShuttle">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;org.apache.calcite.rel.<a href="../rel/RelHomogeneousShuttle.html" title="class in org.apache.calcite.rel">RelHomogeneousShuttle</a></h3>
+<code><a href="../rel/RelHomogeneousShuttle.html#visit(org.apache.calcite.rel.core.TableFunctionScan)">visit</a>, <a href="../rel/RelHomogeneousShuttle.html#visit(org.apache.calcite.rel.core.TableScan)">visit</a>, <a href="../rel/RelHomogeneousShuttle.html#visit(org.apache.calcite.rel.logical.LogicalAggregate)">visit</a>, <a href="../rel/RelHomogeneousShuttle.html#visit(org.apache.calcite.rel.logical.LogicalCorrelate)">visit</a>, <a href="../rel/RelHomogeneousShuttle.html#visit(org.apache.calcite.rel.logical.LogicalExchange)">visit</a>, <a href="../rel/RelHomogeneousShuttle.html#visit(org.apache.calcite.rel.logical.LogicalFilter)">visit</a>, <a href="../rel/RelHomogeneousShuttle.html#visit(org.apache.calcite.rel.logical.LogicalIntersect)">visit</a>, <a href="../rel/RelHomogeneousShuttle.html#visit(org.apache.calcite.rel.logical.LogicalJoin)">visit</a>, <a href="../rel/RelHomogeneousShuttle.html#visit(org.apache.calcite.rel.logical.LogicalMatch)">visit</a>, <a href="../rel/RelHomogeneousShuttle.html#visit(org.apache.calcite.rel.logical.LogicalMinus)">visit</a>, <a href="../rel/RelHomogeneousShuttle.html#visit(org.apache.calcite.rel.logical.LogicalProject)">visit</a>, <a href="../rel/RelHomogeneousShuttle.html#visit(org.apache.calcite.rel.logical.LogicalSort)">visit</a>, <a href="../rel/RelHomogeneousShuttle.html#visit(org.apache.calcite.rel.logical.LogicalUnion)">visit</a>, <a href="../rel/RelHomogeneousShuttle.html#visit(org.apache.calcite.rel.logical.LogicalValues)">visit</a></code></li>
+</ul>
+<ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.org.apache.calcite.rel.RelShuttleImpl">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;org.apache.calcite.rel.<a href="../rel/RelShuttleImpl.html" title="class in org.apache.calcite.rel">RelShuttleImpl</a></h3>
-<code><a href="../rel/RelShuttleImpl.html#visit(org.apache.calcite.rel.core.TableFunctionScan)">visit</a>, <a href="../rel/RelShuttleImpl.html#visit(org.apache.calcite.rel.core.TableScan)">visit</a>, <a href="../rel/RelShuttleImpl.html#visit(org.apache.calcite.rel.logical.LogicalAggregate)">visit</a>, <a href="../rel/RelShuttleImpl.html#visit(org.apache.calcite.rel.logical.LogicalExchange)">visit</a>, <a href="../rel/RelShuttleImpl.html#visit(org.apache.calcite.rel.logical.LogicalIntersect)">visit</a>, <a href="../rel/RelShuttleImpl.html#visit(org.apache.calcite.rel.logical.LogicalMatch)">visit</a>, <a href="../rel/RelShuttleImpl.html#visit(org.apache.calcite.rel.logical.LogicalMinus)">visit</a>, <a href="../rel/RelShuttleImpl.html#visit(org.apache.calcite.rel.logical.LogicalSort)">visit</a>, <a href="../rel/RelShuttleImpl.html#visit(org.apache.calcite.rel.logical.LogicalUnion)">visit</a>, <a href="../rel/RelShuttleImpl.html#visit(org.apache.calcite.rel.logical.LogicalValues)">visit</a>, <a href="../rel/RelShuttleImpl.html#visit(org.apache.calcite.rel.RelNode)">visit</a>, <a href="../rel/RelShuttleImpl.html#visitChildren(org.apache.calcite.rel.RelNode)">visitChildren</a></code></li>
+<code><a href="../rel/RelShuttleImpl.html#visitChildren(org.apache.calcite.rel.RelNode)">visitChildren</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
@@ -379,7 +374,7 @@ extends <a href="../rel/RelShuttleImpl.html" title="class in org.apache.calcite.
 <ul class="blockListLast">
 <li class="blockList">
 <h4>CorelMapBuilder</h4>
-<pre>private&nbsp;CorelMapBuilder()</pre>
+<pre>public&nbsp;CorelMapBuilder()</pre>
 </li>
 </ul>
 </li>
@@ -398,22 +393,22 @@ extends <a href="../rel/RelShuttleImpl.html" title="class in org.apache.calcite.
 <ul class="blockList">
 <li class="blockList">
 <h4>build</h4>
-<pre class="methodSignature"><a href="RelDecorrelator.CorelMap.html" title="class in org.apache.calcite.sql2rel">RelDecorrelator.CorelMap</a>&nbsp;build&#8203;(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>...&nbsp;rels)</pre>
+<pre class="methodSignature">public&nbsp;<a href="RelDecorrelator.CorelMap.html" title="class in org.apache.calcite.sql2rel">RelDecorrelator.CorelMap</a>&nbsp;build&#8203;(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>...&nbsp;rels)</pre>
 <div class="block">Creates a CorelMap by iterating over a <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel"><code>RelNode</code></a> tree.</div>
 </li>
 </ul>
-<a id="visit(org.apache.calcite.rel.logical.LogicalJoin)">
+<a id="visit(org.apache.calcite.rel.RelNode)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>visit</h4>
-<pre class="methodSignature">public&nbsp;<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;visit&#8203;(<a href="../rel/logical/LogicalJoin.html" title="class in org.apache.calcite.rel.logical">LogicalJoin</a>&nbsp;join)</pre>
+<pre class="methodSignature">public&nbsp;<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;visit&#8203;(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;other)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../rel/RelShuttle.html#visit(org.apache.calcite.rel.logical.LogicalJoin)">visit</a></code>&nbsp;in interface&nbsp;<code><a href="../rel/RelShuttle.html" title="interface in org.apache.calcite.rel">RelShuttle</a></code></dd>
+<dd><code><a href="../rel/RelShuttle.html#visit(org.apache.calcite.rel.RelNode)">visit</a></code>&nbsp;in interface&nbsp;<code><a href="../rel/RelShuttle.html" title="interface in org.apache.calcite.rel">RelShuttle</a></code></dd>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../rel/RelShuttleImpl.html#visit(org.apache.calcite.rel.logical.LogicalJoin)">visit</a></code>&nbsp;in class&nbsp;<code><a href="../rel/RelShuttleImpl.html" title="class in org.apache.calcite.rel">RelShuttleImpl</a></code></dd>
+<dd><code><a href="../rel/RelShuttleImpl.html#visit(org.apache.calcite.rel.RelNode)">visit</a></code>&nbsp;in class&nbsp;<code><a href="../rel/RelShuttleImpl.html" title="class in org.apache.calcite.rel">RelShuttleImpl</a></code></dd>
 </dl>
 </li>
 </ul>
@@ -434,21 +429,6 @@ extends <a href="../rel/RelShuttleImpl.html" title="class in org.apache.calcite.
 </dl>
 </li>
 </ul>
-<a id="visit(org.apache.calcite.rel.logical.LogicalCorrelate)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>visit</h4>
-<pre class="methodSignature">public&nbsp;<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;visit&#8203;(<a href="../rel/logical/LogicalCorrelate.html" title="class in org.apache.calcite.rel.logical">LogicalCorrelate</a>&nbsp;correlate)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../rel/RelShuttle.html#visit(org.apache.calcite.rel.logical.LogicalCorrelate)">visit</a></code>&nbsp;in interface&nbsp;<code><a href="../rel/RelShuttle.html" title="interface in org.apache.calcite.rel">RelShuttle</a></code></dd>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../rel/RelShuttleImpl.html#visit(org.apache.calcite.rel.logical.LogicalCorrelate)">visit</a></code>&nbsp;in class&nbsp;<code><a href="../rel/RelShuttleImpl.html" title="class in org.apache.calcite.rel">RelShuttleImpl</a></code></dd>
-</dl>
-</li>
-</ul>
 <a id="visitJoin(org.apache.calcite.rel.BiRel)">
 <!--   -->
 </a>
@@ -456,36 +436,6 @@ extends <a href="../rel/RelShuttleImpl.html" title="class in org.apache.calcite.
 <li class="blockList">
 <h4>visitJoin</h4>
 <pre class="methodSignature">private&nbsp;<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;visitJoin&#8203;(<a href="../rel/BiRel.html" title="class in org.apache.calcite.rel">BiRel</a>&nbsp;join)</pre>
-</li>
-</ul>
-<a id="visit(org.apache.calcite.rel.logical.LogicalFilter)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>visit</h4>
-<pre class="methodSignature">public&nbsp;<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;visit&#8203;(<a href="../rel/logical/LogicalFilter.html" title="class in org.apache.calcite.rel.logical">LogicalFilter</a>&nbsp;filter)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../rel/RelShuttle.html#visit(org.apache.calcite.rel.logical.LogicalFilter)">visit</a></code>&nbsp;in interface&nbsp;<code><a href="../rel/RelShuttle.html" title="interface in org.apache.calcite.rel">RelShuttle</a></code></dd>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../rel/RelShuttleImpl.html#visit(org.apache.calcite.rel.logical.LogicalFilter)">visit</a></code>&nbsp;in class&nbsp;<code><a href="../rel/RelShuttleImpl.html" title="class in org.apache.calcite.rel">RelShuttleImpl</a></code></dd>
-</dl>
-</li>
-</ul>
-<a id="visit(org.apache.calcite.rel.logical.LogicalProject)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>visit</h4>
-<pre class="methodSignature">public&nbsp;<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;visit&#8203;(<a href="../rel/logical/LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a>&nbsp;project)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../rel/RelShuttle.html#visit(org.apache.calcite.rel.logical.LogicalProject)">visit</a></code>&nbsp;in interface&nbsp;<code><a href="../rel/RelShuttle.html" title="interface in org.apache.calcite.rel">RelShuttle</a></code></dd>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../rel/RelShuttleImpl.html#visit(org.apache.calcite.rel.logical.LogicalProject)">visit</a></code>&nbsp;in class&nbsp;<code><a href="../rel/RelShuttleImpl.html" title="class in org.apache.calcite.rel">RelShuttleImpl</a></code></dd>
-</dl>
 </li>
 </ul>
 <a id="rexVisitor(org.apache.calcite.rel.RelNode)">

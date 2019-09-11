@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -150,15 +150,19 @@ extends <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</
 
  <p>todo: This should really be a subtype of <a href="SqlCall.html" title="class in org.apache.calcite.sql"><code>SqlCall</code></a>.</p>
 
- <p>In its full glory, we will have to support complex type expressions
+ <p>we support complex type expressions
  like:</p>
 
  <blockquote><code>ROW(<br>
-   NUMBER(5, 2) NOT NULL AS foo,<br>
-   ROW(BOOLEAN AS b, MyUDT NOT NULL AS i) AS rec)</code></blockquote>
+   foo NUMBER(5, 2) NOT NULL,<br>
+   rec ROW(b BOOLEAN, i MyUDT NOT NULL))</code></blockquote>
 
- <p>Currently it only supports simple datatypes like CHAR, VARCHAR and DOUBLE,
- with optional precision and scale.</p></div>
+ <p>Internally we use <a href="SqlRowTypeNameSpec.html" title="class in org.apache.calcite.sql"><code>SqlRowTypeNameSpec</code></a> to specify row data type name.
+
+ <p>We support simple data types like CHAR, VARCHAR and DOUBLE,
+ with optional precision and scale.</p>
+
+ <p>Internally we use <a href="SqlBasicTypeNameSpec.html" title="class in org.apache.calcite.sql"><code>SqlBasicTypeNameSpec</code></a> to specify basic sql data type name.</div>
 </li>
 </ul>
 </div>
@@ -180,18 +184,8 @@ extends <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private <a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a></code></td>
+<td class="colFirst"><code>private <a href="SqlTypeNameSpec.html" title="class in org.apache.calcite.sql">SqlTypeNameSpec</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#baseTypeName">baseTypeName</a></span></code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>private java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#charSetName">charSetName</a></span></code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code>private <a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#collectionsTypeName">collectionsTypeName</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -202,23 +196,13 @@ extends <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private int</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#precision">precision</a></span></code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>private int</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#scale">scale</a></span></code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
 <td class="colFirst"><code>private java.util.TimeZone</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#timeZone">timeZone</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private <a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#typeName">typeName</a></span></code></th>
+<td class="colFirst"><code>private <a href="SqlTypeNameSpec.html" title="class in org.apache.calcite.sql">SqlTypeNameSpec</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#typeNameSpec">typeNameSpec</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </table>
@@ -246,52 +230,39 @@ extends <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.sql.SqlIdentifier,int,int,java.lang.String,java.util.TimeZone,org.apache.calcite.sql.parser.SqlParserPos)">SqlDataTypeSpec</a></span>&#8203;(<a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;typeName,
-               int&nbsp;precision,
-               int&nbsp;scale,
-               java.lang.String&nbsp;charSetName,
-               java.util.TimeZone&nbsp;timeZone,
-               <a href="parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</code></th>
-<td class="colLast">
-<div class="block">Creates a type specification representing a regular, non-collection type.</div>
-</td>
-</tr>
-<tr class="rowColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.sql.SqlIdentifier,org.apache.calcite.sql.SqlIdentifier,int,int,java.lang.String,java.util.TimeZone,java.lang.Boolean,org.apache.calcite.sql.parser.SqlParserPos)">SqlDataTypeSpec</a></span>&#8203;(<a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;collectionsTypeName,
-               <a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;typeName,
-               int&nbsp;precision,
-               int&nbsp;scale,
-               java.lang.String&nbsp;charSetName,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.sql.SqlTypeNameSpec,java.util.TimeZone,java.lang.Boolean,org.apache.calcite.sql.parser.SqlParserPos)">SqlDataTypeSpec</a></span>&#8203;(<a href="SqlTypeNameSpec.html" title="class in org.apache.calcite.sql">SqlTypeNameSpec</a>&nbsp;typeNameSpec,
                java.util.TimeZone&nbsp;timeZone,
                java.lang.Boolean&nbsp;nullable,
                <a href="parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</code></th>
 <td class="colLast">
-<div class="block">Creates a type specification that has no base type.</div>
+<div class="block">Creates a type specification representing a type, with time zone
+ and nullability specified.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.sql.SqlTypeNameSpec,java.util.TimeZone,org.apache.calcite.sql.parser.SqlParserPos)">SqlDataTypeSpec</a></span>&#8203;(<a href="SqlTypeNameSpec.html" title="class in org.apache.calcite.sql">SqlTypeNameSpec</a>&nbsp;typeNameSpec,
+               java.util.TimeZone&nbsp;timeZone,
+               <a href="parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</code></th>
+<td class="colLast">
+<div class="block">Creates a type specification representing a type, with time zone specified.</div>
 </td>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.sql.SqlIdentifier,org.apache.calcite.sql.SqlIdentifier,int,int,java.lang.String,org.apache.calcite.sql.parser.SqlParserPos)">SqlDataTypeSpec</a></span>&#8203;(<a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;collectionsTypeName,
-               <a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;typeName,
-               int&nbsp;precision,
-               int&nbsp;scale,
-               java.lang.String&nbsp;charSetName,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.sql.SqlTypeNameSpec,org.apache.calcite.sql.parser.SqlParserPos)">SqlDataTypeSpec</a></span>&#8203;(<a href="SqlTypeNameSpec.html" title="class in org.apache.calcite.sql">SqlTypeNameSpec</a>&nbsp;typeNameSpec,
                <a href="parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</code></th>
 <td class="colLast">
-<div class="block">Creates a type specification representing a collection type.</div>
+<div class="block">Creates a type specification representing a type.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.sql.SqlIdentifier,org.apache.calcite.sql.SqlIdentifier,org.apache.calcite.sql.SqlIdentifier,int,int,java.lang.String,java.util.TimeZone,java.lang.Boolean,org.apache.calcite.sql.parser.SqlParserPos)">SqlDataTypeSpec</a></span>&#8203;(<a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;collectionsTypeName,
-               <a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;typeName,
-               <a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;baseTypeName,
-               int&nbsp;precision,
-               int&nbsp;scale,
-               java.lang.String&nbsp;charSetName,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.sql.SqlTypeNameSpec,org.apache.calcite.sql.SqlTypeNameSpec,java.util.TimeZone,java.lang.Boolean,org.apache.calcite.sql.parser.SqlParserPos)">SqlDataTypeSpec</a></span>&#8203;(<a href="SqlTypeNameSpec.html" title="class in org.apache.calcite.sql">SqlTypeNameSpec</a>&nbsp;typeNameSpec,
+               <a href="SqlTypeNameSpec.html" title="class in org.apache.calcite.sql">SqlTypeNameSpec</a>&nbsp;baseTypeName,
                java.util.TimeZone&nbsp;timeZone,
                java.lang.Boolean&nbsp;nullable,
                <a href="parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</code></th>
 <td class="colLast">
-<div class="block">Creates a type specification.</div>
+<div class="block">Creates a type specification representing a type, with time zone,
+ nullability and base type name specified.</div>
 </td>
 </tr>
 </table>
@@ -328,27 +299,20 @@ extends <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#deriveType(org.apache.calcite.rel.type.RelDataTypeFactory)">deriveType</a></span>&#8203;(<a href="../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#deriveType(org.apache.calcite.sql.validate.SqlValidator)">deriveType</a></span>&#8203;(<a href="validate/SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator)</code></th>
 <td class="colLast">
-<div class="block">Does not throw an error if the type is not built-in.</div>
+<div class="block">Converts this type specification to a <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type"><code>RelDataType</code></a>.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#deriveType(org.apache.calcite.rel.type.RelDataTypeFactory,boolean)">deriveType</a></span>&#8203;(<a href="../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#deriveType(org.apache.calcite.sql.validate.SqlValidator,boolean)">deriveType</a></span>&#8203;(<a href="validate/SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
           boolean&nbsp;nullable)</code></th>
 <td class="colLast">
 <div class="block">Converts this type specification to a <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type"><code>RelDataType</code></a>.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#deriveType(org.apache.calcite.sql.validate.SqlValidator)">deriveType</a></span>&#8203;(<a href="validate/SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator)</code></th>
-<td class="colLast">
-<div class="block">Throws an error if the type is not found.</div>
-</td>
-</tr>
-<tr id="i5" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equalsDeep(org.apache.calcite.sql.SqlNode,org.apache.calcite.util.Litmus)">equalsDeep</a></span>&#8203;(<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
           <a href="../util/Litmus.html" title="interface in org.apache.calcite.util">Litmus</a>&nbsp;litmus)</code></th>
@@ -356,17 +320,21 @@ extends <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</
 <div class="block">Returns whether this node is structurally equivalent to another node.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCharSetName()">getCharSetName</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>private <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#fixUpNullability(org.apache.calcite.rel.type.RelDataTypeFactory,org.apache.calcite.rel.type.RelDataType,boolean)">fixUpNullability</a></span>&#8203;(<a href="../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory,
+                <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type,
+                boolean&nbsp;nullable)</code></th>
+<td class="colLast">
+<div class="block">Fix up the nullability of the <code>type</code>.</div>
+</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCollectionsTypeName()">getCollectionsTypeName</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="SqlDataTypeSpec.html" title="class in org.apache.calcite.sql">SqlDataTypeSpec</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getComponentTypeSpec()">getComponentTypeSpec</a></span>()</code></th>
 <td class="colLast">
@@ -375,39 +343,34 @@ extends <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</
  Collection types are <code>ARRAY</code> and <code>MULTISET</code>.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="validate/SqlMonotonicity.html" title="enum in org.apache.calcite.sql.validate">SqlMonotonicity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMonotonicity(org.apache.calcite.sql.validate.SqlValidatorScope)">getMonotonicity</a></span>&#8203;(<a href="validate/SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope)</code></th>
 <td class="colLast">
 <div class="block">Returns whether expression is always ascending, descending or constant.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.lang.Boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNullable()">getNullable</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
-<td class="colFirst"><code>int</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPrecision()">getPrecision</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i12" class="altColor">
-<td class="colFirst"><code>int</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getScale()">getScale</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i13" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>java.util.TimeZone</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTimeZone()">getTimeZone</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTypeName()">getTypeName</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i12" class="altColor">
+<td class="colFirst"><code><a href="SqlTypeNameSpec.html" title="class in org.apache.calcite.sql">SqlTypeNameSpec</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTypeNameSpec()">getTypeNameSpec</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unparse(org.apache.calcite.sql.SqlWriter,int,int)">unparse</a></span>&#8203;(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
        int&nbsp;leftPrec,
@@ -416,7 +379,7 @@ extends <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</
 <div class="block">Writes a SQL representation of this node to a writer.</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#validate(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope)">validate</a></span>&#8203;(<a href="validate/SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
         <a href="validate/SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope)</code></th>
@@ -424,7 +387,7 @@ extends <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</
 <div class="block">Validates this node.</div>
 </td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="SqlDataTypeSpec.html" title="class in org.apache.calcite.sql">SqlDataTypeSpec</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withNullable(java.lang.Boolean)">withNullable</a></span>&#8203;(java.lang.Boolean&nbsp;nullable)</code></th>
 <td class="colLast">
@@ -463,22 +426,13 @@ extends <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</
 <!--   -->
 </a>
 <h3>Field Detail</h3>
-<a id="collectionsTypeName">
+<a id="typeNameSpec">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>collectionsTypeName</h4>
-<pre>private final&nbsp;<a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a> collectionsTypeName</pre>
-</li>
-</ul>
-<a id="typeName">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>typeName</h4>
-<pre>private final&nbsp;<a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a> typeName</pre>
+<h4>typeNameSpec</h4>
+<pre>private final&nbsp;<a href="SqlTypeNameSpec.html" title="class in org.apache.calcite.sql">SqlTypeNameSpec</a> typeNameSpec</pre>
 </li>
 </ul>
 <a id="baseTypeName">
@@ -487,34 +441,7 @@ extends <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</
 <ul class="blockList">
 <li class="blockList">
 <h4>baseTypeName</h4>
-<pre>private final&nbsp;<a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a> baseTypeName</pre>
-</li>
-</ul>
-<a id="scale">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>scale</h4>
-<pre>private final&nbsp;int scale</pre>
-</li>
-</ul>
-<a id="precision">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>precision</h4>
-<pre>private final&nbsp;int precision</pre>
-</li>
-</ul>
-<a id="charSetName">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>charSetName</h4>
-<pre>private final&nbsp;java.lang.String charSetName</pre>
+<pre>private final&nbsp;<a href="SqlTypeNameSpec.html" title="class in org.apache.calcite.sql">SqlTypeNameSpec</a> baseTypeName</pre>
 </li>
 </ul>
 <a id="timeZone">
@@ -549,69 +476,82 @@ extends <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(org.apache.calcite.sql.SqlIdentifier,int,int,java.lang.String,java.util.TimeZone,org.apache.calcite.sql.parser.SqlParserPos)">
+<a id="&lt;init&gt;(org.apache.calcite.sql.SqlTypeNameSpec,org.apache.calcite.sql.parser.SqlParserPos)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>SqlDataTypeSpec</h4>
-<pre>public&nbsp;SqlDataTypeSpec&#8203;(<a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;typeName,
-                       int&nbsp;precision,
-                       int&nbsp;scale,
-                       java.lang.String&nbsp;charSetName,
+<pre>public&nbsp;SqlDataTypeSpec&#8203;(<a href="SqlTypeNameSpec.html" title="class in org.apache.calcite.sql">SqlTypeNameSpec</a>&nbsp;typeNameSpec,
+                       <a href="parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</pre>
+<div class="block">Creates a type specification representing a type.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>typeNameSpec</code> - The type name can be basic sql type, row type,
+                     collections type and user defined type.</dd>
+</dl>
+</li>
+</ul>
+<a id="&lt;init&gt;(org.apache.calcite.sql.SqlTypeNameSpec,java.util.TimeZone,org.apache.calcite.sql.parser.SqlParserPos)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>SqlDataTypeSpec</h4>
+<pre>public&nbsp;SqlDataTypeSpec&#8203;(<a href="SqlTypeNameSpec.html" title="class in org.apache.calcite.sql">SqlTypeNameSpec</a>&nbsp;typeNameSpec,
                        java.util.TimeZone&nbsp;timeZone,
                        <a href="parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</pre>
-<div class="block">Creates a type specification representing a regular, non-collection type.</div>
+<div class="block">Creates a type specification representing a type, with time zone specified.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>typeNameSpec</code> - The type name can be basic sql type, row type,
+                     collections type and user defined type.</dd>
+<dd><code>timeZone</code> - Specified time zone.</dd>
+</dl>
 </li>
 </ul>
-<a id="&lt;init&gt;(org.apache.calcite.sql.SqlIdentifier,org.apache.calcite.sql.SqlIdentifier,int,int,java.lang.String,org.apache.calcite.sql.parser.SqlParserPos)">
+<a id="&lt;init&gt;(org.apache.calcite.sql.SqlTypeNameSpec,java.util.TimeZone,java.lang.Boolean,org.apache.calcite.sql.parser.SqlParserPos)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>SqlDataTypeSpec</h4>
-<pre>public&nbsp;SqlDataTypeSpec&#8203;(<a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;collectionsTypeName,
-                       <a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;typeName,
-                       int&nbsp;precision,
-                       int&nbsp;scale,
-                       java.lang.String&nbsp;charSetName,
-                       <a href="parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</pre>
-<div class="block">Creates a type specification representing a collection type.</div>
-</li>
-</ul>
-<a id="&lt;init&gt;(org.apache.calcite.sql.SqlIdentifier,org.apache.calcite.sql.SqlIdentifier,int,int,java.lang.String,java.util.TimeZone,java.lang.Boolean,org.apache.calcite.sql.parser.SqlParserPos)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>SqlDataTypeSpec</h4>
-<pre>public&nbsp;SqlDataTypeSpec&#8203;(<a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;collectionsTypeName,
-                       <a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;typeName,
-                       int&nbsp;precision,
-                       int&nbsp;scale,
-                       java.lang.String&nbsp;charSetName,
+<pre>public&nbsp;SqlDataTypeSpec&#8203;(<a href="SqlTypeNameSpec.html" title="class in org.apache.calcite.sql">SqlTypeNameSpec</a>&nbsp;typeNameSpec,
                        java.util.TimeZone&nbsp;timeZone,
                        java.lang.Boolean&nbsp;nullable,
                        <a href="parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</pre>
-<div class="block">Creates a type specification that has no base type.</div>
+<div class="block">Creates a type specification representing a type, with time zone
+ and nullability specified.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>typeNameSpec</code> - The type name can be basic sql type, row type,
+                     collections type and user defined type.</dd>
+<dd><code>timeZone</code> - Specified time zone.</dd>
+<dd><code>nullable</code> - The nullability.</dd>
+</dl>
 </li>
 </ul>
-<a id="&lt;init&gt;(org.apache.calcite.sql.SqlIdentifier,org.apache.calcite.sql.SqlIdentifier,org.apache.calcite.sql.SqlIdentifier,int,int,java.lang.String,java.util.TimeZone,java.lang.Boolean,org.apache.calcite.sql.parser.SqlParserPos)">
+<a id="&lt;init&gt;(org.apache.calcite.sql.SqlTypeNameSpec,org.apache.calcite.sql.SqlTypeNameSpec,java.util.TimeZone,java.lang.Boolean,org.apache.calcite.sql.parser.SqlParserPos)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>SqlDataTypeSpec</h4>
-<pre>public&nbsp;SqlDataTypeSpec&#8203;(<a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;collectionsTypeName,
-                       <a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;typeName,
-                       <a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;baseTypeName,
-                       int&nbsp;precision,
-                       int&nbsp;scale,
-                       java.lang.String&nbsp;charSetName,
+<pre>public&nbsp;SqlDataTypeSpec&#8203;(<a href="SqlTypeNameSpec.html" title="class in org.apache.calcite.sql">SqlTypeNameSpec</a>&nbsp;typeNameSpec,
+                       <a href="SqlTypeNameSpec.html" title="class in org.apache.calcite.sql">SqlTypeNameSpec</a>&nbsp;baseTypeName,
                        java.util.TimeZone&nbsp;timeZone,
                        java.lang.Boolean&nbsp;nullable,
                        <a href="parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</pre>
-<div class="block">Creates a type specification.</div>
+<div class="block">Creates a type specification representing a type, with time zone,
+ nullability and base type name specified.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>typeNameSpec</code> - The type name can be basic sql type, row type,
+                     collections type and user defined type.</dd>
+<dd><code>baseTypeName</code> - The base type name.</dd>
+<dd><code>timeZone</code> - Specified time zone.</dd>
+<dd><code>nullable</code> - The nullability.</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -679,31 +619,13 @@ extends <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</
 <pre class="methodSignature">public&nbsp;<a href="SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;getTypeName()</pre>
 </li>
 </ul>
-<a id="getScale()">
+<a id="getTypeNameSpec()">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getScale</h4>
-<pre class="methodSignature">public&nbsp;int&nbsp;getScale()</pre>
-</li>
-</ul>
-<a id="getPrecision()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getPrecision</h4>
-<pre class="methodSignature">public&nbsp;int&nbsp;getPrecision()</pre>
-</li>
-</ul>
-<a id="getCharSetName()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getCharSetName</h4>
-<pre class="methodSignature">public&nbsp;java.lang.String&nbsp;getCharSetName()</pre>
+<h4>getTypeNameSpec</h4>
+<pre class="methodSignature">public&nbsp;<a href="SqlTypeNameSpec.html" title="class in org.apache.calcite.sql">SqlTypeNameSpec</a>&nbsp;getTypeNameSpec()</pre>
 </li>
 </ul>
 <a id="getTimeZone()">
@@ -857,34 +779,47 @@ extends <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</
 <li class="blockList">
 <h4>deriveType</h4>
 <pre class="methodSignature">public&nbsp;<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;deriveType&#8203;(<a href="validate/SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator)</pre>
-<div class="block">Throws an error if the type is not found.</div>
+<div class="block">Converts this type specification to a <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type"><code>RelDataType</code></a>.
+
+ <p>Throws an error if the type is not found.</div>
 </li>
 </ul>
-<a id="deriveType(org.apache.calcite.rel.type.RelDataTypeFactory)">
+<a id="deriveType(org.apache.calcite.sql.validate.SqlValidator,boolean)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>deriveType</h4>
-<pre class="methodSignature">public&nbsp;<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;deriveType&#8203;(<a href="../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory)</pre>
-<div class="block">Does not throw an error if the type is not built-in.</div>
+<pre class="methodSignature">public&nbsp;<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;deriveType&#8203;(<a href="validate/SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
+                              boolean&nbsp;nullable)</pre>
+<div class="block">Converts this type specification to a <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type"><code>RelDataType</code></a>.
+
+ <p>Throws an error if the type is not found.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>nullable</code> - Whether the type is nullable if the type specification
+                 does not explicitly state.</dd>
+</dl>
 </li>
 </ul>
-<a id="deriveType(org.apache.calcite.rel.type.RelDataTypeFactory,boolean)">
+<a id="fixUpNullability(org.apache.calcite.rel.type.RelDataTypeFactory,org.apache.calcite.rel.type.RelDataType,boolean)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>deriveType</h4>
-<pre class="methodSignature">public&nbsp;<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;deriveType&#8203;(<a href="../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory,
-                              boolean&nbsp;nullable)</pre>
-<div class="block">Converts this type specification to a <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type"><code>RelDataType</code></a>.
-
- <p>Does not throw an error if the type is not built-in.</div>
+<h4>fixUpNullability</h4>
+<pre class="methodSignature">private&nbsp;<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;fixUpNullability&#8203;(<a href="../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory,
+                                     <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type,
+                                     boolean&nbsp;nullable)</pre>
+<div class="block">Fix up the nullability of the <code>type</code>.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>nullable</code> - Whether the type is nullable if the type specification
-                 does not explicitly state</dd>
+<dd><code>typeFactory</code> - Type factory.</dd>
+<dd><code>type</code> - The type to coerce nullability.</dd>
+<dd><code>nullable</code> - Default nullability to use if this type specification does not
+                    specify nullability.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>type with specified nullability or the default.</dd>
 </dl>
 </li>
 </ul>

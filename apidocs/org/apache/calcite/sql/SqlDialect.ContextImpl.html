@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -215,6 +215,16 @@ implements <a href="SqlDialect.Context.html" title="interface in org.apache.calc
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>private java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#literalEscapedQuoteString">literalEscapedQuoteString</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>private java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#literalQuoteString">literalQuoteString</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>private <a href="../config/NullCollation.html" title="enum in org.apache.calcite.config">NullCollation</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#nullCollation">nullCollation</a></span></code></th>
 <td class="colLast">&nbsp;</td>
@@ -249,11 +259,13 @@ implements <a href="SqlDialect.Context.html" title="interface in org.apache.calc
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>private </code></td>
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.sql.SqlDialect.DatabaseProduct,java.lang.String,java.lang.String,int,int,java.lang.String,org.apache.calcite.avatica.util.Casing,org.apache.calcite.avatica.util.Casing,boolean,org.apache.calcite.sql.validate.SqlConformance,org.apache.calcite.config.NullCollation,org.apache.calcite.rel.type.RelDataTypeSystem,org.apache.calcite.sql.dialect.JethroDataSqlDialect.JethroInfo)">ContextImpl</a></span>&#8203;(<a href="SqlDialect.DatabaseProduct.html" title="enum in org.apache.calcite.sql">SqlDialect.DatabaseProduct</a>&nbsp;databaseProduct,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.sql.SqlDialect.DatabaseProduct,java.lang.String,java.lang.String,int,int,java.lang.String,java.lang.String,java.lang.String,org.apache.calcite.avatica.util.Casing,org.apache.calcite.avatica.util.Casing,boolean,org.apache.calcite.sql.validate.SqlConformance,org.apache.calcite.config.NullCollation,org.apache.calcite.rel.type.RelDataTypeSystem,org.apache.calcite.sql.dialect.JethroDataSqlDialect.JethroInfo)">ContextImpl</a></span>&#8203;(<a href="SqlDialect.DatabaseProduct.html" title="enum in org.apache.calcite.sql">SqlDialect.DatabaseProduct</a>&nbsp;databaseProduct,
            java.lang.String&nbsp;databaseProductName,
            java.lang.String&nbsp;databaseVersion,
            int&nbsp;databaseMajorVersion,
            int&nbsp;databaseMinorVersion,
+           java.lang.String&nbsp;literalQuoteString,
+           java.lang.String&nbsp;literalEscapedQuoteString,
            java.lang.String&nbsp;identifierQuoteString,
            org.apache.calcite.avatica.util.Casing&nbsp;quotedCasing,
            org.apache.calcite.avatica.util.Casing&nbsp;unquotedCasing,
@@ -333,81 +345,101 @@ implements <a href="SqlDialect.Context.html" title="interface in org.apache.calc
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i10" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#literalEscapedQuoteString()">literalEscapedQuoteString</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i11" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#literalQuoteString()">literalQuoteString</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="../config/NullCollation.html" title="enum in org.apache.calcite.config">NullCollation</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#nullCollation()">nullCollation</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>org.apache.calcite.avatica.util.Casing</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#quotedCasing()">quotedCasing</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>org.apache.calcite.avatica.util.Casing</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unquotedCasing()">unquotedCasing</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withCaseSensitive(boolean)">withCaseSensitive</a></span>&#8203;(boolean&nbsp;caseSensitive)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withConformance(org.apache.calcite.sql.validate.SqlConformance)">withConformance</a></span>&#8203;(<a href="validate/SqlConformance.html" title="interface in org.apache.calcite.sql.validate">SqlConformance</a>&nbsp;conformance)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withDatabaseMajorVersion(int)">withDatabaseMajorVersion</a></span>&#8203;(int&nbsp;databaseMajorVersion)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withDatabaseMinorVersion(int)">withDatabaseMinorVersion</a></span>&#8203;(int&nbsp;databaseMinorVersion)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withDatabaseProduct(org.apache.calcite.sql.SqlDialect.DatabaseProduct)">withDatabaseProduct</a></span>&#8203;(<a href="SqlDialect.DatabaseProduct.html" title="enum in org.apache.calcite.sql">SqlDialect.DatabaseProduct</a>&nbsp;databaseProduct)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withDatabaseProductName(java.lang.String)">withDatabaseProductName</a></span>&#8203;(java.lang.String&nbsp;databaseProductName)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withDatabaseVersion(java.lang.String)">withDatabaseVersion</a></span>&#8203;(java.lang.String&nbsp;databaseVersion)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withDataTypeSystem(org.apache.calcite.rel.type.RelDataTypeSystem)">withDataTypeSystem</a></span>&#8203;(<a href="../rel/type/RelDataTypeSystem.html" title="interface in org.apache.calcite.rel.type">RelDataTypeSystem</a>&nbsp;dataTypeSystem)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withIdentifierQuoteString(java.lang.String)">withIdentifierQuoteString</a></span>&#8203;(java.lang.String&nbsp;identifierQuoteString)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i22" class="altColor">
+<tr id="i24" class="altColor">
 <td class="colFirst"><code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withJethroInfo(org.apache.calcite.sql.dialect.JethroDataSqlDialect.JethroInfo)">withJethroInfo</a></span>&#8203;(<a href="dialect/JethroDataSqlDialect.JethroInfo.html" title="class in org.apache.calcite.sql.dialect">JethroDataSqlDialect.JethroInfo</a>&nbsp;jethroInfo)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i23" class="rowColor">
+<tr id="i25" class="rowColor">
+<td class="colFirst"><code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withLiteralEscapedQuoteString(java.lang.String)">withLiteralEscapedQuoteString</a></span>&#8203;(java.lang.String&nbsp;literalEscapedQuoteString)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i26" class="altColor">
+<td class="colFirst"><code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withLiteralQuoteString(java.lang.String)">withLiteralQuoteString</a></span>&#8203;(java.lang.String&nbsp;literalQuoteString)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i27" class="rowColor">
 <td class="colFirst"><code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withNullCollation(org.apache.calcite.config.NullCollation)">withNullCollation</a></span>&#8203;(<a href="../config/NullCollation.html" title="enum in org.apache.calcite.config">NullCollation</a>&nbsp;nullCollation)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i24" class="altColor">
+<tr id="i28" class="altColor">
 <td class="colFirst"><code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withQuotedCasing(org.apache.calcite.avatica.util.Casing)">withQuotedCasing</a></span>&#8203;(org.apache.calcite.avatica.util.Casing&nbsp;quotedCasing)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i25" class="rowColor">
+<tr id="i29" class="rowColor">
 <td class="colFirst"><code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withUnquotedCasing(org.apache.calcite.avatica.util.Casing)">withUnquotedCasing</a></span>&#8203;(org.apache.calcite.avatica.util.Casing&nbsp;unquotedCasing)</code></th>
 <td class="colLast">&nbsp;</td>
@@ -479,6 +511,24 @@ implements <a href="SqlDialect.Context.html" title="interface in org.apache.calc
 <li class="blockList">
 <h4>databaseMinorVersion</h4>
 <pre>private final&nbsp;int databaseMinorVersion</pre>
+</li>
+</ul>
+<a id="literalQuoteString">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>literalQuoteString</h4>
+<pre>private final&nbsp;java.lang.String literalQuoteString</pre>
+</li>
+</ul>
+<a id="literalEscapedQuoteString">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>literalEscapedQuoteString</h4>
+<pre>private final&nbsp;java.lang.String literalEscapedQuoteString</pre>
 </li>
 </ul>
 <a id="identifierQuoteString">
@@ -563,7 +613,7 @@ implements <a href="SqlDialect.Context.html" title="interface in org.apache.calc
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(org.apache.calcite.sql.SqlDialect.DatabaseProduct,java.lang.String,java.lang.String,int,int,java.lang.String,org.apache.calcite.avatica.util.Casing,org.apache.calcite.avatica.util.Casing,boolean,org.apache.calcite.sql.validate.SqlConformance,org.apache.calcite.config.NullCollation,org.apache.calcite.rel.type.RelDataTypeSystem,org.apache.calcite.sql.dialect.JethroDataSqlDialect.JethroInfo)">
+<a id="&lt;init&gt;(org.apache.calcite.sql.SqlDialect.DatabaseProduct,java.lang.String,java.lang.String,int,int,java.lang.String,java.lang.String,java.lang.String,org.apache.calcite.avatica.util.Casing,org.apache.calcite.avatica.util.Casing,boolean,org.apache.calcite.sql.validate.SqlConformance,org.apache.calcite.config.NullCollation,org.apache.calcite.rel.type.RelDataTypeSystem,org.apache.calcite.sql.dialect.JethroDataSqlDialect.JethroInfo)">
 <!--   -->
 </a>
 <ul class="blockListLast">
@@ -574,6 +624,8 @@ implements <a href="SqlDialect.Context.html" title="interface in org.apache.calc
                     java.lang.String&nbsp;databaseVersion,
                     int&nbsp;databaseMajorVersion,
                     int&nbsp;databaseMinorVersion,
+                    java.lang.String&nbsp;literalQuoteString,
+                    java.lang.String&nbsp;literalEscapedQuoteString,
                     java.lang.String&nbsp;identifierQuoteString,
                     org.apache.calcite.avatica.util.Casing&nbsp;quotedCasing,
                     org.apache.calcite.avatica.util.Casing&nbsp;unquotedCasing,
@@ -723,6 +775,58 @@ public&nbsp;<a href="SqlDialect.DatabaseProduct.html" title="enum in org.apache.
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="SqlDialect.Context.html#withDatabaseMinorVersion(int)">withDatabaseMinorVersion</a></code>&nbsp;in interface&nbsp;<code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="literalQuoteString()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>literalQuoteString</h4>
+<pre class="methodSignature">public&nbsp;java.lang.String&nbsp;literalQuoteString()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="SqlDialect.Context.html#literalQuoteString()">literalQuoteString</a></code>&nbsp;in interface&nbsp;<code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="withLiteralQuoteString(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withLiteralQuoteString</h4>
+<pre class="methodSignature">public&nbsp;<a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a>&nbsp;withLiteralQuoteString&#8203;(java.lang.String&nbsp;literalQuoteString)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="SqlDialect.Context.html#withLiteralQuoteString(java.lang.String)">withLiteralQuoteString</a></code>&nbsp;in interface&nbsp;<code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="literalEscapedQuoteString()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>literalEscapedQuoteString</h4>
+<pre class="methodSignature">public&nbsp;java.lang.String&nbsp;literalEscapedQuoteString()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="SqlDialect.Context.html#literalEscapedQuoteString()">literalEscapedQuoteString</a></code>&nbsp;in interface&nbsp;<code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></dd>
+</dl>
+</li>
+</ul>
+<a id="withLiteralEscapedQuoteString(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withLiteralEscapedQuoteString</h4>
+<pre class="methodSignature">public&nbsp;<a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a>&nbsp;withLiteralEscapedQuoteString&#8203;(java.lang.String&nbsp;literalEscapedQuoteString)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="SqlDialect.Context.html#withLiteralEscapedQuoteString(java.lang.String)">withLiteralEscapedQuoteString</a></code>&nbsp;in interface&nbsp;<code><a href="SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></dd>
 </dl>
 </li>
 </ul>

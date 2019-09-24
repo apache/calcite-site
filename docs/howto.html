@@ -747,7 +747,12 @@ present and does not contain un-substituted <code class="highlighter-rouge">${..
 <p>Now, remove the <code class="highlighter-rouge">-DdryRun</code> flag and run the release for real.
 For this step you’ll have to add the <a href="https://maven.apache.org/developers/committer-settings.html">Apache servers</a> to <code class="highlighter-rouge">~/.m2/settings.xml</code>.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Prepare sets the version numbers, creates a tag, and pushes it to git</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Make sure that there are no junk files in the sandbox; performing a dry run may have generated</span>
+<span class="c"># redundant files that do not need to be present in the release artifacts.</span>
+git clean <span class="nt">-xn</span>
+./mvnw clean
+
+<span class="c"># Prepare sets the version numbers, creates a tag, and pushes it to git</span>
 <span class="c"># Note X.Y.Z is the current version we're trying to release, and X.Y+1.Z is the next development version.</span>
 <span class="c"># For example, if I am currently building a release for 1.16.0, X.Y.Z would be 1.16.0 and X.Y+1.Z would be 1.17.0.</span>
 ./mvnw <span class="nt">-DdryRun</span><span class="o">=</span><span class="nb">false</span> <span class="nt">-DskipTests</span> <span class="nt">-DreleaseVersion</span><span class="o">=</span>X.Y.Z <span class="nt">-DdevelopmentVersion</span><span class="o">=</span>X.Y+1.Z-SNAPSHOT <span class="nt">-Papache-release</span> <span class="nt">-Darguments</span><span class="o">=</span><span class="nt">-DskipTests</span> release:prepare 2&gt;&amp;1 | tee /tmp/prepare.log
@@ -929,14 +934,6 @@ This is based on the time when you expect to announce the release.
 This is usually a day after the vote closes.
 Remember that UTC date changes at 4pm Pacific time.</p>
 
-<p>In JIRA, search for
-<a href="https://issues.apache.org/jira/issues/?jql=project%20%3D%20CALCITE%20and%20fixVersion%20%3D%201.5.0%20and%20status%20%3D%20Resolved%20and%20resolution%20%3D%20Fixed">all issues resolved in this release</a>,
-and do a bulk update changing their status to “Closed”,
-with a change comment
-“Resolved in release X.Y.Z (YYYY-MM-DD)”
-(fill in release number and date appropriately).
-Uncheck “Send mail for this update”.</p>
-
 <p>Promote the staged nexus artifacts.</p>
 
 <ul>
@@ -980,17 +977,33 @@ svn ci</code></pre></figure>
 <p>You should receive an email from the <a href="https://reporter.apache.org/">Apache Reporter Service</a>.
 Make sure to add the version number and date of the latest release at the site linked to in the email.</p>
 
-<p>Add a release note by copying
-<a href="https://github.com/apache/calcite/blob/master/site/_posts/2016-10-12-release-1.10.0.md">site/_posts/2016-10-12-release-1.10.0.md</a>,
-generate the javadoc using <code class="highlighter-rouge">./mvnw site</code>, <a href="#publish-the-web-site">publish the site</a>,
-and check that it appears in the contents in <a href="http://localhost:4000/news/">news</a>.</p>
+<p>Update the site with the release note, the release announcement, and the javadoc of the new version.
+The javadoc can be generated only from a final version (not a SNAPSHOT) so checkout the most recent
+tag and start working there (<code class="highlighter-rouge">git checkout calcite-X.Y.Z</code>). Add a release announcement by copying
+<a href="https://github.com/apache/calcite/blob/master/site/_posts/2016-10-12-release-1.10.0.md">site/_posts/2016-10-12-release-1.10.0.md</a>.
+Generate the javadoc, and <a href="http://localhost:4000/news/">preview</a> the site by following the
+instructions in <a href="https://github.com/apache/calcite/blob/master/site/README.md">site/README.md</a>. Check that the announcement,
+javadoc, and release note appear correctly and then publish the site following the instructions
+in the same file. Now checkout again the release branch (<code class="highlighter-rouge">git checkout branch-X.Y</code>) and commit
+the release announcement.</p>
 
-<p>Merge the release branch back into <code class="highlighter-rouge">master</code> (e.g. <code class="highlighter-rouge">git merge --ff-only branch-X.Y</code>).</p>
+<p>Merge the release branch back into <code class="highlighter-rouge">master</code> (e.g., <code class="highlighter-rouge">git merge --ff-only branch-X.Y</code>) and align
+the <code class="highlighter-rouge">master</code> with the <code class="highlighter-rouge">site</code> branch (e.g., <code class="highlighter-rouge">git merge --ff-only site</code>).</p>
+
+<p>In JIRA, search for
+<a href="https://issues.apache.org/jira/issues/?jql=project%20%3D%20CALCITE%20and%20fixVersion%20%3D%201.5.0%20and%20status%20%3D%20Resolved%20and%20resolution%20%3D%20Fixed">all issues resolved in this release</a>,
+and do a bulk update changing their status to “Closed”,
+with a change comment
+“Resolved in release X.Y.Z (YYYY-MM-DD)”
+(fill in release number and date appropriately).
+Uncheck “Send mail for this update”. Under the <a href="https://issues.apache.org/jira/projects/CALCITE?selectedItem=com.atlassian.jira.jira-projects-plugin%3Arelease-page&amp;status=released-unreleased">releases tab</a>
+of the Calcite project mark the release X.Y.Z as released. If it does not already exist create also
+a new version (e.g., X.Y+1.Z) for the next release.</p>
 
 <p>After 24 hours, announce the release by sending an email to
 <a href="https://mail-archives.apache.org/mod_mbox/www-announce/">announce@apache.org</a>.
 You can use
-<a href="https://mail-archives.apache.org/mod_mbox/www-announce/201906.mbox/%3CCA%2BEpF8tcJcZ41rVuwJODJmyRy-qAxZUQm9OxKsoDi07c2SKs_A%40mail.gmail.com%3E">the 1.21.0 announcement</a>
+<a href="https://mail-archives.apache.org/mod_mbox/www-announce/201906.mbox/%3CCA%2BEpF8tcJcZ41rVuwJODJmyRy-qAxZUQm9OxKsoDi07c2SKs_A%40mail.gmail.com%3E">the 1.20.0 announcement</a>
 as a template. Be sure to include a brief description of the project.</p>
 
 <h2 id="publish-the-web-site">Publishing the web site (for Calcite committers)</h2>

@@ -90,10 +90,7 @@
 
 <ul id="markdown-toc">
   <li><a href="#source-code" id="markdown-toc-source-code">Source code</a></li>
-  <li><a href="#download-source-build-and-run-tests" id="markdown-toc-download-source-build-and-run-tests">Download source, build, and run tests</a>    <ul>
-      <li><a href="#disabling-protobuf-generation" id="markdown-toc-disabling-protobuf-generation">Disabling protobuf generation</a></li>
-    </ul>
-  </li>
+  <li><a href="#download-source-build-and-run-tests" id="markdown-toc-download-source-build-and-run-tests">Download source, build, and run tests</a></li>
   <li><a href="#contributing" id="markdown-toc-contributing">Contributing</a></li>
   <li><a href="#continuous-integration-testing" id="markdown-toc-continuous-integration-testing">Continuous Integration Testing</a></li>
   <li><a href="#getting-started" id="markdown-toc-getting-started">Getting started</a></li>
@@ -121,29 +118,12 @@ then build using maven:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git clone git://github.com/apache/calcite-avatica.git avatica
 <span class="nv">$ </span><span class="nb">cd </span>avatica
-<span class="nv">$ </span>./mvnw install</code></pre></figure>
+<span class="nv">$ </span>./gradlew build</code></pre></figure>
 
 <p>The HOWTO describes how to
 <a href="/avatica/docs/howto.html#building-from-a-source-distribution">build from a source distribution</a>,
 <a href="/avatica/docs/howto.html#running-tests">run more or fewer tests</a> and
 <a href="/avatica/docs/howto.html#running-integration-tests">run integration tests</a>.</p>
-
-<h3 id="disabling-protobuf-generation">Disabling protobuf generation</h3>
-
-<p>On older operating systems, developers trying to build Avatica may experience
-issues with the Xolstice maven-protobuf-plugin, similar to the following:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[INFO] Compiling 3 proto file(s) to /avatica/core/src/main/java
-[ERROR] PROTOC FAILED: /avatica/core/target/protoc-plugins/protoc-3.1.0-linux-x86_64.exe: /lib64/libc.so.6: version `GLIBC_2.14' not found (required by /avatica/core/target/protoc-plugins/protoc-3.1.0-linux-x86_64.exe)
-[ERROR] /avatica/core/src/main/protobuf/common.proto [0:0]: /avatica/core/target/protoc-plugins/protoc-3.1.0-linux-x86_64.exe: /lib64/libc.so.6: version `GLIBC_2.14' not found (required by /avatica/core/target/protoc-plugins/protoc-3.1.0-linux-x86_64.exe)
-[ERROR] /avatica/core/src/main/protobuf/responses.proto [0:0]: /avatica/core/target/protoc-plugins/protoc-3.1.0-linux-x86_64.exe: /lib64/libc.so.6: version `GLIBC_2.14' not found (required by /avatica/core/target/protoc-plugins/protoc-3.1.0-linux-x86_64.exe)
-[ERROR] /avatica/core/src/main/protobuf/requests.proto [0:0]: /avatica/core/target/protoc-plugins/protoc-3.1.0-linux-x86_64.exe: /lib64/libc.so.6: version `GLIBC_2.14' not found (required by /avatica/core/target/protoc-plugins/protoc-3.1.0-linux-x86_64.exe)
-</code></pre></div></div>
-
-<p>In most cases, it is unnecessary to re-generate the Protobuf messages into Java code. Developers
-can side-step this issue by disabling the <code class="highlighter-rouge">compile-protobuf</code> profile in their Maven execution.</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./mvnw package <span class="nt">-P</span><span class="o">!</span>compile-protobuf</code></pre></figure>
 
 <h2 id="contributing">Contributing</h2>
 
@@ -157,7 +137,7 @@ proposed feature or start a discussion on the dev list.</p>
 <p>Fork the github repository, and create a branch for your feature.</p>
 
 <p>Develop your feature and test cases, and make sure that
-<code class="highlighter-rouge">./mvnw install</code> succeeds. (Run extra tests if your change warrants it.)</p>
+<code class="highlighter-rouge">./gradlew build</code> succeeds. (Run extra tests if your change warrants it.)</p>
 
 <p>Commit your change to your branch, and use a comment that starts with
 the JIRA case number, like this:</p>

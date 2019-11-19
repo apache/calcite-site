@@ -114,12 +114,11 @@ to relational operators using planner rules.</li>
 
 <h2 id="download-and-build">Download and build</h2>
 
-<p>You need Java (version 8, 9 or 10) and git.</p>
+<p>You need Java (version 8, 9 or 10) and Git.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git clone https://github.com/apache/calcite.git
-<span class="nv">$ </span><span class="nb">cd </span>calcite
-<span class="nv">$ </span>./mvnw install <span class="nt">-DskipTests</span> <span class="nt">-Dcheckstyle</span>.skip<span class="o">=</span><span class="nb">true</span>
-<span class="nv">$ </span><span class="nb">cd </span>example/csv</code></pre></figure>
+<span class="nv">$ </span><span class="nb">cd </span>calcite/example/csv
+<span class="nv">$ </span>./sqlline</code></pre></figure>
 
 <h2 id="first-queries">First queries</h2>
 
@@ -128,7 +127,7 @@ to relational operators using planner rules.</li>
 that is included in this project.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./sqlline
-sqlline&gt; <span class="o">!</span>connect jdbc:calcite:model<span class="o">=</span>target/test-classes/model.json admin admin</code></pre></figure>
+sqlline&gt; <span class="o">!</span>connect jdbc:calcite:model<span class="o">=</span>src/test/resources/model.json admin admin</code></pre></figure>
 
 <p>(If you are running Windows, the command is <code class="highlighter-rouge">sqlline.bat</code>.)</p>
 
@@ -158,7 +157,7 @@ system tables are always present in Calcite, but the other tables are
 provided by the specific implementation of the schema; in this case,
 the <code>EMPS</code> and <code>DEPTS</code> tables are based on the
 <code>EMPS.csv</code> and <code>DEPTS.csv</code> files in the
-<code>target/test-classes</code> directory.</p>
+<code>resources/sales</code> directory.</p>
 
 <p>Let’s execute some queries on those tables, to show that Calcite is providing
 a full implementation of SQL. First, a table scan:</p>
@@ -227,7 +226,7 @@ format. Here is the model:</p>
       </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
       </span><span class="err">factory</span><span class="p">:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.csv.CsvSchemaFactory'</span><span class="p">,</span><span class="w">
       </span><span class="err">operand</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="err">directory</span><span class="p">:</span><span class="w"> </span><span class="err">'target/test-classes/sales'</span><span class="w">
+        </span><span class="err">directory</span><span class="p">:</span><span class="w"> </span><span class="err">'sales'</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -323,7 +322,7 @@ method in the <code>AbstractSchema</code> base class.</p>
 
 <p>The schema scans the directory and finds all files whose name ends
 with “.csv” and creates tables for them. In this case, the directory
-is <code>target/test-classes/sales</code> and contains files
+is <code>sales</code> and contains files
 <code>EMPS.csv</code> and <code>DEPTS.csv</code>, which these become
 the tables <code>EMPS</code> and <code>DEPTS</code>.</p>
 
@@ -356,7 +355,7 @@ clause that are not used in the final result.</p>
       </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
       </span><span class="err">factory</span><span class="p">:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.csv.CsvSchemaFactory'</span><span class="p">,</span><span class="w">
       </span><span class="err">operand</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="err">directory</span><span class="p">:</span><span class="w"> </span><span class="err">'target/test-classes/sales'</span><span class="w">
+        </span><span class="err">directory</span><span class="p">:</span><span class="w"> </span><span class="err">'sales'</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="err">tables</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
@@ -415,7 +414,7 @@ They don’t need to live in a custom schema.</p>
           </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
           </span><span class="err">factory</span><span class="p">:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.csv.CsvTableFactory'</span><span class="p">,</span><span class="w">
           </span><span class="err">operand</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="err">file</span><span class="p">:</span><span class="w"> </span><span class="err">'target/test-classes/sales/EMPS.csv.gz'</span><span class="p">,</span><span class="w">
+            </span><span class="err">file</span><span class="p">:</span><span class="w"> </span><span class="err">'sales/EMPS.csv.gz'</span><span class="p">,</span><span class="w">
             </span><span class="err">flavor</span><span class="p">:</span><span class="w"> </span><span class="s2">"scannable"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -426,7 +425,7 @@ They don’t need to live in a custom schema.</p>
 
 <p>We can query the table in the usual way:</p>
 
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="o">!</span><span class="k">connect</span> <span class="n">jdbc</span><span class="p">:</span><span class="n">calcite</span><span class="p">:</span><span class="n">model</span><span class="o">=</span><span class="n">target</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">classes</span><span class="o">/</span><span class="n">model</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">custom</span><span class="o">-</span><span class="k">table</span><span class="p">.</span><span class="n">json</span> <span class="k">admin</span> <span class="k">admin</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="o">!</span><span class="k">connect</span> <span class="n">jdbc</span><span class="p">:</span><span class="n">calcite</span><span class="p">:</span><span class="n">model</span><span class="o">=</span><span class="n">src</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">resources</span><span class="o">/</span><span class="n">model</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">custom</span><span class="o">-</span><span class="k">table</span><span class="p">.</span><span class="n">json</span> <span class="k">admin</span> <span class="k">admin</span>
 <span class="n">sqlline</span><span class="o">&gt;</span> <span class="k">SELECT</span> <span class="n">empno</span><span class="p">,</span> <span class="n">name</span> <span class="k">FROM</span> <span class="n">custom_table</span><span class="p">.</span><span class="n">emps</span><span class="p">;</span>
 <span class="o">+</span><span class="c1">--------+--------+</span>
 <span class="o">|</span> <span class="n">EMPNO</span>  <span class="o">|</span>  <span class="n">NAME</span>  <span class="o">|</span>
@@ -504,7 +503,7 @@ schema, and then you define some rules to make the access efficient.</p>
 a subset of columns from a CSV file. Let’s run the same query against two very
 similar schemas:</p>
 
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="o">!</span><span class="k">connect</span> <span class="n">jdbc</span><span class="p">:</span><span class="n">calcite</span><span class="p">:</span><span class="n">model</span><span class="o">=</span><span class="n">target</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">classes</span><span class="o">/</span><span class="n">model</span><span class="p">.</span><span class="n">json</span> <span class="k">admin</span> <span class="k">admin</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="o">!</span><span class="k">connect</span> <span class="n">jdbc</span><span class="p">:</span><span class="n">calcite</span><span class="p">:</span><span class="n">model</span><span class="o">=</span><span class="n">src</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">resources</span><span class="o">/</span><span class="n">model</span><span class="p">.</span><span class="n">json</span> <span class="k">admin</span> <span class="k">admin</span>
 <span class="n">sqlline</span><span class="o">&gt;</span> <span class="k">explain</span> <span class="n">plan</span> <span class="k">for</span> <span class="k">select</span> <span class="n">name</span> <span class="k">from</span> <span class="n">emps</span><span class="p">;</span>
 <span class="o">+</span><span class="c1">-----------------------------------------------------+</span>
 <span class="o">|</span> <span class="n">PLAN</span>                                                <span class="o">|</span>
@@ -512,7 +511,7 @@ similar schemas:</p>
 <span class="o">|</span> <span class="n">EnumerableCalcRel</span><span class="p">(</span><span class="n">expr</span><span class="o">#</span><span class="mi">0</span><span class="p">..</span><span class="mi">9</span><span class="o">=</span><span class="p">[</span><span class="err">{</span><span class="n">inputs</span><span class="err">}</span><span class="p">],</span> <span class="n">NAME</span><span class="o">=</span><span class="p">[</span><span class="err">$</span><span class="n">t1</span><span class="p">])</span> <span class="o">|</span>
 <span class="o">|</span>   <span class="n">EnumerableTableScan</span><span class="p">(</span><span class="k">table</span><span class="o">=</span><span class="p">[[</span><span class="n">SALES</span><span class="p">,</span> <span class="n">EMPS</span><span class="p">]])</span>        <span class="o">|</span>
 <span class="o">+</span><span class="c1">-----------------------------------------------------+</span>
-<span class="n">sqlline</span><span class="o">&gt;</span> <span class="o">!</span><span class="k">connect</span> <span class="n">jdbc</span><span class="p">:</span><span class="n">calcite</span><span class="p">:</span><span class="n">model</span><span class="o">=</span><span class="n">target</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">classes</span><span class="o">/</span><span class="n">smart</span><span class="p">.</span><span class="n">json</span> <span class="k">admin</span> <span class="k">admin</span>
+<span class="n">sqlline</span><span class="o">&gt;</span> <span class="o">!</span><span class="k">connect</span> <span class="n">jdbc</span><span class="p">:</span><span class="n">calcite</span><span class="p">:</span><span class="n">model</span><span class="o">=</span><span class="n">src</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">resources</span><span class="o">/</span><span class="n">smart</span><span class="p">.</span><span class="n">json</span> <span class="k">admin</span> <span class="k">admin</span>
 <span class="n">sqlline</span><span class="o">&gt;</span> <span class="k">explain</span> <span class="n">plan</span> <span class="k">for</span> <span class="k">select</span> <span class="n">name</span> <span class="k">from</span> <span class="n">emps</span><span class="p">;</span>
 <span class="o">+</span><span class="c1">-----------------------------------------------------+</span>
 <span class="o">|</span> <span class="n">PLAN</span>                                                <span class="o">|</span>
@@ -737,7 +736,6 @@ initial implementations.</p>
 
 <p>There are many other ways to extend Calcite not yet described in this tutorial.
 The <a href="adapter.html">adapter specification</a> describes the APIs involved.</p>
-
 
           
 

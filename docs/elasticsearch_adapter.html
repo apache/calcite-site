@@ -118,13 +118,14 @@ follows:</p>
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./sqlline
 sqlline&gt; <span class="o">!</span>connect jdbc:calcite:model<span class="o">=</span>model.json admin admin</code></pre></figure>
 
-<p>You can also specify the index name that is represented by the <code class="highlighter-rouge">index</code> parameter in the model definition:</p>
+<p>You can also specify the index name and path prefix that is represented by the <code class="highlighter-rouge">index</code> and <code class="highlighter-rouge">pathPrefix</code> parameter in the model definition:</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="err">...</span><span class="w">
 
       </span><span class="s2">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{'127.0.0.1': 9200}"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usa"</span><span class="w">
+        </span><span class="s2">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usa"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pathPrefix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"path"</span><span class="w">
       </span><span class="p">}</span><span class="w">
 
 </span><span class="err">...</span></code></pre></figure>
@@ -200,7 +201,6 @@ scroll is automatically cleared (removed) when all query resuts are consumed.</p
 <p>Currently this adapter supports ElasticSearch versions 6.x (or newer). Generally
 we try to follow official <a href="https://www.elastic.co/support/eol">support schedule</a>.
 Also, types are not supported (this adapter only supports indices).</p>
-
 
           
 

@@ -227,7 +227,7 @@ form.</p>
       <span class="n">expression</span> <span class="p">[</span> <span class="k">ASC</span> <span class="o">|</span> <span class="k">DESC</span> <span class="p">]</span> <span class="p">[</span> <span class="n">NULLS</span> <span class="k">FIRST</span> <span class="o">|</span> <span class="n">NULLS</span> <span class="k">LAST</span> <span class="p">]</span>
 
 <span class="k">select</span><span class="p">:</span>
-      <span class="k">SELECT</span> <span class="p">[</span> <span class="s1">'/*+'</span> <span class="n">hint</span> <span class="p">[,</span> <span class="n">hint</span><span class="p">]</span><span class="o">*</span> <span class="s1">'*/'</span> <span class="p">]</span> <span class="p">[</span> <span class="n">STREAM</span> <span class="p">]</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span>
+      <span class="k">SELECT</span> <span class="p">[</span> <span class="n">STREAM</span> <span class="p">]</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span>
           <span class="err">{</span> <span class="o">*</span> <span class="o">|</span> <span class="n">projectItem</span> <span class="p">[,</span> <span class="n">projectItem</span> <span class="p">]</span><span class="o">*</span> <span class="err">}</span>
       <span class="k">FROM</span> <span class="n">tableExpression</span>
       <span class="p">[</span> <span class="k">WHERE</span> <span class="n">booleanExpression</span> <span class="p">]</span>
@@ -262,24 +262,13 @@ form.</p>
 <span class="n">tablePrimary</span><span class="p">:</span>
       <span class="p">[</span> <span class="p">[</span> <span class="n">catalogName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">schemaName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">tableName</span>
       <span class="s1">'('</span> <span class="k">TABLE</span> <span class="p">[</span> <span class="p">[</span> <span class="n">catalogName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">schemaName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">tableName</span> <span class="s1">')'</span>
-  <span class="o">|</span>   <span class="n">tablePrimary</span> <span class="p">[</span> <span class="s1">'/*+'</span> <span class="n">hint</span> <span class="p">[,</span> <span class="n">hint</span><span class="p">]</span><span class="o">*</span> <span class="s1">'*/'</span> <span class="p">]</span> <span class="p">[</span> <span class="n">EXTEND</span> <span class="p">]</span> <span class="s1">'('</span> <span class="n">columnDecl</span> <span class="p">[,</span> <span class="n">columnDecl</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
+  <span class="o">|</span>   <span class="n">tablePrimary</span> <span class="p">[</span> <span class="n">EXTEND</span> <span class="p">]</span> <span class="s1">'('</span> <span class="n">columnDecl</span> <span class="p">[,</span> <span class="n">columnDecl</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
   <span class="o">|</span>   <span class="p">[</span> <span class="k">LATERAL</span> <span class="p">]</span> <span class="s1">'('</span> <span class="n">query</span> <span class="s1">')'</span>
   <span class="o">|</span>   <span class="k">UNNEST</span> <span class="s1">'('</span> <span class="n">expression</span> <span class="s1">')'</span> <span class="p">[</span> <span class="k">WITH</span> <span class="k">ORDINALITY</span> <span class="p">]</span>
   <span class="o">|</span>   <span class="p">[</span> <span class="k">LATERAL</span> <span class="p">]</span> <span class="k">TABLE</span> <span class="s1">'('</span> <span class="p">[</span> <span class="k">SPECIFIC</span> <span class="p">]</span> <span class="n">functionName</span> <span class="s1">'('</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="s1">')'</span>
 
 <span class="n">columnDecl</span><span class="p">:</span>
       <span class="k">column</span> <span class="k">type</span> <span class="p">[</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">]</span>
-
-<span class="n">hint</span><span class="p">:</span>
-      <span class="n">hintName</span>
-  <span class="o">|</span>   <span class="n">hintName</span> <span class="s1">'('</span> <span class="n">hintOptions</span> <span class="s1">')'</span>
-
-<span class="n">hintOptions</span><span class="p">:</span>
-      <span class="n">hintKVOption</span> <span class="p">[,</span> <span class="n">hintKVOption</span><span class="p">]</span><span class="o">*</span>
-  <span class="o">|</span>   <span class="n">optionName</span><span class="p">,</span> <span class="p">[,</span> <span class="n">optionName</span><span class="p">]</span><span class="o">*</span>
-
-<span class="n">hintKVOption</span><span class="p">:</span>
-      <span class="n">optionName</span> <span class="s1">'='</span> <span class="n">stringLiteral</span>
 
 <span class="k">values</span><span class="p">:</span>
       <span class="k">VALUES</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span>
@@ -500,7 +489,6 @@ DATABASE,
 DATETIME_INTERVAL_CODE,
 DATETIME_INTERVAL_PRECISION,
 <strong>DAY</strong>,
-DAYS,
 <strong>DEALLOCATE</strong>,
 <strong>DEC</strong>,
 DECADE,
@@ -601,7 +589,6 @@ GRANTED,
 HIERARCHY,
 <strong>HOLD</strong>,
 <strong>HOUR</strong>,
-HOURS,
 <strong>IDENTITY</strong>,
 IGNORE,
 IMMEDIATE,
@@ -690,13 +677,11 @@ MILLISECOND,
 <strong>MIN</strong>,
 <strong>MINUS</strong>,
 <strong>MINUTE</strong>,
-MINUTES,
 MINVALUE,
 <strong>MOD</strong>,
 <strong>MODIFIES</strong>,
 <strong>MODULE</strong>,
 <strong>MONTH</strong>,
-MONTHS,
 MORE,
 <strong>MULTISET</strong>,
 MUMPS,
@@ -851,7 +836,6 @@ SCOPE_SCHEMA,
 <strong>SCROLL</strong>,
 <strong>SEARCH</strong>,
 <strong>SECOND</strong>,
-SECONDS,
 SECTION,
 SECURITY,
 <strong>SEEK</strong>,
@@ -987,7 +971,6 @@ TRIGGER_SCHEMA,
 <strong>TRIM_ARRAY</strong>,
 <strong>TRUE</strong>,
 <strong>TRUNCATE</strong>,
-TUMBLE,
 TYPE,
 <strong>UESCAPE</strong>,
 UNBOUNDED,
@@ -1037,7 +1020,6 @@ WRAPPER,
 WRITE,
 XML,
 <strong>YEAR</strong>,
-YEARS,
 ZONE.</p>
 
 <h2 id="identifiers">Identifiers</h2>
@@ -1192,10 +1174,6 @@ TIMESTAMP WITH LOCAL TIME ZONE does not store the time zone internally, but
 it will rely on the supplied time zone to provide correct semantics.</li>
   <li>GEOMETRY is allowed only in certain
 <a href="/apidocs/org/apache/calcite/sql/validate/SqlConformance.html#allowGeometry--">conformance levels</a>.</li>
-  <li>Interval literals may only use time units
-YEAR, MONTH, DAY, HOUR, MINUTE and SECOND. In certain
-<a href="/apidocs/org/apache/calcite/sql/validate/SqlConformance.html#allowPluralTimeUnits--">conformance levels</a>,
-we also allow their plurals, YEARS, MONTHS, DAYS, HOURS, MINUTES and SECONDS.</li>
 </ul>
 
 <h3 id="non-scalar-types">Non-scalar types</h3>

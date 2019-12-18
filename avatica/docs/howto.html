@@ -122,13 +122,9 @@
   
     
   
-    
-  
 
   
 
-  
-    
   
     
   
@@ -205,51 +201,9 @@
   
     
   
-    
-  
 
   
 
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-
-  
-
-  
-    
   
     
   
@@ -319,51 +273,9 @@
   
     
   
-    
-  
 
   
 
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-
-  
-
-  
-    
   
     
   
@@ -433,6 +345,40 @@
   
     
   
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
     
   
 
@@ -471,13 +417,45 @@
   
     
   
-    
-  
 
   
 
   
     
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+
   
     
   
@@ -554,13 +532,9 @@
   
     
   
-    
-  
 
   
 
-  
-    
   
     
   
@@ -637,51 +611,9 @@
   
     
   
-    
-  
 
   
 
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-    
-  
-
-  
-
-  
-    
   
     
   
@@ -758,8 +690,6 @@
   
     
   
-    
-  
 
 
     </optgroup>
@@ -790,7 +720,7 @@
   <li><a href="#advanced-topics-for-committers" id="markdown-toc-advanced-topics-for-committers">Advanced topics for committers</a>    <ul>
       <li><a href="#set-up-pgp-signing-keys-for-calcite-committers" id="markdown-toc-set-up-pgp-signing-keys-for-calcite-committers">Set up PGP signing keys (for Calcite committers)</a></li>
       <li><a href="#run-a-gpg-agent" id="markdown-toc-run-a-gpg-agent">Run a GPG agent</a></li>
-      <li><a href="#set-up-maven-repository-credentials-for-calcite-committers" id="markdown-toc-set-up-maven-repository-credentials-for-calcite-committers">Set up Maven repository credentials (for Calcite committers)</a></li>
+      <li><a href="#set-up-nexus-repository-credentials-for-calcite-committers" id="markdown-toc-set-up-nexus-repository-credentials-for-calcite-committers">Set up Nexus repository credentials (for Calcite committers)</a></li>
       <li><a href="#making-a-snapshot-for-calcite-committers" id="markdown-toc-making-a-snapshot-for-calcite-committers">Making a snapshot (for Calcite committers)</a></li>
       <li><a href="#making-a-release-candidate-for-calcite-committers" id="markdown-toc-making-a-release-candidate-for-calcite-committers">Making a release candidate (for Calcite committers)</a>        <ul>
           <li><a href="#to-prepare-a-release-candidate-directly-in-your-environment" id="markdown-toc-to-prepare-a-release-candidate-directly-in-your-environment">To prepare a release candidate directly in your environment:</a></li>
@@ -820,8 +750,8 @@
 <code class="highlighter-rouge">cd</code> to the root directory of the unpacked source,
 then build using maven:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz apache-calcite-avatica-1.15.0-src.tar.gz
-<span class="nv">$ </span><span class="nb">cd </span>apache-calcite-avatica-1.15.0-src
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz apache-calcite-avatica-1.16.0-src.tar.gz
+<span class="nv">$ </span><span class="nb">cd </span>apache-calcite-avatica-1.16.0-src
 <span class="nv">$ </span>./gradlew build</code></pre></figure>
 
 <p><a href="#running-tests">Running tests</a> describes how to run more or fewer
@@ -926,7 +856,7 @@ scripting in your shell’s configuration script of choice (e.g. <code class="hi
 <p>Also, ensure that <code class="highlighter-rouge">default-cache-ttl 6000</code> is set in <code class="highlighter-rouge">~/.gnupg/gpg-agent.conf</code>
 to guarantee that your credentials will be cached for the duration of the build.</p>
 
-<h2 id="set-up-maven-repository-credentials-for-calcite-committers">Set up Maven repository credentials (for Calcite committers)</h2>
+<h2 id="set-up-nexus-repository-credentials-for-calcite-committers">Set up Nexus repository credentials (for Calcite committers)</h2>
 
 <p>Gradle provides multiple ways to <a href="https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties">configure project properties</a>.
 For instance, you could update <code class="highlighter-rouge">$HOME/.gradle/gradle.properties</code>.</p>
@@ -1017,13 +947,22 @@ git clean <span class="nt">-xn</span>
 the script will make a copy of the contents and move it to a different location, so that it will not modify the contents of your original
 <code class="highlighter-rouge">~/.gnupg</code> directory during the build.</p>
   </li>
+  <li>
+    <p>Start the <a href="https://github.com/vlsi/asflike-release-environment">asflike-release-environment</a> to prepare a staging environment for a dry-run.</p>
+  </li>
 </ul>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># On Linux:</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># On Linux (dry-run):</span>
 docker-compose run <span class="nt">-v</span> ~/.gnupg:/.gnupg dry-run
 
-<span class="c"># On Windows</span>
-docker-compose run <span class="nt">-v</span> /c/Users/username/AppData/Roaming/gnupg:/.gnupg dry-run</code></pre></figure>
+<span class="c"># On Windows (dry-run):</span>
+docker-compose run <span class="nt">-v</span> /c/Users/username/AppData/Roaming/gnupg:/.gnupg dry-run
+
+<span class="c"># On Linux (push to ASF servers):</span>
+docker-compose run <span class="nt">-v</span> ~/.gnupg:/.gnupg publish-release-for-voting
+
+<span class="c"># On Windows (push to ASF servers):</span>
+docker-compose run <span class="nt">-v</span> /c/Users/username/AppData/Roaming/gnupg:/.gnupg publish-release-for-voting</code></pre></figure>
 
 <h2 id="checking-the-artifacts">Checking the artifacts</h2>
 
@@ -1049,7 +988,7 @@ no binary distro), check that all files belong to a directory called
   <li>For each .jar (for example <code class="highlighter-rouge">core/build/libs/avatica-core-X.Y.Z.jar</code>
 and <code class="highlighter-rouge">server/build/libs/avatica-server-X.Y.Z-sources.jar</code>),
 verify that the <code class="highlighter-rouge">META-INF</code> directory contains the correct
-contents for <code class="highlighter-rouge">DEPENDENCIES</code>, <code class="highlighter-rouge">LICENSE</code> and <code class="highlighter-rouge">NOTICE</code> per the
+contents for <code class="highlighter-rouge">LICENSE</code> and <code class="highlighter-rouge">NOTICE</code> per the
 source/classes contained. Refer to the ASF licensing documentation on
 what is required.</li>
   <li>Check PGP, per <a href="https://httpd.apache.org/dev/verification.html">this</a></li>
@@ -1062,10 +1001,6 @@ what is required.</li>
   <li>Under <code class="highlighter-rouge">Build Promotion</code>, click <code class="highlighter-rouge">Staging Repositories</code></li>
   <li>In the <code class="highlighter-rouge">Staging Repositories</code> tab there should be a line with profile <code class="highlighter-rouge">org.apache.calcite</code></li>
   <li>Navigate through the artifact tree and make sure the .jar, .pom, .asc files are present</li>
-  <li>Check the box on in the first column of the row,
-and press the ‘Close’ button to publish the repository at
-https://repository.apache.org/content/repositories/orgapachecalcite-1000
-(or a similar URL)</li>
 </ul>
 
 <h2 id="cleaning-up-after-a-failed-release-attempt-for-calcite-committers">Cleaning up after a failed release attempt (for Calcite committers)</h2>
@@ -1205,15 +1140,6 @@ with a change comment
 (fill in release number and date appropriately).
 Uncheck “Send mail for this update”.</p>
 
-<p>Promote the staged nexus artifacts (this is automatic, however, the instructions are here just in case).</p>
-
-<ul>
-  <li>Go to <a href="https://repository.apache.org/">https://repository.apache.org/</a> and login</li>
-  <li>Under “Build Promotion” click “Staging Repositories”</li>
-  <li>In the line with “orgapachecalcite-xxxx”, check the box</li>
-  <li>Press “Release” button</li>
-</ul>
-
 <p>Tip: Push the git tag only after the staged nexus artifacts are promoted in the repository. This is because pushing the
 tag triggers Docker Hub to start building the docker images immediately and the build will pull in the promoted artifacts.
 If the artifacts are not yet available, the build on Docker Hub will fail. It’s best to continue with the following steps
@@ -1243,8 +1169,7 @@ clear out the oldest ones:</p>
 <h2 id="add-release-notes-and-announce-the-release">Add release notes and announce the release</h2>
 <p>Add a release note by copying
 <a href="https://github.com/apache/calcite-avatica/tree/master/site/_posts/2016-11-01-release-1.9.0.md">site/_posts/2016-11-01-release-1.9.0.md</a>,
-generate the javadoc and copy to <code class="highlighter-rouge">site/target/avatica/apidocs</code>
-and <code class="highlighter-rouge">site/target/avatica/testapidocs</code>,
+generate the javadoc and copy to <code class="highlighter-rouge">site/target/avatica/javadocAggregate</code>
 <a href="#publish-the-web-site">publish the site</a>,
 and check that it appears in the contents in <a href="http://localhost:4000/news/">news</a>.</p>
 
@@ -1486,16 +1411,6 @@ as a template. Be sure to include a brief description of the project.</p>
   
 
   <li class=""><a href="/avatica/docs/api/">API</a></li>
-
-
-  
-  
-  
-  
-
-  
-
-  <li class=""><a href="/avatica/docs/testapi/">Test API</a></li>
 
 
 </ul>

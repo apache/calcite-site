@@ -242,11 +242,9 @@ populating materialized views. Let’s run a query and check out its plan:</p>
 <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span><span class="o">&gt;</span> <span class="k">from</span> <span class="nv">"sales_fact_1997"</span>
 <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span><span class="o">&gt;</span> <span class="k">join</span> <span class="nv">"time_by_day"</span> <span class="k">using</span> <span class="p">(</span><span class="nv">"time_id"</span><span class="p">)</span>
 <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span><span class="o">&gt;</span> <span class="k">group</span> <span class="k">by</span> <span class="nv">"the_year"</span><span class="p">,</span><span class="nv">"the_month"</span><span class="p">;</span>
-<span class="o">+</span><span class="c1">----------+-----------+------+
-</span>
+<span class="o">+</span><span class="c1">----------+-----------+------+</span>
 <span class="o">|</span> <span class="n">the_year</span> <span class="o">|</span> <span class="n">the_month</span> <span class="o">|</span>    <span class="k">C</span> <span class="o">|</span>
-<span class="o">+</span><span class="c1">----------+-----------+------+
-</span>
+<span class="o">+</span><span class="c1">----------+-----------+------+</span>
 <span class="o">|</span> <span class="mi">1997</span>     <span class="o">|</span> <span class="n">September</span> <span class="o">|</span> <span class="mi">6663</span> <span class="o">|</span>
 <span class="o">|</span> <span class="mi">1997</span>     <span class="o">|</span> <span class="n">April</span>     <span class="o">|</span> <span class="mi">6590</span> <span class="o">|</span>
 <span class="o">|</span> <span class="mi">1997</span>     <span class="o">|</span> <span class="n">January</span>   <span class="o">|</span> <span class="mi">7034</span> <span class="o">|</span>
@@ -259,8 +257,7 @@ populating materialized views. Let’s run a query and check out its plan:</p>
 <span class="o">|</span> <span class="mi">1997</span>     <span class="o">|</span> <span class="n">December</span>  <span class="o">|</span> <span class="mi">8717</span> <span class="o">|</span>
 <span class="o">|</span> <span class="mi">1997</span>     <span class="o">|</span> <span class="n">July</span>      <span class="o">|</span> <span class="mi">7752</span> <span class="o">|</span>
 <span class="o">|</span> <span class="mi">1997</span>     <span class="o">|</span> <span class="n">November</span>  <span class="o">|</span> <span class="mi">8232</span> <span class="o">|</span>
-<span class="o">+</span><span class="c1">----------+-----------+------+
-</span>
+<span class="o">+</span><span class="c1">----------+-----------+------+</span>
 <span class="mi">12</span> <span class="k">rows</span> <span class="n">selected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">147</span> <span class="n">seconds</span><span class="p">)</span>
 
 <span class="n">sqlline</span><span class="o">&gt;</span> <span class="k">explain</span> <span class="n">plan</span> <span class="k">for</span>
@@ -268,11 +265,9 @@ populating materialized views. Let’s run a query and check out its plan:</p>
 <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span><span class="o">&gt;</span> <span class="k">from</span> <span class="nv">"sales_fact_1997"</span>
 <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span><span class="o">&gt;</span> <span class="k">join</span> <span class="nv">"time_by_day"</span> <span class="k">using</span> <span class="p">(</span><span class="nv">"time_id"</span><span class="p">)</span>
 <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span><span class="o">&gt;</span> <span class="k">group</span> <span class="k">by</span> <span class="nv">"the_year"</span><span class="p">,</span><span class="nv">"the_month"</span><span class="p">;</span>
-<span class="o">+</span><span class="c1">--------------------------------------------------------------------------------+
-</span>
+<span class="o">+</span><span class="c1">--------------------------------------------------------------------------------+</span>
 <span class="o">|</span> <span class="n">PLAN</span>                                                                           <span class="o">|</span>
-<span class="o">+</span><span class="c1">--------------------------------------------------------------------------------+
-</span>
+<span class="o">+</span><span class="c1">--------------------------------------------------------------------------------+</span>
 <span class="o">|</span> <span class="n">EnumerableCalc</span><span class="p">(</span><span class="n">expr</span><span class="o">#</span><span class="mi">0</span><span class="p">..</span><span class="mi">2</span><span class="o">=</span><span class="p">[</span><span class="err">{</span><span class="n">inputs</span><span class="err">}</span><span class="p">],</span> <span class="n">the_year</span><span class="o">=</span><span class="p">[</span><span class="err">$</span><span class="n">t1</span><span class="p">],</span> <span class="n">the_month</span><span class="o">=</span><span class="p">[</span><span class="err">$</span><span class="n">t0</span><span class="p">],</span> <span class="k">C</span><span class="o">=</span><span class="p">[</span><span class="err">$</span><span class="n">t2</span><span class="p">])</span> <span class="o">|</span>
 <span class="o">|</span>   <span class="n">EnumerableAggregate</span><span class="p">(</span><span class="k">group</span><span class="o">=</span><span class="p">[</span><span class="err">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="err">}</span><span class="p">],</span> <span class="k">C</span><span class="o">=</span><span class="p">[</span><span class="err">$</span><span class="n">SUM0</span><span class="p">(</span><span class="err">$</span><span class="mi">7</span><span class="p">)])</span>                           <span class="o">|</span>
 <span class="o">|</span>     <span class="n">EnumerableTableScan</span><span class="p">(</span><span class="k">table</span><span class="o">=</span><span class="p">[[</span><span class="n">adhoc</span><span class="p">,</span> <span class="n">m</span><span class="err">{</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">37</span><span class="err">}</span><span class="p">]])</span>        <span class="o">|</span>
@@ -287,11 +282,9 @@ tiles created at the start of the connection.</p>
 so is a more efficient way to answer the query:</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="o">!</span><span class="k">describe</span> <span class="nv">"adhoc"</span><span class="p">.</span><span class="nv">"m{16, 17, 27, 31, 32, 36, 37}"</span>
-<span class="o">+</span><span class="c1">-------------+-------------------------------+--------------------+-----------+-----------------+
-</span>
+<span class="o">+</span><span class="c1">-------------+-------------------------------+--------------------+-----------+-----------------+</span>
 <span class="o">|</span> <span class="n">TABLE_SCHEM</span> <span class="o">|</span> <span class="k">TABLE_NAME</span>                    <span class="o">|</span> <span class="k">COLUMN_NAME</span>        <span class="o">|</span> <span class="n">DATA_TYPE</span> <span class="o">|</span> <span class="n">TYPE_NAME</span>       <span class="o">|</span>
-<span class="o">+</span><span class="c1">-------------+-------------------------------+--------------------+-----------+-----------------+
-</span>
+<span class="o">+</span><span class="c1">-------------+-------------------------------+--------------------+-----------+-----------------+</span>
 <span class="o">|</span> <span class="n">adhoc</span>       <span class="o">|</span> <span class="n">m</span><span class="err">{</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">37</span><span class="err">}</span> <span class="o">|</span> <span class="n">recyclable_package</span> <span class="o">|</span> <span class="mi">16</span>        <span class="o">|</span> <span class="n">BOOLEAN</span>         <span class="o">|</span>
 <span class="o">|</span> <span class="n">adhoc</span>       <span class="o">|</span> <span class="n">m</span><span class="err">{</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">37</span><span class="err">}</span> <span class="o">|</span> <span class="n">low_fat</span>            <span class="o">|</span> <span class="mi">16</span>        <span class="o">|</span> <span class="n">BOOLEAN</span>         <span class="o">|</span>
 <span class="o">|</span> <span class="n">adhoc</span>       <span class="o">|</span> <span class="n">m</span><span class="err">{</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">37</span><span class="err">}</span> <span class="o">|</span> <span class="n">product_family</span>     <span class="o">|</span> <span class="mi">12</span>        <span class="o">|</span> <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>     <span class="o">|</span>
@@ -300,19 +293,15 @@ so is a more efficient way to answer the query:</p>
 <span class="o">|</span> <span class="n">adhoc</span>       <span class="o">|</span> <span class="n">m</span><span class="err">{</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">37</span><span class="err">}</span> <span class="o">|</span> <span class="n">quarter</span>            <span class="o">|</span> <span class="mi">12</span>        <span class="o">|</span> <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>     <span class="o">|</span>
 <span class="o">|</span> <span class="n">adhoc</span>       <span class="o">|</span> <span class="n">m</span><span class="err">{</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">37</span><span class="err">}</span> <span class="o">|</span> <span class="n">fiscal_period</span>      <span class="o">|</span> <span class="mi">12</span>        <span class="o">|</span> <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>     <span class="o">|</span>
 <span class="o">|</span> <span class="n">adhoc</span>       <span class="o">|</span> <span class="n">m</span><span class="err">{</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">37</span><span class="err">}</span> <span class="o">|</span> <span class="n">m0</span>                 <span class="o">|</span> <span class="o">-</span><span class="mi">5</span>        <span class="o">|</span> <span class="n">BIGINT</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="o">|</span>
-<span class="o">+</span><span class="c1">-------------+-------------------------------+--------------------+-----------+-----------------+
-</span>
+<span class="o">+</span><span class="c1">-------------+-------------------------------+--------------------+-----------+-----------------+</span>
 
 <span class="n">sqlline</span><span class="o">&gt;</span> <span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="k">c</span>
 <span class="p">.</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.</span><span class="o">&gt;</span> <span class="k">from</span> <span class="nv">"adhoc"</span><span class="p">.</span><span class="nv">"m{16, 17, 27, 31, 32, 36, 37}"</span><span class="p">;</span>
-<span class="o">+</span><span class="c1">-----+
-</span>
+<span class="o">+</span><span class="c1">-----+</span>
 <span class="o">|</span>   <span class="k">C</span> <span class="o">|</span>
-<span class="o">+</span><span class="c1">-----+
-</span>
+<span class="o">+</span><span class="c1">-----+</span>
 <span class="o">|</span> <span class="mi">120</span> <span class="o">|</span>
-<span class="o">+</span><span class="c1">-----+
-</span>
+<span class="o">+</span><span class="c1">-----+</span>
 <span class="mi">1</span> <span class="k">row</span> <span class="n">selected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">12</span> <span class="n">seconds</span><span class="p">)</span></code></pre></figure>
 
 <p>Let’s list the tables, and you will see several more tiles. There are also
@@ -320,11 +309,9 @@ tables of the <code class="highlighter-rouge">foodmart</code> schema, and the sy
 and the lattice itself, which appears as a table called <code class="highlighter-rouge">star</code>.</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="o">!</span><span class="n">tables</span>
-<span class="o">+</span><span class="c1">-------------+-------------------------------+--------------+
-</span>
+<span class="o">+</span><span class="c1">-------------+-------------------------------+--------------+</span>
 <span class="o">|</span> <span class="n">TABLE_SCHEM</span> <span class="o">|</span> <span class="k">TABLE_NAME</span>                    <span class="o">|</span> <span class="n">TABLE_TYPE</span>   <span class="o">|</span>
-<span class="o">+</span><span class="c1">-------------+-------------------------------+--------------+
-</span>
+<span class="o">+</span><span class="c1">-------------+-------------------------------+--------------+</span>
 <span class="o">|</span> <span class="n">adhoc</span>       <span class="o">|</span> <span class="n">m</span><span class="err">{</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">37</span><span class="err">}</span>         <span class="o">|</span> <span class="k">TABLE</span>        <span class="o">|</span>
 <span class="o">|</span> <span class="n">adhoc</span>       <span class="o">|</span> <span class="n">m</span><span class="err">{</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">37</span><span class="err">}</span> <span class="o">|</span> <span class="k">TABLE</span>        <span class="o">|</span>
 <span class="o">|</span> <span class="n">adhoc</span>       <span class="o">|</span> <span class="n">m</span><span class="err">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">37</span><span class="err">}</span>       <span class="o">|</span> <span class="k">TABLE</span>        <span class="o">|</span>
@@ -419,7 +406,6 @@ data is changed.</li>
     data cubes efficiently</a>.
     In <i>Proc. ACM SIGMOD Conf.</i>, Montreal, 1996.</li>
 </ul>
-
 
           
 
@@ -724,7 +710,7 @@ data is changed.</li>
       <img src="/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
   </div>
   <div id="copyright">
-  <p>The contents of this website are Copyright &copy;&nbsp;2019
+  <p>The contents of this website are Copyright &copy;&nbsp;2020
      <a href="https://www.apache.org/">Apache Software Foundation</a>
      under the terms of
      the <a href="https://www.apache.org/licenses/">

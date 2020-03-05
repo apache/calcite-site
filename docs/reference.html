@@ -227,7 +227,7 @@ form.</p>
       <span class="n">expression</span> <span class="p">[</span> <span class="k">ASC</span> <span class="o">|</span> <span class="k">DESC</span> <span class="p">]</span> <span class="p">[</span> <span class="n">NULLS</span> <span class="k">FIRST</span> <span class="o">|</span> <span class="n">NULLS</span> <span class="k">LAST</span> <span class="p">]</span>
 
 <span class="k">select</span><span class="p">:</span>
-      <span class="k">SELECT</span> <span class="p">[</span> <span class="n">STREAM</span> <span class="p">]</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span>
+      <span class="k">SELECT</span> <span class="p">[</span> <span class="s1">'/*+'</span> <span class="n">hint</span> <span class="p">[,</span> <span class="n">hint</span><span class="p">]</span><span class="o">*</span> <span class="s1">'*/'</span> <span class="p">]</span> <span class="p">[</span> <span class="n">STREAM</span> <span class="p">]</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span>
           <span class="err">{</span> <span class="o">*</span> <span class="o">|</span> <span class="n">projectItem</span> <span class="p">[,</span> <span class="n">projectItem</span> <span class="p">]</span><span class="o">*</span> <span class="err">}</span>
       <span class="k">FROM</span> <span class="n">tableExpression</span>
       <span class="p">[</span> <span class="k">WHERE</span> <span class="n">booleanExpression</span> <span class="p">]</span>
@@ -262,13 +262,30 @@ form.</p>
 <span class="n">tablePrimary</span><span class="p">:</span>
       <span class="p">[</span> <span class="p">[</span> <span class="n">catalogName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">schemaName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">tableName</span>
       <span class="s1">'('</span> <span class="k">TABLE</span> <span class="p">[</span> <span class="p">[</span> <span class="n">catalogName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">schemaName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">tableName</span> <span class="s1">')'</span>
-  <span class="o">|</span>   <span class="n">tablePrimary</span> <span class="p">[</span> <span class="n">EXTEND</span> <span class="p">]</span> <span class="s1">'('</span> <span class="n">columnDecl</span> <span class="p">[,</span> <span class="n">columnDecl</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
+  <span class="o">|</span>   <span class="n">tablePrimary</span> <span class="p">[</span> <span class="s1">'/*+'</span> <span class="n">hint</span> <span class="p">[,</span> <span class="n">hint</span><span class="p">]</span><span class="o">*</span> <span class="s1">'*/'</span> <span class="p">]</span> <span class="p">[</span> <span class="n">EXTEND</span> <span class="p">]</span> <span class="s1">'('</span> <span class="n">columnDecl</span> <span class="p">[,</span> <span class="n">columnDecl</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
   <span class="o">|</span>   <span class="p">[</span> <span class="k">LATERAL</span> <span class="p">]</span> <span class="s1">'('</span> <span class="n">query</span> <span class="s1">')'</span>
   <span class="o">|</span>   <span class="k">UNNEST</span> <span class="s1">'('</span> <span class="n">expression</span> <span class="s1">')'</span> <span class="p">[</span> <span class="k">WITH</span> <span class="k">ORDINALITY</span> <span class="p">]</span>
   <span class="o">|</span>   <span class="p">[</span> <span class="k">LATERAL</span> <span class="p">]</span> <span class="k">TABLE</span> <span class="s1">'('</span> <span class="p">[</span> <span class="k">SPECIFIC</span> <span class="p">]</span> <span class="n">functionName</span> <span class="s1">'('</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="s1">')'</span>
 
 <span class="n">columnDecl</span><span class="p">:</span>
       <span class="k">column</span> <span class="k">type</span> <span class="p">[</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">]</span>
+
+<span class="n">hint</span><span class="p">:</span>
+      <span class="n">hintName</span>
+  <span class="o">|</span>   <span class="n">hintName</span> <span class="s1">'('</span> <span class="n">hintOptions</span> <span class="s1">')'</span>
+
+<span class="n">hintOptions</span><span class="p">:</span>
+      <span class="n">hintKVOption</span> <span class="p">[,</span> <span class="n">hintKVOption</span><span class="p">]</span><span class="o">*</span>
+  <span class="o">|</span>   <span class="n">optionName</span> <span class="p">[,</span> <span class="n">optionName</span><span class="p">]</span><span class="o">*</span>
+  <span class="o">|</span>   <span class="n">optionValue</span> <span class="p">[,</span> <span class="n">optionValue</span><span class="p">]</span><span class="o">*</span>
+
+<span class="n">hintKVOption</span><span class="p">:</span>
+      <span class="n">optionName</span> <span class="s1">'='</span> <span class="n">stringLiteral</span>
+  <span class="o">|</span>   <span class="n">stringLiteral</span> <span class="s1">'='</span> <span class="n">stringLiteral</span>
+
+<span class="n">optionValue</span><span class="p">:</span>
+      <span class="n">stringLiteral</span>
+  <span class="o">|</span>   <span class="n">numericLiteral</span>
 
 <span class="k">values</span><span class="p">:</span>
       <span class="k">VALUES</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span>
@@ -489,6 +506,7 @@ DATABASE,
 DATETIME_INTERVAL_CODE,
 DATETIME_INTERVAL_PRECISION,
 <strong>DAY</strong>,
+DAYS,
 <strong>DEALLOCATE</strong>,
 <strong>DEC</strong>,
 DECADE,
@@ -589,6 +607,7 @@ GRANTED,
 HIERARCHY,
 <strong>HOLD</strong>,
 <strong>HOUR</strong>,
+HOURS,
 <strong>IDENTITY</strong>,
 IGNORE,
 IMMEDIATE,
@@ -677,11 +696,13 @@ MILLISECOND,
 <strong>MIN</strong>,
 <strong>MINUS</strong>,
 <strong>MINUTE</strong>,
+MINUTES,
 MINVALUE,
 <strong>MOD</strong>,
 <strong>MODIFIES</strong>,
 <strong>MODULE</strong>,
 <strong>MONTH</strong>,
+MONTHS,
 MORE,
 <strong>MULTISET</strong>,
 MUMPS,
@@ -836,6 +857,7 @@ SCOPE_SCHEMA,
 <strong>SCROLL</strong>,
 <strong>SEARCH</strong>,
 <strong>SECOND</strong>,
+SECONDS,
 SECTION,
 SECURITY,
 <strong>SEEK</strong>,
@@ -971,6 +993,7 @@ TRIGGER_SCHEMA,
 <strong>TRIM_ARRAY</strong>,
 <strong>TRUE</strong>,
 <strong>TRUNCATE</strong>,
+TUMBLE,
 TYPE,
 <strong>UESCAPE</strong>,
 UNBOUNDED,
@@ -1020,6 +1043,7 @@ WRAPPER,
 WRITE,
 XML,
 <strong>YEAR</strong>,
+YEARS,
 ZONE.</p>
 
 <h2 id="identifiers">Identifiers</h2>
@@ -1174,6 +1198,10 @@ TIMESTAMP WITH LOCAL TIME ZONE does not store the time zone internally, but
 it will rely on the supplied time zone to provide correct semantics.</li>
   <li>GEOMETRY is allowed only in certain
 <a href="/apidocs/org/apache/calcite/sql/validate/SqlConformance.html#allowGeometry--">conformance levels</a>.</li>
+  <li>Interval literals may only use time units
+YEAR, MONTH, DAY, HOUR, MINUTE and SECOND. In certain
+<a href="/apidocs/org/apache/calcite/sql/validate/SqlConformance.html#allowPluralTimeUnits--">conformance levels</a>,
+we also allow their plurals, YEARS, MONTHS, DAYS, HOURS, MINUTES and SECONDS.</li>
 </ul>
 
 <h3 id="non-scalar-types">Non-scalar types</h3>
@@ -1649,6 +1677,10 @@ completeness.</p>
     <tr>
       <td style="text-align: left">ATAN2(numeric, numeric)</td>
       <td style="text-align: left">Returns the arc tangent of the <em>numeric</em> coordinates</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CBRT(numeric)</td>
+      <td style="text-align: left">Returns the cube root of <em>numeric</em></td>
     </tr>
     <tr>
       <td style="text-align: left">COS(numeric)</td>
@@ -2400,7 +2432,7 @@ these details follow the table.</p>
 <h5 id="conversion-contexts-and-strategies">Conversion Contexts and Strategies</h5>
 
 <ul>
-  <li>Set operation (<code class="highlighter-rouge">UNION</code>, <code class="highlighter-rouge">EXCEPT</code>, <code class="highlighter-rouge">INTERSECT</code>): Compare every branch
+  <li>Set operation (<code class="highlighter-rouge">UNION</code>, <code class="highlighter-rouge">EXCEPT</code>, <code class="highlighter-rouge">INTERSECT</code>): compare every branch
 row data type and find the common type of each fields pair;</li>
   <li>Binary arithmetic expression (<code class="highlighter-rouge">+</code>, <code class="highlighter-rouge">-</code>, <code class="highlighter-rouge">&amp;</code>, <code class="highlighter-rouge">^</code>, <code class="highlighter-rouge">/</code>, <code class="highlighter-rouge">%</code>): promote
 string operand to data type of the other numeric operand;</li>
@@ -2413,12 +2445,26 @@ if it is struct type, find wider type for every field;</li>
   <li><code class="highlighter-rouge">IN</code> expression list: compare every expression to find the common type;</li>
   <li><code class="highlighter-rouge">CASE WHEN</code> expression or <code class="highlighter-rouge">COALESCE</code>: find the common wider type of the <code class="highlighter-rouge">THEN</code>
 and <code class="highlighter-rouge">ELSE</code> operands;</li>
-  <li>Character + <code class="highlighter-rouge">INTERVAL</code> or character - <code class="highlighter-rouge">INTERVAL</code>: Promote character to
+  <li>Character + <code class="highlighter-rouge">INTERVAL</code> or character - <code class="highlighter-rouge">INTERVAL</code>: promote character to
 <code class="highlighter-rouge">TIMESTAMP</code>;</li>
-  <li>Built-in function: Look up the type families registered in the checker,
+  <li>Built-in function: look up the type families registered in the checker,
 find the family default type if checker rules allow it;</li>
-  <li>User-defined function (UDF): Coerce based on the declared argument types
-of the <code class="highlighter-rouge">eval()</code> method.</li>
+  <li>User-defined function (UDF): coerce based on the declared argument types
+of the <code class="highlighter-rouge">eval()</code> method;</li>
+  <li><code class="highlighter-rouge">INSERT</code> and <code class="highlighter-rouge">UPDATE</code>: coerce a source field to counterpart target table
+field’s type if the two fields differ with type name or precision(scale).</li>
+</ul>
+
+<p>Note:</p>
+
+<p>Implicit type coercion of following cases are ignored:</p>
+
+<ul>
+  <li>One of the type is <code class="highlighter-rouge">ANY</code>;</li>
+  <li>Type coercion within <code class="highlighter-rouge">CHARACTER</code> types are always ignored,
+i.e. from <code class="highlighter-rouge">CHAR(20)</code> to <code class="highlighter-rouge">VARCHAR(30)</code>;</li>
+  <li>Type coercion from a numeric to another with higher precedence is ignored,
+i.e. from <code class="highlighter-rouge">INT</code> to <code class="highlighter-rouge">LONG</code>.</li>
 </ul>
 
 <h5 id="strategies-for-finding-common-type">Strategies for Finding Common Type</h5>
@@ -2665,6 +2711,10 @@ or promote to <code class="highlighter-rouge">VARCHAR</code> type.</li>
     <tr>
       <td style="text-align: left">{fn ATAN2(numeric, numeric)}</td>
       <td style="text-align: left">Returns the arc tangent of the <em>numeric</em> coordinates</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">{fn CBRT(numeric)}</td>
+      <td style="text-align: left">Returns the cube root of <em>numeric</em></td>
     </tr>
     <tr>
       <td style="text-align: left">{fn CEILING(numeric)}</td>
@@ -3022,6 +3072,10 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
       <td style="text-align: left">Returns the bitwise OR of all non-null input values, or null if none</td>
     </tr>
     <tr>
+      <td style="text-align: left">BIT_XOR( [ ALL | DISTINCT ] value)</td>
+      <td style="text-align: left">Returns the bitwise XOR of all non-null input values, or null if none</td>
+    </tr>
+    <tr>
       <td style="text-align: left">STDDEV_POP( [ ALL | DISTINCT ] numeric)</td>
       <td style="text-align: left">Returns the population standard deviation of <em>numeric</em> across all input values</td>
     </tr>
@@ -3208,6 +3262,39 @@ runtime.</li>
     </tr>
   </tbody>
 </table>
+
+<h3 id="descriptor">DESCRIPTOR</h3>
+<p>| Operator syntax      | Description
+|:——————– |:———–
+| DESCRIPTOR(name [, name ]*) | DESCRIPTOR appears as an argument in a function to indicate a list of names. The interpretation of names is left to the function.</p>
+
+<h3 id="table-valued-functions">Table-valued functions.</h3>
+<p>Table-valued functions occur in the <code class="highlighter-rouge">FROM</code> clause.</p>
+
+<h4 id="tumble">TUMBLE</h4>
+<p>In streaming queries, TUMBLE assigns a window for each row of a relation based on a timestamp column. An assigned window
+is specified by its beginning and ending. All assigned windows have the same length, and that’s why tumbling sometimes
+is named as “fixed windowing”.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Operator syntax</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">TUMBLE(table, DESCRIPTOR(column_name), interval [, time ])</td>
+      <td style="text-align: left">Indicates a tumbling window of <em>interval</em> for <em>datetime</em>, optionally aligned at <em>time</em>. Tumbling is applied on table in which there is a watermarked column specified by descriptor.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Here is an example:
+<code class="highlighter-rouge">SELECT * FROM TABLE(TUMBLE(TABLE orders, DESCRIPTOR(rowtime), INTERVAL '1' MINUTE))</code>,
+will apply tumbling with 1 minute window size on rows from table orders. rowtime is the
+watermarked column of table orders that tells data completeness.</p>
 
 <h3 id="grouped-window-functions">Grouped window functions</h3>
 
@@ -4062,6 +4149,11 @@ semantics.</p>
       <td style="text-align: left">Returns the character having the binary equivalent to <em>integer</em> as a CHAR value</td>
     </tr>
     <tr>
+      <td style="text-align: left">o</td>
+      <td style="text-align: left">COSH(numeric)</td>
+      <td style="text-align: left">Returns the hyperbolic cosine of <em>numeric</em></td>
+    </tr>
+    <tr>
       <td style="text-align: left">m o p</td>
       <td style="text-align: left">CONCAT(string [, string ]*)</td>
       <td style="text-align: left">Concatenates two or more strings</td>
@@ -4085,6 +4177,21 @@ semantics.</p>
       <td style="text-align: left">p</td>
       <td style="text-align: left">DIFFERENCE(string, string)</td>
       <td style="text-align: left">Returns a measure of the similarity of two strings, namely the number of character positions that their <code class="highlighter-rouge">SOUNDEX</code> values have in common: 4 if the <code class="highlighter-rouge">SOUNDEX</code> values are same and 0 if the <code class="highlighter-rouge">SOUNDEX</code> values are totally different</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">o</td>
+      <td style="text-align: left">EXTRACT(xml, xpath, [, namespaces ])</td>
+      <td style="text-align: left">Returns the xml fragment of the element or elements matched by the XPath expression. The optional namespace value that specifies a default mapping or namespace mapping for prefixes, which is used when evaluating the XPath expression</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">o</td>
+      <td style="text-align: left">EXISTSNODE(xml, xpath, [, namespaces ])</td>
+      <td style="text-align: left">Determines whether traversal of a XML document using a specified xpath results in any nodes. Returns 0 if no nodes remain after applying the XPath traversal on the document fragment of the element or elements matched by the XPath expression. Returns 1 if any nodes remain. The optional namespace value that specifies a default mapping or namespace mapping for prefixes, which is used when evaluating the XPath expression.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
+      <td style="text-align: left">EXTRACTVALUE(xml, xpathExpr))</td>
+      <td style="text-align: left">Returns the text of the first text node which is a child of the element or elements matched by the XPath expression.</td>
     </tr>
     <tr>
       <td style="text-align: left">o</td>
@@ -4212,6 +4319,11 @@ semantics.</p>
       <td style="text-align: left">Returns a portion of <em>string</em>, beginning at character <em>position</em>, <em>substringLength</em> characters long. SUBSTR calculates lengths using characters as defined by the input character set</td>
     </tr>
     <tr>
+      <td style="text-align: left">o</td>
+      <td style="text-align: left">TANH(numeric)</td>
+      <td style="text-align: left">Returns the hyperbolic tangent of <em>numeric</em></td>
+    </tr>
+    <tr>
       <td style="text-align: left">o p</td>
       <td style="text-align: left">TO_DATE(string, format)</td>
       <td style="text-align: left">Converts <em>string</em> to a date using the format <em>format</em></td>
@@ -4225,6 +4337,11 @@ semantics.</p>
       <td style="text-align: left">o p</td>
       <td style="text-align: left">TRANSLATE(expr, fromString, toString)</td>
       <td style="text-align: left">Returns <em>expr</em> with all occurrences of each character in <em>fromString</em> replaced by its corresponding character in <em>toString</em>. Characters in <em>expr</em> that are not in <em>fromString</em> are not replaced</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">o</td>
+      <td style="text-align: left">XMLTRANSFORM(xml, xslt)</td>
+      <td style="text-align: left">Returns a string after applying xslt to supplied xml.</td>
     </tr>
   </tbody>
 </table>
@@ -4661,6 +4778,72 @@ Here are some examples:</p>
 <code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">a</code> is not optional.</li>
 </ul>
 
+<h3 id="sql-hints">SQL Hints</h3>
+
+<p>A hint is an instruction to the optimizer. When writing SQL, you may know information about
+the data unknown to the optimizer. Hints enable you to make decisions normally made by the optimizer.</p>
+
+<ul>
+  <li>Planner enforcers: there’s no perfect planner, so it makes sense to implement hints to
+allow user better control the execution. For instance: “never merge this subquery with others” (<code class="highlighter-rouge">/*+ no_merge */</code>);
+“treat those tables as leading ones” (<code class="highlighter-rouge">/*+ leading */</code>) to affect join ordering, etc;</li>
+  <li>Append meta data/statistics: some statistics like “table index for scan” or “skew info of some shuffle keys”
+are somehow dynamic for the query, it would be very convenient to config them with hints because
+our planning metadata from the planner is very often not very accurate;</li>
+  <li>Operator resource constraints: for many cases, we would give a default resource configuration
+for the execution operators,
+i.e. min parallelism, memory (resource consuming UDF), special resource requirement (GPU or SSD disk) …
+It would be very flexible to profile the resource with hints per query (not the Job).</li>
+</ul>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>Calcite supports basically two kinds of hints:</p>
+
+<ul>
+  <li>Query Hint: right after the <code class="highlighter-rouge">SELECT</code> keyword;</li>
+  <li>Table Hint: right after the referenced table name.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">query</span> <span class="p">:</span>
+      <span class="k">SELECT</span> <span class="cm">/*+ hints */</span>
+      <span class="p">...</span>
+      <span class="k">from</span>
+          <span class="n">tableName</span> <span class="cm">/*+ hints */</span>
+          <span class="k">JOIN</span>
+          <span class="n">tableName</span> <span class="cm">/*+ hints */</span>
+      <span class="p">...</span>
+
+<span class="n">hints</span> <span class="p">:</span>
+      <span class="n">hintItem</span><span class="p">[,</span> <span class="n">hintItem</span> <span class="p">]</span><span class="o">*</span>
+
+<span class="n">hintItem</span> <span class="p">:</span>
+      <span class="n">hintName</span>
+  <span class="o">|</span>   <span class="n">hintName</span><span class="p">(</span><span class="n">optionKey</span><span class="o">=</span><span class="n">optionVal</span><span class="p">[,</span> <span class="n">optionKey</span><span class="o">=</span><span class="n">optionVal</span> <span class="p">]</span><span class="o">*</span><span class="p">)</span>
+  <span class="o">|</span>   <span class="n">hintName</span><span class="p">(</span><span class="n">hintOption</span> <span class="p">[,</span> <span class="n">hintOption</span> <span class="p">]</span><span class="o">*</span><span class="p">)</span>
+
+<span class="n">optionKey</span> <span class="p">:</span>
+      <span class="n">simpleIdentifier</span>
+  <span class="o">|</span>   <span class="n">stringLiteral</span>
+
+<span class="n">optionVal</span> <span class="p">:</span>
+      <span class="n">stringLiteral</span>
+
+<span class="n">hintOption</span> <span class="p">:</span>
+      <span class="n">simpleIdentifier</span>
+   <span class="o">|</span>  <span class="n">numericLiteral</span>
+   <span class="o">|</span>  <span class="n">stringLiteral</span></code></pre></figure>
+
+<p>It is experimental in Calcite, and yet not fully implemented, what we have implemented are:</p>
+
+<ul>
+  <li>The parser support for the syntax above;</li>
+  <li><code class="highlighter-rouge">RelHint</code> to represent a hint item;</li>
+  <li>Mechanism to propagate the hints, during sql-to-rel conversion and planner planning.</li>
+</ul>
+
+<p>We do not add any builtin hint items yet, would introduce more if we think the hints is stable enough.</p>
+
 <h3 id="match_recognize">MATCH_RECOGNIZE</h3>
 
 <p><code class="highlighter-rouge">MATCH_RECOGNIZE</code> is a SQL extension for recognizing sequences of
@@ -4668,7 +4851,7 @@ events in complex event processing (CEP).</p>
 
 <p>It is experimental in Calcite, and yet not fully implemented.</p>
 
-<h4 id="syntax">Syntax</h4>
+<h4 id="syntax-1">Syntax</h4>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">matchRecognize</span><span class="p">:</span>
       <span class="n">MATCH_RECOGNIZE</span> <span class="s1">'('</span>

@@ -1,0 +1,667 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>Redis adapter</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="generator" content="Jekyll v3.7.3">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
+  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+
+<body class="wrap">
+  <header role="banner">
+  <div class="grid">
+    <div class="unit center-on-mobiles">
+      <h1>
+        <a href="/">
+          <span class="sr-only">Apache Calcite</span>
+          <img src="/img/logo.svg" alt="Calcite Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav">
+      <ul>
+  <li class="">
+    <a href="/">Home</a>
+  </li>
+  <li class="">
+    <a href="/downloads/">Download</a>
+  </li>
+  <li class="">
+    <a href="/community/">Community</a>
+  </li>
+  <li class="">
+    <a href="/develop/">Develop</a>
+  </li>
+  <li class="">
+    <a href="/news/">News</a>
+  </li>
+  <li class="current">
+    <a href="/docs/">Docs</a>
+  </li>
+</ul>
+
+    </nav>
+  </div>
+</header>
+
+
+    <section class="docs">
+    <div class="grid">
+
+      <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select onchange="if (this.value) window.location.href=this.value">
+    <option value="">Navigate the docs…</option>
+        <optgroup label="Overview">      
+    </optgroup>
+    <optgroup label="Advanced">      
+    </optgroup>
+    <optgroup label="Avatica">      
+    </optgroup>
+    <optgroup label="Reference">      
+    </optgroup>
+    <optgroup label="Meta">      
+    </optgroup>
+
+  </select>
+</div>
+
+
+      <div class="unit four-fifths">
+        <article>
+          <h1>Redis adapter</h1>
+          <!--
+
+-->
+
+<p><a href="https://redis.io/">Redis</a> is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker. It supports data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, HyperLogLogs, geospatial indexes with radius queries, and streams. Redis has built-in replication, Lua scripting, LRU eviction, transactions and different levels of on-disk persistence, and provides high availability via Redis Sentinel and automatic partitioning with Redis Cluster.</p>
+
+<p>Calcite’s Redis adapter allows you to query data in Redis using SQL, combining it with data in other Calcite schemas.</p>
+
+<p>The Redis adapter allows querying of live data stored in Redis. Each Redis key-value pair is presented as a single row. Rows can be broken down into cells by using table definition files.
+Redis <code class="highlighter-rouge">string</code> ,<code class="highlighter-rouge">hash</code>, <code class="highlighter-rouge">sets</code>, <code class="highlighter-rouge">zsets</code>, <code class="highlighter-rouge">list</code> value types are supported;</p>
+
+<p>First, we need a <a href="/docs/model.html">model definition</a>.
+The model gives Calcite the necessary parameters to create an instance of the Redis adapter.</p>
+
+<p>A basic example of a model file is given below:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"defaultSchema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foodmart"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"schemas"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foodmart"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.redis.RedisSchemaFactory"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"localhost"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">6379</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"database"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"tables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"json_01"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.redis.RedisTableFactory"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"dataFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"json"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEPTNO"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEPTNO"</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NAME"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NAME"</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"raw_01"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.redis.RedisTableFactory"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"dataFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"raw"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pop"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"int"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pop"</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"csv_01"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.redis.RedisTableFactory"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"dataFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"csv"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"keyDelimiter"</span><span class="p">:</span><span class="w"> </span><span class="s2">":"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EMPNO"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+              </span><span class="p">},</span><span class="w">
+              </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NAME"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>This file is stored as <a href="https://github.com/apache/calcite/blob/master/redis/src/test/resources/redis-mix-model.json"><code class="highlighter-rouge">redis/src/test/resources/redis-mix-model.json</code></a>,
+so you can connect to Redis via
+<a href="https://github.com/julianhyde/sqlline"><code class="highlighter-rouge">sqlline</code></a>
+as follows:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">From the model above, you can see the schema information of the table. You need to start a Redis service before the query, When the <span class="nb">source </span>code build is executed, a redis service is started to load the following <span class="nb">test </span>data.<span class="sb">`</span>redis/src/test/resources/start.sh<span class="sb">`</span> is used to start this service.<span class="sb">`</span>redis/src/test/resources/stop.sh<span class="sb">`</span> is used to stop this service.
+<span class="nv">$ </span>./sqlline
+sqlline&gt; <span class="o">!</span>connect jdbc:calcite:model<span class="o">=</span>redis/src/test/resources/redis-mix-model.json admin admin
+sqlline&gt; <span class="o">!</span>tables
++-----------+-------------+------------+--------------+---------+----------+------------+-----------+---------------------------+----------------+
+| TABLE_CAT | TABLE_SCHEM | TABLE_NAME |  TABLE_TYPE  | REMARKS | TYPE_CAT | TYPE_SCHEM | TYPE_NAME | SELF_REFERENCING_COL_NAME | REF_GENERATION |
++-----------+-------------+------------+--------------+---------+----------+------------+-----------+---------------------------+----------------+
+|           | foodmart    | csv_01     | TABLE        |         |          |            |           |                           |                |
+|           | foodmart    | json_01    | TABLE        |         |          |            |           |                           |                |
+|           | foodmart    | raw_01     | TABLE        |         |          |            |           |                           |                |
++-----------+-------------+------------+--------------+---------+----------+------------+-----------+---------------------------+----------------+
+sqlline&gt; Select a.DEPTNO, b.NAME from <span class="s2">"csv_01"</span> a left join <span class="s2">"json_02"</span> b on a.DEPTNO<span class="o">=</span>b.DEPTNO<span class="p">;</span>
++--------+----------+
+| DEPTNO |   NAME   |
++--------+----------+
+| 10     | <span class="s2">"Sales1"</span> |
++--------+----------+
+1 row selected <span class="o">(</span>3.304 seconds<span class="o">)</span></code></pre></figure>
+
+<p>This query shows the result of the join query in a CSV format table <code class="highlighter-rouge">csv_01</code> and a JSON format table <code class="highlighter-rouge">json_02</code>.</p>
+
+<p>Here are a few details about the fields:</p>
+
+<p>The <code class="highlighter-rouge">keyDelimiter</code> is used to split the value, the default is a colon, and the split value is used to map the field column. This only works for the CSV format.</p>
+
+<p>The <code class="highlighter-rouge">format</code> key is used to specify the format of the data in Redis. Currently, it supports: <code class="highlighter-rouge">"csv"</code>, <code class="highlighter-rouge">"json"</code>, and <code class="highlighter-rouge">"raw"</code>. The <code class="highlighter-rouge">"raw"</code> format keeps the original Redis key and value intact and only one field key is used for the query. The details are not described below.</p>
+
+<p>The function of <code class="highlighter-rouge">mapping</code> is to map the columns of Redis to the underlying data. Since there is no concept of columns in Redis, the specific mapping method varies according to the format. For example, with <code class="highlighter-rouge">"csv"</code>, we know that the CSV data will be formed after being parsed. The corresponding column mapping uses the index (subscript) of the underlying array. In the example above, <code class="highlighter-rouge">EMPNO</code> is mapped to index 0, <code class="highlighter-rouge">NAME</code> is mapped to index 1 and so on.</p>
+
+<p>Currently the Redis adapter supports three formats: raw, JSON, and CSV.</p>
+
+<h2 id="example-raw">Example: raw</h2>
+
+<p>The raw format maintains the original Redis key-value format with only one column <code class="highlighter-rouge">key</code>:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">127.0.0.1:6379&gt; LPUSH raw_02 <span class="s2">"book1"</span>
+sqlline&gt; <span class="k">select</span> <span class="k">*</span> from <span class="s2">"raw_02"</span><span class="p">;</span>
++-------+
+|  key  |
++-------+
+| book2 |
+| book1 |
++-------+</code></pre></figure>
+
+<h2 id="example-json">Example: JSON</h2>
+
+<p>The JSON format parses a Redis string value and uses the mapping to convert fields into multiple columns.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">127.0.0.1:6379&gt; LPUSH json_02 <span class="o">{</span><span class="s2">"DEPTNO"</span>:10,<span class="s2">"NAME"</span>:<span class="s2">"Sales1"</span><span class="o">}</span></code></pre></figure>
+
+<p>The schema contains mapping:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="o">{</span>
+   <span class="s2">"name"</span>: <span class="s2">"json_02"</span>,
+   <span class="s2">"factory"</span>: <span class="s2">"org.apache.calcite.adapter.redis.RedisTableFactory"</span>,
+   <span class="s2">"operand"</span>: <span class="o">{</span>
+     <span class="s2">"dataFormat"</span>: <span class="s2">"json"</span>,
+     <span class="s2">"fields"</span>: <span class="o">[</span>
+       <span class="o">{</span>
+         <span class="s2">"name"</span>: <span class="s2">"DEPTNO"</span>,
+         <span class="s2">"type"</span>: <span class="s2">"varchar"</span>,
+         <span class="s2">"mapping"</span>: <span class="s2">"DEPTNO"</span>
+       <span class="o">}</span>,
+       <span class="o">{</span>
+         <span class="s2">"name"</span>: <span class="s2">"NAME"</span>,
+         <span class="s2">"type"</span>: <span class="s2">"varchar"</span>,
+         <span class="s2">"mapping"</span>: <span class="s2">"NAME"</span>
+       <span class="o">}</span>
+     <span class="o">]</span>
+   <span class="o">}</span>
+ <span class="o">}</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select</span> <span class="k">*</span> from <span class="s2">"json_02"</span><span class="p">;</span>
++--------+----------+
+| DEPTNO |   NAME   |
++--------+----------+
+| 20     | <span class="s2">"Sales2"</span> |
+| 10     | <span class="s2">"Sales1"</span> |
++--------+----------+
+2 rows selected <span class="o">(</span>0.014 seconds<span class="o">)</span></code></pre></figure>
+
+<h2 id="example-csv">Example: CSV</h2>
+
+<p>The CSV format parses a Redis string value and combines the mapping in fields into multiple columns. The default separator is <code class="highlighter-rouge">:</code>.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">127.0.0.1:6379&gt; LPUSH csv_02 <span class="s2">"10:Sales"</span></code></pre></figure>
+
+<p>The schema contains mapping:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="o">{</span>
+  <span class="s2">"name"</span>: <span class="s2">"csv_02"</span>,
+  <span class="s2">"factory"</span>: <span class="s2">"org.apache.calcite.adapter.redis.RedisTableFactory"</span>,
+  <span class="s2">"operand"</span>: <span class="o">{</span>
+    <span class="s2">"dataFormat"</span>: <span class="s2">"csv"</span>,
+    <span class="s2">"keyDelimiter"</span>: <span class="s2">":"</span>,
+    <span class="s2">"fields"</span>: <span class="o">[</span>
+      <span class="o">{</span>
+        <span class="s2">"name"</span>: <span class="s2">"DEPTNO"</span>,
+        <span class="s2">"type"</span>: <span class="s2">"varchar"</span>,
+        <span class="s2">"mapping"</span>: 0
+      <span class="o">}</span>,
+      <span class="o">{</span>
+        <span class="s2">"name"</span>: <span class="s2">"NAME"</span>,
+        <span class="s2">"type"</span>: <span class="s2">"varchar"</span>,
+        <span class="s2">"mapping"</span>: 1
+      <span class="o">}</span>
+    <span class="o">]</span>
+  <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select</span> <span class="k">*</span> from <span class="s2">"csv_02"</span><span class="p">;</span>
++--------+-------+
+| DEPTNO | NAME  |
++--------+-------+
+| 20     | Sales |
+| 10     | Sales |
++--------+-------+</code></pre></figure>
+
+<p>Future plan:
+More Redis features need to be further refined: for example HyperLogLog and Pub/Sub.</p>
+
+          
+
+
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+
+        </article>
+      </div>
+
+      <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    
+    <h4>Overview</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/index.html">Background</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/tutorial.html">Tutorial</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/algebra.html">Algebra</a></li>
+
+
+</ul>
+
+    
+    <h4>Advanced</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/adapter.html">Adapters</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/spatial.html">Spatial</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/stream.html">Streaming</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/materialized_views.html">Materialized Views</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/lattice.html">Lattices</a></li>
+
+
+</ul>
+
+    
+    <h4>Avatica</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_overview.html">Overview</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_roadmap.html">Roadmap</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_json_reference.html">JSON Reference</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_protobuf_reference.html">Protobuf Reference</a></li>
+
+
+</ul>
+
+    
+    <h4>Reference</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/reference.html">SQL language</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/model.html">JSON/YAML models</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/howto.html">HOWTO</a></li>
+
+
+</ul>
+
+    
+    <h4>Meta</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/history.html">History</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/powered_by.html">Powered by Calcite</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/apidocs">API</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/testapidocs">Test API</a></li>
+
+
+</ul>
+
+    
+  </aside>
+</div>
+
+
+      <div class="clear"></div>
+
+    </div>
+  </section>
+
+
+  <footer role="contentinfo">
+  <div id="poweredby">
+    <a href="http://www.apache.org/">
+      <span class="sr-only">Apache</span>
+      <img src="/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
+  </div>
+  <div id="copyright">
+  <p>The contents of this website are Copyright &copy;&nbsp;2020
+     <a href="https://www.apache.org/">Apache Software Foundation</a>
+     under the terms of
+     the <a href="https://www.apache.org/licenses/">
+     Apache&nbsp;License&nbsp;v2</a>. Apache Calcite and its logo are
+     trademarks of the Apache Software Foundation.</p>
+  </div>
+</footer>
+
+  <script>
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
+    anchor.title = "Permalink";
+    return anchor;
+  };
+
+  var linkifyAnchors = function (level, containingElement) {
+    var headers = containingElement.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.appendChild(anchorForId(header.id));
+      }
+    }
+  };
+
+  document.onreadystatechange = function () {
+    if (this.readyState === "complete") {
+      var contentBlock = document.getElementsByClassName("docs")[0] || document.getElementsByClassName("news")[0];
+      if (!contentBlock) {
+        return;
+      }
+      for (var level = 1; level <= 6; level++) {
+        linkifyAnchors(level, contentBlock);
+      }
+    }
+  };
+</script>
+
+
+</body>
+</html>

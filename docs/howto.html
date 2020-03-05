@@ -149,8 +149,8 @@ adapters.</p>
 <code class="highlighter-rouge">cd</code> to the root directory of the unpacked source,
 then build using the included maven wrapper:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz calcite-1.21.0-source.tar.gz
-<span class="nv">$ </span><span class="nb">cd </span>calcite-1.21.0
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz calcite-1.22.0-source.tar.gz
+<span class="nv">$ </span><span class="nb">cd </span>calcite-1.22.0
 <span class="nv">$ </span>./gradlew build</code></pre></figure>
 
 <p><a href="#running-tests">Running tests</a> describes how to run more or fewer
@@ -204,7 +204,8 @@ be impedance mismatch between different versions.</p>
 <span class="nv">$ </span>./gradlew build <span class="nt">-x</span> <span class="nb">test</span> <span class="c"># build the artifacts, verify code style, skip tests</span>
 <span class="nv">$ </span>./gradlew check <span class="c"># verify code style, execute tests</span>
 <span class="nv">$ </span>./gradlew <span class="nb">test</span> <span class="c"># execute tests</span>
-<span class="nv">$ </span>./gradlew checkstyleMain checkstyleTest <span class="c"># verify code style</span></code></pre></figure>
+<span class="nv">$ </span>./gradlew style <span class="c"># update code formatting (for auto-correctable cases) and verify style</span>
+<span class="nv">$ </span>./gradlew autostyleCheck checkstyleAll <span class="c"># report code style violations</span></code></pre></figure>
 
 <p>You can use <code class="highlighter-rouge">./gradlew assemble</code> to build the artifacts and skip all tests and verifications.</p>
 
@@ -225,11 +226,11 @@ to populate it (i.e. provision a VM).</li>
     </ul>
   </li>
   <li><code class="highlighter-rouge">-Dcalcite.debug</code> prints extra debugging information to stdout.</li>
-  <li><code class="highlighter-rouge">-Dcalcite.test.slow</code> enables tests that take longer to execute. For
-example, there are tests that create virtual TPC-H and TPC-DS schemas
-in-memory and run tests from those benchmarks.</li>
   <li><code class="highlighter-rouge">-Dcalcite.test.splunk</code> enables tests that run against Splunk.
 Splunk must be installed and running.</li>
+  <li><code class="highlighter-rouge">./gradlew testSlow</code> runs tests that take longer to execute. For
+example, there are tests that create virtual TPC-H and TPC-DS schemas
+in-memory and run tests from those benchmarks.</li>
 </ul>
 
 <p>Note: tests are executed in a forked JVM, so system properties are not passed automatically
@@ -581,6 +582,12 @@ from a contributor, found it satisfactory, and is about to merge it to master.
 Usually the contributor is not a committer (otherwise they would be committing
 it themselves, after you gave approval in a review).</p>
 
+<p>There are certain kinds of continuous integration tests that are not run
+automatically against the PR. These tests can be triggered explicitly by adding
+an appropriate label to the PR. For instance, you can run slow tests by adding
+the <code class="highlighter-rouge">slow-tests-needed</code> label. It is up to you to decide if these additional
+tests need to run before merging.</p>
+
 <p>If the PR has multiple commits, squash them into a single commit. The
 commit message should follow the conventions outined in
 <a href="/develop/#contributing">contribution guidelines</a>.
@@ -601,7 +608,7 @@ must:</p>
   <li>resolve the issue (do not close it as this will be done by the release
 manager);</li>
   <li>select “Fixed” as resolution cause;</li>
-  <li>mark the appropriate version (e.g., 1.21.0) in the “Fix version” field;</li>
+  <li>mark the appropriate version (e.g., 1.22.0) in the “Fix version” field;</li>
   <li>add a comment (e.g., “Fixed in …”) with a hyperlink pointing to the commit
 which resolves the issue (in GitHub or GitBox), and also thank the contributor
 for their contribution.</li>
@@ -679,13 +686,17 @@ if new critical vulnerabilities are found among dependencies.</li>
 Guava.  These will probably be the same as those described in the
 release notes of the previous release.  Document them in the release
 notes.  To test Guava version <em>x.y</em>, specify <code class="highlighter-rouge">-Pguava.version=x.y</code></li>
-  <li>Optional extra tests:
+  <li>Optional tests using properties:
     <ul>
       <li><code class="highlighter-rouge">-Dcalcite.test.db=mysql</code></li>
       <li><code class="highlighter-rouge">-Dcalcite.test.db=hsqldb</code></li>
-      <li><code class="highlighter-rouge">-Dcalcite.test.slow</code></li>
       <li><code class="highlighter-rouge">-Dcalcite.test.mongodb</code></li>
       <li><code class="highlighter-rouge">-Dcalcite.test.splunk</code></li>
+    </ul>
+  </li>
+  <li>Optional tests using tasks:
+    <ul>
+      <li><code class="highlighter-rouge">./gradlew testSlow</code></li>
     </ul>
   </li>
   <li>Trigger a

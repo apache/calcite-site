@@ -151,7 +151,7 @@ views, e.g., views with an arbitrary number of join operators.</p>
 
 <p>In turn, an alternative rule that attempts to match queries to views by extracting some structural information about the expression to replace has been proposed.</p>
 
-<p><code class="highlighter-rouge">AbstractMaterializedViewRule</code> builds on the ideas presented in [<a href="#ref-gl01">GL01</a>] and introduces some additional extensions.
+<p><code class="highlighter-rouge">MaterializedViewRule</code> builds on the ideas presented in [<a href="#ref-gl01">GL01</a>] and introduces some additional extensions.
 The rule can rewrite expressions containing arbitrary chains of Join, Filter, and Project operators.
 Additionally, the rule can rewrite expressions rooted at an Aggregate operator, rolling aggregations up if necessary. In turn, it can also produce rewritings using Union operators if the query can be partially answered from a view.</p>
 
@@ -159,7 +159,7 @@ Additionally, the rule can rewrite expressions rooted at an Aggregate operator, 
 
 <h5 id="rewriting-coverage">Rewriting coverage</h5>
 
-<p>Let us illustrate with some examples the coverage of the view rewriting algorithm implemented in <code class="highlighter-rouge">AbstractMaterializedViewRule</code>. The examples are based on the following database schema.</p>
+<p>Let us illustrate with some examples the coverage of the view rewriting algorithm implemented in <code class="highlighter-rouge">MaterializedViewRule</code>. The examples are based on the following database schema.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE depts(
   deptno INT NOT NULL,

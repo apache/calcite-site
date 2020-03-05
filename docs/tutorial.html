@@ -237,7 +237,7 @@ powered by a plugin class,
 <a href="https://github.com/apache/calcite/blob/master/example/csv/src/main/java/org/apache/calcite/adapter/csv/CsvSchemaFactory.java">org.apache.calcite.adapter.csv.CsvSchemaFactory</a>,
 which is part of the
 calcite-example-csv project and implements the Calcite interface
-<a href="/apidocs/org/apache/calcite/schema/SchemaFactory.html">SchemaFactory</a>.
+<a href="/javadocAggregate/org/apache/calcite/schema/SchemaFactory.html">SchemaFactory</a>.
 Its <code>create</code> method instantiates a
 schema, passing in the <code>directory</code> argument from the model file:</p>
 
@@ -260,18 +260,18 @@ schema, passing in the <code>directory</code> argument from the model file:</p>
 called ‘SALES’.  The schema is an instance of
 <a href="https://github.com/apache/calcite/blob/master/example/csv/src/main/java/org/apache/calcite/adapter/csv/CsvSchema.java">org.apache.calcite.adapter.csv.CsvSchema</a>
 and implements the Calcite interface
-<a href="/apidocs/org/apache/calcite/schema/Schema.html">Schema</a>.</p>
+<a href="/javadocAggregate/org/apache/calcite/schema/Schema.html">Schema</a>.</p>
 
 <p>A schema’s job is to produce a list of tables. (It can also list sub-schemas and
 table-functions, but these are advanced features and calcite-example-csv does
 not support them.) The tables implement Calcite’s
-<a href="/apidocs/org/apache/calcite/schema/Table.html">Table</a>
+<a href="/javadocAggregate/org/apache/calcite/schema/Table.html">Table</a>
 interface. <code>CsvSchema</code> produces tables that are instances of
 <a href="https://github.com/apache/calcite/blob/master/example/csv/src/main/java/org/apache/calcite/adapter/csv/CsvTable.java">CsvTable</a>
 and its sub-classes.</p>
 
 <p>Here is the relevant code from <code>CsvSchema</code>, overriding the
-<code><a href="/apidocs/org/apache/calcite/schema/impl/AbstractSchema.html#getTableMap()">getTableMap()</a></code>
+<code><a href="/javadocAggregate/org/apache/calcite/schema/impl/AbstractSchema.html#getTableMap()">getTableMap()</a></code>
 method in the <code>AbstractSchema</code> base class.</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">protected</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Table</span><span class="o">&gt;</span> <span class="nf">getTableMap</span><span class="o">()</span> <span class="o">{</span>
@@ -440,7 +440,7 @@ They don’t need to live in a custom schema.</p>
 <p>The schema is a regular one, and contains a custom table powered by
 <a href="https://github.com/apache/calcite/blob/master/example/csv/src/main/java/org/apache/calcite/adapter/csv/CsvTableFactory.java">org.apache.calcite.adapter.csv.CsvTableFactory</a>,
 which implements the Calcite interface
-<a href="/apidocs/org/apache/calcite/schema/TableFactory.html">TableFactory</a>.
+<a href="/javadocAggregate/org/apache/calcite/schema/TableFactory.html">TableFactory</a>.
 Its <code>create</code> method instantiates a <code>CsvScannableTable</code>,
 passing in the <code>file</code> argument from the model file:</p>
 
@@ -532,12 +532,12 @@ and its <code>createTable</code> method creates instances of
 rather than a <code>CsvScannableTable</code>.</p>
 
 <p><code>CsvTranslatableTable</code> implements the
-<code><a href="/apidocs/org/apache/calcite/schema/TranslatableTable.html#toRel()">TranslatableTable.toRel()</a></code>
+<code><a href="/javadocAggregate/org/apache/calcite/schema/TranslatableTable.html#toRel()">TranslatableTable.toRel()</a></code>
 method to create
 <a href="https://github.com/apache/calcite/blob/master/example/csv/src/main/java/org/apache/calcite/adapter/csv/CsvTableScan.java">CsvTableScan</a>.
 Table scans are the leaves of a query operator tree.
 The usual implementation is
-<code><a href="/apidocs/org/apache/calcite/adapter/enumerable/EnumerableTableScan.html">EnumerableTableScan</a></code>,
+<code><a href="/javadocAggregate/org/apache/calcite/adapter/enumerable/EnumerableTableScan.html">EnumerableTableScan</a></code>,
 but we have created a distinctive sub-type that will cause rules to fire.</p>
 
 <p>Here is the rule in its entirety:</p>
@@ -588,7 +588,7 @@ but we have created a distinctive sub-type that will cause rules to fire.</p>
 the rule to fire.</p>
 
 <p>The <code>onMatch</code> method generates a new relational expression and calls
-<code><a href="/apidocs/org/apache/calcite/plan/RelOptRuleCall.html#transformTo(org.apache.calcite.rel.RelNode)">RelOptRuleCall.transformTo()</a></code>
+<code><a href="/javadocAggregate/org/apache/calcite/plan/RelOptRuleCall.html#transformTo(org.apache.calcite.rel.RelNode)">RelOptRuleCall.transformTo()</a></code>
 to indicate that the rule has fired successfully.</p>
 
 <h2 id="the-query-optimization-process">The query optimization process</h2>
@@ -989,17 +989,7 @@ The <a href="adapter.html">adapter specification</a> describes the APIs involved
 
   
 
-  <li class=""><a href="/apidocs">API</a></li>
-
-
-  
-  
-  
-  
-
-  
-
-  <li class=""><a href="/testapidocs">Test API</a></li>
+  <li class=""><a href="/javadocAggregate">API</a></li>
 
 
 </ul>

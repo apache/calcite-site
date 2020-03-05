@@ -101,7 +101,7 @@ operators, planner rules, cost model, and statistics.</p>
 <h2 id="algebra-builder">Algebra builder</h2>
 
 <p>The simplest way to build a relational expression is to use the algebra builder,
-<a href="/apidocs/org/apache/calcite/tools/RelBuilder.html">RelBuilder</a>.
+<a href="/javadocAggregate/org/apache/calcite/tools/RelBuilder.html">RelBuilder</a>.
 Here is an example:</p>
 
 <h3 id="tablescan">TableScan</h3>
@@ -255,7 +255,7 @@ If you have a particular <code class="highlighter-rouge">RelNode</code> instance
 changing. In fact, the whole relational expression is immutable.</p>
 
 <p>But if a relational expression has passed through several rewrite rules (see
-<a href="/apidocs/org/apache/calcite/plan/RelOptRule.html">RelOptRule</a>), the field
+<a href="/javadocAggregate/org/apache/calcite/plan/RelOptRule.html">RelOptRule</a>), the field
 names of the resulting expression might not look much like the originals.
 At that point it is better to reference fields by ordinal.</p>
 
@@ -332,7 +332,7 @@ A SQL recursive query, e.g. this one that generates the sequence 1, 2, 3, …10:
 <h4 id="relational-operators">Relational operators</h4>
 
 <p>The following methods create a relational expression
-(<a href="/apidocs/org/apache/calcite/rel/RelNode.html">RelNode</a>),
+(<a href="/javadocAggregate/org/apache/calcite/rel/RelNode.html">RelNode</a>),
 push it onto the stack, and
 return the <code class="highlighter-rouge">RelBuilder</code>.</p>
 
@@ -346,27 +346,27 @@ return the <code class="highlighter-rouge">RelBuilder</code>.</p>
   <tbody>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">scan(tableName)</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/TableScan.html">TableScan</a>.</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/TableScan.html">TableScan</a>.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">functionScan(operator, n, expr...)</code><br /><code class="highlighter-rouge">functionScan(operator, n, exprList)</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/TableFunctionScan.html">TableFunctionScan</a> of the <code class="highlighter-rouge">n</code> most recent relational expressions.</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/TableFunctionScan.html">TableFunctionScan</a> of the <code class="highlighter-rouge">n</code> most recent relational expressions.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">transientScan(tableName [, rowType])</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/TableScan.html">TableScan</a> on a <a href="/apidocs/org/apache/calcite/schema/TransientTable.html">TransientTable</a> with the given type (if not specified, the most recent relational expression’s type will be used).</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/TableScan.html">TableScan</a> on a <a href="/javadocAggregate/org/apache/calcite/schema/TransientTable.html">TransientTable</a> with the given type (if not specified, the most recent relational expression’s type will be used).</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">values(fieldNames, value...)</code><br /><code class="highlighter-rouge">values(rowType, tupleList)</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Values.html">Values</a>.</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Values.html">Values</a>.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">filter([variablesSet, ] exprList)</code><br /><code class="highlighter-rouge">filter([variablesSet, ] expr...)</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Filter.html">Filter</a> over the AND of the given predicates; if <code class="highlighter-rouge">variablesSet</code> is specified, the predicates may reference those variables.</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Filter.html">Filter</a> over the AND of the given predicates; if <code class="highlighter-rouge">variablesSet</code> is specified, the predicates may reference those variables.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">project(expr...)</code><br /><code class="highlighter-rouge">project(exprList [, fieldNames])</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Project.html">Project</a>. To override the default name, wrap expressions using <code class="highlighter-rouge">alias</code>, or specify the <code class="highlighter-rouge">fieldNames</code> argument.</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Project.html">Project</a>. To override the default name, wrap expressions using <code class="highlighter-rouge">alias</code>, or specify the <code class="highlighter-rouge">fieldNames</code> argument.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">projectPlus(expr...)</code><br /><code class="highlighter-rouge">projectPlus(exprList)</code></td>
@@ -378,79 +378,79 @@ return the <code class="highlighter-rouge">RelBuilder</code>.</p>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">permute(mapping)</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Project.html">Project</a> that permutes the fields using <code class="highlighter-rouge">mapping</code>.</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Project.html">Project</a> that permutes the fields using <code class="highlighter-rouge">mapping</code>.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">convert(rowType [, rename])</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Project.html">Project</a> that converts the fields to the given types, optionally also renaming them.</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Project.html">Project</a> that converts the fields to the given types, optionally also renaming them.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">aggregate(groupKey, aggCall...)</code><br /><code class="highlighter-rouge">aggregate(groupKey, aggCallList)</code></td>
-      <td style="text-align: left">Creates an <a href="/apidocs/org/apache/calcite/rel/core/Aggregate.html">Aggregate</a>.</td>
+      <td style="text-align: left">Creates an <a href="/javadocAggregate/org/apache/calcite/rel/core/Aggregate.html">Aggregate</a>.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">distinct()</code></td>
-      <td style="text-align: left">Creates an <a href="/apidocs/org/apache/calcite/rel/core/Aggregate.html">Aggregate</a> that eliminates duplicate records.</td>
+      <td style="text-align: left">Creates an <a href="/javadocAggregate/org/apache/calcite/rel/core/Aggregate.html">Aggregate</a> that eliminates duplicate records.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">sort(fieldOrdinal...)</code><br /><code class="highlighter-rouge">sort(expr...)</code><br /><code class="highlighter-rouge">sort(exprList)</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Sort.html">Sort</a>.<br /><br />In the first form, field ordinals are 0-based, and a negative ordinal indicates descending; for example, -2 means field 1 descending.<br /><br />In the other forms, you can wrap expressions in <code class="highlighter-rouge">as</code>, <code class="highlighter-rouge">nullsFirst</code> or <code class="highlighter-rouge">nullsLast</code>.</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Sort.html">Sort</a>.<br /><br />In the first form, field ordinals are 0-based, and a negative ordinal indicates descending; for example, -2 means field 1 descending.<br /><br />In the other forms, you can wrap expressions in <code class="highlighter-rouge">as</code>, <code class="highlighter-rouge">nullsFirst</code> or <code class="highlighter-rouge">nullsLast</code>.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">sortLimit(offset, fetch, expr...)</code><br /><code class="highlighter-rouge">sortLimit(offset, fetch, exprList)</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Sort.html">Sort</a> with offset and limit.</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Sort.html">Sort</a> with offset and limit.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">limit(offset, fetch)</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Sort.html">Sort</a> that does not sort, only applies with offset and limit.</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Sort.html">Sort</a> that does not sort, only applies with offset and limit.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">exchange(distribution)</code></td>
-      <td style="text-align: left">Creates an <a href="/apidocs/org/apache/calcite/rel/core/Exchange.html">Exchange</a>.</td>
+      <td style="text-align: left">Creates an <a href="/javadocAggregate/org/apache/calcite/rel/core/Exchange.html">Exchange</a>.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">sortExchange(distribution, collation)</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/SortExchange.html">SortExchange</a>.</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/SortExchange.html">SortExchange</a>.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">correlate(joinType, correlationId, requiredField...)</code><br /><code class="highlighter-rouge">correlate(joinType, correlationId, requiredFieldList)</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Correlate.html">Correlate</a> of the two most recent relational expressions, with a variable name and required field expressions for the left relation.</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Correlate.html">Correlate</a> of the two most recent relational expressions, with a variable name and required field expressions for the left relation.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">join(joinType, expr...)</code><br /><code class="highlighter-rouge">join(joinType, exprList)</code><br /><code class="highlighter-rouge">join(joinType, fieldName...)</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Join.html">Join</a> of the two most recent relational expressions.<br /><br />The first form joins on a boolean expression (multiple conditions are combined using AND).<br /><br />The last form joins on named fields; each side must have a field of each name.</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Join.html">Join</a> of the two most recent relational expressions.<br /><br />The first form joins on a boolean expression (multiple conditions are combined using AND).<br /><br />The last form joins on named fields; each side must have a field of each name.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">semiJoin(expr)</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Join.html">Join</a> with SEMI join type of the two most recent relational expressions.</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Join.html">Join</a> with SEMI join type of the two most recent relational expressions.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">antiJoin(expr)</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Join.html">Join</a> with ANTI join type of the two most recent relational expressions.</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Join.html">Join</a> with ANTI join type of the two most recent relational expressions.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">union(all [, n])</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Union.html">Union</a> of the <code class="highlighter-rouge">n</code> (default two) most recent relational expressions.</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Union.html">Union</a> of the <code class="highlighter-rouge">n</code> (default two) most recent relational expressions.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">intersect(all [, n])</code></td>
-      <td style="text-align: left">Creates an <a href="/apidocs/org/apache/calcite/rel/core/Intersect.html">Intersect</a> of the <code class="highlighter-rouge">n</code> (default two) most recent relational expressions.</td>
+      <td style="text-align: left">Creates an <a href="/javadocAggregate/org/apache/calcite/rel/core/Intersect.html">Intersect</a> of the <code class="highlighter-rouge">n</code> (default two) most recent relational expressions.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">minus(all)</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Minus.html">Minus</a> of the two most recent relational expressions.</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Minus.html">Minus</a> of the two most recent relational expressions.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">repeatUnion(tableName, all [, n])</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/RepeatUnion.html">RepeatUnion</a> associated to a <a href="/apidocs/org/apache/calcite/schema/TransientTable.html">TransientTable</a> of the two most recent relational expressions, with <code class="highlighter-rouge">n</code> maximum number of iterations (default -1, i.e. no limit).</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/RepeatUnion.html">RepeatUnion</a> associated to a <a href="/javadocAggregate/org/apache/calcite/schema/TransientTable.html">TransientTable</a> of the two most recent relational expressions, with <code class="highlighter-rouge">n</code> maximum number of iterations (default -1, i.e. no limit).</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">snapshot(period)</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Snapshot.html">Snapshot</a> of the given snapshot period.</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Snapshot.html">Snapshot</a> of the given snapshot period.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">match(pattern, strictStart,</code> <code class="highlighter-rouge">strictEnd, patterns, measures,</code> <code class="highlighter-rouge">after, subsets, allRows,</code> <code class="highlighter-rouge">partitionKeys, orderKeys,</code> <code class="highlighter-rouge">interval)</code></td>
-      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Match.html">Match</a>.</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Match.html">Match</a>.</td>
     </tr>
   </tbody>
 </table>
@@ -458,35 +458,35 @@ return the <code class="highlighter-rouge">RelBuilder</code>.</p>
 <p>Argument types:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">expr</code>, <code class="highlighter-rouge">interval</code> <a href="/apidocs/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
+  <li><code class="highlighter-rouge">expr</code>, <code class="highlighter-rouge">interval</code> <a href="/javadocAggregate/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
   <li><code class="highlighter-rouge">expr...</code>, <code class="highlighter-rouge">requiredField...</code> Array of
-<a href="/apidocs/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
+<a href="/javadocAggregate/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
   <li><code class="highlighter-rouge">exprList</code>, <code class="highlighter-rouge">measureList</code>, <code class="highlighter-rouge">partitionKeys</code>, <code class="highlighter-rouge">orderKeys</code>,
 <code class="highlighter-rouge">requiredFieldList</code> Iterable of
-<a href="/apidocs/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
+<a href="/javadocAggregate/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
   <li><code class="highlighter-rouge">fieldOrdinal</code> Ordinal of a field within its row (starting from 0)</li>
   <li><code class="highlighter-rouge">fieldName</code> Name of a field, unique within its row</li>
   <li><code class="highlighter-rouge">fieldName...</code> Array of String</li>
   <li><code class="highlighter-rouge">fieldNames</code> Iterable of String</li>
-  <li><code class="highlighter-rouge">rowType</code> <a href="/apidocs/org/apache/calcite/rel/type/RelDataType.html">RelDataType</a></li>
-  <li><code class="highlighter-rouge">groupKey</code> <a href="/apidocs/org/apache/calcite/tools/RelBuilder.GroupKey.html">RelBuilder.GroupKey</a></li>
-  <li><code class="highlighter-rouge">aggCall...</code> Array of <a href="/apidocs/org/apache/calcite/tools/RelBuilder.AggCall.html">RelBuilder.AggCall</a></li>
-  <li><code class="highlighter-rouge">aggCallList</code> Iterable of <a href="/apidocs/org/apache/calcite/tools/RelBuilder.AggCall.html">RelBuilder.AggCall</a></li>
+  <li><code class="highlighter-rouge">rowType</code> <a href="/javadocAggregate/org/apache/calcite/rel/type/RelDataType.html">RelDataType</a></li>
+  <li><code class="highlighter-rouge">groupKey</code> <a href="/javadocAggregate/org/apache/calcite/tools/RelBuilder.GroupKey.html">RelBuilder.GroupKey</a></li>
+  <li><code class="highlighter-rouge">aggCall...</code> Array of <a href="/javadocAggregate/org/apache/calcite/tools/RelBuilder.AggCall.html">RelBuilder.AggCall</a></li>
+  <li><code class="highlighter-rouge">aggCallList</code> Iterable of <a href="/javadocAggregate/org/apache/calcite/tools/RelBuilder.AggCall.html">RelBuilder.AggCall</a></li>
   <li><code class="highlighter-rouge">value...</code> Array of Object</li>
   <li><code class="highlighter-rouge">value</code> Object</li>
-  <li><code class="highlighter-rouge">tupleList</code> Iterable of List of <a href="/apidocs/org/apache/calcite/rex/RexLiteral.html">RexLiteral</a></li>
+  <li><code class="highlighter-rouge">tupleList</code> Iterable of List of <a href="/javadocAggregate/org/apache/calcite/rex/RexLiteral.html">RexLiteral</a></li>
   <li><code class="highlighter-rouge">all</code>, <code class="highlighter-rouge">distinct</code>, <code class="highlighter-rouge">strictStart</code>, <code class="highlighter-rouge">strictEnd</code>, <code class="highlighter-rouge">allRows</code> boolean</li>
   <li><code class="highlighter-rouge">alias</code> String</li>
-  <li><code class="highlighter-rouge">correlationId</code> <a href="/apidocs/org/apache/calcite/rel/core/CorrelationId.html">CorrelationId</a></li>
+  <li><code class="highlighter-rouge">correlationId</code> <a href="/javadocAggregate/org/apache/calcite/rel/core/CorrelationId.html">CorrelationId</a></li>
   <li><code class="highlighter-rouge">variablesSet</code> Iterable of
-<a href="/apidocs/org/apache/calcite/rel/core/CorrelationId.html">CorrelationId</a></li>
-  <li><code class="highlighter-rouge">varHolder</code> <a href="/apidocs/org/apache/calcite/util/Holder.html">Holder</a> of <a href="/apidocs/org/apache/calcite/rex/RexCorrelVariable.html">RexCorrelVariable</a></li>
-  <li><code class="highlighter-rouge">patterns</code> Map whose key is String, value is <a href="/apidocs/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
+<a href="/javadocAggregate/org/apache/calcite/rel/core/CorrelationId.html">CorrelationId</a></li>
+  <li><code class="highlighter-rouge">varHolder</code> <a href="/javadocAggregate/org/apache/calcite/util/Holder.html">Holder</a> of <a href="/javadocAggregate/org/apache/calcite/rex/RexCorrelVariable.html">RexCorrelVariable</a></li>
+  <li><code class="highlighter-rouge">patterns</code> Map whose key is String, value is <a href="/javadocAggregate/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
   <li><code class="highlighter-rouge">subsets</code> Map whose key is String, value is a sorted set of String</li>
-  <li><code class="highlighter-rouge">distribution</code> <a href="/apidocs/org/apache/calcite/rel/RelDistribution.html">RelDistribution</a></li>
-  <li><code class="highlighter-rouge">collation</code> <a href="/apidocs/org/apache/calcite/rel/RelCollation.html">RelCollation</a></li>
-  <li><code class="highlighter-rouge">operator</code> <a href="/apidocs/org/apache/calcite/sql/SqlOperator.html">SqlOperator</a></li>
-  <li><code class="highlighter-rouge">joinType</code> <a href="/apidocs/org/apache/calcite/rel/core/JoinRelType.html">JoinRelType</a></li>
+  <li><code class="highlighter-rouge">distribution</code> <a href="/javadocAggregate/org/apache/calcite/rel/RelDistribution.html">RelDistribution</a></li>
+  <li><code class="highlighter-rouge">collation</code> <a href="/javadocAggregate/org/apache/calcite/rel/RelCollation.html">RelCollation</a></li>
+  <li><code class="highlighter-rouge">operator</code> <a href="/javadocAggregate/org/apache/calcite/sql/SqlOperator.html">SqlOperator</a></li>
+  <li><code class="highlighter-rouge">joinType</code> <a href="/javadocAggregate/org/apache/calcite/rel/core/JoinRelType.html">JoinRelType</a></li>
 </ul>
 
 <p>The builder methods perform various optimizations, including:</p>
@@ -552,7 +552,7 @@ expression on the stack:</p>
 <h4 id="scalar-expression-methods">Scalar expression methods</h4>
 
 <p>The following methods return a scalar expression
-(<a href="/apidocs/org/apache/calcite/rex/RexNode.html">RexNode</a>).</p>
+(<a href="/javadocAggregate/org/apache/calcite/rex/RexNode.html">RexNode</a>).</p>
 
 <p>Many of them use the contents of the stack. For example, <code class="highlighter-rouge">field("DEPTNO")</code>
 returns a reference to the “DEPTNO” field of the relational expression just
@@ -707,7 +707,7 @@ added to the stack.</p>
 <h4 id="group-key-methods">Group key methods</h4>
 
 <p>The following methods return a
-<a href="/apidocs/org/apache/calcite/tools/RelBuilder.GroupKey.html">RelBuilder.GroupKey</a>.</p>
+<a href="/javadocAggregate/org/apache/calcite/tools/RelBuilder.GroupKey.html">RelBuilder.GroupKey</a>.</p>
 
 <table>
   <thead>
@@ -735,7 +735,7 @@ added to the stack.</p>
 <h4 id="aggregate-call-methods">Aggregate call methods</h4>
 
 <p>The following methods return an
-<a href="/apidocs/org/apache/calcite/tools/RelBuilder.AggCall.html">RelBuilder.AggCall</a>.</p>
+<a href="/javadocAggregate/org/apache/calcite/tools/RelBuilder.AggCall.html">RelBuilder.AggCall</a>.</p>
 
 <table>
   <thead>
@@ -1064,17 +1064,7 @@ added to the stack.</p>
 
   
 
-  <li class=""><a href="/apidocs">API</a></li>
-
-
-  
-  
-  
-  
-
-  
-
-  <li class=""><a href="/testapidocs">Test API</a></li>
+  <li class=""><a href="/javadocAggregate">API</a></li>
 
 
 </ul>

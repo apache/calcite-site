@@ -316,13 +316,13 @@ form.</p>
 <p>In <em>insert</em>, if the INSERT or UPSERT statement does not specify a
 list of target columns, the query must have the same number of
 columns as the target table, except in certain
-<a href="/apidocs/org/apache/calcite/sql/validate/SqlConformance.html#isInsertSubsetColumnsAllowed--">conformance levels</a>.</p>
+<a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#isInsertSubsetColumnsAllowed--">conformance levels</a>.</p>
 
 <p>In <em>merge</em>, at least one of the WHEN MATCHED and WHEN NOT MATCHED clauses must
 be present.</p>
 
 <p><em>tablePrimary</em> may only contain an EXTEND clause in certain
-<a href="/apidocs/org/apache/calcite/sql/validate/SqlConformance.html#allowExtend--">conformance levels</a>;
+<a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#allowExtend--">conformance levels</a>;
 in those same conformance levels, any <em>column</em> in <em>insert</em> may be replaced by
 <em>columnDecl</em>, which has a similar effect to including it in an EXTEND clause.</p>
 
@@ -355,18 +355,18 @@ may refer to tables in the FROM clause of an enclosing query.</p>
 
 <p><em>selectWithoutFrom</em> is equivalent to VALUES,
 but is not standard SQL and is only allowed in certain
-<a href="/apidocs/org/apache/calcite/sql/validate/SqlConformance.html#isFromRequired--">conformance levels</a>.</p>
+<a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#isFromRequired--">conformance levels</a>.</p>
 
 <p>MINUS is equivalent to EXCEPT,
 but is not standard SQL and is only allowed in certain
-<a href="/apidocs/org/apache/calcite/sql/validate/SqlConformance.html#isMinusAllowed--">conformance levels</a>.</p>
+<a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#isMinusAllowed--">conformance levels</a>.</p>
 
 <p>CROSS APPLY and OUTER APPLY are only allowed in certain
-<a href="/apidocs/org/apache/calcite/sql/validate/SqlConformance.html#isApplyAllowed--">conformance levels</a>.</p>
+<a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#isApplyAllowed--">conformance levels</a>.</p>
 
 <p>“LIMIT start, count” is equivalent to “LIMIT count OFFSET start”
 but is only allowed in certain
-<a href="/apidocs/org/apache/calcite/sql/validate/SqlConformance.html#isLimitStartCountAllowed--">conformance levels</a>.</p>
+<a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#isLimitStartCountAllowed--">conformance levels</a>.</p>
 
 <h2 id="keywords">Keywords</h2>
 
@@ -1197,10 +1197,10 @@ It is left to the user or application to supply a time zone. In turn,
 TIMESTAMP WITH LOCAL TIME ZONE does not store the time zone internally, but
 it will rely on the supplied time zone to provide correct semantics.</li>
   <li>GEOMETRY is allowed only in certain
-<a href="/apidocs/org/apache/calcite/sql/validate/SqlConformance.html#allowGeometry--">conformance levels</a>.</li>
+<a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#allowGeometry--">conformance levels</a>.</li>
   <li>Interval literals may only use time units
 YEAR, MONTH, DAY, HOUR, MINUTE and SECOND. In certain
-<a href="/apidocs/org/apache/calcite/sql/validate/SqlConformance.html#allowPluralTimeUnits--">conformance levels</a>,
+<a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#allowPluralTimeUnits--">conformance levels</a>,
 we also allow their plurals, YEARS, MONTHS, DAYS, HOURS, MINUTES and SECONDS.</li>
 </ul>
 
@@ -1616,7 +1616,7 @@ completeness.</p>
     </tr>
     <tr>
       <td style="text-align: left">numeric1 % numeric2</td>
-      <td style="text-align: left">As <em>MOD(numeric1, numeric2)</em> (only in certain <a href="/apidocs/org/apache/calcite/sql/validate/SqlConformance.html#isPercentRemainderAllowed--">conformance levels</a>)</td>
+      <td style="text-align: left">As <em>MOD(numeric1, numeric2)</em> (only in certain <a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#isPercentRemainderAllowed--">conformance levels</a>)</td>
     </tr>
     <tr>
       <td style="text-align: left">POWER(numeric1, numeric2)</td>
@@ -1936,7 +1936,7 @@ completeness.</p>
 
 <p>Calls to niladic functions such as <code class="highlighter-rouge">CURRENT_DATE</code> do not accept parentheses in
 standard SQL. Calls with parentheses, such as <code class="highlighter-rouge">CURRENT_DATE()</code> are accepted in certain
-<a href="/apidocs/org/apache/calcite/sql/validate/SqlConformance.html#allowNiladicParentheses--">conformance levels</a>.</p>
+<a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#allowNiladicParentheses--">conformance levels</a>.</p>
 
 <p>Not implemented:</p>
 
@@ -4681,7 +4681,7 @@ and register the class.</li>
 generate code that merges sub-totals.</p>
 
 <p>Optionally, make your class implement the
-<a href="/apidocs/org/apache/calcite/sql/SqlSplittableAggFunction.html">SqlSplittableAggFunction</a>
+<a href="/javadocAggregate/org/apache/calcite/sql/SqlSplittableAggFunction.html">SqlSplittableAggFunction</a>
 interface; this allows Calcite to decompose the function across several stages
 of aggregation, roll up from summary tables, and push it through joins.</p>
 
@@ -4689,19 +4689,19 @@ of aggregation, roll up from summary tables, and push it through joins.</p>
 
 <ul>
   <li>Create a class with a static <code class="highlighter-rouge">eval</code> method that returns
-<a href="/apidocs/org/apache/calcite/schema/ScannableTable.html">ScannableTable</a>
+<a href="/javadocAggregate/org/apache/calcite/schema/ScannableTable.html">ScannableTable</a>
 or
-<a href="/apidocs/org/apache/calcite/schema/QueryableTable.html">QueryableTable</a>,
+<a href="/javadocAggregate/org/apache/calcite/schema/QueryableTable.html">QueryableTable</a>,
 and register the class;</li>
   <li>Create a class with a non-static <code class="highlighter-rouge">eval</code> method that returns
-<a href="/apidocs/org/apache/calcite/schema/ScannableTable.html">ScannableTable</a>
+<a href="/javadocAggregate/org/apache/calcite/schema/ScannableTable.html">ScannableTable</a>
 or
-<a href="/apidocs/org/apache/calcite/schema/QueryableTable.html">QueryableTable</a>,
+<a href="/javadocAggregate/org/apache/calcite/schema/QueryableTable.html">QueryableTable</a>,
 and register the class;</li>
   <li>Create a class with one or more public static methods that return
-<a href="/apidocs/org/apache/calcite/schema/ScannableTable.html">ScannableTable</a>
+<a href="/javadocAggregate/org/apache/calcite/schema/ScannableTable.html">ScannableTable</a>
 or
-<a href="/apidocs/org/apache/calcite/schema/QueryableTable.html">QueryableTable</a>,
+<a href="/javadocAggregate/org/apache/calcite/schema/QueryableTable.html">QueryableTable</a>,
 and register each class/method combination.</li>
 </ul>
 
@@ -4709,20 +4709,20 @@ and register each class/method combination.</li>
 
 <ul>
   <li>Create a class with a static <code class="highlighter-rouge">eval</code> method that returns
-<a href="/apidocs/org/apache/calcite/schema/TranslatableTable.html">TranslatableTable</a>,
+<a href="/javadocAggregate/org/apache/calcite/schema/TranslatableTable.html">TranslatableTable</a>,
 and register the class;</li>
   <li>Create a class with a non-static <code class="highlighter-rouge">eval</code> method that returns
-<a href="/apidocs/org/apache/calcite/schema/TranslatableTable.html">TranslatableTable</a>,
+<a href="/javadocAggregate/org/apache/calcite/schema/TranslatableTable.html">TranslatableTable</a>,
 and register the class;</li>
   <li>Create a class with one or more public static methods that return
-<a href="/apidocs/org/apache/calcite/schema/TranslatableTable.html">TranslatableTable</a>,
+<a href="/javadocAggregate/org/apache/calcite/schema/TranslatableTable.html">TranslatableTable</a>,
 and register each class/method combination.</li>
 </ul>
 
 <p>Calcite deduces the parameter types and result type of a function from the
 parameter and return types of the Java method that implements it. Further, you
 can specify the name and optionality of each parameter using the
-<a href="/apidocs/org/apache/calcite/linq4j/function/Parameter.html">Parameter</a>
+<a href="/javadocAggregate/org/apache/calcite/linq4j/function/Parameter.html">Parameter</a>
 annotation.</p>
 
 <h3 id="calling-functions-with-named-and-optional-parameters">Calling functions with named and optional parameters</h3>
@@ -4917,7 +4917,7 @@ and <em>minRepeat</em> and <em>maxRepeat</em> are non-negative integers.</p>
 To enable, include <code class="highlighter-rouge">calcite-server.jar</code> in your class path, and add
 <code class="highlighter-rouge">parserFactory=org.apache.calcite.sql.parser.ddl.SqlDdlParserImpl#FACTORY</code>
 to the JDBC connect string (see connect string property
-<a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#PARSER_FACTORY">parserFactory</a>).</p>
+<a href="/javadocAggregate/org/apache/calcite/config/CalciteConnectionProperty.html#PARSER_FACTORY">parserFactory</a>).</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">ddlStatement</span><span class="p">:</span>
       <span class="n">createSchemaStatement</span>
@@ -5323,17 +5323,7 @@ and <em>filePathLiteral</em> are character literals.</p>
 
   
 
-  <li class=""><a href="/apidocs">API</a></li>
-
-
-  
-  
-  
-  
-
-  
-
-  <li class=""><a href="/testapidocs">Test API</a></li>
+  <li class=""><a href="/javadocAggregate">API</a></li>
 
 
 </ul>

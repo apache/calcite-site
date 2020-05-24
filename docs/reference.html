@@ -606,6 +606,7 @@ GRANTED,
 <strong>HAVING</strong>,
 HIERARCHY,
 <strong>HOLD</strong>,
+HOP,
 <strong>HOUR</strong>,
 HOURS,
 <strong>IDENTITY</strong>,
@@ -3040,6 +3041,10 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
       <td style="text-align: left">Returns the multiset union of <em>multiset</em> across all input values</td>
     </tr>
     <tr>
+      <td style="text-align: left">INTERSECTION(multiset)</td>
+      <td style="text-align: left">Returns the multiset intersection of <em>multiset</em> across all input values</td>
+    </tr>
+    <tr>
       <td style="text-align: left">APPROX_COUNT_DISTINCT(value [, value ]*)</td>
       <td style="text-align: left">Returns the approximate number of distinct values of <em>value</em>; the database is allowed to use an approximation but is not required to</td>
     </tr>
@@ -3062,6 +3067,14 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
     <tr>
       <td style="text-align: left">ANY_VALUE( [ ALL | DISTINCT ] value)</td>
       <td style="text-align: left">Returns one of the values of <em>value</em> across all input values; this is NOT specified in the SQL standard</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SOME(condition)</td>
+      <td style="text-align: left">Returns true if any condition is true.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">EVERY(condition)</td>
+      <td style="text-align: left">Returns true if all conditions are true.</td>
     </tr>
     <tr>
       <td style="text-align: left">BIT_AND( [ ALL | DISTINCT ] value)</td>
@@ -3268,8 +3281,8 @@ runtime.</li>
 |:——————– |:———–
 | DESCRIPTOR(name [, name ]*) | DESCRIPTOR appears as an argument in a function to indicate a list of names. The interpretation of names is left to the function.</p>
 
-<h3 id="table-valued-functions">Table-valued functions.</h3>
-<p>Table-valued functions occur in the <code class="highlighter-rouge">FROM</code> clause.</p>
+<h3 id="table-functions">Table functions.</h3>
+<p>Table functions occur in the <code class="highlighter-rouge">FROM</code> clause.</p>
 
 <h4 id="tumble">TUMBLE</h4>
 <p>In streaming queries, TUMBLE assigns a window for each row of a relation based on a timestamp column. An assigned window
@@ -3285,8 +3298,8 @@ is named as “fixed windowing”.</p>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">TUMBLE(table, DESCRIPTOR(column_name), interval [, time ])</td>
-      <td style="text-align: left">Indicates a tumbling window of <em>interval</em> for <em>datetime</em>, optionally aligned at <em>time</em>. Tumbling is applied on table in which there is a watermarked column specified by descriptor.</td>
+      <td style="text-align: left">TUMBLE(table, DESCRIPTOR(datetime), interval)</td>
+      <td style="text-align: left">Indicates a tumbling window of <em>interval</em> for <em>datetime</em>.</td>
     </tr>
   </tbody>
 </table>
@@ -3296,7 +3309,56 @@ is named as “fixed windowing”.</p>
 will apply tumbling with 1 minute window size on rows from table orders. rowtime is the
 watermarked column of table orders that tells data completeness.</p>
 
+<h4 id="hop">HOP</h4>
+<p>In streaming queries, HOP assigns windows that cover rows within the interval of <em>size</em> and shifting every <em>slide</em> based
+on a timestamp column. Windows assigned could have overlapping so hopping sometime is named as “sliding windowing”.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Operator syntax</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">HOP(table, DESCRIPTOR(datetime), slide, size)</td>
+      <td style="text-align: left">Indicates a hopping window for <em>datetime</em>, covering rows within the interval of <em>size</em>, shifting every <em>slide</em>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Here is an example:
+<code class="highlighter-rouge">SELECT * FROM TABLE(HOP(TABLE orders, DESCRIPTOR(rowtime), INTERVAL '2' MINUTE, INTERVAL '5' MINUTE))</code>,
+will apply hopping with 5-minute interval size on rows from table orders and shifting every 2 minutes. rowtime is the
+watermarked column of table orders that tells data completeness.</p>
+
+<h4 id="session">SESSION</h4>
+<p>In streaming queries, SESSION assigns windows that cover rows based on <em>datetime</em>. Within a session window, distances
+of rows are less than <em>interval</em>. Session window is applied per <em>key</em>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Operator syntax</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">session(table, DESCRIPTOR(datetime), DESCRIPTOR(key), interval)</td>
+      <td style="text-align: left">Indicates a session window of <em>interval</em> for <em>datetime</em>. Session window is applied per <em>key</em>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Here is an example:
+<code class="highlighter-rouge">SELECT * FROM TABLE(SESSION(TABLE orders, DESCRIPTOR(rowtime), DESCRIPTOR(product), INTERVAL '20' MINUTE))</code>,
+will apply session with 20-minute inactive gap on rows from table orders. rowtime is the
+watermarked column of table orders that tells data completeness. Session is applied per product.</p>
+
 <h3 id="grouped-window-functions">Grouped window functions</h3>
+<p><strong>warning</strong>: grouped window functions are deprecated.</p>
 
 <p>Grouped window functions occur in the <code class="highlighter-rouge">GROUP BY</code> clause and define a key value
 that represents a window containing several rows.</p>
@@ -4154,9 +4216,19 @@ semantics.</p>
       <td style="text-align: left">Returns the hyperbolic cosine of <em>numeric</em></td>
     </tr>
     <tr>
-      <td style="text-align: left">m o p</td>
+      <td style="text-align: left">o</td>
+      <td style="text-align: left">CONCAT(string, string)</td>
+      <td style="text-align: left">Concatenates two strings</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m p</td>
       <td style="text-align: left">CONCAT(string [, string ]*)</td>
       <td style="text-align: left">Concatenates two or more strings</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
+      <td style="text-align: left">COMPRESS(string)</td>
+      <td style="text-align: left">Compresses a string using zlib compression and returns the result as a binary string.</td>
     </tr>
     <tr>
       <td style="text-align: left">p</td>
@@ -4304,6 +4376,11 @@ semantics.</p>
       <td style="text-align: left">Calculates a SHA-1 hash value of <em>string</em> and returns it as a hex string</td>
     </tr>
     <tr>
+      <td style="text-align: left">o</td>
+      <td style="text-align: left">SINH(numeric)</td>
+      <td style="text-align: left">Returns the hyperbolic sine of <em>numeric</em></td>
+    </tr>
+    <tr>
       <td style="text-align: left">m o p</td>
       <td style="text-align: left">SOUNDEX(string)</td>
       <td style="text-align: left">Returns the phonetic representation of <em>string</em>; throws if <em>string</em> is encoded with multi-byte encoding such as UTF-8</td>
@@ -4317,6 +4394,11 @@ semantics.</p>
       <td style="text-align: left">o</td>
       <td style="text-align: left">SUBSTR(string, position [, substringLength ])</td>
       <td style="text-align: left">Returns a portion of <em>string</em>, beginning at character <em>position</em>, <em>substringLength</em> characters long. SUBSTR calculates lengths using characters as defined by the input character set</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
+      <td style="text-align: left">STRCMP(string, string)</td>
+      <td style="text-align: left">Returns 0 if both of the strings are same and returns -1 when the first argument is smaller than the second and 1 when the second one is smaller the first one.</td>
     </tr>
     <tr>
       <td style="text-align: left">o</td>
@@ -5037,6 +5119,39 @@ generated column, <code class="highlighter-rouge">VIRTUAL</code> is the default.
 
 <p>In <em>createFunctionStatement</em> and <em>usingFile</em>, <em>classNameLiteral</em>
 and <em>filePathLiteral</em> are character literals.</p>
+
+<h4 id="declaring-objects-for-types-defined-in-schema">Declaring Objects For Types Defined In Schema</h4>
+<p>After an object type is defined and installed in the schema, you can use it to declare objects in any SQL block. For example, you can use the object type to specify the datatype of an attribute, column, variable, bind variable, record field, table element, formal parameter, or function result. At run time, instances of the object type are created; that is, objects of that type are instantiated. Each object can hold different values.</p>
+
+<p>Example: For declared types <code class="highlighter-rouge">address_typ</code> and <code class="highlighter-rouge">employee_typ</code></p>
+<pre><code class="language-SQL">CREATE TYPE address_typ AS OBJECT (
+   street          VARCHAR2(30),
+   city            VARCHAR2(20),
+   state           CHAR(2),
+   postal_code     VARCHAR2(6) );
+
+CREATE TYPE employee_typ AS OBJECT (
+  employee_id       NUMBER(6),
+  first_name        VARCHAR2(20),
+  last_name         VARCHAR2(25),
+  email             VARCHAR2(25),
+  phone_number      VARCHAR2(20),
+  hire_date         DATE,
+  job_id            VARCHAR2(10),
+  salary            NUMBER(8,2),
+  commission_pct    NUMBER(2,2),
+  manager_id        NUMBER(6),
+  department_id     NUMBER(4),
+  address           address_typ
+);
+</code></pre>
+
+<p>We can declare objects of type <code class="highlighter-rouge">employee_typ</code> and <code class="highlighter-rouge">address_typ</code> :</p>
+
+<pre><code class="language-SQL">employee_typ(315, 'Francis', 'Logan', 'FLOGAN',
+        '555.777.2222', '01-MAY-04', 'SA_MAN', 11000, .15, 101, 110,
+         address_typ('376 Mission', 'San Francisco', 'CA', '94222'))
+</code></pre>
 
           
 

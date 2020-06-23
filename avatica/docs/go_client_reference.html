@@ -722,11 +722,7 @@ hood.</p>
 </ul>
 
 <h2 id="getting-started">Getting Started</h2>
-<p>If you are using Go 1.10 and below, install using <a href="https://github.com/golang/dep">dep</a>:</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">$ </span>dep ensure <span class="nt">-add</span> github.com/apache/calcite-avatica-go</code></pre></figure>
-
-<p>If you are using Go 1.11 and above, install using Go modules:</p>
+<p>Install using Go modules:</p>
 
 <figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">$ </span>go get github.com/apache/calcite-avatica-go</code></pre></figure>
 
@@ -860,6 +856,35 @@ we recommend setting it to <code class="highlighter-rouge">4</code>, which is th
     </tr>
   </tbody>
 </table>
+
+<p><strong><a name="batching" href="#batching">batching</a></strong></p>
+
+<p>When you want to write large amounts of data, you can enable batching rather than making a call to the server for each execution.
+By using <a href="https://calcite.apache.org/avatica/docs/protobuf_reference.html#executebatchrequest">ExecuteBatchRequest</a>, 
+the driver will batch up <code class="highlighter-rouge">Exec()</code>s and send them to the sever when a statement is closed using <code class="highlighter-rouge">Close()</code>. The statement object
+is thread-safe and can be used by multiple go-routines, but the changes will only be sent to the server after the
+statement has been closed.</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// when using phoenix</span><span class="x">
+</span><span class="n">stmt</span><span class="p">,</span><span class="x"> </span><span class="n">_</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">db</span><span class="o">.</span><span class="n">Prepare</span><span class="p">(</span><span class="s">`UPSERT INTO `</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="n">dbt</span><span class="o">.</span><span class="n">tableName</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="s">` VALUES(?)`</span><span class="p">)</span><span class="x">
+</span><span class="k">var</span><span class="x"> </span><span class="n">wg</span><span class="x"> </span><span class="n">sync</span><span class="o">.</span><span class="n">WaitGroup</span><span class="x">
+</span><span class="k">for</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="m">1</span><span class="p">;</span><span class="x"> </span><span class="n">i</span><span class="x"> </span><span class="o">&lt;=</span><span class="x"> </span><span class="m">6</span><span class="p">;</span><span class="x"> </span><span class="n">i</span><span class="o">++</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">wg</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="x">
+    </span><span class="k">go</span><span class="x"> </span><span class="k">func</span><span class="p">(</span><span class="n">num</span><span class="x"> </span><span class="kt">int</span><span class="p">)</span><span class="x"> </span><span class="p">{</span><span class="x">
+        </span><span class="k">defer</span><span class="x"> </span><span class="n">wg</span><span class="o">.</span><span class="n">Done</span><span class="p">()</span><span class="x">
+
+        </span><span class="n">_</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">stmt</span><span class="o">.</span><span class="n">Exec</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="x">
+
+        </span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">!=</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+            </span><span class="n">dbt</span><span class="o">.</span><span class="n">Fatal</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+        </span><span class="p">}</span><span class="x">
+    </span><span class="p">}(</span><span class="n">i</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span><span class="n">wg</span><span class="o">.</span><span class="n">Wait</span><span class="p">()</span><span class="x">
+
+</span><span class="c">// When batching=true, the statement will only be executed when Close() is called</span><span class="x">
+</span><span class="n">err</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="n">stmt</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span><span class="x">
+</span></code></pre></div></div>
 
 <h2 id="timetime-support">time.Time support</h2>
 
@@ -1196,7 +1221,7 @@ Apache Phoenix error code:</p>
       <img src="/avatica/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
   </div>
   <div id="copyright">
-  <p>The contents of this website are &copy;&nbsp;2019
+  <p>The contents of this website are &copy;&nbsp;2020
      <a href="https://www.apache.org/">Apache Software Foundation</a>
      under the terms of
      the <a href="https://www.apache.org/licenses/LICENSE-2.0.html">

@@ -3281,7 +3281,7 @@ runtime.</li>
 |:——————– |:———–
 | DESCRIPTOR(name [, name ]*) | DESCRIPTOR appears as an argument in a function to indicate a list of names. The interpretation of names is left to the function.</p>
 
-<h3 id="table-functions">Table functions.</h3>
+<h3 id="table-functions">Table functions</h3>
 <p>Table functions occur in the <code class="highlighter-rouge">FROM</code> clause.</p>
 
 <h4 id="tumble">TUMBLE</h4>
@@ -3298,8 +3298,8 @@ is named as “fixed windowing”.</p>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">TUMBLE(table, DESCRIPTOR(datetime), interval)</td>
-      <td style="text-align: left">Indicates a tumbling window of <em>interval</em> for <em>datetime</em>.</td>
+      <td style="text-align: left">TUMBLE(table, DESCRIPTOR(datetime), interval [, offset ])</td>
+      <td style="text-align: left">Indicates a tumbling window of <em>interval</em> for <em>datetime</em>, optionally aligned at offset.</td>
     </tr>
   </tbody>
 </table>
@@ -3322,8 +3322,8 @@ on a timestamp column. Windows assigned could have overlapping so hopping someti
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">HOP(table, DESCRIPTOR(datetime), slide, size)</td>
-      <td style="text-align: left">Indicates a hopping window for <em>datetime</em>, covering rows within the interval of <em>size</em>, shifting every <em>slide</em>.</td>
+      <td style="text-align: left">HOP(table, DESCRIPTOR(datetime), slide, size [, offset ])</td>
+      <td style="text-align: left">Indicates a hopping window for <em>datetime</em>, covering rows within the interval of <em>size</em>, shifting every <em>slide</em> and optionally aligned at offset.</td>
     </tr>
   </tbody>
 </table>
@@ -4184,6 +4184,7 @@ if your session has enabled an extra operator table.</p>
 connect string parameter.</p>
 
 <p>The ‘C’ (compatibility) column contains value
+‘b’ for BigQuery (‘fun=bigquery’ in the connect string),
 ‘m’ for MySQL (‘fun=mysql’ in the connect string),
 ‘o’ for Oracle (‘fun=oracle’ in the connect string),
 ‘p’ for PostgreSQL (‘fun=postgresql’ in the connect string).</p>
@@ -4239,6 +4240,16 @@ semantics.</p>
       <td style="text-align: left">m</td>
       <td style="text-align: left">DAYNAME(datetime)</td>
       <td style="text-align: left">Returns the name, in the connection’s locale, of the weekday in <em>datetime</em>; for example, it returns ‘星期日’ for both DATE ‘2020-02-10’ and TIMESTAMP ‘2020-02-10 10:10:10’</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">DATE(string)</td>
+      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">CAST(string AS DATE)</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">DATE_FROM_UNIX_DATE(integer)</td>
+      <td style="text-align: left">Returns the DATE that is <em>integer</em> days after 1970-01-01</td>
     </tr>
     <tr>
       <td style="text-align: left">o</td>
@@ -4398,12 +4409,27 @@ semantics.</p>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">STRCMP(string, string)</td>
-      <td style="text-align: left">Returns 0 if both of the strings are same and returns -1 when the first argument is smaller than the second and 1 when the second one is smaller the first one.</td>
+      <td style="text-align: left">Returns 0 if both of the strings are same and returns -1 when the first argument is smaller than the second and 1 when the second one is smaller than the first one</td>
     </tr>
     <tr>
       <td style="text-align: left">o</td>
       <td style="text-align: left">TANH(numeric)</td>
       <td style="text-align: left">Returns the hyperbolic tangent of <em>numeric</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIMESTAMP_MICROS(integer)</td>
+      <td style="text-align: left">Returns the TIMESTAMP that is <em>integer</em> microseconds after 1970-01-01 00:00:00</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIMESTAMP_MILLIS(integer)</td>
+      <td style="text-align: left">Returns the TIMESTAMP that is <em>integer</em> milliseconds after 1970-01-01 00:00:00</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIMESTAMP_SECONDS(integer)</td>
+      <td style="text-align: left">Returns the TIMESTAMP that is <em>integer</em> seconds after 1970-01-01 00:00:00</td>
     </tr>
     <tr>
       <td style="text-align: left">o p</td>
@@ -4421,9 +4447,29 @@ semantics.</p>
       <td style="text-align: left">Returns <em>expr</em> with all occurrences of each character in <em>fromString</em> replaced by its corresponding character in <em>toString</em>. Characters in <em>expr</em> that are not in <em>fromString</em> are not replaced</td>
     </tr>
     <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">UNIX_MICROS(timestamp)</td>
+      <td style="text-align: left">Returns the number of microseconds since 1970-01-01 00:00:00</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">UNIX_MILLIS(timestamp)</td>
+      <td style="text-align: left">Returns the number of milliseconds since 1970-01-01 00:00:00</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">UNIX_SECONDS(timestamp)</td>
+      <td style="text-align: left">Returns the number of seconds since 1970-01-01 00:00:00</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">UNIX_DATE(date)</td>
+      <td style="text-align: left">Returns the number of days since 1970-01-01</td>
+    </tr>
+    <tr>
       <td style="text-align: left">o</td>
       <td style="text-align: left">XMLTRANSFORM(xml, xslt)</td>
-      <td style="text-align: left">Returns a string after applying xslt to supplied xml.</td>
+      <td style="text-align: left">Returns a string after applying xslt to supplied XML</td>
     </tr>
   </tbody>
 </table>

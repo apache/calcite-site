@@ -224,6 +224,19 @@ time to create the final <code class="highlighter-rouge">Join</code>:</p>
   <span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="n">JoinRelType</span><span class="o">.</span><span class="na">INNER</span><span class="o">,</span> <span class="s">"ORDER_ID"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">build</span><span class="o">();</span></code></pre></figure>
 
+<h3 id="switch-convention">Switch Convention</h3>
+
+<p>The default RelBuilder creates logical RelNode without coventions. But you could
+switch to use a different convention through <code class="highlighter-rouge">adoptConvention()</code>:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">final</span> <span class="n">RelNode</span> <span class="n">result</span> <span class="o">=</span> <span class="n">builder</span>
+  <span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">input</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">adoptConvention</span><span class="o">(</span><span class="n">EnumerableConvention</span><span class="o">.</span><span class="na">INSTANCE</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">toCollation</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span></code></pre></figure>
+
+<p>In this case, we create an EnumerableSort on top of the input RelNode.</p>
+
 <h3 id="field-names-and-ordinals">Field names and ordinals</h3>
 
 <p>You can reference a field by name or ordinal.</p>

@@ -787,6 +787,10 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="kt">string</span> <span class="na">table_name_pattern</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
   <span class="kt">string</span> <span class="na">column_name_pattern</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
   <span class="kt">string</span> <span class="na">connection_id</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="na">has_catalog</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="na">has_schema_pattern</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="na">has_table_name_pattern</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="na">has_column_name_pattern</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
 <p><code class="highlighter-rouge">catalog</code> The name of a catalog to limit returned columns.</p>
@@ -798,6 +802,14 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
 <p><code class="highlighter-rouge">column_name_pattern</code> A Java Pattern against column names to limit returned columns.</p>
 
 <p><code class="highlighter-rouge">connection_id</code> The identifier of the connection which to use to fetch the columns.</p>
+
+<p><code class="highlighter-rouge">has_catalog</code> A boolean denoting if <code class="highlighter-rouge">catalog</code> was set.</p>
+
+<p><code class="highlighter-rouge">has_schema_pattern</code> A boolean denoting if <code class="highlighter-rouge">schema_pattern</code> was set.</p>
+
+<p><code class="highlighter-rouge">has_table_name_pattern</code> A boolean denoting if <code class="highlighter-rouge">table_name_pattern</code> was set.</p>
+
+<p><code class="highlighter-rouge">has_column_name_pattern</code> A boolean denoting if <code class="highlighter-rouge">column_name_pattern</code> was set.</p>
 
 <h3 id="commitrequest">CommitRequest</h3>
 
@@ -1012,6 +1024,8 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="kt">string</span> <span class="na">catalog</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
   <span class="kt">string</span> <span class="na">schema_pattern</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
   <span class="kt">string</span> <span class="na">connection_id</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="na">has_catalog</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="na">has_schema_pattern</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
 <p><code class="highlighter-rouge">catalog</code> The name of the catalog to fetch the schema from.</p>
@@ -1019,6 +1033,10 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
 <p><code class="highlighter-rouge">schema_pattern</code> A Java pattern of schemas to fetch.</p>
 
 <p><code class="highlighter-rouge">connection_id</code> The identifier for the connection to fetch schemas from.</p>
+
+<p><code class="highlighter-rouge">has_catalog</code> A boolean denoting if <code class="highlighter-rouge">catalog</code> was set.</p>
+
+<p><code class="highlighter-rouge">has_schema_pattern</code> A boolean denoting if <code class="highlighter-rouge">schema_pattern</code> was set.</p>
 
 <h3 id="tabletypesrequest">TableTypesRequest</h3>
 
@@ -1041,6 +1059,9 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="k">repeated</span> <span class="kt">string</span> <span class="na">type_list</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
   <span class="kt">bool</span> <span class="na">has_type_list</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
   <span class="kt">string</span> <span class="na">connection_id</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="na">has_catalog</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="na">has_schema_pattern</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="na">has_table_name_pattern</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
 <p><code class="highlighter-rouge">catalog</code> The name of a catalog to restrict fetched tables.</p>
@@ -1054,6 +1075,12 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
 <p><code class="highlighter-rouge">has_type_list</code> A boolean which denotes if the field <code class="highlighter-rouge">type_list</code> was provided.</p>
 
 <p><code class="highlighter-rouge">connection_id</code> The identifier of the connection to fetch the tables from.</p>
+
+<p><code class="highlighter-rouge">has_catalog</code> A boolean denoting if <code class="highlighter-rouge">catalog</code> was set.</p>
+
+<p><code class="highlighter-rouge">has_schema_pattern</code> A boolean denoting if <code class="highlighter-rouge">schema_pattern</code> was set.</p>
+
+<p><code class="highlighter-rouge">has_table_name_pattern</code> A boolean denoting if <code class="highlighter-rouge">table_name_pattern</code> was set.</p>
 
 <h3 id="typeinforequest">TypeInfoRequest</h3>
 

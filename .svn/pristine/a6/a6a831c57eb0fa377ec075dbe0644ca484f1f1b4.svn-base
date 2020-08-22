@@ -1,0 +1,624 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>Apache Geode adapter</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="generator" content="Jekyll v3.7.3">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
+  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+
+<body class="wrap">
+  <header role="banner">
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li class="">
+    <a href="/">Home</a>
+  </li>
+  <li class="">
+    <a href="/downloads/">Download</a>
+  </li>
+  <li class="">
+    <a href="/community/">Community</a>
+  </li>
+  <li class="">
+    <a href="/develop/">Develop</a>
+  </li>
+  <li class="">
+    <a href="/news/">News</a>
+  </li>
+  <li class="current">
+    <a href="/docs/">Docs</a>
+  </li>
+</ul>
+
+  </nav>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <h1>
+        <a href="/">
+          <span class="sr-only">Apache Calcite</span>
+          <img src="/img/logo.png" width="226" height="140" alt="Calcite Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav unit two-thirds hide-on-mobiles">
+      <ul>
+  <li class="">
+    <a href="/">Home</a>
+  </li>
+  <li class="">
+    <a href="/downloads/">Download</a>
+  </li>
+  <li class="">
+    <a href="/community/">Community</a>
+  </li>
+  <li class="">
+    <a href="/develop/">Develop</a>
+  </li>
+  <li class="">
+    <a href="/news/">News</a>
+  </li>
+  <li class="current">
+    <a href="/docs/">Docs</a>
+  </li>
+</ul>
+
+    </nav>
+  </div>
+</header>
+
+
+    <section class="docs">
+    <div class="grid">
+
+      <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select onchange="if (this.value) window.location.href=this.value">
+    <option value="">Navigate the docs…</option>
+        <optgroup label="Overview">      
+    </optgroup>
+    <optgroup label="Advanced">      
+    </optgroup>
+    <optgroup label="Avatica">      
+    </optgroup>
+    <optgroup label="Reference">      
+    </optgroup>
+    <optgroup label="Meta">      
+    </optgroup>
+
+  </select>
+</div>
+
+
+      <div class="unit four-fifths">
+        <article>
+          <h1>Apache Geode adapter</h1>
+          <!--
+
+-->
+
+<p>For instructions on downloading and building Calcite, start with the
+<a href="/docs/tutorial.html">tutorial</a>.</p>
+
+<blockquote>
+  <p>Optionally: add <code class="highlighter-rouge">-Puberjdbc</code> to your maven build to create a single self-contained Geode JDBC adapter jar.</p>
+</blockquote>
+
+<p>Once you’ve managed to compile the project, you can return here to
+start querying Apache Geode with Calcite. First, we need a
+<a href="/docs/model.html">model definition</a>.
+The model gives Calcite the necessary parameters to create an instance
+of the Geode adapter. The models can contain definitions of
+<a href="/docs/model.html#materialization">materializations</a>.
+The name of the tables defined in the model definition corresponds to
+<a href="https://geode.apache.org/docs/guide/12/developing/region_options/chapter_overview.html">Regions</a>
+in Geode.</p>
+
+<p>A basic example of a model file is given below:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"defaultSchema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"geode"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"schemas"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"geode_raw"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.geode.rel.GeodeSchemaFactory"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"locatorHost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"localhost"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"locatorPort"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10334"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"regions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zips"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pdxSerializablePackagePath"</span><span class="p">:</span><span class="w"> </span><span class="s2">".*"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>This adapter is targeted for Geode 1.3.x. The <code class="highlighter-rouge">regions</code> field allows to list (comma separated)
+all Geode regions to be appear as relational tables.</p>
+
+<p>Assuming this file is stored as <code class="highlighter-rouge">model.json</code>, you can connect to
+Geode via <a href="https://github.com/julianhyde/sqlline"><code class="highlighter-rouge">sqlline</code></a> as
+follows:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./sqlline
+sqlline&gt; <span class="o">!</span>connect jdbc:calcite:model<span class="o">=</span>model.json admin admin</code></pre></figure>
+
+<p><code class="highlighter-rouge">sqlline</code> will now accept SQL queries which access your Regions using OQL.
+However, you’re not restricted to issuing queries supported by
+<a href="https://geode.apache.org/docs/guide/latest/developing/querying_basics/chapter_overview.html">OQL</a>.
+Calcite allows you to perform complex operations such as aggregations
+or joins. The adapter will attempt to compile the query into the most
+efficient OQL possible by exploiting filtering, sorting and aggregation directly
+in Geode where possible.</p>
+
+<p>For example, in the example Bookshop dataset there is a Regions <code class="highlighter-rouge">BookMaster</code>.</p>
+
+<p>We can issue a SQL query to fetch the annual retail cost ordered by the cost:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="k">SELECT</span>
+           <span class="nv">"yearPublished"</span><span class="p">,</span>
+           <span class="k">SUM</span><span class="p">(</span><span class="nv">"retailCost"</span><span class="p">)</span> <span class="k">AS</span> <span class="nv">"totalCost"</span>
+         <span class="k">FROM</span> <span class="nv">"TEST"</span><span class="p">.</span><span class="nv">"BookMaster"</span>
+         <span class="k">GROUP</span> <span class="k">BY</span> <span class="nv">"yearPublished"</span>
+         <span class="k">ORDER</span> <span class="k">BY</span> <span class="nv">"totalCost"</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">---------------+--------------------+</span>
+<span class="o">|</span> <span class="n">yearPublished</span> <span class="o">|</span> <span class="n">totalCost</span>          <span class="o">|</span>
+<span class="o">+</span><span class="c1">---------------+--------------------+</span>
+<span class="o">|</span> <span class="mi">1971</span>          <span class="o">|</span> <span class="mi">11</span><span class="p">.</span><span class="mi">989999771118164</span> <span class="o">|</span>
+<span class="o">|</span> <span class="mi">2011</span>          <span class="o">|</span> <span class="mi">94</span><span class="p">.</span><span class="mi">9800033569336</span>   <span class="o">|</span>
+<span class="o">+</span><span class="c1">---------------+--------------------+</span></code></pre></figure>
+
+<p>While executing this query, the Geode adapter is able to recognize
+that the projection, grouping and ordering can be performed natively by Geode.</p>
+
+<p>The final OQL query given to Geode is below:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>  <span class="n">yearPublished</span> <span class="k">AS</span> <span class="n">yearPublished</span><span class="p">,</span>  <span class="k">SUM</span><span class="p">(</span><span class="n">retailCost</span><span class="p">)</span> <span class="k">AS</span> <span class="n">totalCost</span>
+<span class="k">FROM</span> <span class="o">/</span><span class="n">BookMaster</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">yearPublished</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">totalCost</span> <span class="k">ASC</span></code></pre></figure>
+
+<p>Operations that are not supported in Geode are handled by Calcite itself.
+For example the following JOIN query on the same Bookshop dataset</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="k">SELECT</span>
+           <span class="nv">"i"</span><span class="p">.</span><span class="nv">"itemNumber"</span><span class="p">,</span>
+           <span class="nv">"m"</span><span class="p">.</span><span class="nv">"author"</span><span class="p">,</span>
+           <span class="nv">"m"</span><span class="p">.</span><span class="nv">"retailCost"</span>
+         <span class="k">FROM</span> <span class="nv">"TEST"</span><span class="p">.</span><span class="nv">"BookInventory"</span> <span class="nv">"i"</span>
+           <span class="k">JOIN</span> <span class="nv">"TEST"</span><span class="p">.</span><span class="nv">"BookMaster"</span> <span class="nv">"m"</span> <span class="k">ON</span> <span class="nv">"i"</span><span class="p">.</span><span class="nv">"itemNumber"</span> <span class="o">=</span> <span class="nv">"m"</span><span class="p">.</span><span class="nv">"itemNumber"</span>
+         <span class="k">WHERE</span> <span class="nv">"m"</span><span class="p">.</span><span class="nv">"retailCost"</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">------------+----------------+------------+</span>
+<span class="o">|</span> <span class="n">itemNumber</span> <span class="o">|</span> <span class="n">author</span>         <span class="o">|</span> <span class="n">retailCost</span> <span class="o">|</span>
+<span class="o">+</span><span class="c1">------------+----------------+------------+</span>
+<span class="o">|</span> <span class="mi">123</span>        <span class="o">|</span> <span class="n">Daisy</span> <span class="n">Mae</span> <span class="n">West</span> <span class="o">|</span> <span class="mi">34</span><span class="p">.</span><span class="mi">99</span>      <span class="o">|</span>
+<span class="o">+</span><span class="c1">------------+----------------+------------+</span></code></pre></figure>
+
+<p>Will result into two separate OQL queries:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>  <span class="n">itemNumber</span> <span class="k">AS</span> <span class="n">itemNumber</span><span class="p">,</span> <span class="n">retailCost</span> <span class="k">AS</span> <span class="n">retailCost</span><span class="p">,</span> <span class="n">author</span> <span class="k">AS</span> <span class="n">author</span>
+<span class="k">FROM</span> <span class="o">/</span><span class="n">BookMaster</span>
+<span class="k">WHERE</span> <span class="n">retailCost</span> <span class="o">&gt;</span> <span class="mi">20</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>  <span class="n">itemNumber</span> <span class="k">AS</span> <span class="n">itemNumber</span>
+<span class="k">FROM</span> <span class="o">/</span><span class="n">BookInventory</span></code></pre></figure>
+
+<p>And the result will be joined in Calcite.</p>
+
+<p>To select a particular item in Geode array field use the <code class="highlighter-rouge">fieldName[index]</code>
+syntax:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="k">SELECT</span>
+           <span class="nv">"loc"</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">AS</span> <span class="nv">"lon"</span><span class="p">,</span>
+           <span class="nv">"loc"</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">AS</span> <span class="nv">"lat"</span>
+         <span class="k">FROM</span> <span class="nv">"geode"</span><span class="p">.</span><span class="n">ZIPS</span></code></pre></figure>
+
+<p>To select a nested fields use the map <code class="highlighter-rouge">fieldName[nestedFiledName]</code>
+syntax:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="k">SELECT</span> <span class="nv">"primaryAddress"</span> <span class="p">[</span><span class="s1">'postalCode'</span><span class="p">]</span> <span class="k">AS</span> <span class="nv">"postalCode"</span>
+         <span class="k">FROM</span> <span class="nv">"TEST"</span><span class="p">.</span><span class="nv">"BookCustomer"</span>
+         <span class="k">WHERE</span> <span class="nv">"primaryAddress"</span> <span class="p">[</span><span class="s1">'postalCode'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="s1">'0'</span><span class="p">;</span></code></pre></figure>
+
+<p>This will project <code class="highlighter-rouge">BookCustomer.primaryAddress.postalCode</code> value field.</p>
+
+<p>The following presentations and video tutorials provide further dails
+about Geode adapter:</p>
+
+<ul>
+  <li><a href="https://www.slideshare.net/slideshow/embed_code/key/2Mil7I0ZPMLuJU">Enable SQL/JDBC Access to Apache Geode/GemFire Using Apache Calcite</a>
+(GeodeSummit/SpringOne 2017)</li>
+  <li><a href="https://www.linkedin.com/pulse/access-apache-geode-gemfire-over-sqljdbc-christian-tzolov">Access Apache Geode / GemFire over SQL/JDBC</a></li>
+  <li><a href="https://www.linkedin.com/pulse/explore-your-geode-gemfire-data-from-within-intellij-tool-tzolov">Explore Geode &amp; GemFire Data with IntelliJ SQL/Database tool</a></li>
+  <li><a href="https://www.linkedin.com/pulse/advanced-apache-geode-data-analytics-zeppelin-over-sqljdbc-tzolov">Advanced Apache Geode Data Analytics with Apache Zeppelin over SQL/JDBC</a></li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[Unified Access to {Geode</td>
+          <td>Greenplum</td>
+          <td>…}](https://www.linkedin.com/pulse/unified-access-geodegreenplum-christian-tzolov)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li><a href="https://schd.ws/hosted_files/apachebigdataeu2016/b6/ApacheCon2016ChristianTzolov.v3.pdf">Apache Calcite for Enabling SQL Access to NoSQL Data Systems such as Apache Geode</a>
+(ApacheCon Big Data, 2016)</li>
+</ul>
+
+<p>There is still significant work to do in improving the flexibility and
+performance of the adapter, but if you’re looking for a quick way to
+gain additional insights into data stored in Geode, Calcite should
+prove useful.</p>
+
+          
+
+
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+
+        </article>
+      </div>
+
+      <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    
+    <h4>Overview</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/index.html">Background</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/tutorial.html">Tutorial</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/algebra.html">Algebra</a></li>
+
+
+</ul>
+
+    
+    <h4>Advanced</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/adapter.html">Adapters</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/spatial.html">Spatial</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/stream.html">Streaming</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/materialized_views.html">Materialized Views</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/lattice.html">Lattices</a></li>
+
+
+</ul>
+
+    
+    <h4>Avatica</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_overview.html">Overview</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_roadmap.html">Roadmap</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_json_reference.html">JSON Reference</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_protobuf_reference.html">Protobuf Reference</a></li>
+
+
+</ul>
+
+    
+    <h4>Reference</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/reference.html">SQL language</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/model.html">JSON/YAML models</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/howto.html">HOWTO</a></li>
+
+
+</ul>
+
+    
+    <h4>Meta</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/history.html">History</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/powered_by.html">Powered by Calcite</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/apidocs">API</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/testapidocs">Test API</a></li>
+
+
+</ul>
+
+    
+  </aside>
+</div>
+
+
+      <div class="clear"></div>
+
+    </div>
+  </section>
+
+
+  <footer role="contentinfo">
+  <div id="poweredby">
+    <a href="http://www.apache.org/">
+      <span class="sr-only">Apache</span>
+      <img src="/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
+  </div>
+  <div id="copyright">
+  <p>The contents of this website are Copyright &copy;&nbsp;2019
+     <a href="https://www.apache.org/">Apache Software Foundation</a>
+     under the terms of
+     the <a href="https://www.apache.org/licenses/">
+     Apache&nbsp;License&nbsp;v2</a>. Apache Calcite and its logo are
+     trademarks of the Apache Software Foundation.</p>
+  </div>
+</footer>
+
+  <script>
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
+    anchor.title = "Permalink";
+    return anchor;
+  };
+
+  var linkifyAnchors = function (level, containingElement) {
+    var headers = containingElement.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.appendChild(anchorForId(header.id));
+      }
+    }
+  };
+
+  document.onreadystatechange = function () {
+    if (this.readyState === "complete") {
+      var contentBlock = document.getElementsByClassName("docs")[0] || document.getElementsByClassName("news")[0];
+      if (!contentBlock) {
+        return;
+      }
+      for (var level = 1; level <= 6; level++) {
+        linkifyAnchors(level, contentBlock);
+      }
+    }
+  };
+</script>
+
+
+</body>
+</html>

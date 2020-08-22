@@ -1,0 +1,582 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>Elasticsearch adapter</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="generator" content="Jekyll v3.7.3">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
+  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+
+<body class="wrap">
+  <header role="banner">
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li class="">
+    <a href="/">Home</a>
+  </li>
+  <li class="">
+    <a href="/downloads/">Download</a>
+  </li>
+  <li class="">
+    <a href="/community/">Community</a>
+  </li>
+  <li class="">
+    <a href="/develop/">Develop</a>
+  </li>
+  <li class="">
+    <a href="/news/">News</a>
+  </li>
+  <li class="current">
+    <a href="/docs/">Docs</a>
+  </li>
+</ul>
+
+  </nav>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <h1>
+        <a href="/">
+          <span class="sr-only">Apache Calcite</span>
+          <img src="/img/logo.png" width="226" height="140" alt="Calcite Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav unit two-thirds hide-on-mobiles">
+      <ul>
+  <li class="">
+    <a href="/">Home</a>
+  </li>
+  <li class="">
+    <a href="/downloads/">Download</a>
+  </li>
+  <li class="">
+    <a href="/community/">Community</a>
+  </li>
+  <li class="">
+    <a href="/develop/">Develop</a>
+  </li>
+  <li class="">
+    <a href="/news/">News</a>
+  </li>
+  <li class="current">
+    <a href="/docs/">Docs</a>
+  </li>
+</ul>
+
+    </nav>
+  </div>
+</header>
+
+
+    <section class="docs">
+    <div class="grid">
+
+      <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select onchange="if (this.value) window.location.href=this.value">
+    <option value="">Navigate the docs…</option>
+        <optgroup label="Overview">      
+    </optgroup>
+    <optgroup label="Advanced">      
+    </optgroup>
+    <optgroup label="Avatica">      
+    </optgroup>
+    <optgroup label="Reference">      
+    </optgroup>
+    <optgroup label="Meta">      
+    </optgroup>
+
+  </select>
+</div>
+
+
+      <div class="unit four-fifths">
+        <article>
+          <h1>Elasticsearch adapter</h1>
+          <!--
+
+-->
+
+<p>For instructions on downloading and building Calcite, start with the
+<a href="/docs/tutorial.html">tutorial</a>.</p>
+
+<p>Once you’ve managed to compile the project, you can return here to
+start querying Elasticsearch with Calcite. First, we need a
+<a href="/docs/model.html">model definition</a>.
+The model gives Calcite the necessary parameters to create an instance
+of the Elasticsearch adapter. The models can contain
+definitions of
+<a href="/docs/model.html#materialization">materializations</a>.
+The name of the tables defined in the model definition corresponds to
+<a href="https://www.elastic.co/blog/what-is-an-elasticsearch-index">types</a> in
+Elasticsearch. The schema/database is represented by the <code class="highlighter-rouge">index</code> parameter
+in the model definition.</p>
+
+<p>A basic example of a model file is given below:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"defaultSchema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"elasticsearch"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"schemas"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"elasticsearch"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.elasticsearch.ElasticsearchSchemaFactory"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{'127.0.0.1': 9300}"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"index"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usa"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>Assuming this file is stored as <code class="highlighter-rouge">model.json</code>, you can connect to
+Elasticsearch via <a href="https://github.com/julianhyde/sqlline"><code class="highlighter-rouge">sqlline</code></a> as
+follows:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./sqlline
+sqlline&gt; <span class="o">!</span>connect jdbc:calcite:model<span class="o">=</span>model.json admin admin</code></pre></figure>
+
+<p><code class="highlighter-rouge">sqlline</code> will now accept SQL queries which access your Elasticsearch types.
+The purpose of this adapter is to compile the query into the most efficient
+Elasticsearch SEARCH JSON possible by exploiting filtering and sorting directly
+in Elasticsearch where possible.</p>
+
+<p>For example, in the example dataset there is an Elasticsearch type
+named <code class="highlighter-rouge">zips</code> under index named <code class="highlighter-rouge">usa</code>.</p>
+
+<p>We can issue a simple query to fetch the names of all the states
+stored in the type <code class="highlighter-rouge">zips</code>.</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="k">SELECT</span> <span class="o">*</span> <span class="k">from</span> <span class="nv">"zips"</span><span class="p">;</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="err">_MAP=</span><span class="p">{</span><span class="err">pop=</span><span class="mi">13367</span><span class="p">,</span><span class="w"> </span><span class="err">loc=</span><span class="p">[</span><span class="mf">-72.505565</span><span class="p">,</span><span class="w"> </span><span class="mf">42.067203</span><span class="p">],</span><span class="w"> </span><span class="err">city=EAST</span><span class="w"> </span><span class="err">LONGMEADOW</span><span class="p">,</span><span class="w"> </span><span class="err">id=</span><span class="mi">01028</span><span class="p">,</span><span class="w"> </span><span class="err">state=MA</span><span class="p">}</span><span class="w">
+</span><span class="err">_MAP=</span><span class="p">{</span><span class="err">pop=</span><span class="mi">1652</span><span class="p">,</span><span class="w"> </span><span class="err">loc=</span><span class="p">[</span><span class="mf">-72.908793</span><span class="p">,</span><span class="w"> </span><span class="mf">42.070234</span><span class="p">],</span><span class="w"> </span><span class="err">city=TOLLAND</span><span class="p">,</span><span class="w"> </span><span class="err">id=</span><span class="mi">01034</span><span class="p">,</span><span class="w"> </span><span class="err">state=MA</span><span class="p">}</span><span class="w">
+</span><span class="err">_MAP=</span><span class="p">{</span><span class="err">pop=</span><span class="mi">3184</span><span class="p">,</span><span class="w"> </span><span class="err">loc=</span><span class="p">[</span><span class="mf">-72.616735</span><span class="p">,</span><span class="w"> </span><span class="mf">42.38439</span><span class="p">],</span><span class="w"> </span><span class="err">city=HATFIELD</span><span class="p">,</span><span class="w"> </span><span class="err">id=</span><span class="mi">01038</span><span class="p">,</span><span class="w"> </span><span class="err">state=MA</span><span class="p">}</span><span class="w">
+</span><span class="err">_MAP=</span><span class="p">{</span><span class="err">pop=</span><span class="mi">43704</span><span class="p">,</span><span class="w"> </span><span class="err">loc=</span><span class="p">[</span><span class="mf">-72.626193</span><span class="p">,</span><span class="w"> </span><span class="mf">42.202007</span><span class="p">],</span><span class="w"> </span><span class="err">city=HOLYOKE</span><span class="p">,</span><span class="w"> </span><span class="err">id=</span><span class="mi">01040</span><span class="p">,</span><span class="w"> </span><span class="err">state=MA</span><span class="p">}</span><span class="w">
+</span><span class="err">_MAP=</span><span class="p">{</span><span class="err">pop=</span><span class="mi">2084</span><span class="p">,</span><span class="w"> </span><span class="err">loc=</span><span class="p">[</span><span class="mf">-72.873341</span><span class="p">,</span><span class="w"> </span><span class="mf">42.265301</span><span class="p">],</span><span class="w"> </span><span class="err">city=HUNTINGTON</span><span class="p">,</span><span class="w"> </span><span class="err">id=</span><span class="mi">01050</span><span class="p">,</span><span class="w"> </span><span class="err">state=MA</span><span class="p">}</span><span class="w">
+</span><span class="err">_MAP=</span><span class="p">{</span><span class="err">pop=</span><span class="mi">1350</span><span class="p">,</span><span class="w"> </span><span class="err">loc=</span><span class="p">[</span><span class="mf">-72.703403</span><span class="p">,</span><span class="w"> </span><span class="mf">42.354292</span><span class="p">],</span><span class="w"> </span><span class="err">city=LEEDS</span><span class="p">,</span><span class="w"> </span><span class="err">id=</span><span class="mi">01053</span><span class="p">,</span><span class="w"> </span><span class="err">state=MA</span><span class="p">}</span><span class="w">
+</span><span class="err">_MAP=</span><span class="p">{</span><span class="err">pop=</span><span class="mi">8194</span><span class="p">,</span><span class="w"> </span><span class="err">loc=</span><span class="p">[</span><span class="mf">-72.319634</span><span class="p">,</span><span class="w"> </span><span class="mf">42.101017</span><span class="p">],</span><span class="w"> </span><span class="err">city=MONSON</span><span class="p">,</span><span class="w"> </span><span class="err">id=</span><span class="mi">01057</span><span class="p">,</span><span class="w"> </span><span class="err">state=MA</span><span class="p">}</span><span class="w">
+</span><span class="err">_MAP=</span><span class="p">{</span><span class="err">pop=</span><span class="mi">1732</span><span class="p">,</span><span class="w"> </span><span class="err">loc=</span><span class="p">[</span><span class="mf">-72.204592</span><span class="p">,</span><span class="w"> </span><span class="mf">42.062734</span><span class="p">],</span><span class="w"> </span><span class="err">city=WALES</span><span class="p">,</span><span class="w"> </span><span class="err">id=</span><span class="mi">01081</span><span class="p">,</span><span class="w"> </span><span class="err">state=MA</span><span class="p">}</span><span class="w">
+</span><span class="err">_MAP=</span><span class="p">{</span><span class="err">pop=</span><span class="mi">9808</span><span class="p">,</span><span class="w"> </span><span class="err">loc=</span><span class="p">[</span><span class="mf">-72.258285</span><span class="p">,</span><span class="w"> </span><span class="mf">42.261831</span><span class="p">],</span><span class="w"> </span><span class="err">city=WARE</span><span class="p">,</span><span class="w"> </span><span class="err">id=</span><span class="mi">01082</span><span class="p">,</span><span class="w"> </span><span class="err">state=MA</span><span class="p">}</span><span class="w">
+</span><span class="err">_MAP=</span><span class="p">{</span><span class="err">pop=</span><span class="mi">4441</span><span class="p">,</span><span class="w"> </span><span class="err">loc=</span><span class="p">[</span><span class="mf">-72.203639</span><span class="p">,</span><span class="w"> </span><span class="mf">42.20734</span><span class="p">],</span><span class="w"> </span><span class="err">city=WEST</span><span class="w"> </span><span class="err">WARREN</span><span class="p">,</span><span class="w"> </span><span class="err">id=</span><span class="mi">01092</span><span class="p">,</span><span class="w"> </span><span class="err">state=MA</span><span class="p">}</span></code></pre></figure>
+
+<p>While executing this query, the Elasticsearch adapter is able to recognize
+that <code class="highlighter-rouge">city</code> can be filtered by Elasticsearch and <code class="highlighter-rouge">state</code> can be sorted by
+Elasticsearch in ascending order.</p>
+
+<p>The final source json given to Elasticsearch is below:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"constant_score"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"bool"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"must"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"term"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"springfield"</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"script_fields"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"sort"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asc"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>You can also query elastic search index without prior view definition:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="k">SELECT</span> <span class="n">_MAP</span><span class="p">[</span><span class="s1">'city'</span><span class="p">],</span> <span class="n">_MAP</span><span class="p">[</span><span class="s1">'state'</span><span class="p">]</span> <span class="k">from</span> <span class="nv">"elasticsearch"</span><span class="p">.</span><span class="nv">"zips"</span> <span class="k">order</span> <span class="k">by</span> <span class="n">_MAP</span><span class="p">[</span><span class="s1">'state'</span><span class="p">];</span></code></pre></figure>
+
+<h3 id="use-of-scrolling-api">Use of Scrolling API</h3>
+<p>For queries without aggregate functions (like <code class="highlighter-rouge">COUNT</code>, <code class="highlighter-rouge">MAX</code> etc.) elastic adapter 
+uses <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html">scroll API</a>, by default. 
+This ensures that consistent and full data-set is returned to end user (lazily and in batches). Please note that
+scroll is automatically cleared (removed) when all query resuts are consumed.</p>
+
+<h3 id="supported-versions">Supported versions</h3>
+<p>Currently this adapter supports ElasticSearch versions 2.x (or newer). Generally
+we try to follow official <a href="https://www.elastic.co/support/eol">support schedule</a>.</p>
+
+
+          
+
+
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+
+        </article>
+      </div>
+
+      <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    
+    <h4>Overview</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/index.html">Background</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/tutorial.html">Tutorial</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/algebra.html">Algebra</a></li>
+
+
+</ul>
+
+    
+    <h4>Advanced</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/adapter.html">Adapters</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/spatial.html">Spatial</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/stream.html">Streaming</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/materialized_views.html">Materialized Views</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/lattice.html">Lattices</a></li>
+
+
+</ul>
+
+    
+    <h4>Avatica</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_overview.html">Overview</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_roadmap.html">Roadmap</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_json_reference.html">JSON Reference</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_protobuf_reference.html">Protobuf Reference</a></li>
+
+
+</ul>
+
+    
+    <h4>Reference</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/reference.html">SQL language</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/model.html">JSON/YAML models</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/howto.html">HOWTO</a></li>
+
+
+</ul>
+
+    
+    <h4>Meta</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/history.html">History</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/powered_by.html">Powered by Calcite</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/apidocs">API</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/testapidocs">Test API</a></li>
+
+
+</ul>
+
+    
+  </aside>
+</div>
+
+
+      <div class="clear"></div>
+
+    </div>
+  </section>
+
+
+  <footer role="contentinfo">
+  <div id="poweredby">
+    <a href="http://www.apache.org/">
+      <span class="sr-only">Apache</span>
+      <img src="/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
+  </div>
+  <div id="copyright">
+  <p>The contents of this website are Copyright &copy;&nbsp;2019
+     <a href="https://www.apache.org/">Apache Software Foundation</a>
+     under the terms of
+     the <a href="https://www.apache.org/licenses/">
+     Apache&nbsp;License&nbsp;v2</a>. Apache Calcite and its logo are
+     trademarks of the Apache Software Foundation.</p>
+  </div>
+</footer>
+
+  <script>
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
+    anchor.title = "Permalink";
+    return anchor;
+  };
+
+  var linkifyAnchors = function (level, containingElement) {
+    var headers = containingElement.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.appendChild(anchorForId(header.id));
+      }
+    }
+  };
+
+  document.onreadystatechange = function () {
+    if (this.readyState === "complete") {
+      var contentBlock = document.getElementsByClassName("docs")[0] || document.getElementsByClassName("news")[0];
+      if (!contentBlock) {
+        return;
+      }
+      for (var level = 1; level <= 6; level++) {
+        linkifyAnchors(level, contentBlock);
+      }
+    }
+  };
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,1089 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>Algebra</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="generator" content="Jekyll v3.7.3">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
+  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+
+<body class="wrap">
+  <header role="banner">
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li class="">
+    <a href="/">Home</a>
+  </li>
+  <li class="">
+    <a href="/downloads/">Download</a>
+  </li>
+  <li class="">
+    <a href="/community/">Community</a>
+  </li>
+  <li class="">
+    <a href="/develop/">Develop</a>
+  </li>
+  <li class="">
+    <a href="/news/">News</a>
+  </li>
+  <li class="current">
+    <a href="/docs/">Docs</a>
+  </li>
+</ul>
+
+  </nav>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <h1>
+        <a href="/">
+          <span class="sr-only">Apache Calcite</span>
+          <img src="/img/logo.png" width="226" height="140" alt="Calcite Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav unit two-thirds hide-on-mobiles">
+      <ul>
+  <li class="">
+    <a href="/">Home</a>
+  </li>
+  <li class="">
+    <a href="/downloads/">Download</a>
+  </li>
+  <li class="">
+    <a href="/community/">Community</a>
+  </li>
+  <li class="">
+    <a href="/develop/">Develop</a>
+  </li>
+  <li class="">
+    <a href="/news/">News</a>
+  </li>
+  <li class="current">
+    <a href="/docs/">Docs</a>
+  </li>
+</ul>
+
+    </nav>
+  </div>
+</header>
+
+
+    <section class="docs">
+    <div class="grid">
+
+      <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select onchange="if (this.value) window.location.href=this.value">
+    <option value="">Navigate the docs…</option>
+        <optgroup label="Overview">      
+    </optgroup>
+    <optgroup label="Advanced">      
+    </optgroup>
+    <optgroup label="Avatica">      
+    </optgroup>
+    <optgroup label="Reference">      
+    </optgroup>
+    <optgroup label="Meta">      
+    </optgroup>
+
+  </select>
+</div>
+
+
+      <div class="unit four-fifths">
+        <article>
+          <h1>Algebra</h1>
+          <!--
+
+-->
+
+<p>Relational algebra is at the heart of Calcite. Every query is
+represented as a tree of relational operators. You can translate from
+SQL to relational algebra, or you can build the tree directly.</p>
+
+<p>Planner rules transform expression trees using mathematical identities
+that preserve semantics. For example, it is valid to push a filter
+into an input of an inner join if the filter does not reference
+columns from the other input.</p>
+
+<p>Calcite optimizes queries by repeatedly applying planner rules to a
+relational expression. A cost model guides the process, and the
+planner engine generates an alternative expression that has the same
+semantics as the original but a lower cost.</p>
+
+<p>The planning process is extensible. You can add your own relational
+operators, planner rules, cost model, and statistics.</p>
+
+<h2 id="algebra-builder">Algebra builder</h2>
+
+<p>The simplest way to build a relational expression is to use the algebra builder,
+<a href="/apidocs/org/apache/calcite/tools/RelBuilder.html">RelBuilder</a>.
+Here is an example:</p>
+
+<h3 id="tablescan">TableScan</h3>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">final</span> <span class="n">FrameworkConfig</span> <span class="n">config</span><span class="o">;</span>
+<span class="kd">final</span> <span class="n">RelBuilder</span> <span class="n">builder</span> <span class="o">=</span> <span class="n">RelBuilder</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">config</span><span class="o">);</span>
+<span class="kd">final</span> <span class="n">RelNode</span> <span class="n">node</span> <span class="o">=</span> <span class="n">builder</span>
+  <span class="o">.</span><span class="na">scan</span><span class="o">(</span><span class="s">"EMP"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">RelOptUtil</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">node</span><span class="o">));</span></code></pre></figure>
+
+<p>(You can find the full code for this and other examples in
+<a href="https://github.com/apache/calcite/blob/master/core/src/test/java/org/apache/calcite/examples/RelBuilderExample.java">RelBuilderExample.java</a>.)</p>
+
+<p>The code prints</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">LogicalTableScan(table=[[scott, EMP]])</code></pre></figure>
+
+<p>It has created a scan of the <code class="highlighter-rouge">EMP</code> table; equivalent to the SQL</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">scott</span><span class="p">.</span><span class="n">EMP</span><span class="p">;</span></code></pre></figure>
+
+<h3 id="adding-a-project">Adding a Project</h3>
+
+<p>Now, let’s add a Project, the equivalent of</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">ename</span><span class="p">,</span> <span class="n">deptno</span>
+<span class="k">FROM</span> <span class="n">scott</span><span class="p">.</span><span class="n">EMP</span><span class="p">;</span></code></pre></figure>
+
+<p>We just add a call to the <code class="highlighter-rouge">project</code> method before calling
+<code class="highlighter-rouge">build</code>:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">final</span> <span class="n">RelNode</span> <span class="n">node</span> <span class="o">=</span> <span class="n">builder</span>
+  <span class="o">.</span><span class="na">scan</span><span class="o">(</span><span class="s">"EMP"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">project</span><span class="o">(</span><span class="n">builder</span><span class="o">.</span><span class="na">field</span><span class="o">(</span><span class="s">"DEPTNO"</span><span class="o">),</span> <span class="n">builder</span><span class="o">.</span><span class="na">field</span><span class="o">(</span><span class="s">"ENAME"</span><span class="o">))</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">RelOptUtil</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">node</span><span class="o">));</span></code></pre></figure>
+
+<p>and the output is</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">LogicalProject(DEPTNO=[$7], ENAME=[$1])
+  LogicalTableScan(table=[[scott, EMP]])</code></pre></figure>
+
+<p>The two calls to <code class="highlighter-rouge">builder.field</code> create simple expressions
+that return the fields from the input relational expression,
+namely the TableScan created by the <code class="highlighter-rouge">scan</code> call.</p>
+
+<p>Calcite has converted them to field references by ordinal,
+<code class="highlighter-rouge">$7</code> and <code class="highlighter-rouge">$1</code>.</p>
+
+<h3 id="adding-a-filter-and-aggregate">Adding a Filter and Aggregate</h3>
+
+<p>A query with an Aggregate, and a Filter:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">final</span> <span class="n">RelNode</span> <span class="n">node</span> <span class="o">=</span> <span class="n">builder</span>
+  <span class="o">.</span><span class="na">scan</span><span class="o">(</span><span class="s">"EMP"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">aggregate</span><span class="o">(</span><span class="n">builder</span><span class="o">.</span><span class="na">groupKey</span><span class="o">(</span><span class="s">"DEPTNO"</span><span class="o">),</span>
+      <span class="n">builder</span><span class="o">.</span><span class="na">count</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="s">"C"</span><span class="o">),</span>
+      <span class="n">builder</span><span class="o">.</span><span class="na">sum</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="s">"S"</span><span class="o">,</span> <span class="n">builder</span><span class="o">.</span><span class="na">field</span><span class="o">(</span><span class="s">"SAL"</span><span class="o">)))</span>
+  <span class="o">.</span><span class="na">filter</span><span class="o">(</span>
+      <span class="n">builder</span><span class="o">.</span><span class="na">call</span><span class="o">(</span><span class="n">SqlStdOperatorTable</span><span class="o">.</span><span class="na">GREATER_THAN</span><span class="o">,</span>
+          <span class="n">builder</span><span class="o">.</span><span class="na">field</span><span class="o">(</span><span class="s">"C"</span><span class="o">),</span>
+          <span class="n">builder</span><span class="o">.</span><span class="na">literal</span><span class="o">(</span><span class="mi">10</span><span class="o">)))</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">RelOptUtil</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">node</span><span class="o">));</span></code></pre></figure>
+
+<p>is equivalent to SQL</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="k">c</span><span class="p">,</span> <span class="k">sum</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span>
+<span class="k">HAVING</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span></code></pre></figure>
+
+<p>and produces</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">LogicalFilter(condition=[&gt;($1, 10)])
+  LogicalAggregate(group=[{7}], C=[COUNT()], S=[SUM($5)])
+    LogicalTableScan(table=[[scott, EMP]])</code></pre></figure>
+
+<h3 id="push-and-pop">Push and pop</h3>
+
+<p>The builder uses a stack to store the relational expression produced by
+one step and pass it as an input to the next step. This allows the
+methods that produce relational expressions to produce a builder.</p>
+
+<p>Most of the time, the only stack method you will use is <code class="highlighter-rouge">build()</code>, to get the
+last relational expression, namely the root of the tree.</p>
+
+<p>Sometimes the stack becomes so deeply nested it gets confusing. To keep things
+straight, you can remove expressions from the stack. For example, here we are
+building a bushy join:</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">.
+               join
+             /      \
+        join          join
+      /      \      /      \
+CUSTOMERS ORDERS LINE_ITEMS PRODUCTS</code></pre></figure>
+
+<p>We build it in three stages. Store the intermediate results in variables
+<code class="highlighter-rouge">left</code> and <code class="highlighter-rouge">right</code>, and use <code class="highlighter-rouge">push()</code> to put them back on the stack when it is
+time to create the final <code class="highlighter-rouge">Join</code>:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">final</span> <span class="n">RelNode</span> <span class="n">left</span> <span class="o">=</span> <span class="n">builder</span>
+  <span class="o">.</span><span class="na">scan</span><span class="o">(</span><span class="s">"CUSTOMERS"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">scan</span><span class="o">(</span><span class="s">"ORDERS"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="n">JoinRelType</span><span class="o">.</span><span class="na">INNER</span><span class="o">,</span> <span class="s">"ORDER_ID"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="kd">final</span> <span class="n">RelNode</span> <span class="n">right</span> <span class="o">=</span> <span class="n">builder</span>
+  <span class="o">.</span><span class="na">scan</span><span class="o">(</span><span class="s">"LINE_ITEMS"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">scan</span><span class="o">(</span><span class="s">"PRODUCTS"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="n">JoinRelType</span><span class="o">.</span><span class="na">INNER</span><span class="o">,</span> <span class="s">"PRODUCT_ID"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="kd">final</span> <span class="n">RelNode</span> <span class="n">result</span> <span class="o">=</span> <span class="n">builder</span>
+  <span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">left</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">right</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="n">JoinRelType</span><span class="o">.</span><span class="na">INNER</span><span class="o">,</span> <span class="s">"ORDER_ID"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span></code></pre></figure>
+
+<h3 id="field-names-and-ordinals">Field names and ordinals</h3>
+
+<p>You can reference a field by name or ordinal.</p>
+
+<p>Ordinals are zero-based. Each operator guarantees the order in which its output
+fields occur. For example, <code class="highlighter-rouge">Project</code> returns the fields in the generated by
+each of the scalar expressions.</p>
+
+<p>The field names of an operator are guaranteed to be unique, but sometimes that
+means that the names are not exactly what you expect. For example, when you
+join EMP to DEPT, one of the output fields will be called DEPTNO and another
+will be called something like DEPTNO_1.</p>
+
+<p>Some relational expression methods give you more control over field names:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">project</code> lets you wrap expressions using <code class="highlighter-rouge">alias(expr, fieldName)</code>. It
+removes the wrapper but keeps the suggested name (as long as it is unique).</li>
+  <li><code class="highlighter-rouge">values(String[] fieldNames, Object... values)</code> accepts an array of field
+names. If any element of the array is null, the builder will generate a unique
+name.</li>
+</ul>
+
+<p>If an expression projects an input field, or a cast of an input field, it will
+use the name of that input field.</p>
+
+<p>Once the unique field names have been assigned, the names are immutable.
+If you have a particular <code class="highlighter-rouge">RelNode</code> instance, you can rely on the field names not
+changing. In fact, the whole relational expression is immutable.</p>
+
+<p>But if a relational expression has passed through several rewrite rules (see
+<a href="/apidocs/org/apache/calcite/plan/RelOptRule.html">RelOptRule</a>), the field
+names of the resulting expression might not look much like the originals.
+At that point it is better to reference fields by ordinal.</p>
+
+<p>When you are building a relational expression that accepts multiple inputs,
+you need to build field references that take that into account. This occurs
+most often when building join conditions.</p>
+
+<p>Suppose you are building a join on EMP,
+which has 8 fields [EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO]
+and DEPT,
+which has 3 fields [DEPTNO, DNAME, LOC].
+Internally, Calcite represents those fields as offsets into
+a combined input row with 11 fields: the first field of the left input is
+field #0 (0-based, remember), and the first field of the right input is
+field #8.</p>
+
+<p>But through the builder API, you specify which field of which input.
+To reference “SAL”, internal field #5,
+write <code class="highlighter-rouge">builder.field(2, 0, "SAL")</code>, <code class="highlighter-rouge">builder.field(2, "EMP", "SAL")</code>,
+or <code class="highlighter-rouge">builder.field(2, 0, 5)</code>.
+This means “the field #5 of input #0 of two inputs”.
+(Why does it need to know that there are two inputs? Because they are stored on
+the stack; input #1 is at the top of the stack, and input #0 is below it.
+If we did not tell the builder that were two inputs, it would not know how deep
+to go for input #0.)</p>
+
+<p>Similarly, to reference “DNAME”, internal field #9 (8 + 1),
+write <code class="highlighter-rouge">builder.field(2, 1, "DNAME")</code>, <code class="highlighter-rouge">builder.field(2, "DEPT", "DNAME")</code>,
+or <code class="highlighter-rouge">builder.field(2, 1, 1)</code>.</p>
+
+<h3 id="api-summary">API summary</h3>
+
+<h4 id="relational-operators">Relational operators</h4>
+
+<p>The following methods create a relational expression
+(<a href="/apidocs/org/apache/calcite/rel/RelNode.html">RelNode</a>),
+push it onto the stack, and
+return the <code class="highlighter-rouge">RelBuilder</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Method</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">scan(tableName)</code></td>
+      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/TableScan.html">TableScan</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">values(fieldNames, value...)</code><br /><code class="highlighter-rouge">values(rowType, tupleList)</code></td>
+      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Values.html">Values</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">filter(expr...)</code><br /><code class="highlighter-rouge">filter(exprList)</code></td>
+      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Filter.html">Filter</a> over the AND of the given predicates.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">project(expr...)</code><br /><code class="highlighter-rouge">project(exprList [, fieldNames])</code></td>
+      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Project.html">Project</a>. To override the default name, wrap expressions using <code class="highlighter-rouge">alias</code>, or specify the <code class="highlighter-rouge">fieldNames</code> argument.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">projectPlus(expr...)</code><br /><code class="highlighter-rouge">projectPlus(exprList)</code></td>
+      <td style="text-align: left">Variant of <code class="highlighter-rouge">project</code> that keeps original fields and appends the given expressions.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">permute(mapping)</code></td>
+      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Project.html">Project</a> that permutes the fields using <code class="highlighter-rouge">mapping</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">convert(rowType [, rename])</code></td>
+      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Project.html">Project</a> that converts the fields to the given types, optionally also renaming them.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">aggregate(groupKey, aggCall...)</code><br /><code class="highlighter-rouge">aggregate(groupKey, aggCallList)</code></td>
+      <td style="text-align: left">Creates an <a href="/apidocs/org/apache/calcite/rel/core/Aggregate.html">Aggregate</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">distinct()</code></td>
+      <td style="text-align: left">Creates an <a href="/apidocs/org/apache/calcite/rel/core/Aggregate.html">Aggregate</a> that eliminates duplicate records.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">sort(fieldOrdinal...)</code><br /><code class="highlighter-rouge">sort(expr...)</code><br /><code class="highlighter-rouge">sort(exprList)</code></td>
+      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Sort.html">Sort</a>.<br /><br />In the first form, field ordinals are 0-based, and a negative ordinal indicates descending; for example, -2 means field 1 descending.<br /><br />In the other forms, you can wrap expressions in <code class="highlighter-rouge">as</code>, <code class="highlighter-rouge">nullsFirst</code> or <code class="highlighter-rouge">nullsLast</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">sortLimit(offset, fetch, expr...)</code><br /><code class="highlighter-rouge">sortLimit(offset, fetch, exprList)</code></td>
+      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Sort.html">Sort</a> with offset and limit.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">limit(offset, fetch)</code></td>
+      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Sort.html">Sort</a> that does not sort, only applies with offset and limit.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">exchange(distribution)</code></td>
+      <td style="text-align: left">Creates an <a href="/apidocs/org/apache/calcite/rel/core/Exchange.html">Exchange</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">sortExchange(distribution, collation)</code></td>
+      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/SortExchange.html">SortExchange</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">join(joinType, expr...)</code><br /><code class="highlighter-rouge">join(joinType, exprList)</code><br /><code class="highlighter-rouge">join(joinType, fieldName...)</code></td>
+      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Join.html">Join</a> of the two most recent relational expressions.<br /><br />The first form joins on a boolean expression (multiple conditions are combined using AND).<br /><br />The last form joins on named fields; each side must have a field of each name.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">semiJoin(expr)</code></td>
+      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/SemiJoin.html">SemiJoin</a> of the two most recent relational expressions.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">union(all [, n])</code></td>
+      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Union.html">Union</a> of the <code class="highlighter-rouge">n</code> (default two) most recent relational expressions.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">intersect(all [, n])</code></td>
+      <td style="text-align: left">Creates an <a href="/apidocs/org/apache/calcite/rel/core/Intersect.html">Intersect</a> of the <code class="highlighter-rouge">n</code> (default two) most recent relational expressions.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">minus(all)</code></td>
+      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Minus.html">Minus</a> of the two most recent relational expressions.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">match(pattern, strictStart,</code> <code class="highlighter-rouge">strictEnd, patterns, measures,</code> <code class="highlighter-rouge">after, subsets, allRows,</code> <code class="highlighter-rouge">partitionKeys, orderKeys,</code> <code class="highlighter-rouge">interval)</code></td>
+      <td style="text-align: left">Creates a <a href="/apidocs/org/apache/calcite/rel/core/Match.html">Match</a>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Argument types:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">expr</code>, <code class="highlighter-rouge">interval</code> <a href="/apidocs/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
+  <li><code class="highlighter-rouge">expr...</code> Array of <a href="/apidocs/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
+  <li><code class="highlighter-rouge">exprList</code>, <code class="highlighter-rouge">measureList</code>, <code class="highlighter-rouge">partitionKeys</code>, <code class="highlighter-rouge">orderKeys</code> Iterable of
+<a href="/apidocs/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
+  <li><code class="highlighter-rouge">fieldOrdinal</code> Ordinal of a field within its row (starting from 0)</li>
+  <li><code class="highlighter-rouge">fieldName</code> Name of a field, unique within its row</li>
+  <li><code class="highlighter-rouge">fieldName...</code> Array of String</li>
+  <li><code class="highlighter-rouge">fieldNames</code> Iterable of String</li>
+  <li><code class="highlighter-rouge">rowType</code> <a href="/apidocs/org/apache/calcite/rel/type/RelDataType.html">RelDataType</a></li>
+  <li><code class="highlighter-rouge">groupKey</code> <a href="/apidocs/org/apache/calcite/tools/RelBuilder.GroupKey.html">RelBuilder.GroupKey</a></li>
+  <li><code class="highlighter-rouge">aggCall...</code> Array of <a href="/apidocs/org/apache/calcite/tools/RelBuilder.AggCall.html">RelBuilder.AggCall</a></li>
+  <li><code class="highlighter-rouge">aggCallList</code> Iterable of <a href="/apidocs/org/apache/calcite/tools/RelBuilder.AggCall.html">RelBuilder.AggCall</a></li>
+  <li><code class="highlighter-rouge">value...</code> Array of Object</li>
+  <li><code class="highlighter-rouge">value</code> Object</li>
+  <li><code class="highlighter-rouge">tupleList</code> Iterable of List of <a href="/apidocs/org/apache/calcite/rex/RexLiteral.html">RexLiteral</a></li>
+  <li><code class="highlighter-rouge">all</code>, <code class="highlighter-rouge">distinct</code>, <code class="highlighter-rouge">strictStart</code>, <code class="highlighter-rouge">strictEnd</code>, <code class="highlighter-rouge">allRows</code> boolean</li>
+  <li><code class="highlighter-rouge">alias</code> String</li>
+  <li><code class="highlighter-rouge">varHolder</code> <a href="/apidocs/org/apache/calcite/util/Holder.html">Holder</a> of <a href="/apidocs/org/apache/calcite/rex/RexCorrelVariable.html">RexCorrelVariable</a></li>
+  <li><code class="highlighter-rouge">patterns</code> Map whose key is String, value is <a href="/apidocs/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
+  <li><code class="highlighter-rouge">subsets</code> Map whose key is String, value is a sorted set of String</li>
+  <li><code class="highlighter-rouge">distribution</code> <a href="/apidocs/org/apache/calcite/rel/RelDistribution.html">RelDistribution</a></li>
+  <li><code class="highlighter-rouge">collation</code> <a href="/apidocs/org/apache/calcite/rel/RelCollation.html">RelCollation</a></li>
+</ul>
+
+<p>The builder methods perform various optimizations, including:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">project</code> returns its input if asked to project all columns in order</li>
+  <li><code class="highlighter-rouge">filter</code> flattens the condition (so an <code class="highlighter-rouge">AND</code> and <code class="highlighter-rouge">OR</code> may have more than 2 children),
+simplifies (converting say <code class="highlighter-rouge">x = 1 AND TRUE</code> to <code class="highlighter-rouge">x = 1</code>)</li>
+  <li>If you apply <code class="highlighter-rouge">sort</code> then <code class="highlighter-rouge">limit</code>, the effect is as if you had called <code class="highlighter-rouge">sortLimit</code></li>
+</ul>
+
+<p>There are annotation methods that add information to the top relational
+expression on the stack:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Method</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">as(alias)</code></td>
+      <td style="text-align: left">Assigns a table alias to the top relational expression on the stack</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">variable(varHolder)</code></td>
+      <td style="text-align: left">Creates a correlation variable referencing the top relational expression</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="stack-methods">Stack methods</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Method</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">build()</code></td>
+      <td style="text-align: left">Pops the most recently created relational expression off the stack</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">push(rel)</code></td>
+      <td style="text-align: left">Pushes a relational expression onto the stack. Relational methods such as <code class="highlighter-rouge">scan</code>, above, call this method, but user code generally does not</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">pushAll(collection)</code></td>
+      <td style="text-align: left">Pushes a collection of relational expressions onto the stack</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">peek()</code></td>
+      <td style="text-align: left">Returns the relational expression most recently put onto the stack, but does not remove it</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="scalar-expression-methods">Scalar expression methods</h4>
+
+<p>The following methods return a scalar expression
+(<a href="/apidocs/org/apache/calcite/rex/RexNode.html">RexNode</a>).</p>
+
+<p>Many of them use the contents of the stack. For example, <code class="highlighter-rouge">field("DEPTNO")</code>
+returns a reference to the “DEPTNO” field of the relational expression just
+added to the stack.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Method</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">literal(value)</code></td>
+      <td style="text-align: left">Constant</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">field(fieldName)</code></td>
+      <td style="text-align: left">Reference, by name, to a field of the top-most relational expression</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">field(fieldOrdinal)</code></td>
+      <td style="text-align: left">Reference, by ordinal, to a field of the top-most relational expression</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">field(inputCount, inputOrdinal, fieldName)</code></td>
+      <td style="text-align: left">Reference, by name, to a field of the (<code class="highlighter-rouge">inputCount</code> - <code class="highlighter-rouge">inputOrdinal</code>)th relational expression</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">field(inputCount, inputOrdinal, fieldOrdinal)</code></td>
+      <td style="text-align: left">Reference, by ordinal, to a field of the (<code class="highlighter-rouge">inputCount</code> - <code class="highlighter-rouge">inputOrdinal</code>)th relational expression</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">field(inputCount, alias, fieldName)</code></td>
+      <td style="text-align: left">Reference, by table alias and field name, to a field at most <code class="highlighter-rouge">inputCount - 1</code> elements from the top of the stack</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">field(alias, fieldName)</code></td>
+      <td style="text-align: left">Reference, by table alias and field name, to a field of the top-most relational expressions</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">field(expr, fieldName)</code></td>
+      <td style="text-align: left">Reference, by name, to a field of a record-valued expression</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">field(expr, fieldOrdinal)</code></td>
+      <td style="text-align: left">Reference, by ordinal, to a field of a record-valued expression</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">fields(fieldOrdinalList)</code></td>
+      <td style="text-align: left">List of expressions referencing input fields by ordinal</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">fields(mapping)</code></td>
+      <td style="text-align: left">List of expressions referencing input fields by a given mapping</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">fields(collation)</code></td>
+      <td style="text-align: left">List of expressions, <code class="highlighter-rouge">exprList</code>, such that <code class="highlighter-rouge">sort(exprList)</code> would replicate collation</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">call(op, expr...)</code><br /><code class="highlighter-rouge">call(op, exprList)</code></td>
+      <td style="text-align: left">Call to a function or operator</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">and(expr...)</code><br /><code class="highlighter-rouge">and(exprList)</code></td>
+      <td style="text-align: left">Logical AND. Flattens nested ANDs, and optimizes cases involving TRUE and FALSE.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">or(expr...)</code><br /><code class="highlighter-rouge">or(exprList)</code></td>
+      <td style="text-align: left">Logical OR. Flattens nested ORs, and optimizes cases involving TRUE and FALSE.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">not(expr)</code></td>
+      <td style="text-align: left">Logical NOT</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">equals(expr, expr)</code></td>
+      <td style="text-align: left">Equals</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">isNull(expr)</code></td>
+      <td style="text-align: left">Checks whether an expression is null</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">isNotNull(expr)</code></td>
+      <td style="text-align: left">Checks whether an expression is not null</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">alias(expr, fieldName)</code></td>
+      <td style="text-align: left">Renames an expression (only valid as an argument to <code class="highlighter-rouge">project</code>)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">cast(expr, typeName)</code><br /><code class="highlighter-rouge">cast(expr, typeName, precision)</code><br /><code class="highlighter-rouge">cast(expr, typeName, precision, scale)</code><br /></td>
+      <td style="text-align: left">Converts an expression to a given type</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">desc(expr)</code></td>
+      <td style="text-align: left">Changes sort direction to descending (only valid as an argument to <code class="highlighter-rouge">sort</code> or <code class="highlighter-rouge">sortLimit</code>)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">nullsFirst(expr)</code></td>
+      <td style="text-align: left">Changes sort order to nulls first (only valid as an argument to <code class="highlighter-rouge">sort</code> or <code class="highlighter-rouge">sortLimit</code>)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">nullsLast(expr)</code></td>
+      <td style="text-align: left">Changes sort order to nulls last (only valid as an argument to <code class="highlighter-rouge">sort</code> or <code class="highlighter-rouge">sortLimit</code>)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="pattern-methods">Pattern methods</h4>
+
+<p>The following methods return patterns for use in <code class="highlighter-rouge">match</code>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Method</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">patternConcat(pattern...)</code></td>
+      <td style="text-align: left">Concatenates patterns</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">patternAlter(pattern...)</code></td>
+      <td style="text-align: left">Alternates patterns</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">patternQuantify(pattern, min, max)</code></td>
+      <td style="text-align: left">Quantifies a pattern</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">patternPermute(pattern...)</code></td>
+      <td style="text-align: left">Permutes a pattern</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">patternExclude(pattern)</code></td>
+      <td style="text-align: left">Excludes a pattern</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="group-key-methods">Group key methods</h4>
+
+<p>The following methods return a
+<a href="/apidocs/org/apache/calcite/tools/RelBuilder.GroupKey.html">RelBuilder.GroupKey</a>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Method</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">groupKey(fieldName...)</code><br /><code class="highlighter-rouge">groupKey(fieldOrdinal...)</code><br /><code class="highlighter-rouge">groupKey(expr...)</code><br /><code class="highlighter-rouge">groupKey(exprList)</code></td>
+      <td style="text-align: left">Creates a group key of the given expressions</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">groupKey(exprList, exprListList)</code></td>
+      <td style="text-align: left">Creates a group key of the given expressions with grouping sets</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">groupKey(bitSet [, bitSets])</code></td>
+      <td style="text-align: left">Creates a group key of the given input columns, with multiple grouping sets if <code class="highlighter-rouge">bitSets</code> is specified</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="aggregate-call-methods">Aggregate call methods</h4>
+
+<p>The following methods return an
+<a href="/apidocs/org/apache/calcite/tools/RelBuilder.AggCall.html">RelBuilder.AggCall</a>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Method</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">aggregateCall(op, expr...)</code><br /><code class="highlighter-rouge">aggregateCall(op, exprList)</code></td>
+      <td style="text-align: left">Creates a call to a given aggregate function</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">count([ distinct, alias, ] expr...)</code><br /><code class="highlighter-rouge">count([ distinct, alias, ] exprList)</code></td>
+      <td style="text-align: left">Creates a call to the <code class="highlighter-rouge">COUNT</code> aggregate function</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">countStar(alias)</code></td>
+      <td style="text-align: left">Creates a call to the <code class="highlighter-rouge">COUNT(*)</code> aggregate function</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">sum([ distinct, alias, ] expr)</code></td>
+      <td style="text-align: left">Creates a call to the <code class="highlighter-rouge">SUM</code> aggregate function</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">min([ alias, ] expr)</code></td>
+      <td style="text-align: left">Creates a call to the <code class="highlighter-rouge">MIN</code> aggregate function</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">max([ alias, ] expr)</code></td>
+      <td style="text-align: left">Creates a call to the <code class="highlighter-rouge">MAX</code> aggregate function</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>To further modify the <code class="highlighter-rouge">AggCall</code>, call its methods:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Method</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">approximate(approximate)</code></td>
+      <td style="text-align: left">Allows approximate value for the aggregate of <code class="highlighter-rouge">approximate</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">as(alias)</code></td>
+      <td style="text-align: left">Assigns a column alias to this expression (see SQL <code class="highlighter-rouge">AS</code>)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">distinct()</code></td>
+      <td style="text-align: left">Eliminates duplicate values before aggregating (see SQL <code class="highlighter-rouge">DISTINCT</code>)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">distinct(distinct)</code></td>
+      <td style="text-align: left">Eliminates duplicate values before aggregating if <code class="highlighter-rouge">distinct</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">filter(expr)</code></td>
+      <td style="text-align: left">Filters rows before aggregating (see SQL <code class="highlighter-rouge">FILTER (WHERE ...)</code>)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">sort(expr...)</code><br /><code class="highlighter-rouge">sort(exprList)</code></td>
+      <td style="text-align: left">Sorts rows before aggregating (see SQL <code class="highlighter-rouge">WITHIN GROUP</code>)</td>
+    </tr>
+  </tbody>
+</table>
+
+
+          
+
+
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="section-nav">
+      <div class="left align-right">
+          
+            
+            
+            <a href="/docs/tutorial.html" class="prev">Previous</a>
+          
+      </div>
+      <div class="right align-left">
+          
+            
+            
+
+            
+            <a href="/docs/adapter.html" class="next">Next</a>
+          
+      </div>
+    </div>
+    <div class="clear"></div>
+    
+
+        </article>
+      </div>
+
+      <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    
+    <h4>Overview</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/index.html">Background</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/tutorial.html">Tutorial</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class="current"><a href="/docs/algebra.html">Algebra</a></li>
+
+
+</ul>
+
+    
+    <h4>Advanced</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/adapter.html">Adapters</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/spatial.html">Spatial</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/stream.html">Streaming</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/materialized_views.html">Materialized Views</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/lattice.html">Lattices</a></li>
+
+
+</ul>
+
+    
+    <h4>Avatica</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_overview.html">Overview</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_roadmap.html">Roadmap</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_json_reference.html">JSON Reference</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_protobuf_reference.html">Protobuf Reference</a></li>
+
+
+</ul>
+
+    
+    <h4>Reference</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/reference.html">SQL language</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/model.html">JSON/YAML models</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/howto.html">HOWTO</a></li>
+
+
+</ul>
+
+    
+    <h4>Meta</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/history.html">History</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/powered_by.html">Powered by Calcite</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/apidocs">API</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/testapidocs">Test API</a></li>
+
+
+</ul>
+
+    
+  </aside>
+</div>
+
+
+      <div class="clear"></div>
+
+    </div>
+  </section>
+
+
+  <footer role="contentinfo">
+  <div id="poweredby">
+    <a href="http://www.apache.org/">
+      <span class="sr-only">Apache</span>
+      <img src="/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
+  </div>
+  <div id="copyright">
+  <p>The contents of this website are Copyright &copy;&nbsp;2019
+     <a href="https://www.apache.org/">Apache Software Foundation</a>
+     under the terms of
+     the <a href="https://www.apache.org/licenses/">
+     Apache&nbsp;License&nbsp;v2</a>. Apache Calcite and its logo are
+     trademarks of the Apache Software Foundation.</p>
+  </div>
+</footer>
+
+  <script>
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
+    anchor.title = "Permalink";
+    return anchor;
+  };
+
+  var linkifyAnchors = function (level, containingElement) {
+    var headers = containingElement.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.appendChild(anchorForId(header.id));
+      }
+    }
+  };
+
+  document.onreadystatechange = function () {
+    if (this.readyState === "complete") {
+      var contentBlock = document.getElementsByClassName("docs")[0] || document.getElementsByClassName("news")[0];
+      if (!contentBlock) {
+        return;
+      }
+      for (var level = 1; level <= 6; level++) {
+        linkifyAnchors(level, contentBlock);
+      }
+    }
+  };
+</script>
+
+
+</body>
+</html>

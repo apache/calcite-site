@@ -1,0 +1,803 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>Materialized Views</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="generator" content="Jekyll v3.7.3">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
+  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+
+<body class="wrap">
+  <header role="banner">
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li class="">
+    <a href="/">Home</a>
+  </li>
+  <li class="">
+    <a href="/downloads/">Download</a>
+  </li>
+  <li class="">
+    <a href="/community/">Community</a>
+  </li>
+  <li class="">
+    <a href="/develop/">Develop</a>
+  </li>
+  <li class="">
+    <a href="/news/">News</a>
+  </li>
+  <li class="current">
+    <a href="/docs/">Docs</a>
+  </li>
+</ul>
+
+  </nav>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <h1>
+        <a href="/">
+          <span class="sr-only">Apache Calcite</span>
+          <img src="/img/logo.png" width="226" height="140" alt="Calcite Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav unit two-thirds hide-on-mobiles">
+      <ul>
+  <li class="">
+    <a href="/">Home</a>
+  </li>
+  <li class="">
+    <a href="/downloads/">Download</a>
+  </li>
+  <li class="">
+    <a href="/community/">Community</a>
+  </li>
+  <li class="">
+    <a href="/develop/">Develop</a>
+  </li>
+  <li class="">
+    <a href="/news/">News</a>
+  </li>
+  <li class="current">
+    <a href="/docs/">Docs</a>
+  </li>
+</ul>
+
+    </nav>
+  </div>
+</header>
+
+
+    <section class="docs">
+    <div class="grid">
+
+      <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select onchange="if (this.value) window.location.href=this.value">
+    <option value="">Navigate the docs…</option>
+        <optgroup label="Overview">      
+    </optgroup>
+    <optgroup label="Advanced">      
+    </optgroup>
+    <optgroup label="Avatica">      
+    </optgroup>
+    <optgroup label="Reference">      
+    </optgroup>
+    <optgroup label="Meta">      
+    </optgroup>
+
+  </select>
+</div>
+
+
+      <div class="unit four-fifths">
+        <article>
+          <h1>Materialized Views</h1>
+          <!--
+
+-->
+
+<p>There are several different ways to exploit materialized views in Calcite.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#materialized-views-maintained-by-calcite" id="markdown-toc-materialized-views-maintained-by-calcite">Materialized views maintained by Calcite</a></li>
+  <li><a href="#expose-materialized-views-to-calcite" id="markdown-toc-expose-materialized-views-to-calcite">Expose materialized views to Calcite</a>    <ul>
+      <li><a href="#view-based-query-rewriting" id="markdown-toc-view-based-query-rewriting">View-based query rewriting</a>        <ul>
+          <li><a href="#substitution-via-rules-transformation" id="markdown-toc-substitution-via-rules-transformation">Substitution via rules transformation</a></li>
+          <li><a href="#rewriting-using-plan-structural-information" id="markdown-toc-rewriting-using-plan-structural-information">Rewriting using plan structural information</a>            <ul>
+              <li><a href="#rewriting-coverage" id="markdown-toc-rewriting-coverage">Rewriting coverage</a>                <ul>
+                  <li><a href="#join-rewriting" id="markdown-toc-join-rewriting">Join rewriting</a></li>
+                  <li><a href="#aggregate-rewriting" id="markdown-toc-aggregate-rewriting">Aggregate rewriting</a></li>
+                  <li><a href="#aggregate-rewriting-with-aggregation-rollup" id="markdown-toc-aggregate-rewriting-with-aggregation-rollup">Aggregate rewriting (with aggregation rollup)</a></li>
+                  <li><a href="#query-partial-rewriting" id="markdown-toc-query-partial-rewriting">Query partial rewriting</a></li>
+                  <li><a href="#view-partial-rewriting" id="markdown-toc-view-partial-rewriting">View partial rewriting</a></li>
+                  <li><a href="#union-rewriting" id="markdown-toc-union-rewriting">Union rewriting</a></li>
+                  <li><a href="#union-rewriting-with-aggregate" id="markdown-toc-union-rewriting-with-aggregate">Union rewriting with aggregate</a></li>
+                </ul>
+              </li>
+              <li><a href="#limitations" id="markdown-toc-limitations">Limitations</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#references" id="markdown-toc-references">References</a></li>
+</ul>
+
+<h2 id="materialized-views-maintained-by-calcite">Materialized views maintained by Calcite</h2>
+
+<p>For details, see the <a href="/docs/lattice.html">lattices documentation</a>.</p>
+
+<h2 id="expose-materialized-views-to-calcite">Expose materialized views to Calcite</h2>
+
+<p>Some Calcite adapters as well as projects that rely on Calcite have their own notion of materialized views.</p>
+
+<p>For example, Apache Cassandra allows the user to define materialized views based on existing tables which are automatically maintained.
+The Cassandra adapter automatically exposes these materialized views to Calcite.</p>
+
+<p>Another example is Apache Hive. When a materialized view is created in Hive, the user can specify whether the view may be used in query optimization. If the user chooses to do so, the materialized view will be registered with Calcite.</p>
+
+<p>By registering materialized views in Calcite, the optimizer has the opportunity to automatically rewrite queries to use these views.</p>
+
+<h3 id="view-based-query-rewriting">View-based query rewriting</h3>
+
+<p>View-based query rewriting aims to take an input query which can be answered using a preexisting view and rewrite the query to make use of the view.
+Currently Calcite has two implementations of view-based query rewriting.</p>
+
+<h4 id="substitution-via-rules-transformation">Substitution via rules transformation</h4>
+
+<p>The first approach is based on view substitution.
+<code class="highlighter-rouge">SubstitutionVisitor</code> and its extension <code class="highlighter-rouge">MaterializedViewSubstitutionVisitor</code> aim to substitute part of the relational algebra tree with an equivalent expression which makes use of a materialized view. The scan over the materialized view and the materialized view definition plan are registered with the planner. Afterwards, transformation rules that try to unify expressions in the plan are triggered. Expressions do not need to be equivalent to be replaced: the visitor might add a residual predicate on top of the expression if needed.</p>
+
+<p>The following example is taken from the documentation of <code class="highlighter-rouge">SubstitutionVisitor</code>:</p>
+
+<ul>
+  <li>Query: <code class="highlighter-rouge">SELECT a, c FROM t WHERE x = 5 AND b = 4</code></li>
+  <li>Target (materialized view definition): <code class="highlighter-rouge">SELECT a, b, c FROM t WHERE x = 5</code></li>
+  <li>Result: <code class="highlighter-rouge">SELECT a, c FROM mv WHERE b = 4</code></li>
+</ul>
+
+<p>Note that <code class="highlighter-rouge">result</code> uses the materialized view table <code class="highlighter-rouge">mv</code> and a simplified condition <code class="highlighter-rouge">b = 4</code>.</p>
+
+<p>While this approach can accomplish a large number of rewritings, it has some limitations. Since the rule relies on transformation rules to create the equivalence between expressions in the query and the materialized view, it might need to enumerate exhaustively all possible equivalent rewritings for a given expression to find a materialized view substitution. However, this is not scalable in the presence of complex
+views, e.g., views with an arbitrary number of join operators.</p>
+
+<h4 id="rewriting-using-plan-structural-information">Rewriting using plan structural information</h4>
+
+<p>In turn, an alternative rule that attempts to match queries to views by extracting some structural information about the expression to replace has been proposed.</p>
+
+<p><code class="highlighter-rouge">AbstractMaterializedViewRule</code> builds on the ideas presented in [<a href="#ref-gl01">GL01</a>] and introduces some additional extensions.
+The rule can rewrite expressions containing arbitrary chains of Join, Filter, and Project operators.
+Additionally, the rule can rewrite expressions rooted at an Aggregate operator, rolling aggregations up if necessary. In turn, it can also produce rewritings using Union operators if the query can be partially answered from a view.</p>
+
+<p>To produce a larger number of rewritings, the rule relies on information exposed as constraints defined over the database tables, e.g., <em>foreign keys</em>, <em>primary keys</em>, <em>unique keys</em> or <em>not null</em>.</p>
+
+<h5 id="rewriting-coverage">Rewriting coverage</h5>
+
+<p>Let us illustrate with some examples the coverage of the view rewriting algorithm implemented in <code class="highlighter-rouge">AbstractMaterializedViewRule</code>. The examples are based on the following database schema.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE depts(
+  deptno INT NOT NULL,
+  deptname VARCHAR(20),
+  PRIMARY KEY (deptno)
+);
+CREATE TABLE locations(
+  locationid INT NOT NULL,
+  state CHAR(2),
+  PRIMARY KEY (locationid)
+);
+CREATE TABLE emps(
+  empid INT NOT NULL,
+  deptno INT NOT NULL,
+  locationid INT NOT NULL,
+  empname VARCHAR(20) NOT NULL,
+  salary DECIMAL (18, 2),
+  PRIMARY KEY (empid),
+  FOREIGN KEY (deptno) REFERENCES depts(deptno),
+  FOREIGN KEY (locationid) REFERENCES locations(locationid)
+);
+</code></pre></div></div>
+
+<h6 id="join-rewriting">Join rewriting</h6>
+
+<p>The rewriting can handle different join orders in the query and the view definition. In addition, the rule tries to detect when a compensation predicate could be used to produce a rewriting using a view.</p>
+
+<ul>
+  <li>Query:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid
+FROM depts
+JOIN (
+  SELECT empid, deptno
+  FROM emps
+  WHERE empid = 1) AS subq
+ON depts.deptno = subq.deptno
+</code></pre></div></div>
+
+<ul>
+  <li>Materialized view definition:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid
+FROM emps
+JOIN depts USING (deptno)
+</code></pre></div></div>
+
+<ul>
+  <li>Rewriting:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid
+FROM mv
+WHERE empid = 1
+</code></pre></div></div>
+
+<h6 id="aggregate-rewriting">Aggregate rewriting</h6>
+
+<ul>
+  <li>Query:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT deptno
+FROM emps
+WHERE deptno &gt; 10
+GROUP BY deptno
+</code></pre></div></div>
+
+<ul>
+  <li>Materialized view definition:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, deptno
+FROM emps
+WHERE deptno &gt; 5
+GROUP BY empid, deptno
+</code></pre></div></div>
+
+<ul>
+  <li>Rewriting:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT deptno
+FROM mv
+WHERE deptno &gt; 10
+GROUP BY deptno
+</code></pre></div></div>
+
+<h6 id="aggregate-rewriting-with-aggregation-rollup">Aggregate rewriting (with aggregation rollup)</h6>
+
+<ul>
+  <li>Query:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT deptno, COUNT(*) AS c, SUM(salary) AS s
+FROM emps
+GROUP BY deptno
+</code></pre></div></div>
+
+<ul>
+  <li>Materialized view definition:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, deptno, COUNT(*) AS c, SUM(salary) AS s
+FROM emps
+GROUP BY empid, deptno
+</code></pre></div></div>
+
+<ul>
+  <li>Rewriting:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT deptno, SUM(c), SUM(s)
+FROM mv
+GROUP BY deptno
+</code></pre></div></div>
+
+<h6 id="query-partial-rewriting">Query partial rewriting</h6>
+
+<p>Through the declared constraints, the rule can detect joins that only append columns without altering the tuples multiplicity and produce correct rewritings.</p>
+
+<ul>
+  <li>Query:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT deptno, COUNT(*)
+FROM emps
+GROUP BY deptno
+</code></pre></div></div>
+
+<ul>
+  <li>Materialized view definition:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, depts.deptno, COUNT(*) AS c, SUM(salary) AS s
+FROM emps
+JOIN depts USING (deptno)
+GROUP BY empid, depts.deptno
+</code></pre></div></div>
+
+<ul>
+  <li>Rewriting:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT deptno, SUM(c)
+FROM mv
+GROUP BY deptno
+</code></pre></div></div>
+
+<h6 id="view-partial-rewriting">View partial rewriting</h6>
+
+<ul>
+  <li>Query:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT deptname, state, SUM(salary) AS s
+FROM emps
+JOIN depts ON emps.deptno = depts.deptno
+JOIN locations ON emps.locationid = locations.locationid
+GROUP BY deptname, state
+</code></pre></div></div>
+
+<ul>
+  <li>Materialized view definition:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, deptno, state, SUM(salary) AS s
+FROM emps
+JOIN locations ON emps.locationid = locations.locationid
+GROUP BY empid, deptno, state
+</code></pre></div></div>
+
+<ul>
+  <li>Rewriting:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT deptname, state, SUM(s)
+FROM mv
+JOIN depts ON mv.deptno = depts.deptno
+GROUP BY deptname, state
+</code></pre></div></div>
+
+<h6 id="union-rewriting">Union rewriting</h6>
+
+<ul>
+  <li>Query:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, deptname
+FROM emps
+JOIN depts ON emps.deptno = depts.deptno
+WHERE salary &gt; 10000
+</code></pre></div></div>
+
+<ul>
+  <li>Materialized view definition:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, deptname
+FROM emps
+JOIN depts ON emps.deptno = depts.deptno
+WHERE salary &gt; 12000
+</code></pre></div></div>
+
+<ul>
+  <li>Rewriting:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, deptname
+FROM mv
+UNION ALL
+SELECT empid, deptname
+FROM emps
+JOIN depts ON emps.deptno = depts.deptno
+WHERE salary &gt; 10000 AND salary &lt;= 12000
+</code></pre></div></div>
+
+<h6 id="union-rewriting-with-aggregate">Union rewriting with aggregate</h6>
+
+<ul>
+  <li>Query:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, deptname, SUM(salary) AS s
+FROM emps
+JOIN depts ON emps.deptno = depts.deptno
+WHERE salary &gt; 10000
+GROUP BY empid, deptname
+</code></pre></div></div>
+
+<ul>
+  <li>Materialized view definition:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, deptname, SUM(salary) AS s
+FROM emps
+JOIN depts ON emps.deptno = depts.deptno
+WHERE salary &gt; 12000
+GROUP BY empid, deptname
+</code></pre></div></div>
+
+<ul>
+  <li>Rewriting:</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, deptname, SUM(s)
+FROM (
+  SELECT empid, deptname, s
+  FROM mv
+  UNION ALL
+  SELECT empid, deptname, SUM(salary) AS s
+  FROM emps
+  JOIN depts ON emps.deptno = depts.deptno
+  WHERE salary &gt; 10000 AND salary &lt;= 12000
+  GROUP BY empid, deptname) AS subq
+GROUP BY empid, deptname
+</code></pre></div></div>
+
+<h5 id="limitations">Limitations</h5>
+
+<p>This rule still presents some limitations. In particular, the rewriting rule attempts to match all views against each query. We plan to implement more refined filtering techniques such as those described in [<a href="#ref-gl01">GL01</a>].</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+<li>[<a name="ref-gl01">GL01</a>] Jonathan Goldstein and Per-åke Larson.
+    <a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.95.113">Optimizing queries using materialized views: A practical, scalable solution</a>.
+    In <i>Proc. ACM SIGMOD Conf.</i>, 2001.</li>
+</ul>
+
+          
+
+
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="section-nav">
+      <div class="left align-right">
+          
+            
+            
+            <a href="/docs/stream.html" class="prev">Previous</a>
+          
+      </div>
+      <div class="right align-left">
+          
+            
+            
+
+            
+            <a href="/docs/lattice.html" class="next">Next</a>
+          
+      </div>
+    </div>
+    <div class="clear"></div>
+    
+
+        </article>
+      </div>
+
+      <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    
+    <h4>Overview</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/index.html">Background</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/tutorial.html">Tutorial</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/algebra.html">Algebra</a></li>
+
+
+</ul>
+
+    
+    <h4>Advanced</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/adapter.html">Adapters</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/spatial.html">Spatial</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/stream.html">Streaming</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class="current"><a href="/docs/materialized_views.html">Materialized Views</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/lattice.html">Lattices</a></li>
+
+
+</ul>
+
+    
+    <h4>Avatica</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_overview.html">Overview</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_roadmap.html">Roadmap</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_json_reference.html">JSON Reference</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_protobuf_reference.html">Protobuf Reference</a></li>
+
+
+</ul>
+
+    
+    <h4>Reference</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/reference.html">SQL language</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/model.html">JSON/YAML models</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/howto.html">HOWTO</a></li>
+
+
+</ul>
+
+    
+    <h4>Meta</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/history.html">History</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/powered_by.html">Powered by Calcite</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/apidocs">API</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/testapidocs">Test API</a></li>
+
+
+</ul>
+
+    
+  </aside>
+</div>
+
+
+      <div class="clear"></div>
+
+    </div>
+  </section>
+
+
+  <footer role="contentinfo">
+  <div id="poweredby">
+    <a href="http://www.apache.org/">
+      <span class="sr-only">Apache</span>
+      <img src="/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
+  </div>
+  <div id="copyright">
+  <p>The contents of this website are Copyright &copy;&nbsp;2019
+     <a href="https://www.apache.org/">Apache Software Foundation</a>
+     under the terms of
+     the <a href="https://www.apache.org/licenses/">
+     Apache&nbsp;License&nbsp;v2</a>. Apache Calcite and its logo are
+     trademarks of the Apache Software Foundation.</p>
+  </div>
+</footer>
+
+  <script>
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
+    anchor.title = "Permalink";
+    return anchor;
+  };
+
+  var linkifyAnchors = function (level, containingElement) {
+    var headers = containingElement.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.appendChild(anchorForId(header.id));
+      }
+    }
+  };
+
+  document.onreadystatechange = function () {
+    if (this.readyState === "complete") {
+      var contentBlock = document.getElementsByClassName("docs")[0] || document.getElementsByClassName("news")[0];
+      if (!contentBlock) {
+        return;
+      }
+      for (var level = 1; level <= 6; level++) {
+        linkifyAnchors(level, contentBlock);
+      }
+    }
+  };
+</script>
+
+
+</body>
+</html>

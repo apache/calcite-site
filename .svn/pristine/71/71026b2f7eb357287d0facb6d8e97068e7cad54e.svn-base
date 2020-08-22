@@ -1,0 +1,1108 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>Adapters</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="generator" content="Jekyll v3.7.3">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
+  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+
+<body class="wrap">
+  <header role="banner">
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li class="">
+    <a href="/">Home</a>
+  </li>
+  <li class="">
+    <a href="/downloads/">Download</a>
+  </li>
+  <li class="">
+    <a href="/community/">Community</a>
+  </li>
+  <li class="">
+    <a href="/develop/">Develop</a>
+  </li>
+  <li class="">
+    <a href="/news/">News</a>
+  </li>
+  <li class="current">
+    <a href="/docs/">Docs</a>
+  </li>
+</ul>
+
+  </nav>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <h1>
+        <a href="/">
+          <span class="sr-only">Apache Calcite</span>
+          <img src="/img/logo.png" width="226" height="140" alt="Calcite Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav unit two-thirds hide-on-mobiles">
+      <ul>
+  <li class="">
+    <a href="/">Home</a>
+  </li>
+  <li class="">
+    <a href="/downloads/">Download</a>
+  </li>
+  <li class="">
+    <a href="/community/">Community</a>
+  </li>
+  <li class="">
+    <a href="/develop/">Develop</a>
+  </li>
+  <li class="">
+    <a href="/news/">News</a>
+  </li>
+  <li class="current">
+    <a href="/docs/">Docs</a>
+  </li>
+</ul>
+
+    </nav>
+  </div>
+</header>
+
+
+    <section class="docs">
+    <div class="grid">
+
+      <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select onchange="if (this.value) window.location.href=this.value">
+    <option value="">Navigate the docs…</option>
+        <optgroup label="Overview">      
+    </optgroup>
+    <optgroup label="Advanced">      
+    </optgroup>
+    <optgroup label="Avatica">      
+    </optgroup>
+    <optgroup label="Reference">      
+    </optgroup>
+    <optgroup label="Meta">      
+    </optgroup>
+
+  </select>
+</div>
+
+
+      <div class="unit four-fifths">
+        <article>
+          <h1>Adapters</h1>
+          <!--
+
+-->
+
+<h2 id="schema-adapters">Schema adapters</h2>
+
+<p>A schema adapter allows Calcite to read particular kind of data,
+presenting the data as tables within a schema.</p>
+
+<ul>
+  <li><a href="cassandra_adapter.html">Cassandra adapter</a> (<a href="/apidocs/org/apache/calcite/adapter/cassandra/package-summary.html">calcite-cassandra</a>)</li>
+  <li>CSV adapter (<a href="/apidocs/org/apache/calcite/adapter/csv/package-summary.html">example/csv</a>)</li>
+  <li><a href="druid_adapter.html">Druid adapter</a> (<a href="/apidocs/org/apache/calcite/adapter/druid/package-summary.html">calcite-druid</a>)</li>
+  <li><a href="elasticsearch_adapter.html">Elasticsearch adapter</a>
+(<a href="/apidocs/org/apache/calcite/adapter/elasticsearch/package-summary.html">calcite-elasticsearch</a>)</li>
+  <li><a href="file_adapter.html">File adapter</a> (<a href="/apidocs/org/apache/calcite/adapter/file/package-summary.html">calcite-file</a>)</li>
+  <li><a href="geode_adapter.html">Geode adapter</a> (<a href="/apidocs/org/apache/calcite/adapter/geode/package-summary.html">calcite-geode</a>)</li>
+  <li>JDBC adapter (part of <a href="/apidocs/org/apache/calcite/adapter/jdbc/package-summary.html">calcite-core</a>)</li>
+  <li>MongoDB adapter (<a href="/apidocs/org/apache/calcite/adapter/mongodb/package-summary.html">calcite-mongodb</a>)</li>
+  <li><a href="os_adapter.html">OS adapter</a> (<a href="/apidocs/org/apache/calcite/adapter/os/package-summary.html">calcite-os</a>)</li>
+  <li><a href="pig_adapter.html">Pig adapter</a> (<a href="/apidocs/org/apache/calcite/adapter/pig/package-summary.html">calcite-pig</a>)</li>
+  <li>Solr cloud adapter (<a href="https://github.com/bluejoe2008/solr-sql">solr-sql</a>)</li>
+  <li>Spark adapter (<a href="/apidocs/org/apache/calcite/adapter/spark/package-summary.html">calcite-spark</a>)</li>
+  <li>Splunk adapter (<a href="/apidocs/org/apache/calcite/adapter/splunk/package-summary.html">calcite-splunk</a>)</li>
+  <li>Eclipse Memory Analyzer (MAT) adapter (<a href="https://github.com/vlsi/mat-calcite-plugin">mat-calcite-plugin</a>)</li>
+</ul>
+
+<h3 id="other-language-interfaces">Other language interfaces</h3>
+
+<ul>
+  <li>Piglet (<a href="/apidocs/org/apache/calcite/piglet/package-summary.html">calcite-piglet</a>) runs queries in a subset of <a href="https://pig.apache.org/docs/r0.7.0/piglatin_ref1.html">Pig Latin</a></li>
+</ul>
+
+<h2 id="engines">Engines</h2>
+
+<p>Many projects and products use Apache Calcite for SQL parsing,
+query optimization, data virtualization/federation,
+and materialized view rewrite. Some of them are listed on the
+<a href="/docs/powered_by.html">“powered by Calcite”</a>
+page.</p>
+
+<h2 id="drivers">Drivers</h2>
+
+<p>A driver allows you to connect to Calcite from your application.</p>
+
+<ul>
+  <li><a href="/apidocs/org/apache/calcite/jdbc/package-summary.html">JDBC driver</a></li>
+</ul>
+
+<p>The JDBC driver is powered by
+<a href="/avatica/docs/">Avatica</a>.
+Connections can be local or remote (JSON over HTTP or Protobuf over HTTP).</p>
+
+<p>The basic form of the JDBC connect string is</p>
+
+<p>jdbc:calcite:property=value;property2=value2</p>
+
+<p>where <code class="highlighter-rouge">property</code>, <code class="highlighter-rouge">property2</code> are properties as described below.
+(Connect strings are compliant with OLE DB Connect String syntax,
+as implemented by Avatica’s
+<a href="/avatica/apidocs/org/apache/calcite/avatica/ConnectStringParser.html">ConnectStringParser</a>.)</p>
+
+<h2 id="jdbc-connect-string-parameters">JDBC connect string parameters</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#APPROXIMATE_DECIMAL">approximateDecimal</a></td>
+      <td style="text-align: left">Whether approximate results from aggregate functions on <code class="highlighter-rouge">DECIMAL</code> types are acceptable.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#APPROXIMATE_DISTINCT_COUNT">approximateDistinctCount</a></td>
+      <td style="text-align: left">Whether approximate results from <code class="highlighter-rouge">COUNT(DISTINCT ...)</code> aggregate functions are acceptable.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#APPROXIMATE_TOP_N">approximateTopN</a></td>
+      <td style="text-align: left">Whether approximate results from “Top N” queries (<code class="highlighter-rouge">ORDER BY aggFun() DESC LIMIT n</code>) are acceptable.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#CASE_SENSITIVE">caseSensitive</a></td>
+      <td style="text-align: left">Whether identifiers are matched case-sensitively. If not specified, value from <code class="highlighter-rouge">lex</code> is used.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#CONFORMANCE">conformance</a></td>
+      <td style="text-align: left">SQL conformance level. Values: DEFAULT (the default, similar to PRAGMATIC_2003), LENIENT, MYSQL_5, ORACLE_10, ORACLE_12, PRAGMATIC_99, PRAGMATIC_2003, STRICT_92, STRICT_99, STRICT_2003, SQL_SERVER_2008.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#CREATE_MATERIALIZATIONS">createMaterializations</a></td>
+      <td style="text-align: left">Whether Calcite should create materializations. Default false.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#DEFAULT_NULL_COLLATION">defaultNullCollation</a></td>
+      <td style="text-align: left">How NULL values should be sorted if neither NULLS FIRST nor NULLS LAST are specified in a query. The default, HIGH, sorts NULL values the same as Oracle.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#DRUID_FETCH">druidFetch</a></td>
+      <td style="text-align: left">How many rows the Druid adapter should fetch at a time when executing SELECT queries.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#FORCE_DECORRELATE">forceDecorrelate</a></td>
+      <td style="text-align: left">Whether the planner should try de-correlating as much as possible. Default true.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#FUN">fun</a></td>
+      <td style="text-align: left">Collection of built-in functions and operators. Valid values are “standard” (the default), “oracle”, “spatial”, and may be combined using commas, for example “oracle,spatial”.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#LEX">lex</a></td>
+      <td style="text-align: left">Lexical policy. Values are ORACLE (default), MYSQL, MYSQL_ANSI, SQL_SERVER, JAVA.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#MATERIALIZATIONS_ENABLED">materializationsEnabled</a></td>
+      <td style="text-align: left">Whether Calcite should use materializations. Default false.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#MODEL">model</a></td>
+      <td style="text-align: left">URI of the JSON/YAML model file or inline like <code class="highlighter-rouge">inline:{...}</code> for JSON and <code class="highlighter-rouge">inline:...</code> for YAML.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#PARSER_FACTORY">parserFactory</a></td>
+      <td style="text-align: left">Parser factory. The name of a class that implements <a href="/apidocs/org/apache/calcite/sql/parser/SqlParserImplFactory.html"><code>interface SqlParserImplFactory</code></a> and has a public default constructor or an <code class="highlighter-rouge">INSTANCE</code> constant.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#QUOTING">quoting</a></td>
+      <td style="text-align: left">How identifiers are quoted. Values are DOUBLE_QUOTE, BACK_QUOTE, BRACKET. If not specified, value from <code class="highlighter-rouge">lex</code> is used.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#QUOTED_CASING">quotedCasing</a></td>
+      <td style="text-align: left">How identifiers are stored if they are quoted. Values are UNCHANGED, TO_UPPER, TO_LOWER. If not specified, value from <code class="highlighter-rouge">lex</code> is used.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#SCHEMA">schema</a></td>
+      <td style="text-align: left">Name of initial schema.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#SCHEMA_FACTORY">schemaFactory</a></td>
+      <td style="text-align: left">Schema factory. The name of a class that implements <a href="/apidocs/org/apache/calcite/schema/SchemaFactory.html"><code>interface SchemaFactory</code></a> and has a public default constructor or an <code class="highlighter-rouge">INSTANCE</code> constant. Ignored if <code class="highlighter-rouge">model</code> is specified.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#SCHEMA_TYPE">schemaType</a></td>
+      <td style="text-align: left">Schema type. Value must be “MAP” (the default), “JDBC”, or “CUSTOM” (implicit if <code class="highlighter-rouge">schemaFactory</code> is specified). Ignored if <code class="highlighter-rouge">model</code> is specified.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#SPARK">spark</a></td>
+      <td style="text-align: left">Specifies whether Spark should be used as the engine for processing that cannot be pushed to the source system. If false (the default), Calcite generates code that implements the Enumerable interface.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#TIME_ZONE">timeZone</a></td>
+      <td style="text-align: left">Time zone, for example “gmt-3”. Default is the JVM’s time zone.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#TYPE_SYSTEM">typeSystem</a></td>
+      <td style="text-align: left">Type system. The name of a class that implements <a href="/apidocs/org/apache/calcite/rel/type/RelDataTypeSystem.html"><code>interface RelDataTypeSystem</code></a> and has a public default constructor or an <code class="highlighter-rouge">INSTANCE</code> constant.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#UNQUOTED_CASING">unquotedCasing</a></td>
+      <td style="text-align: left">How identifiers are stored if they are not quoted. Values are UNCHANGED, TO_UPPER, TO_LOWER. If not specified, value from <code class="highlighter-rouge">lex</code> is used.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>To make a connection to a single schema based on a built-in schema type, you don’t need to specify
+a model. For example,</p>
+
+<p>jdbc:calcite:schemaType=JDBC; schema.jdbcUser=SCOTT; schema.jdbcPassword=TIGER; schema.jdbcUrl=jdbc:hsqldb:res:foodmart</p>
+
+<p>creates a connection with a schema mapped via the JDBC schema adapter to the foodmart database.</p>
+
+<p>Similarly, you can connect to a single schema based on a user-defined schema adapter.
+For example,</p>
+
+<p>jdbc:calcite:schemaFactory=org.apache.calcite.adapter.cassandra.CassandraSchemaFactory; schema.host=localhost; schema.keyspace=twissandra</p>
+
+<p>makes a connection to the Cassandra adapter, equivalent to writing the following model file:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"defaultSchema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foodmart"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"schemas"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
+      </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="err">'twissandra'</span><span class="p">,</span><span class="w">
+      </span><span class="err">factory</span><span class="p">:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.cassandra.CassandraSchemaFactory'</span><span class="p">,</span><span class="w">
+      </span><span class="err">operand</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">host</span><span class="p">:</span><span class="w"> </span><span class="err">'localhost'</span><span class="p">,</span><span class="w">
+        </span><span class="err">keyspace</span><span class="p">:</span><span class="w"> </span><span class="err">'twissandra'</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>Note how each key in the <code class="highlighter-rouge">operand</code> section appears with a <code class="highlighter-rouge">schema.</code> prefix in the connect string.</p>
+
+<h2 id="server">Server</h2>
+
+<p>Calcite’s core module (<code class="highlighter-rouge">calcite-core</code>) supports SQL queries (<code class="highlighter-rouge">SELECT</code>) and DML
+operations  (<code class="highlighter-rouge">INSERT</code>, <code class="highlighter-rouge">UPDATE</code>, <code class="highlighter-rouge">DELETE</code>, <code class="highlighter-rouge">MERGE</code>)
+but does not support DDL operations such as <code class="highlighter-rouge">CREATE SCHEMA</code> or <code class="highlighter-rouge">CREATE TABLE</code>.
+As we shall see, DDL complicates the state model of the repository and makes
+the parser more difficult to extend, so we left DDL out of core.</p>
+
+<p>The server module (<code class="highlighter-rouge">calcite-server</code>) adds DDL support to Calcite.
+It extends the SQL parser,
+<a href="#extending-the-parser">using the same mechanism used by sub-projects</a>,
+adding some DDL commands:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">CREATE</code> and <code class="highlighter-rouge">DROP SCHEMA</code></li>
+  <li><code class="highlighter-rouge">CREATE</code> and <code class="highlighter-rouge">DROP FOREIGN SCHEMA</code></li>
+  <li><code class="highlighter-rouge">CREATE</code> and <code class="highlighter-rouge">DROP TABLE</code> (including <code class="highlighter-rouge">CREATE TABLE ... AS SELECT</code>)</li>
+  <li><code class="highlighter-rouge">CREATE</code> and <code class="highlighter-rouge">DROP MATERIALIZED VIEW</code></li>
+  <li><code class="highlighter-rouge">CREATE</code> and <code class="highlighter-rouge">DROP VIEW</code></li>
+</ul>
+
+<p>Commands are described in the <a href="reference.html#ddl-extensions">SQL reference</a>.</p>
+
+<p>To enable, include <code class="highlighter-rouge">calcite-server.jar</code> in your class path, and add
+<code class="highlighter-rouge">parserFactory=org.apache.calcite.sql.parser.ddl.SqlDdlParserImpl#FACTORY</code>
+to the JDBC connect string (see connect string property
+<a href="/apidocs/org/apache/calcite/config/CalciteConnectionProperty.html#PARSER_FACTORY">parserFactory</a>).
+Here is an example using the <code class="highlighter-rouge">sqlline</code> shell.</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="err">$</span> <span class="p">.</span><span class="o">/</span><span class="n">sqlline</span>
+<span class="n">sqlline</span> <span class="k">version</span> <span class="mi">1</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">0</span>
+<span class="o">&gt;</span> <span class="o">!</span><span class="k">connect</span> <span class="n">jdbc</span><span class="p">:</span><span class="n">calcite</span><span class="p">:</span><span class="n">parserFactory</span><span class="o">=</span><span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">calcite</span><span class="p">.</span><span class="k">sql</span><span class="p">.</span><span class="n">parser</span><span class="p">.</span><span class="n">ddl</span><span class="p">.</span><span class="n">SqlDdlParserImpl</span><span class="o">#</span><span class="n">FACTORY</span> <span class="n">sa</span> <span class="nv">""</span>
+<span class="o">&gt;</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">t</span> <span class="p">(</span><span class="n">i</span> <span class="n">INTEGER</span><span class="p">,</span> <span class="n">j</span> <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
+<span class="k">No</span> <span class="k">rows</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">293</span> <span class="n">seconds</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">t</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">'bc'</span><span class="p">);</span>
+<span class="mi">2</span> <span class="k">rows</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">873</span> <span class="n">seconds</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="k">CREATE</span> <span class="k">VIEW</span> <span class="n">v</span> <span class="k">AS</span> <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">t</span> <span class="k">WHERE</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">No</span> <span class="k">rows</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">072</span> <span class="n">seconds</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="k">SELECT</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">v</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">---------------------+</span>
+<span class="o">|</span>       <span class="n">EXPR</span><span class="err">$</span><span class="mi">0</span>        <span class="o">|</span>
+<span class="o">+</span><span class="c1">---------------------+</span>
+<span class="o">|</span> <span class="mi">1</span>                   <span class="o">|</span>
+<span class="o">+</span><span class="c1">---------------------+</span>
+<span class="mi">1</span> <span class="k">row</span> <span class="n">selected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">148</span> <span class="n">seconds</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="o">!</span><span class="n">quit</span></code></pre></figure>
+
+<p>The <code class="highlighter-rouge">calcite-server</code> module is optional.
+One of its goals is to showcase Calcite’s capabilities
+(for example materialized views, foreign tables and generated columns) using
+concise examples that you can try from the SQL command line.
+All of the capabilities used by <code class="highlighter-rouge">calcite-server</code> are available via APIs in
+<code class="highlighter-rouge">calcite-core</code>.</p>
+
+<p>If you are the author of a sub-project, it is unlikely that your syntax
+extensions match those in <code class="highlighter-rouge">calcite-server</code>, so we recommend that you add your
+SQL syntax extensions by <a href="#extending-the-parser">extending the core parser</a>;
+if you want DDL commands, you may be able to copy-paste from <code class="highlighter-rouge">calcite-server</code>
+into your project.</p>
+
+<p>At present, the repository is not persisted. As you execute DDL commands, you
+are modifying an in-memory repository by adding and removing objects
+reachable from a root
+<a href="/apidocs/org/apache/calcite/schema/Schema.html"><code>Schema</code></a>.
+All commands within the same SQL session will see those objects.
+You can create the same objects in a future session by executing the same
+script of SQL commands.</p>
+
+<p>Calcite could also act as a data virtualization or federation server:
+Calcite manages data in multiple foreign schemas, but to a client the data
+all seems to be in the same place. Calcite chooses where processing should
+occur, and whether to create copies of data for efficiency.
+The <code class="highlighter-rouge">calcite-server</code> module is a step towards that goal; an
+industry-strength solution would require further on packaging (to make Calcite
+runnable as a service), repository persistence, authorization and security.</p>
+
+<h2 id="extensibility">Extensibility</h2>
+
+<p>There are many other APIs that allow you to extend Calcite’s capabilities.</p>
+
+<p>In this section, we briefly describe those APIs, to give you an idea what is
+possible. To fully use these APIs you will need to read other documentation
+such as the javadoc for the interfaces, and possibly seek out the tests that
+we have written for them.</p>
+
+<h3 id="functions-and-operators">Functions and operators</h3>
+
+<p>There are several ways to add operators or functions to Calcite.
+We’ll describe the simplest (and least powerful) first.</p>
+
+<p><em>User-defined functions</em> are the simplest (but least powerful).
+They are straightforward to write (you just write a Java class and register it
+in your schema) but do not offer much flexibility in the number and type of
+arguments, resolving overloaded functions, or deriving the return type.</p>
+
+<p>It you want that flexibility, you probably need to write you a
+<em>user-defined operator</em>
+(see <a href="/apidocs/org/apache/calcite/sql/SqlOperator.html"><code>interface SqlOperator</code></a>).</p>
+
+<p>If your operator does not adhere to standard SQL function syntax,
+“<code class="highlighter-rouge">f(arg1, arg2, ...)</code>”, then you need to
+<a href="#extending-the-parser">extend the parser</a>.</p>
+
+<p>There are many good examples in the tests:
+<a href="https://github.com/apache/calcite/blob/master/core/src/test/java/org/apache/calcite/test/UdfTest.java"><code>class UdfTest</code></a>
+tests user-defined functions and user-defined aggregate functions.</p>
+
+<h3 id="aggregate-functions">Aggregate functions</h3>
+
+<p><em>User-defined aggregate functions</em> are similar to user-defined functions,
+but each function has several corresponding Java methods, one for each
+stage in the life-cycle of an aggregate:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">init</code> creates an accumulator;</li>
+  <li><code class="highlighter-rouge">add</code> adds one row’s value to an accumulator;</li>
+  <li><code class="highlighter-rouge">merge</code> combines two accumulators into one;</li>
+  <li><code class="highlighter-rouge">result</code> finalizes an accumulator and converts it to a result.</li>
+</ul>
+
+<p>For example, the methods (in pseudo-code) for <code class="highlighter-rouge">SUM(int)</code> are as follows:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">struct</span> <span class="n">Accumulator</span> <span class="o">{</span>
+  <span class="kd">final</span> <span class="kt">int</span> <span class="n">sum</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="n">Accumulator</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nf">Accumulator</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">Accumulator</span> <span class="nf">add</span><span class="o">(</span><span class="n">Accumulator</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nf">Accumulator</span><span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="na">sum</span> <span class="o">+</span> <span class="n">x</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="n">Accumulator</span> <span class="nf">merge</span><span class="o">(</span><span class="n">Accumulator</span> <span class="n">a</span><span class="o">,</span> <span class="n">Accumulator</span> <span class="n">a2</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nf">Accumulator</span><span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="na">sum</span> <span class="o">+</span> <span class="n">a2</span><span class="o">.</span><span class="na">sum</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="kt">int</span> <span class="nf">result</span><span class="o">(</span><span class="n">Accumulator</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nf">Accumulator</span><span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="na">sum</span> <span class="o">+</span> <span class="n">x</span><span class="o">);</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Here is the sequence of calls to compute the sum of two rows with column values 4 and 7:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">a</span> <span class="o">=</span> <span class="n">init</span><span class="o">()</span>    <span class="err">#</span> <span class="n">a</span> <span class="o">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">}</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">add</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span> <span class="err">#</span> <span class="n">a</span> <span class="o">=</span> <span class="o">{</span><span class="mi">4</span><span class="o">}</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">add</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="mi">7</span><span class="o">)</span> <span class="err">#</span> <span class="n">a</span> <span class="o">=</span> <span class="o">{</span><span class="mi">11</span><span class="o">}</span>
+<span class="k">return</span> <span class="nf">result</span><span class="o">(</span><span class="n">a</span><span class="o">)</span> <span class="err">#</span> <span class="n">returns</span> <span class="mi">11</span></code></pre></figure>
+
+<h3 id="window-functions">Window functions</h3>
+
+<p>A window function is similar to an aggregate function but it is applied to a set
+of rows gathered by an <code class="highlighter-rouge">OVER</code> clause rather than by a <code class="highlighter-rouge">GROUP BY</code> clause.
+Every aggregate function can be used as a window function, but there are some
+key differences. The rows seen by a window function may be ordered, and
+window functions that rely upon order (<code class="highlighter-rouge">RANK</code>, for example) cannot be used as
+aggregate functions.</p>
+
+<p>Another difference is that windows are <em>non-disjoint</em>: a particular row can
+appear in more than one window. For example, 10:37 appears in both the
+9:00-10:00 hour and also the 9:15-9:45 hour.</p>
+
+<p>Window functions are computed incrementally: when the clock ticks from
+10:14 to 10:15, two rows might enter the window and three rows leave.
+For this, window functions have have an extra life-cycle operation:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">remove</code> removes a value from an accumulator.</li>
+</ul>
+
+<p>It pseudo-code for <code class="highlighter-rouge">SUM(int)</code> would be:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Accumulator</span> <span class="nf">remove</span><span class="o">(</span><span class="n">Accumulator</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nf">Accumulator</span><span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="na">sum</span> <span class="o">-</span> <span class="n">x</span><span class="o">);</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Here is the sequence of calls to compute the moving sum,
+over the previous 2 rows, of 4 rows with values 4, 7, 2 and 3:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">a</span> <span class="o">=</span> <span class="n">init</span><span class="o">()</span>       <span class="err">#</span> <span class="n">a</span> <span class="o">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">}</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">add</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span>    <span class="err">#</span> <span class="n">a</span> <span class="o">=</span> <span class="o">{</span><span class="mi">4</span><span class="o">}</span>
+<span class="n">emit</span> <span class="nf">result</span><span class="o">(</span><span class="n">a</span><span class="o">)</span>   <span class="err">#</span> <span class="n">emits</span> <span class="mi">4</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">add</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="mi">7</span><span class="o">)</span>    <span class="err">#</span> <span class="n">a</span> <span class="o">=</span> <span class="o">{</span><span class="mi">11</span><span class="o">}</span>
+<span class="n">emit</span> <span class="nf">result</span><span class="o">(</span><span class="n">a</span><span class="o">)</span>   <span class="err">#</span> <span class="n">emits</span> <span class="mi">11</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">remove</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span> <span class="err">#</span> <span class="n">a</span> <span class="o">=</span> <span class="o">{</span><span class="mi">7</span><span class="o">}</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">add</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>    <span class="err">#</span> <span class="n">a</span> <span class="o">=</span> <span class="o">{</span><span class="mi">9</span><span class="o">}</span>
+<span class="n">emit</span> <span class="nf">result</span><span class="o">(</span><span class="n">a</span><span class="o">)</span>   <span class="err">#</span> <span class="n">emits</span> <span class="mi">9</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">remove</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="mi">7</span><span class="o">)</span> <span class="err">#</span> <span class="n">a</span> <span class="o">=</span> <span class="o">{</span><span class="mi">2</span><span class="o">}</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">add</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>    <span class="err">#</span> <span class="n">a</span> <span class="o">=</span> <span class="o">{</span><span class="mi">5</span><span class="o">}</span>
+<span class="n">emit</span> <span class="nf">result</span><span class="o">(</span><span class="n">a</span><span class="o">)</span>   <span class="err">#</span> <span class="n">emits</span> <span class="mi">5</span></code></pre></figure>
+
+<h3 id="grouped-window-functions">Grouped window functions</h3>
+
+<p>Grouped window functions are functions that operate the <code class="highlighter-rouge">GROUP BY</code> clause
+to gather together records into sets. The built-in grouped window functions
+are <code class="highlighter-rouge">HOP</code>, <code class="highlighter-rouge">TUMBLE</code> and <code class="highlighter-rouge">SESSION</code>.
+You can define additional functions by implementing
+<a href="/apidocs/org/apache/calcite/sql/fun/SqlGroupedWindowFunction.html"><code>interface SqlGroupedWindowFunction</code></a>.</p>
+
+<h3 id="table-functions-and-table-macros">Table functions and table macros</h3>
+
+<p><em>User-defined table functions</em>
+are defined in a similar way to regular “scalar” user-defined functions,
+but are used in the <code class="highlighter-rouge">FROM</code> clause of a query. The following query uses a table
+function called <code class="highlighter-rouge">Ramp</code>:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="k">TABLE</span><span class="p">(</span><span class="n">Ramp</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span></code></pre></figure>
+
+<p><em>User-defined table macros</em> use the same SQL syntax as table functions,
+but are defined differently. Rather than generating data, they generate an
+relational expression.
+Table macros are invoked during query preparation and the relational expression
+they produce can then be optimized.
+(Calcite’s implementation of views uses table macros.)</p>
+
+<p><a href="https://github.com/apache/calcite/blob/master/core/src/test/java/org/apache/calcite/test/TableFunctionTest.java"><code>class TableFunctionTest</code></a>
+tests table functions and contains several useful examples.</p>
+
+<h3 id="extending-the-parser">Extending the parser</h3>
+
+<p>Suppose you need to extend Calcite’s SQL grammar in a way that will be
+compatible with future changes to the grammar. Making a copy of the grammar file
+<code class="highlighter-rouge">Parser.jj</code> in your project would be foolish, because the grammar is edited
+quite frequently.</p>
+
+<p>Fortunately, <code class="highlighter-rouge">Parser.jj</code> is actually an
+<a href="https://freemarker.apache.org/">Apache FreeMarker</a>
+template that contains variables that can be substituted.
+The parser in <code class="highlighter-rouge">calcite-core</code> instantiates the template with default values of
+the variables, typically empty, but you can override.
+If your project would like a different parser, you can provide your
+own <code class="highlighter-rouge">config.fmpp</code> and <code class="highlighter-rouge">parserImpls.ftl</code> files and therefore generate an
+extended parser.</p>
+
+<p>The <code class="highlighter-rouge">calcite-server</code> module, which was created in
+[<a href="https://issues.apache.org/jira/browse/CALCITE-707">CALCITE-707</a>] and
+adds DDL statements such as <code class="highlighter-rouge">CREATE TABLE</code>, is an example that you could follow.
+Also see
+<a href="https://github.com/apache/calcite/blob/master/core/src/test/java/org/apache/calcite/sql/parser/parserextensiontesting/ExtensionSqlParserTest.java"><code>class ExtensionSqlParserTest</code></a>.</p>
+
+<h3 id="customizing-sql-dialect-accepted-and-generated">Customizing SQL dialect accepted and generated</h3>
+
+<p>To customize what SQL extensions the parser should accept, implement
+<a href="/apidocs/org/apache/calcite/sql/validate/SqlConformance.html"><code>interface SqlConformance</code></a>
+or use one of the built-in values in
+<a href="/apidocs/org/apache/calcite/sql/validate/SqlConformanceEnum.html"><code>enum SqlConformanceEnum</code></a>.</p>
+
+<p>To control how SQL is generated for an external database (usually via the JDBC
+adapter), use
+<a href="/apidocs/org/apache/calcite/sql/SqlDialect.html"><code>class SqlDialect</code></a>.
+The dialect also describes the engine’s capabilities, such as whether it
+supports <code class="highlighter-rouge">OFFSET</code> and <code class="highlighter-rouge">FETCH</code> clauses.</p>
+
+<h3 id="defining-a-custom-schema">Defining a custom schema</h3>
+
+<p>To define a custom schema, you need to implement
+<a href="/apidocs/org/apache/calcite/schema/SchemaFactory.html"><code>interface SchemaFactory</code></a>.</p>
+
+<p>During query preparation, Calcite will call this interface to find out
+what tables and sub-schemas your schema contains. When a table in your schema
+is referenced in a query, Calcite will ask your schema to create an instance of
+<a href="/apidocs/org/apache/calcite/schema/Table.html"><code>interface Table</code></a>.</p>
+
+<p>That table will be wrapped in a
+<a href="/apidocs/org/apache/calcite/rel/core/TableScan.html"><code>TableScan</code></a>
+and will undergo the query optimization process.</p>
+
+<h3 id="reflective-schema">Reflective schema</h3>
+
+<p>A reflective schema
+(<a href="/apidocs/org/apache/calcite/adapter/java/ReflectiveSchema.html"><code>class ReflectiveSchema</code></a>)
+is a way of wrapping a Java object so that it appears
+as a schema. Its collection-valued fields will appear as tables.</p>
+
+<p>It is not a schema factory but an actual schema; you have to create the object
+and wrap it in the schema by calling APIs.</p>
+
+<p>See
+<a href="https://github.com/apache/calcite/blob/master/core/src/test/java/org/apache/calcite/test/ReflectiveSchemaTest.java"><code>class ReflectiveSchemaTest</code></a>.</p>
+
+<h3 id="defining-a-custom-table">Defining a custom table</h3>
+
+<p>To define a custom table, you need to implement
+<a href="/apidocs/org/apache/calcite/schema/TableFactory.html"><code>interface TableFactory</code></a>.
+Whereas a schema factory a set of named tables, a table factory produces a
+single table when bound to a schema with a particular name (and optionally a
+set of extra operands).</p>
+
+<h3 id="modifying-data">Modifying data</h3>
+
+<p>If your table is to support DML operations (INSERT, UPDATE, DELETE, MERGE),
+your implementation of <code class="highlighter-rouge">interface Table</code> must implement
+<a href="/apidocs/org/apache/calcite/schema/ModifiableTable.html"><code>interface ModifiableTable</code></a>.</p>
+
+<h3 id="streaming">Streaming</h3>
+
+<p>If your table is to support streaming queries,
+your implementation of <code class="highlighter-rouge">interface Table</code> must implement
+<a href="/apidocs/org/apache/calcite/schema/StreamableTable.html"><code>interface StreamableTable</code></a>.</p>
+
+<p>See
+<a href="https://github.com/apache/calcite/blob/master/core/src/test/java/org/apache/calcite/test/StreamTest.java"><code>class StreamTest</code></a>
+for examples.</p>
+
+<h3 id="pushing-operations-down-to-your-table">Pushing operations down to your table</h3>
+
+<p>If you wish to push processing down to your custom table’s source system,
+consider implementing either
+<a href="/apidocs/org/apache/calcite/schema/FilterableTable.html"><code>interface FilterableTable</code></a>
+or
+<a href="/apidocs/org/apache/calcite/schema/ProjectableFilterableTable.html"><code>interface ProjectableFilterableTable</code></a>.</p>
+
+<p>If you want more control, you should write a <a href="#planner-rule">planner rule</a>.
+This will allow you to push down expressions, to make a cost-based decision
+about whether to push down processing, and push down more complex operations
+such as join, aggregation, and sort.</p>
+
+<h3 id="type-system">Type system</h3>
+
+<p>You can customize some aspects of the type system by implementing
+<a href="/apidocs/org/apache/calcite/rel/type/RelDataTypeSystem.html"><code>interface RelDataTypeSystem</code></a>.</p>
+
+<h3 id="relational-operators">Relational operators</h3>
+
+<p>All relational operators implement
+<a href="/apidocs/org/apache/calcite/rel/RelNode.html"><code>interface RelNode</code></a>
+and most extend
+<a href="/apidocs/org/apache/calcite/rel/AbstractRelNode.html"><code>class AbstractRelNode</code></a>.
+The core operators (used by
+<a href="/apidocs/org/apache/calcite/sql2rel/SqlToRelConverter.html"><code>SqlToRelConverter</code></a>
+and covering conventional relational algebra) are
+<a href="/apidocs/org/apache/calcite/rel/core/TableScan.html"><code>TableScan</code></a>,
+<a href="/apidocs/org/apache/calcite/rel/core/TableModify.html"><code>TableModify</code></a>,
+<a href="/apidocs/org/apache/calcite/rel/core/Values.html"><code>Values</code></a>,
+<a href="/apidocs/org/apache/calcite/rel/core/Project.html"><code>Project</code></a>,
+<a href="/apidocs/org/apache/calcite/rel/core/Filter.html"><code>Filter</code></a>,
+<a href="/apidocs/org/apache/calcite/rel/core/Aggregate.html"><code>Aggregate</code></a>,
+<a href="/apidocs/org/apache/calcite/rel/core/Join.html"><code>Join</code></a>,
+<a href="/apidocs/org/apache/calcite/rel/core/Sort.html"><code>Sort</code></a>,
+<a href="/apidocs/org/apache/calcite/rel/core/Union.html"><code>Union</code></a>,
+<a href="/apidocs/org/apache/calcite/rel/core/Intersect.html"><code>Intersect</code></a>,
+<a href="/apidocs/org/apache/calcite/rel/core/Minus.html"><code>Minus</code></a>,
+<a href="/apidocs/org/apache/calcite/rel/core/Window.html"><code>Window</code></a> and
+<a href="/apidocs/org/apache/calcite/rel/core/Match.html"><code>Match</code></a>.</p>
+
+<p>Each of these has a “pure” logical sub-class,
+<a href="/apidocs/org/apache/calcite/rel/logical/LogicalProject.html"><code>LogicalProject</code></a>
+and so forth. Any given adapter will have counterparts for the operations that
+its engine can implement efficiently; for example, the Cassandra adapter has
+<a href="/apidocs/org/apache/calcite/rel/cassandra/CassandraProject.html"><code>CassandraProject</code></a>
+but there is no <code class="highlighter-rouge">CassandraJoin</code>.</p>
+
+<p>You can define your own sub-class of <code class="highlighter-rouge">RelNode</code> to add a new operator, or
+an implementation of an existing operator in a particular engine.</p>
+
+<p>To make an operator useful and powerful, you will need
+<a href="#planner-rule">planner rules</a> to combine it with existing operators.
+(And also provide metadata, see <a href="#statistics-and-cost">below</a>).
+This being algebra, the effects are combinatorial: you write a few
+rules, but they combine to handle an exponential number of query patterns.</p>
+
+<p>If possible, make your operator a sub-class of an existing
+operator; then you may be able to re-use or adapt its rules.
+Even better, if your operator is a logical operation that you can rewrite
+(again, via a planner rule) in terms of existing operators, you should do that.
+You will be able to re-use the rules, metadata and implementations of those
+operators with no extra work.</p>
+
+<h3 id="planner-rule">Planner rule</h3>
+
+<p>A planner rule
+(<a href="/apidocs/org/apache/calcite/plan/RelOptRule.html"><code>class RelOptRule</code></a>)
+transforms a relational expression into an equivalent relational expression.</p>
+
+<p>A planner engine has many planner rules registered and fires them
+to transform the input query into something more efficient. Planner rules are
+therefore central to the optimization process, but surprisingly each planner
+rule does not concern itself with cost. The planner engine is responsible for
+firing rules in a sequence that produces an optimal plan, but each individual
+rules only concerns itself with correctness.</p>
+
+<p>Calcite has two built-in planner engines:
+<a href="/apidocs/org/apache/calcite/plan/volcano/VolcanoPlanner.html"><code>class VolcanoPlanner</code></a>
+uses dynamic programming and is good for exhaustive search, whereas
+<a href="/apidocs/org/apache/calcite/plan/hep/HepPlanner.html"><code>class HepPlanner</code></a>
+fires a sequence of rules in a more fixed order.</p>
+
+<h3 id="calling-conventions">Calling conventions</h3>
+
+<p>A calling convention is a protocol used by a particular data engine.
+For example, the Cassandra engine has a collection of relational operators,
+<code class="highlighter-rouge">CassandraProject</code>, <code class="highlighter-rouge">CassandraFilter</code> and so forth, and these operators can be
+connected to each other without the data having to be converted from one format
+to another.</p>
+
+<p>If data needs to be converted from one calling convention to another, Calcite
+uses a special sub-class of relational expression called a converter
+(see <a href="/apidocs/org/apache/calcite/rel/convert/Converter.html"><code>class Converter</code></a>).
+But of course converting data has a runtime cost.</p>
+
+<p>When planning a query that uses multiple engines, Calcite “colors” regions of
+the relational expression tree according to their calling convention. The
+planner pushes operations into data sources by firing rules. If the engine does
+not support a particular operation, the rule will not fire. Sometimes an
+operation can occur in more than one place, and ultimately the best plan is
+chosen according to cost.</p>
+
+<p>A calling convention is a class that implements
+<a href="/apidocs/org/apache/calcite/plan/Convention.html"><code>interface Convention</code></a>,
+an auxiliary interface (for instance
+<a href="/apidocs/org/apache/calcite/adapter/cassandra/CassandraRel.html"><code>interface CassandraRel</code></a>),
+and a set of sub-classes of
+<a href="/apidocs/org/apache/calcite/rel/RelNode.html"><code>class RelNode</code></a>
+that implement that interface for the core relational operators
+(<a href="/apidocs/org/apache/calcite/rel/core/Project.html"><code>Project</code></a>,
+<a href="/apidocs/org/apache/calcite/rel/core/Filter.html"><code>Filter</code></a>,
+<a href="/apidocs/org/apache/calcite/rel/core/Aggregate.html"><code>Aggregate</code></a>,
+and so forth).</p>
+
+<h3 id="built-in-sql-implementation">Built-in SQL implementation</h3>
+
+<p>How does Calcite implement SQL, if an adapter does not implement all of the core
+relational operators?</p>
+
+<p>The answer is a particular built-in calling convention,
+<a href="/apidocs/org/apache/calcite/adapter/EnumerableConvention.html"><code>EnumerableConvention</code></a>.
+Relational expressions of enumerable convention are implemented as “built-ins”:
+Calcite generates Java code, compiles it, and executes inside its own JVM.
+Enumerable convention is less efficient than, say, a distributed engine
+running over column-oriented data files, but it can implement all core
+relational operators and all built-in SQL functions and operators. If a data
+source cannot an implement a relational operator, enumerable convention is
+a fall-back.</p>
+
+<h3 id="statistics-and-cost">Statistics and cost</h3>
+
+<p>Calcite has a metadata system that allow you to define cost functions and
+statistics about relational operators, collectively referred to as <em>metadata</em>.
+Each kind of metadata has an interface with (usually) one method.
+For example, selectivity is defined by
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMdSelectivity.html"><code>interface RelMdSelectivity</code></a>
+and the method
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMetadataQuery.html#getSelectivity-org.apache.calcite.rel.RelNode-org.apache.calcite.rex.RexNode-"><code>getSelectivity(RelNode rel, RexNode predicate)</code></a>.</p>
+
+<p>There are many built-in kinds of metadata, including
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMdCollation.html">collation</a>,
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMdColumnOrigins.html">column origins</a>,
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMdColumnUniqueness.html">column uniqueness</a>,
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMdDistinctRowCount.html">distinct row count</a>,
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMdDistribution.html">distribution</a>,
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMdExplainVisibility.html">explain visibility</a>,
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMdExpressionLineage.html">expression lineage</a>,
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMdMaxRowCount.html">max row count</a>,
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMdNodeTypes.html">node types</a>,
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMdParallelism.html">parallelism</a>,
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMdPercentageOriginalRows.html">percentage original rows</a>,
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMdPopulationSize.html">population size</a>,
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMdPredicates.html">predicates</a>,
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMdRowCount.html">row count</a>,
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMdSelectivity.html">selectivity</a>,
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMdSize.html">size</a>,
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMdTableReferences.html">table references</a>, and
+<a href="/apidocs/org/apache/calcite/rel/metadata/RelMdUniqueKeys.html">unique keys</a>;
+you can also define your own.</p>
+
+<p>You can then supply a <em>metadata provider</em> that computes that kind of metadata
+for particular sub-classes of <code class="highlighter-rouge">RelNode</code>. Metadata providers can handle built-in
+and extended metadata types, and built-in and extended <code class="highlighter-rouge">RelNode</code> types.
+While preparing a query Calcite combines all of the applicable metadata
+providers and maintains a cache so that a given piece of metadata (for example
+the selectivity of the condition <code class="highlighter-rouge">x &gt; 10</code> in a particular <code class="highlighter-rouge">Filter</code> operator)
+is computed only once.</p>
+
+
+          
+
+
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="section-nav">
+      <div class="left align-right">
+          
+            
+            
+            <a href="/docs/algebra.html" class="prev">Previous</a>
+          
+      </div>
+      <div class="right align-left">
+          
+            
+            
+
+            
+            <a href="/docs/spatial.html" class="next">Next</a>
+          
+      </div>
+    </div>
+    <div class="clear"></div>
+    
+
+        </article>
+      </div>
+
+      <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    
+    <h4>Overview</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/index.html">Background</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/tutorial.html">Tutorial</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/algebra.html">Algebra</a></li>
+
+
+</ul>
+
+    
+    <h4>Advanced</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class="current"><a href="/docs/adapter.html">Adapters</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/spatial.html">Spatial</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/stream.html">Streaming</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/materialized_views.html">Materialized Views</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/lattice.html">Lattices</a></li>
+
+
+</ul>
+
+    
+    <h4>Avatica</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_overview.html">Overview</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_roadmap.html">Roadmap</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_json_reference.html">JSON Reference</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_protobuf_reference.html">Protobuf Reference</a></li>
+
+
+</ul>
+
+    
+    <h4>Reference</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/reference.html">SQL language</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/model.html">JSON/YAML models</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/howto.html">HOWTO</a></li>
+
+
+</ul>
+
+    
+    <h4>Meta</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/history.html">History</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/powered_by.html">Powered by Calcite</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/apidocs">API</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/testapidocs">Test API</a></li>
+
+
+</ul>
+
+    
+  </aside>
+</div>
+
+
+      <div class="clear"></div>
+
+    </div>
+  </section>
+
+
+  <footer role="contentinfo">
+  <div id="poweredby">
+    <a href="http://www.apache.org/">
+      <span class="sr-only">Apache</span>
+      <img src="/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
+  </div>
+  <div id="copyright">
+  <p>The contents of this website are Copyright &copy;&nbsp;2019
+     <a href="https://www.apache.org/">Apache Software Foundation</a>
+     under the terms of
+     the <a href="https://www.apache.org/licenses/">
+     Apache&nbsp;License&nbsp;v2</a>. Apache Calcite and its logo are
+     trademarks of the Apache Software Foundation.</p>
+  </div>
+</footer>
+
+  <script>
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
+    anchor.title = "Permalink";
+    return anchor;
+  };
+
+  var linkifyAnchors = function (level, containingElement) {
+    var headers = containingElement.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.appendChild(anchorForId(header.id));
+      }
+    }
+  };
+
+  document.onreadystatechange = function () {
+    if (this.readyState === "complete") {
+      var contentBlock = document.getElementsByClassName("docs")[0] || document.getElementsByClassName("news")[0];
+      if (!contentBlock) {
+        return;
+      }
+      for (var level = 1; level <= 6; level++) {
+        linkifyAnchors(level, contentBlock);
+      }
+    }
+  };
+</script>
+
+
+</body>
+</html>

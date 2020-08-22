@@ -1,0 +1,707 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>File adapter</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="generator" content="Jekyll v3.7.3">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
+  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+
+<body class="wrap">
+  <header role="banner">
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li class="">
+    <a href="/">Home</a>
+  </li>
+  <li class="">
+    <a href="/downloads/">Download</a>
+  </li>
+  <li class="">
+    <a href="/community/">Community</a>
+  </li>
+  <li class="">
+    <a href="/develop/">Develop</a>
+  </li>
+  <li class="">
+    <a href="/news/">News</a>
+  </li>
+  <li class="current">
+    <a href="/docs/">Docs</a>
+  </li>
+</ul>
+
+  </nav>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <h1>
+        <a href="/">
+          <span class="sr-only">Apache Calcite</span>
+          <img src="/img/logo.png" width="226" height="140" alt="Calcite Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav unit two-thirds hide-on-mobiles">
+      <ul>
+  <li class="">
+    <a href="/">Home</a>
+  </li>
+  <li class="">
+    <a href="/downloads/">Download</a>
+  </li>
+  <li class="">
+    <a href="/community/">Community</a>
+  </li>
+  <li class="">
+    <a href="/develop/">Develop</a>
+  </li>
+  <li class="">
+    <a href="/news/">News</a>
+  </li>
+  <li class="current">
+    <a href="/docs/">Docs</a>
+  </li>
+</ul>
+
+    </nav>
+  </div>
+</header>
+
+
+    <section class="docs">
+    <div class="grid">
+
+      <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select onchange="if (this.value) window.location.href=this.value">
+    <option value="">Navigate the docs…</option>
+        <optgroup label="Overview">      
+    </optgroup>
+    <optgroup label="Advanced">      
+    </optgroup>
+    <optgroup label="Avatica">      
+    </optgroup>
+    <optgroup label="Reference">      
+    </optgroup>
+    <optgroup label="Meta">      
+    </optgroup>
+
+  </select>
+</div>
+
+
+      <div class="unit four-fifths">
+        <article>
+          <h1>File adapter</h1>
+          <!--
+
+-->
+
+<h2 id="overview">Overview</h2>
+
+<p>The file adapter is able to read files in a variety of formats,
+and can also read files over various protocols, such as HTTP.</p>
+
+<p>For example if you define:</p>
+
+<ul>
+  <li>States - https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States</li>
+  <li>Cities - https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population</li>
+</ul>
+
+<p>You can then write a query like:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">select</span>
+    <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="nv">"City Count"</span><span class="p">,</span>
+    <span class="k">sum</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="k">c</span><span class="p">.</span><span class="nv">"Population"</span> <span class="o">/</span> <span class="n">s</span><span class="p">.</span><span class="nv">"Population"</span><span class="p">)</span> <span class="nv">"Pct State Population"</span>
+<span class="k">from</span> <span class="nv">"Cities"</span> <span class="k">c</span><span class="p">,</span> <span class="nv">"States"</span> <span class="n">s</span>
+<span class="k">where</span> <span class="k">c</span><span class="p">.</span><span class="nv">"State"</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="nv">"State"</span> <span class="k">and</span> <span class="n">s</span><span class="p">.</span><span class="nv">"State"</span> <span class="o">=</span> <span class="s1">'California'</span><span class="p">;</span></code></pre></figure>
+
+<p>And learn that California has 69 cities of 100k or more
+comprising almost 1/2 of the state’s population:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+---------------------+----------------------+
+|     City Count      | Pct State Population |
++---------------------+----------------------+
+| 69                  | 48.574217177106576   |
++---------------------+----------------------+
+</code></pre></div></div>
+
+<p>For simple file formats such as CSV, the file is self-describing and
+you don’t even need a model.
+See <a href="#csv_files_and_model_free_browsing">CSV files and model-free browsing</a>.</p>
+
+<h2 id="a-simple-example">A simple example</h2>
+
+<p>Let’s start with a simple example. First, we need a
+<a href="/docs/model.html">model definition</a>,
+as follows.</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"defaultSchema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SALES"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"schemas"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SALES"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.file.FileSchemaFactory"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"tables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EMPS"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file:file/src/test/resources/sales/EMPS.html"</span><span class="w">
+      </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEPTS"</span><span class="w">
+        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file:file/src/test/resources/sales/DEPTS.html"</span><span class="w">
+      </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>Schemas are defined as a list of tables, each containing minimally a
+table name and a url.  If a page has more than one table, you can
+include in a table definition <code class="highlighter-rouge">selector</code> and <code class="highlighter-rouge">index</code> fields to specify the
+desired table.  If there is no table specification, the file adapter
+chooses the largest table on the page.</p>
+
+<p><code class="highlighter-rouge">EMPS.html</code> contains a single HTML table:</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;table&gt;</span>
+      <span class="nt">&lt;thead&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+          <span class="nt">&lt;th&gt;</span>EMPNO<span class="nt">&lt;/th&gt;</span>
+          <span class="nt">&lt;th&gt;</span>NAME<span class="nt">&lt;/th&gt;</span>
+          <span class="nt">&lt;th&gt;</span>DEPTNO<span class="nt">&lt;/th&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+      <span class="nt">&lt;/thead&gt;</span>
+      <span class="nt">&lt;tbody&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+          <span class="nt">&lt;td&gt;</span>100<span class="nt">&lt;/td&gt;</span>
+          <span class="nt">&lt;td&gt;</span>Fred<span class="nt">&lt;/td&gt;</span>
+          <span class="nt">&lt;td&gt;</span>30<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+          <span class="nt">&lt;td&gt;</span>110<span class="nt">&lt;/td&gt;</span>
+          <span class="nt">&lt;td&gt;</span>Eric<span class="nt">&lt;/td&gt;</span>
+          <span class="nt">&lt;td&gt;</span>20<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+          <span class="nt">&lt;td&gt;</span>110<span class="nt">&lt;/td&gt;</span>
+          <span class="nt">&lt;td&gt;</span>John<span class="nt">&lt;/td&gt;</span>
+          <span class="nt">&lt;td&gt;</span>40<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+          <span class="nt">&lt;td&gt;</span>120<span class="nt">&lt;/td&gt;</span>
+          <span class="nt">&lt;td&gt;</span>Wilma<span class="nt">&lt;/td&gt;</span>
+          <span class="nt">&lt;td&gt;</span>20<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+          <span class="nt">&lt;td&gt;</span>130<span class="nt">&lt;/td&gt;</span>
+          <span class="nt">&lt;td&gt;</span>Alice<span class="nt">&lt;/td&gt;</span>
+          <span class="nt">&lt;td&gt;</span>40<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+      <span class="nt">&lt;/tbody&gt;</span>
+    <span class="nt">&lt;/table&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span></code></pre></figure>
+
+<p>The model file is stored as <code class="highlighter-rouge">file/src/test/resources/sales.json</code>,
+so you can connect via <a href="https://github.com/julianhyde/sqlline"><code class="highlighter-rouge">sqlline</code></a>
+as follows:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./sqlline
+sqlline&gt; <span class="o">!</span>connect jdbc:calcite:model<span class="o">=</span>file/src/test/resources/sales.json admin admin
+sqlline&gt; <span class="k">select</span> <span class="k">*</span> from sales.emps<span class="p">;</span>
++-------+--------+------+
+| EMPNO | DEPTNO | NAME |
++-------+--------+------+
+| 100   | 30     | Fred |
+| 110   | 20     | Eric |
+| 110   | 40     | John |
+| 120   | 20     | Wilma |
+| 130   | 40     | Alice |
++-------+--------+------+
+5 rows selected</code></pre></figure>
+
+<h2 id="mapping-tables">Mapping tables</h2>
+
+<p>Now for a more complex example. This time we connect to Wikipedia via
+HTTP, read pages for US states and cities, and extract data from HTML
+tables on those pages. The tables have more complex formats, and the
+file adapter helps us locate and parse data in those tables.</p>
+
+<p>Tables can be simply defined for immediate gratification:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="err">tableName</span><span class="p">:</span><span class="w"> </span><span class="s2">"RawCities"</span><span class="p">,</span><span class="w">
+  </span><span class="err">url</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population"</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>And subsequently refined for better usability / querying:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="err">tableName</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cities"</span><span class="p">,</span><span class="w">
+  </span><span class="err">url</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population"</span><span class="p">,</span><span class="w">
+  </span><span class="err">path</span><span class="p">:</span><span class="w"> </span><span class="s2">"#mw-content-text &gt; table.wikitable.sortable"</span><span class="p">,</span><span class="w">
+  </span><span class="err">index</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="err">fieldDefs</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="err">th</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012 rank"</span><span class="p">,</span><span class="w"> </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rank"</span><span class="p">,</span><span class="w"> </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="s2">"int"</span><span class="p">,</span><span class="w"> </span><span class="err">pattern</span><span class="p">:</span><span class="w"> </span><span class="s2">"(</span><span class="se">\\</span><span class="s2">d+)"</span><span class="p">,</span><span class="w"> </span><span class="err">matchGroup</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="err">th</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w"> </span><span class="err">selector</span><span class="p">:</span><span class="w"> </span><span class="s2">"a"</span><span class="p">,</span><span class="w"> </span><span class="err">selectedElement</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="err">th</span><span class="p">:</span><span class="w"> </span><span class="s2">"State[5]"</span><span class="p">,</span><span class="w"> </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="s2">"State"</span><span class="p">,</span><span class="w"> </span><span class="err">selector</span><span class="p">:</span><span class="w"> </span><span class="s2">"a:eq(0)"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="err">th</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012 estimate"</span><span class="p">,</span><span class="w"> </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="s2">"Population"</span><span class="p">,</span><span class="w"> </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="s2">"double"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="err">th</span><span class="p">:</span><span class="w"> </span><span class="s2">"2010 Census"</span><span class="p">,</span><span class="w"> </span><span class="err">skip</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="err">th</span><span class="p">:</span><span class="w"> </span><span class="s2">"Change"</span><span class="p">,</span><span class="w"> </span><span class="err">skip</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="err">th</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012 land area"</span><span class="p">,</span><span class="w"> </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="s2">"Land Area (sq mi)"</span><span class="p">,</span><span class="w"> </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="s2">"double"</span><span class="p">,</span><span class="w"> </span><span class="err">selector</span><span class="p">:</span><span class="w"> </span><span class="s2">":not(span)"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="err">th</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012 population density"</span><span class="p">,</span><span class="w"> </span><span class="err">skip</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="err">th</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANSI"</span><span class="p">,</span><span class="w"> </span><span class="err">skip</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>Connect and execute queries, as follows.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./sqlline
+sqlline&gt; <span class="o">!</span>connect jdbc:calcite:model<span class="o">=</span>file/src/test/resources/wiki.json admin admin
+sqlline&gt; <span class="k">select</span> <span class="k">*</span> from wiki.<span class="s2">"RawCities"</span><span class="p">;</span>
+sqlline&gt; <span class="k">select</span> <span class="k">*</span> from wiki.<span class="s2">"Cities"</span><span class="p">;</span></code></pre></figure>
+
+<p>Note that <code class="highlighter-rouge">Cities</code> is easier to consume than <code class="highlighter-rouge">RawCities</code>,
+because its table definition has a field list.</p>
+
+<p>The file adapter uses <a href="https://jsoup.org/">Jsoup</a> for HTML DOM
+navigation; selectors for both tables and fields follow the
+<a href="https://jsoup.org/cookbook/extracting-data/selector-syntax">Jsoup selector specification</a>.</p>
+
+<p>Field definitions may be used to rename or skip source fields, to
+select and condition the cell contents and to set a data type.</p>
+
+<h3 id="parsing-cell-contents">Parsing cell contents</h3>
+
+<p>The file adapter can select DOM nodes within a cell, replace text
+within the selected element, match within the selected text, and
+choose a data type for the resulting database column.  Processing
+steps are applied in the order described and replace and match
+patterns are based on
+<a href="https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html">Java regular expressions</a>.</p>
+
+<h3 id="further-examples">Further examples</h3>
+
+<p>There are more examples in the form of a script:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./sqlline <span class="nt">-f</span> file/src/test/resources/webjoin.sql</code></pre></figure>
+
+<p>(When running <code class="highlighter-rouge">webjoin.sql</code> you will see a number of warning messages for
+each query containing a join.  These are expected and do not affect
+query results.  These messages will be suppressed in the next release.)</p>
+
+<h2 id="csv-files-and-model-free-browsing">CSV files and model-free browsing</h2>
+
+<p>Some files are describe their own schema, and for these files, we do not need a model. For example, <code class="highlighter-rouge">DEPTS.csv</code> has an
+integer <code class="highlighter-rouge">DEPTNO</code> column and a string <code class="highlighter-rouge">NAME</code> column:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="err">DEPTNO</span><span class="p">:</span><span class="err">int</span><span class="p">,</span><span class="err">NAME</span><span class="p">:</span><span class="err">string</span><span class="w">
+</span><span class="mi">10</span><span class="p">,</span><span class="s2">"Sales"</span><span class="w">
+</span><span class="mi">20</span><span class="p">,</span><span class="s2">"Marketing"</span><span class="w">
+</span><span class="mi">30</span><span class="p">,</span><span class="s2">"Accounts"</span></code></pre></figure>
+
+<p>You can launch <code class="highlighter-rouge">sqlline</code>, and pointing the file adapter that directory,
+and every CSV file becomes a table:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">ls </span>file/src/test/resources/sales-csv
+ <span class="nt">-rw-r--r--</span> 1 jhyde jhyde  62 Mar 15 10:16 DEPTS.csv
+ <span class="nt">-rw-r--r--</span> 1 jhyde jhyde 262 Mar 15 10:16 EMPS.csv.gz
+
+<span class="nv">$ </span>./sqlline <span class="nt">-u</span> <span class="s2">"jdbc:calcite:schemaFactory=org.apache.calcite.adapter.file.FileSchemaFactory;schema.directory=file/src/test/resources/sales-csv"</span>
+sqlline&gt; <span class="o">!</span>tables
++-----------+-------------+------------+------------+
+| TABLE_CAT | TABLE_SCHEM | TABLE_NAME | TABLE_TYPE |
++-----------+-------------+------------+------------+
+|           | adhoc       | DEPTS      | TABLE      |
+|           | adhoc       | EMPS       | TABLE      |
++-----------+-------------+------------+------------+
+
+sqlline&gt; <span class="k">select </span>distinct deptno from depts<span class="p">;</span>
++--------+
+| DEPTNO |
++--------+
+| 20     |
+| 10     |
+| 30     |
++--------+
+3 rows selected <span class="o">(</span>0.985 seconds<span class="o">)</span></code></pre></figure>
+
+<h2 id="future-improvements">Future improvements</h2>
+
+<p>We are continuing to enhance the adapter, and would welcome
+contributions of new parsing capabilities (for example parsing JSON
+files) and being able to form URLs dynamically to push down filters.</p>
+
+          
+
+
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+
+        </article>
+      </div>
+
+      <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    
+    <h4>Overview</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/index.html">Background</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/tutorial.html">Tutorial</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/algebra.html">Algebra</a></li>
+
+
+</ul>
+
+    
+    <h4>Advanced</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/adapter.html">Adapters</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/spatial.html">Spatial</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/stream.html">Streaming</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/materialized_views.html">Materialized Views</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/lattice.html">Lattices</a></li>
+
+
+</ul>
+
+    
+    <h4>Avatica</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_overview.html">Overview</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_roadmap.html">Roadmap</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_json_reference.html">JSON Reference</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_protobuf_reference.html">Protobuf Reference</a></li>
+
+
+</ul>
+
+    
+    <h4>Reference</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/reference.html">SQL language</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/model.html">JSON/YAML models</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/howto.html">HOWTO</a></li>
+
+
+</ul>
+
+    
+    <h4>Meta</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/history.html">History</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/powered_by.html">Powered by Calcite</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/apidocs">API</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/testapidocs">Test API</a></li>
+
+
+</ul>
+
+    
+  </aside>
+</div>
+
+
+      <div class="clear"></div>
+
+    </div>
+  </section>
+
+
+  <footer role="contentinfo">
+  <div id="poweredby">
+    <a href="http://www.apache.org/">
+      <span class="sr-only">Apache</span>
+      <img src="/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
+  </div>
+  <div id="copyright">
+  <p>The contents of this website are Copyright &copy;&nbsp;2019
+     <a href="https://www.apache.org/">Apache Software Foundation</a>
+     under the terms of
+     the <a href="https://www.apache.org/licenses/">
+     Apache&nbsp;License&nbsp;v2</a>. Apache Calcite and its logo are
+     trademarks of the Apache Software Foundation.</p>
+  </div>
+</footer>
+
+  <script>
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
+    anchor.title = "Permalink";
+    return anchor;
+  };
+
+  var linkifyAnchors = function (level, containingElement) {
+    var headers = containingElement.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.appendChild(anchorForId(header.id));
+      }
+    }
+  };
+
+  document.onreadystatechange = function () {
+    if (this.readyState === "complete") {
+      var contentBlock = document.getElementsByClassName("docs")[0] || document.getElementsByClassName("news")[0];
+      if (!contentBlock) {
+        return;
+      }
+      for (var level = 1; level <= 6; level++) {
+        linkifyAnchors(level, contentBlock);
+      }
+    }
+  };
+</script>
+
+
+</body>
+</html>

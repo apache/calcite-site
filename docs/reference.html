@@ -3298,15 +3298,28 @@ is named as “fixed windowing”.</p>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">TUMBLE(table, DESCRIPTOR(datetime), interval [, offset ])</td>
-      <td style="text-align: left">Indicates a tumbling window of <em>interval</em> for <em>datetime</em>, optionally aligned at offset.</td>
+      <td style="text-align: left">TUMBLE(data, DESCRIPTOR(timecol), size [, offset ])</td>
+      <td style="text-align: left">Indicates a tumbling window of <em>size</em> interval for <em>timecol</em>, optionally aligned at <em>offset</em>.</td>
     </tr>
   </tbody>
 </table>
 
-<p>Here is an example:
-<code class="highlighter-rouge">SELECT * FROM TABLE(TUMBLE(TABLE orders, DESCRIPTOR(rowtime), INTERVAL '1' MINUTE))</code>,
-will apply tumbling with 1 minute window size on rows from table orders. rowtime is the
+<p>Here is an example:</p>
+<pre><code class="language-SQL">SELECT * FROM TABLE(
+  TUMBLE(
+    TABLE orders,
+    DESCRIPTOR(rowtime),
+    INTERVAL '1' MINUTE));
+
+-- or with the named params
+-- note: the DATA param must be the first
+SELECT * FROM TABLE(
+  TUMBLE(
+    DATA =&gt; TABLE orders,
+    TIMECOL =&gt; DESCRIPTOR(rowtime),
+    SIZE =&gt; INTERVAL '1' MINUTE));
+</code></pre>
+<p>will apply tumbling with 1 minute window size on rows from table orders. rowtime is the
 watermarked column of table orders that tells data completeness.</p>
 
 <h4 id="hop">HOP</h4>
@@ -3322,15 +3335,30 @@ on a timestamp column. Windows assigned could have overlapping so hopping someti
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">HOP(table, DESCRIPTOR(datetime), slide, size [, offset ])</td>
-      <td style="text-align: left">Indicates a hopping window for <em>datetime</em>, covering rows within the interval of <em>size</em>, shifting every <em>slide</em> and optionally aligned at offset.</td>
+      <td style="text-align: left">HOP(data, DESCRIPTOR(timecol), slide, size [, offset ])</td>
+      <td style="text-align: left">Indicates a hopping window for <em>timecol</em>, covering rows within the interval of <em>size</em>, shifting every <em>slide</em> and optionally aligned at <em>offset</em>.</td>
     </tr>
   </tbody>
 </table>
 
-<p>Here is an example:
-<code class="highlighter-rouge">SELECT * FROM TABLE(HOP(TABLE orders, DESCRIPTOR(rowtime), INTERVAL '2' MINUTE, INTERVAL '5' MINUTE))</code>,
-will apply hopping with 5-minute interval size on rows from table orders and shifting every 2 minutes. rowtime is the
+<p>Here is an example:</p>
+<pre><code class="language-SQL">SELECT * FROM TABLE(
+  HOP(
+    TABLE orders,
+    DESCRIPTOR(rowtime),
+    INTERVAL '2' MINUTE,
+    INTERVAL '5' MINUTE));
+
+-- or with the named params
+-- note: the DATA param must be the first
+SELECT * FROM TABLE(
+  HOP(
+    DATA =&gt; TABLE orders,
+    TIMECOL =&gt; DESCRIPTOR(rowtime),
+    SLIDE =&gt; INTERVAL '2' MINUTE,
+    SIZE =&gt; INTERVAL '5' MINUTE));
+</code></pre>
+<p>will apply hopping with 5-minute interval size on rows from table orders and shifting every 2 minutes. rowtime is the
 watermarked column of table orders that tells data completeness.</p>
 
 <h4 id="session">SESSION</h4>
@@ -3346,16 +3374,36 @@ of rows are less than <em>interval</em>. Session window is applied per <em>key</
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">session(table, DESCRIPTOR(datetime), DESCRIPTOR(key), interval)</td>
-      <td style="text-align: left">Indicates a session window of <em>interval</em> for <em>datetime</em>. Session window is applied per <em>key</em>.</td>
+      <td style="text-align: left">session(data, DESCRIPTOR(timecol), DESCRIPTOR(key), size)</td>
+      <td style="text-align: left">Indicates a session window of <em>size</em> interval for <em>timecol</em>. Session window is applied per <em>key</em>.</td>
     </tr>
   </tbody>
 </table>
 
-<p>Here is an example:
-<code class="highlighter-rouge">SELECT * FROM TABLE(SESSION(TABLE orders, DESCRIPTOR(rowtime), DESCRIPTOR(product), INTERVAL '20' MINUTE))</code>,
-will apply session with 20-minute inactive gap on rows from table orders. rowtime is the
+<p>Here is an example:</p>
+<pre><code class="language-SQL">SELECT * FROM TABLE(
+  SESSION(
+    TABLE orders,
+    DESCRIPTOR(rowtime),
+    DESCRIPTOR(product),
+    INTERVAL '20' MINUTE));
+
+-- or with the named params
+-- note: the DATA param must be the first
+SELECT * FROM TABLE(
+  SESSION(
+    DATA =&gt; TABLE orders,
+    TIMECOL =&gt; DESCRIPTOR(rowtime),
+    KEY =&gt; DESCRIPTOR(product),
+    SIZE =&gt; INTERVAL '20' MINUTE));
+</code></pre>
+<p>will apply session with 20-minute inactive gap on rows from table orders. rowtime is the
 watermarked column of table orders that tells data completeness. Session is applied per product.</p>
+
+<p><strong>Note</strong>: The <code class="highlighter-rouge">Tumble</code>, <code class="highlighter-rouge">Hop</code> and <code class="highlighter-rouge">Session</code> window table functions assign
+each row in the original table to a window. The output table has all
+the same columns as the original table plus two additional columns <code class="highlighter-rouge">window_start</code>
+and <code class="highlighter-rouge">window_end</code>, which repesent the start and end of the window interval, respectively.</p>
 
 <h3 id="grouped-window-functions">Grouped window functions</h3>
 <p><strong>warning</strong>: grouped window functions are deprecated.</p>
@@ -3453,7 +3501,9 @@ by a grouped window function.</p>
 implements the OpenGIS Simple Features Implementation Specification for SQL,
 <a href="https://www.opengeospatial.org/standards/sfs">version 1.2.1</a>;
 “p” indicates that the function is a
-<a href="https://www.postgis.net/docs/reference.html">PostGIS</a> extension to OpenGIS.</p>
+<a href="https://www.postgis.net/docs/reference.html">PostGIS</a> extension to OpenGIS;
+“h” indicates that the function is an
+<a href="http://www.h2gis.org/docs/dev/functions/">H2GIS</a> extension.</p>
 
 <h4 id="geometry-conversion-functions-2d">Geometry conversion functions (2D)</h4>
 
@@ -3552,6 +3602,21 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
   </thead>
   <tbody>
     <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">ST_MakeEnvelope(xMin, yMin, xMax, yMax  [, srid ])</td>
+      <td style="text-align: left">Creates a rectangular POLYGON</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_MakeGrid(geom, deltaX, deltaY)</td>
+      <td style="text-align: left">Calculates a regular grid of POLYGONs based on <em>geom</em></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_MakeGridPoints(geom, deltaX, deltaY)</td>
+      <td style="text-align: left">Calculates a regular grid of points based on <em>geom</em></td>
+    </tr>
+    <tr>
       <td style="text-align: left">o</td>
       <td style="text-align: left">ST_MakeLine(point1 [, point ]*)</td>
       <td style="text-align: left">Creates a line-string from the given POINTs (or MULTIPOINTs)</td>
@@ -3576,9 +3641,6 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
   <li>ST_Expand(geom, distance) Expands <em>geom</em>’s envelope</li>
   <li>ST_Expand(geom, deltaX, deltaY) Expands <em>geom</em>’s envelope</li>
   <li>ST_MakeEllipse(point, width, height) Constructs an ellipse</li>
-  <li>ST_MakeEnvelope(xMin, yMin, xMax, yMax  [, srid ]) Creates a rectangular POLYGON</li>
-  <li>ST_MakeGrid(geom, deltaX, deltaY) Calculates a regular grid of POLYGONs based on <em>geom</em></li>
-  <li>ST_MakeGridPoints(geom, deltaX, deltaY) Calculates a regular grid of points based on <em>geom</em></li>
   <li>ST_MakePolygon(lineString [, hole ]<em>) Creates a POLYGON from *lineString</em> with the given holes (which are required to be closed LINESTRINGs)</li>
   <li>ST_MinimumDiameter(geom) Returns the minimum diameter of <em>geom</em></li>
   <li>ST_MinimumRectangle(geom) Returns the minimum rectangle enclosing <em>geom</em></li>

@@ -256,6 +256,7 @@ form.</p>
 <span class="n">tableReference</span><span class="p">:</span>
       <span class="n">tablePrimary</span>
       <span class="p">[</span> <span class="k">FOR</span> <span class="n">SYSTEM_TIME</span> <span class="k">AS</span> <span class="k">OF</span> <span class="n">expression</span> <span class="p">]</span>
+      <span class="p">[</span> <span class="n">pivot</span> <span class="p">]</span>
       <span class="p">[</span> <span class="n">matchRecognize</span> <span class="p">]</span>
       <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="k">alias</span> <span class="p">[</span> <span class="s1">'('</span> <span class="n">columnAlias</span> <span class="p">[,</span> <span class="n">columnAlias</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="p">]</span> <span class="p">]</span>
 
@@ -286,6 +287,27 @@ form.</p>
 <span class="n">optionValue</span><span class="p">:</span>
       <span class="n">stringLiteral</span>
   <span class="o">|</span>   <span class="n">numericLiteral</span>
+
+<span class="n">pivot</span><span class="p">:</span>
+      <span class="n">PIVOT</span> <span class="s1">'('</span>
+      <span class="n">pivotAgg</span> <span class="p">[,</span> <span class="n">pivotAgg</span> <span class="p">]</span><span class="o">*</span>
+      <span class="k">FOR</span> <span class="n">pivotList</span>
+      <span class="k">IN</span> <span class="s1">'('</span> <span class="n">pivotExpr</span> <span class="p">[,</span> <span class="n">pivotExpr</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
+      <span class="s1">')'</span>
+
+<span class="n">pivotAgg</span><span class="p">:</span>
+      <span class="n">agg</span> <span class="s1">'('</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span> <span class="n">value</span> <span class="p">[,</span> <span class="n">value</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
+      <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="k">alias</span> <span class="p">]</span>
+
+<span class="n">pivotList</span><span class="p">:</span>
+      <span class="k">column</span>
+   <span class="o">|</span>  <span class="s1">'('</span> <span class="k">column</span> <span class="p">[,</span> <span class="k">column</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
+
+<span class="n">pivotExpr</span><span class="p">:</span>
+      <span class="err">{</span> <span class="n">expr</span>
+      <span class="o">|</span> <span class="s1">'('</span> <span class="n">expr</span> <span class="p">[,</span> <span class="n">expr</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
+      <span class="err">}</span>
+      <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="k">alias</span> <span class="p">]</span>
 
 <span class="k">values</span><span class="p">:</span>
       <span class="k">VALUES</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span>
@@ -779,6 +801,7 @@ PATH,
 <strong>PERCENT_RANK</strong>,
 <strong>PERIOD</strong>,
 <strong>PERMUTE</strong>,
+PIVOT,
 PLACING,
 PLAN,
 PLI,
@@ -3078,15 +3101,15 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
     </tr>
     <tr>
       <td style="text-align: left">BIT_AND( [ ALL | DISTINCT ] value)</td>
-      <td style="text-align: left">Returns the bitwise AND of all non-null input values, or null if none</td>
+      <td style="text-align: left">Returns the bitwise AND of all non-null input values, or null if none; integer and binary types are supported</td>
     </tr>
     <tr>
       <td style="text-align: left">BIT_OR( [ ALL | DISTINCT ] value)</td>
-      <td style="text-align: left">Returns the bitwise OR of all non-null input values, or null if none</td>
+      <td style="text-align: left">Returns the bitwise OR of all non-null input values, or null if none; integer and binary types are supported</td>
     </tr>
     <tr>
       <td style="text-align: left">BIT_XOR( [ ALL | DISTINCT ] value)</td>
-      <td style="text-align: left">Returns the bitwise XOR of all non-null input values, or null if none</td>
+      <td style="text-align: left">Returns the bitwise XOR of all non-null input values, or null if none; integer and binary types are supported</td>
     </tr>
     <tr>
       <td style="text-align: left">STDDEV_POP( [ ALL | DISTINCT ] numeric)</td>

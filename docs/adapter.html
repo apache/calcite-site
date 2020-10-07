@@ -193,7 +193,7 @@ as implemented by Avatica’s
     </tr>
     <tr>
       <td style="text-align: left"><a href="/javadocAggregate/org/apache/calcite/config/CalciteConnectionProperty.html#LEX">lex</a></td>
-      <td style="text-align: left">Lexical policy. Values are ORACLE (default), MYSQL, MYSQL_ANSI, SQL_SERVER, JAVA.</td>
+      <td style="text-align: left">Lexical policy. Values are BIG_QUERY, JAVA, MYSQL, MYSQL_ANSI, ORACLE (default), SQL_SERVER.</td>
     </tr>
     <tr>
       <td style="text-align: left"><a href="/javadocAggregate/org/apache/calcite/config/CalciteConnectionProperty.html#MATERIALIZATIONS_ENABLED">materializationsEnabled</a></td>
@@ -288,7 +288,7 @@ For example,</p>
 operations  (<code class="highlighter-rouge">INSERT</code>, <code class="highlighter-rouge">UPDATE</code>, <code class="highlighter-rouge">DELETE</code>, <code class="highlighter-rouge">MERGE</code>)
 but does not support DDL operations such as <code class="highlighter-rouge">CREATE SCHEMA</code> or <code class="highlighter-rouge">CREATE TABLE</code>.
 As we shall see, DDL complicates the state model of the repository and makes
-the parser more difficult to extend, so we left DDL out of core.</p>
+the parser more difficult to extend, so we left DDL out of the core.</p>
 
 <p>The server module (<code class="highlighter-rouge">calcite-server</code>) adds DDL support to Calcite.
 It extends the SQL parser,
@@ -364,7 +364,7 @@ runnable as a service), repository persistence, authorization and security.</p>
 
 <p>There are many other APIs that allow you to extend Calcite’s capabilities.</p>
 
-<p>In this section, we briefly describe those APIs, to give you an idea what is
+<p>In this section, we briefly describe those APIs, to give you an idea of what is
 possible. To fully use these APIs you will need to read other documentation
 such as the javadoc for the interfaces, and possibly seek out the tests that
 we have written for them.</p>
@@ -444,7 +444,7 @@ appear in more than one window. For example, 10:37 appears in both the
 
 <p>Window functions are computed incrementally: when the clock ticks from
 10:14 to 10:15, two rows might enter the window and three rows leave.
-For this, window functions have have an extra life-cycle operation:</p>
+For this, window functions have an extra life-cycle operation:</p>
 
 <ul>
   <li><code class="highlighter-rouge">remove</code> removes a value from an accumulator.</li>
@@ -489,7 +489,7 @@ function called <code class="highlighter-rouge">Ramp</code>:</p>
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="k">TABLE</span><span class="p">(</span><span class="n">Ramp</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span></code></pre></figure>
 
 <p><em>User-defined table macros</em> use the same SQL syntax as table functions,
-but are defined differently. Rather than generating data, they generate an
+but are defined differently. Rather than generating data, they generate a
 relational expression.
 Table macros are invoked during query preparation and the relational expression
 they produce can then be optimized.
@@ -716,7 +716,7 @@ a fall-back.</p>
 
 <h3 id="statistics-and-cost">Statistics and cost</h3>
 
-<p>Calcite has a metadata system that allow you to define cost functions and
+<p>Calcite has a metadata system that allows you to define cost functions and
 statistics about relational operators, collectively referred to as <em>metadata</em>.
 Each kind of metadata has an interface with (usually) one method.
 For example, selectivity is defined by

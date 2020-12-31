@@ -838,6 +838,7 @@ which uniquely identifies the concrete Request from all other Requests.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
   </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"databaseProperties"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
 <p><code class="highlighter-rouge">connectionId</code> (required string) The identifier of the connection to use when fetching the database properties.</p>
@@ -1009,9 +1010,9 @@ which uniquely identifies the concrete Request from all other Requests.</p>
 
 <p><code class="highlighter-rouge">connection_id</code> The identifier for the connection to fetch schemas from.</p>
 
-<p><code class="highlighter-rouge">catalog</code> (required string) The name of the catalog to fetch the schema from.</p>
+<p><code class="highlighter-rouge">catalog</code> (optional string) The name of the catalog to fetch the schema from.</p>
 
-<p><code class="highlighter-rouge">schemaPattern</code> (required string) A Java pattern of schemas to fetch.</p>
+<p><code class="highlighter-rouge">schemaPattern</code> (optional string) A Java pattern of schemas to fetch.</p>
 
 <h3 id="tabletypesrequest">TableTypesRequest</h3>
 
@@ -1493,6 +1494,9 @@ specification. This value is analogous to the values defined in <code class="hig
 <p><code class="highlighter-rouge">catalog</code> (optional string) The name of the catalog to include when fetching connection properties.</p>
 
 <p><code class="highlighter-rouge">schema</code> (optional string) The name of the schema to include when fetching connection properties.</p>
+
+<p><code class="highlighter-rouge">isDirty</code> (internal boolean) A boolean used for internal purposes only (not required by the Avatica protocol).
+This field will be removed from the protocol in future releases.</p>
 
 <h3 id="cursorfactory">CursorFactory</h3>
 

@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":10,"i3":9,"i4":10,"i5":9,"i6":9,"i7":9,"i8":10};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":9,"i1":9,"i2":10,"i3":9,"i4":10,"i5":9,"i6":41,"i7":9,"i8":10};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -173,7 +173,7 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -187,7 +187,10 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../org/apache/calcite/avatica/Meta.CursorFactory.html" title="class in org.apache.calcite.avatica">Meta.CursorFactory</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../org/apache/calcite/avatica/Meta.CursorFactory.html#deduce-java.util.List-java.lang.Class-">deduce</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../org/apache/calcite/avatica/ColumnMetaData.html" title="class in org.apache.calcite.avatica">ColumnMetaData</a>&gt;&nbsp;columns,
-      <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&nbsp;resultClazz)</code>&nbsp;</td>
+      <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&nbsp;resultClazz)</code>
+<div class="block">Deduces the appropriate <code>CursorFactory</code> for accessing the underlying
+ result set.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
@@ -207,7 +210,11 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../org/apache/calcite/avatica/Meta.CursorFactory.html" title="class in org.apache.calcite.avatica">Meta.CursorFactory</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../org/apache/calcite/avatica/Meta.CursorFactory.html#record-java.lang.Class-">record</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&nbsp;resultClazz)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../org/apache/calcite/avatica/Meta.CursorFactory.html#record-java.lang.Class-">record</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&nbsp;resultClazz)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">Use <a href="../../../../org/apache/calcite/avatica/Meta.CursorFactory.html#record-java.lang.Class-java.util.List-java.util.List-"><code>record(Class, List, List)</code></a></span></div>
+</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../org/apache/calcite/avatica/Meta.CursorFactory.html" title="class in org.apache.calcite.avatica">Meta.CursorFactory</a></code></td>
@@ -329,7 +336,9 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <ul class="blockList">
 <li class="blockList">
 <h4>record</h4>
-<pre>public static&nbsp;<a href="../../../../org/apache/calcite/avatica/Meta.CursorFactory.html" title="class in org.apache.calcite.avatica">Meta.CursorFactory</a>&nbsp;record(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&nbsp;resultClazz)</pre>
+<pre><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang">@Deprecated</a>
+public static&nbsp;<a href="../../../../org/apache/calcite/avatica/Meta.CursorFactory.html" title="class in org.apache.calcite.avatica">Meta.CursorFactory</a>&nbsp;record(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&nbsp;resultClazz)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">Use <a href="../../../../org/apache/calcite/avatica/Meta.CursorFactory.html#record-java.lang.Class-java.util.List-java.util.List-"><code>record(Class, List, List)</code></a></span></div>
 </li>
 </ul>
 <a name="record-java.lang.Class-java.util.List-java.util.List-">
@@ -360,6 +369,19 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <h4>deduce</h4>
 <pre>public static&nbsp;<a href="../../../../org/apache/calcite/avatica/Meta.CursorFactory.html" title="class in org.apache.calcite.avatica">Meta.CursorFactory</a>&nbsp;deduce(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../org/apache/calcite/avatica/ColumnMetaData.html" title="class in org.apache.calcite.avatica">ColumnMetaData</a>&gt;&nbsp;columns,
                                         <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&nbsp;resultClazz)</pre>
+<div class="block">Deduces the appropriate <code>CursorFactory</code> for accessing the underlying
+ result set. For result sets composed by records, <code>resultClazz</code> must
+ be not null, and each field name in <code>columns</code> must match one of its
+ public fields.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>columns</code> - The columns metadata for the result set</dd>
+<dd><code>resultClazz</code> - The class representing the records, if any</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the appropriate <code>CursorFactory</code> for the underlying result set</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/RuntimeException.html?is-external=true" title="class or interface in java.lang">RuntimeException</a></code> - if the field name validation fails</dd>
+</dl>
 </li>
 </ul>
 <a name="toProto--">
@@ -475,6 +497,6 @@ extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </body>
 </html>

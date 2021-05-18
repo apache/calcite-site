@@ -744,18 +744,25 @@
 
 <h2 id="building-from-a-source-distribution">Building from a source distribution</h2>
 
-<p>Prerequisites are Java (JDK 8 or later) on your path.</p>
+<p>Prerequisites are Java (JDK 8 or later)
+and Gradle (version 6.8.1) on your path.</p>
+
+<p>(The source distribution
+<a href="https://issues.apache.org/jira/browse/CALCITE-4575">does not include the Gradle wrapper</a>;
+therefore you need to
+<a href="https://gradle.org/releases/">install Gradle manually</a>.)</p>
 
 <p>Unpack the source distribution <code class="highlighter-rouge">.tar.gz</code> file,
 <code class="highlighter-rouge">cd</code> to the root directory of the unpacked source,
-then build using maven:</p>
+then build using Gradle:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz apache-calcite-avatica-1.17.0-src.tar.gz
-<span class="nv">$ </span><span class="nb">cd </span>apache-calcite-avatica-1.17.0-src
-<span class="nv">$ </span>./gradlew build</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz apache-calcite-avatica-1.18.0-src.tar.gz
+<span class="nv">$ </span><span class="nb">cd </span>apache-calcite-avatica-1.18.0-src
+<span class="nv">$ </span>gradle build</code></pre></figure>
 
 <p><a href="#running-tests">Running tests</a> describes how to run more or fewer
-tests.</p>
+tests (but you should use the <code class="highlighter-rouge">gradle</code> command rather than
+<code class="highlighter-rouge">./gradlew</code>).</p>
 
 <h2 id="building-from-git">Building from Git</h2>
 
@@ -764,14 +771,11 @@ and Java (JDK 8 or later) on your path.</p>
 
 <p>Create a local copy of the GitHub repository,
 <code class="highlighter-rouge">cd</code> to its root directory,
-then build using maven:</p>
+then build using Gradle:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git clone git://github.com/apache/calcite-avatica.git avatica
 <span class="nv">$ </span><span class="nb">cd </span>avatica
 <span class="nv">$ </span>./gradlew build</code></pre></figure>
-
-<p>Note: <a href="https://github.com/dougborg/gdub">gdub</a> simplifies <code class="highlighter-rouge">./gradlew build</code> to <code class="highlighter-rouge">gw build</code>,
-and it simplifies cases like <code class="highlighter-rouge">../../gradlew ...</code> to <code class="highlighter-rouge">gw ...</code> as well.</p>
 
 <p><a href="#running-tests">Running tests</a> describes how to run more or fewer
 tests.</p>
@@ -791,9 +795,8 @@ tests.</p>
 
 <h3 id="to-run-tests-in-docker">To run tests in docker:</h3>
 
-<ul>
-  <li>You will need to have <a href="https://docs.docker.com/install/">docker</a> and <a href="https://docs.docker.com/compose/install/">Docker Compose</a> installed.</li>
-</ul>
+<p>Prerequisites are <a href="https://docs.docker.com/install/">Docker</a> and
+<a href="https://docs.docker.com/compose/install/">Docker Compose</a>.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose run <span class="nb">test</span></code></pre></figure>
 
@@ -831,7 +834,7 @@ ball because that would be
 
 <h2 id="run-a-gpg-agent">Run a GPG agent</h2>
 
-<p>By default, Maven plugins which require you to unlock a GPG secret key
+<p>By default, Gradle plugins which require you to unlock a GPG secret key
 will prompt you in the terminal. To prevent you from having to enter
 this password numerous times, it is highly recommended to install and
 run <code class="highlighter-rouge">gpg-agent</code>.</p>
@@ -871,8 +874,10 @@ For instance, you could update <code class="highlighter-rouge">$HOME/.gradle/gra
 <span class="py">asfSvnUsername</span><span class="p">=</span>
 <span class="py">asfSvnPassword</span><span class="p">=</span></code></pre></figure>
 
-<p>Note: when https://github.com/vlsi/asflike-release-environment is used, the credentials are takend from
-<code class="highlighter-rouge">asfTest...</code> (e.g. <code class="highlighter-rouge">asfTestNexusUsername=test</code>)</p>
+<p>When
+<a href="https://github.com/vlsi/asflike-release-environment">asflike-release-environment</a>
+is used, the credentials are taken from <code class="highlighter-rouge">asfTest...</code>
+(e.g. <code class="highlighter-rouge">asfTestNexusUsername=test</code>)</p>
 
 <p>Note: if you want to uses <code class="highlighter-rouge">gpg-agent</code>, you need to pass <code class="highlighter-rouge">useGpgCmd</code> property, and specify the key id
 via <code class="highlighter-rouge">signing.gnupg.keyName</code>.</p>
@@ -899,6 +904,7 @@ git clean <span class="nt">-xn</span>
   <li>Set up signing keys as described above.</li>
   <li>Make sure you are using JDK 8 (not 9 or 10).</li>
   <li>Check that <code class="highlighter-rouge">README</code>, <code class="highlighter-rouge">site/_docs/howto.md</code>, <code class="highlighter-rouge">site/_docs/docker_images.md</code> have the correct version number.</li>
+  <li>Check that <code class="highlighter-rouge">site/_docs/howto.md</code> has the correct Gradle version.</li>
   <li>Check that <code class="highlighter-rouge">NOTICE</code> has the current copyright year.</li>
   <li>Check that <code class="highlighter-rouge">calcite.avatica.version</code> has the proper value in <code class="highlighter-rouge">/gradle.properties</code>.</li>
   <li>Add release notes to <code class="highlighter-rouge">site/_docs/history.md</code>. Include the commit history,
@@ -982,9 +988,12 @@ no binary distro), check that all files belong to a directory called
 <code class="highlighter-rouge">README</code>, <code class="highlighter-rouge">README.md</code>
     <ul>
       <li>Check that the version in <code class="highlighter-rouge">README</code> is correct</li>
+      <li>Check that <code class="highlighter-rouge">LICENSE</code> is identical to the file checked into git</li>
     </ul>
   </li>
-  <li>Make sure that there is no <code class="highlighter-rouge">KEYS</code> file in the source distros</li>
+  <li>Make sure that the following files do not occur in the source
+distros: <code class="highlighter-rouge">KEYS</code>, <code class="highlighter-rouge">gradlew</code>, <code class="highlighter-rouge">gradlew.bat</code>, <code class="highlighter-rouge">gradle-wrapper.jar</code>,
+<code class="highlighter-rouge">gradle-wrapper.properties</code></li>
   <li>For each .jar (for example <code class="highlighter-rouge">core/build/libs/avatica-core-X.Y.Z.jar</code>
 and <code class="highlighter-rouge">server/build/libs/avatica-server-X.Y.Z-sources.jar</code>),
 verify that the <code class="highlighter-rouge">META-INF</code> directory contains the correct
@@ -1016,7 +1025,7 @@ gpg <span class="nt">--recv-keys</span> key
 <span class="c"># Check keys</span>
 curl <span class="nt">-O</span> https://dist.apache.org/repos/dist/release/calcite/KEYS
 
-<span class="c"># Sign/check sha256 hashes</span>
+<span class="c"># Sign/check sha512 hashes</span>
 <span class="c"># (Assumes your O/S has a 'shasum' command.)</span>
 <span class="k">function </span>checkHash<span class="o">()</span> <span class="o">{</span>
   <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
@@ -1024,15 +1033,15 @@ curl <span class="nt">-O</span> https://dist.apache.org/repos/dist/release/calci
     if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-f</span> <span class="nv">$i</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
       continue
     fi
-    if</span> <span class="o">[</span> <span class="nt">-f</span> <span class="nv">$i</span>.sha256 <span class="o">]</span><span class="p">;</span> <span class="k">then
-      if</span> <span class="o">[</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">cat</span> <span class="nv">$i</span>.sha256<span class="k">)</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"</span><span class="k">$(</span>shasum <span class="nt">-a</span> 256 <span class="nv">$i</span><span class="k">)</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
-        </span><span class="nb">echo</span> <span class="nv">$i</span>.sha256 present and correct
+    if</span> <span class="o">[</span> <span class="nt">-f</span> <span class="nv">$i</span>.sha512 <span class="o">]</span><span class="p">;</span> <span class="k">then
+      if</span> <span class="o">[</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">cat</span> <span class="nv">$i</span>.sha512<span class="k">)</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"</span><span class="k">$(</span>shasum <span class="nt">-a</span> 512 <span class="nv">$i</span><span class="k">)</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+        </span><span class="nb">echo</span> <span class="nv">$i</span>.sha512 present and correct
       <span class="k">else
-        </span><span class="nb">echo</span> <span class="nv">$i</span>.sha256 does not match
+        </span><span class="nb">echo</span> <span class="nv">$i</span>.sha512 does not match
       <span class="k">fi
     else
-      </span>shasum <span class="nt">-a</span> 256 <span class="nv">$i</span> <span class="o">&gt;</span> <span class="nv">$i</span>.sha256
-      <span class="nb">echo</span> <span class="nv">$i</span>.sha256 created
+      </span>shasum <span class="nt">-a</span> 512 <span class="nv">$i</span> <span class="o">&gt;</span> <span class="nv">$i</span>.sha512
+      <span class="nb">echo</span> <span class="nv">$i</span>.sha512 created
     <span class="k">fi
   done</span>
 <span class="o">}</span>
@@ -1064,7 +1073,7 @@ The artifacts to be voted on are located here:
 https://dist.apache.org/repos/dist/dev/calcite/apache-calcite-avatica-X.Y.Z-rcN/
 
 The hashes of the artifacts are as follows:
-src.tar.gz.sha256 XXXX
+src.tar.gz.sha512 XXXX
 
 A staged Maven repository is available for review at:
 https://repository.apache.org/content/repositories/orgapachecalcite-NNNN
@@ -1077,7 +1086,7 @@ Please vote on releasing this package as Apache Calcite Avatica X.Y.Z.
 The vote is open for the next 72 hours and passes if a majority of
 at least three +1 PMC votes are cast.
 
-[ ] +1 Release this package as Apache Calcite X.Y.Z
+[ ] +1 Release this package as Apache Calcite Avatica X.Y.Z
 [ ]  0 I don't feel strongly about it, but I'm okay with the release
 [ ] -1 Do not release this package because...
 
@@ -1451,7 +1460,7 @@ as a template. Be sure to include a brief description of the project.</p>
       <img src="/avatica/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
   </div>
   <div id="copyright">
-  <p>The contents of this website are &copy;&nbsp;2020
+  <p>The contents of this website are &copy;&nbsp;2021
      <a href="https://www.apache.org/">Apache Software Foundation</a>
      under the terms of
      the <a href="https://www.apache.org/licenses/LICENSE-2.0.html">

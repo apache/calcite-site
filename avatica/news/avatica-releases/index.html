@@ -85,6 +85,8 @@
     <option value="/avatica/news/">Home</option>
     <optgroup label="v1.x">
       
+      <option value="/news/2021/05/18/release-1.18.0/">Release 1.18.0</option>
+      
       <option value="/news/2020/07/16/release-avatica-go-5.0.0/">Release Avatica Go 5.0.0</option>
       
       <option value="/news/2020/06/22/release-1.17.0/">Release 1.17.0</option>
@@ -131,6 +133,61 @@
 
 -->
 
+
+  
+    
+<article>
+  <h2>
+    <a href="/avatica/news/2021/05/18/release-1.18.0/">
+      Release 1.18.0
+    </a>
+  </h2>
+  <span class="post-category">
+    <span class="label">
+      release
+    </span>
+  </span>
+  <div class="post-meta">
+    <span class="post-date">
+      18 May 2021
+    </span>
+    
+    
+    
+    <a href="http://github.com/F21" class="post-author">
+      <img src="http://github.com/F21.png"
+           class="avatar" alt="francischuang avatar"
+           width="24" height="24">
+      francischuang
+    </a>
+  </div>
+  <div class="post-content">
+    <!--
+
+-->
+
+<p>Apache Calcite Avatica 1.18.0 includes a few dependency updates, bug fixes and
+a breaking change. In addition, the Gradle wrapper has been removed from the source
+distribution in order to comply with ASF policy. See the list of <a href="/avatica/docs/history.html#v1-18-0">bug fixes and new features</a>
+for more information.</p>
+
+<p><strong>Breaking change (<a href="https://issues.apache.org/jira/browse/CALCITE-4503">CALCITE-4503</a>)</strong>: Order of fields in records should follow that of the SQL types</p>
+
+<p><code class="highlighter-rouge">Meta#deduce(List&lt;ColumnMetaData&gt; columns, Class resultClazz)</code> now only derives the order of the fields from the list of provided column metadata <code class="highlighter-rouge">columns</code> when generating a record from the given Java class <code class="highlighter-rouge">resultClazz</code>, instead of relying on the field order provided by <code class="highlighter-rouge">Object#getFields()</code>, which is a JVM-dependent feature.</p>
+
+<p>Before, the field names where not checked against the field names of the provided class. Now, if <code class="highlighter-rouge">resultClazz</code> is not null, the provided field names are expected to match existing fields in that class. If a column metadata has name <code class="highlighter-rouge">column</code>, and no public field in <code class="highlighter-rouge">resultClazz</code> with that name exists, the following exception is thrown:
+<code class="highlighter-rouge">java.lang.RuntimeException: java.lang.NoSuchFieldException: C</code>.</p>
+
+    
+        
+        <p>See the <a href="/avatica/docs/history.html#v1-18-0">release notes</a>;
+            <a href="/avatica/downloads/avatica.html#source-releases">download</a> the release.</p>
+        
+    
+  </div>
+</article>
+
+  
 
   
 
@@ -836,6 +893,10 @@ upgrading to this version.</p>
     <ul>
       
       <li class="">
+        <a href="/avatica/news/2021/05/18/release-1.18.0/">avatica 1.18.0</a>
+      </li>
+      
+      <li class="">
         <a href="/avatica/news/2020/07/16/release-avatica-go-5.0.0/">avatica-go 5.0.0</a>
       </li>
       
@@ -849,10 +910,6 @@ upgrading to this version.</p>
       
       <li class="">
         <a href="/avatica/news/2019/05/16/release-avatica-go-4.0.0/">avatica-go 4.0.0</a>
-      </li>
-      
-      <li class="">
-        <a href="/avatica/news/2019/05/13/release-1.15.0/">avatica 1.15.0</a>
       </li>
       
     </ul>
@@ -885,7 +942,7 @@ upgrading to this version.</p>
       <img src="/avatica/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
   </div>
   <div id="copyright">
-  <p>The contents of this website are &copy;&nbsp;2020
+  <p>The contents of this website are &copy;&nbsp;2021
      <a href="https://www.apache.org/">Apache Software Foundation</a>
      under the terms of
      the <a href="https://www.apache.org/licenses/LICENSE-2.0.html">

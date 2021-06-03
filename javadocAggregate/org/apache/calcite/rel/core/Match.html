@@ -184,7 +184,7 @@ extends <a href="../SingleRel.html" title="class in org.apache.calcite.rel">Sing
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></td>
+<td class="colFirst"><code>protected @Nullable <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#interval">interval</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -276,7 +276,7 @@ boolean&nbsp;strictEnd,
 boolean&nbsp;allRows,
 <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&nbsp;partitionKeys,
 <a href="../RelCollation.html" title="interface in org.apache.calcite.rel">RelCollation</a>&nbsp;orderKeys,
-<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;interval)</code></th>
+@Nullable <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;interval)</code></th>
 <td class="colLast">
 <div class="block">Creates a Match.</div>
 </td>
@@ -317,7 +317,7 @@ boolean&nbsp;allRows,
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i2">
-<td class="colFirst"><code><a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getInterval()">getInterval</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -389,7 +389,7 @@ boolean&nbsp;allRows,
 <h3>Methods inherited from interface&nbsp;org.apache.calcite.rel.<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></h3>
 <a id="methods.inherited.from.class.org.apache.calcite.rel.RelNode">
 <!--   -->
-</a><code><a href="../RelNode.html#explain()">explain</a></code></div>
+</a><code><a href="../RelNode.html#explain()">explain</a>, <a href="../RelNode.html#fieldIsNullable(int)">fieldIsNullable</a></code></div>
 </section>
 </li>
 </ul>
@@ -478,7 +478,7 @@ boolean&nbsp;allRows,
 <li class="blockList">
 <section class="detail">
 <h3><a id="interval">interval</a></h3>
-<div class="memberSignature"><span class="modifiers">protected final</span>&nbsp;<span class="returnType"><a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="memberName">interval</span></div>
+<div class="memberSignature"><span class="modifiers">protected final</span>&nbsp;<span class="returnType">@Nullable <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="memberName">interval</span></div>
 </section>
 </li>
 </ul>
@@ -508,7 +508,7 @@ boolean&nbsp;strictEnd,
 boolean&nbsp;allRows,
 <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&nbsp;partitionKeys,
 <a href="../RelCollation.html" title="interface in org.apache.calcite.rel">RelCollation</a>&nbsp;orderKeys,
-<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;interval)</span></div>
+@Nullable <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;interval)</span></div>
 <div class="block">Creates a Match.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -603,7 +603,7 @@ boolean&nbsp;allRows,
 <li class="blockList">
 <section class="detail">
 <h3><a id="getInterval()">getInterval</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="memberName">getInterval</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="memberName">getInterval</span>()</div>
 </section>
 </li>
 <li class="blockList">
@@ -615,7 +615,7 @@ boolean&nbsp;allRows,
  Each node should call <code>super.explainTerms</code>, then call the
  <a href="../RelWriter.html#input(java.lang.String,org.apache.calcite.rel.RelNode)"><code>RelWriter.input(String, RelNode)</code></a>
  and
- <a href="../externalize/RelWriterImpl.html#item(java.lang.String,java.lang.Object)"><code>RelWriterImpl.item(String, Object)</code></a>
+ <a href="../RelWriter.html#item(java.lang.String,java.lang.Object)"><code>RelWriter.item(String, Object)</code></a>
  methods for each input and attribute.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
@@ -678,7 +678,7 @@ boolean&nbsp;allRows,
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

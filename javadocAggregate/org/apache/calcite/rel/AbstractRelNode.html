@@ -152,7 +152,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected <a href="type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
+<td class="colFirst"><code>protected @MonotonicNonNull <a href="type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rowType">rowType</a></span></code></th>
 <td class="colLast">
 <div class="block">Cached type of this relational expression.</div>
@@ -181,12 +181,14 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 <caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
 <thead>
 <tr>
-<th class="colFirst" scope="col">Constructor</th>
+<th class="colFirst" scope="col">Modifier</th>
+<th class="colSecond" scope="col">Constructor</th>
 <th class="colLast" scope="col">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="altColor">
+<td class="colFirst"><code>protected </code></td>
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet)">AbstractRelNode</a></span>&#8203;(<a href="../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
 <a href="../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet)</code></th>
 <td class="colLast">
@@ -255,7 +257,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 </td>
 </tr>
 <tr class="rowColor" id="i5">
-<td class="colFirst"><code><a href="../plan/RelOptCost.html" title="interface in org.apache.calcite.plan">RelOptCost</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="../plan/RelOptCost.html" title="interface in org.apache.calcite.plan">RelOptCost</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#computeSelfCost(org.apache.calcite.plan.RelOptPlanner,org.apache.calcite.rel.metadata.RelMetadataQuery)">computeSelfCost</a></span>&#8203;(<a href="../plan/RelOptPlanner.html" title="interface in org.apache.calcite.plan">RelOptPlanner</a>&nbsp;planner,
 <a href="metadata/RelMetadataQuery.html" title="class in org.apache.calcite.rel.metadata">RelMetadataQuery</a>&nbsp;mq)</code></th>
 <td class="colLast">
@@ -273,7 +275,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 </tr>
 <tr class="rowColor" id="i7">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#deepEquals(java.lang.Object)">deepEquals</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;obj)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#deepEquals(java.lang.Object)">deepEquals</a></span>&#8203;(@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;obj)</code></th>
 <td class="colLast">
 <div class="block">Equality check for RelNode digest.</div>
 </td>
@@ -292,7 +294,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 </tr>
 <tr class="altColor" id="i10">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;obj)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;obj)</code></th>
 </tr>
 <tr class="rowColor" id="i11">
 <td class="colFirst"><code>double</code></td>
@@ -324,7 +326,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 </td>
 </tr>
 <tr class="rowColor" id="i15">
-<td class="colFirst"><code><a href="../plan/Convention.html" title="interface in org.apache.calcite.plan">Convention</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="../plan/Convention.html" title="interface in org.apache.calcite.plan">Convention</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getConvention()">getConvention</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Return the CallingConvention trait from this RelNode's
@@ -332,7 +334,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 </td>
 </tr>
 <tr class="altColor" id="i16">
-<td class="colFirst"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCorrelVariable()">getCorrelVariable</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the name of the variable which is to be implicitly set at runtime
@@ -406,7 +408,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 </td>
 </tr>
 <tr class="altColor" id="i26">
-<td class="colFirst"><code><a href="../plan/RelOptTable.html" title="interface in org.apache.calcite.plan">RelOptTable</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="../plan/RelOptTable.html" title="interface in org.apache.calcite.plan">RelOptTable</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTable()">getTable</a></span>()</code></th>
 <td class="colLast">
 <div class="block">If this relational expression represents an access to a table, returns
@@ -443,14 +445,14 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 <tr class="rowColor" id="i31">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isValid(org.apache.calcite.util.Litmus,org.apache.calcite.rel.RelNode.Context)">isValid</a></span>&#8203;(<a href="../util/Litmus.html" title="interface in org.apache.calcite.util">Litmus</a>&nbsp;litmus,
-<a href="RelNode.Context.html" title="interface in org.apache.calcite.rel">RelNode.Context</a>&nbsp;context)</code></th>
+@Nullable <a href="RelNode.Context.html" title="interface in org.apache.calcite.rel">RelNode.Context</a>&nbsp;context)</code></th>
 <td class="colLast">
 <div class="block">Returns whether this relational expression is valid.</div>
 </td>
 </tr>
 <tr class="altColor" id="i32">
-<td class="colFirst"><code>&lt;M extends <a href="metadata/Metadata.html" title="interface in org.apache.calcite.rel.metadata">Metadata</a>&gt;<br>M</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#metadata(java.lang.Class,org.apache.calcite.rel.metadata.RelMetadataQuery)">metadata</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;M&gt;&nbsp;metadataClass,
+<td class="colFirst"><code>&lt;@Nullable M extends @Nullable <a href="metadata/Metadata.html" title="interface in org.apache.calcite.rel.metadata">Metadata</a>&gt;<br>M</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#metadata(java.lang.Class,org.apache.calcite.rel.metadata.RelMetadataQuery)">metadata</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;@Nullable M&gt;&nbsp;metadataClass,
 <a href="metadata/RelMetadataQuery.html" title="class in org.apache.calcite.rel.metadata">RelMetadataQuery</a>&nbsp;mq)</code></th>
 <td class="colLast">
 <div class="block">Returns a metadata interface.</div>
@@ -511,7 +513,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 <h3>Methods inherited from interface&nbsp;org.apache.calcite.rel.<a href="RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></h3>
 <a id="methods.inherited.from.class.org.apache.calcite.rel.RelNode">
 <!--   -->
-</a><code><a href="RelNode.html#explain()">explain</a></code></div>
+</a><code><a href="RelNode.html#explain()">explain</a>, <a href="RelNode.html#fieldIsNullable(int)">fieldIsNullable</a></code></div>
 </section>
 </li>
 </ul>
@@ -528,7 +530,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 <li class="blockList">
 <section class="detail">
 <h3><a id="rowType">rowType</a></h3>
-<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType"><a href="type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></span>&nbsp;<span class="memberName">rowType</span></div>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">@MonotonicNonNull <a href="type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></span>&nbsp;<span class="memberName">rowType</span></div>
 <div class="block">Cached type of this relational expression.</div>
 </section>
 </li>
@@ -568,7 +570,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 <li class="blockList">
 <section class="detail">
 <h3><a id="&lt;init&gt;(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet)">AbstractRelNode</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">AbstractRelNode</span>&#8203;(<span class="arguments"><a href="../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="memberName">AbstractRelNode</span>&#8203;(<span class="arguments"><a href="../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
 <a href="../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet)</span></div>
 <div class="block">Creates an <code>AbstractRelNode</code>.</div>
 </section>
@@ -629,7 +631,8 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 <li class="blockList">
 <section class="detail">
 <h3><a id="getConvention()">getConvention</a></h3>
-<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="returnType"><a href="../plan/Convention.html" title="interface in org.apache.calcite.plan">Convention</a></span>&nbsp;<span class="memberName">getConvention</span>()</div>
+<div class="memberSignature"><span class="annotations">@Pure
+</span><span class="modifiers">public final</span>&nbsp;<span class="returnType">@Nullable <a href="../plan/Convention.html" title="interface in org.apache.calcite.plan">Convention</a></span>&nbsp;<span class="memberName">getConvention</span>&#8203;(<span class="arguments">@UnknownInitialization&nbsp;AbstractRelNode&nbsp;this)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="RelNode.html#getConvention()">RelNode</a></code></span></div>
 <div class="block">Return the CallingConvention trait from this RelNode's
  <a href="../plan/RelOptNode.html#getTraitSet()"><code>trait set</code></a>.</div>
@@ -663,7 +666,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 <li class="blockList">
 <section class="detail">
 <h3><a id="getCorrelVariable()">getCorrelVariable</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></span>&nbsp;<span class="memberName">getCorrelVariable</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></span>&nbsp;<span class="memberName">getCorrelVariable</span>()</div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="RelNode.html#getCorrelVariable()">RelNode</a></code></span></div>
 <div class="block">Returns the name of the variable which is to be implicitly set at runtime
  each time a row is returned from the first input of this relational
@@ -750,7 +753,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 <section class="detail">
 <h3><a id="isValid(org.apache.calcite.util.Litmus,org.apache.calcite.rel.RelNode.Context)">isValid</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isValid</span>&#8203;(<span class="arguments"><a href="../util/Litmus.html" title="interface in org.apache.calcite.util">Litmus</a>&nbsp;litmus,
-<a href="RelNode.Context.html" title="interface in org.apache.calcite.rel">RelNode.Context</a>&nbsp;context)</span></div>
+@Nullable <a href="RelNode.Context.html" title="interface in org.apache.calcite.rel">RelNode.Context</a>&nbsp;context)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="RelNode.html#isValid(org.apache.calcite.util.Litmus,org.apache.calcite.rel.RelNode.Context)">RelNode</a></code></span></div>
 <div class="block">Returns whether this relational expression is valid.
 
@@ -975,7 +978,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 <li class="blockList">
 <section class="detail">
 <h3><a id="computeSelfCost(org.apache.calcite.plan.RelOptPlanner,org.apache.calcite.rel.metadata.RelMetadataQuery)">computeSelfCost</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../plan/RelOptCost.html" title="interface in org.apache.calcite.plan">RelOptCost</a></span>&nbsp;<span class="memberName">computeSelfCost</span>&#8203;(<span class="arguments"><a href="../plan/RelOptPlanner.html" title="interface in org.apache.calcite.plan">RelOptPlanner</a>&nbsp;planner,
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="../plan/RelOptCost.html" title="interface in org.apache.calcite.plan">RelOptCost</a></span>&nbsp;<span class="memberName">computeSelfCost</span>&#8203;(<span class="arguments"><a href="../plan/RelOptPlanner.html" title="interface in org.apache.calcite.plan">RelOptPlanner</a>&nbsp;planner,
 <a href="metadata/RelMetadataQuery.html" title="class in org.apache.calcite.rel.metadata">RelMetadataQuery</a>&nbsp;mq)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="RelNode.html#computeSelfCost(org.apache.calcite.plan.RelOptPlanner,org.apache.calcite.rel.metadata.RelMetadataQuery)">RelNode</a></code></span></div>
 <div class="block">Returns the cost of this plan (not including children). The base
@@ -998,7 +1001,8 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 <li class="blockList">
 <section class="detail">
 <h3><a id="metadata(java.lang.Class,org.apache.calcite.rel.metadata.RelMetadataQuery)">metadata</a></h3>
-<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="typeParameters">&lt;M extends <a href="metadata/Metadata.html" title="interface in org.apache.calcite.rel.metadata">Metadata</a>&gt;</span>&nbsp;<span class="returnType">M</span>&nbsp;<span class="memberName">metadata</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;M&gt;&nbsp;metadataClass,
+<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="typeParameters">&lt;@Nullable M extends @Nullable <a href="metadata/Metadata.html" title="interface in org.apache.calcite.rel.metadata">Metadata</a>&gt;</span>
+<span class="returnType">M</span>&nbsp;<span class="memberName">metadata</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;@Nullable M&gt;&nbsp;metadataClass,
 <a href="metadata/RelMetadataQuery.html" title="class in org.apache.calcite.rel.metadata">RelMetadataQuery</a>&nbsp;mq)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="RelNode.html#metadata(java.lang.Class,org.apache.calcite.rel.metadata.RelMetadataQuery)">RelNode</a></code></span></div>
 <div class="block">Returns a metadata interface.</div>
@@ -1026,7 +1030,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
  Each node should call <code>super.explain</code>, then call the
  <a href="RelWriter.html#input(java.lang.String,org.apache.calcite.rel.RelNode)"><code>RelWriter.input(String, RelNode)</code></a>
  and
- <a href="externalize/RelWriterImpl.html#item(java.lang.String,java.lang.Object)"><code>RelWriterImpl.item(String, Object)</code></a>
+ <a href="RelWriter.html#item(java.lang.String,java.lang.Object)"><code>RelWriter.item(String, Object)</code></a>
  methods for each input and attribute.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
@@ -1044,7 +1048,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
  Each node should call <code>super.explainTerms</code>, then call the
  <a href="RelWriter.html#input(java.lang.String,org.apache.calcite.rel.RelNode)"><code>RelWriter.input(String, RelNode)</code></a>
  and
- <a href="externalize/RelWriterImpl.html#item(java.lang.String,java.lang.Object)"><code>RelWriterImpl.item(String, Object)</code></a>
+ <a href="RelWriter.html#item(java.lang.String,java.lang.Object)"><code>RelWriter.item(String, Object)</code></a>
  methods for each input and attribute.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -1177,7 +1181,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 <li class="blockList">
 <section class="detail">
 <h3><a id="getTable()">getTable</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../plan/RelOptTable.html" title="interface in org.apache.calcite.plan">RelOptTable</a></span>&nbsp;<span class="memberName">getTable</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="../plan/RelOptTable.html" title="interface in org.apache.calcite.plan">RelOptTable</a></span>&nbsp;<span class="memberName">getTable</span>()</div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="RelNode.html#getTable()">RelNode</a></code></span></div>
 <div class="block">If this relational expression represents an access to a table, returns
  that table, otherwise returns null.</div>
@@ -1193,7 +1197,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 <li class="blockList">
 <section class="detail">
 <h3><a id="equals(java.lang.Object)">equals</a></h3>
-<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">equals</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;obj)</span></div>
+<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">equals</span>&#8203;(<span class="arguments">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;obj)</span></div>
 <div class="block">
 
  <p>This method (and <a href="#hashCode()"><code>hashCode()</code></a> is intentionally final. We do not want
@@ -1225,7 +1229,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 <h3><a id="deepEquals(java.lang.Object)">deepEquals</a></h3>
 <div class="memberSignature"><span class="annotations">@API(since="1.25",
      status=MAINTAINED)
-</span><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">deepEquals</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;obj)</span></div>
+</span><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">deepEquals</span>&#8203;(<span class="arguments">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;obj)</span></div>
 <div class="block">Equality check for RelNode digest.
 
  <p>By default this method collects digest attributes from
@@ -1255,7 +1259,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="RelNode.html#deepHashCode()">deepHashCode</a></code>&nbsp;in interface&nbsp;<code><a href="RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></dd>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="#deepEquals(java.lang.Object)"><code>deepEquals(Object)</code></a></dd>
+<dd><a href="RelNode.html#deepEquals(java.lang.Object)"><code>RelNode.deepEquals(Object)</code></a></dd>
 </dl>
 </section>
 </li>
@@ -1310,7 +1314,7 @@ implements <a href="RelNode.html" title="interface in org.apache.calcite.rel">Re
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

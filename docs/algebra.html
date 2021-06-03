@@ -410,6 +410,10 @@ return the <code class="highlighter-rouge">RelBuilder</code>.</p>
       <td style="text-align: left">Adds a pivot operation, implemented by generating an <a href="/javadocAggregate/org/apache/calcite/rel/core/Aggregate.html">Aggregate</a> with a column for each combination of measures and values</td>
     </tr>
     <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">unpivot(includeNulls, measureNames, axisNames, axisMap)</code></td>
+      <td style="text-align: left">Adds an unpivot operation, implemented by generating a <a href="/javadocAggregate/org/apache/calcite/rel/core/Join.html">Join</a> to a <a href="/javadocAggregate/org/apache/calcite/rel/core/Values.html">Values</a> that converts each row to several rows</td>
+    </tr>
+    <tr>
       <td style="text-align: left"><code class="highlighter-rouge">sort(fieldOrdinal...)</code><br /><code class="highlighter-rouge">sort(expr...)</code><br /><code class="highlighter-rouge">sort(exprList)</code></td>
       <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Sort.html">Sort</a>.<br /><br />In the first form, field ordinals are 0-based, and a negative ordinal indicates descending; for example, -2 means field 1 descending.<br /><br />In the other forms, you can wrap expressions in <code class="highlighter-rouge">as</code>, <code class="highlighter-rouge">nullsFirst</code> or <code class="highlighter-rouge">nullsLast</code>.</td>
     </tr>
@@ -822,6 +826,90 @@ added to the stack.</p>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">sort(expr...)</code><br /><code class="highlighter-rouge">sort(exprList)</code></td>
       <td style="text-align: left">Sorts rows before aggregating (see SQL <code class="highlighter-rouge">WITHIN GROUP</code>)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">unique(expr...)</code><br /><code class="highlighter-rouge">unique(exprList)</code></td>
+      <td style="text-align: left">Makes rows unique before aggregating (see SQL <code class="highlighter-rouge">WITHIN DISTINCT</code>)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">over()</code></td>
+      <td style="text-align: left">Converts this <code class="highlighter-rouge">AggCall</code> into a windowed aggregate (see <code class="highlighter-rouge">OverCall</code> below)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="windowed-aggregate-call-methods">Windowed aggregate call methods</h4>
+
+<p>To create an
+<a href="/javadocAggregate/org/apache/calcite/tools/RelBuilder.OverCall.html">RelBuilder.OverCall</a>,
+which represents a call to a windowed aggregate function, create an aggregate
+call and then call its <code class="highlighter-rouge">over()</code> method, for instance <code class="highlighter-rouge">count().over()</code>.</p>
+
+<p>To further modify the <code class="highlighter-rouge">OverCall</code>, call its methods:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Method</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">rangeUnbounded()</code></td>
+      <td style="text-align: left">Creates an unbounded range-based window, <code class="highlighter-rouge">RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">rangeFrom(lower)</code></td>
+      <td style="text-align: left">Creates a range-based window bounded below, <code class="highlighter-rouge">RANGE BETWEEN lower AND CURRENT ROW</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">rangeTo(upper)</code></td>
+      <td style="text-align: left">Creates a range-based window bounded above, <code class="highlighter-rouge">RANGE BETWEEN CURRENT ROW AND upper</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">rangeBetween(lower, upper)</code></td>
+      <td style="text-align: left">Creates a range-based window, <code class="highlighter-rouge">RANGE BETWEEN lower AND upper</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">rowsUnbounded()</code></td>
+      <td style="text-align: left">Creates an unbounded row-based window, <code class="highlighter-rouge">ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">rowsFrom(lower)</code></td>
+      <td style="text-align: left">Creates a row-based window bounded below, <code class="highlighter-rouge">ROWS BETWEEN lower AND CURRENT ROW</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">rowsTo(upper)</code></td>
+      <td style="text-align: left">Creates a row-based window bounded above, <code class="highlighter-rouge">ROWS BETWEEN CURRENT ROW AND upper</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">rowsBetween(lower, upper)</code></td>
+      <td style="text-align: left">Creates a rows-based window, <code class="highlighter-rouge">ROWS BETWEEN lower AND upper</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">partitionBy(expr...)</code><br /><code class="highlighter-rouge">partitionBy(exprList)</code></td>
+      <td style="text-align: left">Partitions the window on the given expressions (see SQL <code class="highlighter-rouge">PARTITION BY</code>)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">orderBy(expr...)</code><br /><code class="highlighter-rouge">sort(exprList)</code></td>
+      <td style="text-align: left">Sorts the rows in the window (see SQL <code class="highlighter-rouge">ORDER BY</code>)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">allowPartial(b)</code></td>
+      <td style="text-align: left">Sets whether to allow partial width windows; default true</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">nullWhenCountZero(b)</code></td>
+      <td style="text-align: left">Sets whether whether the aggregate function should evaluate to null if no rows are in the window; default false</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">as(alias)</code></td>
+      <td style="text-align: left">Assigns a column alias (see SQL <code class="highlighter-rouge">AS</code>) and converts this <code class="highlighter-rouge">OverCall</code> to a <code class="highlighter-rouge">RexNode</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">toRex()</code></td>
+      <td style="text-align: left">Converts this <code class="highlighter-rouge">OverCall</code> to a <code class="highlighter-rouge">RexNode</code></td>
     </tr>
   </tbody>
 </table>

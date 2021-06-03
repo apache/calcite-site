@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -130,7 +130,7 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(boolean,org.apache.calcite.linq4j.tree.BlockBuilder)">BlockBuilder</a></span>&#8203;(boolean&nbsp;optimizing,
-<a href="BlockBuilder.html" title="class in org.apache.calcite.linq4j.tree">BlockBuilder</a>&nbsp;parent)</code></th>
+@Nullable <a href="BlockBuilder.html" title="class in org.apache.calcite.linq4j.tree">BlockBuilder</a>&nbsp;parent)</code></th>
 <td class="colLast">
 <div class="block">Creates a BlockBuilder.</div>
 </td>
@@ -219,11 +219,12 @@ boolean&nbsp;optimize)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i8">
-<td class="colFirst"><code><a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a></code></td>
+<td class="colFirst"><code>@PolyNull <a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#appendIfNotNull(java.lang.String,org.apache.calcite.linq4j.tree.Expression)">appendIfNotNull</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;name,
-<a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expression)</code></th>
+@PolyNull <a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expression)</code></th>
 <td class="colLast">
-<div class="block">Appends an expression to a list of statements, if it is not null.</div>
+<div class="block">Appends an expression to a list of statements if it is not null,
+ and returns the expression.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i9">
@@ -248,7 +249,7 @@ boolean&nbsp;optimize)</code></th>
 </td>
 </tr>
 <tr class="altColor" id="i12">
-<td class="colFirst"><code><a href="DeclarationStatement.html" title="class in org.apache.calcite.linq4j.tree">DeclarationStatement</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="DeclarationStatement.html" title="class in org.apache.calcite.linq4j.tree">DeclarationStatement</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getComputedExpression(org.apache.calcite.linq4j.tree.Expression)">getComputedExpression</a></span>&#8203;(<a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expr)</code></th>
 <td class="colLast">
 <div class="block">Returns the reference to ParameterExpression if given expression was
@@ -267,7 +268,7 @@ boolean&nbsp;optimize)</code></th>
 </tr>
 <tr class="rowColor" id="i15">
 <td class="colFirst"><code>protected boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isSimpleExpression(org.apache.calcite.linq4j.tree.Expression)">isSimpleExpression</a></span>&#8203;(<a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expr)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isSimpleExpression(org.apache.calcite.linq4j.tree.Expression)">isSimpleExpression</a></span>&#8203;(@Nullable <a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expr)</code></th>
 <td class="colLast">
 <div class="block">Checks if expression is simple enough to always inline at zero cost.</div>
 </td>
@@ -285,6 +286,11 @@ boolean&nbsp;optimize)</code></th>
 <td class="colLast">
 <div class="block">Returns a block consisting of the current list of statements.</div>
 </td>
+</tr>
+<tr class="altColor" id="i18">
+<td class="colFirst"><code><a href="BlockBuilder.html" title="class in org.apache.calcite.linq4j.tree">BlockBuilder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withRemoveUnused(boolean)">withRemoveUnused</a></span>&#8203;(boolean&nbsp;removeUnused)</code></th>
+<td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
 </table>
@@ -330,7 +336,7 @@ boolean&nbsp;optimize)</code></th>
 <section class="detail">
 <h3><a id="&lt;init&gt;(boolean,org.apache.calcite.linq4j.tree.BlockBuilder)">BlockBuilder</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">BlockBuilder</span>&#8203;(<span class="arguments">boolean&nbsp;optimizing,
-<a href="BlockBuilder.html" title="class in org.apache.calcite.linq4j.tree">BlockBuilder</a>&nbsp;parent)</span></div>
+@Nullable <a href="BlockBuilder.html" title="class in org.apache.calcite.linq4j.tree">BlockBuilder</a>&nbsp;parent)</span></div>
 <div class="block">Creates a BlockBuilder.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -396,9 +402,10 @@ boolean&nbsp;optimize)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="appendIfNotNull(java.lang.String,org.apache.calcite.linq4j.tree.Expression)">appendIfNotNull</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a></span>&nbsp;<span class="memberName">appendIfNotNull</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;name,
-<a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expression)</span></div>
-<div class="block">Appends an expression to a list of statements, if it is not null.</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@PolyNull <a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a></span>&nbsp;<span class="memberName">appendIfNotNull</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;name,
+@PolyNull <a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expression)</span></div>
+<div class="block">Appends an expression to a list of statements if it is not null,
+ and returns the expression.</div>
 </section>
 </li>
 <li class="blockList">
@@ -414,7 +421,7 @@ boolean&nbsp;optimize)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="isSimpleExpression(org.apache.calcite.linq4j.tree.Expression)">isSimpleExpression</a></h3>
-<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isSimpleExpression</span>&#8203;(<span class="arguments"><a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expr)</span></div>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isSimpleExpression</span>&#8203;(<span class="arguments">@Nullable <a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expr)</span></div>
 <div class="block">Checks if expression is simple enough to always inline at zero cost.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -439,7 +446,7 @@ boolean&nbsp;optimize)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getComputedExpression(org.apache.calcite.linq4j.tree.Expression)">getComputedExpression</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="DeclarationStatement.html" title="class in org.apache.calcite.linq4j.tree">DeclarationStatement</a></span>&nbsp;<span class="memberName">getComputedExpression</span>&#8203;(<span class="arguments"><a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expr)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="DeclarationStatement.html" title="class in org.apache.calcite.linq4j.tree">DeclarationStatement</a></span>&nbsp;<span class="memberName">getComputedExpression</span>&#8203;(<span class="arguments"><a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expr)</span></div>
 <div class="block">Returns the reference to ParameterExpression if given expression was
  already computed and stored to local variable.</div>
 <dl>
@@ -513,6 +520,12 @@ boolean&nbsp;optimize)</span></div>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="BlockBuilder.html" title="class in org.apache.calcite.linq4j.tree">BlockBuilder</a></span>&nbsp;<span class="memberName">append</span>&#8203;(<span class="arguments"><a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expression)</span></div>
 </section>
 </li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="withRemoveUnused(boolean)">withRemoveUnused</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="BlockBuilder.html" title="class in org.apache.calcite.linq4j.tree">BlockBuilder</a></span>&nbsp;<span class="memberName">withRemoveUnused</span>&#8203;(<span class="arguments">boolean&nbsp;removeUnused)</span></div>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -564,7 +577,7 @@ boolean&nbsp;optimize)</span></div>
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

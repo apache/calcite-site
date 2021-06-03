@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -95,7 +95,7 @@ loadScripts(document, 'script');</script>
 <section class="description">
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="SqlFilterOperator.html" title="class in org.apache.calcite.sql">SqlFilterOperator</a></code>, <code><a href="fun/SqlInOperator.html" title="class in org.apache.calcite.sql.fun">SqlInOperator</a></code>, <code><a href="fun/SqlMonotonicBinaryOperator.html" title="class in org.apache.calcite.sql.fun">SqlMonotonicBinaryOperator</a></code>, <code><a href="fun/SqlMultisetMemberOfOperator.html" title="class in org.apache.calcite.sql.fun">SqlMultisetMemberOfOperator</a></code>, <code><a href="fun/SqlMultisetSetOperator.html" title="class in org.apache.calcite.sql.fun">SqlMultisetSetOperator</a></code>, <code><a href="fun/SqlOverlapsOperator.html" title="class in org.apache.calcite.sql.fun">SqlOverlapsOperator</a></code>, <code><a href="SqlOverOperator.html" title="class in org.apache.calcite.sql">SqlOverOperator</a></code>, <code><a href="fun/SqlPosixRegexOperator.html" title="class in org.apache.calcite.sql.fun">SqlPosixRegexOperator</a></code>, <code><a href="SqlSetOperator.html" title="class in org.apache.calcite.sql">SqlSetOperator</a></code>, <code><a href="SqlWithinGroupOperator.html" title="class in org.apache.calcite.sql">SqlWithinGroupOperator</a></code></dd>
+<dd><code><a href="SqlFilterOperator.html" title="class in org.apache.calcite.sql">SqlFilterOperator</a></code>, <code><a href="fun/SqlInOperator.html" title="class in org.apache.calcite.sql.fun">SqlInOperator</a></code>, <code><a href="fun/SqlMonotonicBinaryOperator.html" title="class in org.apache.calcite.sql.fun">SqlMonotonicBinaryOperator</a></code>, <code><a href="fun/SqlMultisetMemberOfOperator.html" title="class in org.apache.calcite.sql.fun">SqlMultisetMemberOfOperator</a></code>, <code><a href="fun/SqlMultisetSetOperator.html" title="class in org.apache.calcite.sql.fun">SqlMultisetSetOperator</a></code>, <code><a href="fun/SqlOverlapsOperator.html" title="class in org.apache.calcite.sql.fun">SqlOverlapsOperator</a></code>, <code><a href="SqlOverOperator.html" title="class in org.apache.calcite.sql">SqlOverOperator</a></code>, <code><a href="fun/SqlPosixRegexOperator.html" title="class in org.apache.calcite.sql.fun">SqlPosixRegexOperator</a></code>, <code><a href="SqlSetOperator.html" title="class in org.apache.calcite.sql">SqlSetOperator</a></code>, <code><a href="SqlWithinDistinctOperator.html" title="class in org.apache.calcite.sql">SqlWithinDistinctOperator</a></code>, <code><a href="SqlWithinGroupOperator.html" title="class in org.apache.calcite.sql">SqlWithinGroupOperator</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">SqlBinaryOperator</span>
@@ -138,9 +138,9 @@ extends <a href="SqlOperator.html" title="class in org.apache.calcite.sql">SqlOp
 <a href="SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&nbsp;kind,
 int&nbsp;prec,
 boolean&nbsp;leftAssoc,
-<a href="type/SqlReturnTypeInference.html" title="interface in org.apache.calcite.sql.type">SqlReturnTypeInference</a>&nbsp;returnTypeInference,
-<a href="type/SqlOperandTypeInference.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeInference</a>&nbsp;operandTypeInference,
-<a href="type/SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a>&nbsp;operandTypeChecker)</code></th>
+@Nullable <a href="type/SqlReturnTypeInference.html" title="interface in org.apache.calcite.sql.type">SqlReturnTypeInference</a>&nbsp;returnTypeInference,
+@Nullable <a href="type/SqlOperandTypeInference.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeInference</a>&nbsp;operandTypeInference,
+@Nullable <a href="type/SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a>&nbsp;operandTypeChecker)</code></th>
 <td class="colLast">
 <div class="block">Creates a SqlBinaryOperator.</div>
 </td>
@@ -195,7 +195,7 @@ boolean&nbsp;leftAssoc,
 </td>
 </tr>
 <tr class="rowColor" id="i3">
-<td class="colFirst"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSignatureTemplate(int)">getSignatureTemplate</a></span>&#8203;(int&nbsp;operandsCount)</code></th>
 <td class="colLast">
 <div class="block">Returns a template describing how the operator signature is to be built.</div>
@@ -209,6 +209,14 @@ boolean&nbsp;leftAssoc,
 </td>
 </tr>
 <tr class="rowColor" id="i5">
+<td class="colFirst"><code>@Nullable <a href="SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#reverse()">reverse</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the operator that has the same effect as this operator
+ if its arguments are reversed.</div>
+</td>
+</tr>
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#validRexOperands(int,org.apache.calcite.util.Litmus)">validRexOperands</a></span>&#8203;(int&nbsp;count,
 <a href="../util/Litmus.html" title="interface in org.apache.calcite.util">Litmus</a>&nbsp;litmus)</code></th>
@@ -224,7 +232,7 @@ boolean&nbsp;leftAssoc,
 <h3>Methods inherited from class&nbsp;org.apache.calcite.sql.<a href="SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a></h3>
 <a id="methods.inherited.from.class.org.apache.calcite.sql.SqlOperator">
 <!--   -->
-</a><code><a href="SqlOperator.html#acceptCall(org.apache.calcite.sql.util.SqlVisitor,org.apache.calcite.sql.SqlCall)">acceptCall</a>, <a href="SqlOperator.html#acceptCall(org.apache.calcite.sql.util.SqlVisitor,org.apache.calcite.sql.SqlCall,boolean,org.apache.calcite.sql.util.SqlBasicVisitor.ArgHandler)">acceptCall</a>, <a href="SqlOperator.html#allowsFraming()">allowsFraming</a>, <a href="SqlOperator.html#argumentMustBeScalar(int)">argumentMustBeScalar</a>, <a href="SqlOperator.html#checkOperandCount(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.type.SqlOperandTypeChecker,org.apache.calcite.sql.SqlCall)">checkOperandCount</a>, <a href="SqlOperator.html#checkOperandTypes(org.apache.calcite.sql.SqlCallBinding,boolean)">checkOperandTypes</a>, <a href="SqlOperator.html#constructArgNameList(org.apache.calcite.sql.SqlCall)">constructArgNameList</a>, <a href="SqlOperator.html#constructArgTypeList(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall,java.util.List,boolean)">constructArgTypeList</a>, <a href="SqlOperator.html#constructOperandList(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.SqlCall,java.util.List)">constructOperandList</a>, <a href="SqlOperator.html#createCall(org.apache.calcite.sql.parser.SqlParserPos,java.util.List)">createCall</a>, <a href="SqlOperator.html#createCall(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.sql.SqlNode...)">createCall</a>, <a href="SqlOperator.html#createCall(org.apache.calcite.sql.SqlLiteral,org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.sql.SqlNode...)">createCall</a>, <a href="SqlOperator.html#createCall(org.apache.calcite.sql.SqlNodeList)">createCall</a>, <a href="SqlOperator.html#equals(java.lang.Object)">equals</a>, <a href="SqlOperator.html#getAllowedSignatures()">getAllowedSignatures</a>, <a href="SqlOperator.html#getAllowedSignatures(java.lang.String)">getAllowedSignatures</a>, <a href="SqlOperator.html#getKind()">getKind</a>, <a href="SqlOperator.html#getLeftPrec()">getLeftPrec</a>, <a href="SqlOperator.html#getMonotonicity(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.validate.SqlValidatorScope)">getMonotonicity</a>, <a href="SqlOperator.html#getName()">getName</a>, <a href="SqlOperator.html#getNameAsId()">getNameAsId</a>, <a href="SqlOperator.html#getOperandCountRange()">getOperandCountRange</a>, <a href="SqlOperator.html#getOperandTypeChecker()">getOperandTypeChecker</a>, <a href="SqlOperator.html#getOperandTypeInference()">getOperandTypeInference</a>, <a href="SqlOperator.html#getReturnTypeInference()">getReturnTypeInference</a>, <a href="SqlOperator.html#getRightPrec()">getRightPrec</a>, <a href="SqlOperator.html#getStrongPolicyInference()">getStrongPolicyInference</a>, <a href="SqlOperator.html#hashCode()">hashCode</a>, <a href="SqlOperator.html#inferReturnType(org.apache.calcite.rel.type.RelDataTypeFactory,java.util.List)">inferReturnType</a>, <a href="SqlOperator.html#inferReturnType(org.apache.calcite.sql.SqlOperatorBinding)">inferReturnType</a>, <a href="SqlOperator.html#isAggregator()">isAggregator</a>, <a href="SqlOperator.html#isDeterministic()">isDeterministic</a>, <a href="SqlOperator.html#isDynamicFunction()">isDynamicFunction</a>, <a href="SqlOperator.html#isGroup()">isGroup</a>, <a href="SqlOperator.html#isGroupAuxiliary()">isGroupAuxiliary</a>, <a href="SqlOperator.html#isName(java.lang.String,boolean)">isName</a>, <a href="SqlOperator.html#isSymmetrical()">isSymmetrical</a>, <a href="SqlOperator.html#leftPrec(int,boolean)">leftPrec</a>, <a href="SqlOperator.html#preValidateCall(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall)">preValidateCall</a>, <a href="SqlOperator.html#requiresDecimalExpansion()">requiresDecimalExpansion</a>, <a href="SqlOperator.html#requiresOrder()">requiresOrder</a>, <a href="SqlOperator.html#requiresOver()">requiresOver</a>, <a href="SqlOperator.html#rewriteCall(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.SqlCall)">rewriteCall</a>, <a href="SqlOperator.html#rightPrec(int,boolean)">rightPrec</a>, <a href="SqlOperator.html#toString()">toString</a>, <a href="SqlOperator.html#unparse(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,int,int)">unparse</a>, <a href="SqlOperator.html#unparseListClause(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode)">unparseListClause</a>, <a href="SqlOperator.html#unparseListClause(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlKind)">unparseListClause</a>, <a href="SqlOperator.html#validateCall(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.validate.SqlValidatorScope)">validateCall</a>, <a href="SqlOperator.html#validateOperands(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall)">validateOperands</a></code></div>
+</a><code><a href="SqlOperator.html#acceptCall(org.apache.calcite.sql.util.SqlVisitor,org.apache.calcite.sql.SqlCall)">acceptCall</a>, <a href="SqlOperator.html#acceptCall(org.apache.calcite.sql.util.SqlVisitor,org.apache.calcite.sql.SqlCall,boolean,org.apache.calcite.sql.util.SqlBasicVisitor.ArgHandler)">acceptCall</a>, <a href="SqlOperator.html#allowsFraming()">allowsFraming</a>, <a href="SqlOperator.html#argumentMustBeScalar(int)">argumentMustBeScalar</a>, <a href="SqlOperator.html#checkOperandCount(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.type.SqlOperandTypeChecker,org.apache.calcite.sql.SqlCall)">checkOperandCount</a>, <a href="SqlOperator.html#checkOperandTypes(org.apache.calcite.sql.SqlCallBinding,boolean)">checkOperandTypes</a>, <a href="SqlOperator.html#constructArgNameList(org.apache.calcite.sql.SqlCall)">constructArgNameList</a>, <a href="SqlOperator.html#constructArgTypeList(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall,java.util.List,boolean)">constructArgTypeList</a>, <a href="SqlOperator.html#constructOperandList(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.SqlCall,java.util.List)">constructOperandList</a>, <a href="SqlOperator.html#createCall(org.apache.calcite.sql.SqlLiteral,org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.sql.SqlNode...)">createCall</a>, <a href="SqlOperator.html#createCall(org.apache.calcite.sql.SqlLiteral,org.apache.calcite.sql.parser.SqlParserPos,java.lang.Iterable)">createCall</a>, <a href="SqlOperator.html#createCall(org.apache.calcite.sql.SqlLiteral,org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.sql.SqlNodeList)">createCall</a>, <a href="SqlOperator.html#createCall(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.sql.SqlNode...)">createCall</a>, <a href="SqlOperator.html#createCall(org.apache.calcite.sql.parser.SqlParserPos,java.util.List)">createCall</a>, <a href="SqlOperator.html#createCall(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.sql.SqlNodeList)">createCall</a>, <a href="SqlOperator.html#createCall(org.apache.calcite.sql.SqlNodeList)">createCall</a>, <a href="SqlOperator.html#equals(java.lang.Object)">equals</a>, <a href="SqlOperator.html#getAllowedSignatures()">getAllowedSignatures</a>, <a href="SqlOperator.html#getAllowedSignatures(java.lang.String)">getAllowedSignatures</a>, <a href="SqlOperator.html#getKind()">getKind</a>, <a href="SqlOperator.html#getLeftPrec()">getLeftPrec</a>, <a href="SqlOperator.html#getMonotonicity(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.validate.SqlValidatorScope)">getMonotonicity</a>, <a href="SqlOperator.html#getName()">getName</a>, <a href="SqlOperator.html#getNameAsId()">getNameAsId</a>, <a href="SqlOperator.html#getOperandCountRange()">getOperandCountRange</a>, <a href="SqlOperator.html#getOperandTypeChecker()">getOperandTypeChecker</a>, <a href="SqlOperator.html#getOperandTypeInference()">getOperandTypeInference</a>, <a href="SqlOperator.html#getReturnTypeInference()">getReturnTypeInference</a>, <a href="SqlOperator.html#getRightPrec()">getRightPrec</a>, <a href="SqlOperator.html#getStrongPolicyInference()">getStrongPolicyInference</a>, <a href="SqlOperator.html#hashCode()">hashCode</a>, <a href="SqlOperator.html#inferReturnType(org.apache.calcite.rel.type.RelDataTypeFactory,java.util.List)">inferReturnType</a>, <a href="SqlOperator.html#inferReturnType(org.apache.calcite.sql.SqlOperatorBinding)">inferReturnType</a>, <a href="SqlOperator.html#isAggregator()">isAggregator</a>, <a href="SqlOperator.html#isDeterministic()">isDeterministic</a>, <a href="SqlOperator.html#isDynamicFunction()">isDynamicFunction</a>, <a href="SqlOperator.html#isGroup()">isGroup</a>, <a href="SqlOperator.html#isGroupAuxiliary()">isGroupAuxiliary</a>, <a href="SqlOperator.html#isName(java.lang.String,boolean)">isName</a>, <a href="SqlOperator.html#isSymmetrical()">isSymmetrical</a>, <a href="SqlOperator.html#leftPrec(int,boolean)">leftPrec</a>, <a href="SqlOperator.html#not()">not</a>, <a href="SqlOperator.html#preValidateCall(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall)">preValidateCall</a>, <a href="SqlOperator.html#requiresDecimalExpansion()">requiresDecimalExpansion</a>, <a href="SqlOperator.html#requiresOrder()">requiresOrder</a>, <a href="SqlOperator.html#requiresOver()">requiresOver</a>, <a href="SqlOperator.html#rewriteCall(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.SqlCall)">rewriteCall</a>, <a href="SqlOperator.html#rightPrec(int,boolean)">rightPrec</a>, <a href="SqlOperator.html#toString()">toString</a>, <a href="SqlOperator.html#unparse(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,int,int)">unparse</a>, <a href="SqlOperator.html#unparseListClause(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode)">unparseListClause</a>, <a href="SqlOperator.html#unparseListClause(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlKind)">unparseListClause</a>, <a href="SqlOperator.html#validateCall(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.validate.SqlValidatorScope)">validateCall</a>, <a href="SqlOperator.html#validateOperands(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall)">validateOperands</a></code></div>
 <div class="inheritedList">
 <h3>Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a></h3>
 <a id="methods.inherited.from.class.java.lang.Object">
@@ -250,9 +258,9 @@ boolean&nbsp;leftAssoc,
 <a href="SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&nbsp;kind,
 int&nbsp;prec,
 boolean&nbsp;leftAssoc,
-<a href="type/SqlReturnTypeInference.html" title="interface in org.apache.calcite.sql.type">SqlReturnTypeInference</a>&nbsp;returnTypeInference,
-<a href="type/SqlOperandTypeInference.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeInference</a>&nbsp;operandTypeInference,
-<a href="type/SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a>&nbsp;operandTypeChecker)</span></div>
+@Nullable <a href="type/SqlReturnTypeInference.html" title="interface in org.apache.calcite.sql.type">SqlReturnTypeInference</a>&nbsp;returnTypeInference,
+@Nullable <a href="type/SqlOperandTypeInference.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeInference</a>&nbsp;operandTypeInference,
+@Nullable <a href="type/SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a>&nbsp;operandTypeChecker)</span></div>
 <div class="block">Creates a SqlBinaryOperator.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -291,7 +299,7 @@ boolean&nbsp;leftAssoc,
 <li class="blockList">
 <section class="detail">
 <h3><a id="getSignatureTemplate(int)">getSignatureTemplate</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></span>&nbsp;<span class="memberName">getSignatureTemplate</span>&#8203;(<span class="arguments">int&nbsp;operandsCount)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></span>&nbsp;<span class="memberName">getSignatureTemplate</span>&#8203;(<span class="arguments">int&nbsp;operandsCount)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="SqlOperator.html#getSignatureTemplate(int)">SqlOperator</a></code></span></div>
 <div class="block">Returns a template describing how the operator signature is to be built.
  E.g for the binary + operator the template looks like "{1} {0} {2}" {0}
@@ -305,6 +313,31 @@ boolean&nbsp;leftAssoc,
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>signature template, or null to indicate that a default template
  will suffice</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="reverse()">reverse</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a></span>&nbsp;<span class="memberName">reverse</span>()</div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="SqlOperator.html#reverse()">SqlOperator</a></code></span></div>
+<div class="block">Returns the operator that has the same effect as this operator
+ if its arguments are reversed.
+
+ <p>For example, <code>SqlStdOperatorTable.GREATER_THAN.reverse()</code> returns
+ <code>SqlStdOperatorTable.LESS_THAN</code>, and vice versa,
+ because <code>a &gt; b</code> is equivalent to <code>b &lt; a</code>.
+
+ <p><code>SqlStdOperatorTable.EQUALS.reverse()</code> returns itself.
+
+ <p>By default, returns <code>null</code>, which means there is no inverse
+ operator.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="SqlOperator.html#reverse()">reverse</a></code>&nbsp;in class&nbsp;<code><a href="SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a></code></dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="SqlOperator.html#not()"><code>SqlOperator.not()</code></a>, 
+<a href="SqlKind.html#reverse()"><code>SqlKind.reverse()</code></a></dd>
 </dl>
 </section>
 </li>
@@ -434,7 +467,7 @@ boolean&nbsp;leftAssoc,
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

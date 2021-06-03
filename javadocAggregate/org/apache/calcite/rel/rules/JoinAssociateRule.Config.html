@@ -19,8 +19,8 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":18,"i1":18};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],16:["t5","Default Methods"]};
+<script type="text/javascript">var data = {"i0":6,"i1":18,"i2":6,"i3":18};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -142,7 +142,7 @@ extends <a href="../../plan/RelRule.Config.html" title="interface in org.apache.
 </a>
 <h2>Method Summary</h2>
 <div class="memberSummary">
-<div role="tablist" aria-orientation="horizontal"><button role="tab" aria-selected="true" aria-controls="memberSummary_tabpanel" tabindex="0" onkeydown="switchTab(event)" id="t0" class="activeTableTab">All Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t2" class="tableTab" onclick="show(2);">Instance Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t5" class="tableTab" onclick="show(16);">Default Methods</button></div>
+<div role="tablist" aria-orientation="horizontal"><button role="tab" aria-selected="true" aria-controls="memberSummary_tabpanel" tabindex="0" onkeydown="switchTab(event)" id="t0" class="activeTableTab">All Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t2" class="tableTab" onclick="show(2);">Instance Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t3" class="tableTab" onclick="show(4);">Abstract Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t5" class="tableTab" onclick="show(16);">Default Methods</button></div>
 <div id="memberSummary_tabpanel" role="tabpanel">
 <table aria-labelledby="t0">
 <thead>
@@ -154,16 +154,30 @@ extends <a href="../../plan/RelRule.Config.html" title="interface in org.apache.
 </thead>
 <tbody>
 <tr class="altColor" id="i0">
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isAllowAlwaysTrueCondition()">isAllowAlwaysTrueCondition</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Whether to emit the new join tree if the new top or bottom join has a condition which
+ is always <code>TRUE</code>.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i1">
 <td class="colFirst"><code>default <a href="JoinAssociateRule.html" title="class in org.apache.calcite.rel.rules">JoinAssociateRule</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toRule()">toRule</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Creates a rule that uses this configuration.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i1">
+<tr class="altColor" id="i2">
+<td class="colFirst"><code><a href="JoinAssociateRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinAssociateRule.Config</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withAllowAlwaysTrueCondition(boolean)">withAllowAlwaysTrueCondition</a></span>&#8203;(boolean&nbsp;allowAlwaysTrueCondition)</code></th>
+<td class="colLast">
+<div class="block">Sets <a href="#isAllowAlwaysTrueCondition()"><code>isAllowAlwaysTrueCondition()</code></a>.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i3">
 <td class="colFirst"><code>default <a href="JoinAssociateRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinAssociateRule.Config</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withOperandFor(java.lang.Class,java.lang.Class)">withOperandFor</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="../core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&gt;&nbsp;joinClass,
-<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="../../plan/volcano/RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a>&gt;&nbsp;relSubsetClass)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withOperandFor(java.lang.Class)">withOperandFor</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="../core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&gt;&nbsp;joinClass)</code></th>
 <td class="colLast">
 <div class="block">Defines an operand tree for the given classes.</div>
 </td>
@@ -220,9 +234,23 @@ extends <a href="../../plan/RelRule.Config.html" title="interface in org.apache.
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="withOperandFor(java.lang.Class,java.lang.Class)">withOperandFor</a></h3>
-<div class="memberSignature"><span class="modifiers">default</span>&nbsp;<span class="returnType"><a href="JoinAssociateRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinAssociateRule.Config</a></span>&nbsp;<span class="memberName">withOperandFor</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="../core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&gt;&nbsp;joinClass,
-<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="../../plan/volcano/RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a>&gt;&nbsp;relSubsetClass)</span></div>
+<h3><a id="isAllowAlwaysTrueCondition()">isAllowAlwaysTrueCondition</a></h3>
+<div class="memberSignature"><span class="returnType">boolean</span>&nbsp;<span class="memberName">isAllowAlwaysTrueCondition</span>()</div>
+<div class="block">Whether to emit the new join tree if the new top or bottom join has a condition which
+ is always <code>TRUE</code>.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="withAllowAlwaysTrueCondition(boolean)">withAllowAlwaysTrueCondition</a></h3>
+<div class="memberSignature"><span class="returnType"><a href="JoinAssociateRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinAssociateRule.Config</a></span>&nbsp;<span class="memberName">withAllowAlwaysTrueCondition</span>&#8203;(<span class="arguments">boolean&nbsp;allowAlwaysTrueCondition)</span></div>
+<div class="block">Sets <a href="#isAllowAlwaysTrueCondition()"><code>isAllowAlwaysTrueCondition()</code></a>.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="withOperandFor(java.lang.Class)">withOperandFor</a></h3>
+<div class="memberSignature"><span class="modifiers">default</span>&nbsp;<span class="returnType"><a href="JoinAssociateRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinAssociateRule.Config</a></span>&nbsp;<span class="memberName">withOperandFor</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="../core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&gt;&nbsp;joinClass)</span></div>
 <div class="block">Defines an operand tree for the given classes.</div>
 </section>
 </li>
@@ -277,7 +305,7 @@ extends <a href="../../plan/RelRule.Config.html" title="interface in org.apache.
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

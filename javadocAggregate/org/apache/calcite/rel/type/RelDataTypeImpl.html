@@ -129,14 +129,21 @@ implements <a href="RelDataType.html" title="interface in org.apache.calcite.rel
 </thead>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><code>protected <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></code></td>
+<td class="colFirst"><code>protected @Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#digest">digest</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>protected <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a>&gt;</code></td>
+<td class="colFirst"><code>protected @Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#fieldList">fieldList</a></span></code></th>
 <td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#NON_NULLABLE_SUFFIX">NON_NULLABLE_SUFFIX</a></span></code></th>
+<td class="colLast">
+<div class="block">Suffix for the digests of non-nullable types.</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -175,7 +182,7 @@ implements <a href="RelDataType.html" title="interface in org.apache.calcite.rel
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected </code></td>
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.util.List)">RelDataTypeImpl</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a>&gt;&nbsp;fieldList)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.util.List)">RelDataTypeImpl</a></span>&#8203;(@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a>&gt;&nbsp;fieldList)</code></th>
 <td class="colLast">
 <div class="block">Creates a RelDataTypeImpl.</div>
 </td>
@@ -212,11 +219,11 @@ implements <a href="RelDataType.html" title="interface in org.apache.calcite.rel
 </tr>
 <tr class="rowColor" id="i1">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;obj)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;obj)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i2">
-<td class="colFirst"><code>static <a href="RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a></code></td>
+<td class="colFirst"><code>static @Nullable <a href="RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#extra(org.apache.calcite.rel.type.RelDataType)">extra</a></span>&#8203;(<a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType)</code></th>
 <td class="colLast">
 <div class="block">Returns the "extra" field in a row type whose presence signals that
@@ -232,7 +239,7 @@ boolean&nbsp;withDetail)</code></th>
 </td>
 </tr>
 <tr class="altColor" id="i4">
-<td class="colFirst"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/nio/charset/Charset.html?is-external=true" title="class or interface in java.nio.charset" class="externalLink">Charset</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/nio/charset/Charset.html?is-external=true" title="class or interface in java.nio.charset" class="externalLink">Charset</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCharset()">getCharset</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Gets this type's character set, or null if this type cannot carry a
@@ -240,7 +247,7 @@ boolean&nbsp;withDetail)</code></th>
 </td>
 </tr>
 <tr class="rowColor" id="i5">
-<td class="colFirst"><code><a href="../../sql/SqlCollation.html" title="class in org.apache.calcite.sql">SqlCollation</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="../../sql/SqlCollation.html" title="class in org.apache.calcite.sql">SqlCollation</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCollation()">getCollation</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Gets this type's collation, or null if this type cannot carry a collation
@@ -256,7 +263,7 @@ boolean&nbsp;withDetail)</code></th>
 </td>
 </tr>
 <tr class="rowColor" id="i7">
-<td class="colFirst"><code><a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getComponentType()">getComponentType</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Gets the component type if this type is a collection, otherwise null.</div>
@@ -270,7 +277,7 @@ boolean&nbsp;withDetail)</code></th>
 </td>
 </tr>
 <tr class="rowColor" id="i9">
-<td class="colFirst"><code><a href="RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getField(java.lang.String,boolean,boolean)">getField</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;fieldName,
 boolean&nbsp;caseSensitive,
 boolean&nbsp;elideRecord)</code></th>
@@ -308,7 +315,7 @@ boolean&nbsp;elideRecord)</code></th>
 </td>
 </tr>
 <tr class="altColor" id="i14">
-<td class="colFirst"><code><a href="../../sql/SqlIntervalQualifier.html" title="class in org.apache.calcite.sql">SqlIntervalQualifier</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="../../sql/SqlIntervalQualifier.html" title="class in org.apache.calcite.sql">SqlIntervalQualifier</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getIntervalQualifier()">getIntervalQualifier</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Gets this type's interval qualifier, or null if this is not an interval
@@ -316,7 +323,7 @@ boolean&nbsp;elideRecord)</code></th>
 </td>
 </tr>
 <tr class="rowColor" id="i15">
-<td class="colFirst"><code><a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getKeyType()">getKeyType</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Gets the key type if this type is a map, otherwise null.</div>
@@ -344,7 +351,7 @@ boolean&nbsp;elideRecord)</code></th>
 </td>
 </tr>
 <tr class="rowColor" id="i19">
-<td class="colFirst"><code><a href="../../sql/SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="../../sql/SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSqlIdentifier()">getSqlIdentifier</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Gets the <a href="../../sql/SqlIdentifier.html" title="class in org.apache.calcite.sql"><code>SqlIdentifier</code></a> associated with this type.</div>
@@ -366,7 +373,7 @@ boolean&nbsp;elideRecord)</code></th>
 </td>
 </tr>
 <tr class="altColor" id="i22">
-<td class="colFirst"><code><a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getValueType()">getValueType</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Gets the value type if this type is a map, otherwise null.</div>
@@ -475,14 +482,25 @@ boolean&nbsp;nullable)</code></th>
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
+<h3><a id="NON_NULLABLE_SUFFIX">NON_NULLABLE_SUFFIX</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></span>&nbsp;<span class="memberName">NON_NULLABLE_SUFFIX</span></div>
+<div class="block">Suffix for the digests of non-nullable types.</div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../constant-values.html#org.apache.calcite.rel.type.RelDataTypeImpl.NON_NULLABLE_SUFFIX">Constant Field Values</a></dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="fieldList">fieldList</a></h3>
-<div class="memberSignature"><span class="modifiers">protected final</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a>&gt;</span>&nbsp;<span class="memberName">fieldList</span></div>
+<div class="memberSignature"><span class="modifiers">protected final</span>&nbsp;<span class="returnType">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a>&gt;</span>&nbsp;<span class="memberName">fieldList</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="digest">digest</a></h3>
-<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></span>&nbsp;<span class="memberName">digest</span></div>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></span>&nbsp;<span class="memberName">digest</span></div>
 </section>
 </li>
 </ul>
@@ -498,7 +516,7 @@ boolean&nbsp;nullable)</code></th>
 <li class="blockList">
 <section class="detail">
 <h3><a id="&lt;init&gt;(java.util.List)">RelDataTypeImpl</a></h3>
-<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="memberName">RelDataTypeImpl</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a>&gt;&nbsp;fieldList)</span></div>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="memberName">RelDataTypeImpl</span>&#8203;(<span class="arguments">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a>&gt;&nbsp;fieldList)</span></div>
 <div class="block">Creates a RelDataTypeImpl.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -531,7 +549,7 @@ boolean&nbsp;nullable)</code></th>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getField(java.lang.String,boolean,boolean)">getField</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a></span>&nbsp;<span class="memberName">getField</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;fieldName,
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a></span>&nbsp;<span class="memberName">getField</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;fieldName,
 boolean&nbsp;caseSensitive,
 boolean&nbsp;elideRecord)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="RelDataType.html#getField(java.lang.String,boolean,boolean)">RelDataType</a></code></span></div>
@@ -620,7 +638,7 @@ boolean&nbsp;elideRecord)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getComponentType()">getComponentType</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></span>&nbsp;<span class="memberName">getComponentType</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></span>&nbsp;<span class="memberName">getComponentType</span>()</div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="RelDataType.html#getComponentType()">RelDataType</a></code></span></div>
 <div class="block">Gets the component type if this type is a collection, otherwise null.</div>
 <dl>
@@ -634,7 +652,7 @@ boolean&nbsp;elideRecord)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getKeyType()">getKeyType</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></span>&nbsp;<span class="memberName">getKeyType</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></span>&nbsp;<span class="memberName">getKeyType</span>()</div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="RelDataType.html#getKeyType()">RelDataType</a></code></span></div>
 <div class="block">Gets the key type if this type is a map, otherwise null.</div>
 <dl>
@@ -648,7 +666,7 @@ boolean&nbsp;elideRecord)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getValueType()">getValueType</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></span>&nbsp;<span class="memberName">getValueType</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></span>&nbsp;<span class="memberName">getValueType</span>()</div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="RelDataType.html#getValueType()">RelDataType</a></code></span></div>
 <div class="block">Gets the value type if this type is a map, otherwise null.</div>
 <dl>
@@ -677,7 +695,7 @@ boolean&nbsp;elideRecord)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="equals(java.lang.Object)">equals</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">equals</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;obj)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">equals</span>&#8203;(<span class="arguments">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;obj)</span></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang" class="externalLink">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a></code></dd>
@@ -728,7 +746,7 @@ boolean&nbsp;elideRecord)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getCharset()">getCharset</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/nio/charset/Charset.html?is-external=true" title="class or interface in java.nio.charset" class="externalLink">Charset</a></span>&nbsp;<span class="memberName">getCharset</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/nio/charset/Charset.html?is-external=true" title="class or interface in java.nio.charset" class="externalLink">Charset</a></span>&nbsp;<span class="memberName">getCharset</span>()</div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="RelDataType.html#getCharset()">RelDataType</a></code></span></div>
 <div class="block">Gets this type's character set, or null if this type cannot carry a
  character set or has no character set defined.</div>
@@ -743,7 +761,7 @@ boolean&nbsp;elideRecord)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getCollation()">getCollation</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../../sql/SqlCollation.html" title="class in org.apache.calcite.sql">SqlCollation</a></span>&nbsp;<span class="memberName">getCollation</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="../../sql/SqlCollation.html" title="class in org.apache.calcite.sql">SqlCollation</a></span>&nbsp;<span class="memberName">getCollation</span>()</div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="RelDataType.html#getCollation()">RelDataType</a></code></span></div>
 <div class="block">Gets this type's collation, or null if this type cannot carry a collation
  or has no collation defined.</div>
@@ -758,7 +776,7 @@ boolean&nbsp;elideRecord)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getIntervalQualifier()">getIntervalQualifier</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../../sql/SqlIntervalQualifier.html" title="class in org.apache.calcite.sql">SqlIntervalQualifier</a></span>&nbsp;<span class="memberName">getIntervalQualifier</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="../../sql/SqlIntervalQualifier.html" title="class in org.apache.calcite.sql">SqlIntervalQualifier</a></span>&nbsp;<span class="memberName">getIntervalQualifier</span>()</div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="RelDataType.html#getIntervalQualifier()">RelDataType</a></code></span></div>
 <div class="block">Gets this type's interval qualifier, or null if this is not an interval
  type.</div>
@@ -827,7 +845,7 @@ boolean&nbsp;elideRecord)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getSqlIdentifier()">getSqlIdentifier</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../../sql/SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a></span>&nbsp;<span class="memberName">getSqlIdentifier</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="../../sql/SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a></span>&nbsp;<span class="memberName">getSqlIdentifier</span>()</div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="RelDataType.html#getSqlIdentifier()">RelDataType</a></code></span></div>
 <div class="block">Gets the <a href="../../sql/SqlIdentifier.html" title="class in org.apache.calcite.sql"><code>SqlIdentifier</code></a> associated with this type. For a
  predefined type, this is a simple identifier based on
@@ -874,7 +892,7 @@ boolean&nbsp;withDetail)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="computeDigest()">computeDigest</a></h3>
-<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">computeDigest</span>()</div>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">computeDigest</span>&#8203;(<span class="arguments">@UnknownInitialization&nbsp;RelDataTypeImpl&nbsp;this)</span></div>
 <div class="block">Computes the digest field. This should be called in every non-abstract
  subclass constructor once the type is fully defined.</div>
 </section>
@@ -996,7 +1014,7 @@ boolean&nbsp;nullable)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="extra(org.apache.calcite.rel.type.RelDataType)">extra</a></h3>
-<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a></span>&nbsp;<span class="memberName">extra</span>&#8203;(<span class="arguments"><a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType)</span></div>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">@Nullable <a href="RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a></span>&nbsp;<span class="memberName">extra</span>&#8203;(<span class="arguments"><a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType)</span></div>
 <div class="block">Returns the "extra" field in a row type whose presence signals that
  fields will come into existence just by asking for them.</div>
 <dl>
@@ -1071,7 +1089,7 @@ boolean&nbsp;nullable)</span></div>
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

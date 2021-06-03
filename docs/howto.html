@@ -145,27 +145,29 @@ adapters.</p>
 
 <h2 id="building-from-a-source-distribution">Building from a source distribution</h2>
 
-<p>Prerequisite is Java (JDK 8, 9, 10, 11, 12, 13, 14 or 15) on your path.</p>
+<p>Prerequisite is Java (JDK 8, 9, 10, 11, 12, 13, 14 or 15)
+and Gradle (version 6.8.1) on your path.</p>
 
 <p>Unpack the source distribution <code class="highlighter-rouge">.tar.gz</code> file,
 <code class="highlighter-rouge">cd</code> to the root directory of the unpacked source,
-then build using the included maven wrapper:</p>
+then build using Gradle:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz apache-calcite-1.26.0-src.tar.gz
-<span class="nv">$ </span><span class="nb">cd </span>apache-calcite-1.26.0-src
-<span class="nv">$ </span>./gradlew build</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz apache-calcite-1.27.0-src.tar.gz
+<span class="nv">$ </span><span class="nb">cd </span>apache-calcite-1.27.0-src
+<span class="nv">$ </span>gradle build</code></pre></figure>
 
 <p><a href="#running-tests">Running tests</a> describes how to run more or fewer
-tests.</p>
+tests  (but you should use the <code class="highlighter-rouge">gradle</code> command rather than
+<code class="highlighter-rouge">./gradlew</code>).</p>
 
 <h2 id="building-from-git">Building from Git</h2>
 
 <p>Prerequisites are git
 and Java (JDK 8, 9, 10, 11, 12, 13, 14 or 15) on your path.</p>
 
-<p>Create a local copy of the github repository,
+<p>Create a local copy of the GitHub repository,
 <code class="highlighter-rouge">cd</code> to its root directory,
-then build using the included maven wrapper:</p>
+then build using the included Gradle wrapper:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git clone git://github.com/apache/calcite.git
 <span class="nv">$ </span><span class="nb">cd </span>calcite
@@ -178,7 +180,7 @@ has not changed.</p>
 
 <p>Typically re-generation is called automatically when the relevant templates
 are changed, and it should work transparently.
-However if your IDE does not generate sources (e.g. <code class="highlighter-rouge">core/build/javacc/javaCCMain/org/apache/calcite/sql/parser/impl/SqlParserImpl.java</code>),
+However, if your IDE does not generate sources (e.g. <code class="highlighter-rouge">core/build/javacc/javaCCMain/org/apache/calcite/sql/parser/impl/SqlParserImpl.java</code>),
 then you can call <code class="highlighter-rouge">./gradlew generateSources</code> tasks manually.</p>
 
 <p><a href="#running-tests">Running tests</a> describes how to run more or fewer
@@ -207,7 +209,8 @@ be impedance mismatch between different versions.</p>
 <span class="nv">$ </span>./gradlew check <span class="c"># verify code style, execute tests</span>
 <span class="nv">$ </span>./gradlew <span class="nb">test</span> <span class="c"># execute tests</span>
 <span class="nv">$ </span>./gradlew style <span class="c"># update code formatting (for auto-correctable cases) and verify style</span>
-<span class="nv">$ </span>./gradlew autostyleCheck checkstyleAll <span class="c"># report code style violations</span></code></pre></figure>
+<span class="nv">$ </span>./gradlew autostyleCheck checkstyleAll <span class="c"># report code style violations</span>
+<span class="nv">$ </span>./gradlew <span class="nt">-PenableErrorprone</span> classes <span class="c"># verify Java code with Error Prone compiler, requires Java 11</span></code></pre></figure>
 
 <p>You can use <code class="highlighter-rouge">./gradlew assemble</code> to build the artifacts and skip all tests and verifications.</p>
 
@@ -307,9 +310,9 @@ The connection strings for different databases are listed in <a href="https://gi
 
 <h3 id="integration-tests-technical-details">Integration tests technical details</h3>
 
-<p>Tests with external data are executed at maven’s integration-test phase.
-We do not currently use pre-integration-test/post-integration-test, however we could use that in future.
-The verification of build pass/failure is performed at verify phase.
+<p>Tests with external data are executed during Gradle’s integration-test phase.
+We do not currently use pre-integration-test/post-integration-test, however, we could use that in the future.
+The verification of build pass/failure is performed during the verify phase.
 Integration tests should be named <code class="highlighter-rouge">...IT.java</code>, so they are not picked up on unit test execution.</p>
 
 <h2 id="contributing">Contributing</h2>
@@ -354,7 +357,7 @@ Wait for NetBeans to finish importing all dependencies.</p>
 
 <p>To ensure that the project is configured successfully, navigate to the method <code class="highlighter-rouge">testWinAgg</code> in <code class="highlighter-rouge">org.apache.calcite.test.JdbcTest</code>.
 Right-click on the method and select to <em>Run Focused Test Method</em>.
-NetBeans will run a Maven process, and you should see in the command output window a line with
+NetBeans will run a Gradle process, and you should see in the command output window a line with
  <code class="highlighter-rouge">Running org.apache.calcite.test.JdbcTest</code> followed by <code class="highlighter-rouge">"BUILD SUCCESS"</code>.</p>
 
 <p>Note: it is not clear if NetBeans automatically generates relevant sources on project import,
@@ -402,7 +405,7 @@ for temporary files, such as <code class="highlighter-rouge">/tmp</code> on Unix
 </ul>
 
 <p>After code is generated, either go into Intellij and mark the folder that
-contains generated temporary files as a generated sources root or sources root,
+contains generated temporary files as generated sources root or sources root,
 or directly set the value of <code class="highlighter-rouge">org.codehaus.janino.source_debugging.dir</code> to an
 existing source root when starting the JVM.</p>
 
@@ -415,7 +418,7 @@ existing source root when starting the JVM.</p>
 <p>First, download and install Calcite,
 and <a href="https://www.mongodb.org/downloads">install MongoDB</a>.</p>
 
-<p>Note: you can use MongoDB from integration test virtual machine above.</p>
+<p>Note: you can use MongoDB from the integration test virtual machine above.</p>
 
 <p>Import MongoDB’s zipcode data set into MongoDB:</p>
 
@@ -609,11 +612,11 @@ need to be re-generated only every build, only when the schema changes.</p>
 sometimes followed by what the rule does, then the word <code class="highlighter-rouge">Rule</code>.
 Examples: <code class="highlighter-rouge">ProjectFilterTransposeRule</code>, <code class="highlighter-rouge">FilterMergeRule</code>.</p>
 
-<p>The rule must have a constructor that takes a <code class="highlighter-rouge">Config</code> as argument.
+<p>The rule must have a constructor that takes a <code class="highlighter-rouge">Config</code> as an argument.
 It should be <code class="highlighter-rouge">protected</code>, and will only be called from <code class="highlighter-rouge">Config.toRule()</code>.</p>
 
 <p>The class must contain an interface called <code class="highlighter-rouge">Config</code> that extends
-<code class="highlighter-rouge">RelRule.Config</code> (or the config of a the rule’s super-class).</p>
+<code class="highlighter-rouge">RelRule.Config</code> (or the config of the rule’s super-class).</p>
 
 <p><code class="highlighter-rouge">Config</code> must implement the <code class="highlighter-rouge">toRule</code> method and create a rule.</p>
 
@@ -688,7 +691,7 @@ the <code class="highlighter-rouge">slow-tests-needed</code> label. It is up to 
 tests need to run before merging.</p>
 
 <p>If the PR has multiple commits, squash them into a single commit. The
-commit message should follow the conventions outined in
+commit message should follow the conventions outlined in
 <a href="/develop/#contributing">contribution guidelines</a>.
 If there are conflicts it is better to ask the contributor to take this step,
 otherwise it is preferred to do this manually since it saves time and also
@@ -707,7 +710,7 @@ must:</p>
   <li>resolve the issue (do not close it as this will be done by the release
 manager);</li>
   <li>select “Fixed” as resolution cause;</li>
-  <li>mark the appropriate version (e.g., 1.26.0) in the “Fix version” field;</li>
+  <li>mark the appropriate version (e.g., 1.28.0) in the “Fix version” field;</li>
   <li>add a comment (e.g., “Fixed in …”) with a hyperlink pointing to the commit
 which resolves the issue (in GitHub or GitBox), and also thank the contributor
 for their contribution.</li>
@@ -726,6 +729,10 @@ the permission to update the <code class="highlighter-rouge">KEYS</code> file, a
 (The <code class="highlighter-rouge">KEYS</code> file is not present in the git repo or in a release tar
 ball because that would be
 <a href="https://issues.apache.org/jira/browse/CALCITE-1746">redundant</a>.)</p>
+
+<p>In order to be able to make a release candidate, make sure you upload
+your key to <a href="https://keyserver.ubuntu.com">https://keyserver.ubuntu.com</a> and/or
+<a href="http://pool.sks-keyservers.net:11371">http://pool.sks-keyservers.net:11371</a> (keyservers used by Nexus).</p>
 
 <h2 id="set-up-nexus-repository-credentials">Set up Nexus repository credentials</h2>
 
@@ -749,13 +756,15 @@ For instance, you could update <code class="highlighter-rouge">$HOME/.gradle/gra
 <p>Note: Both <code class="highlighter-rouge">asfNexusUsername</code> and <code class="highlighter-rouge">asfSvnUsername</code> are your apache id with <code class="highlighter-rouge">asfNexusPassword</code> and
 <code class="highlighter-rouge">asfSvnPassword</code> are corresponding password.</p>
 
-<p>Note: when https://github.com/vlsi/asflike-release-environment is used, the credentials are taken from
+<p>When
+<a href="https://github.com/vlsi/asflike-release-environment">asflike-release-environment</a>
+is used, the credentials are taken from
 <code class="highlighter-rouge">asfTest...</code> (e.g. <code class="highlighter-rouge">asfTestNexusUsername=test</code>)</p>
 
-<p>Note: <code class="highlighter-rouge">asfGitSourceUsername</code> is your github id while <code class="highlighter-rouge">asfGitSourcePassword</code> is not your github password.
+<p>Note: <code class="highlighter-rouge">asfGitSourceUsername</code> is your GitHub id while <code class="highlighter-rouge">asfGitSourcePassword</code> is not your GitHub password.
 You need to generate it in https://github.com/settings/tokens choosing <code class="highlighter-rouge">Personal access tokens</code>.</p>
 
-<p>Note: if you want to uses <code class="highlighter-rouge">gpg-agent</code>, you need to pass anther properties:</p>
+<p>Note: if you want to use <code class="highlighter-rouge">gpg-agent</code>, you need to pass some more properties:</p>
 
 <figure class="highlight"><pre><code class="language-properties" data-lang="properties"><span class="py">useGpgCmd</span><span class="p">=</span><span class="s">true</span>
 <span class="py">signing.gnupg.keyName</span><span class="p">=</span>
@@ -766,7 +775,7 @@ You need to generate it in https://github.com/settings/tokens choosing <code cla
 <p>Before you start:</p>
 
 <ul>
-  <li>Make sure you are using JDK 8.</li>
+  <li>Make sure you are using JDK 8. Note: you need Java 8u202 or later in case you use OpenJDK-based Java.</li>
   <li>Make sure build and tests succeed with <code class="highlighter-rouge">-Dcalcite.test.db=hsqldb</code> (the default)</li>
 </ul>
 
@@ -783,9 +792,15 @@ git clean <span class="nt">-xn</span>
 <p>Before you start:</p>
 
 <ul>
+  <li>Send an email to <a href="mailto:dev@calcite.apache.org">dev@calcite.apache.org</a> notifying that RC build process
+is starting and therefore <code class="highlighter-rouge">master</code> branch is in code freeze until further notice.</li>
   <li>Set up signing keys as described above.</li>
   <li>Make sure you are using JDK 8 (not 9 or 10).</li>
+  <li>Make sure <code class="highlighter-rouge">master</code> branch and <code class="highlighter-rouge">site</code> branch are in sync, i.e. there is no commit on <code class="highlighter-rouge">site</code> that has not
+been applied also to <code class="highlighter-rouge">master</code>.
+This can be achieved by doing <code class="highlighter-rouge">git switch site &amp;&amp; git rebase --empty=drop master &amp;&amp; git switch master &amp;&amp; git reset --hard site</code>.</li>
   <li>Check that <code class="highlighter-rouge">README</code> and <code class="highlighter-rouge">site/_docs/howto.md</code> have the correct version number.</li>
+  <li>Check that <code class="highlighter-rouge">site/_docs/howto.md</code> has the correct Gradle version.</li>
   <li>Check that <code class="highlighter-rouge">NOTICE</code> has the current copyright year.</li>
   <li>Check that <code class="highlighter-rouge">calcite.version</code> has the proper value in <code class="highlighter-rouge">/gradle.properties</code>.</li>
   <li>Make sure build and tests succeed</li>
@@ -812,10 +827,6 @@ notes.  To test Guava version <em>x.y</em>, specify <code class="highlighter-rou
       <li><code class="highlighter-rouge">./gradlew testSlow</code></li>
     </ul>
   </li>
-  <li>Trigger a
-<a href="https://scan.coverity.com/projects/julianhyde-calcite">Coverity scan</a>
-by merging the latest code into the <code class="highlighter-rouge">julianhyde/coverity_scan</code> branch,
-and when it completes, make sure that there are no important issues.</li>
   <li>Add release notes to <code class="highlighter-rouge">site/_docs/history.md</code>. Include the commit history,
 and say which versions of Java, Guava and operating systems the release is
 tested against.</li>
@@ -865,6 +876,16 @@ git clean <span class="nt">-xn</span>
 <span class="c"># Push release candidate to ASF servers</span>
 ./gradlew prepareVote <span class="nt">-Prc</span><span class="o">=</span>1 <span class="nt">-Pasf</span></code></pre></figure>
 
+<p>prepareVote troubleshooting:</p>
+<ul>
+  <li><code class="highlighter-rouge">net.rubygrapefruit.platform.NativeException: Could not start 'svnmucc'</code>: Make sure you have <code class="highlighter-rouge">svnmucc</code> command
+installed in your machine.</li>
+  <li><code class="highlighter-rouge">Execution failed for task ':closeRepository' ... Possible staging rules violation. Check repository status using Nexus UI</code>:
+Log into <a href="https://repository.apache.org/#stagingRepositories">Nexus UI</a> to see the actual error. In case of
+<code class="highlighter-rouge">Failed: Signature Validation. No public key: Key with id: ... was not able to be located</code>, make sure you have uploaded
+your key to the keyservers used by Nexus, see above.</li>
+</ul>
+
 <h4 id="checking-the-artifacts">Checking the artifacts</h4>
 
 <ul>
@@ -884,8 +905,12 @@ no binary distro), check that all files belong to a directory called
     <ul>
       <li>Check that the version in <code class="highlighter-rouge">README</code> is correct</li>
       <li>Check that the copyright year in <code class="highlighter-rouge">NOTICE</code> is correct</li>
+      <li>Check that <code class="highlighter-rouge">LICENSE</code> is identical to the file checked into git</li>
     </ul>
   </li>
+  <li>Make sure that the following files do not occur in the source
+distros: <code class="highlighter-rouge">KEYS</code>, <code class="highlighter-rouge">gradlew</code>, <code class="highlighter-rouge">gradlew.bat</code>, <code class="highlighter-rouge">gradle-wrapper.jar</code>,
+<code class="highlighter-rouge">gradle-wrapper.properties</code></li>
   <li>Make sure that there is no <code class="highlighter-rouge">KEYS</code> file in the source distros</li>
   <li>In each .jar (for example
 <code class="highlighter-rouge">core/build/libs/calcite-core-X.Y.Z.jar</code> and
@@ -921,7 +946,7 @@ gpg <span class="nt">--recv-keys</span> key
 <span class="c"># Check keys</span>
 curl <span class="nt">-O</span> https://dist.apache.org/repos/dist/release/calcite/KEYS
 
-<span class="c"># Sign/check sha256 hashes</span>
+<span class="c"># Sign/check sha512 hashes</span>
 <span class="c"># (Assumes your O/S has a 'shasum' command.)</span>
 <span class="k">function </span>checkHash<span class="o">()</span> <span class="o">{</span>
   <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
@@ -929,15 +954,15 @@ curl <span class="nt">-O</span> https://dist.apache.org/repos/dist/release/calci
     if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-f</span> <span class="nv">$i</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
       continue
     fi
-    if</span> <span class="o">[</span> <span class="nt">-f</span> <span class="nv">$i</span>.sha256 <span class="o">]</span><span class="p">;</span> <span class="k">then
-      if</span> <span class="o">[</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">cat</span> <span class="nv">$i</span>.sha256<span class="k">)</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"</span><span class="k">$(</span>shasum <span class="nt">-a</span> 256 <span class="nv">$i</span><span class="k">)</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
-        </span><span class="nb">echo</span> <span class="nv">$i</span>.sha256 present and correct
+    if</span> <span class="o">[</span> <span class="nt">-f</span> <span class="nv">$i</span>.sha512 <span class="o">]</span><span class="p">;</span> <span class="k">then
+      if</span> <span class="o">[</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">cat</span> <span class="nv">$i</span>.sha512<span class="k">)</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"</span><span class="k">$(</span>shasum <span class="nt">-a</span> 512 <span class="nv">$i</span><span class="k">)</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+        </span><span class="nb">echo</span> <span class="nv">$i</span>.sha512 present and correct
       <span class="k">else
-        </span><span class="nb">echo</span> <span class="nv">$i</span>.sha256 does not match
+        </span><span class="nb">echo</span> <span class="nv">$i</span>.sha512 does not match
       <span class="k">fi
     else
-      </span>shasum <span class="nt">-a</span> 256 <span class="nv">$i</span> <span class="o">&gt;</span> <span class="nv">$i</span>.sha256
-      <span class="nb">echo</span> <span class="nv">$i</span>.sha256 created
+      </span>shasum <span class="nt">-a</span> 512 <span class="nv">$i</span> <span class="o">&gt;</span> <span class="nv">$i</span>.sha512
+      <span class="nb">echo</span> <span class="nv">$i</span>.sha512 created
     <span class="k">fi
   done</span>
 <span class="o">}</span>
@@ -969,7 +994,7 @@ The artifacts to be voted on are located here:
 https://dist.apache.org/repos/dist/dev/calcite/apache-calcite-X.Y.Z-rcN/
 
 The hashes of the artifacts are as follows:
-src.tar.gz.sha256 XXXX
+src.tar.gz.sha512 XXXX
 
 A staged Maven repository is available for review at:
 https://repository.apache.org/content/repositories/orgapachecalcite-NNNN
@@ -1035,7 +1060,7 @@ out to mirrors, and other tasks.</p>
 <p>Choose a release date.
 This is based on the time when you expect to announce the release.
 This is usually a day after the vote closes.
-Remember that UTC date changes at 4pm Pacific time.</p>
+Remember that UTC date changes at 4 pm Pacific time.</p>
 
 <h3 id="publishing-directly-in-your-environment">Publishing directly in your environment:</h3>
 
@@ -1089,6 +1114,13 @@ a new version (e.g., X.Y+1.Z) for the next release.</p>
 address. You can use
 <a href="https://mail-archives.apache.org/mod_mbox/www-announce/201906.mbox/%3CCA%2BEpF8tcJcZ41rVuwJODJmyRy-qAxZUQm9OxKsoDi07c2SKs_A%40mail.gmail.com%3E">the 1.20.0 announcement</a>
 as a template. Be sure to include a brief description of the project.</p>
+
+<p>Increase the <code class="highlighter-rouge">calcite.version</code> value in <code class="highlighter-rouge">/gradle.properties</code> and commit &amp; push
+the change with the message “Prepare for next development iteration”
+(see <a href="https://github.com/apache/calcite/commit/ed1470a3ea53a78c667354a5ec066425364eca73">ed1470a</a> as a reference)</p>
+
+<p>Re-open the <code class="highlighter-rouge">master</code> branch. Send an email to <a href="mailto:dev@calcite.apache.org">dev@calcite.apache.org</a> notifying
+that <code class="highlighter-rouge">master</code> code freeze is over and commits can resume.</p>
 
 <h2 id="publish-the-web-site">Publishing the web site</h2>
 

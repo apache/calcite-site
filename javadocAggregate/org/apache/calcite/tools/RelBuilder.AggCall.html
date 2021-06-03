@@ -19,8 +19,8 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+<script type="text/javascript">var data = {"i0":6,"i1":6,"i2":18,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":18,"i9":6,"i10":18};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -109,7 +109,7 @@ loadScripts(document, 'script');</script>
 </a>
 <h2>Method Summary</h2>
 <div class="memberSummary">
-<div role="tablist" aria-orientation="horizontal"><button role="tab" aria-selected="true" aria-controls="memberSummary_tabpanel" tabindex="0" onkeydown="switchTab(event)" id="t0" class="activeTableTab">All Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t2" class="tableTab" onclick="show(2);">Instance Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t3" class="tableTab" onclick="show(4);">Abstract Methods</button></div>
+<div role="tablist" aria-orientation="horizontal"><button role="tab" aria-selected="true" aria-controls="memberSummary_tabpanel" tabindex="0" onkeydown="switchTab(event)" id="t0" class="activeTableTab">All Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t2" class="tableTab" onclick="show(2);">Instance Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t3" class="tableTab" onclick="show(4);">Abstract Methods</button><button role="tab" aria-selected="false" aria-controls="memberSummary_tabpanel" tabindex="-1" onkeydown="switchTab(event)" id="t5" class="tableTab" onclick="show(16);">Default Methods</button></div>
 <div id="memberSummary_tabpanel" role="tabpanel">
 <table aria-labelledby="t0">
 <thead>
@@ -130,13 +130,13 @@ loadScripts(document, 'script');</script>
 </tr>
 <tr class="rowColor" id="i1">
 <td class="colFirst"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#as(java.lang.String)">as</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;alias)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#as(java.lang.String)">as</a></span>&#8203;(@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;alias)</code></th>
 <td class="colLast">
 <div class="block">Returns a copy of this AggCall with a given alias.</div>
 </td>
 </tr>
 <tr class="altColor" id="i2">
-<td class="colFirst"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></td>
+<td class="colFirst"><code>default <a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#distinct()">distinct</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns a copy of this AggCall that is distinct.</div>
@@ -151,7 +151,7 @@ loadScripts(document, 'script');</script>
 </tr>
 <tr class="altColor" id="i4">
 <td class="colFirst"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#filter(org.apache.calcite.rex.RexNode)">filter</a></span>&#8203;(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#filter(org.apache.calcite.rex.RexNode)">filter</a></span>&#8203;(@Nullable <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition)</code></th>
 <td class="colLast">
 <div class="block">Returns a copy of this AggCall that applies a filter before aggregating
  values.</div>
@@ -165,6 +165,13 @@ loadScripts(document, 'script');</script>
 </td>
 </tr>
 <tr class="altColor" id="i6">
+<td class="colFirst"><code><a href="RelBuilder.OverCall.html" title="interface in org.apache.calcite.tools">RelBuilder.OverCall</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#over()">over</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Converts this aggregate call to a windowed aggregate call.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i7">
 <td class="colFirst"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sort(java.lang.Iterable)">sort</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang" class="externalLink">Iterable</a>&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;orderKeys)</code></th>
 <td class="colLast">
@@ -173,13 +180,31 @@ loadScripts(document, 'script');</script>
  clause.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i7">
-<td class="colFirst"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></td>
+<tr class="altColor" id="i8">
+<td class="colFirst"><code>default <a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sort(org.apache.calcite.rex.RexNode...)">sort</a></span>&#8203;(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;orderKeys)</code></th>
 <td class="colLast">
 <div class="block">Returns a copy of this AggCall that sorts its input values by
  <code>orderKeys</code> before aggregating, as in SQL's <code>WITHIN GROUP</code>
  clause.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i9">
+<td class="colFirst"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unique(java.lang.Iterable)">unique</a></span>&#8203;(@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang" class="externalLink">Iterable</a>&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;distinctKeys)</code></th>
+<td class="colLast">
+<div class="block">Returns a copy of this AggCall that makes its input values unique by
+ <code>distinctKeys</code> before aggregating, as in SQL's
+ <code>WITHIN DISTINCT</code> clause.</div>
+</td>
+</tr>
+<tr class="altColor" id="i10">
+<td class="colFirst"><code>default <a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unique(org.apache.calcite.rex.RexNode...)">unique</a></span>&#8203;(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;distinctKeys)</code></th>
+<td class="colLast">
+<div class="block">Returns a copy of this AggCall that makes its input values unique by
+ <code>distinctKeys</code> before aggregating, as in SQL's
+ <code>WITHIN DISTINCT</code> clause.</div>
 </td>
 </tr>
 </tbody>
@@ -202,7 +227,7 @@ loadScripts(document, 'script');</script>
 <li class="blockList">
 <section class="detail">
 <h3><a id="filter(org.apache.calcite.rex.RexNode)">filter</a></h3>
-<div class="memberSignature"><span class="returnType"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="memberName">filter</span>&#8203;(<span class="arguments"><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition)</span></div>
+<div class="memberSignature"><span class="returnType"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="memberName">filter</span>&#8203;(<span class="arguments">@Nullable <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition)</span></div>
 <div class="block">Returns a copy of this AggCall that applies a filter before aggregating
  values.</div>
 </section>
@@ -219,10 +244,28 @@ loadScripts(document, 'script');</script>
 <li class="blockList">
 <section class="detail">
 <h3><a id="sort(org.apache.calcite.rex.RexNode...)">sort</a></h3>
-<div class="memberSignature"><span class="returnType"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="memberName">sort</span>&#8203;(<span class="arguments"><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;orderKeys)</span></div>
+<div class="memberSignature"><span class="modifiers">default</span>&nbsp;<span class="returnType"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="memberName">sort</span>&#8203;(<span class="arguments"><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;orderKeys)</span></div>
 <div class="block">Returns a copy of this AggCall that sorts its input values by
  <code>orderKeys</code> before aggregating, as in SQL's <code>WITHIN GROUP</code>
  clause.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="unique(java.lang.Iterable)">unique</a></h3>
+<div class="memberSignature"><span class="returnType"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="memberName">unique</span>&#8203;(<span class="arguments">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang" class="externalLink">Iterable</a>&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;distinctKeys)</span></div>
+<div class="block">Returns a copy of this AggCall that makes its input values unique by
+ <code>distinctKeys</code> before aggregating, as in SQL's
+ <code>WITHIN DISTINCT</code> clause.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="unique(org.apache.calcite.rex.RexNode...)">unique</a></h3>
+<div class="memberSignature"><span class="modifiers">default</span>&nbsp;<span class="returnType"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="memberName">unique</span>&#8203;(<span class="arguments"><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;distinctKeys)</span></div>
+<div class="block">Returns a copy of this AggCall that makes its input values unique by
+ <code>distinctKeys</code> before aggregating, as in SQL's
+ <code>WITHIN DISTINCT</code> clause.</div>
 </section>
 </li>
 <li class="blockList">
@@ -243,7 +286,7 @@ loadScripts(document, 'script');</script>
 <li class="blockList">
 <section class="detail">
 <h3><a id="as(java.lang.String)">as</a></h3>
-<div class="memberSignature"><span class="returnType"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="memberName">as</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;alias)</span></div>
+<div class="memberSignature"><span class="returnType"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="memberName">as</span>&#8203;(<span class="arguments">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;alias)</span></div>
 <div class="block">Returns a copy of this AggCall with a given alias.</div>
 </section>
 </li>
@@ -257,8 +300,15 @@ loadScripts(document, 'script');</script>
 <li class="blockList">
 <section class="detail">
 <h3><a id="distinct()">distinct</a></h3>
-<div class="memberSignature"><span class="returnType"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="memberName">distinct</span>()</div>
+<div class="memberSignature"><span class="modifiers">default</span>&nbsp;<span class="returnType"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="memberName">distinct</span>()</div>
 <div class="block">Returns a copy of this AggCall that is distinct.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="over()">over</a></h3>
+<div class="memberSignature"><span class="returnType"><a href="RelBuilder.OverCall.html" title="interface in org.apache.calcite.tools">RelBuilder.OverCall</a></span>&nbsp;<span class="memberName">over</span>()</div>
+<div class="block">Converts this aggregate call to a windowed aggregate call.</div>
 </section>
 </li>
 </ul>
@@ -312,7 +362,7 @@ loadScripts(document, 'script');</script>
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -204,7 +204,7 @@ extends <a href="../SqlDialect.html" title="class in org.apache.calcite.sql">Sql
 </td>
 </tr>
 <tr class="rowColor" id="i1">
-<td class="colFirst"><code><a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#emulateNullDirection(org.apache.calcite.sql.SqlNode,boolean,boolean)">emulateNullDirection</a></span>&#8203;(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
 boolean&nbsp;nullsFirst,
 boolean&nbsp;desc)</code></th>
@@ -214,7 +214,7 @@ boolean&nbsp;desc)</code></th>
 </td>
 </tr>
 <tr class="altColor" id="i2">
-<td class="colFirst"><code><a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCastSpec(org.apache.calcite.rel.type.RelDataType)">getCastSpec</a></span>&#8203;(<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type)</code></th>
 <td class="colLast">
 <div class="block">Returns SqlNode for type in "cast(column as type)", which might be
@@ -230,20 +230,28 @@ boolean&nbsp;desc)</code></th>
 </tr>
 <tr class="altColor" id="i4">
 <td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#supportsAggregateFunctionFilter()">supportsAggregateFunctionFilter</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns whether this dialect supports the use of FILTER clauses for
+ aggregate functions.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i5">
+<td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#supportsAliasedValues()">supportsAliasedValues</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns whether the dialect supports VALUES in a sub-query with
  and an "AS t(column, ...)" values to define column names.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i5">
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#supportsImplicitTypeCoercion(org.apache.calcite.rex.RexCall)">supportsImplicitTypeCoercion</a></span>&#8203;(<a href="../../rex/RexCall.html" title="class in org.apache.calcite.rex">RexCall</a>&nbsp;call)</code></th>
 <td class="colLast">
 <div class="block">Returns whether the dialect supports implicit type coercion.</div>
 </td>
 </tr>
-<tr class="altColor" id="i6">
+<tr class="rowColor" id="i7">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#supportsNestedAggregations()">supportsNestedAggregations</a></span>()</code></th>
 <td class="colLast">
@@ -251,7 +259,7 @@ boolean&nbsp;desc)</code></th>
  <code>SELECT SUM(SUM(1)) </code>.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i7">
+<tr class="altColor" id="i8">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unparseCall(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,int,int)">unparseCall</a></span>&#8203;(<a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
 <a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
@@ -259,16 +267,16 @@ int&nbsp;leftPrec,
 int&nbsp;rightPrec)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor" id="i8">
+<tr class="rowColor" id="i9">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unparseOffsetFetch(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)">unparseOffsetFetch</a></span>&#8203;(<a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
-<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset,
-<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch)</code></th>
+@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset,
+@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch)</code></th>
 <td class="colLast">
 <div class="block">Converts an offset and fetch into SQL.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i9">
+<tr class="altColor" id="i10">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unparseSqlIntervalLiteral(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlIntervalLiteral,int,int)">unparseSqlIntervalLiteral</a></span>&#8203;(<a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
 <a href="../SqlIntervalLiteral.html" title="class in org.apache.calcite.sql">SqlIntervalLiteral</a>&nbsp;literal,
@@ -278,7 +286,7 @@ int&nbsp;rightPrec)</code></th>
 <div class="block">BigQuery interval syntax: INTERVAL int64 time_unit.</div>
 </td>
 </tr>
-<tr class="altColor" id="i10">
+<tr class="rowColor" id="i11">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unparseSqlIntervalQualifier(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlIntervalQualifier,org.apache.calcite.rel.type.RelDataTypeSystem)">unparseSqlIntervalQualifier</a></span>&#8203;(<a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
 <a href="../SqlIntervalQualifier.html" title="class in org.apache.calcite.sql">SqlIntervalQualifier</a>&nbsp;qualifier,
@@ -369,7 +377,7 @@ int&nbsp;rightPrec)</code></th>
 <li class="blockList">
 <section class="detail">
 <h3><a id="emulateNullDirection(org.apache.calcite.sql.SqlNode,boolean,boolean)">emulateNullDirection</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></span>&nbsp;<span class="memberName">emulateNullDirection</span>&#8203;(<span class="arguments"><a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></span>&nbsp;<span class="memberName">emulateNullDirection</span>&#8203;(<span class="arguments"><a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
 boolean&nbsp;nullsFirst,
 boolean&nbsp;desc)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../SqlDialect.html#emulateNullDirection(org.apache.calcite.sql.SqlNode,boolean,boolean)">SqlDialect</a></code></span></div>
@@ -429,9 +437,21 @@ boolean&nbsp;desc)</span></div>
 </li>
 <li class="blockList">
 <section class="detail">
+<h3><a id="supportsAggregateFunctionFilter()">supportsAggregateFunctionFilter</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">supportsAggregateFunctionFilter</span>()</div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../SqlDialect.html#supportsAggregateFunctionFilter()">SqlDialect</a></code></span></div>
+<div class="block">Returns whether this dialect supports the use of FILTER clauses for
+ aggregate functions. e.g. <code>COUNT(*) FILTER (WHERE a = 2)</code>.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../SqlDialect.html#supportsAggregateFunctionFilter()">supportsAggregateFunctionFilter</a></code>&nbsp;in class&nbsp;<code><a href="../SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a></code></dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="configureParser(org.apache.calcite.sql.parser.SqlParser.Config)">configureParser</a></h3>
-<div class="memberSignature"><span class="annotations"><a href="https://docs.oracle.com/javase/9/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation" class="externalLink">@Nonnull</a>
-</span><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../parser/SqlParser.Config.html" title="interface in org.apache.calcite.sql.parser">SqlParser.Config</a></span>&nbsp;<span class="memberName">configureParser</span>&#8203;(<span class="arguments"><a href="../parser/SqlParser.Config.html" title="interface in org.apache.calcite.sql.parser">SqlParser.Config</a>&nbsp;configBuilder)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../parser/SqlParser.Config.html" title="interface in org.apache.calcite.sql.parser">SqlParser.Config</a></span>&nbsp;<span class="memberName">configureParser</span>&#8203;(<span class="arguments"><a href="../parser/SqlParser.Config.html" title="interface in org.apache.calcite.sql.parser">SqlParser.Config</a>&nbsp;configBuilder)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../SqlDialect.html#configureParser(org.apache.calcite.sql.parser.SqlParser.Config)">SqlDialect</a></code></span></div>
 <div class="block">Copies settings from this dialect into a parser configuration.
 
@@ -467,8 +487,8 @@ boolean&nbsp;desc)</span></div>
 <section class="detail">
 <h3><a id="unparseOffsetFetch(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)">unparseOffsetFetch</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">unparseOffsetFetch</span>&#8203;(<span class="arguments"><a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
-<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset,
-<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch)</span></div>
+@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset,
+@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../SqlDialect.html#unparseOffsetFetch(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)">SqlDialect</a></code></span></div>
 <div class="block">Converts an offset and fetch into SQL.
 
@@ -556,7 +576,7 @@ int&nbsp;rightPrec)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getCastSpec(org.apache.calcite.rel.type.RelDataType)">getCastSpec</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></span>&nbsp;<span class="memberName">getCastSpec</span>&#8203;(<span class="arguments"><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></span>&nbsp;<span class="memberName">getCastSpec</span>&#8203;(<span class="arguments"><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type)</span></div>
 <div class="block">Returns SqlNode for type in "cast(column as type)", which might be
  different between databases by type name, precision etc.
 
@@ -624,7 +644,7 @@ int&nbsp;rightPrec)</span></div>
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

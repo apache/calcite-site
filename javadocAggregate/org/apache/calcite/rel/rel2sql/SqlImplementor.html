@@ -296,11 +296,9 @@ boolean&nbsp;qualified)</code></th>
 </tr>
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code>static <a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#convertConditionToSqlNode(org.apache.calcite.rex.RexNode,org.apache.calcite.rel.rel2sql.SqlImplementor.Context,org.apache.calcite.rel.rel2sql.SqlImplementor.Context,int,org.apache.calcite.sql.SqlDialect)">convertConditionToSqlNode</a></span>&#8203;(<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#convertConditionToSqlNode(org.apache.calcite.rex.RexNode,org.apache.calcite.rel.rel2sql.SqlImplementor.Context,org.apache.calcite.rel.rel2sql.SqlImplementor.Context)">convertConditionToSqlNode</a></span>&#8203;(<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node,
 <a href="SqlImplementor.Context.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Context</a>&nbsp;leftContext,
-<a href="SqlImplementor.Context.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Context</a>&nbsp;rightContext,
-int&nbsp;leftFieldCount,
-<a href="../../sql/SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a>&nbsp;dialect)</code></th>
+<a href="SqlImplementor.Context.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Context</a>&nbsp;rightContext)</code></th>
 <td class="colLast">
 <div class="block">Converts a <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex"><code>RexNode</code></a> condition into a <a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql"><code>SqlNode</code></a>.</div>
 </td>
@@ -348,8 +346,8 @@ int&nbsp;leftFieldCount,
 <td class="colFirst"><code>protected <a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#result(org.apache.calcite.sql.SqlNode,java.util.Collection,java.lang.String,org.apache.calcite.rel.type.RelDataType,java.util.Map)">result</a></span>&#8203;(<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
 <a href="https://docs.oracle.com/javase/9/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util" class="externalLink">Collection</a>&lt;<a href="SqlImplementor.Clause.html" title="enum in org.apache.calcite.rel.rel2sql">SqlImplementor.Clause</a>&gt;&nbsp;clauses,
-<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;neededAlias,
-<a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;neededType,
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;neededAlias,
+@Nullable <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;neededType,
 <a href="https://docs.oracle.com/javase/9/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util" class="externalLink">Map</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>,&#8203;<a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;aliases)</code></th>
 <td class="colLast">
 <div class="block">Factory method for <a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql"><code>SqlImplementor.Result</code></a>.</div>
@@ -360,7 +358,7 @@ int&nbsp;leftFieldCount,
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#result(org.apache.calcite.sql.SqlNode,java.util.Collection,org.apache.calcite.rel.RelNode,java.util.Map)">result</a></span>&#8203;(<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
 <a href="https://docs.oracle.com/javase/9/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util" class="externalLink">Collection</a>&lt;<a href="SqlImplementor.Clause.html" title="enum in org.apache.calcite.rel.rel2sql">SqlImplementor.Clause</a>&gt;&nbsp;clauses,
 <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
-<a href="https://docs.oracle.com/javase/9/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util" class="externalLink">Map</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>,&#8203;<a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;aliases)</code></th>
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util" class="externalLink">Map</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>,&#8203;<a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;aliases)</code></th>
 <td class="colLast">
 <div class="block">Creates a result based on a single relational expression.</div>
 </td>
@@ -387,18 +385,18 @@ int&nbsp;leftFieldCount,
 </tr>
 <tr class="rowColor" id="i15">
 <td class="colFirst"><code>static <a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toSql(org.apache.calcite.rex.RexLiteral)">toSql</a></span>&#8203;(<a href="../../rex/RexLiteral.html" title="class in org.apache.calcite.rex">RexLiteral</a>&nbsp;literal)</code></th>
-<td class="colLast">
-<div class="block">Converts a <a href="../../rex/RexLiteral.html" title="class in org.apache.calcite.rex"><code>RexLiteral</code></a> to a <a href="../../sql/SqlLiteral.html" title="class in org.apache.calcite.sql"><code>SqlLiteral</code></a>.</div>
-</td>
-</tr>
-<tr class="altColor" id="i16">
-<td class="colFirst"><code>static <a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toSql(org.apache.calcite.rex.RexProgram,org.apache.calcite.rex.RexLiteral)">toSql</a></span>&#8203;(<a href="../../rex/RexProgram.html" title="class in org.apache.calcite.rex">RexProgram</a>&nbsp;program,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toSql(org.apache.calcite.rex.RexProgram,org.apache.calcite.rex.RexLiteral)">toSql</a></span>&#8203;(@Nullable <a href="../../rex/RexProgram.html" title="class in org.apache.calcite.rex">RexProgram</a>&nbsp;program,
 <a href="../../rex/RexLiteral.html" title="class in org.apache.calcite.rex">RexLiteral</a>&nbsp;literal)</code></th>
 <td class="colLast">
 <div class="block">Converts a <a href="../../rex/RexLiteral.html" title="class in org.apache.calcite.rex"><code>RexLiteral</code></a> in the context of a <a href="../../rex/RexProgram.html" title="class in org.apache.calcite.rex"><code>RexProgram</code></a>
  to a <a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql"><code>SqlNode</code></a>.</div>
+</td>
+</tr>
+<tr class="altColor" id="i16">
+<td class="colFirst"><code>static <a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toSql(org.apache.calcite.rex.RexLiteral)">toSql</a></span>&#8203;(<a href="../../rex/RexLiteral.html" title="class in org.apache.calcite.rex">RexLiteral</a>&nbsp;literal)</code></th>
+<td class="colLast">
+<div class="block">Converts a <a href="../../rex/RexLiteral.html" title="class in org.apache.calcite.rex"><code>RexLiteral</code></a> to a <a href="../../sql/SqlLiteral.html" title="class in org.apache.calcite.sql"><code>SqlLiteral</code></a>.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i17">
@@ -651,19 +649,16 @@ boolean&nbsp;ignoreClauses,
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="convertConditionToSqlNode(org.apache.calcite.rex.RexNode,org.apache.calcite.rel.rel2sql.SqlImplementor.Context,org.apache.calcite.rel.rel2sql.SqlImplementor.Context,int,org.apache.calcite.sql.SqlDialect)">convertConditionToSqlNode</a></h3>
+<h3><a id="convertConditionToSqlNode(org.apache.calcite.rex.RexNode,org.apache.calcite.rel.rel2sql.SqlImplementor.Context,org.apache.calcite.rel.rel2sql.SqlImplementor.Context)">convertConditionToSqlNode</a></h3>
 <div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></span>&nbsp;<span class="memberName">convertConditionToSqlNode</span>&#8203;(<span class="arguments"><a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node,
 <a href="SqlImplementor.Context.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Context</a>&nbsp;leftContext,
-<a href="SqlImplementor.Context.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Context</a>&nbsp;rightContext,
-int&nbsp;leftFieldCount,
-<a href="../../sql/SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a>&nbsp;dialect)</span></div>
+<a href="SqlImplementor.Context.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Context</a>&nbsp;rightContext)</span></div>
 <div class="block">Converts a <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex"><code>RexNode</code></a> condition into a <a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql"><code>SqlNode</code></a>.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>node</code> - Join condition</dd>
 <dd><code>leftContext</code> - Left context</dd>
 <dd><code>rightContext</code> - Right context</dd>
-<dd><code>leftFieldCount</code> - Number of fields on left result</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>SqlNode that represents the condition</dd>
 </dl>
@@ -681,7 +676,7 @@ int&nbsp;leftFieldCount,
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></span>&nbsp;<span class="memberName">result</span>&#8203;(<span class="arguments"><a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
 <a href="https://docs.oracle.com/javase/9/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util" class="externalLink">Collection</a>&lt;<a href="SqlImplementor.Clause.html" title="enum in org.apache.calcite.rel.rel2sql">SqlImplementor.Clause</a>&gt;&nbsp;clauses,
 <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
-<a href="https://docs.oracle.com/javase/9/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util" class="externalLink">Map</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>,&#8203;<a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;aliases)</span></div>
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util" class="externalLink">Map</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>,&#8203;<a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;aliases)</span></div>
 <div class="block">Creates a result based on a single relational expression.</div>
 </section>
 </li>
@@ -690,8 +685,8 @@ int&nbsp;leftFieldCount,
 <h3><a id="result(org.apache.calcite.sql.SqlNode,java.util.Collection,java.lang.String,org.apache.calcite.rel.type.RelDataType,java.util.Map)">result</a></h3>
 <div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType"><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></span>&nbsp;<span class="memberName">result</span>&#8203;(<span class="arguments"><a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
 <a href="https://docs.oracle.com/javase/9/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util" class="externalLink">Collection</a>&lt;<a href="SqlImplementor.Clause.html" title="enum in org.apache.calcite.rel.rel2sql">SqlImplementor.Clause</a>&gt;&nbsp;clauses,
-<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;neededAlias,
-<a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;neededType,
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;neededAlias,
+@Nullable <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;neededType,
 <a href="https://docs.oracle.com/javase/9/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util" class="externalLink">Map</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>,&#8203;<a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;aliases)</span></div>
 <div class="block">Factory method for <a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql"><code>SqlImplementor.Result</code></a>.
 
@@ -747,7 +742,7 @@ int&nbsp;leftFieldCount,
 <li class="blockList">
 <section class="detail">
 <h3><a id="toSql(org.apache.calcite.rex.RexProgram,org.apache.calcite.rex.RexLiteral)">toSql</a></h3>
-<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></span>&nbsp;<span class="memberName">toSql</span>&#8203;(<span class="arguments"><a href="../../rex/RexProgram.html" title="class in org.apache.calcite.rex">RexProgram</a>&nbsp;program,
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></span>&nbsp;<span class="memberName">toSql</span>&#8203;(<span class="arguments">@Nullable <a href="../../rex/RexProgram.html" title="class in org.apache.calcite.rex">RexProgram</a>&nbsp;program,
 <a href="../../rex/RexLiteral.html" title="class in org.apache.calcite.rex">RexLiteral</a>&nbsp;literal)</span></div>
 <div class="block">Converts a <a href="../../rex/RexLiteral.html" title="class in org.apache.calcite.rex"><code>RexLiteral</code></a> in the context of a <a href="../../rex/RexProgram.html" title="class in org.apache.calcite.rex"><code>RexProgram</code></a>
  to a <a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql"><code>SqlNode</code></a>.</div>
@@ -837,7 +832,7 @@ boolean&nbsp;qualified)</span></div>
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

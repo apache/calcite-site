@@ -1,0 +1,785 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>InnoDB adapter</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="generator" content="Jekyll v3.7.3">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
+  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+
+<body class="wrap">
+  <header role="banner">
+  <div class="grid">
+    <div class="unit center-on-mobiles">
+      <h1>
+        <a href="/">
+          <span class="sr-only">Apache Calcite</span>
+          <img src="/img/logo.svg" alt="Calcite Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav">
+      <ul>
+  <li class="">
+    <a href="/">Home</a>
+  </li>
+  <li class="">
+    <a href="/downloads/">Download</a>
+  </li>
+  <li class="">
+    <a href="/community/">Community</a>
+  </li>
+  <li class="">
+    <a href="/develop/">Develop</a>
+  </li>
+  <li class="">
+    <a href="/news/">News</a>
+  </li>
+  <li class="current">
+    <a href="/docs/">Docs</a>
+  </li>
+</ul>
+
+    </nav>
+  </div>
+</header>
+
+
+    <section class="docs">
+    <div class="grid">
+
+      <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select onchange="if (this.value) window.location.href=this.value">
+    <option value="">Navigate the docs…</option>
+        <optgroup label="Overview">      
+    </optgroup>
+    <optgroup label="Advanced">      
+    </optgroup>
+    <optgroup label="Avatica">      
+    </optgroup>
+    <optgroup label="Reference">      
+    </optgroup>
+    <optgroup label="Meta">      
+    </optgroup>
+
+  </select>
+</div>
+
+
+      <div class="unit four-fifths">
+        <article>
+          <h1>InnoDB adapter</h1>
+          <!--
+
+-->
+
+<p><a href="https://www.mysql.com/">MySQL</a> is the most popular Open Source SQL
+database management system, is developed, distributed, and supported
+by Oracle Corporation. InnoDB is a general-purpose storage engine that
+balances high reliability and high performance in MySQL, since 5.6
+InnoDB has become the default MySQL storage engine.</p>
+
+<p>Calcite’s InnoDB adapter allows you to query the data based on InnoDB
+data files directly as illustrated below, data files are also known as
+<code class="highlighter-rouge">.ibd</code> files. It leverages the
+<a href="https://github.com/alibaba/innodb-java-reader">innodb-java-reader</a>. This
+adapter is different from JDBC adapter which maps a schema in a JDBC
+data source and requires a MySQL server to serve response.</p>
+
+<p>With <code class="highlighter-rouge">.ibd</code> files and the corresponding DDLs, the InnoDB adapter acts
+as a simple “MySQL server”: it accepts SQL queries and attempts to
+compile each query based on InnoDB file access APIs provided by
+<a href="https://github.com/alibaba/innodb-java-reader">innodb-java-reader</a>.
+It projects, filters and sorts directly in the InnoDB data files where
+possible.</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="w">                      </span><span class="err">SQL</span><span class="w"> </span><span class="err">query</span><span class="w">
+                       </span><span class="err">|</span><span class="w">     </span><span class="err">|</span><span class="w">
+                      </span><span class="err">/</span><span class="w">       </span><span class="err">\</span><span class="w">
+             </span><span class="err">---------</span><span class="w">         </span><span class="err">---------</span><span class="w">
+            </span><span class="err">|</span><span class="w">                           </span><span class="err">|</span><span class="w">
+            </span><span class="err">v</span><span class="w">                           </span><span class="err">v</span><span class="w">
+</span><span class="err">+-------------------------+</span><span class="w">  </span><span class="err">+------------------------+</span><span class="w">
+</span><span class="err">|</span><span class="w">      </span><span class="err">MySQL</span><span class="w"> </span><span class="err">Server</span><span class="w">       </span><span class="err">|</span><span class="w">  </span><span class="err">|</span><span class="w"> </span><span class="err">Calcite</span><span class="w"> </span><span class="err">InnoDB</span><span class="w"> </span><span class="err">Adapter</span><span class="w"> </span><span class="err">|</span><span class="w">
+</span><span class="err">|</span><span class="w">                         </span><span class="err">|</span><span class="w">  </span><span class="err">+------------------------+</span><span class="w">
+</span><span class="err">|</span><span class="w"> </span><span class="err">+---------------------+</span><span class="w"> </span><span class="err">|</span><span class="w">    </span><span class="err">+--------------------+</span><span class="w">
+</span><span class="err">|</span><span class="w"> </span><span class="err">|InnoDB</span><span class="w"> </span><span class="err">Storage</span><span class="w"> </span><span class="err">Engine|</span><span class="w"> </span><span class="err">|</span><span class="w">    </span><span class="err">|</span><span class="w"> </span><span class="err">innodb-java-reader</span><span class="w"> </span><span class="err">|</span><span class="w">
+</span><span class="err">|</span><span class="w"> </span><span class="err">+---------------------+</span><span class="w"> </span><span class="err">|</span><span class="w">    </span><span class="err">+--------------------+</span><span class="w">
+</span><span class="err">+-------------------------+</span><span class="w">
+
+</span><span class="err">--------------------</span><span class="w"> </span><span class="err">File</span><span class="w"> </span><span class="err">System</span><span class="w"> </span><span class="err">--------------------</span><span class="w">
+
+	</span><span class="err">+------------+</span><span class="w">      </span><span class="err">+-----+</span><span class="w">
+	</span><span class="err">|</span><span class="w"> </span><span class="err">.ibd</span><span class="w"> </span><span class="err">files</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">...</span><span class="w">  </span><span class="err">|</span><span class="w">     </span><span class="err">|</span><span class="w">    </span><span class="err">InnoDB</span><span class="w"> </span><span class="err">Data</span><span class="w"> </span><span class="err">files</span><span class="w">
+	</span><span class="err">+------------+</span><span class="w">      </span><span class="err">+-----+</span></code></pre></figure>
+
+<p>What’s more, with DDL statements, the adapter is “index aware”. It
+leverages rules to choose the appropriate index to scan, for example,
+using primary key or secondary keys to look up data, then it tries to
+push down some conditions into storage engine. The adapter also
+supports hints, so that users can tell the optimizer to use a
+particular index.</p>
+
+<p>A basic example of a model file is given below, this schema reads from
+a MySQL “scott” database:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"defaultSchema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scott"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"schemas"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scott"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.innodb.InnodbSchemaFactory"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"sqlFilePath"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"/path/scott.sql"</span><span class="w"> </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"ibdDataFileBasePath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/local/mysql/data/scott"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p><code class="highlighter-rouge">sqlFilePath</code> is a list of DDL files, you can generate table
+definitions by executing `mysqldump -d -u<username> -p<password> -h</password></username></p>
+<hostname> <dbname>` in command-line.
+
+The file content of `/path/scott.sql` is as follows:
+
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">CREATE TABLE <span class="sb">`</span>DEPT<span class="sb">`</span><span class="o">(</span>
+    <span class="sb">`</span>DEPTNO<span class="sb">`</span> TINYINT NOT NULL,
+    <span class="sb">`</span>DNAME<span class="sb">`</span> VARCHAR<span class="o">(</span>50<span class="o">)</span> NOT NULL,
+    <span class="sb">`</span>LOC<span class="sb">`</span> VARCHAR<span class="o">(</span>20<span class="o">)</span>,
+    UNIQUE KEY <span class="sb">`</span>DEPT_PK<span class="sb">`</span> <span class="o">(</span><span class="sb">`</span>DEPTNO<span class="sb">`</span><span class="o">)</span>
+<span class="o">)</span> <span class="nv">ENGINE</span><span class="o">=</span>InnoDB DEFAULT <span class="nv">CHARSET</span><span class="o">=</span>latin1<span class="p">;</span>
+
+CREATE TABLE <span class="sb">`</span>EMP<span class="sb">`</span><span class="o">(</span>
+    <span class="sb">`</span>EMPNO<span class="sb">`</span> INT<span class="o">(</span>11<span class="o">)</span> NOT NULL,
+    <span class="sb">`</span>ENAME<span class="sb">`</span> VARCHAR<span class="o">(</span>100<span class="o">)</span> NOT NULL,
+    <span class="sb">`</span>JOB<span class="sb">`</span> VARCHAR<span class="o">(</span>15<span class="o">)</span> NOT NULL,
+    <span class="sb">`</span>AGE<span class="sb">`</span> SMALLINT,
+    <span class="sb">`</span>MGR<span class="sb">`</span> BIGINT,
+    <span class="sb">`</span>HIREDATE<span class="sb">`</span> DATE,
+    <span class="sb">`</span>SAL<span class="sb">`</span> DECIMAL<span class="o">(</span>8,2<span class="o">)</span> NOT NULL,
+    <span class="sb">`</span>COMM<span class="sb">`</span> DECIMAL<span class="o">(</span>6,2<span class="o">)</span>,
+    <span class="sb">`</span>DEPTNO<span class="sb">`</span> TINYINT,
+    <span class="sb">`</span>EMAIL<span class="sb">`</span> VARCHAR<span class="o">(</span>100<span class="o">)</span> DEFAULT NULL,
+    <span class="sb">`</span>CREATE_DATETIME<span class="sb">`</span> DATETIME,
+    <span class="sb">`</span>CREATE_TIME<span class="sb">`</span> TIME,
+    <span class="sb">`</span>UPSERT_TIME<span class="sb">`</span> TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY <span class="o">(</span><span class="sb">`</span>EMPNO<span class="sb">`</span><span class="o">)</span>,
+    KEY <span class="sb">`</span>ENAME_KEY<span class="sb">`</span> <span class="o">(</span><span class="sb">`</span>ENAME<span class="sb">`</span><span class="o">)</span>,
+    KEY <span class="sb">`</span>HIREDATE_KEY<span class="sb">`</span> <span class="o">(</span><span class="sb">`</span>HIREDATE<span class="sb">`</span><span class="o">)</span>,
+    KEY <span class="sb">`</span>CREATE_DATETIME_JOB_KEY<span class="sb">`</span> <span class="o">(</span><span class="sb">`</span>CREATE_DATETIME<span class="sb">`</span>, <span class="sb">`</span>JOB<span class="sb">`</span><span class="o">)</span>,
+    KEY <span class="sb">`</span>CREATE_TIME_KEY<span class="sb">`</span> <span class="o">(</span><span class="sb">`</span>CREATE_TIME<span class="sb">`</span><span class="o">)</span>,
+    KEY <span class="sb">`</span>UPSERT_TIME_KEY<span class="sb">`</span> <span class="o">(</span><span class="sb">`</span>UPSERT_TIME<span class="sb">`</span><span class="o">)</span>,
+    KEY <span class="sb">`</span>DEPTNO_JOB_KEY<span class="sb">`</span> <span class="o">(</span><span class="sb">`</span>DEPTNO<span class="sb">`</span>, <span class="sb">`</span>JOB<span class="sb">`</span><span class="o">)</span>,
+    KEY <span class="sb">`</span>DEPTNO_SAL_COMM_KEY<span class="sb">`</span> <span class="o">(</span><span class="sb">`</span>DEPTNO<span class="sb">`</span>, <span class="sb">`</span>SAL<span class="sb">`</span>, <span class="sb">`</span>COMM<span class="sb">`</span><span class="o">)</span>,
+    KEY <span class="sb">`</span>DEPTNO_MGR_KEY<span class="sb">`</span> <span class="o">(</span><span class="sb">`</span>DEPTNO<span class="sb">`</span>, <span class="sb">`</span>MGR<span class="sb">`</span><span class="o">)</span>,
+    KEY <span class="sb">`</span>AGE_KEY<span class="sb">`</span> <span class="o">(</span><span class="sb">`</span>AGE<span class="sb">`</span><span class="o">)</span>
+<span class="o">)</span> <span class="nv">ENGINE</span><span class="o">=</span>InnoDB DEFAULT <span class="nv">CHARSET</span><span class="o">=</span>utf8mb4<span class="p">;</span></code></pre></figure>
+
+
+ibdDataFileBasePath is the parent file path of `.ibd` files.
+
+Assuming the model file is stored as `model.json`, you can connect to
+InnoDB data file to perform query via
+[sqlline](https://github.com/julianhyde/sqlline) as follows:
+
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="o">!</span>connect jdbc:calcite:model<span class="o">=</span>model.json admin admin</code></pre></figure>
+
+
+We can query all employees by writing standard SQL:
+
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select </span>empno, ename, job, age, mgr from <span class="s2">"EMP"</span><span class="p">;</span>
++-------+--------+-----------+-----+------+
+| EMPNO | ENAME  |    JOB    | AGE | MGR  |
++-------+--------+-----------+-----+------+
+| 7369  | SMITH  | CLERK     | 30  | 7902 |
+| 7499  | ALLEN  | SALESMAN  | 24  | 7698 |
+| 7521  | WARD   | SALESMAN  | 41  | 7698 |
+| 7566  | JONES  | MANAGER   | 28  | 7839 |
+| 7654  | MARTIN | SALESMAN  | 27  | 7698 |
+| 7698  | BLAKE  | MANAGER   | 38  | 7839 |
+| 7782  | CLARK  | MANAGER   | 32  | 7839 |
+| 7788  | SCOTT  | ANALYST   | 45  | 7566 |
+| 7839  | KING   | PRESIDENT | 22  | null |
+| 7844  | TURNER | SALESMAN  | 54  | 7698 |
+| 7876  | ADAMS  | CLERK     | 35  | 7788 |
+| 7900  | JAMES  | CLERK     | 40  | 7698 |
+| 7902  | FORD   | ANALYST   | 28  | 7566 |
+| 7934  | MILLER | CLERK     | 32  | 7782 |
++-------+--------+-----------+-----+------+</code></pre></figure>
+
+
+While executing this query, the InnoDB adapter scans the InnoDB data
+file `EMP.ibd` using primary key, also known as clustering B+ tree
+index in MySQL, and is able to push down projection to underlying
+storage engine. Projection can reduce the size of data fetched from
+the storage engine.
+
+We can look up one employee by filtering. The InnoDB adapter retrieves
+all indexes through DDL file provided in `model.json`.
+
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select </span>empno, ename, job, age, mgr from <span class="s2">"EMP"</span> where empno <span class="o">=</span> 7782<span class="p">;</span>
++-------+-------+---------+-----+------+
+| EMPNO | ENAME |   JOB   | AGE | MGR  |
++-------+-------+---------+-----+------+
+| 7782  | CLARK | MANAGER | 32  | 7839 |
++-------+-------+---------+-----+------+</code></pre></figure>
+
+
+The InnoDB adapter recognizes that `empno` is the primary key and
+performs a point-lookup by using the clustering index instead of a
+full table scan.
+
+We can also do range queries on the primary key:
+
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select </span>empno, ename, job, age, mgr from <span class="s2">"EMP"</span> where empno <span class="o">&gt;</span> 7782 and empno &lt; 7900<span class="p">;</span></code></pre></figure>
+
+
+Note that such query with acceptable range is usually efficient in
+MySQL with InnoDB storage engine, because for clustering B+ tree
+index, records close in index are close in data file, which is good
+for scanning.
+
+We can look up employee by secondary key. For example, in the
+following query, the filtering condition is a field `ename` of type
+`VARCHAR`.
+
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select </span>empno, ename, job, age, mgr from <span class="s2">"EMP"</span> where ename <span class="o">=</span> <span class="s1">'smith'</span><span class="p">;</span>
++-------+-------+-------+-----+------+
+| EMPNO | ENAME |  JOB  | AGE | MGR  |
++-------+-------+-------+-----+------+
+| 7369  | SMITH | CLERK | 30  | 7902 |
++-------+-------+-------+-----+------+</code></pre></figure>
+
+
+The InnoDB adapter works well on almost all the commonly used data
+types in MySQL, for more information on supported data types, please
+refer to
+[innodb-java-reader](https://github.com/alibaba/innodb-java-reader#3-features).
+
+We can query by composite key. For example, given secondary index of
+`DEPTNO_MGR_KEY`.
+
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select </span>empno, ename, job, age, mgr from <span class="s2">"EMP"</span> where deptno <span class="o">=</span> 20 and mgr <span class="o">=</span> 7566<span class="p">;</span>
++-------+-------+---------+-----+------+
+| EMPNO | ENAME |   JOB   | AGE | MGR  |
++-------+-------+---------+-----+------+
+| 7788  | SCOTT | ANALYST | 45  | 7566 |
+| 7902  | FORD  | ANALYST | 28  | 7566 |
++-------+-------+---------+-----+------+</code></pre></figure>
+
+
+The InnoDB adapter leverages the matched key `DEPTNO_MGR_KEY` to push
+down filtering condition of `deptno = 20 and mgr = 7566`.
+
+In some cases, only part of the conditions can be pushed down since
+there is a limitation in the underlying storage engine API; other
+conditions remain in the rest of the plan. Given the following SQL,
+only `deptno = 20` is pushed down.
+
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">select </span>empno, ename, job, age, mgr from <span class="s2">"EMP"</span> where deptno <span class="o">=</span> 20 and upsert_time <span class="o">&gt;</span> <span class="s1">'2018-01-01 00:00:00'</span><span class="p">;</span></code></pre></figure>
+
+
+`innodb-java-reader` only supports range queries with lower and upper
+bound using an index, not fully `Index Condition Pushdown (ICP)`. The
+storage engine returns a range of rows and Calcite evaluates the rest
+of `WHERE` condition from the rows fetched.
+
+For the following SQL, there are multiple indexes satisfying the
+left-prefix index rule: the possible indexes are `DEPTNO_JOB_KEY`,
+`DEPTNO_SAL_COMM_KEY` and `DEPTNO_MGR_KEY`. The InnoDB adapter chooses
+one of them according to the ordinal defined in DDL; only the `deptno
+= 20` condition is pushed down, leaving the rest of `WHERE` condition
+handled by Calcite's built-in execution engine.
+
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select </span>empno, deptno, sal from <span class="s2">"EMP"</span> where deptno <span class="o">=</span> 20 and sal <span class="o">&gt;</span> 2000<span class="p">;</span>
++-------+--------+---------+
+| EMPNO | DEPTNO |   SAL   |
++-------+--------+---------+
+| 7788  | 20     | 3000.00 |
+| 7902  | 20     | 3000.00 |
+| 7566  | 20     | 2975.00 |
++-------+--------+---------+</code></pre></figure>
+
+
+Accessing rows through secondary key requires scanning by secondary
+index and retrieving records back to clustering index in InnoDB, for a
+"big" scan, that would introduce many random I/O operations, so
+performance is usually not good enough. Note that the query above can
+be more performant by using `EPTNO_SAL_COMM_KEY` index, because
+covering index does not need to retrieve back to clustering index. We
+can force using `DEPTNO_SAL_COMM_KEY` index by hint as follows.
+
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select </span>empno, deptno, sal from <span class="s2">"EMP"</span>/<span class="k">*</span>+ index<span class="o">(</span>DEPTNO_SAL_COMM_KEY<span class="o">)</span> <span class="k">*</span>/ where deptno <span class="o">=</span> 20 and sal <span class="o">&gt;</span> 2000<span class="p">;</span></code></pre></figure>
+
+
+Hint can be configured in `SqlToRelConverter`, to enable hint, you
+should register `index` HintStrategy on `TableScan` in
+`SqlToRelConverter.ConfigBuilder`. Index hint takes effect on the base
+`TableScan` relational node, if there are conditions matching the
+index, index condition can be pushed down as well. For the following SQL,
+although none of the indexes can be used, but by leveraging covering
+index, the performance is better than full table scan, we can force to
+use `DEPTNO_MGR_KEY` to scan in secondary index.
+
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select </span>empno,mgr from <span class="s2">"EMP"</span>/<span class="k">*</span>+ index<span class="o">(</span>DEPTNO_MGR_KEY<span class="o">)</span> <span class="k">*</span>/ where mgr <span class="o">=</span> 7839<span class="p">;</span></code></pre></figure>
+
+
+Ordering can be pushed down if it matches the natural collation of the index used.
+
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select </span>deptno,ename,hiredate from <span class="s2">"EMP"</span> where hiredate &lt; <span class="s1">'2020-01-01'</span> order by hiredate desc<span class="p">;</span>
++--------+--------+------------+
+| DEPTNO | ENAME  |  HIREDATE  |
++--------+--------+------------+
+| 20     | ADAMS  | 1987-05-23 |
+| 20     | SCOTT  | 1987-04-19 |
+| 10     | MILLER | 1982-01-23 |
+| 20     | FORD   | 1981-12-03 |
+| 30     | JAMES  | 1981-12-03 |
+| 10     | KING   | 1981-11-17 |
+| 30     | MARTIN | 1981-09-28 |
+| 30     | TURNER | 1981-09-08 |
+| 10     | CLARK  | 1981-06-09 |
+| 30     | WARD   | 1981-02-22 |
+| 30     | ALLEN  | 1981-02-20 |
+| 20     | JONES  | 1981-02-04 |
+| 30     | BLAKE  | 1981-01-05 |
+| 20     | SMITH  | 1980-12-17 |
++--------+--------+------------+</code></pre></figure>
+
+
+## About time zone
+
+MySQL converts `TIMESTAMP` values from the current time zone to UTC
+for storage, and back from UTC to the current time zone for
+retrieval. So in this adapter, MySQL's `TIMESTAMP` is mapped to
+Calcite's `TIMESTAMP WITH LOCAL TIME ZONE`. The per-session time zone
+setting can be configured in Calcite connection config `timeZone`,
+which tells the MySQL server which time zone the `TIMESTAMP` value was
+in. Currently the InnoDB adapter cannot pass the property to the
+underlying storage engine, but you can specify `timeZone` in
+`model.json` like below. Note that you only need to specify the
+property if `timeZone` is set in connection config and it is different
+from system default time zone where the InnoDB adapter runs.
+
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="o">{</span>
+  <span class="s2">"version"</span>: <span class="s2">"1.0"</span>,
+  <span class="s2">"defaultSchema"</span>: <span class="s2">"test"</span>,
+  <span class="s2">"schemas"</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">"name"</span>: <span class="s2">"test"</span>,
+      <span class="s2">"type"</span>: <span class="s2">"custom"</span>,
+      <span class="s2">"factory"</span>: <span class="s2">"org.apache.calcite.adapter.innodb.InnodbSchemaFactory"</span>,
+      <span class="s2">"operand"</span>: <span class="o">{</span>
+        <span class="s2">"sqlFilePath"</span>: <span class="o">[</span><span class="s2">"src/test/resources/data_types.sql"</span><span class="o">]</span>,
+        <span class="s2">"ibdDataFileBasePath"</span>: <span class="s2">"src/test/resources/data"</span>,
+        <span class="s2">"timeZone"</span>: <span class="s2">"America/Los_Angeles"</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">}</span></code></pre></figure>
+
+
+## Limitations
+
+`innodb-java-reader` has some prerequisites for `.ibd` files.
+
+* The `COMPACT` and `DYNAMIC` row formats are supported. `COMPRESSED`,
+  `REDUNDANT` and `FIXED` are not supported.
+* `innodb_file_per_table` should set to `ON`, `innodb_file_per_table`
+  is enabled by default in MySQL 5.6 and higher.
+* Page size should set to `16K` which is also the default value.
+
+For more information, please refer to
+[prerequisites](https://github.com/alibaba/innodb-java-reader#2-prerequisites).
+
+In terms of data consistency, you can think of the adapter as a simple
+MySQL server, with the ability to query directly through InnoDB data
+file, dump data by offloading from MySQL. If pages are not flushed
+from InnoDB Buffer Pool to disk, then the result may be inconsistent
+(the LSN in `.ibd` file might smaller than in-memory pages). InnoDB
+leverages write ahead log in terms of performance, so there is no
+command available to flush all dirty pages. Only internal mechanism
+manages when and where to persist pages to disk, like Page Cleaner
+thread, adaptive flushing, etc.
+
+Currently the InnoDB adapter is not aware of row count and cardinality
+of a `.ibd` data file, so it relies on simple rules to perform
+optimization. If, in future, the underlying storage engine can provide
+such metrics and metadata, this could be integrated into Calcite by
+leveraging cost based optimization.
+</dbname></hostname>
+
+          
+
+
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+
+        </article>
+      </div>
+
+      <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    
+    <h4>Overview</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/index.html">Background</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/tutorial.html">Tutorial</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/algebra.html">Algebra</a></li>
+
+
+</ul>
+
+    
+    <h4>Advanced</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/adapter.html">Adapters</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/spatial.html">Spatial</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/stream.html">Streaming</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/materialized_views.html">Materialized Views</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/lattice.html">Lattices</a></li>
+
+
+</ul>
+
+    
+    <h4>Avatica</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_overview.html">Overview</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_roadmap.html">Roadmap</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_json_reference.html">JSON Reference</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_protobuf_reference.html">Protobuf Reference</a></li>
+
+
+</ul>
+
+    
+    <h4>Reference</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/reference.html">SQL language</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/model.html">JSON/YAML models</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/howto.html">HOWTO</a></li>
+
+
+</ul>
+
+    
+    <h4>Meta</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/history.html">History</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/powered_by.html">Powered by Calcite</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/javadocAggregate">API</a></li>
+
+
+</ul>
+
+    
+  </aside>
+</div>
+
+
+      <div class="clear"></div>
+
+    </div>
+  </section>
+
+
+  <footer role="contentinfo">
+  <div id="poweredby">
+    <a href="http://www.apache.org/">
+      <span class="sr-only">Apache</span>
+      <img src="/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
+  </div>
+  <div id="copyright">
+  <p>The contents of this website are Copyright &copy;&nbsp;2021
+     <a href="https://www.apache.org/">Apache Software Foundation</a>
+     under the terms of
+     the <a href="https://www.apache.org/licenses/">
+     Apache&nbsp;License&nbsp;v2</a>. Apache Calcite and its logo are
+     trademarks of the Apache Software Foundation.</p>
+  </div>
+</footer>
+
+  <script>
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
+    anchor.title = "Permalink";
+    return anchor;
+  };
+
+  var linkifyAnchors = function (level, containingElement) {
+    var headers = containingElement.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.appendChild(anchorForId(header.id));
+      }
+    }
+  };
+
+  document.onreadystatechange = function () {
+    if (this.readyState === "complete") {
+      var contentBlock = document.getElementsByClassName("docs")[0] || document.getElementsByClassName("news")[0];
+      if (!contentBlock) {
+        return;
+      }
+      for (var level = 1; level <= 6; level++) {
+        linkifyAnchors(level, contentBlock);
+      }
+    }
+  };
+</script>
+
+
+</body>
+</html>

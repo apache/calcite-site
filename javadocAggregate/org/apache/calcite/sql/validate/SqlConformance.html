@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":6,"i16":6,"i17":6,"i18":6,"i19":6,"i20":6,"i21":6,"i22":6,"i23":6,"i24":6,"i25":6};
+<script type="text/javascript">var data = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":6,"i16":6,"i17":6,"i18":6,"i19":6,"i20":6,"i21":6,"i22":6,"i23":6,"i24":6,"i25":6,"i26":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -386,6 +386,14 @@ loadScripts(document, 'script');</script>
 </td>
 </tr>
 <tr class="altColor" id="i24">
+<td class="colFirst"><code><a href="../fun/SqlLibrary.html" title="enum in org.apache.calcite.sql.fun">SqlLibrary</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#semantics()">semantics</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Controls the behavior of operators that are part of Standard SQL but
+ nevertheless have different behavior in different databases.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i25">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#shouldConvertRaggedUnionTypesToVarying()">shouldConvertRaggedUnionTypesToVarying</a></span>()</code></th>
 <td class="colLast">
@@ -393,7 +401,7 @@ loadScripts(document, 'script');</script>
  lengths should be a VARCHAR type.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i25">
+<tr class="altColor" id="i26">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#splitQuotedTableName()">splitQuotedTableName</a></span>()</code></th>
 <td class="colLast">
@@ -543,6 +551,7 @@ loadScripts(document, 'script');</script>
 
  <p>Among the built-in conformance levels, true in
  <a href="SqlConformanceEnum.html#BABEL"><code>SqlConformanceEnum.BABEL</code></a>,
+ <a href="SqlConformanceEnum.html#BIG_QUERY"><code>SqlConformanceEnum.BIG_QUERY</code></a>,
  <a href="SqlConformanceEnum.html#LENIENT"><code>SqlConformanceEnum.LENIENT</code></a>,
  <a href="SqlConformanceEnum.html#MYSQL_5"><code>SqlConformanceEnum.MYSQL_5</code></a>,
  <a href="SqlConformanceEnum.html#PRESTO"><code>SqlConformanceEnum.PRESTO</code></a>;
@@ -982,6 +991,34 @@ loadScripts(document, 'script');</script>
  true otherwise.</div>
 </section>
 </li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="semantics()">semantics</a></h3>
+<div class="memberSignature"><span class="returnType"><a href="../fun/SqlLibrary.html" title="enum in org.apache.calcite.sql.fun">SqlLibrary</a></span>&nbsp;<span class="memberName">semantics</span>()</div>
+<div class="block">Controls the behavior of operators that are part of Standard SQL but
+ nevertheless have different behavior in different databases.
+
+ <p>Consider the <code>SUBSTRING</code> operator. In ISO standard SQL, negative
+ start indexes are converted to 1; in Google BigQuery, negative start
+ indexes are treated as offsets from the end of the string. For example,
+ <code>SUBSTRING('abcde' FROM -3 FOR 2)</code> returns <code>'ab'</code> in standard
+ SQL and 'cd' in BigQuery.
+
+ <p>If you specify <code>conformance=BIG_QUERY</code> in your connection
+ parameters, <code>SUBSTRING</code> will give the BigQuery behavior. Similarly
+ MySQL and Oracle.
+
+ <p>Among the built-in conformance levels:
+ <ul>
+ <li><a href="SqlConformanceEnum.html#BIG_QUERY"><code>SqlConformanceEnum.BIG_QUERY</code></a> returns
+     <a href="../fun/SqlLibrary.html#BIG_QUERY"><code>SqlLibrary.BIG_QUERY</code></a>;
+ <li><a href="SqlConformanceEnum.html#MYSQL_5"><code>SqlConformanceEnum.MYSQL_5</code></a> returns <a href="../fun/SqlLibrary.html#MYSQL"><code>SqlLibrary.MYSQL</code></a>;
+ <li><a href="SqlConformanceEnum.html#ORACLE_10"><code>SqlConformanceEnum.ORACLE_10</code></a> and
+     <a href="SqlConformanceEnum.html#ORACLE_12"><code>SqlConformanceEnum.ORACLE_12</code></a> return <a href="../fun/SqlLibrary.html#ORACLE"><code>SqlLibrary.ORACLE</code></a>;
+ <li>otherwise returns <a href="../fun/SqlLibrary.html#STANDARD"><code>SqlLibrary.STANDARD</code></a>.
+ </ul></div>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -1033,7 +1070,7 @@ loadScripts(document, 'script');</script>
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

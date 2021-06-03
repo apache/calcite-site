@@ -153,14 +153,14 @@ extends <a href="JsonTable.html" title="class in org.apache.calcite.model">JsonT
 </thead>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#modifiable">modifiable</a></span></code></th>
 <td class="colLast">
 <div class="block">Whether this view should allow INSERT requests.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
+<td class="colFirst"><code>@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#path">path</a></span></code></th>
 <td class="colLast">
 <div class="block">Schema name(s) to use when resolving query.</div>
@@ -200,7 +200,11 @@ extends <a href="JsonTable.html" title="class in org.apache.calcite.model">JsonT
 </thead>
 <tbody>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">JsonView</a></span>()</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,org.apache.calcite.model.JsonStream,java.lang.Object,java.util.List,java.lang.Boolean)">JsonView</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;name,
+<a href="JsonStream.html" title="class in org.apache.calcite.model">JsonStream</a>&nbsp;stream,
+<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;sql,
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;path,
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&nbsp;modifiable)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -269,7 +273,7 @@ extends <a href="JsonTable.html" title="class in org.apache.calcite.model">JsonT
 <li class="blockList">
 <section class="detail">
 <h3><a id="sql">sql</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a></span>&nbsp;<span class="memberName">sql</span></div>
+<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a></span>&nbsp;<span class="memberName">sql</span></div>
 <div class="block">SQL query that is the definition of the view.
 
  <p>Must be a string or a list of strings (which are concatenated into a
@@ -279,7 +283,7 @@ extends <a href="JsonTable.html" title="class in org.apache.calcite.model">JsonT
 <li class="blockList">
 <section class="detail">
 <h3><a id="path">path</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</span>&nbsp;<span class="memberName">path</span></div>
+<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="returnType">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;</span>&nbsp;<span class="memberName">path</span></div>
 <div class="block">Schema name(s) to use when resolving query.
 
  <p>If not specified, defaults to current schema.</div>
@@ -288,7 +292,7 @@ extends <a href="JsonTable.html" title="class in org.apache.calcite.model">JsonT
 <li class="blockList">
 <section class="detail">
 <h3><a id="modifiable">modifiable</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a></span>&nbsp;<span class="memberName">modifiable</span></div>
+<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="returnType">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a></span>&nbsp;<span class="memberName">modifiable</span></div>
 <div class="block">Whether this view should allow INSERT requests.
 
  <p>The values have the following meanings:
@@ -314,8 +318,12 @@ extends <a href="JsonTable.html" title="class in org.apache.calcite.model">JsonT
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
-<h3><a id="&lt;init&gt;()">JsonView</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">JsonView</span>()</div>
+<h3><a id="&lt;init&gt;(java.lang.String,org.apache.calcite.model.JsonStream,java.lang.Object,java.util.List,java.lang.Boolean)">JsonView</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">JsonView</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;name,
+<a href="JsonStream.html" title="class in org.apache.calcite.model">JsonStream</a>&nbsp;stream,
+<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;sql,
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;path,
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&nbsp;modifiable)</span></div>
 </section>
 </li>
 </ul>
@@ -407,7 +415,7 @@ extends <a href="JsonTable.html" title="class in org.apache.calcite.model">JsonT
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

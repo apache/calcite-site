@@ -201,7 +201,7 @@ int&nbsp;endColumnNumber)</code></th>
 <tbody>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;o)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;o)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i1">
@@ -262,18 +262,18 @@ int&nbsp;endColumnNumber)</code></th>
 </tr>
 <tr class="rowColor" id="i9">
 <td class="colFirst"><code><a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#plusAll(java.util.Collection)">plusAll</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util" class="externalLink">Collection</a>&lt;<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;nodeList)</code></th>
-<td class="colLast">
-<div class="block">Combines this parser position with a list of positions.</div>
-</td>
-</tr>
-<tr class="altColor" id="i10">
-<td class="colFirst"><code><a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#plusAll(org.apache.calcite.sql.SqlNode%5B%5D)">plusAll</a></span>&#8203;(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>[]&nbsp;nodes)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#plusAll(org.apache.calcite.sql.SqlNode%5B%5D)">plusAll</a></span>&#8203;(@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>[]&nbsp;nodes)</code></th>
 <td class="colLast">
 <div class="block">Combines this parser position with an array of positions to create a
  position that spans from the first point in the first to the last point
  in the other.</div>
+</td>
+</tr>
+<tr class="altColor" id="i10">
+<td class="colFirst"><code><a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#plusAll(java.util.Collection)">plusAll</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util" class="externalLink">Collection</a>&lt;? extends @Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;nodes)</code></th>
+<td class="colLast">
+<div class="block">Combines this parser position with a list of positions.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i11">
@@ -285,8 +285,7 @@ int&nbsp;endColumnNumber)</code></th>
 <td class="colFirst"><code>static <a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sum(java.lang.Iterable)">sum</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang" class="externalLink">Iterable</a>&lt;<a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&gt;&nbsp;poses)</code></th>
 <td class="colLast">
-<div class="block">Combines an iterable of parser positions to create a position which spans
- from the beginning of the first to the end of the last.</div>
+<div class="block">Returns a position spanning the earliest position to the latest.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i13">
@@ -405,7 +404,7 @@ int&nbsp;endColumnNumber)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="equals(java.lang.Object)">equals</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">equals</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;o)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">equals</span>&#8203;(<span class="arguments">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;o)</span></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang" class="externalLink">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a></code></dd>
@@ -478,7 +477,7 @@ int&nbsp;endColumnNumber)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="plusAll(org.apache.calcite.sql.SqlNode[])">plusAll</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a></span>&nbsp;<span class="memberName">plusAll</span>&#8203;(<span class="arguments"><a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>[]&nbsp;nodes)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a></span>&nbsp;<span class="memberName">plusAll</span>&#8203;(<span class="arguments">@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>[]&nbsp;nodes)</span></div>
 <div class="block">Combines this parser position with an array of positions to create a
  position that spans from the first point in the first to the last point
  in the other.</div>
@@ -487,7 +486,7 @@ int&nbsp;endColumnNumber)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="plusAll(java.util.Collection)">plusAll</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a></span>&nbsp;<span class="memberName">plusAll</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util" class="externalLink">Collection</a>&lt;<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;nodeList)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a></span>&nbsp;<span class="memberName">plusAll</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util" class="externalLink">Collection</a>&lt;? extends @Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;nodes)</span></div>
 <div class="block">Combines this parser position with a list of positions.</div>
 </section>
 </li>
@@ -511,8 +510,9 @@ int&nbsp;endColumnNumber)</span></div>
 <section class="detail">
 <h3><a id="sum(java.lang.Iterable)">sum</a></h3>
 <div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a></span>&nbsp;<span class="memberName">sum</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang" class="externalLink">Iterable</a>&lt;<a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&gt;&nbsp;poses)</span></div>
-<div class="block">Combines an iterable of parser positions to create a position which spans
- from the beginning of the first to the end of the last.</div>
+<div class="block">Returns a position spanning the earliest position to the latest.
+ Does not assume that the positions are sorted.
+ Throws if the list is empty.</div>
 </section>
 </li>
 <li class="blockList">
@@ -578,7 +578,7 @@ int&nbsp;endColumnNumber)</span></div>
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

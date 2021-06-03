@@ -172,11 +172,11 @@ extends <a href="../AbstractRelNode.html" title="class in org.apache.calcite.rel
 <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;joinFilter,
 <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
 boolean&nbsp;isFullOuterJoin,
-<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;outerJoinConditions,
+<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends @Nullable <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;outerJoinConditions,
 <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../core/JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a>&gt;&nbsp;joinTypes,
-<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&gt;&nbsp;projFields,
+<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends @Nullable <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&gt;&nbsp;projFields,
 com.google.common.collect.ImmutableMap&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang" class="externalLink">Integer</a>,&#8203;<a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&gt;&nbsp;joinFieldRefCountsMap,
-<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;postJoinFilter)</code></th>
+@Nullable <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;postJoinFilter)</code></th>
 <td class="colLast">
 <div class="block">Constructs a MultiJoin.</div>
 </td>
@@ -270,21 +270,21 @@ com.google.common.collect.ImmutableMap&lt;<a href="https://docs.oracle.com/javas
 </td>
 </tr>
 <tr class="rowColor" id="i9">
-<td class="colFirst"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></td>
+<td class="colFirst"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;@Nullable <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getOuterJoinConditions()">getOuterJoinConditions</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns outer join conditions for null-generating inputs.</div>
 </td>
 </tr>
 <tr class="altColor" id="i10">
-<td class="colFirst"><code><a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPostJoinFilter()">getPostJoinFilter</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns post-join filter associated with this MultiJoin.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i11">
-<td class="colFirst"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&gt;</code></td>
+<td class="colFirst"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;@Nullable <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getProjFields()">getProjFields</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns bitmaps representing the fields projected from each input; if an
@@ -324,7 +324,7 @@ com.google.common.collect.ImmutableMap&lt;<a href="https://docs.oracle.com/javas
 <h3>Methods inherited from interface&nbsp;org.apache.calcite.rel.<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></h3>
 <a id="methods.inherited.from.class.org.apache.calcite.rel.RelNode">
 <!--   -->
-</a><code><a href="../RelNode.html#explain()">explain</a></code></div>
+</a><code><a href="../RelNode.html#explain()">explain</a>, <a href="../RelNode.html#fieldIsNullable(int)">fieldIsNullable</a></code></div>
 </section>
 </li>
 </ul>
@@ -362,11 +362,11 @@ com.google.common.collect.ImmutableMap&lt;<a href="https://docs.oracle.com/javas
 <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;joinFilter,
 <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
 boolean&nbsp;isFullOuterJoin,
-<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;outerJoinConditions,
+<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends @Nullable <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;outerJoinConditions,
 <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../core/JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a>&gt;&nbsp;joinTypes,
-<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&gt;&nbsp;projFields,
+<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends @Nullable <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&gt;&nbsp;projFields,
 com.google.common.collect.ImmutableMap&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang" class="externalLink">Integer</a>,&#8203;<a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&gt;&nbsp;joinFieldRefCountsMap,
-<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;postJoinFilter)</span></div>
+@Nullable <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;postJoinFilter)</span></div>
 <div class="block">Constructs a MultiJoin.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -457,7 +457,7 @@ com.google.common.collect.ImmutableMap&lt;<a href="https://docs.oracle.com/javas
  Each node should call <code>super.explainTerms</code>, then call the
  <a href="../RelWriter.html#input(java.lang.String,org.apache.calcite.rel.RelNode)"><code>RelWriter.input(String, RelNode)</code></a>
  and
- <a href="../externalize/RelWriterImpl.html#item(java.lang.String,java.lang.Object)"><code>RelWriterImpl.item(String, Object)</code></a>
+ <a href="../RelWriter.html#item(java.lang.String,java.lang.Object)"><code>RelWriter.item(String, Object)</code></a>
  methods for each input and attribute.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
@@ -536,7 +536,7 @@ com.google.common.collect.ImmutableMap&lt;<a href="https://docs.oracle.com/javas
 <li class="blockList">
 <section class="detail">
 <h3><a id="getOuterJoinConditions()">getOuterJoinConditions</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</span>&nbsp;<span class="memberName">getOuterJoinConditions</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;@Nullable <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</span>&nbsp;<span class="memberName">getOuterJoinConditions</span>()</div>
 <div class="block">Returns outer join conditions for null-generating inputs.</div>
 </section>
 </li>
@@ -550,7 +550,7 @@ com.google.common.collect.ImmutableMap&lt;<a href="https://docs.oracle.com/javas
 <li class="blockList">
 <section class="detail">
 <h3><a id="getProjFields()">getProjFields</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&gt;</span>&nbsp;<span class="memberName">getProjFields</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;@Nullable <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&gt;</span>&nbsp;<span class="memberName">getProjFields</span>()</div>
 <div class="block">Returns bitmaps representing the fields projected from each input; if an
  entry is null, all fields are projected.</div>
 </section>
@@ -574,7 +574,7 @@ com.google.common.collect.ImmutableMap&lt;<a href="https://docs.oracle.com/javas
 <li class="blockList">
 <section class="detail">
 <h3><a id="getPostJoinFilter()">getPostJoinFilter</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="memberName">getPostJoinFilter</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="memberName">getPostJoinFilter</span>()</div>
 <div class="block">Returns post-join filter associated with this MultiJoin.</div>
 </section>
 </li>
@@ -629,7 +629,7 @@ com.google.common.collect.ImmutableMap&lt;<a href="https://docs.oracle.com/javas
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

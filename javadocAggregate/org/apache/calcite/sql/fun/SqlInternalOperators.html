@@ -114,6 +114,21 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 </thead>
 <tbody>
 <tr class="altColor">
+<td class="colFirst"><code>static <a href="SqlRowOperator.html" title="class in org.apache.calcite.sql.fun">SqlRowOperator</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#ANONYMOUS_ROW">ANONYMOUS_ROW</a></span></code></th>
+<td class="colLast">
+<div class="block">Similar to <a href="SqlStdOperatorTable.html#ROW"><code>SqlStdOperatorTable.ROW</code></a>, but does not print "ROW".</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="SqlRowOperator.html" title="class in org.apache.calcite.sql.fun">SqlRowOperator</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#ANONYMOUS_ROW_NO_PARENTHESES">ANONYMOUS_ROW_NO_PARENTHESES</a></span></code></th>
+<td class="colLast">
+<div class="block">Similar to <a href="#ANONYMOUS_ROW"><code>ANONYMOUS_ROW</code></a>, but does not print "ROW" or
+ parentheses.</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="SqlBetweenOperator.html" title="class in org.apache.calcite.sql.fun">SqlBetweenOperator</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#DRUID_BETWEEN">DRUID_BETWEEN</a></span></code></th>
 <td class="colLast">
@@ -132,6 +147,21 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#DRUID_NOT_IN">DRUID_NOT_IN</a></span></code></th>
 <td class="colLast">
 <div class="block">A NOT IN operator for Druid, analogous to <a href="#DRUID_IN"><code>DRUID_IN</code></a>.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="../SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#SEPARATOR">SEPARATOR</a></span></code></th>
+<td class="colLast">
+<div class="block">Separator expression inside GROUP_CONCAT, e.g.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="../SqlInternalOperator.html" title="class in org.apache.calcite.sql">SqlInternalOperator</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#THROW_UNLESS">THROW_UNLESS</a></span></code></th>
+<td class="colLast">
+<div class="block">"$THROW_UNLESS(condition, message)" throws an error with the given message
+ if condition is not TRUE, otherwise returns TRUE.</div>
 </td>
 </tr>
 </tbody>
@@ -165,6 +195,36 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
+<h3><a id="ANONYMOUS_ROW">ANONYMOUS_ROW</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="SqlRowOperator.html" title="class in org.apache.calcite.sql.fun">SqlRowOperator</a></span>&nbsp;<span class="memberName">ANONYMOUS_ROW</span></div>
+<div class="block">Similar to <a href="SqlStdOperatorTable.html#ROW"><code>SqlStdOperatorTable.ROW</code></a>, but does not print "ROW".
+
+ <p>For arguments [1, TRUE], ROW would print "<code>ROW (1, TRUE)</code>",
+ but this operator prints "<code>(1, TRUE)</code>".</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="ANONYMOUS_ROW_NO_PARENTHESES">ANONYMOUS_ROW_NO_PARENTHESES</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="SqlRowOperator.html" title="class in org.apache.calcite.sql.fun">SqlRowOperator</a></span>&nbsp;<span class="memberName">ANONYMOUS_ROW_NO_PARENTHESES</span></div>
+<div class="block">Similar to <a href="#ANONYMOUS_ROW"><code>ANONYMOUS_ROW</code></a>, but does not print "ROW" or
+ parentheses.
+
+ <p>For arguments [1, TRUE], prints "<code>1, TRUE</code>".  It is used in
+ contexts where parentheses have been printed (because we thought we were
+ about to print "<code>(ROW (1, TRUE))</code>") and we wish we had not.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="THROW_UNLESS">THROW_UNLESS</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="../SqlInternalOperator.html" title="class in org.apache.calcite.sql">SqlInternalOperator</a></span>&nbsp;<span class="memberName">THROW_UNLESS</span></div>
+<div class="block">"$THROW_UNLESS(condition, message)" throws an error with the given message
+ if condition is not TRUE, otherwise returns TRUE.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="DRUID_IN">DRUID_IN</a></h3>
 <div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="SqlInOperator.html" title="class in org.apache.calcite.sql.fun">SqlInOperator</a></span>&nbsp;<span class="memberName">DRUID_IN</span></div>
 <div class="block">An IN operator for Druid.
@@ -187,6 +247,13 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 <h3><a id="DRUID_BETWEEN">DRUID_BETWEEN</a></h3>
 <div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="SqlBetweenOperator.html" title="class in org.apache.calcite.sql.fun">SqlBetweenOperator</a></span>&nbsp;<span class="memberName">DRUID_BETWEEN</span></div>
 <div class="block">A BETWEEN operator for Druid, analogous to <a href="#DRUID_IN"><code>DRUID_IN</code></a>.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="SEPARATOR">SEPARATOR</a></h3>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="../SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a></span>&nbsp;<span class="memberName">SEPARATOR</span></div>
+<div class="block">Separator expression inside GROUP_CONCAT, e.g. '<code>SEPARATOR ','</code>'.</div>
 </section>
 </li>
 </ul>
@@ -240,7 +307,7 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

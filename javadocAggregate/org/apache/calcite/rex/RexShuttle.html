@@ -157,23 +157,23 @@ implements <a href="RexVisitor.html" title="interface in org.apache.calcite.rex"
 </thead>
 <tbody>
 <tr class="altColor" id="i0">
-<td class="colFirst"><code>&lt;T extends <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;<br><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;T&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#apply(java.util.List)">apply</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;T&gt;&nbsp;exprList)</code></th>
+<td class="colFirst"><code>&lt;T extends @Nullable <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;<br>@PolyNull <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;T&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#apply(java.util.List)">apply</a></span>&#8203;(@PolyNull <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;T&gt;&nbsp;exprList)</code></th>
 <td class="colLast">
 <div class="block">Applies this shuttle to each expression in a list and returns the
  resulting list.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i1">
-<td class="colFirst"><code><a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#apply(org.apache.calcite.rex.RexNode)">apply</a></span>&#8203;(<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;expr)</code></th>
+<td class="colFirst"><code>@PolyNull <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#apply(org.apache.calcite.rex.RexNode)">apply</a></span>&#8203;(@PolyNull <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;expr)</code></th>
 <td class="colLast">
 <div class="block">Applies this shuttle to an expression, or returns null if the expression
  is null.</div>
 </td>
 </tr>
 <tr class="altColor" id="i2">
-<td class="colFirst"><code>&lt;T extends <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;<br>boolean</code></td>
+<td class="colFirst"><code>&lt;T extends @Nullable <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;<br>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#mutate(java.util.List)">mutate</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;T&gt;&nbsp;exprList)</code></th>
 <td class="colLast">
 <div class="block">Applies this shuttle to each expression in a list.</div>
@@ -182,7 +182,7 @@ implements <a href="RexVisitor.html" title="interface in org.apache.calcite.rex"
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code>protected <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visitArray(org.apache.calcite.rex.RexNode%5B%5D,boolean%5B%5D)">visitArray</a></span>&#8203;(<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>[]&nbsp;exprs,
-boolean[]&nbsp;update)</code></th>
+boolean @Nullable []&nbsp;update)</code></th>
 <td class="colLast">
 <div class="block">Visits each of an array of expressions and returns an array of the
  results.</div>
@@ -211,7 +211,7 @@ boolean[]&nbsp;update)</code></th>
 <tr class="altColor" id="i8">
 <td class="colFirst"><code>protected <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="RexFieldCollation.html" title="class in org.apache.calcite.rex">RexFieldCollation</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visitFieldCollations(java.util.List,boolean%5B%5D)">visitFieldCollations</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="RexFieldCollation.html" title="class in org.apache.calcite.rex">RexFieldCollation</a>&gt;&nbsp;collations,
-boolean[]&nbsp;update)</code></th>
+boolean @Nullable []&nbsp;update)</code></th>
 <td class="colLast">
 <div class="block">Visits each of a list of field collations and returns a list of the
  results.</div>
@@ -225,7 +225,7 @@ boolean[]&nbsp;update)</code></th>
 <tr class="altColor" id="i10">
 <td class="colFirst"><code>protected <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visitList(java.util.List,boolean%5B%5D)">visitList</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;exprs,
-boolean[]&nbsp;update)</code></th>
+boolean @Nullable []&nbsp;update)</code></th>
 <td class="colLast">
 <div class="block">Visits each of a list of expressions and returns a list of the
  results.</div>
@@ -374,7 +374,7 @@ boolean[]&nbsp;update)</code></th>
 <section class="detail">
 <h3><a id="visitArray(org.apache.calcite.rex.RexNode[],boolean[])">visitArray</a></h3>
 <div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType"><a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>[]</span>&nbsp;<span class="memberName">visitArray</span>&#8203;(<span class="arguments"><a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>[]&nbsp;exprs,
-boolean[]&nbsp;update)</span></div>
+boolean @Nullable []&nbsp;update)</span></div>
 <div class="block">Visits each of an array of expressions and returns an array of the
  results.</div>
 <dl>
@@ -391,7 +391,7 @@ boolean[]&nbsp;update)</span></div>
 <section class="detail">
 <h3><a id="visitList(java.util.List,boolean[])">visitList</a></h3>
 <div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</span>&nbsp;<span class="memberName">visitList</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;exprs,
-boolean[]&nbsp;update)</span></div>
+boolean @Nullable []&nbsp;update)</span></div>
 <div class="block">Visits each of a list of expressions and returns a list of the
  results.</div>
 <dl>
@@ -408,7 +408,7 @@ boolean[]&nbsp;update)</span></div>
 <section class="detail">
 <h3><a id="visitFieldCollations(java.util.List,boolean[])">visitFieldCollations</a></h3>
 <div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="RexFieldCollation.html" title="class in org.apache.calcite.rex">RexFieldCollation</a>&gt;</span>&nbsp;<span class="memberName">visitFieldCollations</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="RexFieldCollation.html" title="class in org.apache.calcite.rex">RexFieldCollation</a>&gt;&nbsp;collations,
-boolean[]&nbsp;update)</span></div>
+boolean @Nullable []&nbsp;update)</span></div>
 <div class="block">Visits each of a list of field collations and returns a list of the
  results.</div>
 <dl>
@@ -494,7 +494,7 @@ boolean[]&nbsp;update)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="mutate(java.util.List)">mutate</a></h3>
-<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="typeParameters">&lt;T extends <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">mutate</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;T&gt;&nbsp;exprList)</span></div>
+<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="typeParameters">&lt;T extends @Nullable <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">mutate</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;T&gt;&nbsp;exprList)</span></div>
 <div class="block">Applies this shuttle to each expression in a list.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -505,15 +505,18 @@ boolean[]&nbsp;update)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="apply(java.util.List)">apply</a></h3>
-<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="typeParameters">&lt;T extends <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;T&gt;</span>&nbsp;<span class="memberName">apply</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;T&gt;&nbsp;exprList)</span></div>
+<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="typeParameters">&lt;T extends @Nullable <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</span>
+<span class="returnType">@PolyNull <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;T&gt;</span>&nbsp;<span class="memberName">apply</span>&#8203;(<span class="arguments">@PolyNull <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;T&gt;&nbsp;exprList)</span></div>
 <div class="block">Applies this shuttle to each expression in a list and returns the
- resulting list. Does not modify the initial list.</div>
+ resulting list. Does not modify the initial list.
+
+ <p>Returns null if and only if <code>exprList</code> is null.</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="apply(org.apache.calcite.rex.RexNode)">apply</a></h3>
-<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="returnType"><a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="memberName">apply</span>&#8203;(<span class="arguments"><a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;expr)</span></div>
+<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="returnType">@PolyNull <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="memberName">apply</span>&#8203;(<span class="arguments">@PolyNull <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;expr)</span></div>
 <div class="block">Applies this shuttle to an expression, or returns null if the expression
  is null.</div>
 </section>
@@ -569,7 +572,7 @@ boolean[]&nbsp;update)</span></div>
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

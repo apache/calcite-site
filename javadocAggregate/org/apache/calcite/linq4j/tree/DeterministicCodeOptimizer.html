@@ -122,7 +122,7 @@ extends <a href="ClassDeclarationFinder.html" title="class in org.apache.calcite
 </thead>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><code>protected <a href="https://docs.oracle.com/javase/9/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util" class="externalLink">Map</a>&lt;<a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>,&#8203;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;</code></td>
+<td class="colFirst"><code>protected <a href="https://docs.oracle.com/javase/9/docs/api/java/util/IdentityHashMap.html?is-external=true" title="class or interface in java.util" class="externalLink">IdentityHashMap</a>&lt;<a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>,&#8203;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#constants">constants</a></span></code></th>
 <td class="colLast">
 <div class="block">The map contains known to be effectively-final expression.</div>
@@ -213,7 +213,7 @@ extends <a href="ClassDeclarationFinder.html" title="class in org.apache.calcite
 </td>
 </tr>
 <tr class="altColor" id="i2">
-<td class="colFirst"><code>protected <a href="ParameterExpression.html" title="class in org.apache.calcite.linq4j.tree">ParameterExpression</a></code></td>
+<td class="colFirst"><code>protected @Nullable <a href="ParameterExpression.html" title="class in org.apache.calcite.linq4j.tree">ParameterExpression</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findDeclaredExpression(org.apache.calcite.linq4j.tree.Expression)">findDeclaredExpression</a></span>&#8203;(<a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expression)</code></th>
 <td class="colLast">
 <div class="block">Finds if there exists ready for reuse declaration for given expression.</div>
@@ -242,7 +242,7 @@ extends <a href="ClassDeclarationFinder.html" title="class in org.apache.calcite
 </tr>
 <tr class="altColor" id="i6">
 <td class="colFirst"><code>protected boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isConstant(org.apache.calcite.linq4j.tree.Expression)">isConstant</a></span>&#8203;(<a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expression)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isConstant(org.apache.calcite.linq4j.tree.Expression)">isConstant</a></span>&#8203;(@Nullable <a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expression)</code></th>
 <td class="colLast">
 <div class="block">Verifies if the expression is effectively constant.</div>
 </td>
@@ -293,19 +293,19 @@ extends <a href="ClassDeclarationFinder.html" title="class in org.apache.calcite
 <tr class="rowColor" id="i13">
 <td class="colFirst"><code><a href="MemberDeclaration.html" title="class in org.apache.calcite.linq4j.tree">MemberDeclaration</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.linq4j.tree.FieldDeclaration,org.apache.calcite.linq4j.tree.Expression)">visit</a></span>&#8203;(<a href="FieldDeclaration.html" title="class in org.apache.calcite.linq4j.tree">FieldDeclaration</a>&nbsp;fieldDeclaration,
-<a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;initializer)</code></th>
+@Nullable <a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;initializer)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i14">
 <td class="colFirst"><code><a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.linq4j.tree.MemberExpression,org.apache.calcite.linq4j.tree.Expression)">visit</a></span>&#8203;(<a href="MemberExpression.html" title="class in org.apache.calcite.linq4j.tree">MemberExpression</a>&nbsp;memberExpression,
-<a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expression)</code></th>
+@Nullable <a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expression)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i15">
 <td class="colFirst"><code><a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(org.apache.calcite.linq4j.tree.MethodCallExpression,org.apache.calcite.linq4j.tree.Expression,java.util.List)">visit</a></span>&#8203;(<a href="MethodCallExpression.html" title="class in org.apache.calcite.linq4j.tree">MethodCallExpression</a>&nbsp;methodCallExpression,
-<a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;targetExpression,
+@Nullable <a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;targetExpression,
 <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&gt;&nbsp;expressions)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -364,7 +364,7 @@ extends <a href="ClassDeclarationFinder.html" title="class in org.apache.calcite
 <li class="blockList">
 <section class="detail">
 <h3><a id="constants">constants</a></h3>
-<div class="memberSignature"><span class="modifiers">protected final</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util" class="externalLink">Map</a>&lt;<a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>,&#8203;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;</span>&nbsp;<span class="memberName">constants</span></div>
+<div class="memberSignature"><span class="modifiers">protected final</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/IdentityHashMap.html?is-external=true" title="class or interface in java.util" class="externalLink">IdentityHashMap</a>&lt;<a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>,&#8203;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;</span>&nbsp;<span class="memberName">constants</span></div>
 <div class="block">The map contains known to be effectively-final expression.
  The map uses identity equality.
  Typically the key is <code>ParameterExpression</code>, however there might be
@@ -501,7 +501,7 @@ extends <a href="ClassDeclarationFinder.html" title="class in org.apache.calcite
 <section class="detail">
 <h3><a id="visit(org.apache.calcite.linq4j.tree.MethodCallExpression,org.apache.calcite.linq4j.tree.Expression,java.util.List)">visit</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a></span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="MethodCallExpression.html" title="class in org.apache.calcite.linq4j.tree">MethodCallExpression</a>&nbsp;methodCallExpression,
-<a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;targetExpression,
+@Nullable <a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;targetExpression,
 <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&gt;&nbsp;expressions)</span></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
@@ -513,7 +513,7 @@ extends <a href="ClassDeclarationFinder.html" title="class in org.apache.calcite
 <section class="detail">
 <h3><a id="visit(org.apache.calcite.linq4j.tree.MemberExpression,org.apache.calcite.linq4j.tree.Expression)">visit</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a></span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="MemberExpression.html" title="class in org.apache.calcite.linq4j.tree">MemberExpression</a>&nbsp;memberExpression,
-<a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expression)</span></div>
+@Nullable <a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expression)</span></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="Shuttle.html#visit(org.apache.calcite.linq4j.tree.MemberExpression,org.apache.calcite.linq4j.tree.Expression)">visit</a></code>&nbsp;in class&nbsp;<code><a href="Shuttle.html" title="class in org.apache.calcite.linq4j.tree">Shuttle</a></code></dd>
@@ -524,7 +524,7 @@ extends <a href="ClassDeclarationFinder.html" title="class in org.apache.calcite
 <section class="detail">
 <h3><a id="visit(org.apache.calcite.linq4j.tree.FieldDeclaration,org.apache.calcite.linq4j.tree.Expression)">visit</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="MemberDeclaration.html" title="class in org.apache.calcite.linq4j.tree">MemberDeclaration</a></span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="FieldDeclaration.html" title="class in org.apache.calcite.linq4j.tree">FieldDeclaration</a>&nbsp;fieldDeclaration,
-<a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;initializer)</span></div>
+@Nullable <a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;initializer)</span></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="Shuttle.html#visit(org.apache.calcite.linq4j.tree.FieldDeclaration,org.apache.calcite.linq4j.tree.Expression)">visit</a></code>&nbsp;in class&nbsp;<code><a href="Shuttle.html" title="class in org.apache.calcite.linq4j.tree">Shuttle</a></code></dd>
@@ -548,7 +548,7 @@ extends <a href="ClassDeclarationFinder.html" title="class in org.apache.calcite
 <li class="blockList">
 <section class="detail">
 <h3><a id="findDeclaredExpression(org.apache.calcite.linq4j.tree.Expression)">findDeclaredExpression</a></h3>
-<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType"><a href="ParameterExpression.html" title="class in org.apache.calcite.linq4j.tree">ParameterExpression</a></span>&nbsp;<span class="memberName">findDeclaredExpression</span>&#8203;(<span class="arguments"><a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expression)</span></div>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">@Nullable <a href="ParameterExpression.html" title="class in org.apache.calcite.linq4j.tree">ParameterExpression</a></span>&nbsp;<span class="memberName">findDeclaredExpression</span>&#8203;(<span class="arguments"><a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expression)</span></div>
 <div class="block">Finds if there exists ready for reuse declaration for given expression.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
@@ -595,7 +595,7 @@ extends <a href="ClassDeclarationFinder.html" title="class in org.apache.calcite
 <li class="blockList">
 <section class="detail">
 <h3><a id="isConstant(org.apache.calcite.linq4j.tree.Expression)">isConstant</a></h3>
-<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isConstant</span>&#8203;(<span class="arguments"><a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expression)</span></div>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isConstant</span>&#8203;(<span class="arguments">@Nullable <a href="Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expression)</span></div>
 <div class="block">Verifies if the expression is effectively constant.
  It is assumed the expression is simple (e.g. <code>ConstantExpression</code> or
  <code>ParameterExpression</code>).
@@ -734,7 +734,7 @@ extends <a href="ClassDeclarationFinder.html" title="class in org.apache.calcite
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

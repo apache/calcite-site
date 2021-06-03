@@ -158,28 +158,28 @@ form.</p>
       <span class="k">statement</span> <span class="p">[</span> <span class="s1">';'</span> <span class="k">statement</span> <span class="p">]</span><span class="o">*</span> <span class="p">[</span> <span class="s1">';'</span> <span class="p">]</span>
 
 <span class="n">setStatement</span><span class="p">:</span>
-      <span class="p">[</span> <span class="k">ALTER</span> <span class="p">(</span> <span class="k">SYSTEM</span> <span class="o">|</span> <span class="k">SESSION</span> <span class="p">)</span> <span class="p">]</span> <span class="k">SET</span> <span class="n">identifier</span> <span class="s1">'='</span> <span class="n">expression</span>
+      <span class="p">[</span> <span class="k">ALTER</span> <span class="err">{</span> <span class="k">SYSTEM</span> <span class="o">|</span> <span class="k">SESSION</span> <span class="err">}</span> <span class="p">]</span> <span class="k">SET</span> <span class="n">identifier</span> <span class="s1">'='</span> <span class="n">expression</span>
 
 <span class="n">resetStatement</span><span class="p">:</span>
-      <span class="p">[</span> <span class="k">ALTER</span> <span class="p">(</span> <span class="k">SYSTEM</span> <span class="o">|</span> <span class="k">SESSION</span> <span class="p">)</span> <span class="p">]</span> <span class="k">RESET</span> <span class="n">identifier</span>
-  <span class="o">|</span>   <span class="p">[</span> <span class="k">ALTER</span> <span class="p">(</span> <span class="k">SYSTEM</span> <span class="o">|</span> <span class="k">SESSION</span> <span class="p">)</span> <span class="p">]</span> <span class="k">RESET</span> <span class="k">ALL</span>
+      <span class="p">[</span> <span class="k">ALTER</span> <span class="err">{</span> <span class="k">SYSTEM</span> <span class="o">|</span> <span class="k">SESSION</span> <span class="err">}</span> <span class="p">]</span> <span class="k">RESET</span> <span class="n">identifier</span>
+  <span class="o">|</span>   <span class="p">[</span> <span class="k">ALTER</span> <span class="err">{</span> <span class="k">SYSTEM</span> <span class="o">|</span> <span class="k">SESSION</span> <span class="err">}</span> <span class="p">]</span> <span class="k">RESET</span> <span class="k">ALL</span>
 
 <span class="k">explain</span><span class="p">:</span>
       <span class="k">EXPLAIN</span> <span class="n">PLAN</span>
       <span class="p">[</span> <span class="k">WITH</span> <span class="k">TYPE</span> <span class="o">|</span> <span class="k">WITH</span> <span class="k">IMPLEMENTATION</span> <span class="o">|</span> <span class="k">WITHOUT</span> <span class="k">IMPLEMENTATION</span> <span class="p">]</span>
       <span class="p">[</span> <span class="k">EXCLUDING</span> <span class="n">ATTRIBUTES</span> <span class="o">|</span> <span class="k">INCLUDING</span> <span class="p">[</span> <span class="k">ALL</span> <span class="p">]</span> <span class="n">ATTRIBUTES</span> <span class="p">]</span>
-      <span class="p">[</span> <span class="k">AS</span> <span class="n">JSON</span> <span class="o">|</span> <span class="k">AS</span> <span class="n">XML</span> <span class="p">]</span>
-      <span class="k">FOR</span> <span class="p">(</span> <span class="n">query</span> <span class="o">|</span> <span class="k">insert</span> <span class="o">|</span> <span class="k">update</span> <span class="o">|</span> <span class="n">merge</span> <span class="o">|</span> <span class="k">delete</span> <span class="p">)</span>
+      <span class="p">[</span> <span class="k">AS</span> <span class="n">JSON</span> <span class="o">|</span> <span class="k">AS</span> <span class="n">XML</span> <span class="o">|</span> <span class="k">AS</span> <span class="n">DOT</span> <span class="p">]</span>
+      <span class="k">FOR</span> <span class="err">{</span> <span class="n">query</span> <span class="o">|</span> <span class="k">insert</span> <span class="o">|</span> <span class="k">update</span> <span class="o">|</span> <span class="n">merge</span> <span class="o">|</span> <span class="k">delete</span> <span class="err">}</span>
 
 <span class="k">describe</span><span class="p">:</span>
       <span class="k">DESCRIBE</span> <span class="k">DATABASE</span> <span class="n">databaseName</span>
-   <span class="o">|</span>  <span class="k">DESCRIBE</span> <span class="k">CATALOG</span> <span class="p">[</span> <span class="n">databaseName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">catalogName</span>
-   <span class="o">|</span>  <span class="k">DESCRIBE</span> <span class="k">SCHEMA</span> <span class="p">[</span> <span class="p">[</span> <span class="n">databaseName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">catalogName</span> <span class="p">]</span> <span class="p">.</span> <span class="n">schemaName</span>
-   <span class="o">|</span>  <span class="k">DESCRIBE</span> <span class="p">[</span> <span class="k">TABLE</span> <span class="p">]</span> <span class="p">[</span> <span class="p">[</span> <span class="p">[</span> <span class="n">databaseName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">catalogName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">schemaName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">tableName</span> <span class="p">[</span> <span class="n">columnName</span> <span class="p">]</span>
-   <span class="o">|</span>  <span class="k">DESCRIBE</span> <span class="p">[</span> <span class="k">STATEMENT</span> <span class="p">]</span> <span class="p">(</span> <span class="n">query</span> <span class="o">|</span> <span class="k">insert</span> <span class="o">|</span> <span class="k">update</span> <span class="o">|</span> <span class="n">merge</span> <span class="o">|</span> <span class="k">delete</span> <span class="p">)</span>
+  <span class="o">|</span>   <span class="k">DESCRIBE</span> <span class="k">CATALOG</span> <span class="p">[</span> <span class="n">databaseName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">catalogName</span>
+  <span class="o">|</span>   <span class="k">DESCRIBE</span> <span class="k">SCHEMA</span> <span class="p">[</span> <span class="p">[</span> <span class="n">databaseName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">catalogName</span> <span class="p">]</span> <span class="p">.</span> <span class="n">schemaName</span>
+  <span class="o">|</span>   <span class="k">DESCRIBE</span> <span class="p">[</span> <span class="k">TABLE</span> <span class="p">]</span> <span class="p">[</span> <span class="p">[</span> <span class="p">[</span> <span class="n">databaseName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">catalogName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">schemaName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">tableName</span> <span class="p">[</span> <span class="n">columnName</span> <span class="p">]</span>
+  <span class="o">|</span>   <span class="k">DESCRIBE</span> <span class="p">[</span> <span class="k">STATEMENT</span> <span class="p">]</span> <span class="err">{</span> <span class="n">query</span> <span class="o">|</span> <span class="k">insert</span> <span class="o">|</span> <span class="k">update</span> <span class="o">|</span> <span class="n">merge</span> <span class="o">|</span> <span class="k">delete</span> <span class="err">}</span>
 
 <span class="k">insert</span><span class="p">:</span>
-      <span class="p">(</span> <span class="k">INSERT</span> <span class="o">|</span> <span class="n">UPSERT</span> <span class="p">)</span> <span class="k">INTO</span> <span class="n">tablePrimary</span>
+      <span class="err">{</span> <span class="k">INSERT</span> <span class="o">|</span> <span class="n">UPSERT</span> <span class="err">}</span> <span class="k">INTO</span> <span class="n">tablePrimary</span>
       <span class="p">[</span> <span class="s1">'('</span> <span class="k">column</span> <span class="p">[,</span> <span class="k">column</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="p">]</span>
       <span class="n">query</span>
 
@@ -227,7 +227,7 @@ form.</p>
       <span class="n">expression</span> <span class="p">[</span> <span class="k">ASC</span> <span class="o">|</span> <span class="k">DESC</span> <span class="p">]</span> <span class="p">[</span> <span class="n">NULLS</span> <span class="k">FIRST</span> <span class="o">|</span> <span class="n">NULLS</span> <span class="k">LAST</span> <span class="p">]</span>
 
 <span class="k">select</span><span class="p">:</span>
-      <span class="k">SELECT</span> <span class="p">[</span> <span class="s1">'/*+'</span> <span class="n">hint</span> <span class="p">[,</span> <span class="n">hint</span><span class="p">]</span><span class="o">*</span> <span class="s1">'*/'</span> <span class="p">]</span> <span class="p">[</span> <span class="n">STREAM</span> <span class="p">]</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span>
+      <span class="k">SELECT</span> <span class="p">[</span> <span class="n">hintComment</span> <span class="p">]</span> <span class="p">[</span> <span class="n">STREAM</span> <span class="p">]</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span>
           <span class="err">{</span> <span class="o">*</span> <span class="o">|</span> <span class="n">projectItem</span> <span class="p">[,</span> <span class="n">projectItem</span> <span class="p">]</span><span class="o">*</span> <span class="err">}</span>
       <span class="k">FROM</span> <span class="n">tableExpression</span>
       <span class="p">[</span> <span class="k">WHERE</span> <span class="n">booleanExpression</span> <span class="p">]</span>
@@ -245,7 +245,7 @@ form.</p>
 
 <span class="n">tableExpression</span><span class="p">:</span>
       <span class="n">tableReference</span> <span class="p">[,</span> <span class="n">tableReference</span> <span class="p">]</span><span class="o">*</span>
-  <span class="o">|</span>   <span class="n">tableExpression</span> <span class="p">[</span> <span class="k">NATURAL</span> <span class="p">]</span> <span class="p">[</span> <span class="p">(</span> <span class="k">LEFT</span> <span class="o">|</span> <span class="k">RIGHT</span> <span class="o">|</span> <span class="k">FULL</span> <span class="p">)</span> <span class="p">[</span> <span class="k">OUTER</span> <span class="p">]</span> <span class="p">]</span> <span class="k">JOIN</span> <span class="n">tableExpression</span> <span class="p">[</span> <span class="n">joinCondition</span> <span class="p">]</span>
+  <span class="o">|</span>   <span class="n">tableExpression</span> <span class="p">[</span> <span class="k">NATURAL</span> <span class="p">]</span> <span class="p">[</span> <span class="err">{</span> <span class="k">LEFT</span> <span class="o">|</span> <span class="k">RIGHT</span> <span class="o">|</span> <span class="k">FULL</span> <span class="err">}</span> <span class="p">[</span> <span class="k">OUTER</span> <span class="p">]</span> <span class="p">]</span> <span class="k">JOIN</span> <span class="n">tableExpression</span> <span class="p">[</span> <span class="n">joinCondition</span> <span class="p">]</span>
   <span class="o">|</span>   <span class="n">tableExpression</span> <span class="k">CROSS</span> <span class="k">JOIN</span> <span class="n">tableExpression</span>
   <span class="o">|</span>   <span class="n">tableExpression</span> <span class="p">[</span> <span class="k">CROSS</span> <span class="o">|</span> <span class="k">OUTER</span> <span class="p">]</span> <span class="n">APPLY</span> <span class="n">tableExpression</span>
 
@@ -257,13 +257,14 @@ form.</p>
       <span class="n">tablePrimary</span>
       <span class="p">[</span> <span class="k">FOR</span> <span class="n">SYSTEM_TIME</span> <span class="k">AS</span> <span class="k">OF</span> <span class="n">expression</span> <span class="p">]</span>
       <span class="p">[</span> <span class="n">pivot</span> <span class="p">]</span>
+      <span class="p">[</span> <span class="n">unpivot</span> <span class="p">]</span>
       <span class="p">[</span> <span class="n">matchRecognize</span> <span class="p">]</span>
       <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="k">alias</span> <span class="p">[</span> <span class="s1">'('</span> <span class="n">columnAlias</span> <span class="p">[,</span> <span class="n">columnAlias</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="p">]</span> <span class="p">]</span>
 
 <span class="n">tablePrimary</span><span class="p">:</span>
       <span class="p">[</span> <span class="p">[</span> <span class="n">catalogName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">schemaName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">tableName</span>
       <span class="s1">'('</span> <span class="k">TABLE</span> <span class="p">[</span> <span class="p">[</span> <span class="n">catalogName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">schemaName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">tableName</span> <span class="s1">')'</span>
-  <span class="o">|</span>   <span class="n">tablePrimary</span> <span class="p">[</span> <span class="s1">'/*+'</span> <span class="n">hint</span> <span class="p">[,</span> <span class="n">hint</span><span class="p">]</span><span class="o">*</span> <span class="s1">'*/'</span> <span class="p">]</span> <span class="p">[</span> <span class="n">EXTEND</span> <span class="p">]</span> <span class="s1">'('</span> <span class="n">columnDecl</span> <span class="p">[,</span> <span class="n">columnDecl</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
+  <span class="o">|</span>   <span class="n">tablePrimary</span> <span class="p">[</span> <span class="n">hintComment</span> <span class="p">]</span> <span class="p">[</span> <span class="n">EXTEND</span> <span class="p">]</span> <span class="s1">'('</span> <span class="n">columnDecl</span> <span class="p">[,</span> <span class="n">columnDecl</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
   <span class="o">|</span>   <span class="p">[</span> <span class="k">LATERAL</span> <span class="p">]</span> <span class="s1">'('</span> <span class="n">query</span> <span class="s1">')'</span>
   <span class="o">|</span>   <span class="k">UNNEST</span> <span class="s1">'('</span> <span class="n">expression</span> <span class="s1">')'</span> <span class="p">[</span> <span class="k">WITH</span> <span class="k">ORDINALITY</span> <span class="p">]</span>
   <span class="o">|</span>   <span class="p">[</span> <span class="k">LATERAL</span> <span class="p">]</span> <span class="k">TABLE</span> <span class="s1">'('</span> <span class="p">[</span> <span class="k">SPECIFIC</span> <span class="p">]</span> <span class="n">functionName</span> <span class="s1">'('</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="s1">')'</span>
@@ -276,9 +277,9 @@ form.</p>
   <span class="o">|</span>   <span class="n">hintName</span> <span class="s1">'('</span> <span class="n">hintOptions</span> <span class="s1">')'</span>
 
 <span class="n">hintOptions</span><span class="p">:</span>
-      <span class="n">hintKVOption</span> <span class="p">[,</span> <span class="n">hintKVOption</span><span class="p">]</span><span class="o">*</span>
-  <span class="o">|</span>   <span class="n">optionName</span> <span class="p">[,</span> <span class="n">optionName</span><span class="p">]</span><span class="o">*</span>
-  <span class="o">|</span>   <span class="n">optionValue</span> <span class="p">[,</span> <span class="n">optionValue</span><span class="p">]</span><span class="o">*</span>
+      <span class="n">hintKVOption</span> <span class="p">[,</span> <span class="n">hintKVOption</span> <span class="p">]</span><span class="o">*</span>
+  <span class="o">|</span>   <span class="n">optionName</span> <span class="p">[,</span> <span class="n">optionName</span> <span class="p">]</span><span class="o">*</span>
+  <span class="o">|</span>   <span class="n">optionValue</span> <span class="p">[,</span> <span class="n">optionValue</span> <span class="p">]</span><span class="o">*</span>
 
 <span class="n">hintKVOption</span><span class="p">:</span>
       <span class="n">optionName</span> <span class="s1">'='</span> <span class="n">stringLiteral</span>
@@ -287,6 +288,14 @@ form.</p>
 <span class="n">optionValue</span><span class="p">:</span>
       <span class="n">stringLiteral</span>
   <span class="o">|</span>   <span class="n">numericLiteral</span>
+
+<span class="n">columnOrList</span><span class="p">:</span>
+      <span class="k">column</span>
+  <span class="o">|</span>   <span class="s1">'('</span> <span class="k">column</span> <span class="p">[,</span> <span class="k">column</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
+
+<span class="n">exprOrList</span><span class="p">:</span>
+      <span class="n">expr</span>
+  <span class="o">|</span>   <span class="s1">'('</span> <span class="n">expr</span> <span class="p">[,</span> <span class="n">expr</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
 
 <span class="n">pivot</span><span class="p">:</span>
       <span class="n">PIVOT</span> <span class="s1">'('</span>
@@ -300,14 +309,27 @@ form.</p>
       <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="k">alias</span> <span class="p">]</span>
 
 <span class="n">pivotList</span><span class="p">:</span>
-      <span class="k">column</span>
-   <span class="o">|</span>  <span class="s1">'('</span> <span class="k">column</span> <span class="p">[,</span> <span class="k">column</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
+      <span class="n">columnOrList</span>
 
 <span class="n">pivotExpr</span><span class="p">:</span>
-      <span class="err">{</span> <span class="n">expr</span>
-      <span class="o">|</span> <span class="s1">'('</span> <span class="n">expr</span> <span class="p">[,</span> <span class="n">expr</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
-      <span class="err">}</span>
-      <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="k">alias</span> <span class="p">]</span>
+      <span class="n">exprOrList</span> <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="k">alias</span> <span class="p">]</span>
+
+<span class="n">unpivot</span><span class="p">:</span>
+      <span class="n">UNPIVOT</span> <span class="p">[</span> <span class="k">INCLUDING</span> <span class="n">NULLS</span> <span class="o">|</span> <span class="k">EXCLUDING</span> <span class="n">NULLS</span> <span class="p">]</span> <span class="s1">'('</span>
+      <span class="n">unpivotMeasureList</span>
+      <span class="k">FOR</span> <span class="n">unpivotAxisList</span>
+      <span class="k">IN</span> <span class="s1">'('</span> <span class="n">unpivotValue</span> <span class="p">[,</span> <span class="n">unpivotValue</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
+      <span class="s1">')'</span>
+
+<span class="n">unpivotMeasureList</span><span class="p">:</span>
+      <span class="n">columnOrList</span>
+
+<span class="n">unpivotAxisList</span><span class="p">:</span>
+      <span class="n">columnOrList</span>
+
+<span class="n">unpivotValue</span><span class="p">:</span>
+      <span class="k">column</span> <span class="p">[</span> <span class="k">AS</span> <span class="n">literal</span> <span class="p">]</span>
+  <span class="o">|</span>   <span class="s1">'('</span> <span class="k">column</span> <span class="p">[,</span> <span class="k">column</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="p">[</span> <span class="k">AS</span> <span class="s1">'('</span> <span class="n">literal</span> <span class="p">[,</span> <span class="n">literal</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="p">]</span>
 
 <span class="k">values</span><span class="p">:</span>
       <span class="k">VALUES</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span>
@@ -414,6 +436,8 @@ ALWAYS,
 APPLY,
 <strong>ARE</strong>,
 <strong>ARRAY</strong>,
+ARRAY_AGG,
+ARRAY_CONCAT_AGG,
 <strong>ARRAY_MAX_CARDINALITY</strong>,
 <strong>AS</strong>,
 ASC,
@@ -558,6 +582,7 @@ DIAGNOSTICS,
 DISPATCH,
 <strong>DISTINCT</strong>,
 DOMAIN,
+DOT,
 <strong>DOUBLE</strong>,
 DOW,
 DOY,
@@ -625,6 +650,7 @@ GRANTED,
 <strong>GROUP</strong>,
 <strong>GROUPING</strong>,
 <strong>GROUPS</strong>,
+GROUP_CONCAT,
 <strong>HAVING</strong>,
 HIERARCHY,
 <strong>HOLD</strong>,
@@ -633,11 +659,13 @@ HOP,
 HOURS,
 <strong>IDENTITY</strong>,
 IGNORE,
+ILIKE,
 IMMEDIATE,
 IMMEDIATELY,
 IMPLEMENTATION,
 <strong>IMPORT</strong>,
 <strong>IN</strong>,
+INCLUDE,
 INCLUDING,
 INCREMENT,
 <strong>INDICATOR</strong>,
@@ -857,6 +885,7 @@ RETURNING,
 <strong>RETURNS</strong>,
 <strong>REVOKE</strong>,
 <strong>RIGHT</strong>,
+RLIKE,
 ROLE,
 <strong>ROLLBACK</strong>,
 <strong>ROLLUP</strong>,
@@ -888,6 +917,7 @@ SECURITY,
 <strong>SELECT</strong>,
 SELF,
 <strong>SENSITIVE</strong>,
+SEPARATOR,
 SEQUENCE,
 SERIALIZABLE,
 SERVER,
@@ -969,6 +999,7 @@ STATEMENT,
 <strong>STDDEV_POP</strong>,
 <strong>STDDEV_SAMP</strong>,
 <strong>STREAM</strong>,
+STRING_AGG,
 STRUCTURE,
 STYLE,
 SUBCLASS_ORIGIN,
@@ -1029,6 +1060,7 @@ UNDER,
 <strong>UNKNOWN</strong>,
 UNNAMED,
 <strong>UNNEST</strong>,
+UNPIVOT,
 <strong>UPDATE</strong>,
 <strong>UPPER</strong>,
 <strong>UPSERT</strong>,
@@ -1389,7 +1421,7 @@ for example <code class="highlighter-rouge">ST_GeomFromText('POINT (30 10)')</co
       <td style="text-align: left">left</td>
     </tr>
     <tr>
-      <td style="text-align: left">[ ] (array element)</td>
+      <td style="text-align: left">[ ] (collection element)</td>
       <td style="text-align: left">left</td>
     </tr>
     <tr>
@@ -1534,7 +1566,7 @@ completeness.</p>
     </tr>
     <tr>
       <td style="text-align: left">value comparison ANY (sub-query)</td>
-      <td style="text-align: left">Synonym for SOME</td>
+      <td style="text-align: left">Synonym for <code class="highlighter-rouge">SOME</code></td>
     </tr>
     <tr>
       <td style="text-align: left">value comparison ALL (sub-query)</td>
@@ -1829,6 +1861,10 @@ completeness.</p>
     <tr>
       <td style="text-align: left">binary || binary</td>
       <td style="text-align: left">Concatenates two binary strings</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">OCTET_LENGTH(binary)</td>
+      <td style="text-align: left">Returns the number of bytes in <em>binary</em></td>
     </tr>
     <tr>
       <td style="text-align: left">POSITION(binary1 IN binary2)</td>
@@ -2529,12 +2565,20 @@ or promote to <code class="highlighter-rouge">VARCHAR</code> type.</li>
       <td style="text-align: left">Creates a row from a list of values.</td>
     </tr>
     <tr>
+      <td style="text-align: left">row ‘[’ index ‘]’</td>
+      <td style="text-align: left">Returns the element at a particular location in a row (1-based index).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">row ‘[’ name ‘]’</td>
+      <td style="text-align: left">Returns the element of a row with a particular name.</td>
+    </tr>
+    <tr>
       <td style="text-align: left">map ‘[’ key ‘]’</td>
       <td style="text-align: left">Returns the element of a map with a particular key.</td>
     </tr>
     <tr>
       <td style="text-align: left">array ‘[’ index ‘]’</td>
-      <td style="text-align: left">Returns the element at a particular location in an array.</td>
+      <td style="text-align: left">Returns the element at a particular location in an array (1-based index).</td>
     </tr>
     <tr>
       <td style="text-align: left">ARRAY ‘[’ value [, value ]* ‘]’</td>
@@ -3014,10 +3058,11 @@ or promote to <code class="highlighter-rouge">VARCHAR</code> type.</li>
 <p>Syntax:</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">aggregateCall</span><span class="p">:</span>
-        <span class="n">agg</span><span class="p">(</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span> <span class="n">value</span> <span class="p">[,</span> <span class="n">value</span> <span class="p">]</span><span class="o">*</span><span class="p">)</span>
-        <span class="p">[</span> <span class="n">WITHIN</span> <span class="k">GROUP</span> <span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">orderItem</span> <span class="p">[,</span> <span class="n">orderItem</span> <span class="p">]</span><span class="o">*</span><span class="p">)</span> <span class="p">]</span>
-        <span class="p">[</span> <span class="n">FILTER</span> <span class="p">(</span><span class="k">WHERE</span> <span class="n">condition</span><span class="p">)</span> <span class="p">]</span>
-    <span class="o">|</span>   <span class="n">agg</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="p">[</span> <span class="n">FILTER</span> <span class="p">(</span><span class="k">WHERE</span> <span class="n">condition</span><span class="p">)</span> <span class="p">]</span></code></pre></figure>
+      <span class="n">agg</span> <span class="s1">'('</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span> <span class="n">value</span> <span class="p">[,</span> <span class="n">value</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
+      <span class="p">[</span> <span class="n">WITHIN</span> <span class="k">DISTINCT</span> <span class="s1">'('</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="p">]</span>
+      <span class="p">[</span> <span class="n">WITHIN</span> <span class="k">GROUP</span> <span class="s1">'('</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">orderItem</span> <span class="p">[,</span> <span class="n">orderItem</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="p">]</span>
+      <span class="p">[</span> <span class="n">FILTER</span> <span class="s1">'('</span> <span class="k">WHERE</span> <span class="n">condition</span> <span class="s1">')'</span> <span class="p">]</span>
+  <span class="o">|</span>   <span class="n">agg</span> <span class="s1">'('</span> <span class="s1">'*'</span> <span class="s1">')'</span> <span class="p">[</span> <span class="n">FILTER</span> <span class="p">(</span><span class="k">WHERE</span> <span class="n">condition</span><span class="p">)</span> <span class="p">]</span></code></pre></figure>
 
 <p>where <em>agg</em> is one of the operators in the following table, or a user-defined
 aggregate function.</p>
@@ -3027,6 +3072,9 @@ aggregate function.</p>
 
 <p>If <code class="highlighter-rouge">DISTINCT</code> is present, duplicate argument values are eliminated before being
 passed to the aggregate function.</p>
+
+<p>If <code class="highlighter-rouge">WITHIN DISTINCT</code> is present, argument values are made distinct within
+each value of specified keys before being passed to the aggregate function.</p>
 
 <p>If <code class="highlighter-rouge">WITHIN GROUP</code> is present, the aggregate function sorts the input rows
 according to the <code class="highlighter-rouge">ORDER BY</code> clause inside <code class="highlighter-rouge">WITHIN GROUP</code> before aggregating
@@ -3093,11 +3141,11 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
     </tr>
     <tr>
       <td style="text-align: left">SOME(condition)</td>
-      <td style="text-align: left">Returns true if any condition is true.</td>
+      <td style="text-align: left">Returns TRUE if one or more of the values of <em>condition</em> is TRUE</td>
     </tr>
     <tr>
       <td style="text-align: left">EVERY(condition)</td>
-      <td style="text-align: left">Returns true if all conditions are true.</td>
+      <td style="text-align: left">Returns TRUE if all of the values of <em>condition</em> are TRUE</td>
     </tr>
     <tr>
       <td style="text-align: left">BIT_AND( [ ALL | DISTINCT ] value)</td>
@@ -3170,14 +3218,14 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
 <p>Syntax:</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">windowedAggregateCall</span><span class="p">:</span>
-        <span class="n">agg</span><span class="p">(</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span> <span class="n">value</span> <span class="p">[,</span> <span class="n">value</span> <span class="p">]</span><span class="o">*</span><span class="p">)</span>
-        <span class="p">[</span> <span class="n">RESPECT</span> <span class="n">NULLS</span> <span class="o">|</span> <span class="k">IGNORE</span> <span class="n">NULLS</span> <span class="p">]</span>
-        <span class="p">[</span> <span class="n">WITHIN</span> <span class="k">GROUP</span> <span class="p">(</span><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">orderItem</span> <span class="p">[,</span> <span class="n">orderItem</span> <span class="p">]</span><span class="o">*</span><span class="p">)</span> <span class="p">]</span>
-        <span class="p">[</span> <span class="n">FILTER</span> <span class="p">(</span><span class="k">WHERE</span> <span class="n">condition</span><span class="p">)</span> <span class="p">]</span>
-        <span class="n">OVER</span> <span class="n">window</span>
-    <span class="o">|</span>   <span class="n">agg</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
-        <span class="p">[</span> <span class="n">FILTER</span> <span class="p">(</span><span class="k">WHERE</span> <span class="n">condition</span><span class="p">)</span> <span class="p">]</span>
-        <span class="n">OVER</span> <span class="n">window</span></code></pre></figure>
+      <span class="n">agg</span> <span class="s1">'('</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span> <span class="n">value</span> <span class="p">[,</span> <span class="n">value</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
+      <span class="p">[</span> <span class="n">RESPECT</span> <span class="n">NULLS</span> <span class="o">|</span> <span class="k">IGNORE</span> <span class="n">NULLS</span> <span class="p">]</span>
+      <span class="p">[</span> <span class="n">WITHIN</span> <span class="k">GROUP</span> <span class="s1">'('</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">orderItem</span> <span class="p">[,</span> <span class="n">orderItem</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="p">]</span>
+      <span class="p">[</span> <span class="n">FILTER</span> <span class="s1">'('</span> <span class="k">WHERE</span> <span class="n">condition</span> <span class="s1">')'</span> <span class="p">]</span>
+      <span class="n">OVER</span> <span class="n">window</span>
+  <span class="o">|</span>   <span class="n">agg</span> <span class="s1">'('</span> <span class="s1">'*'</span> <span class="s1">')'</span>
+      <span class="p">[</span> <span class="n">FILTER</span>  <span class="s1">'('</span> <span class="k">WHERE</span> <span class="n">condition</span> <span class="s1">')'</span> <span class="p">]</span>
+      <span class="n">OVER</span> <span class="n">window</span></code></pre></figure>
 
 <p>where <em>agg</em> is one of the operators in the following table, or a user-defined
 aggregate function.</p>
@@ -3300,17 +3348,32 @@ runtime.</li>
 </table>
 
 <h3 id="descriptor">DESCRIPTOR</h3>
-<p>| Operator syntax      | Description
-|:——————– |:———–
-| DESCRIPTOR(name [, name ]*) | DESCRIPTOR appears as an argument in a function to indicate a list of names. The interpretation of names is left to the function.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Operator syntax</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">DESCRIPTOR(name [, name ]*)</td>
+      <td style="text-align: left">DESCRIPTOR appears as an argument in a function to indicate a list of names. The interpretation of names is left to the function.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="table-functions">Table functions</h3>
+
 <p>Table functions occur in the <code class="highlighter-rouge">FROM</code> clause.</p>
 
 <h4 id="tumble">TUMBLE</h4>
-<p>In streaming queries, TUMBLE assigns a window for each row of a relation based on a timestamp column. An assigned window
-is specified by its beginning and ending. All assigned windows have the same length, and that’s why tumbling sometimes
-is named as “fixed windowing”.</p>
+
+<p>In streaming queries, TUMBLE assigns a window for each row of a relation based
+on a timestamp column. An assigned window is specified by its beginning and
+ending. All assigned windows have the same length, and that’s why tumbling
+sometimes is named as “fixed windowing”.</p>
 
 <table>
   <thead>
@@ -3328,24 +3391,27 @@ is named as “fixed windowing”.</p>
 </table>
 
 <p>Here is an example:</p>
-<pre><code class="language-SQL">SELECT * FROM TABLE(
-  TUMBLE(
-    TABLE orders,
-    DESCRIPTOR(rowtime),
-    INTERVAL '1' MINUTE));
 
--- or with the named params
--- note: the DATA param must be the first
-SELECT * FROM TABLE(
-  TUMBLE(
-    DATA =&gt; TABLE orders,
-    TIMECOL =&gt; DESCRIPTOR(rowtime),
-    SIZE =&gt; INTERVAL '1' MINUTE));
-</code></pre>
-<p>will apply tumbling with 1 minute window size on rows from table orders. rowtime is the
-watermarked column of table orders that tells data completeness.</p>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="k">TABLE</span><span class="p">(</span>
+  <span class="n">TUMBLE</span><span class="p">(</span>
+    <span class="k">TABLE</span> <span class="n">orders</span><span class="p">,</span>
+    <span class="k">DESCRIPTOR</span><span class="p">(</span><span class="n">rowtime</span><span class="p">),</span>
+    <span class="n">INTERVAL</span> <span class="s1">'1'</span> <span class="k">MINUTE</span><span class="p">));</span>
+
+<span class="c1">-- or with the named params</span>
+<span class="c1">-- note: the DATA param must be the first</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="k">TABLE</span><span class="p">(</span>
+  <span class="n">TUMBLE</span><span class="p">(</span>
+    <span class="k">DATA</span> <span class="o">=&gt;</span> <span class="k">TABLE</span> <span class="n">orders</span><span class="p">,</span>
+    <span class="n">TIMECOL</span> <span class="o">=&gt;</span> <span class="k">DESCRIPTOR</span><span class="p">(</span><span class="n">rowtime</span><span class="p">),</span>
+    <span class="k">SIZE</span> <span class="o">=&gt;</span> <span class="n">INTERVAL</span> <span class="s1">'1'</span> <span class="k">MINUTE</span><span class="p">));</span></code></pre></figure>
+
+<p>applies a tumbling window with a one minute range to rows from the <code class="highlighter-rouge">orders</code>
+table. <code class="highlighter-rouge">rowtime</code> is the watermarked column of the <code class="highlighter-rouge">orders</code> table that informs
+whether data is complete.</p>
 
 <h4 id="hop">HOP</h4>
+
 <p>In streaming queries, HOP assigns windows that cover rows within the interval of <em>size</em> and shifting every <em>slide</em> based
 on a timestamp column. Windows assigned could have overlapping so hopping sometime is named as “sliding windowing”.</p>
 
@@ -3365,26 +3431,29 @@ on a timestamp column. Windows assigned could have overlapping so hopping someti
 </table>
 
 <p>Here is an example:</p>
-<pre><code class="language-SQL">SELECT * FROM TABLE(
-  HOP(
-    TABLE orders,
-    DESCRIPTOR(rowtime),
-    INTERVAL '2' MINUTE,
-    INTERVAL '5' MINUTE));
 
--- or with the named params
--- note: the DATA param must be the first
-SELECT * FROM TABLE(
-  HOP(
-    DATA =&gt; TABLE orders,
-    TIMECOL =&gt; DESCRIPTOR(rowtime),
-    SLIDE =&gt; INTERVAL '2' MINUTE,
-    SIZE =&gt; INTERVAL '5' MINUTE));
-</code></pre>
-<p>will apply hopping with 5-minute interval size on rows from table orders and shifting every 2 minutes. rowtime is the
-watermarked column of table orders that tells data completeness.</p>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="k">TABLE</span><span class="p">(</span>
+  <span class="n">HOP</span><span class="p">(</span>
+    <span class="k">TABLE</span> <span class="n">orders</span><span class="p">,</span>
+    <span class="k">DESCRIPTOR</span><span class="p">(</span><span class="n">rowtime</span><span class="p">),</span>
+    <span class="n">INTERVAL</span> <span class="s1">'2'</span> <span class="k">MINUTE</span><span class="p">,</span>
+    <span class="n">INTERVAL</span> <span class="s1">'5'</span> <span class="k">MINUTE</span><span class="p">));</span>
+
+<span class="c1">-- or with the named params</span>
+<span class="c1">-- note: the DATA param must be the first</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="k">TABLE</span><span class="p">(</span>
+  <span class="n">HOP</span><span class="p">(</span>
+    <span class="k">DATA</span> <span class="o">=&gt;</span> <span class="k">TABLE</span> <span class="n">orders</span><span class="p">,</span>
+    <span class="n">TIMECOL</span> <span class="o">=&gt;</span> <span class="k">DESCRIPTOR</span><span class="p">(</span><span class="n">rowtime</span><span class="p">),</span>
+    <span class="n">SLIDE</span> <span class="o">=&gt;</span> <span class="n">INTERVAL</span> <span class="s1">'2'</span> <span class="k">MINUTE</span><span class="p">,</span>
+    <span class="k">SIZE</span> <span class="o">=&gt;</span> <span class="n">INTERVAL</span> <span class="s1">'5'</span> <span class="k">MINUTE</span><span class="p">));</span></code></pre></figure>
+
+<p>applies hopping with 5-minute interval size on rows from table <code class="highlighter-rouge">orders</code>
+and shifting every 2 minutes. <code class="highlighter-rouge">rowtime</code> is the watermarked column of table
+orders that tells data completeness.</p>
 
 <h4 id="session">SESSION</h4>
+
 <p>In streaming queries, SESSION assigns windows that cover rows based on <em>datetime</em>. Within a session window, distances
 of rows are less than <em>interval</em>. Session window is applied per <em>key</em>.</p>
 
@@ -3404,24 +3473,26 @@ of rows are less than <em>interval</em>. Session window is applied per <em>key</
 </table>
 
 <p>Here is an example:</p>
-<pre><code class="language-SQL">SELECT * FROM TABLE(
-  SESSION(
-    TABLE orders,
-    DESCRIPTOR(rowtime),
-    DESCRIPTOR(product),
-    INTERVAL '20' MINUTE));
 
--- or with the named params
--- note: the DATA param must be the first
-SELECT * FROM TABLE(
-  SESSION(
-    DATA =&gt; TABLE orders,
-    TIMECOL =&gt; DESCRIPTOR(rowtime),
-    KEY =&gt; DESCRIPTOR(product),
-    SIZE =&gt; INTERVAL '20' MINUTE));
-</code></pre>
-<p>will apply session with 20-minute inactive gap on rows from table orders. rowtime is the
-watermarked column of table orders that tells data completeness. Session is applied per product.</p>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="k">TABLE</span><span class="p">(</span>
+  <span class="k">SESSION</span><span class="p">(</span>
+    <span class="k">TABLE</span> <span class="n">orders</span><span class="p">,</span>
+    <span class="k">DESCRIPTOR</span><span class="p">(</span><span class="n">rowtime</span><span class="p">),</span>
+    <span class="k">DESCRIPTOR</span><span class="p">(</span><span class="n">product</span><span class="p">),</span>
+    <span class="n">INTERVAL</span> <span class="s1">'20'</span> <span class="k">MINUTE</span><span class="p">));</span>
+
+<span class="c1">-- or with the named params</span>
+<span class="c1">-- note: the DATA param must be the first</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="k">TABLE</span><span class="p">(</span>
+  <span class="k">SESSION</span><span class="p">(</span>
+    <span class="k">DATA</span> <span class="o">=&gt;</span> <span class="k">TABLE</span> <span class="n">orders</span><span class="p">,</span>
+    <span class="n">TIMECOL</span> <span class="o">=&gt;</span> <span class="k">DESCRIPTOR</span><span class="p">(</span><span class="n">rowtime</span><span class="p">),</span>
+    <span class="k">KEY</span> <span class="o">=&gt;</span> <span class="k">DESCRIPTOR</span><span class="p">(</span><span class="n">product</span><span class="p">),</span>
+    <span class="k">SIZE</span> <span class="o">=&gt;</span> <span class="n">INTERVAL</span> <span class="s1">'20'</span> <span class="k">MINUTE</span><span class="p">));</span></code></pre></figure>
+
+<p>applies a session with 20-minute inactive gap on rows from table <code class="highlighter-rouge">orders</code>.
+<code class="highlighter-rouge">rowtime</code> is the watermarked column of table orders that tells data
+completeness. Session is applied per product.</p>
 
 <p><strong>Note</strong>: The <code class="highlighter-rouge">Tumble</code>, <code class="highlighter-rouge">Hop</code> and <code class="highlighter-rouge">Session</code> window table functions assign
 each row in the original table to a window. The output table has all
@@ -3542,7 +3613,7 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
     <tr>
       <td style="text-align: left">p</td>
       <td style="text-align: left">ST_AsText(geom)</td>
-      <td style="text-align: left">Alias for <code class="highlighter-rouge">ST_AsWKT</code></td>
+      <td style="text-align: left">Synonym for <code class="highlighter-rouge">ST_AsWKT</code></td>
     </tr>
     <tr>
       <td style="text-align: left">o</td>
@@ -3647,7 +3718,7 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
     <tr>
       <td style="text-align: left">p</td>
       <td style="text-align: left">ST_MakePoint(x, y [, z ])</td>
-      <td style="text-align: left">Alias for <code class="highlighter-rouge">ST_Point</code></td>
+      <td style="text-align: left">Synonym for <code class="highlighter-rouge">ST_Point</code></td>
     </tr>
     <tr>
       <td style="text-align: left">o</td>
@@ -3754,7 +3825,7 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
   <li>ST_IsValidReason(geom [, selfTouchValid ]) Returns text stating whether <em>geom</em> is valid, and if not valid, a reason why</li>
   <li>ST_NPoints(geom) Returns the number of points in <em>geom</em></li>
   <li>ST_NumGeometries(geom) Returns the number of geometries in <em>geom</em> (1 if it is not a GEOMETRYCOLLECTION)</li>
-  <li>ST_NumInteriorRing(geom) Alias for <code class="highlighter-rouge">ST_NumInteriorRings</code></li>
+  <li>ST_NumInteriorRing(geom) Synonym for <code class="highlighter-rouge">ST_NumInteriorRings</code></li>
   <li>ST_NumInteriorRings(geom) Returns the number of interior rings of <em>geom</em></li>
   <li>ST_NumPoints(lineString) Returns the number of points in <em>lineString</em></li>
   <li>ST_PointN(geom, n) Returns the <em>n</em>th point of a <em>lineString</em></li>
@@ -4071,7 +4142,7 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
 
 <ul>
   <li>ST_Accum(geom) Accumulates <em>geom</em> into a GEOMETRYCOLLECTION (or MULTIPOINT, MULTILINESTRING or MULTIPOLYGON if possible)</li>
-  <li>ST_Collect(geom) Alias for <code class="highlighter-rouge">ST_Accum</code></li>
+  <li>ST_Collect(geom) Synonym for <code class="highlighter-rouge">ST_Accum</code></li>
   <li>ST_Union(geom) Computes the union of geometries</li>
 </ul>
 
@@ -4095,7 +4166,7 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">JSON_EXISTS(jsonValue, path [ { TRUE | FALSE | UNKNOWN | ERROR ) ON ERROR } )</td>
+      <td style="text-align: left">JSON_EXISTS(jsonValue, path [ { TRUE | FALSE | UNKNOWN | ERROR } ON ERROR ] )</td>
       <td style="text-align: left">Whether a <em>jsonValue</em> satisfies a search criterion described using JSON path expression <em>path</em></td>
     </tr>
     <tr>
@@ -4122,8 +4193,7 @@ behaviors.</li>
 
 <p>Example Data:</p>
 
-<pre><code class="language-JSON">{"a": "[1,2]", "b": [1,2], "c": "hi"}
-</code></pre>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="s2">"a"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[1,2]"</span><span class="p">,</span><span class="w"> </span><span class="s2">"b"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="s2">"c"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hi"</span><span class="p">}</span></code></pre></figure>
 
 <p>Comparison:</p>
 
@@ -4181,23 +4251,34 @@ behaviors.</li>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">JSON_OBJECT( { [ KEY ] name VALUE value [ FORMAT JSON ] | name : value [ FORMAT JSON ] } * [ { NULL | ABSENT } ON NULL ] )</td>
-      <td style="text-align: left">Construct JSON object using a series of key (<em>name</em>) value (<em>value</em>) pairs</td>
+      <td style="text-align: left">JSON_OBJECT( jsonKeyVal [, jsonKeyVal ]* [ nullBehavior ] )</td>
+      <td style="text-align: left">Construct JSON object using a series of key-value pairs</td>
     </tr>
     <tr>
-      <td style="text-align: left">JSON_OBJECTAGG( { [ KEY ] name VALUE value [ FORMAT JSON ] | name : value [ FORMAT JSON ] } [ { NULL | ABSENT } ON NULL ] )</td>
-      <td style="text-align: left">Aggregate function to construct a JSON object using a key (<em>name</em>) value (<em>value</em>) pair</td>
+      <td style="text-align: left">JSON_OBJECTAGG( jsonKeyVal [ nullBehavior ] )</td>
+      <td style="text-align: left">Aggregate function to construct a JSON object using a key-value pair</td>
     </tr>
     <tr>
-      <td style="text-align: left">JSON_ARRAY( { value [ FORMAT JSON ] } * [ { NULL | ABSENT } ON NULL ] )</td>
-      <td style="text-align: left">Construct a JSON array using a series of values (<em>value</em>)</td>
+      <td style="text-align: left">JSON_ARRAY( [ jsonVal [, jsonVal ]* ] [ nullBehavior ] )</td>
+      <td style="text-align: left">Construct a JSON array using a series of values</td>
     </tr>
     <tr>
-      <td style="text-align: left">JSON_ARRAYAGG( value [ FORMAT JSON ] [ ORDER BY orderItem [, orderItem ]* ] [ { NULL | ABSENT } ON NULL ] )</td>
-      <td style="text-align: left">Aggregate function to construct a JSON array using a value (<em>value</em>)</td>
+      <td style="text-align: left">JSON_ARRAYAGG( jsonVal [ ORDER BY orderItem [, orderItem ]* ] [ nullBehavior ] )</td>
+      <td style="text-align: left">Aggregate function to construct a JSON array using a value</td>
     </tr>
   </tbody>
 </table>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">jsonKeyVal</span><span class="p">:</span>
+      <span class="p">[</span> <span class="k">KEY</span> <span class="p">]</span> <span class="n">name</span> <span class="n">VALUE</span> <span class="n">value</span> <span class="p">[</span> <span class="n">FORMAT</span> <span class="n">JSON</span> <span class="p">]</span>
+  <span class="o">|</span>   <span class="n">name</span> <span class="p">:</span> <span class="n">value</span> <span class="p">[</span> <span class="n">FORMAT</span> <span class="n">JSON</span> <span class="p">]</span>
+
+<span class="n">jsonVal</span><span class="p">:</span>
+      <span class="n">value</span> <span class="p">[</span> <span class="n">FORMAT</span> <span class="n">JSON</span> <span class="p">]</span>
+
+<span class="n">nullBehavior</span><span class="p">:</span>
+      <span class="k">NULL</span> <span class="k">ON</span> <span class="k">NULL</span>
+  <span class="o">|</span>   <span class="n">ABSENT</span> <span class="k">ON</span> <span class="k">NULL</span></code></pre></figure>
 
 <p>Note:</p>
 
@@ -4268,11 +4349,15 @@ if your session has enabled an extra operator table.</p>
 <a href="/docs/adapter.html#jdbc-connect-string-parameters">fun</a>
 connect string parameter.</p>
 
-<p>The ‘C’ (compatibility) column contains value
-‘b’ for BigQuery (‘fun=bigquery’ in the connect string),
-‘m’ for MySQL (‘fun=mysql’ in the connect string),
-‘o’ for Oracle (‘fun=oracle’ in the connect string),
-‘p’ for PostgreSQL (‘fun=postgresql’ in the connect string).</p>
+<p>The ‘C’ (compatibility) column contains value:</p>
+<ul>
+  <li>‘b’ for Google BigQuery (‘fun=bigquery’ in the connect string),</li>
+  <li>‘h’ for Apache Hive (‘fun=hive’ in the connect string),</li>
+  <li>‘m’ for MySQL (‘fun=mysql’ in the connect string),</li>
+  <li>‘o’ for Oracle (‘fun=oracle’ in the connect string),</li>
+  <li>‘p’ for PostgreSQL (‘fun=postgresql’ in the connect string),</li>
+  <li>’s’ for Apache Spark (‘fun=spark’ in the connect string).</li>
+</ul>
 
 <p>One operator name may correspond to multiple SQL dialects, but with different
 semantics.</p>
@@ -4322,6 +4407,11 @@ semantics.</p>
       <td style="text-align: left">Converts the timezone of <em>datetime</em> from <em>tz1</em> to <em>tz2</em></td>
     </tr>
     <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">CURRENT_DATETIME([timezone])</td>
+      <td style="text-align: left">Returns the current time as a TIMESTAMP from <em>timezone</em></td>
+    </tr>
+    <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">DAYNAME(datetime)</td>
       <td style="text-align: left">Returns the name, in the connection’s locale, of the weekday in <em>datetime</em>; for example, it returns ‘星期日’ for both DATE ‘2020-02-10’ and TIMESTAMP ‘2020-02-10 10:10:10’</td>
@@ -4367,14 +4457,29 @@ semantics.</p>
       <td style="text-align: left">Returns the greatest of the expressions</td>
     </tr>
     <tr>
+      <td style="text-align: left">b h s</td>
+      <td style="text-align: left">IF(condition, value1, value2)</td>
+      <td style="text-align: left">Returns <em>value1</em> if <em>condition</em> is TRUE, <em>value2</em> otherwise</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">string1 ILIKE string2 [ ESCAPE string3 ]</td>
+      <td style="text-align: left">Whether <em>string1</em> matches pattern <em>string2</em>, ignoring case (similar to <code class="highlighter-rouge">LIKE</code>)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">string1 NOT ILIKE string2 [ ESCAPE string3 ]</td>
+      <td style="text-align: left">Whether <em>string1</em> does not match pattern <em>string2</em>, ignoring case (similar to <code class="highlighter-rouge">NOT LIKE</code>)</td>
+    </tr>
+    <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">JSON_TYPE(jsonValue)</td>
-      <td style="text-align: left">Returns a string value indicating the type of a <em>jsonValue</em></td>
+      <td style="text-align: left">Returns a string value indicating the type of <em>jsonValue</em></td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">JSON_DEPTH(jsonValue)</td>
-      <td style="text-align: left">Returns an integer value indicating the depth of a <em>jsonValue</em></td>
+      <td style="text-align: left">Returns an integer value indicating the depth of <em>jsonValue</em></td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
@@ -4399,7 +4504,7 @@ semantics.</p>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">JSON_STORAGE_SIZE(jsonValue)</td>
-      <td style="text-align: left">Returns the number of bytes used to store the binary representation of a <em>jsonValue</em></td>
+      <td style="text-align: left">Returns the number of bytes used to store the binary representation of <em>jsonValue</em></td>
     </tr>
     <tr>
       <td style="text-align: left">o</td>
@@ -4462,6 +4567,16 @@ semantics.</p>
       <td style="text-align: left">Returns the rightmost <em>length</em> characters from the <em>string</em></td>
     </tr>
     <tr>
+      <td style="text-align: left">h s</td>
+      <td style="text-align: left">string1 RLIKE string2</td>
+      <td style="text-align: left">Whether <em>string1</em> matches regex pattern <em>string2</em> (similar to <code class="highlighter-rouge">LIKE</code>, but uses Java regex)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h s</td>
+      <td style="text-align: left">string1 NOT RLIKE string2</td>
+      <td style="text-align: left">Whether <em>string1</em> does not match regex pattern <em>string2</em> (similar to <code class="highlighter-rouge">NOT LIKE</code>, but uses Java regex)</td>
+    </tr>
+    <tr>
       <td style="text-align: left">o</td>
       <td style="text-align: left">RTRIM(string)</td>
       <td style="text-align: left">Returns <em>string</em> with all blanks removed from the end</td>
@@ -4487,7 +4602,7 @@ semantics.</p>
       <td style="text-align: left">Returns a string of <em>integer</em> spaces; returns an empty string if <em>integer</em> is less than 1</td>
     </tr>
     <tr>
-      <td style="text-align: left">o</td>
+      <td style="text-align: left">b m o p</td>
       <td style="text-align: left">SUBSTR(string, position [, substringLength ])</td>
       <td style="text-align: left">Returns a portion of <em>string</em>, beginning at character <em>position</em>, <em>substringLength</em> characters long. SUBSTR calculates lengths using characters as defined by the input character set</td>
     </tr>
@@ -4554,7 +4669,7 @@ semantics.</p>
     <tr>
       <td style="text-align: left">o</td>
       <td style="text-align: left">XMLTRANSFORM(xml, xslt)</td>
-      <td style="text-align: left">Returns a string after applying xslt to supplied XML</td>
+      <td style="text-align: left">Applies XSLT transform <em>xslt</em> to XML string <em>xml</em> and returns the result</td>
     </tr>
   </tbody>
 </table>
@@ -4593,19 +4708,77 @@ semantics.</p>
   </li>
 </ul>
 
+<p>Dialect-specific aggregate functions.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">C</th>
+      <th style="text-align: left">Operator syntax</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">b p</td>
+      <td style="text-align: left">ARRAY_AGG( [ ALL | DISTINCT ] value [ RESPECT NULLS | IGNORE NULLS ] [ ORDER BY orderItem [, orderItem ]* ] )</td>
+      <td style="text-align: left">Gathers values into arrays</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b p</td>
+      <td style="text-align: left">ARRAY_CONCAT_AGG( [ ALL | DISTINCT ] value [ ORDER BY orderItem [, orderItem ]* ] )</td>
+      <td style="text-align: left">Concatenates arrays into arrays</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">BOOL_AND(condition)</td>
+      <td style="text-align: left">Synonym for <code class="highlighter-rouge">EVERY</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">BOOL_OR(condition)</td>
+      <td style="text-align: left">Synonym for <code class="highlighter-rouge">SOME</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">COUNTIF(condition)</td>
+      <td style="text-align: left">Returns the number of rows for which <em>condition</em> is TRUE; equivalent to <code class="highlighter-rouge">COUNT(*) FILTER (WHERE condition)</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
+      <td style="text-align: left">GROUP_CONCAT( [ ALL | DISTINCT ] value [, value ]* [ ORDER BY orderItem [, orderItem ]* ] [ SEPARATOR separator ] )</td>
+      <td style="text-align: left">MySQL-specific variant of <code class="highlighter-rouge">LISTAGG</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">LOGICAL_AND(condition)</td>
+      <td style="text-align: left">Synonym for <code class="highlighter-rouge">EVERY</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">LOGICAL_OR(condition)</td>
+      <td style="text-align: left">Synonym for <code class="highlighter-rouge">SOME</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b p</td>
+      <td style="text-align: left">STRING_AGG( [ ALL | DISTINCT ] value [, separator] [ ORDER BY orderItem [, orderItem ]* ] )</td>
+      <td style="text-align: left">Synonym for <code class="highlighter-rouge">LISTAGG</code></td>
+    </tr>
+  </tbody>
+</table>
+
 <p>Usage Examples:</p>
 
 <h5 id="json_type-example">JSON_TYPE example</h5>
 
 <p>SQL</p>
 
-<pre><code class="language-SQL">SELECT JSON_TYPE(v) AS c1,
-  JSON_TYPE(JSON_VALUE(v, 'lax $.b' ERROR ON ERROR)) AS c2,
-  JSON_TYPE(JSON_VALUE(v, 'strict $.a[0]' ERROR ON ERROR)) AS c3,
-  JSON_TYPE(JSON_VALUE(v, 'strict $.a[1]' ERROR ON ERROR)) AS c4
-FROM (VALUES ('{"a": [10, true],"b": "[10, true]"}')) AS t(v)
-LIMIT 10;
-</code></pre>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">JSON_TYPE</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c1</span><span class="p">,</span>
+  <span class="n">JSON_TYPE</span><span class="p">(</span><span class="n">JSON_VALUE</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">'lax $.b'</span> <span class="n">ERROR</span> <span class="k">ON</span> <span class="n">ERROR</span><span class="p">))</span> <span class="k">AS</span> <span class="n">c2</span><span class="p">,</span>
+  <span class="n">JSON_TYPE</span><span class="p">(</span><span class="n">JSON_VALUE</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">'strict $.a[0]'</span> <span class="n">ERROR</span> <span class="k">ON</span> <span class="n">ERROR</span><span class="p">))</span> <span class="k">AS</span> <span class="n">c3</span><span class="p">,</span>
+  <span class="n">JSON_TYPE</span><span class="p">(</span><span class="n">JSON_VALUE</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">'strict $.a[1]'</span> <span class="n">ERROR</span> <span class="k">ON</span> <span class="n">ERROR</span><span class="p">))</span> <span class="k">AS</span> <span class="n">c4</span>
+<span class="k">FROM</span> <span class="p">(</span><span class="k">VALUES</span> <span class="p">(</span><span class="s1">'{"a": [10, true],"b": "[10, true]"}'</span><span class="p">))</span> <span class="k">AS</span> <span class="n">t</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="k">LIMIT</span> <span class="mi">10</span><span class="p">;</span></code></pre></figure>
 
 <p>Result</p>
 
@@ -4632,13 +4805,12 @@ LIMIT 10;
 
 <p>SQL</p>
 
-<pre><code class="language-SQL">SELECT JSON_DEPTH(v) AS c1,
-  JSON_DEPTH(JSON_VALUE(v, 'lax $.b' ERROR ON ERROR)) AS c2,
-  JSON_DEPTH(JSON_VALUE(v, 'strict $.a[0]' ERROR ON ERROR)) AS c3,
-  JSON_DEPTH(JSON_VALUE(v, 'strict $.a[1]' ERROR ON ERROR)) AS c4
-FROM (VALUES ('{"a": [10, true],"b": "[10, true]"}')) AS t(v)
-LIMIT 10;
-</code></pre>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">JSON_DEPTH</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c1</span><span class="p">,</span>
+  <span class="n">JSON_DEPTH</span><span class="p">(</span><span class="n">JSON_VALUE</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">'lax $.b'</span> <span class="n">ERROR</span> <span class="k">ON</span> <span class="n">ERROR</span><span class="p">))</span> <span class="k">AS</span> <span class="n">c2</span><span class="p">,</span>
+  <span class="n">JSON_DEPTH</span><span class="p">(</span><span class="n">JSON_VALUE</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">'strict $.a[0]'</span> <span class="n">ERROR</span> <span class="k">ON</span> <span class="n">ERROR</span><span class="p">))</span> <span class="k">AS</span> <span class="n">c3</span><span class="p">,</span>
+  <span class="n">JSON_DEPTH</span><span class="p">(</span><span class="n">JSON_VALUE</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">'strict $.a[1]'</span> <span class="n">ERROR</span> <span class="k">ON</span> <span class="n">ERROR</span><span class="p">))</span> <span class="k">AS</span> <span class="n">c4</span>
+<span class="k">FROM</span> <span class="p">(</span><span class="k">VALUES</span> <span class="p">(</span><span class="s1">'{"a": [10, true],"b": "[10, true]"}'</span><span class="p">))</span> <span class="k">AS</span> <span class="n">t</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="k">LIMIT</span> <span class="mi">10</span><span class="p">;</span></code></pre></figure>
 
 <p>Result</p>
 
@@ -4665,13 +4837,12 @@ LIMIT 10;
 
 <p>SQL</p>
 
-<pre><code class="language-SQL">SELECT JSON_LENGTH(v) AS c1,
-  JSON_LENGTH(v, 'lax $.a') AS c2,
-  JSON_LENGTH(v, 'strict $.a[0]') AS c3,
-  JSON_LENGTH(v, 'strict $.a[1]') AS c4
-FROM (VALUES ('{"a": [10, true]}')) AS t(v)
-LIMIT 10;
-</code></pre>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">JSON_LENGTH</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c1</span><span class="p">,</span>
+  <span class="n">JSON_LENGTH</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">'lax $.a'</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c2</span><span class="p">,</span>
+  <span class="n">JSON_LENGTH</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">'strict $.a[0]'</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c3</span><span class="p">,</span>
+  <span class="n">JSON_LENGTH</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">'strict $.a[1]'</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c4</span>
+<span class="k">FROM</span> <span class="p">(</span><span class="k">VALUES</span> <span class="p">(</span><span class="s1">'{"a": [10, true]}'</span><span class="p">))</span> <span class="k">AS</span> <span class="n">t</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="k">LIMIT</span> <span class="mi">10</span><span class="p">;</span></code></pre></figure>
 
 <p>Result</p>
 
@@ -4698,14 +4869,13 @@ LIMIT 10;
 
 <p>SQL</p>
 
-<pre><code class="language-SQL">SELECT JSON_KEYS(v) AS c1,
-  JSON_KEYS(v, 'lax $.a') AS c2,
-  JSON_KEYS(v, 'lax $.b') AS c2,
-  JSON_KEYS(v, 'strict $.a[0]') AS c3,
-  JSON_KEYS(v, 'strict $.a[1]') AS c4
-FROM (VALUES ('{"a": [10, true],"b": {"c": 30}}')) AS t(v)
-LIMIT 10;
-</code></pre>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">ELECT</span> <span class="n">JSON_KEYS</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c1</span><span class="p">,</span>
+  <span class="n">JSON_KEYS</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">'lax $.a'</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c2</span><span class="p">,</span>
+  <span class="n">JSON_KEYS</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">'lax $.b'</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c2</span><span class="p">,</span>
+  <span class="n">JSON_KEYS</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">'strict $.a[0]'</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c3</span><span class="p">,</span>
+  <span class="n">JSON_KEYS</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">'strict $.a[1]'</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c4</span>
+<span class="k">FROM</span> <span class="p">(</span><span class="k">VALUES</span> <span class="p">(</span><span class="s1">'{"a": [10, true],"b": {"c": 30}}'</span><span class="p">))</span> <span class="k">AS</span> <span class="n">t</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="k">LIMIT</span> <span class="mi">10</span><span class="p">;</span></code></pre></figure>
 
 <p>Result</p>
 
@@ -4734,10 +4904,9 @@ LIMIT 10;
 
 <p>SQL</p>
 
-<pre><code class="language-SQL">SELECT JSON_REMOVE(v, '$[1]') AS c1
-FROM (VALUES ('["a", ["b", "c"], "d"]')) AS t(v)
-LIMIT 10;
-</code></pre>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">JSON_REMOVE</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">'$[1]'</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c1</span>
+<span class="k">FROM</span> <span class="p">(</span><span class="k">VALUES</span> <span class="p">(</span><span class="s1">'["a", ["b", "c"], "d"]'</span><span class="p">))</span> <span class="k">AS</span> <span class="n">t</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="k">LIMIT</span> <span class="mi">10</span><span class="p">;</span></code></pre></figure>
 
 <p>Result</p>
 
@@ -4758,13 +4927,12 @@ LIMIT 10;
 
 <p>SQL</p>
 
-<pre><code class="language-SQL">SELECT
-JSON_STORAGE_SIZE('[100, \"sakila\", [1, 3, 5], 425.05]') AS c1,
-JSON_STORAGE_SIZE('{\"a\": 10, \"b\": \"a\", \"c\": \"[1, 3, 5, 7]\"}') AS c2,
-JSON_STORAGE_SIZE('{\"a\": 10, \"b\": \"xyz\", \"c\": \"[1, 3, 5, 7]\"}') AS c3,
-JSON_STORAGE_SIZE('[100, \"json\", [[10, 20, 30], 3, 5], 425.05]') AS c4
-limit 10;
-</code></pre>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
+<span class="n">JSON_STORAGE_SIZE</span><span class="p">(</span><span class="s1">'[100, </span><span class="se">\"</span><span class="s1">sakila</span><span class="se">\"</span><span class="s1">, [1, 3, 5], 425.05]'</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c1</span><span class="p">,</span>
+<span class="n">JSON_STORAGE_SIZE</span><span class="p">(</span><span class="s1">'{</span><span class="se">\"</span><span class="s1">a</span><span class="se">\"</span><span class="s1">: 10, </span><span class="se">\"</span><span class="s1">b</span><span class="se">\"</span><span class="s1">: </span><span class="se">\"</span><span class="s1">a</span><span class="se">\"</span><span class="s1">, </span><span class="se">\"</span><span class="s1">c</span><span class="se">\"</span><span class="s1">: </span><span class="se">\"</span><span class="s1">[1, 3, 5, 7]</span><span class="se">\"</span><span class="s1">}'</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c2</span><span class="p">,</span>
+<span class="n">JSON_STORAGE_SIZE</span><span class="p">(</span><span class="s1">'{</span><span class="se">\"</span><span class="s1">a</span><span class="se">\"</span><span class="s1">: 10, </span><span class="se">\"</span><span class="s1">b</span><span class="se">\"</span><span class="s1">: </span><span class="se">\"</span><span class="s1">xyz</span><span class="se">\"</span><span class="s1">, </span><span class="se">\"</span><span class="s1">c</span><span class="se">\"</span><span class="s1">: </span><span class="se">\"</span><span class="s1">[1, 3, 5, 7]</span><span class="se">\"</span><span class="s1">}'</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c3</span><span class="p">,</span>
+<span class="n">JSON_STORAGE_SIZE</span><span class="p">(</span><span class="s1">'[100, </span><span class="se">\"</span><span class="s1">json</span><span class="se">\"</span><span class="s1">, [[10, 20, 30], 3, 5], 425.05]'</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c4</span>
+<span class="k">limit</span> <span class="mi">10</span><span class="p">;</span></code></pre></figure>
 
 <p>Result</p>
 
@@ -4791,14 +4959,13 @@ limit 10;
 
 <p>SQL</p>
 
-<pre><code class="language-SQL">SELECT DECODE(f1, 1, 'aa', 2, 'bb', 3, 'cc', 4, 'dd', 'ee') as c1,
-  DECODE(f2, 1, 'aa', 2, 'bb', 3, 'cc', 4, 'dd', 'ee') as c2,
-  DECODE(f3, 1, 'aa', 2, 'bb', 3, 'cc', 4, 'dd', 'ee') as c3,
-  DECODE(f4, 1, 'aa', 2, 'bb', 3, 'cc', 4, 'dd', 'ee') as c4,
-  DECODE(f5, 1, 'aa', 2, 'bb', 3, 'cc', 4, 'dd', 'ee') as c5
-FROM (VALUES (1, 2, 3, 4, 5)) AS t(f1, f2, f3, f4, f5);
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">DECODE</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'aa'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'bb'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">'cc'</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">'dd'</span><span class="p">,</span> <span class="s1">'ee'</span><span class="p">)</span> <span class="k">as</span> <span class="n">c1</span><span class="p">,</span>
+  <span class="n">DECODE</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'aa'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'bb'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">'cc'</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">'dd'</span><span class="p">,</span> <span class="s1">'ee'</span><span class="p">)</span> <span class="k">as</span> <span class="n">c2</span><span class="p">,</span>
+  <span class="n">DECODE</span><span class="p">(</span><span class="n">f3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'aa'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'bb'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">'cc'</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">'dd'</span><span class="p">,</span> <span class="s1">'ee'</span><span class="p">)</span> <span class="k">as</span> <span class="n">c3</span><span class="p">,</span>
+  <span class="n">DECODE</span><span class="p">(</span><span class="n">f4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'aa'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'bb'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">'cc'</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">'dd'</span><span class="p">,</span> <span class="s1">'ee'</span><span class="p">)</span> <span class="k">as</span> <span class="n">c4</span><span class="p">,</span>
+  <span class="n">DECODE</span><span class="p">(</span><span class="n">f5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'aa'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'bb'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">'cc'</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">'dd'</span><span class="p">,</span> <span class="s1">'ee'</span><span class="p">)</span> <span class="k">as</span> <span class="n">c5</span>
+<span class="k">FROM</span> <span class="p">(</span><span class="k">VALUES</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span> <span class="k">AS</span> <span class="n">t</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">,</span> <span class="n">f3</span><span class="p">,</span> <span class="n">f4</span><span class="p">,</span> <span class="n">f5</span><span class="p">);</span></code></pre></figure>
 
-</code></pre>
 <p>Result</p>
 
 <table>
@@ -4826,12 +4993,11 @@ FROM (VALUES (1, 2, 3, 4, 5)) AS t(f1, f2, f3, f4, f5);
 
 <p>SQL</p>
 
-<pre><code class="language-SQL">SELECT TRANSLATE('Aa*Bb*Cc''D*d', ' */''%', '_') as c1,
-  TRANSLATE('Aa/Bb/Cc''D/d', ' */''%', '_') as c2,
-  TRANSLATE('Aa Bb Cc''D d', ' */''%', '_') as c3,
-  TRANSLATE('Aa%Bb%Cc''D%d', ' */''%', '_') as c4
-FROM (VALUES (true)) AS t(f0);
-</code></pre>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="k">TRANSLATE</span><span class="p">(</span><span class="s1">'Aa*Bb*Cc</span><span class="se">''</span><span class="s1">D*d'</span><span class="p">,</span> <span class="s1">' */</span><span class="se">''</span><span class="s1">%'</span><span class="p">,</span> <span class="s1">'_'</span><span class="p">)</span> <span class="k">as</span> <span class="n">c1</span><span class="p">,</span>
+  <span class="k">TRANSLATE</span><span class="p">(</span><span class="s1">'Aa/Bb/Cc</span><span class="se">''</span><span class="s1">D/d'</span><span class="p">,</span> <span class="s1">' */</span><span class="se">''</span><span class="s1">%'</span><span class="p">,</span> <span class="s1">'_'</span><span class="p">)</span> <span class="k">as</span> <span class="n">c2</span><span class="p">,</span>
+  <span class="k">TRANSLATE</span><span class="p">(</span><span class="s1">'Aa Bb Cc</span><span class="se">''</span><span class="s1">D d'</span><span class="p">,</span> <span class="s1">' */</span><span class="se">''</span><span class="s1">%'</span><span class="p">,</span> <span class="s1">'_'</span><span class="p">)</span> <span class="k">as</span> <span class="n">c3</span><span class="p">,</span>
+  <span class="k">TRANSLATE</span><span class="p">(</span><span class="s1">'Aa%Bb%Cc</span><span class="se">''</span><span class="s1">D%d'</span><span class="p">,</span> <span class="s1">' */</span><span class="se">''</span><span class="s1">%'</span><span class="p">,</span> <span class="s1">'_'</span><span class="p">)</span> <span class="k">as</span> <span class="n">c4</span>
+<span class="k">FROM</span> <span class="p">(</span><span class="k">VALUES</span> <span class="p">(</span><span class="k">true</span><span class="p">))</span> <span class="k">AS</span> <span class="n">t</span><span class="p">(</span><span class="n">f0</span><span class="p">);</span></code></pre></figure>
 
 <p>Result</p>
 
@@ -5011,38 +5177,41 @@ It would be very flexible to profile the resource with hints per query (not the 
 
 <h4 id="syntax">Syntax</h4>
 
-<p>Calcite supports basically two kinds of hints:</p>
+<p>Calcite supports hints in two locations:</p>
 
 <ul>
   <li>Query Hint: right after the <code class="highlighter-rouge">SELECT</code> keyword;</li>
   <li>Table Hint: right after the referenced table name.</li>
 </ul>
 
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">query</span> <span class="p">:</span>
-      <span class="k">SELECT</span> <span class="cm">/*+ hints */</span>
-      <span class="p">...</span>
-      <span class="k">from</span>
-          <span class="n">tableName</span> <span class="cm">/*+ hints */</span>
-          <span class="k">JOIN</span>
-          <span class="n">tableName</span> <span class="cm">/*+ hints */</span>
-      <span class="p">...</span>
+<p>For example:</p>
 
-<span class="n">hints</span> <span class="p">:</span>
-      <span class="n">hintItem</span><span class="p">[,</span> <span class="n">hintItem</span> <span class="p">]</span><span class="o">*</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="cm">/*+ hint1, hint2(a=1, b=2) */</span>
+<span class="p">...</span>
+<span class="k">FROM</span>
+  <span class="n">tableName</span> <span class="cm">/*+ hint3(5, 'x') */</span>
+<span class="k">JOIN</span>
+  <span class="n">tableName</span> <span class="cm">/*+ hint4(c=id), hint5 */</span>
+<span class="p">...</span></code></pre></figure>
 
-<span class="n">hintItem</span> <span class="p">:</span>
+<p>The syntax is as follows:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">hintComment</span><span class="p">:</span>
+      <span class="s1">'/*+'</span> <span class="n">hint</span> <span class="p">[,</span> <span class="n">hint</span> <span class="p">]</span><span class="o">*</span> <span class="s1">'*/'</span>
+
+<span class="n">hint</span><span class="p">:</span>
       <span class="n">hintName</span>
-  <span class="o">|</span>   <span class="n">hintName</span><span class="p">(</span><span class="n">optionKey</span><span class="o">=</span><span class="n">optionVal</span><span class="p">[,</span> <span class="n">optionKey</span><span class="o">=</span><span class="n">optionVal</span> <span class="p">]</span><span class="o">*</span><span class="p">)</span>
-  <span class="o">|</span>   <span class="n">hintName</span><span class="p">(</span><span class="n">hintOption</span> <span class="p">[,</span> <span class="n">hintOption</span> <span class="p">]</span><span class="o">*</span><span class="p">)</span>
+  <span class="o">|</span>   <span class="n">hintName</span> <span class="s1">'('</span> <span class="n">optionKey</span> <span class="s1">'='</span> <span class="n">optionVal</span> <span class="p">[,</span> <span class="n">optionKey</span> <span class="s1">'='</span> <span class="n">optionVal</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
+  <span class="o">|</span>   <span class="n">hintName</span> <span class="s1">'('</span> <span class="n">hintOption</span> <span class="p">[,</span> <span class="n">hintOption</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
 
-<span class="n">optionKey</span> <span class="p">:</span>
+<span class="n">optionKey</span><span class="p">:</span>
       <span class="n">simpleIdentifier</span>
   <span class="o">|</span>   <span class="n">stringLiteral</span>
 
-<span class="n">optionVal</span> <span class="p">:</span>
+<span class="n">optionVal</span><span class="p">:</span>
       <span class="n">stringLiteral</span>
 
-<span class="n">hintOption</span> <span class="p">:</span>
+<span class="n">hintOption</span><span class="p">:</span>
       <span class="n">simpleIdentifier</span>
    <span class="o">|</span>  <span class="n">numericLiteral</span>
    <span class="o">|</span>  <span class="n">stringLiteral</span></code></pre></figure>
@@ -5072,18 +5241,19 @@ events in complex event processing (CEP).</p>
       <span class="p">[</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">orderItem</span> <span class="p">[,</span> <span class="n">orderItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
       <span class="p">[</span> <span class="n">MEASURES</span> <span class="n">measureColumn</span> <span class="p">[,</span> <span class="n">measureColumn</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
       <span class="p">[</span> <span class="n">ONE</span> <span class="k">ROW</span> <span class="n">PER</span> <span class="k">MATCH</span> <span class="o">|</span> <span class="k">ALL</span> <span class="k">ROWS</span> <span class="n">PER</span> <span class="k">MATCH</span> <span class="p">]</span>
-      <span class="p">[</span> <span class="k">AFTER</span> <span class="k">MATCH</span>
-            <span class="p">(</span> <span class="n">SKIP</span> <span class="k">TO</span> <span class="k">NEXT</span> <span class="k">ROW</span>
-            <span class="o">|</span> <span class="n">SKIP</span> <span class="n">PAST</span> <span class="k">LAST</span> <span class="k">ROW</span>
-            <span class="o">|</span> <span class="n">SKIP</span> <span class="k">TO</span> <span class="k">FIRST</span> <span class="k">variable</span>
-            <span class="o">|</span> <span class="n">SKIP</span> <span class="k">TO</span> <span class="k">LAST</span> <span class="k">variable</span>
-            <span class="o">|</span> <span class="n">SKIP</span> <span class="k">TO</span> <span class="k">variable</span> <span class="p">)</span>
-      <span class="p">]</span>
+      <span class="p">[</span> <span class="k">AFTER</span> <span class="k">MATCH</span> <span class="n">skip</span> <span class="p">]</span>
       <span class="n">PATTERN</span> <span class="s1">'('</span> <span class="n">pattern</span> <span class="s1">')'</span>
       <span class="p">[</span> <span class="n">WITHIN</span> <span class="n">intervalLiteral</span> <span class="p">]</span>
       <span class="p">[</span> <span class="n">SUBSET</span> <span class="n">subsetItem</span> <span class="p">[,</span> <span class="n">subsetItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
       <span class="n">DEFINE</span> <span class="k">variable</span> <span class="k">AS</span> <span class="n">condition</span> <span class="p">[,</span> <span class="k">variable</span> <span class="k">AS</span> <span class="n">condition</span> <span class="p">]</span><span class="o">*</span>
       <span class="s1">')'</span>
+
+<span class="n">skip</span><span class="p">:</span>
+      <span class="n">SKIP</span> <span class="k">TO</span> <span class="k">NEXT</span> <span class="k">ROW</span>
+  <span class="o">|</span>   <span class="n">SKIP</span> <span class="n">PAST</span> <span class="k">LAST</span> <span class="k">ROW</span>
+  <span class="o">|</span>   <span class="n">SKIP</span> <span class="k">TO</span> <span class="k">FIRST</span> <span class="k">variable</span>
+  <span class="o">|</span>   <span class="n">SKIP</span> <span class="k">TO</span> <span class="k">LAST</span> <span class="k">variable</span>
+  <span class="o">|</span>   <span class="n">SKIP</span> <span class="k">TO</span> <span class="k">variable</span>
 
 <span class="n">subsetItem</span><span class="p">:</span>
       <span class="k">variable</span> <span class="o">=</span> <span class="s1">'('</span> <span class="k">variable</span> <span class="p">[,</span> <span class="k">variable</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
@@ -5218,7 +5388,7 @@ to the JDBC connect string (see connect string property
       <span class="p">[</span> <span class="k">USING</span>  <span class="n">usingFile</span> <span class="p">[,</span> <span class="n">usingFile</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
 
 <span class="n">usingFile</span><span class="p">:</span>
-      <span class="p">(</span> <span class="n">JAR</span> <span class="o">|</span> <span class="n">FILE</span> <span class="o">|</span> <span class="n">ARCHIVE</span> <span class="p">)</span> <span class="n">filePathLiteral</span>
+      <span class="err">{</span> <span class="n">JAR</span> <span class="o">|</span> <span class="n">FILE</span> <span class="o">|</span> <span class="n">ARCHIVE</span> <span class="err">}</span> <span class="n">filePathLiteral</span>
 
 <span class="n">dropSchemaStatement</span><span class="p">:</span>
       <span class="k">DROP</span> <span class="k">SCHEMA</span> <span class="p">[</span> <span class="n">IF</span> <span class="k">EXISTS</span> <span class="p">]</span> <span class="n">name</span>
@@ -5251,38 +5421,43 @@ generated column, <code class="highlighter-rouge">VIRTUAL</code> is the default.
 <p>In <em>createFunctionStatement</em> and <em>usingFile</em>, <em>classNameLiteral</em>
 and <em>filePathLiteral</em> are character literals.</p>
 
-<h4 id="declaring-objects-for-types-defined-in-schema">Declaring Objects For Types Defined In Schema</h4>
-<p>After an object type is defined and installed in the schema, you can use it to declare objects in any SQL block. For example, you can use the object type to specify the datatype of an attribute, column, variable, bind variable, record field, table element, formal parameter, or function result. At run time, instances of the object type are created; that is, objects of that type are instantiated. Each object can hold different values.</p>
+<h4 id="declaring-objects-for-user-defined-types">Declaring objects for user-defined types</h4>
 
-<p>Example: For declared types <code class="highlighter-rouge">address_typ</code> and <code class="highlighter-rouge">employee_typ</code></p>
-<pre><code class="language-SQL">CREATE TYPE address_typ AS OBJECT (
-   street          VARCHAR2(30),
-   city            VARCHAR2(20),
-   state           CHAR(2),
-   postal_code     VARCHAR2(6) );
+<p>After an object type is defined and installed in the schema, you can use it to
+declare objects in any SQL block. For example, you can use the object type to
+specify the datatype of an attribute, column, variable, bind variable, record
+field, table element, formal parameter, or function result. At run time,
+instances of the object type are created; that is, objects of that type are
+instantiated. Each object can hold different values.</p>
 
-CREATE TYPE employee_typ AS OBJECT (
-  employee_id       NUMBER(6),
-  first_name        VARCHAR2(20),
-  last_name         VARCHAR2(25),
-  email             VARCHAR2(25),
-  phone_number      VARCHAR2(20),
-  hire_date         DATE,
-  job_id            VARCHAR2(10),
-  salary            NUMBER(8,2),
-  commission_pct    NUMBER(2,2),
-  manager_id        NUMBER(6),
-  department_id     NUMBER(4),
-  address           address_typ
-);
-</code></pre>
+<p>For example, we can declare types <code class="highlighter-rouge">address_typ</code> and <code class="highlighter-rouge">employee_typ</code>:</p>
 
-<p>We can declare objects of type <code class="highlighter-rouge">employee_typ</code> and <code class="highlighter-rouge">address_typ</code> :</p>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TYPE</span> <span class="n">address_typ</span> <span class="k">AS</span> <span class="k">OBJECT</span> <span class="p">(</span>
+   <span class="n">street</span>          <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span>
+   <span class="n">city</span>            <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+   <span class="k">state</span>           <span class="n">CHAR</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+   <span class="n">postal_code</span>     <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">6</span><span class="p">));</span>
 
-<pre><code class="language-SQL">employee_typ(315, 'Francis', 'Logan', 'FLOGAN',
-        '555.777.2222', '01-MAY-04', 'SA_MAN', 11000, .15, 101, 110,
-         address_typ('376 Mission', 'San Francisco', 'CA', '94222'))
-</code></pre>
+<span class="k">CREATE</span> <span class="k">TYPE</span> <span class="n">employee_typ</span> <span class="k">AS</span> <span class="k">OBJECT</span> <span class="p">(</span>
+  <span class="n">employee_id</span>       <span class="n">NUMBER</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span>
+  <span class="n">first_name</span>        <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+  <span class="n">last_name</span>         <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">25</span><span class="p">),</span>
+  <span class="n">email</span>             <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">25</span><span class="p">),</span>
+  <span class="n">phone_number</span>      <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+  <span class="n">hire_date</span>         <span class="n">DATE</span><span class="p">,</span>
+  <span class="n">job_id</span>            <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+  <span class="n">salary</span>            <span class="n">NUMBER</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+  <span class="n">commission_pct</span>    <span class="n">NUMBER</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+  <span class="n">manager_id</span>        <span class="n">NUMBER</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span>
+  <span class="n">department_id</span>     <span class="n">NUMBER</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+  <span class="n">address</span>           <span class="n">address_typ</span><span class="p">);</span></code></pre></figure>
+
+<p>Using these types, you can instantiate objects as follows:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">employee_typ</span><span class="p">(</span><span class="mi">315</span><span class="p">,</span> <span class="s1">'Francis'</span><span class="p">,</span> <span class="s1">'Logan'</span><span class="p">,</span> <span class="s1">'FLOGAN'</span><span class="p">,</span>
+    <span class="s1">'555.777.2222'</span><span class="p">,</span> <span class="s1">'01-MAY-04'</span><span class="p">,</span> <span class="s1">'SA_MAN'</span><span class="p">,</span> <span class="mi">11000</span><span class="p">,</span> <span class="p">.</span><span class="mi">15</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span>
+     <span class="n">address_typ</span><span class="p">(</span><span class="s1">'376 Mission'</span><span class="p">,</span> <span class="s1">'San Francisco'</span><span class="p">,</span> <span class="s1">'CA'</span><span class="p">,</span> <span class="s1">'94222'</span><span class="p">))</span></code></pre></figure>
+
 
           
 

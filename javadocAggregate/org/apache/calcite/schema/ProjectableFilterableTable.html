@@ -128,10 +128,10 @@ extends <a href="Table.html" title="interface in org.apache.calcite.schema">Tabl
 </thead>
 <tbody>
 <tr class="altColor" id="i0">
-<td class="colFirst"><code><a href="../linq4j/Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>[]&gt;</code></td>
+<td class="colFirst"><code><a href="../linq4j/Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>[]&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#scan(org.apache.calcite.DataContext,java.util.List,int%5B%5D)">scan</a></span>&#8203;(<a href="../DataContext.html" title="interface in org.apache.calcite">DataContext</a>&nbsp;root,
 <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;filters,
-int[]&nbsp;projects)</code></th>
+int @Nullable []&nbsp;projects)</code></th>
 <td class="colLast">
 <div class="block">Returns an enumerable over the rows in this Table.</div>
 </td>
@@ -161,9 +161,9 @@ int[]&nbsp;projects)</code></th>
 <li class="blockList">
 <section class="detail">
 <h3><a id="scan(org.apache.calcite.DataContext,java.util.List,int[])">scan</a></h3>
-<div class="memberSignature"><span class="returnType"><a href="../linq4j/Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>[]&gt;</span>&nbsp;<span class="memberName">scan</span>&#8203;(<span class="arguments"><a href="../DataContext.html" title="interface in org.apache.calcite">DataContext</a>&nbsp;root,
+<div class="memberSignature"><span class="returnType"><a href="../linq4j/Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>[]&gt;</span>&nbsp;<span class="memberName">scan</span>&#8203;(<span class="arguments"><a href="../DataContext.html" title="interface in org.apache.calcite">DataContext</a>&nbsp;root,
 <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;filters,
-int[]&nbsp;projects)</span></div>
+int @Nullable []&nbsp;projects)</span></div>
 <div class="block">Returns an enumerable over the rows in this Table.
 
  <p>Each row is represented as an array of its column values.
@@ -182,7 +182,7 @@ int[]&nbsp;projects)</span></div>
 <dd><code>filters</code> - Mutable list of filters. The method should keep in the
                 list any filters that it cannot apply.</dd>
 <dd><code>projects</code> - List of projects. Each is the 0-based ordinal of the column
-                 to project.</dd>
+                 to project. Null means "project all columns".</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>Enumerable over all rows that match the accepted filters, returning
  for each row an array of column values, one value for each ordinal in
@@ -241,7 +241,7 @@ int[]&nbsp;projects)</span></div>
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

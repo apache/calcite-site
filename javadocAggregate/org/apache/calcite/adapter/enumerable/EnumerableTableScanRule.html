@@ -100,9 +100,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <pre>public class <span class="typeNameLabel">EnumerableTableScanRule</span>
 extends <a href="../../rel/convert/ConverterRule.html" title="class in org.apache.calcite.rel.convert">ConverterRule</a></pre>
-<div class="block">Planner rule that converts a
- <a href="../../rel/logical/LogicalTableScan.html" title="class in org.apache.calcite.rel.logical"><code>LogicalTableScan</code></a> to
- <a href="EnumerableConvention.html" title="enum in org.apache.calcite.adapter.enumerable"><code>enumerable calling convention</code></a>.</div>
+<div class="block">Planner rule that converts a <a href="../../rel/logical/LogicalTableScan.html" title="class in org.apache.calcite.rel.logical"><code>LogicalTableScan</code></a> to an <a href="EnumerableTableScan.html" title="class in org.apache.calcite.adapter.enumerable"><code>EnumerableTableScan</code></a>.
+ You may provide a custom config to convert other nodes that extend <a href="../../rel/core/TableScan.html" title="class in org.apache.calcite.rel.core"><code>TableScan</code></a>.</div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="EnumerableRules.html#ENUMERABLE_TABLE_SCAN_RULE"><code>EnumerableRules.ENUMERABLE_TABLE_SCAN_RULE</code></a></dd>
@@ -223,7 +222,7 @@ extends <a href="../../rel/convert/ConverterRule.html" title="class in org.apach
 </thead>
 <tbody>
 <tr class="altColor" id="i0">
-<td class="colFirst"><code><a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#convert(org.apache.calcite.rel.RelNode)">convert</a></span>&#8203;(<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel)</code></th>
 <td class="colLast">
 <div class="block">Converts a relational expression to the target trait(s) of this rule.</div>
@@ -297,7 +296,7 @@ extends <a href="../../rel/convert/ConverterRule.html" title="class in org.apach
 <li class="blockList">
 <section class="detail">
 <h3><a id="convert(org.apache.calcite.rel.RelNode)">convert</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></span>&nbsp;<span class="memberName">convert</span>&#8203;(<span class="arguments"><a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></span>&nbsp;<span class="memberName">convert</span>&#8203;(<span class="arguments"><a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../rel/convert/ConverterRule.html#convert(org.apache.calcite.rel.RelNode)">ConverterRule</a></code></span></div>
 <div class="block">Converts a relational expression to the target trait(s) of this rule.
 
@@ -359,7 +358,7 @@ extends <a href="../../rel/convert/ConverterRule.html" title="class in org.apach
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

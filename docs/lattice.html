@@ -118,7 +118,7 @@ and assigning aliases to the column names (it more convenient than
 inventing a new language to represent relationships, join conditions
 and cardinalities).</p>
 
-<p>Unlike regular SQL, order is important. If you put A before B in the
+<p>Unlike regular SQL, the order is important. If you put A before B in the
 FROM clause, and make a join between A and B, you are saying that
 there is a many-to-one foreign key relationship from A to B. (E.g. in
 the example lattice, the Sales fact table occurs before the Time
@@ -273,7 +273,7 @@ populating materialized views. Let’s run a query and check out its plan:</p>
 <span class="o">|</span>     <span class="n">EnumerableTableScan</span><span class="p">(</span><span class="k">table</span><span class="o">=</span><span class="p">[[</span><span class="n">adhoc</span><span class="p">,</span> <span class="n">m</span><span class="err">{</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">37</span><span class="err">}</span><span class="p">]])</span>        <span class="o">|</span>
 <span class="o">+</span><span class="c1">--------------------------------------------------------------------------------+</span></code></pre></figure>
 
-<p>The query gives the right answer, but plan is somewhat surprising.
+<p>The query gives the right answer, but the plan is somewhat surprising.
 It doesn’t read the <code class="highlighter-rouge">sales_fact_1997</code> or <code class="highlighter-rouge">time_by_day</code> tables, but instead
 reads from a table called <code class="highlighter-rouge">m{16, 17, 27, 31, 32, 36, 37}</code>. This is one of the
 tiles created at the start of the connection.</p>

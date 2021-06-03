@@ -138,7 +138,7 @@ extends <a href="../../schema/Wrapper.html" title="interface in org.apache.calci
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i1">
-<td class="colFirst"><code><a href="../../rel/type/RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="../../rel/type/RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#field(org.apache.calcite.rel.type.RelDataType,java.lang.String)">field</a></span>&#8203;(<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
 <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;alias)</code></th>
 <td class="colLast">
@@ -164,7 +164,7 @@ extends <a href="../../schema/Wrapper.html" title="interface in org.apache.calci
 </td>
 </tr>
 <tr class="altColor" id="i4">
-<td class="colFirst"><code><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNamedType(org.apache.calcite.sql.SqlIdentifier)">getNamedType</a></span>&#8203;(<a href="../SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;typeName)</code></th>
 <td class="colLast">
 <div class="block">Finds a user-defined type with the given name, possibly qualified.</div>
@@ -185,7 +185,7 @@ extends <a href="../../schema/Wrapper.html" title="interface in org.apache.calci
 </td>
 </tr>
 <tr class="rowColor" id="i7">
-<td class="colFirst"><code><a href="SqlValidatorTable.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorTable</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="SqlValidatorTable.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorTable</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTable(java.util.List)">getTable</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;names)</code></th>
 <td class="colLast">
 <div class="block">Finds a table or schema with the given name, possibly qualified.</div>
@@ -229,7 +229,7 @@ extends <a href="../../schema/Wrapper.html" title="interface in org.apache.calci
 <h3>Methods inherited from interface&nbsp;org.apache.calcite.schema.<a href="../../schema/Wrapper.html" title="interface in org.apache.calcite.schema">Wrapper</a></h3>
 <a id="methods.inherited.from.class.org.apache.calcite.schema.Wrapper">
 <!--   -->
-</a><code><a href="../../schema/Wrapper.html#unwrap(java.lang.Class)">unwrap</a></code></div>
+</a><code><a href="../../schema/Wrapper.html#maybeUnwrap(java.lang.Class)">maybeUnwrap</a>, <a href="../../schema/Wrapper.html#unwrap(java.lang.Class)">unwrap</a>, <a href="../../schema/Wrapper.html#unwrapOrThrow(java.lang.Class)">unwrapOrThrow</a></code></div>
 </section>
 </li>
 </ul>
@@ -246,7 +246,7 @@ extends <a href="../../schema/Wrapper.html" title="interface in org.apache.calci
 <li class="blockList">
 <section class="detail">
 <h3><a id="getTable(java.util.List)">getTable</a></h3>
-<div class="memberSignature"><span class="returnType"><a href="SqlValidatorTable.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorTable</a></span>&nbsp;<span class="memberName">getTable</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;names)</span></div>
+<div class="memberSignature"><span class="returnType">@Nullable <a href="SqlValidatorTable.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorTable</a></span>&nbsp;<span class="memberName">getTable</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;names)</span></div>
 <div class="block">Finds a table or schema with the given name, possibly qualified.
 
  <p>Uses the case-sensitivity policy of the catalog reader.
@@ -265,7 +265,7 @@ extends <a href="../../schema/Wrapper.html" title="interface in org.apache.calci
 <li class="blockList">
 <section class="detail">
 <h3><a id="getNamedType(org.apache.calcite.sql.SqlIdentifier)">getNamedType</a></h3>
-<div class="memberSignature"><span class="returnType"><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></span>&nbsp;<span class="memberName">getNamedType</span>&#8203;(<span class="arguments"><a href="../SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;typeName)</span></div>
+<div class="memberSignature"><span class="returnType">@Nullable <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></span>&nbsp;<span class="memberName">getNamedType</span>&#8203;(<span class="arguments"><a href="../SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;typeName)</span></div>
 <div class="block">Finds a user-defined type with the given name, possibly qualified.
 
  <p>NOTE jvs 12-Feb-2005: the reason this method is defined here instead
@@ -312,7 +312,7 @@ extends <a href="../../schema/Wrapper.html" title="interface in org.apache.calci
 <section class="detail">
 <h3><a id="field(org.apache.calcite.rel.type.RelDataType,java.lang.String)">field</a></h3>
 <div class="memberSignature"><span class="annotations"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang" class="externalLink">@Deprecated</a>
-</span><span class="returnType"><a href="../../rel/type/RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a></span>&nbsp;<span class="memberName">field</span>&#8203;(<span class="arguments"><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
+</span><span class="returnType">@Nullable <a href="../../rel/type/RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a></span>&nbsp;<span class="memberName">field</span>&#8203;(<span class="arguments"><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
 <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;alias)</span></div>
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
 <div class="deprecationComment">Use
@@ -424,7 +424,7 @@ extends <a href="../../schema/Wrapper.html" title="interface in org.apache.calci
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

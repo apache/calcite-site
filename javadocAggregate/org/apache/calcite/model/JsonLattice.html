@@ -160,7 +160,7 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Double.html?is-external=true" title="class or interface in java.lang" class="externalLink">Double</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Double.html?is-external=true" title="class or interface in java.lang" class="externalLink">Double</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#rowCountEstimate">rowCountEstimate</a></span></code></th>
 <td class="colLast">
 <div class="block">Estimated number of rows.</div>
@@ -174,7 +174,7 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#statisticProvider">statisticProvider</a></span></code></th>
 <td class="colLast">
 <div class="block">Name of a class that provides estimates of the number of distinct values
@@ -210,7 +210,14 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 </thead>
 <tbody>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">JsonLattice</a></span>()</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,java.lang.Object,java.lang.Boolean,java.lang.Boolean,java.lang.Long,java.lang.Double,java.lang.String,java.util.List)">JsonLattice</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;name,
+<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;sql,
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&nbsp;auto,
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&nbsp;algorithm,
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Long.html?is-external=true" title="class or interface in java.lang" class="externalLink">Long</a>&nbsp;algorithmMaxMillis,
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Double.html?is-external=true" title="class or interface in java.lang" class="externalLink">Double</a>&nbsp;rowCountEstimate,
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;statisticProvider,
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="JsonMeasure.html" title="class in org.apache.calcite.model">JsonMeasure</a>&gt;&nbsp;defaultMeasures)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -284,7 +291,7 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 <li class="blockList">
 <section class="detail">
 <h3><a id="name">name</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></span>&nbsp;<span class="memberName">name</span></div>
+<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></span>&nbsp;<span class="memberName">name</span></div>
 <div class="block">The name of this lattice.
 
  <p>Required.</div>
@@ -293,7 +300,7 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 <li class="blockList">
 <section class="detail">
 <h3><a id="sql">sql</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a></span>&nbsp;<span class="memberName">sql</span></div>
+<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a></span>&nbsp;<span class="memberName">sql</span></div>
 <div class="block">SQL query that defines the lattice.
 
  <p>Must be a string or a list of strings (which are concatenated into a
@@ -307,7 +314,7 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 <li class="blockList">
 <section class="detail">
 <h3><a id="auto">auto</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">auto</span></div>
+<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">auto</span></div>
 <div class="block">Whether to materialize tiles on demand as queries are executed.
 
  <p>Optional; default is true.</div>
@@ -316,7 +323,7 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 <li class="blockList">
 <section class="detail">
 <h3><a id="algorithm">algorithm</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">algorithm</span></div>
+<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">algorithm</span></div>
 <div class="block">Whether to use an optimization algorithm to suggest and populate an
  initial set of tiles.
 
@@ -326,7 +333,7 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 <li class="blockList">
 <section class="detail">
 <h3><a id="algorithmMaxMillis">algorithmMaxMillis</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">long</span>&nbsp;<span class="memberName">algorithmMaxMillis</span></div>
+<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="returnType">long</span>&nbsp;<span class="memberName">algorithmMaxMillis</span></div>
 <div class="block">Maximum time (in milliseconds) to run the algorithm.
 
  <p>Optional; default is -1, meaning no timeout.
@@ -338,7 +345,7 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 <li class="blockList">
 <section class="detail">
 <h3><a id="rowCountEstimate">rowCountEstimate</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Double.html?is-external=true" title="class or interface in java.lang" class="externalLink">Double</a></span>&nbsp;<span class="memberName">rowCountEstimate</span></div>
+<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="returnType">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Double.html?is-external=true" title="class or interface in java.lang" class="externalLink">Double</a></span>&nbsp;<span class="memberName">rowCountEstimate</span></div>
 <div class="block">Estimated number of rows.
 
  <p>If null, Calcite will a query to find the real value.</div>
@@ -347,7 +354,7 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 <li class="blockList">
 <section class="detail">
 <h3><a id="statisticProvider">statisticProvider</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></span>&nbsp;<span class="memberName">statisticProvider</span></div>
+<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="returnType">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></span>&nbsp;<span class="memberName">statisticProvider</span></div>
 <div class="block">Name of a class that provides estimates of the number of distinct values
  in each column.
 
@@ -371,7 +378,7 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 <li class="blockList">
 <section class="detail">
 <h3><a id="defaultMeasures">defaultMeasures</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="JsonMeasure.html" title="class in org.apache.calcite.model">JsonMeasure</a>&gt;</span>&nbsp;<span class="memberName">defaultMeasures</span></div>
+<div class="memberSignature"><span class="modifiers">public final</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="JsonMeasure.html" title="class in org.apache.calcite.model">JsonMeasure</a>&gt;</span>&nbsp;<span class="memberName">defaultMeasures</span></div>
 <div class="block">List of measures that a tile should have by default.
 
  <p>A tile can define its own measures, including measures not in this list.
@@ -391,8 +398,15 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
-<h3><a id="&lt;init&gt;()">JsonLattice</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">JsonLattice</span>()</div>
+<h3><a id="&lt;init&gt;(java.lang.String,java.lang.Object,java.lang.Boolean,java.lang.Boolean,java.lang.Long,java.lang.Double,java.lang.String,java.util.List)">JsonLattice</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">JsonLattice</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;name,
+<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;sql,
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&nbsp;auto,
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&nbsp;algorithm,
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Long.html?is-external=true" title="class or interface in java.lang" class="externalLink">Long</a>&nbsp;algorithmMaxMillis,
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Double.html?is-external=true" title="class or interface in java.lang" class="externalLink">Double</a>&nbsp;rowCountEstimate,
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;statisticProvider,
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="JsonMeasure.html" title="class in org.apache.calcite.model">JsonMeasure</a>&gt;&nbsp;defaultMeasures)</span></div>
 </section>
 </li>
 </ul>
@@ -486,7 +500,7 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

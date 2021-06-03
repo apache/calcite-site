@@ -85,6 +85,423 @@
 <a href="https://github.com/apache/calcite/releases">github</a>.
 Downloads are available on the
 <a href="/downloads/">downloads page</a>.</p>
+<h2 id="v1-27-0"><a href="https://github.com/apache/calcite/releases/tag/calcite-1.27.0">1.27.0</a> / 2021-06-03</h2>
+<p>This release comes eight months after <a href="#v1-26-0">1.26.0</a>. It includes more than 150 resolved
+issues, comprising a few new features, three minor breaking changes, many bug-fixes and small
+improvements, as well as code quality enhancements and better test coverage.</p>
+
+<p>Among others, it is worth highlighting the following:</p>
+
+<ul>
+  <li><a href="https://issues.apache.org/jira/browse/CALCITE-4034">InnoDB adapter</a></li>
+  <li><a href="https://issues.apache.org/jira/browse/CALCITE-4446">Three-valued logic for SEARCH operator</a></li>
+  <li><a href="https://issues.apache.org/jira/browse/CALCITE-3221">MergeUnion operator in Enumerable convention</a></li>
+  <li><a href="https://issues.apache.org/jira/browse/CALCITE-4260">Explain plan with DOT format</a></li>
+  <li><a href="https://issues.apache.org/jira/browse/CALCITE-4314">ErrorProne code quality checks</a></li>
+</ul>
+
+<p>Compatibility: This release is tested on Linux, macOS, Microsoft Windows;
+using JDK/OpenJDK versions 8 to 15;
+Guava versions 19.0 to 29.0-jre;
+other software versions as specified in gradle.properties.</p>
+
+<h4 id="breaking-changes">Breaking Changes</h4>
+<ul>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4521">CALCITE-4251</a>]
+Get the origin column, even if it is derived</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4570">CALCITE-4570</a>]
+Always validate preconditions in Filter/Correlate/Snapshot expressions when
+assertions are enabled</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4427">CALCITE-4427</a>]
+Make <code class="highlighter-rouge">SUBSTRING</code> operator comply with ISO standard SQL</li>
+</ul>
+
+<h4 id="new-features">New features</h4>
+<ul>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4564">CALCITE-4564</a>]
+Initialization context for non-static user-defined functions (UDFs)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4477">CALCITE-4477</a>]
+In <code class="highlighter-rouge">Interpreter</code>, support table-valued functions</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4418">CALCITE-4418</a>]
+Allow Interpreter to read from JDBC input</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3574">CALCITE-3574</a>]
+Add <code class="highlighter-rouge">RLIKE</code> operator (similar to <code class="highlighter-rouge">LIKE</code>, but Hive- and Spark-specific)
+(Shradha Ambekar)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4483">CALCITE-4483</a>]
+<code class="highlighter-rouge">WITHIN DISTINCT</code> clause for aggregate functions (experimental)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3221">CALCITE-3221</a>]
+Add <code class="highlighter-rouge">MergeUnion</code> operator in <code class="highlighter-rouge">Enumerable</code> convention</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4349">CALCITE-4349</a>]
+<code class="highlighter-rouge">GROUP_CONCAT</code> aggregate function (MySQL’s equivalent of <code class="highlighter-rouge">LISTAGG</code>)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4443">CALCITE-4443</a>]
+Add <code class="highlighter-rouge">ILIKE</code> operator (as <code class="highlighter-rouge">LIKE</code>, but case-insensitive and PostgreSQL-specific)
+(Ondřej Štumpf)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4456">CALCITE-4456</a>]
+Allows all value expressions in <code class="highlighter-rouge">ROW</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4433">CALCITE-4433</a>]
+Add <code class="highlighter-rouge">UNPIVOT</code> operator to SQL</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4408">CALCITE-4408</a>]
+Implement Oracle <code class="highlighter-rouge">SUBSTR</code> function (James Starr)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4374">CALCITE-4374</a>]
+Support materialized view recognition when query distinct aggregate on target
+<code class="highlighter-rouge">GROUP BY</code> columns (xzh)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4369">CALCITE-4369</a>]
+Support <code class="highlighter-rouge">COUNTIF</code> aggregate function for BigQuery (Aryeh Hillman)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4354">CALCITE-4354</a>]
+Allow <code class="highlighter-rouge">ITEM</code> operator on <code class="highlighter-rouge">ROW/STRUCT</code> data types (Alessandro Solimando)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4335">CALCITE-4335</a>]
+<code class="highlighter-rouge">ARRAY_AGG</code>, <code class="highlighter-rouge">ARRAY_CONCAT_AGG</code>, <code class="highlighter-rouge">STRING_AGG</code> aggregate functions for BigQuery</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-2935">CALCITE-2935</a>]
+Support <code class="highlighter-rouge">BOOL_AND</code>, <code class="highlighter-rouge">BOOL_OR</code>, <code class="highlighter-rouge">LOGICAL_AND</code>, <code class="highlighter-rouge">LOGICAL_OR</code> aggregate functions
+(ShuMingLi)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3731">CALCITE-3731</a>]
+Add <code class="highlighter-rouge">IF</code> function for BigQuery, Hive and Spark dialects (Vaibhav Jain)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4260">CALCITE-4260</a>]
+Support plan explain with <code class="highlighter-rouge">DOT</code> format (Liya Fan)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4297">CALCITE-4297</a>]
+Allow BigQuery to parse and validate niladic functions (Mr. Swett)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4034">CALCITE-4034</a>]
+<code class="highlighter-rouge">InnoDB</code> adapter (neoremind)</li>
+</ul>
+
+<h4 id="bug-fixes-api-changes-and-minor-enhancements">Bug fixes, API changes and minor enhancements</h4>
+<ul>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4497">CALCITE-4497</a>]
+In <code class="highlighter-rouge">RelBuilder</code>, support windowed aggregate functions (OVER)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4620">CALCITE-4620</a>] 
+Join on <code class="highlighter-rouge">CASE</code> causes <code class="highlighter-rouge">AssertionError</code> in <code class="highlighter-rouge">RelToSqlConverter</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4446">CALCITE-4446</a>]
+Implement three-valued logic for SEARCH operator</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4621">CALCITE-4621</a>]
+<code class="highlighter-rouge">SemiJoinRule</code> throws <code class="highlighter-rouge">AssertionError</code> on <code class="highlighter-rouge">ANTI</code> join</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4610">CALCITE-4610</a>]
+Join on range causes <code class="highlighter-rouge">AssertionError</code> in <code class="highlighter-rouge">RelToSqlConverter</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4609">CALCITE-4609</a>]
+<code class="highlighter-rouge">AggregateRemoveRule</code> throws while handling <code class="highlighter-rouge">AVG</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4603">CALCITE-4603</a>]
+Least restrictive type considers only the last element in collections of collections</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4548">CALCITE-4548</a>]
+<code class="highlighter-rouge">SqlToRelConverter#convertExpression</code> cannot convert <code class="highlighter-rouge">SqlNode</code> with sub query (jibiyr)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-2317">CALCITE-2317</a>]
+Support JDBC <code class="highlighter-rouge">DatabaseMetaData#getFunctions</code> (Malte Bellmann)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4594">CALCITE-4594</a>]
+Interpreter returns wrong result when <code class="highlighter-rouge">VALUES</code> has zero fields</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4510">CALCITE-4510</a>]
+<code class="highlighter-rouge">RexLiteral</code> can produce wrong digest for some user defined types</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4560">CALCITE-4560</a>]
+Wrong plan when decorrelating <code class="highlighter-rouge">EXISTS</code> subquery with <code class="highlighter-rouge">COALESCE</code> in the predicate</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4574">CALCITE-4574</a>]
+Wrong/Invalid plans when using <code class="highlighter-rouge">RelBuilder#join</code> with correlations</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4591">CALCITE-4591</a>]
+<code class="highlighter-rouge">RelRunner</code> should throw SQLException if prepare fails</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4585">CALCITE-4585</a>]
+Improve error message from <code class="highlighter-rouge">RelRunner</code> (NobiGo)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4586">CALCITE-4586</a>]
+In piglet, allow creating a <code class="highlighter-rouge">PigRelBuilder</code> with custom <code class="highlighter-rouge">config.simplify()</code>
+(Jiatao Tao)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4583">CALCITE-4583</a>]
+Control simplification in <code class="highlighter-rouge">RelBuilder#filter</code> with <code class="highlighter-rouge">config.simplify()</code> (Jiatao
+Tao)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4571">CALCITE-4571</a>]
+In piglet, a Pig Latin script with multiple <code class="highlighter-rouge">STORE</code> commands causes the merging
+of multiple SQL statements (Mahesh Kumar Behera)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4569">CALCITE-4569</a>]
+In piglet, allow creating a <code class="highlighter-rouge">PigConverter</code> with custom properties (Mahesh Kumar
+Behera)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4572">CALCITE-4572</a>]
+Piglet fails if Pig Latin script contains <code class="highlighter-rouge">RANK</code> or <code class="highlighter-rouge">FILTER</code> operators (Mahesh
+Kumar Behera)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4579">CALCITE-4579</a>]
+Piglet throws <code class="highlighter-rouge">ClassCastException</code> if Pig Latin script contains <code class="highlighter-rouge">FLATTEN</code> or
+<code class="highlighter-rouge">STRSPLIT</code> operators (Mahesh Kumar Behera)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4515">CALCITE-4515</a>]
+Do not generate the new join tree from commute/associate rules if there are
+“always TRUE” conditions (Vladimir Ozerov)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4535">CALCITE-4535</a>]
+<code class="highlighter-rouge">ServerDdlExecutor</code> cannot execute <code class="highlighter-rouge">DROP</code> commands with qualified object names
+(Vladimir Ozerov)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4511">CALCITE-4511</a>]
+Distinct row count and population size for constant columns should be 1</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4562">CALCITE-4562</a>]
+Improve simplification of “x IS TRUE” and “x LIKE ‘%’”</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4556">CALCITE-4556</a>]
+<code class="highlighter-rouge">CalciteMetaImpl#createEmptyResultSet</code> should not pass class to
+<code class="highlighter-rouge">CursorFactory#deduce</code> (Alessandro Solimando)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4522">CALCITE-4522</a>]
+CPU cost of <code class="highlighter-rouge">Sort</code> should be lower if sort keys are empty (huangqixiang)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4552">CALCITE-4552</a>]
+<code class="highlighter-rouge">Interpreter</code> does not close resources held by its nodes on close</li>
+  <li>Add method RelJsonReader.readType</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4524">CALCITE-4524</a>]
+Make some fields non-nullable (<code class="highlighter-rouge">SqlSelect.selectList</code>,
+<code class="highlighter-rouge">DataContext.getTypeFactory</code>)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4533">CALCITE-4533</a>]
+Incorrect semantics of <code class="highlighter-rouge">REPLACE</code> and <code class="highlighter-rouge">IF NOT EXISTS</code> keywords in
+<code class="highlighter-rouge">CREATE TABLE/SCHEMA</code> commands (Vladimir Ozerov)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4342">CALCITE-4342</a>]
+More aggregate functions should be marked as splittable and ignore distinct
+optionality (Liya Fan)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4526">CALCITE-4526</a>]
+<code class="highlighter-rouge">SqlSnapshot#unparse</code> loses the <code class="highlighter-rouge">AS</code> keyword when the table has alias (jibiyr)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4276">CALCITE-4276</a>]
+<code class="highlighter-rouge">MaterializedViewOnlyAggregateRule</code> performs invalid rewrite on query that
+contains join and time-rollup function (<code class="highlighter-rouge">FLOOR</code>) (Justin Swett)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-2000">CALCITE-2000</a>]
+<code class="highlighter-rouge">UNNEST</code> a collection that has a field with nested data generates an <code class="highlighter-rouge">Exception</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4514">CALCITE-4514</a>]
+When merging <code class="highlighter-rouge">RelSets</code>, fine-tune which set is merged into which, for efficiency
+(Botong Huang)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4437">CALCITE-4437</a>]
+<code class="highlighter-rouge">Sort</code> should be decorrelated even though it has fetch or limit when it
+is not inside a <code class="highlighter-rouge">Correlate</code> (Thomas Rebele)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4265">CALCITE-4265</a>]
+Improve error message when <code class="highlighter-rouge">CAST</code> to unknown type (Louis Kuang)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4494">CALCITE-4494</a>]
+Improve performance of checking <code class="highlighter-rouge">RelNode</code> presence in <code class="highlighter-rouge">RelSubset</code> (Igor Lozynskyi)</li>
+  <li>In <code class="highlighter-rouge">RelBuilder</code>, remove not-null arguments to <code class="highlighter-rouge">COUNT</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4199">CALCITE-4199</a>]
+<code class="highlighter-rouge">RelBuilder</code> throws <code class="highlighter-rouge">NullPointerException</code> while implementing <code class="highlighter-rouge">GROUP_ID()</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4491">CALCITE-4491</a>]
+Aggregation of window function produces invalid SQL for PostgreSQL (Dominik
+Labuda)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4426">CALCITE-4426</a>]
+Short-circuit evaluating when comparing two <code class="highlighter-rouge">RelTraitSets</code> (Jiatao Tao)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4482">CALCITE-4482</a>]
+Extract the default <code class="highlighter-rouge">SqlWriterConfig</code> in <code class="highlighter-rouge">SqlPrettyWriter</code>, reduce the overhead of
+<code class="highlighter-rouge">ImmutableBeans#create</code> (Jiatao Tao)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4461">CALCITE-4461</a>]
+Do not use <code class="highlighter-rouge">Logical</code> nodes inside <code class="highlighter-rouge">Enumerable</code> rules (Vladimir Ozerov)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4479">CALCITE-4479</a>]
+<code class="highlighter-rouge">vFloat in (1.0, 2.0)</code> throws <code class="highlighter-rouge">UnsupportedOperationException</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4474">CALCITE-4474</a>]
+<code class="highlighter-rouge">SqlSimpleParser</code> inner Tokenizer should not recognize the sql of TokenType.ID
+ or some keywords in some case (wangjie)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4431">CALCITE-4431</a>]
+Use <code class="highlighter-rouge">requireNonNull(var, "var")</code> instead of <code class="highlighter-rouge">requireNonNull(var)</code> for better error
+messages</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4466">CALCITE-4466</a>]
+Do not invoke <code class="highlighter-rouge">RelTraitDef#convert</code> when the source trait satisfies the target
+trait (Vladimir Ozerov)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4463">CALCITE-4463</a>]
+JDBC adapter for Spark generates incorrect <code class="highlighter-rouge">ORDER BY</code> syntax (Yanjing Wang)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4453">CALCITE-4453</a>]
+<code class="highlighter-rouge">RexExecutorImpl#compile</code> should use <code class="highlighter-rouge">RexBuilder</code>’s type factory if possible</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4450">CALCITE-4450</a>]
+ElasticSearch query with <code class="highlighter-rouge">VARCHAR</code> literal projection fails with
+<code class="highlighter-rouge">JsonParseException</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4449">CALCITE-4449</a>]
+Generate nicer SQL for Sarg <code class="highlighter-rouge">x IS NULL OR x NOT IN (1, 2)</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4434">CALCITE-4434</a>]
+Cannot implement <code class="highlighter-rouge">CASE row WHEN row</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4425">CALCITE-4425</a>]
+Class <code class="highlighter-rouge">DefaultEdge</code> lacks a proper <code class="highlighter-rouge">toString</code> implementation (Liya Fan)</li>
+  <li>Change return type of <code class="highlighter-rouge">RelBuilder#literal</code> from <code class="highlighter-rouge">RexNode</code> to <code class="highlighter-rouge">RexLiteral</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4435">CALCITE-4435</a>]
+Incorrect logic for validating <code class="highlighter-rouge">RexFieldAccess</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4436">CALCITE-4436</a>]
+Use the fields order from the struct type for <code class="highlighter-rouge">ITEM(STRUCT, INDEX)</code> access
+(Alessandro Solimando)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4429">CALCITE-4429</a>]
+<code class="highlighter-rouge">RelOptUtil#createCastRel</code> should throw if source and target row types have
+different number of fields</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4419">CALCITE-4419</a>]
+POSIX regex operators cannot be used within <code class="highlighter-rouge">RelBuilder</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4411">CALCITE-4411</a>]
+<code class="highlighter-rouge">RelNode</code> to SQL loses <code class="highlighter-rouge">DISTINCT</code> on window aggregation (Jiatao Tao)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4284">CALCITE-4284</a>]
+<code class="highlighter-rouge">ImmutableBeans</code>: make reference properties non-nullable by default</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4199">CALCITE-4199</a>]
+Add nullability annotations</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4199">CALCITE-4199</a>]
+Add package-level NonNull annotations to calcite packages</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4214">CALCITE-4214</a>]
+Make <code class="highlighter-rouge">RelDataType#getSqlTypeName</code> non-nullable</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4251">CALCITE-4251</a>]
+<code class="highlighter-rouge">NPE</code> in <code class="highlighter-rouge">LoptMultiJoin</code> when <code class="highlighter-rouge">mq#getColumnOrigin(left, i)</code> returns <code class="highlighter-rouge">null</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4415">CALCITE-4415</a>]
+<code class="highlighter-rouge">SqlStdOperatorTable.NOT_LIKE</code> has a wrong implementor</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4317">CALCITE-4317</a>]
+<code class="highlighter-rouge">RelFieldTrimmer</code> after trimming all the fields in an aggregate should not
+return a zero field Aggregate (Rafay)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4414">CALCITE-4414</a>]
+<code class="highlighter-rouge">RelMdSelectivity#getSelectivity</code> for <code class="highlighter-rouge">Calc</code> propagates predicate with wrong
+references</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4409">CALCITE-4409</a>]
+Improve exception when <code class="highlighter-rouge">RelBuilder</code> tries to create a field on a non-struct
+expression</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4393">CALCITE-4393</a>]
+<code class="highlighter-rouge">ExceptionInInitializerError</code> due to <code class="highlighter-rouge">NPE</code> in <code class="highlighter-rouge">SqlCallBinding</code> caused by circular
+dependency</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4251">CALCITE-4251</a>]
+Support <code class="highlighter-rouge">Calc</code> and <code class="highlighter-rouge">SetOp</code> operator in <code class="highlighter-rouge">RelMdAllPredicates</code> (Xu Zhaohui)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4402">CALCITE-4402</a>]
+<code class="highlighter-rouge">SqlCall#equalsDeep</code> does not take into account the function quantifier (Huang
+Qixiang)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4251">CALCITE-4251</a>]
+Get the origin column, even if it is derived (xzh)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4406">CALCITE-4406</a>]
+<code class="highlighter-rouge">SqlTableRef</code> operator should create a <code class="highlighter-rouge">SqlTableRef</code> as the call</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4277">CALCITE-4277</a>]
+When <code class="highlighter-rouge">RelNode</code> has been removed from its subset, skip the origin rule match (Jiatao
+Tao)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4392">CALCITE-4392</a>]
+The operation of checking types equal ignoring null can be more efficient</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4383">CALCITE-4383</a>]
+In <code class="highlighter-rouge">RelBuilder</code>, optimize <code class="highlighter-rouge">VALUES ... UNION ALL ... VALUES</code> to a single <code class="highlighter-rouge">VALUES</code>
+with multiple rows</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4394">CALCITE-4394</a>]
+When generating code for a function call, take the inferred types of the
+operands into account</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4389">CALCITE-4389</a>]
+Calls to <code class="highlighter-rouge">ROW</code> and implicit row constructor sometimes print too many spaces</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4380">CALCITE-4380</a>]
+Make class <code class="highlighter-rouge">SqlNodeList</code> implement <code class="highlighter-rouge">List&lt;SqlNode&gt;</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4390">CALCITE-4390</a>]
+<code class="highlighter-rouge">SqlMatchRecognize</code> returns wrong operand list (Dawid Wysakowicz)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4364">CALCITE-4364</a>]
+<code class="highlighter-rouge">a IN (1, 2) AND a = 1</code> should be simplified to <code class="highlighter-rouge">a = 1</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4273">CALCITE-4273</a>]
+Support get expression lineage for Calc</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4350">CALCITE-4350</a>]
+The reverse operation of collation direction is overly relaxed (Liya Fan)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4345">CALCITE-4345</a>]
+<code class="highlighter-rouge">AggregateCaseToFilterRule</code> throws <code class="highlighter-rouge">NullPointerException</code> when converting <code class="highlighter-rouge">CASE</code>
+without <code class="highlighter-rouge">ELSE</code> (Jiatao Tao)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4233">CALCITE-4233</a>]
+In Elasticsearch adapter, support generating disjunction max (dis_max) queries
+(shlok7296)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4106">CALCITE-4106</a>]
+Consider <code class="highlighter-rouge">listCoerced</code> in <code class="highlighter-rouge">TypeCoercionImpl#inOperationCoercion</code> (Jiatao Tao)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4352">CALCITE-4352</a>]
+<code class="highlighter-rouge">RexSimplify</code> incorrectly drops <code class="highlighter-rouge">IS NULL</code> and <code class="highlighter-rouge">IS NOT NULL</code> from <code class="highlighter-rouge">SEARCH</code>
+expressions</li>
+  <li>BigQuery dialect should allow <code class="highlighter-rouge">GROUP BY</code> ordinal</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4332">CALCITE-4332</a>]
+Improve error when planning rule produces a relational expression with wrong
+row type</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4225">CALCITE-4225</a>]
+Make <code class="highlighter-rouge">RelDecorrelator</code> pluggable</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4305">CALCITE-4305</a>]
+Implicit column alias for single-column <code class="highlighter-rouge">VALUES</code>, and <code class="highlighter-rouge">UNNEST</code> of <code class="highlighter-rouge">ARRAY</code> and
+<code class="highlighter-rouge">MULTISET</code> constructors</li>
+  <li>Add an overloaded <code class="highlighter-rouge">SqlOperator#createCall</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4321">CALCITE-4321</a>]
+JDBC adapter omits <code class="highlighter-rouge">FILTER (WHERE ...)</code> expressions when generating SQL
+(Jeremiah Rhoads Hall)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4325">CALCITE-4325</a>]
+<code class="highlighter-rouge">RexSimplify</code> incorrectly simplifies complex expressions that contain Sarg and
+<code class="highlighter-rouge">IS NULL</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4240">CALCITE-4240</a>]
+<code class="highlighter-rouge">SqlTypeUtil#getMaxPrecisionScaleDecimal</code> returns a decimal with same
+precision and scale (Jiatao Tao)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4333">CALCITE-4333</a>]
+<code class="highlighter-rouge">Sort</code> rel should be decorrelated even though it has fetch or limit when its
+parent is not a <code class="highlighter-rouge">Correlate</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4302">CALCITE-4302</a>]
+Avoid cost re-propagation in <code class="highlighter-rouge">VolcanoPlanner</code> (Botong Huang)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4324">CALCITE-4324</a>]
+Avoid sqlline classpath caching by default, add sqlline and sqlsh tests</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4315">CALCITE-4315</a>]
+<code class="highlighter-rouge">NPE</code> in <code class="highlighter-rouge">RelMdUtil#checkInputForCollationAndLimit</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4316">CALCITE-4316</a>]
+<code class="highlighter-rouge">NPE</code> when division includes nulls</li>
+  <li>Add method RelBuilder.isDistinctFrom()</li>
+  <li>Add class SqlBasicAggFunction</li>
+  <li>Add generic info to <code class="highlighter-rouge">Map</code> &amp; <code class="highlighter-rouge">Array</code> annotation</li>
+  <li>Refactor: Add method SqlOperator.reverse()</li>
+  <li>Refactor: Make HintStrategyTable immutable</li>
+  <li>Refactor: move CassandraRules.reverseDirection into Direction</li>
+  <li>Remove the insecure, unused <code class="highlighter-rouge">TrustAllSslSocketFactory</code> class (intrigus-lgtm)</li>
+  <li>Remove multiple blank lines after package statements</li>
+  <li>Remove multiple blank lines after import statements</li>
+  <li>Cleanup code after errorprone upgrade: <code class="highlighter-rouge">IdentityHashMapUsage</code>, <code class="highlighter-rouge">JdkObsolete</code> -&gt;
+<code class="highlighter-rouge">JavaUtilDate</code>
+    <h4 id="build-and-test-suit">Build and test suit</h4>
+  </li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4613">CALCITE-4613</a>]
+OWASP dependency-check tasks fail due to missing resources</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4576">CALCITE-4576</a>]
+Release process should not overwrite LICENSE file</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4575">CALCITE-4575</a>]
+Remove Gradle wrapper from source distribution</li>
+  <li>Remove <code class="highlighter-rouge">System.out.println</code> from <code class="highlighter-rouge">DiffRepository</code></li>
+  <li><code class="highlighter-rouge">DiffRepository</code> should write a test’s resource file only when it is modified</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4593">CALCITE-4593</a>]
+<code class="highlighter-rouge">DiffRepository</code> tests should fail if new XML resources are not in alphabetical
+order</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4587">CALCITE-4587</a>]
+Set <code class="highlighter-rouge">spark.driver.bindAddress</code> explicitly to avoid <code class="highlighter-rouge">BindException</code> thrown by
+Spark (Jiatao Tao)</li>
+  <li>Add Matcher#matches to ForbiddenApis to avoid its accidental use</li>
+  <li>Apply com.autonomousapps.dependency-analysis plugin only when
+-PenableDependencyAnalysis is provided on a command line</li>
+  <li>Fuzz testing for SEARCH operator, and refactor RexSimplify</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4344">CALCITE-4344</a>]
+Run <code class="highlighter-rouge">Redis</code> tests using Docker containers</li>
+  <li>Make sure FmppTask re-executes in case default_config.fmpp changes</li>
+  <li>Use max-parallel=3 to reduce the usage of the shared GitHub Actions executors</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4140">CALCITE-4140</a>]
+Use Wasabi S3 for remote build cache</li>
+  <li>Use Sonatype OSSRH repository instead of JCenter in build plugins</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4459">CALCITE-4459</a>]
+Verify the bytecode with Jandex by default</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4470">CALCITE-4470</a>]
+Add optional bytecode verification with Jandex</li>
+  <li>Cancel stale workflows in GitHub Actions CI</li>
+  <li>Add ErrorProne and the Checker Framework verifications to Travis CI</li>
+  <li>Test case for [<a href="https://issues.apache.org/jira/browse/CALCITE-1382">CALCITE-1382</a>]
+<code class="highlighter-rouge">ClassCastException</code> in JDBC Adapter</li>
+  <li>Require Java 1.8.0u202 or later for the build</li>
+  <li>Make sure compileJava is re-executed in case of the minor javac version changes</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4422">CALCITE-4422</a>]
+Add <code class="highlighter-rouge">MethodCanBeStatic</code> check via ErrorProne</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4199">CALCITE-4199</a>]
+Add CheckerFramework to GitHub Actions CI</li>
+  <li>Add OpenJ9 1.8 CI job at GitHub Actions</li>
+  <li>Add markdown to .gitattributes</li>
+  <li>Set diff pattern for CSS files in .gitattributes</li>
+  <li>Remove files that change often from Travis cache, remove broken files
+automatically</li>
+  <li>Make buildSrc jars reproducible for better caching</li>
+  <li>Refactor <code class="highlighter-rouge">SqlToRelTestBase</code> to allow custom <code class="highlighter-rouge">Context</code> in tests</li>
+  <li>Exclude root project from javadoc aggregate tasks</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4301">CALCITE-4301</a>]
+Unit test <code class="highlighter-rouge">testCollectionsInnerValues()</code> for Cassandra adapter is wrong
+(Alessandro Solimando)</li>
+  <li>Refactor <code class="highlighter-rouge">ResultSetEnumerable</code> to avoid nested lambdas</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4314">CALCITE-4314</a>]
+Enable ErrorProne checking and resolve identified problems</li>
+</ul>
+
+<h4 id="dependency-version-upgrade">Dependency version upgrade</h4>
+<ul>
+  <li>Bump commons-codec from 1.12 to 1.13 (Jaromir Hamala)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4528">CALCITE-4528</a>]
+Upgrade Avatica version to 1.18.0</li>
+  <li>Bump Gradle 6.8.1 -&gt; 6.8.3</li>
+  <li>Update dependency declarations: adjust api vs implementation, remove unused
+ones</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4506">CALCITE-4506</a>]
+Upgrade SQLLine to 1.11.0</li>
+  <li>Bump checkerframework 3.9.1 -&gt; 3.10.0, errorprone 2.4.0 -&gt; 2.5.1</li>
+  <li>Bump checkerframework 3.7 -&gt; 3.9.1</li>
+  <li>Bump Gradle 6.7 -&gt; 6.8.1</li>
+  <li>Bump AppVeyor image from 2017 to 2019 to test with newer Java: 1.8u162 -&gt;
+1.8u221, 13 -&gt; 15</li>
+  <li>Bump de.thetaphi.forbiddenapis from 2.7 to 3.1</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4343">CALCITE-4343</a>]
+Bump Jedis from 2.9.0 to 3.3.0 (Tugdual Grall)</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4339">CALCITE-4339</a>]
+Update Gradle: 6.6 -&gt; 6.7</li>
+  <li>Use jackson-bom to specify Jackson versions
+    <h4 id="web-site-and-documentation">Web site and documentation</h4>
+  </li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4625">CALCITE-4625</a>]
+Update version in NOTICE, README, and howto.md</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4601">CALCITE-4601</a>]
+Invalid Javadoc URL in <code class="highlighter-rouge">SchemaFactory</code> of CSV adapter</li>
+  <li>Update release instructions</li>
+</ul>
 
 <h2 id="v1-26-0"><a href="https://github.com/apache/calcite/releases/tag/calcite-1.26.0">1.26.0</a> / 2020-10-06</h2>
 
@@ -104,13 +521,13 @@ using JDK/OpenJDK versions 8 to 15;
 Guava versions 19.0 to 29.0-jre;
 other software versions as specified in gradle.properties.</p>
 
-<h4 id="breaking-changes">Breaking Changes</h4>
+<h4 id="breaking-changes-1">Breaking Changes</h4>
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-2082">CALCITE-2082</a>]
 Do not store types or type factories inside operators</li>
 </ul>
 
-<h4 id="new-features">New features</h4>
+<h4 id="new-features-1">New features</h4>
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4173">CALCITE-4173</a>]
 Add internal <code class="highlighter-rouge">SEARCH</code> operator and <code class="highlighter-rouge">Sarg</code> literal that represents a set of values or ranges</li>
@@ -130,7 +547,7 @@ Provide utility to visualize <code class="highlighter-rouge">RelNode</code> plan
 Support <code class="highlighter-rouge">LEFT JOIN</code> in <code class="highlighter-rouge">EnumerableMergeJoin</code></li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements">Bug fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-1">Bug fixes, API changes and minor enhancements</h4>
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-2833">CALCITE-2833</a>]
 In JDBC adapter for Hive and BigQuery, implement <code class="highlighter-rouge">Values</code> by generating <code class="highlighter-rouge">SELECT</code> without <code class="highlighter-rouge">FROM</code> (Stuti Gupta)</li>
@@ -279,7 +696,7 @@ Remove dependency between checkstyle and compilation tasks</li>
   <li>Update <code class="highlighter-rouge">org.nosphere.apache.rat</code> plugin from 0.5.2 to 0.7.0, and print files with unapproved licenses to console</li>
 </ul>
 
-<h4 id="web-site-and-documentation">Web site and documentation</h4>
+<h4 id="web-site-and-documentation-1">Web site and documentation</h4>
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3841">CALCITE-3841</a>]
 Change downloads page to use downloads.apache.org</li>
@@ -306,7 +723,7 @@ using Oracle JDK 8, 9, 10, 11, 12, 13, 14 and OpenJDK 8, 9, 10, 11, 12, 13, 14;
 Guava versions 19.0 to 28.2-jre; other software versions as specified in
 gradle.properties.</p>
 
-<h4 id="breaking-changes-1">Breaking Changes</h4>
+<h4 id="breaking-changes-2">Breaking Changes</h4>
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-2569">CALCITE-2569</a>]
 UDFs that are table functions must implement <code class="highlighter-rouge">SqlTableFunction</code> and have <code class="highlighter-rouge">CURSOR</code> as their return type</li>
@@ -318,7 +735,7 @@ Dialect constants in <code class="highlighter-rouge">SqlDialect</code> can cause
 Remove dependency of File adapter on Example CSV adapter</li>
 </ul>
 
-<h4 id="new-features-1">New features</h4>
+<h4 id="new-features-2">New features</h4>
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-2160">CALCITE-2160</a>]
 Spatial: Add functions <code class="highlighter-rouge">ST_MakeGrid</code> and <code class="highlighter-rouge">ST_MakeGridPoints</code></li>
@@ -330,7 +747,7 @@ Add a rule, <code class="highlighter-rouge">ProjectAggregateMergeRule</code>, to
 Allow character literals as column aliases, if <code class="highlighter-rouge">SqlConformance.allowCharLiteralAlias()</code></li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-1">Bug fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-2">Bug fixes, API changes and minor enhancements</h4>
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4139">CALCITE-4139</a>]
 Prevent NPE in <code class="highlighter-rouge">ListTransientTable</code></li>
@@ -402,7 +819,7 @@ using Oracle JDK 8, 9, 10, 11, 12, 13, 14 and OpenJDK 8, 9, 10, 11, 12, 13, 14;
 Guava versions 19.0 to 28.2-jre; other software versions as specified in
 gradle.properties.</p>
 
-<h4 id="breaking-changes-2">Breaking Changes</h4>
+<h4 id="breaking-changes-3">Breaking Changes</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4032">CALCITE-4032</a>]
@@ -414,7 +831,7 @@ Disallow cross convention matching and <code class="highlighter-rouge">PhysicalN
 Change <code class="highlighter-rouge">RelNode#recomputeDigest()</code> return type from <code class="highlighter-rouge">String</code> to <code class="highlighter-rouge">void</code></li>
 </ul>
 
-<h4 id="new-features-2">New features</h4>
+<h4 id="new-features-3">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4000">CALCITE-4000</a>]
@@ -433,7 +850,7 @@ In Babel, allow <code class="highlighter-rouge">CAST(integer AS DATE)</code> eve
 <code class="highlighter-rouge">Hoist</code>, a utility to replace literals in a SQL string with placeholders</li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-2">Bug fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-3">Bug fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4073">CALCITE-4073</a>]
@@ -583,7 +1000,7 @@ Add automatically link to GitHub PR and ‘pull-request-available’ label to is
 Restructure tests for materialized views (Jin Xing)</li>
 </ul>
 
-<h4 id="web-site-and-documentation-1">Web site and documentation</h4>
+<h4 id="web-site-and-documentation-2">Web site and documentation</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3950">CALCITE-3950</a>]
@@ -621,7 +1038,7 @@ using Oracle JDK 8, 9, 10, 11, 12, 13, 14 and OpenJDK 8, 9, 10, 11, 12, 13, 14;
 Guava versions 19.0 to 28.2-jre; other software versions as specified in
 gradle.properties.</p>
 
-<h4 id="breaking-changes-3">Breaking Changes</h4>
+<h4 id="breaking-changes-4">Breaking Changes</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3877">CALCITE-3877</a>]
@@ -638,7 +1055,7 @@ operators</li>
 Split <code class="highlighter-rouge">AbstractMaterializedViewRule</code> into multiple classes (addendum)</li>
 </ul>
 
-<h4 id="new-features-3">New features</h4>
+<h4 id="new-features-4">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3896">CALCITE-3896</a>]
@@ -670,7 +1087,7 @@ Support SQL standard aggregate functions: <code class="highlighter-rouge">EVERY<
 Implement <code class="highlighter-rouge">STRCMP</code> function</li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-3">Bug fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-4">Bug fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3984">CALCITE-3984</a>]
@@ -912,7 +1329,7 @@ Make junit test classes and methods non-public where possible</li>
   <li>The release tag should be ‘calcite-N.N’ not ‘vN.N’</li>
 </ul>
 
-<h4 id="web-site-and-documentation-2">Web site and documentation</h4>
+<h4 id="web-site-and-documentation-3">Web site and documentation</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3958">CALCITE-3958</a>]
@@ -968,7 +1385,7 @@ using Oracle JDK 8, 9, 10, 11, 12, 13 and OpenJDK 8, 9, 10, 11, 12, 13;
 Guava versions 19.0 to 27.1-jre; Apache Flink 1.10.0;
 other software versions as specified in gradle.properties.</p>
 
-<h4 id="breaking-changes-4">Breaking Changes</h4>
+<h4 id="breaking-changes-5">Breaking Changes</h4>
 
 <ul>
   <li>Constructors for <code class="highlighter-rouge">Project</code>, <code class="highlighter-rouge">TableScan</code>, <code class="highlighter-rouge">Calc</code>, <code class="highlighter-rouge">Aggregate</code> and <code class="highlighter-rouge">Join</code> introduce new parameter named <code class="highlighter-rouge">hints</code> (<a href="https://issues.apache.org/jira/browse/CALCITE-482">CALCITE-482</a>)</li>
@@ -979,7 +1396,7 @@ other software versions as specified in gradle.properties.</p>
   <li><code class="highlighter-rouge">RelBuilder.scan</code> and sql-to-rel conversion always invoke <code class="highlighter-rouge">RelOptTable.toRel</code> now, so there may be some plan changes for the <code class="highlighter-rouge">TableScan</code> node if your <code class="highlighter-rouge">RelOptTable.toRel</code> returns a physical rel before</li>
 </ul>
 
-<h4 id="new-features-4">New features</h4>
+<h4 id="new-features-5">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3771">CALCITE-3771</a>] <code class="highlighter-rouge">TRIM</code> Support for HIVE/SPARK Dialect (Dhirenda Gautam)</li>
@@ -1015,7 +1432,7 @@ other software versions as specified in gradle.properties.</p>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3112">CALCITE-3112</a>] Support <code class="highlighter-rouge">Window</code> in <code class="highlighter-rouge">RelToSqlConverter</code> (Wenhui Tang)</li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-4">Bug fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-5">Bug fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>Following CALCITE-3769: Add BindableTableScanRule into the default ruleset</li>
@@ -1287,7 +1704,7 @@ generates the <code class="highlighter-rouge">ROW</code> keyword only if the dia
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3421">CALCITE-3421</a>] Reuse <code class="highlighter-rouge">RelMetadataQuery</code> in test suites</li>
 </ul>
 
-<h4 id="dependency-version-upgrade">Dependency version upgrade</h4>
+<h4 id="dependency-version-upgrade-1">Dependency version upgrade</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3818">CALCITE-3818</a>] Upgrade Avatica version to 1.16.0</li>
@@ -1301,7 +1718,7 @@ generates the <code class="highlighter-rouge">ROW</code> keyword only if the dia
   <li>Bump jackson-databind from 2.9.9.3 to 2.9.10.1</li>
 </ul>
 
-<h4 id="web-site-and-documentation-3">Web site and documentation</h4>
+<h4 id="web-site-and-documentation-4">Web site and documentation</h4>
 
 <ul>
   <li>Site: Update IntelliJ instructions with suggested and problematic versions</li>
@@ -1352,7 +1769,7 @@ Guava versions 19.0 to 27.1-jre;
 Apache Druid version 0.14.0-incubating;
 other software versions as specified in <code class="highlighter-rouge">pom.xml</code>.</p>
 
-<h4 id="breaking-changes-5">Breaking Changes</h4>
+<h4 id="breaking-changes-6">Breaking Changes</h4>
 
 <ul>
   <li>Core parser config.fmpp#dataTypeParserMethods should return <code class="highlighter-rouge">SqlTypeNameSpec</code>
@@ -1364,7 +1781,7 @@ exception. The exception can easily disappear by changing the name of the
 <code class="highlighter-rouge">Convention</code> which causes the problem.</li>
 </ul>
 
-<h4 id="new-features-5">New features</h4>
+<h4 id="new-features-6">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-2973">CALCITE-2973</a>]
@@ -1425,7 +1842,7 @@ Implement <code class="highlighter-rouge">DAYNAME</code>，<code class="highligh
 Parse and process PostgreSQL posix regular expressions</li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-5">Bug-fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-6">Bug-fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3321">CALCITE-3321</a>]
@@ -1664,7 +2081,7 @@ Mongo adapter. Replace fongo with Mongo Java Server for tests</li>
 Add test for invalid literal of SQL parser</li>
 </ul>
 
-<h4 id="web-site-and-documentation-4">Web site and documentation</h4>
+<h4 id="web-site-and-documentation-5">Web site and documentation</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3303">CALCITE-3303</a>]
@@ -1701,7 +2118,7 @@ Guava versions 19.0 to 27.1-jre;
 Apache Druid version 0.14.0-incubating;
 other software versions as specified in <code class="highlighter-rouge">pom.xml</code>.</p>
 
-<h4 id="breaking-changes-6">Breaking Changes</h4>
+<h4 id="breaking-changes-7">Breaking Changes</h4>
 
 <ul>
   <li>Make <code class="highlighter-rouge">EnumerableMergeJoin</code> extend <code class="highlighter-rouge">Join</code> instead of <code class="highlighter-rouge">EquiJoin</code></li>
@@ -1719,7 +2136,7 @@ Calcite table names will reflect index names in Elasticsearch (as opposed to typ
 We recommend use of Elasticsearch 6.2 (or later) with Calcite.</li>
 </ul>
 
-<h4 id="new-features-6">New features</h4>
+<h4 id="new-features-7">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-2822">CALCITE-2822</a>] Allow <code class="highlighter-rouge">MultiJoin</code> rules with any project/filter (Siddharth Teotia)</li>
@@ -1751,7 +2168,7 @@ We recommend use of Elasticsearch 6.2 (or later) with Calcite.</li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-2908">CALCITE-2908</a>] Implement SQL <code class="highlighter-rouge">LAST_DAY</code> function (Chunwei Lei)</li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-6">Bug-fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-7">Bug-fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3119">CALCITE-3119</a>] Deprecate Linq4j <code class="highlighter-rouge">CorrelateJoinType</code> (in favor of <code class="highlighter-rouge">JoinType</code>)</li>
@@ -1865,7 +2282,7 @@ We recommend use of Elasticsearch 6.2 (or later) with Calcite.</li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-2961">CALCITE-2961</a>] Enable Travis to test against JDK 13</li>
 </ul>
 
-<h4 id="web-site-and-documentation-5">Web site and documentation</h4>
+<h4 id="web-site-and-documentation-6">Web site and documentation</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-2952">CALCITE-2952</a>] Document JDK 12 support</li>
@@ -1898,7 +2315,7 @@ Guava versions 19.0 to 27.1-jre;
 Druid version 0.11.0;
 other software versions as specified in <code class="highlighter-rouge">pom.xml</code>.</p>
 
-<h4 id="new-features-7">New features</h4>
+<h4 id="new-features-8">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1912">CALCITE-1912</a>]
@@ -1917,7 +2334,7 @@ Add bitwise aggregate functions <code class="highlighter-rouge">BIT_AND</code>, 
 Allow alias in <code class="highlighter-rouge">HAVING</code> clause for aggregate functions</li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-7">Bug-fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-8">Bug-fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1513">CALCITE-1513</a>]
@@ -2113,7 +2530,7 @@ In Mongo adapter, compare Bson (not string) query representation in tests</li>
 <code class="highlighter-rouge">cassandra-all</code></li>
 </ul>
 
-<h4 id="web-site-and-documentation-6">Web site and documentation</h4>
+<h4 id="web-site-and-documentation-7">Web site and documentation</h4>
 
 <ul>
   <li>Switch from <code class="highlighter-rouge">maven:alpine</code> to <code class="highlighter-rouge">maven</code> image for generating javadoc when
@@ -2160,7 +2577,7 @@ Guava versions 19.0 to 27.0.1-jre;
 Druid version 0.11.0;
 other software versions as specified in <code class="highlighter-rouge">pom.xml</code>.</p>
 
-<h4 id="new-features-8">New features</h4>
+<h4 id="new-features-9">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-2662">CALCITE-2662</a>]
@@ -2260,7 +2677,7 @@ Geode adapter wrongly quotes <code class="highlighter-rouge">BOOLEAN</code> valu
   </li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-8">Bug-fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-9">Bug-fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-2670">CALCITE-2670</a>]
@@ -2616,7 +3033,7 @@ Cassandra unit test fails to parse JDK version string (Andrei Sereda)</li>
 Use embedded Cassandra for tests</li>
 </ul>
 
-<h4 id="web-site-and-documentation-7">Web site and documentation</h4>
+<h4 id="web-site-and-documentation-8">Web site and documentation</h4>
 
 <ul>
   <li>Add geospatial category to DOAP file</li>
@@ -2655,7 +3072,7 @@ that accepts all SQL dialects.
 Allowed <a href="https://issues.apache.org/jira/browse/CALCITE-2261">JDK 8 language level</a> for core module.
 Calcite has been upgraded to use <a href="https://issues.apache.org/jira/browse/CALCITE-2365">Avatica 1.12.0</a></p>
 
-<h4 id="new-features-9">New features</h4>
+<h4 id="new-features-10">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-873">CALCITE-873</a>]
@@ -2676,7 +3093,7 @@ In Babel parser, allow Hive-style syntax <code class="highlighter-rouge">LEFT SE
 A union of <code class="highlighter-rouge">CHAR</code> columns of different lengths can now (based on a conformance setting) yield a <code class="highlighter-rouge">VARCHAR</code> column (Hequn Cheng)</li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-9">Bug-fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-10">Bug-fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-531">CALCITE-531</a>]
@@ -2890,7 +3307,7 @@ and the JDBC adapter now <a href="https://issues.apache.org/jira/browse/CALCITE-
 support for <a href="https://issues.apache.org/jira/browse/CALCITE-2191">Guava versions earlier than 19</a>.</li>
 </ul>
 
-<h4 id="new-features-10">New features</h4>
+<h4 id="new-features-11">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1265">CALCITE-1265</a>]
@@ -2905,7 +3322,7 @@ In JDBC adapter, add SQL dialect for Jethro Data (Jonathan Doron)</li>
 Use Druid Expressions capabilities to improve the amount of work that can be pushed to Druid</li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-10">Bug-fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-11">Bug-fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1054">CALCITE-1054</a>]
@@ -3050,7 +3467,7 @@ Enforce Java version via maven-enforcer-plugin (Kevin Risden)</li>
 Geode integration tests are failing</li>
 </ul>
 
-<h4 id="web-site-and-documentation-8">Web site and documentation</h4>
+<h4 id="web-site-and-documentation-9">Web site and documentation</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-2024">CALCITE-2024</a>]
@@ -3098,7 +3515,7 @@ and the Cassandra adapter’s dependencies.)</p>
 <p>This is the <a href="https://issues.apache.org/jira/browse/CALCITE-2027">last
 release that will support JDK 1.7</a>.</p>
 
-<h4 id="new-features-11">New features</h4>
+<h4 id="new-features-12">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1616">CALCITE-1616</a>]
@@ -3129,7 +3546,7 @@ with dialect methods, and introduce a configurable <code class="highlighter-roug
 (Christian Beikov)</li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-11">Bug-fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-12">Bug-fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-2078">CALCITE-2078</a>]
@@ -3232,7 +3649,7 @@ aggregate functions (Pawel Ruchaj)</li>
 linq4j: support List and Map literals</li>
 </ul>
 
-<h4 id="web-site-and-documentation-9">Web site and documentation</h4>
+<h4 id="web-site-and-documentation-10">Web site and documentation</h4>
 
 <ul>
   <li>Update PMC Chair</li>
@@ -3275,7 +3692,7 @@ Guava versions 14.0 to 21.0;
 Druid version 0.11.0;
 other software versions as specified in <code class="highlighter-rouge">pom.xml</code>.</p>
 
-<h4 id="new-features-12">New features</h4>
+<h4 id="new-features-13">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1968">CALCITE-1968</a>]  OpenGIS Simple Feature Access SQL 1.2.1: add <code class="highlighter-rouge">GEOMETRY</code> data type and first 35 functions
@@ -3297,7 +3714,7 @@ which ones are implemented), and add “countries” data set for testing.</li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1709">CALCITE-1709</a>]  Support mixing table columns with extended columns in DML (Rajeshbabu Chintaguntla)</li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-12">Bug-fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-13">Bug-fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1931">CALCITE-1931</a>]
@@ -3355,7 +3772,7 @@ types: <code class="highlighter-rouge">RANK</code>, <code class="highlighter-rou
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1856">CALCITE-1856</a>]  Add option <code class="highlighter-rouge">StructKind.PEEK_FIELDS_NO_EXPAND</code>, similar to <code class="highlighter-rouge">PEEK_FIELDS</code> but is not expanded in <code class="highlighter-rouge">"SELECT *"</code> (Shuyi Chen)</li>
 </ul>
 
-<h4 id="web-site-and-documentation-10">Web site and documentation</h4>
+<h4 id="web-site-and-documentation-11">Web site and documentation</h4>
 
 <ul>
   <li>Add committer Chris Baynes</li>
@@ -3400,7 +3817,7 @@ Guava versions 14.0 to 21.0;
 Druid version 0.10.0;
 other software versions as specified in <code class="highlighter-rouge">pom.xml</code>.</p>
 
-<h4 id="new-features-13">New features</h4>
+<h4 id="new-features-14">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1570">CALCITE-1570</a>]
@@ -3478,7 +3895,7 @@ Upgrade Druid to 0.9.2 (Nishant Bangarwa)</li>
 Support extended columns in DML (Kevin Liew)</li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-13">Bug-fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-14">Bug-fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1855">CALCITE-1855</a>]
@@ -3565,7 +3982,7 @@ Match <code class="highlighter-rouge">DruidProjectFilterTransposeRule</code> aga
 Do not push group by on druid metrics fields (Slim Bouguerra)</li>
 </ul>
 
-<h4 id="web-site-and-documentation-11">Web site and documentation</h4>
+<h4 id="web-site-and-documentation-12">Web site and documentation</h4>
 
 <ul>
   <li>Michael Mior joins PMC</li>
@@ -3599,7 +4016,7 @@ Guava versions 14.0 to 21.0;
 Druid version 0.9.1.1;
 other software versions as specified in <code class="highlighter-rouge">pom.xml</code>.</p>
 
-<h3 id="new-features-14">New features</h3>
+<h3 id="new-features-15">New features</h3>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1666">CALCITE-1666</a>]
@@ -3689,7 +4106,7 @@ Add numeric scalar functions (Laurent Goujon)</li>
 JDK9</li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-14">Bug-fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-15">Bug-fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1716">CALCITE-1716</a>]
@@ -3838,7 +4255,7 @@ Correlated scalar sub-query with multiple aggregates gives <code class="highligh
 (Kurt Young)</li>
 </ul>
 
-<h4 id="web-site-and-documentation-12">Web site and documentation</h4>
+<h4 id="web-site-and-documentation-13">Web site and documentation</h4>
 
 <ul>
   <li>Maryann Xue joins PMC</li>
@@ -3908,7 +4325,7 @@ Guava versions 14.0 to 19.0;
 Druid version 0.9.1.1;
 other software versions as specified in <code class="highlighter-rouge">pom.xml</code>.</p>
 
-<h4 id="new-features-15">New features</h4>
+<h4 id="new-features-16">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1551">CALCITE-1551</a>]
@@ -3986,7 +4403,7 @@ Implement JDBC functions: <code class="highlighter-rouge">LTRIM</code>, <code cl
 Add <code class="highlighter-rouge">AS JSON</code> as output option for <code class="highlighter-rouge">EXPLAIN</code></li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-15">Bug-fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-16">Bug-fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1559">CALCITE-1559</a>]
@@ -4076,7 +4493,7 @@ Druid type is called <code class="highlighter-rouge">FLOAT</code>, not <code cla
 Add sub-query support for RelStructuredTypeFlattener</li>
 </ul>
 
-<h4 id="web-site-and-documentation-13">Web site and documentation</h4>
+<h4 id="web-site-and-documentation-14">Web site and documentation</h4>
 
 <ul>
   <li>Change PMC chair</li>
@@ -4105,7 +4522,7 @@ other software versions as specified in <code class="highlighter-rouge">pom.xml<
 Support operator <code class="highlighter-rouge">!=</code> as an alternative to <code class="highlighter-rouge">&lt;&gt;</code></li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-16">Bug-fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-17">Bug-fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1378">CALCITE-1378</a>]
@@ -4136,7 +4553,7 @@ Druid Filter translation incorrect if input reference is in RHS of comparison</l
 Allow Calcite JDBC Driver minor version to be greater than 9</li>
 </ul>
 
-<h4 id="web-site-and-documentation-14">Web site and documentation</h4>
+<h4 id="web-site-and-documentation-15">Web site and documentation</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1393">CALCITE-1393</a>]
@@ -4173,7 +4590,7 @@ using Oracle JDK 1.7, 1.8;
 Guava versions 14.0 to 19.0;
 other software versions as specified in <code class="highlighter-rouge">pom.xml</code>.</p>
 
-<h4 id="new-features-16">New features</h4>
+<h4 id="new-features-17">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1208">CALCITE-1208</a>]
@@ -4220,7 +4637,7 @@ Convert predicates on <code class="highlighter-rouge">EXTRACT</code> function ca
 Introduce <code class="highlighter-rouge">UnionPullUpConstantsRule</code></li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-17">Bug-fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-18">Bug-fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-30">CALCITE-30</a>]
@@ -4289,7 +4706,7 @@ In <code class="highlighter-rouge">SqlKind</code>, add <code class="highlighter-
 Calcite generate wrong field names in JDBC adapter</li>
 </ul>
 
-<h4 id="web-site-and-documentation-15">Web site and documentation</h4>
+<h4 id="web-site-and-documentation-16">Web site and documentation</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1229">CALCITE-1229</a>]
@@ -4330,7 +4747,7 @@ using Oracle JDK 1.7, 1.8;
 Guava versions 14.0 to 19.0;
 other software versions as specified in <code class="highlighter-rouge">pom.xml</code>.</p>
 
-<h4 id="new-features-17">New features</h4>
+<h4 id="new-features-18">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1177">CALCITE-1177</a>]
@@ -4387,7 +4804,7 @@ Add <code class="highlighter-rouge">ProjectRemoveRule</code> to pre-processing p
 substitution</li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-18">Bug-fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-19">Bug-fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1281">CALCITE-1281</a>]
@@ -4466,7 +4883,7 @@ Allow <code class="highlighter-rouge">SqlSetOperator</code> to be overridden, as
 Allow apache-rat to be run outside of release process</li>
 </ul>
 
-<h4 id="web-site-and-documentation-16">Web site and documentation</h4>
+<h4 id="web-site-and-documentation-17">Web site and documentation</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1273">CALCITE-1273</a>]
@@ -4527,7 +4944,7 @@ using Oracle JDK 1.7, 1.8;
 Guava versions 12.0.1 to 19.0;
 other software versions as specified in <code class="highlighter-rouge">pom.xml</code>.</p>
 
-<h4 id="new-features-18">New features</h4>
+<h4 id="new-features-19">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1124">CALCITE-1124</a>]
@@ -4571,7 +4988,7 @@ In <code class="highlighter-rouge">RelBuilder</code>, simplify predicates, and o
 Not valid to convert <code class="highlighter-rouge">Aggregate</code> on empty to empty if its <code class="highlighter-rouge">GROUP BY</code> key is empty</li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-19">Bug-fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-20">Bug-fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1147">CALCITE-1147</a>]
@@ -4638,7 +5055,7 @@ Upgrade Jackson</li>
 Clean up maven POM files</li>
 </ul>
 
-<h4 id="web-site-and-documentation-17">Web site and documentation</h4>
+<h4 id="web-site-and-documentation-18">Web site and documentation</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1112">CALCITE-1112</a>]
@@ -4694,7 +5111,7 @@ on Linux, Mac OS X, Microsoft Windows;
 using Oracle JDK 1.7, 1.8;
 other software versions as specified in <code class="highlighter-rouge">pom.xml</code>.</p>
 
-<h4 id="new-features-19">New features</h4>
+<h4 id="new-features-20">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-816">CALCITE-816</a>]
@@ -4799,7 +5216,7 @@ Composite <code class="highlighter-rouge">EnumerableSort</code> with <code class
 Add description to <code class="highlighter-rouge">SortProjectTransposeRule</code>’s constructor</li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-20">Bug-fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-21">Bug-fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1060">CALCITE-1060</a>]
@@ -4881,7 +5298,7 @@ Exception while validating <code class="highlighter-rouge">DELETE</code> (Yuri A
 Rename <code class="highlighter-rouge">timezone</code> connection property to <code class="highlighter-rouge">timeZone</code></li>
 </ul>
 
-<h4 id="web-site-and-documentation-18">Web site and documentation</h4>
+<h4 id="web-site-and-documentation-19">Web site and documentation</h4>
 
 <ul>
   <li>Avatica
@@ -4937,7 +5354,7 @@ multi-sets.  You can follow this example to implement your own query
 language, and immediately taking advantage of Calcite’s back-ends and
 optimizer rules. It’s all just algebra, after all!</p>
 
-<h4 id="new-features-20">New features</h4>
+<h4 id="new-features-21">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-911">CALCITE-911</a>]
@@ -5100,7 +5517,7 @@ Add API to execute queries expressed as <code class="highlighter-rouge">RelNode<
   <li>In RelBuilder, build expressions by table alias</li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-21">Bug-fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-22">Bug-fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-948">CALCITE-948</a>]
@@ -5188,7 +5605,7 @@ this release includes improvements to lattices and materialized views,
 and adds a builder API so that you can easily create relational
 algebra expressions.</p>
 
-<h4 id="new-features-21">New features</h4>
+<h4 id="new-features-22">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-748">CALCITE-748</a>]
@@ -5224,7 +5641,7 @@ exclusions otherwise</li>
     Web site</li>
 </ul>
 
-<h4 id="bug-fixes-api-changes-and-minor-enhancements-22">Bug-fixes, API changes and minor enhancements</h4>
+<h4 id="bug-fixes-api-changes-and-minor-enhancements-23">Bug-fixes, API changes and minor enhancements</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-741">CALCITE-741</a>]
@@ -5375,7 +5792,7 @@ and
 <a href="https://issues.apache.org/jira/browse/CALCITE-704">filtered aggregate functions</a>
 and various improvements to Avatica.</p>
 
-<h4 id="new-features-22">New features</h4>
+<h4 id="new-features-23">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-505">CALCITE-505</a>]
@@ -5504,7 +5921,7 @@ distribution among relational expressions.</p>
 and [<a href="https://issues.apache.org/jira/browse/CALCITE-307">CALCITE-307</a>]
 improve implicit and explicit conversions in SQL.</p>
 
-<h4 id="new-features-23">New features</h4>
+<h4 id="new-features-24">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-366">CALCITE-366</a>]
@@ -5647,7 +6064,7 @@ later.</p>
 <code class="highlighter-rouge">RelNode</code>. We strongly suggest that you use these rather than
 calling constructors directly.</p>
 
-<h4 id="new-features-24">New features</h4>
+<h4 id="new-features-25">New features</h4>
 
 <ul>
   <li>SQL
@@ -5773,7 +6190,7 @@ improvements to the algorithms that implement the relational algebra,
 including an interpreter that can evaluate queries without compilation;
 and fixes about 30 bugs.</p>
 
-<h4 id="new-features-25">New features</h4>
+<h4 id="new-features-26">New features</h4>
 
 <ul>
   <li>SQL
@@ -6035,7 +6452,7 @@ packages and lots of classes, in what we expect to call 1.0. If you
 have an existing application, it’s worth upgrading to this first,
 before you move on to 1.0.</p>
 
-<h4 id="new-features-26">New features</h4>
+<h4 id="new-features-27">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-436">CALCITE-436</a>]
@@ -6086,7 +6503,7 @@ Push predicates through <code class="highlighter-rouge">SemiJoinRel</code></li>
 
 <p>This is the first release as Calcite. (The project was previously called Optiq.)</p>
 
-<h4 id="new-features-27">New features</h4>
+<h4 id="new-features-28">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-430">CALCITE-430</a>]
@@ -6243,7 +6660,7 @@ most recently.</li>
 
 <p>This is the first release under the Apache incubator process.</p>
 
-<h4 id="new-features-28">New features</h4>
+<h4 id="new-features-29">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-371">CALCITE-371</a>]
@@ -6375,7 +6792,7 @@ Add unit test for <code class="highlighter-rouge">SqlRun</code></li>
 
 <h2 id="v0-8"><a href="https://github.com/apache/calcite/releases/tag/optiq-parent-0.8">0.8</a> / 2014-06-27</h2>
 
-<h4 id="new-features-29">New features</h4>
+<h4 id="new-features-30">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-310">CALCITE-310</a>]
@@ -6456,7 +6873,7 @@ Window functions throw exception without <code class="highlighter-rouge">ORDER B
 
 <h2 id="v0-7"><a href="https://github.com/apache/calcite/releases/tag/optiq-parent-0.7">0.7</a> / 2014-05-13</h2>
 
-<h4 id="new-features-30">New features</h4>
+<h4 id="new-features-31">New features</h4>
 
 <ul>
   <li>Implement table functions.</li>
@@ -6541,7 +6958,7 @@ Suspicious map.get in VolcanoPlanner.reregister</li>
 
 <h2 id="v0-6"><a href="https://github.com/apache/calcite/releases/tag/optiq-parent-0.6">0.6</a> / 2014-04-11</h2>
 
-<h4 id="new-features-31">New features</h4>
+<h4 id="new-features-32">New features</h4>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-214">CALCITE-214</a>]
@@ -6666,7 +7083,7 @@ and obsolete our copy of the resource framework.</li>
 
 <h2 id="v0-5"><a href="https://github.com/apache/calcite/releases/tag/optiq-parent-0.5">0.5</a> / 2014-03-14</h2>
 
-<h4 id="new-features-32">New features</h4>
+<h4 id="new-features-33">New features</h4>
 
 <ul>
   <li>Allow <code class="highlighter-rouge">quoting</code>, <code class="highlighter-rouge">quotedCasing</code>, <code class="highlighter-rouge">unquotedCasing</code>, and <code class="highlighter-rouge">caseSensitive</code>

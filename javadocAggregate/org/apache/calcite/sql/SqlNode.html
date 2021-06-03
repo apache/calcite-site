@@ -129,7 +129,7 @@ implements <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Cloneabl
 </thead>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><code>static <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>[]</code></td>
+<td class="colFirst"><code>static @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#EMPTY_ARRAY">EMPTY_ARRAY</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -201,6 +201,16 @@ implements <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Cloneabl
 </tr>
 <tr class="rowColor" id="i5">
 <td class="colFirst"><code>static boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equalDeep(org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode,org.apache.calcite.util.Litmus)">equalDeep</a></span>&#8203;(@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node1,
+@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node2,
+<a href="../util/Litmus.html" title="interface in org.apache.calcite.util">Litmus</a>&nbsp;litmus)</code></th>
+<td class="colLast">
+<div class="block">Returns whether two nodes are equal (using
+ <a href="#equalsDeep(org.apache.calcite.sql.SqlNode,org.apache.calcite.util.Litmus)"><code>equalsDeep(SqlNode, Litmus)</code></a>) or are both null.</div>
+</td>
+</tr>
+<tr class="altColor" id="i6">
+<td class="colFirst"><code>static boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equalDeep(java.util.List,java.util.List,org.apache.calcite.util.Litmus)">equalDeep</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;operands0,
 <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;operands1,
 <a href="../util/Litmus.html" title="interface in org.apache.calcite.util">Litmus</a>&nbsp;litmus)</code></th>
@@ -208,19 +218,9 @@ implements <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Cloneabl
 <div class="block">Returns whether two lists of operands are equal.</div>
 </td>
 </tr>
-<tr class="altColor" id="i6">
-<td class="colFirst"><code>static boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equalDeep(org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode,org.apache.calcite.util.Litmus)">equalDeep</a></span>&#8203;(<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node1,
-<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node2,
-<a href="../util/Litmus.html" title="interface in org.apache.calcite.util">Litmus</a>&nbsp;litmus)</code></th>
-<td class="colLast">
-<div class="block">Returns whether two nodes are equal (using
- <a href="#equalsDeep(org.apache.calcite.sql.SqlNode,org.apache.calcite.util.Litmus)"><code>equalsDeep(SqlNode, Litmus)</code></a>) or are both null.</div>
-</td>
-</tr>
 <tr class="rowColor" id="i7">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equalsDeep(org.apache.calcite.sql.SqlNode,boolean)">equalsDeep</a></span>&#8203;(<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equalsDeep(org.apache.calcite.sql.SqlNode,boolean)">equalsDeep</a></span>&#8203;(@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
 boolean&nbsp;fail)</code></th>
 <td class="colLast">
 <div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
@@ -228,7 +228,7 @@ boolean&nbsp;fail)</code></th>
 </tr>
 <tr class="altColor" id="i8">
 <td class="colFirst"><code>abstract boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equalsDeep(org.apache.calcite.sql.SqlNode,org.apache.calcite.util.Litmus)">equalsDeep</a></span>&#8203;(<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equalsDeep(org.apache.calcite.sql.SqlNode,org.apache.calcite.util.Litmus)">equalsDeep</a></span>&#8203;(@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
 <a href="../util/Litmus.html" title="interface in org.apache.calcite.util">Litmus</a>&nbsp;litmus)</code></th>
 <td class="colLast">
 <div class="block">Returns whether this node is structurally equivalent to another node.</div>
@@ -255,7 +255,7 @@ boolean&nbsp;fail)</code></th>
 </tr>
 <tr class="rowColor" id="i11">
 <td class="colFirst"><code><a href="validate/SqlMonotonicity.html" title="enum in org.apache.calcite.sql.validate">SqlMonotonicity</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMonotonicity(org.apache.calcite.sql.validate.SqlValidatorScope)">getMonotonicity</a></span>&#8203;(<a href="validate/SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMonotonicity(org.apache.calcite.sql.validate.SqlValidatorScope)">getMonotonicity</a></span>&#8203;(@Nullable <a href="validate/SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope)</code></th>
 <td class="colLast">
 <div class="block">Returns whether expression is always ascending, descending or constant.</div>
 </td>
@@ -273,7 +273,7 @@ boolean&nbsp;fail)</code></th>
 </td>
 </tr>
 <tr class="altColor" id="i14">
-<td class="colFirst"><code>static &lt;T extends <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;<br><a href="https://docs.oracle.com/javase/9/docs/api/java/util/stream/Collector.html?is-external=true" title="class or interface in java.util.stream" class="externalLink">Collector</a>&lt;T,&#8203;<a href="https://docs.oracle.com/javase/9/docs/api/java/util/ArrayList.html?is-external=true" title="class or interface in java.util" class="externalLink">ArrayList</a>&lt;T&gt;,&#8203;<a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&gt;</code></td>
+<td class="colFirst"><code>static &lt;T extends <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;<br><a href="https://docs.oracle.com/javase/9/docs/api/java/util/stream/Collector.html?is-external=true" title="class or interface in java.util.stream" class="externalLink">Collector</a>&lt;T,&#8203;<a href="https://docs.oracle.com/javase/9/docs/api/java/util/ArrayList.html?is-external=true" title="class or interface in java.util" class="externalLink">ArrayList</a>&lt;@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;,&#8203;<a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toList()">toList</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns a <code>Collector</code> that accumulates the input elements into a
@@ -281,7 +281,7 @@ boolean&nbsp;fail)</code></th>
 </td>
 </tr>
 <tr class="rowColor" id="i15">
-<td class="colFirst"><code>static &lt;T extends <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;<br><a href="https://docs.oracle.com/javase/9/docs/api/java/util/stream/Collector.html?is-external=true" title="class or interface in java.util.stream" class="externalLink">Collector</a>&lt;T,&#8203;<a href="https://docs.oracle.com/javase/9/docs/api/java/util/ArrayList.html?is-external=true" title="class or interface in java.util" class="externalLink">ArrayList</a>&lt;T&gt;,&#8203;<a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&gt;</code></td>
+<td class="colFirst"><code>static &lt;T extends @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;<br><a href="https://docs.oracle.com/javase/9/docs/api/java/util/stream/Collector.html?is-external=true" title="class or interface in java.util.stream" class="externalLink">Collector</a>&lt;T,&#8203;<a href="https://docs.oracle.com/javase/9/docs/api/java/util/ArrayList.html?is-external=true" title="class or interface in java.util" class="externalLink">ArrayList</a>&lt;@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;,&#8203;<a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toList(org.apache.calcite.sql.parser.SqlParserPos)">toList</a></span>&#8203;(<a href="parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</code></th>
 <td class="colLast">
 <div class="block">Returns a <code>Collector</code> that accumulates the input elements into a
@@ -290,21 +290,21 @@ boolean&nbsp;fail)</code></th>
 </tr>
 <tr class="altColor" id="i16">
 <td class="colFirst"><code><a href="util/SqlString.html" title="class in org.apache.calcite.sql.util">SqlString</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toSqlString(java.util.function.UnaryOperator)">toSqlString</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/function/UnaryOperator.html?is-external=true" title="class or interface in java.util.function" class="externalLink">UnaryOperator</a>&lt;<a href="SqlWriterConfig.html" title="interface in org.apache.calcite.sql">SqlWriterConfig</a>&gt;&nbsp;transform)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toSqlString(org.apache.calcite.sql.SqlDialect)">toSqlString</a></span>&#8203;(@Nullable <a href="SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a>&nbsp;dialect)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor" id="i17">
+<td class="colFirst"><code><a href="util/SqlString.html" title="class in org.apache.calcite.sql.util">SqlString</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toSqlString(org.apache.calcite.sql.SqlDialect,boolean)">toSqlString</a></span>&#8203;(@Nullable <a href="SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a>&nbsp;dialect,
+boolean&nbsp;forceParens)</code></th>
 <td class="colLast">
 <div class="block">Returns the SQL text of the tree of which this <code>SqlNode</code> is
  the root.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i17">
-<td class="colFirst"><code><a href="util/SqlString.html" title="class in org.apache.calcite.sql.util">SqlString</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toSqlString(org.apache.calcite.sql.SqlDialect)">toSqlString</a></span>&#8203;(<a href="SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a>&nbsp;dialect)</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
 <tr class="altColor" id="i18">
 <td class="colFirst"><code><a href="util/SqlString.html" title="class in org.apache.calcite.sql.util">SqlString</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toSqlString(org.apache.calcite.sql.SqlDialect,boolean)">toSqlString</a></span>&#8203;(<a href="SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a>&nbsp;dialect,
-boolean&nbsp;forceParens)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toSqlString(java.util.function.UnaryOperator)">toSqlString</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/function/UnaryOperator.html?is-external=true" title="class or interface in java.util.function" class="externalLink">UnaryOperator</a>&lt;<a href="SqlWriterConfig.html" title="interface in org.apache.calcite.sql">SqlWriterConfig</a>&gt;&nbsp;transform)</code></th>
 <td class="colLast">
 <div class="block">Returns the SQL text of the tree of which this <code>SqlNode</code> is
  the root.</div>
@@ -373,7 +373,7 @@ boolean&nbsp;parentheses)</code></th>
 <li class="blockList">
 <section class="detail">
 <h3><a id="EMPTY_ARRAY">EMPTY_ARRAY</a></h3>
-<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>[]</span>&nbsp;<span class="memberName">EMPTY_ARRAY</span></div>
+<div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType">@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>[]</span>&nbsp;<span class="memberName">EMPTY_ARRAY</span></div>
 </section>
 </li>
 <li class="blockList">
@@ -426,8 +426,7 @@ boolean&nbsp;parentheses)</code></th>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getKind()">getKind</a></h3>
-<div class="memberSignature"><span class="annotations"><a href="https://docs.oracle.com/javase/9/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation" class="externalLink">@Nonnull</a>
-</span><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a></span>&nbsp;<span class="memberName">getKind</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a></span>&nbsp;<span class="memberName">getKind</span>()</div>
 <div class="block">Returns the type of node this is, or
  <a href="SqlKind.html#OTHER"><code>SqlKind.OTHER</code></a> if it's nothing special.</div>
 <dl>
@@ -499,7 +498,7 @@ boolean&nbsp;parentheses)</code></th>
 <li class="blockList">
 <section class="detail">
 <h3><a id="toSqlString(org.apache.calcite.sql.SqlDialect,boolean)">toSqlString</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="util/SqlString.html" title="class in org.apache.calcite.sql.util">SqlString</a></span>&nbsp;<span class="memberName">toSqlString</span>&#8203;(<span class="arguments"><a href="SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a>&nbsp;dialect,
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="util/SqlString.html" title="class in org.apache.calcite.sql.util">SqlString</a></span>&nbsp;<span class="memberName">toSqlString</span>&#8203;(<span class="arguments">@Nullable <a href="SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a>&nbsp;dialect,
 boolean&nbsp;forceParens)</span></div>
 <div class="block">Returns the SQL text of the tree of which this <code>SqlNode</code> is
  the root.
@@ -523,7 +522,7 @@ boolean&nbsp;forceParens)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="toSqlString(org.apache.calcite.sql.SqlDialect)">toSqlString</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="util/SqlString.html" title="class in org.apache.calcite.sql.util">SqlString</a></span>&nbsp;<span class="memberName">toSqlString</span>&#8203;(<span class="arguments"><a href="SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a>&nbsp;dialect)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="util/SqlString.html" title="class in org.apache.calcite.sql.util">SqlString</a></span>&nbsp;<span class="memberName">toSqlString</span>&#8203;(<span class="arguments">@Nullable <a href="SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a>&nbsp;dialect)</span></div>
 </section>
 </li>
 <li class="blockList">
@@ -637,7 +636,7 @@ boolean&nbsp;parentheses)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="equalsDeep(org.apache.calcite.sql.SqlNode,org.apache.calcite.util.Litmus)">equalsDeep</a></h3>
-<div class="memberSignature"><span class="modifiers">public abstract</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">equalsDeep</span>&#8203;(<span class="arguments"><a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
+<div class="memberSignature"><span class="modifiers">public abstract</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">equalsDeep</span>&#8203;(<span class="arguments">@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
 <a href="../util/Litmus.html" title="interface in org.apache.calcite.util">Litmus</a>&nbsp;litmus)</span></div>
 <div class="block">Returns whether this node is structurally equivalent to another node.
  Some examples:
@@ -653,7 +652,7 @@ boolean&nbsp;parentheses)</span></div>
 <section class="detail">
 <h3><a id="equalsDeep(org.apache.calcite.sql.SqlNode,boolean)">equalsDeep</a></h3>
 <div class="memberSignature"><span class="annotations"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang" class="externalLink">@Deprecated</a>
-</span><span class="modifiers">public final</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">equalsDeep</span>&#8203;(<span class="arguments"><a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
+</span><span class="modifiers">public final</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">equalsDeep</span>&#8203;(<span class="arguments">@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
 boolean&nbsp;fail)</span></div>
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 </section>
@@ -661,8 +660,8 @@ boolean&nbsp;fail)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="equalDeep(org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode,org.apache.calcite.util.Litmus)">equalDeep</a></h3>
-<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">equalDeep</span>&#8203;(<span class="arguments"><a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node1,
-<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node2,
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">equalDeep</span>&#8203;(<span class="arguments">@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node1,
+@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node2,
 <a href="../util/Litmus.html" title="interface in org.apache.calcite.util">Litmus</a>&nbsp;litmus)</span></div>
 <div class="block">Returns whether two nodes are equal (using
  <a href="#equalsDeep(org.apache.calcite.sql.SqlNode,org.apache.calcite.util.Litmus)"><code>equalsDeep(SqlNode, Litmus)</code></a>) or are both null.</div>
@@ -678,7 +677,7 @@ boolean&nbsp;fail)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getMonotonicity(org.apache.calcite.sql.validate.SqlValidatorScope)">getMonotonicity</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="validate/SqlMonotonicity.html" title="enum in org.apache.calcite.sql.validate">SqlMonotonicity</a></span>&nbsp;<span class="memberName">getMonotonicity</span>&#8203;(<span class="arguments"><a href="validate/SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="validate/SqlMonotonicity.html" title="enum in org.apache.calcite.sql.validate">SqlMonotonicity</a></span>&nbsp;<span class="memberName">getMonotonicity</span>&#8203;(<span class="arguments">@Nullable <a href="validate/SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope)</span></div>
 <div class="block">Returns whether expression is always ascending, descending or constant.
  This property is useful because it allows to safely aggregate infinite
  streams of values.
@@ -704,7 +703,7 @@ boolean&nbsp;fail)</span></div>
 <section class="detail">
 <h3><a id="toList()">toList</a></h3>
 <div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="typeParameters">&lt;T extends <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;</span>
-<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/stream/Collector.html?is-external=true" title="class or interface in java.util.stream" class="externalLink">Collector</a>&lt;T,&#8203;<a href="https://docs.oracle.com/javase/9/docs/api/java/util/ArrayList.html?is-external=true" title="class or interface in java.util" class="externalLink">ArrayList</a>&lt;T&gt;,&#8203;<a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&gt;</span>&nbsp;<span class="memberName">toList</span>()</div>
+<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/stream/Collector.html?is-external=true" title="class or interface in java.util.stream" class="externalLink">Collector</a>&lt;T,&#8203;<a href="https://docs.oracle.com/javase/9/docs/api/java/util/ArrayList.html?is-external=true" title="class or interface in java.util" class="externalLink">ArrayList</a>&lt;@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;,&#8203;<a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&gt;</span>&nbsp;<span class="memberName">toList</span>()</div>
 <div class="block">Returns a <code>Collector</code> that accumulates the input elements into a
  <a href="SqlNodeList.html" title="class in org.apache.calcite.sql"><code>SqlNodeList</code></a>, with zero position.</div>
 <dl>
@@ -719,8 +718,8 @@ boolean&nbsp;fail)</span></div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="toList(org.apache.calcite.sql.parser.SqlParserPos)">toList</a></h3>
-<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="typeParameters">&lt;T extends <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;</span>
-<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/stream/Collector.html?is-external=true" title="class or interface in java.util.stream" class="externalLink">Collector</a>&lt;T,&#8203;<a href="https://docs.oracle.com/javase/9/docs/api/java/util/ArrayList.html?is-external=true" title="class or interface in java.util" class="externalLink">ArrayList</a>&lt;T&gt;,&#8203;<a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&gt;</span>&nbsp;<span class="memberName">toList</span>&#8203;(<span class="arguments"><a href="parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</span></div>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="typeParameters">&lt;T extends @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;</span>
+<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/stream/Collector.html?is-external=true" title="class or interface in java.util.stream" class="externalLink">Collector</a>&lt;T,&#8203;<a href="https://docs.oracle.com/javase/9/docs/api/java/util/ArrayList.html?is-external=true" title="class or interface in java.util" class="externalLink">ArrayList</a>&lt;@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;,&#8203;<a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&gt;</span>&nbsp;<span class="memberName">toList</span>&#8203;(<span class="arguments"><a href="parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</span></div>
 <div class="block">Returns a <code>Collector</code> that accumulates the input elements into a
  <a href="SqlNodeList.html" title="class in org.apache.calcite.sql"><code>SqlNodeList</code></a>.</div>
 <dl>
@@ -783,7 +782,7 @@ boolean&nbsp;fail)</span></div>
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

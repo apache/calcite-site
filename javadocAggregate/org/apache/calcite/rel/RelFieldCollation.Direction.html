@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":9,"i4":9,"i5":9};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":10,"i6":9,"i7":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -239,6 +239,13 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Enum.html?i
 </td>
 </tr>
 <tr class="altColor" id="i2">
+<td class="colFirst"><code><a href="RelFieldCollation.Direction.html" title="enum in org.apache.calcite.rel">RelFieldCollation.Direction</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#lax()">lax</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Removes strictness.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i3">
 <td class="colFirst"><code><a href="../sql/validate/SqlMonotonicity.html" title="enum in org.apache.calcite.sql.validate">SqlMonotonicity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#monotonicity()">monotonicity</a></span>()</code></th>
 <td class="colLast">
@@ -246,21 +253,28 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Enum.html?i
  <a href="../sql/validate/SqlMonotonicity.html" title="enum in org.apache.calcite.sql.validate"><code>SqlMonotonicity</code></a>.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="altColor" id="i4">
 <td class="colFirst"><code>static <a href="RelFieldCollation.Direction.html" title="enum in org.apache.calcite.rel">RelFieldCollation.Direction</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#of(org.apache.calcite.sql.validate.SqlMonotonicity)">of</a></span>&#8203;(<a href="../sql/validate/SqlMonotonicity.html" title="enum in org.apache.calcite.sql.validate">SqlMonotonicity</a>&nbsp;monotonicity)</code></th>
 <td class="colLast">
 <div class="block">Converts a <a href="../sql/validate/SqlMonotonicity.html" title="enum in org.apache.calcite.sql.validate"><code>SqlMonotonicity</code></a> to a direction.</div>
 </td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="rowColor" id="i5">
+<td class="colFirst"><code><a href="RelFieldCollation.Direction.html" title="enum in org.apache.calcite.rel">RelFieldCollation.Direction</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#reverse()">reverse</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the reverse of this direction.</div>
+</td>
+</tr>
+<tr class="altColor" id="i6">
 <td class="colFirst"><code>static <a href="RelFieldCollation.Direction.html" title="enum in org.apache.calcite.rel">RelFieldCollation.Direction</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#valueOf(java.lang.String)">valueOf</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;name)</code></th>
 <td class="colLast">
 <div class="block">Returns the enum constant of this type with the specified name.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i5">
+<tr class="rowColor" id="i7">
 <td class="colFirst"><code>static <a href="RelFieldCollation.Direction.html" title="enum in org.apache.calcite.rel">RelFieldCollation.Direction</a>[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#values()">values</a></span>()</code></th>
 <td class="colLast">
@@ -412,8 +426,7 @@ not permitted.)</div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="defaultNullDirection()">defaultNullDirection</a></h3>
-<div class="memberSignature"><span class="annotations"><a href="https://docs.oracle.com/javase/9/docs/api/javax/annotation/Nonnull.html?is-external=true" title="class or interface in javax.annotation" class="externalLink">@Nonnull</a>
-</span><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="RelFieldCollation.NullDirection.html" title="enum in org.apache.calcite.rel">RelFieldCollation.NullDirection</a></span>&nbsp;<span class="memberName">defaultNullDirection</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="RelFieldCollation.NullDirection.html" title="enum in org.apache.calcite.rel">RelFieldCollation.NullDirection</a></span>&nbsp;<span class="memberName">defaultNullDirection</span>()</div>
 <div class="block">Returns the null direction if not specified. Consistent with Oracle,
  NULLS are sorted as if they were positive infinity.</div>
 </section>
@@ -424,6 +437,24 @@ not permitted.)</div>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isDescending</span>()</div>
 <div class="block">Returns whether this is <a href="#DESCENDING"><code>DESCENDING</code></a> or
  <a href="#STRICTLY_DESCENDING"><code>STRICTLY_DESCENDING</code></a>.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="reverse()">reverse</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="RelFieldCollation.Direction.html" title="enum in org.apache.calcite.rel">RelFieldCollation.Direction</a></span>&nbsp;<span class="memberName">reverse</span>()</div>
+<div class="block">Returns the reverse of this direction.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>reverse of the input direction</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="lax()">lax</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="RelFieldCollation.Direction.html" title="enum in org.apache.calcite.rel">RelFieldCollation.Direction</a></span>&nbsp;<span class="memberName">lax</span>()</div>
+<div class="block">Removes strictness.</div>
 </section>
 </li>
 </ul>
@@ -477,7 +508,7 @@ not permitted.)</div>
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

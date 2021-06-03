@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":6,"i1":18,"i2":18,"i3":6};
+<script type="text/javascript">var data = {"i0":6,"i1":6,"i2":18,"i3":6,"i4":18,"i5":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -155,26 +155,41 @@ extends <a href="../../plan/RelRule.Config.html" title="interface in org.apache.
 <tbody>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isSwapOuter()">isSwapOuter</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isAllowAlwaysTrueCondition()">isAllowAlwaysTrueCondition</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Whether to swap outer joins.</div>
+<div class="block">Whether to emit the new join tree if the join condition is <code>TRUE</code>
+ (that is, cartesian joins); default true.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i1">
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isSwapOuter()">isSwapOuter</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Whether to swap outer joins; default false.</div>
+</td>
+</tr>
+<tr class="altColor" id="i2">
 <td class="colFirst"><code>default <a href="JoinCommuteRule.html" title="class in org.apache.calcite.rel.rules">JoinCommuteRule</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toRule()">toRule</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Creates a rule that uses this configuration.</div>
 </td>
 </tr>
-<tr class="altColor" id="i2">
+<tr class="rowColor" id="i3">
+<td class="colFirst"><code><a href="JoinCommuteRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinCommuteRule.Config</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withAllowAlwaysTrueCondition(boolean)">withAllowAlwaysTrueCondition</a></span>&#8203;(boolean&nbsp;allowAlwaysTrueCondition)</code></th>
+<td class="colLast">
+<div class="block">Sets <a href="#isAllowAlwaysTrueCondition()"><code>isAllowAlwaysTrueCondition()</code></a>.</div>
+</td>
+</tr>
+<tr class="altColor" id="i4">
 <td class="colFirst"><code>default <a href="JoinCommuteRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinCommuteRule.Config</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withOperandFor(java.lang.Class)">withOperandFor</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="../core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&gt;&nbsp;joinClass)</code></th>
 <td class="colLast">
 <div class="block">Defines an operand tree for the given classes.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="rowColor" id="i5">
 <td class="colFirst"><code><a href="JoinCommuteRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinCommuteRule.Config</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withSwapOuter(boolean)">withSwapOuter</a></span>&#8203;(boolean&nbsp;swapOuter)</code></th>
 <td class="colLast">
@@ -242,7 +257,7 @@ extends <a href="../../plan/RelRule.Config.html" title="interface in org.apache.
 <section class="detail">
 <h3><a id="isSwapOuter()">isSwapOuter</a></h3>
 <div class="memberSignature"><span class="returnType">boolean</span>&nbsp;<span class="memberName">isSwapOuter</span>()</div>
-<div class="block">Whether to swap outer joins.</div>
+<div class="block">Whether to swap outer joins; default false.</div>
 </section>
 </li>
 <li class="blockList">
@@ -250,6 +265,21 @@ extends <a href="../../plan/RelRule.Config.html" title="interface in org.apache.
 <h3><a id="withSwapOuter(boolean)">withSwapOuter</a></h3>
 <div class="memberSignature"><span class="returnType"><a href="JoinCommuteRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinCommuteRule.Config</a></span>&nbsp;<span class="memberName">withSwapOuter</span>&#8203;(<span class="arguments">boolean&nbsp;swapOuter)</span></div>
 <div class="block">Sets <a href="#isSwapOuter()"><code>isSwapOuter()</code></a>.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="isAllowAlwaysTrueCondition()">isAllowAlwaysTrueCondition</a></h3>
+<div class="memberSignature"><span class="returnType">boolean</span>&nbsp;<span class="memberName">isAllowAlwaysTrueCondition</span>()</div>
+<div class="block">Whether to emit the new join tree if the join condition is <code>TRUE</code>
+ (that is, cartesian joins); default true.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="withAllowAlwaysTrueCondition(boolean)">withAllowAlwaysTrueCondition</a></h3>
+<div class="memberSignature"><span class="returnType"><a href="JoinCommuteRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinCommuteRule.Config</a></span>&nbsp;<span class="memberName">withAllowAlwaysTrueCondition</span>&#8203;(<span class="arguments">boolean&nbsp;allowAlwaysTrueCondition)</span></div>
+<div class="block">Sets <a href="#isAllowAlwaysTrueCondition()"><code>isAllowAlwaysTrueCondition()</code></a>.</div>
 </section>
 </li>
 </ul>
@@ -303,7 +333,7 @@ extends <a href="../../plan/RelRule.Config.html" title="interface in org.apache.
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

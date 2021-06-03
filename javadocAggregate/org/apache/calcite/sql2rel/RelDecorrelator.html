@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":41,"i3":9,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":41,"i3":9,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -107,12 +107,15 @@ implements <a href="../util/ReflectiveVisitor.html" title="interface in org.apac
  <p>TODO:</p>
  <ul>
    <li>replace <code>CorelMap</code> constructor parameter with a RelNode
-   <li>make <code>currentRel</code> immutable (would require a fresh
+   <li>make <a href="#currentRel"><code>currentRel</code></a> immutable (would require a fresh
       RelDecorrelator for each node being decorrelated)</li>
    <li>make fields of <code>CorelMap</code> immutable</li>
    <li>make sub-class rules static, and have them create their own
    de-correlator</li>
- </ul></div>
+ </ul>
+
+ <p>Note: make all the members protected scope so that they can be
+ accessed by the sub-class.</div>
 </section>
 <section class="summary">
 <ul class="blockList">
@@ -211,6 +214,40 @@ implements <a href="../util/ReflectiveVisitor.html" title="interface in org.apac
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#cm">cm</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected <a href="../plan/Context.html" title="interface in org.apache.calcite.plan">Context</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#context">context</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected @Nullable <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#currentRel">currentRel</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected <a href="../util/ReflectUtil.MethodDispatcher.html" title="interface in org.apache.calcite.util">ReflectUtil.MethodDispatcher</a>&lt;@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#dispatcher">dispatcher</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected <a href="https://docs.oracle.com/javase/9/docs/api/java/util/HashSet.html?is-external=true" title="class or interface in java.util" class="externalLink">HashSet</a>&lt;<a href="../rel/core/Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#generatedCorRels">generatedCorRels</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected <a href="https://docs.oracle.com/javase/9/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util" class="externalLink">Map</a>&lt;<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>,&#8203;org.apache.calcite.sql2rel.RelDecorrelator.Frame&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#map">map</a></span></code></th>
+<td class="colLast">
+<div class="block">Built during decorrelation, of rel to all the newly created correlated
+ variables in its output, and to map old input positions to new input
+ positions.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected <a href="../tools/RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#relBuilder">relBuilder</a></span></code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -292,114 +329,147 @@ implements <a href="../util/ReflectiveVisitor.html" title="interface in org.apac
 </td>
 </tr>
 <tr class="altColor" id="i4">
-<td class="colFirst"><code>org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.core.Aggregate)">decorrelateRel</a></span>&#8203;(<a href="../rel/core/Aggregate.html" title="class in org.apache.calcite.rel.core">Aggregate</a>&nbsp;rel)</code></th>
+<td class="colFirst"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.core.Aggregate,boolean)">decorrelateRel</a></span>&#8203;(<a href="../rel/core/Aggregate.html" title="class in org.apache.calcite.rel.core">Aggregate</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i5">
-<td class="colFirst"><code>org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.core.Correlate)">decorrelateRel</a></span>&#8203;(<a href="../rel/core/Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&nbsp;rel)</code></th>
+<td class="colFirst"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.core.Correlate,boolean)">decorrelateRel</a></span>&#8203;(<a href="../rel/core/Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i6">
-<td class="colFirst"><code>org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.core.Filter)">decorrelateRel</a></span>&#8203;(<a href="../rel/core/Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;rel)</code></th>
+<td class="colFirst"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.core.Filter,boolean)">decorrelateRel</a></span>&#8203;(<a href="../rel/core/Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i7">
-<td class="colFirst"><code>org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.core.Join)">decorrelateRel</a></span>&#8203;(<a href="../rel/core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&nbsp;rel)</code></th>
+<td class="colFirst"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.core.Join,boolean)">decorrelateRel</a></span>&#8203;(<a href="../rel/core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i8">
-<td class="colFirst"><code>org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.core.Project)">decorrelateRel</a></span>&#8203;(<a href="../rel/core/Project.html" title="class in org.apache.calcite.rel.core">Project</a>&nbsp;rel)</code></th>
+<td class="colFirst"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.core.Project,boolean)">decorrelateRel</a></span>&#8203;(<a href="../rel/core/Project.html" title="class in org.apache.calcite.rel.core">Project</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i9">
-<td class="colFirst"><code>org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.core.Sort)">decorrelateRel</a></span>&#8203;(<a href="../rel/core/Sort.html" title="class in org.apache.calcite.rel.core">Sort</a>&nbsp;rel)</code></th>
+<td class="colFirst"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.core.Sort,boolean)">decorrelateRel</a></span>&#8203;(<a href="../rel/core/Sort.html" title="class in org.apache.calcite.rel.core">Sort</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i10">
-<td class="colFirst"><code>org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.core.Values)">decorrelateRel</a></span>&#8203;(<a href="../rel/core/Values.html" title="class in org.apache.calcite.rel.core">Values</a>&nbsp;rel)</code></th>
+<td class="colFirst"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.core.Values,boolean)">decorrelateRel</a></span>&#8203;(<a href="../rel/core/Values.html" title="class in org.apache.calcite.rel.core">Values</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i11">
-<td class="colFirst"><code>org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.logical.LogicalAggregate)">decorrelateRel</a></span>&#8203;(<a href="../rel/logical/LogicalAggregate.html" title="class in org.apache.calcite.rel.logical">LogicalAggregate</a>&nbsp;rel)</code></th>
+<td class="colFirst"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.logical.LogicalAggregate,boolean)">decorrelateRel</a></span>&#8203;(<a href="../rel/logical/LogicalAggregate.html" title="class in org.apache.calcite.rel.logical">LogicalAggregate</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i12">
-<td class="colFirst"><code>org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.logical.LogicalCorrelate)">decorrelateRel</a></span>&#8203;(<a href="../rel/logical/LogicalCorrelate.html" title="class in org.apache.calcite.rel.logical">LogicalCorrelate</a>&nbsp;rel)</code></th>
+<td class="colFirst"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.logical.LogicalCorrelate,boolean)">decorrelateRel</a></span>&#8203;(<a href="../rel/logical/LogicalCorrelate.html" title="class in org.apache.calcite.rel.logical">LogicalCorrelate</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i13">
-<td class="colFirst"><code>org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.logical.LogicalFilter)">decorrelateRel</a></span>&#8203;(<a href="../rel/logical/LogicalFilter.html" title="class in org.apache.calcite.rel.logical">LogicalFilter</a>&nbsp;rel)</code></th>
+<td class="colFirst"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.logical.LogicalFilter,boolean)">decorrelateRel</a></span>&#8203;(<a href="../rel/logical/LogicalFilter.html" title="class in org.apache.calcite.rel.logical">LogicalFilter</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i14">
-<td class="colFirst"><code>org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.logical.LogicalJoin)">decorrelateRel</a></span>&#8203;(<a href="../rel/logical/LogicalJoin.html" title="class in org.apache.calcite.rel.logical">LogicalJoin</a>&nbsp;rel)</code></th>
+<td class="colFirst"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.logical.LogicalJoin,boolean)">decorrelateRel</a></span>&#8203;(<a href="../rel/logical/LogicalJoin.html" title="class in org.apache.calcite.rel.logical">LogicalJoin</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i15">
-<td class="colFirst"><code>org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.logical.LogicalProject)">decorrelateRel</a></span>&#8203;(<a href="../rel/logical/LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a>&nbsp;rel)</code></th>
+<td class="colFirst"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.logical.LogicalProject,boolean)">decorrelateRel</a></span>&#8203;(<a href="../rel/logical/LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i16">
-<td class="colFirst"><code>org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.logical.LogicalSnapshot)">decorrelateRel</a></span>&#8203;(<a href="../rel/logical/LogicalSnapshot.html" title="class in org.apache.calcite.rel.logical">LogicalSnapshot</a>&nbsp;rel)</code></th>
+<td class="colFirst"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.logical.LogicalSnapshot,boolean)">decorrelateRel</a></span>&#8203;(<a href="../rel/logical/LogicalSnapshot.html" title="class in org.apache.calcite.rel.logical">LogicalSnapshot</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i17">
-<td class="colFirst"><code>org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.logical.LogicalTableFunctionScan)">decorrelateRel</a></span>&#8203;(<a href="../rel/logical/LogicalTableFunctionScan.html" title="class in org.apache.calcite.rel.logical">LogicalTableFunctionScan</a>&nbsp;rel)</code></th>
+<td class="colFirst"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.logical.LogicalTableFunctionScan,boolean)">decorrelateRel</a></span>&#8203;(<a href="../rel/logical/LogicalTableFunctionScan.html" title="class in org.apache.calcite.rel.logical">LogicalTableFunctionScan</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i18">
-<td class="colFirst"><code>org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.RelNode)">decorrelateRel</a></span>&#8203;(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel)</code></th>
+<td class="colFirst"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#decorrelateRel(org.apache.calcite.rel.RelNode,boolean)">decorrelateRel</a></span>&#8203;(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</code></th>
 <td class="colLast">
 <div class="block">Fallback if none of the other <code>decorrelateRel</code> methods match.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i19">
-<td class="colFirst"><code>org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getInvoke(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode)">getInvoke</a></span>&#8203;(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;r,
-<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;parent)</code></th>
+<td class="colFirst"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getInvoke(org.apache.calcite.rel.RelNode,boolean,org.apache.calcite.rel.RelNode)">getInvoke</a></span>&#8203;(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;r,
+boolean&nbsp;isCorVarDefined,
+@Nullable <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;parent)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i20">
+<td class="colFirst"><code>protected <a href="https://docs.oracle.com/javase/9/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util" class="externalLink">Collection</a>&lt;<a href="../plan/RelOptRule.html" title="class in org.apache.calcite.plan">RelOptRule</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPostDecorrelateRules()">getPostDecorrelateRules</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the rules applied on the rel after decorrelation, never null.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i21">
+<td class="colFirst"><code>protected <a href="RelDecorrelator.html" title="class in org.apache.calcite.sql2rel">RelDecorrelator</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getVisitor()">getVisitor</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the <code>visitor</code> on which the <code>MethodDispatcher</code> dispatches
+ each <code>decorrelateRel</code> method, the default implementation returns this instance,
+ if you got a sub-class, override this method to replace the <code>visitor</code> as the
+ sub-class instance.</div>
+</td>
+</tr>
+<tr class="altColor" id="i22">
 <td class="colFirst"><code>protected <a href="../tools/RelBuilderFactory.html" title="interface in org.apache.calcite.tools">RelBuilderFactory</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#relBuilderFactory()">relBuilderFactory</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor" id="i21">
+<tr class="rowColor" id="i23">
 <td class="colFirst"><code>protected <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeCorrelationExpr(org.apache.calcite.rex.RexNode,boolean)">removeCorrelationExpr</a></span>&#8203;(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;exp,
 boolean&nbsp;projectPulledAboveLeftCorrelator)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor" id="i22">
+<tr class="altColor" id="i24">
 <td class="colFirst"><code>protected <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeCorrelationExpr(org.apache.calcite.rex.RexNode,boolean,java.util.Set)">removeCorrelationExpr</a></span>&#8203;(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;exp,
 boolean&nbsp;projectPulledAboveLeftCorrelator,
 <a href="https://docs.oracle.com/javase/9/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util" class="externalLink">Set</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang" class="externalLink">Integer</a>&gt;&nbsp;isCount)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor" id="i23">
+<tr class="rowColor" id="i25">
 <td class="colFirst"><code>protected <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeCorrelationExpr(org.apache.calcite.rex.RexNode,boolean,org.apache.calcite.rex.RexInputRef)">removeCorrelationExpr</a></span>&#8203;(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;exp,
 boolean&nbsp;projectPulledAboveLeftCorrelator,
 <a href="../rex/RexInputRef.html" title="class in org.apache.calcite.rex">RexInputRef</a>&nbsp;nullIndicator)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor" id="i24">
+<tr class="altColor" id="i26">
 <td class="colFirst"><code><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeCorrelationViaRule(org.apache.calcite.rel.RelNode)">removeCorrelationViaRule</a></span>&#8203;(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;root)</code></th>
 <td class="colLast">&nbsp;</td>
@@ -428,8 +498,47 @@ boolean&nbsp;projectPulledAboveLeftCorrelator,
 <ul class="blockList">
 <li class="blockList">
 <section class="detail">
+<h3><a id="relBuilder">relBuilder</a></h3>
+<div class="memberSignature"><span class="modifiers">protected final</span>&nbsp;<span class="returnType"><a href="../tools/RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></span>&nbsp;<span class="memberName">relBuilder</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="cm">cm</a></h3>
 <div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType"><a href="RelDecorrelator.CorelMap.html" title="class in org.apache.calcite.sql2rel">RelDecorrelator.CorelMap</a></span>&nbsp;<span class="memberName">cm</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="dispatcher">dispatcher</a></h3>
+<div class="memberSignature"><span class="modifiers">protected final</span>&nbsp;<span class="returnType"><a href="../util/ReflectUtil.MethodDispatcher.html" title="interface in org.apache.calcite.util">ReflectUtil.MethodDispatcher</a>&lt;@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame&gt;</span>&nbsp;<span class="memberName">dispatcher</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="currentRel">currentRel</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">@Nullable <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></span>&nbsp;<span class="memberName">currentRel</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="context">context</a></h3>
+<div class="memberSignature"><span class="modifiers">protected final</span>&nbsp;<span class="returnType"><a href="../plan/Context.html" title="interface in org.apache.calcite.plan">Context</a></span>&nbsp;<span class="memberName">context</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="map">map</a></h3>
+<div class="memberSignature"><span class="modifiers">protected final</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util" class="externalLink">Map</a>&lt;<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>,&#8203;org.apache.calcite.sql2rel.RelDecorrelator.Frame&gt;</span>&nbsp;<span class="memberName">map</span></div>
+<div class="block">Built during decorrelation, of rel to all the newly created correlated
+ variables in its output, and to map old input positions to new input
+ positions. This is from the view point of the parent rel of a new rel.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="generatedCorRels">generatedCorRels</a></h3>
+<div class="memberSignature"><span class="modifiers">protected final</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/HashSet.html?is-external=true" title="class or interface in java.util" class="externalLink">HashSet</a>&lt;<a href="../rel/core/Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&gt;</span>&nbsp;<span class="memberName">generatedCorRels</span></div>
 </section>
 </li>
 </ul>
@@ -538,100 +647,133 @@ boolean&nbsp;projectPulledAboveLeftCorrelator,
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="decorrelateRel(org.apache.calcite.rel.RelNode)">decorrelateRel</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel)</span></div>
+<h3><a id="decorrelateRel(org.apache.calcite.rel.RelNode,boolean)">decorrelateRel</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</span></div>
 <div class="block">Fallback if none of the other <code>decorrelateRel</code> methods match.</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="decorrelateRel(org.apache.calcite.rel.core.Sort)">decorrelateRel</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/core/Sort.html" title="class in org.apache.calcite.rel.core">Sort</a>&nbsp;rel)</span></div>
+<h3><a id="decorrelateRel(org.apache.calcite.rel.core.Sort,boolean)">decorrelateRel</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/core/Sort.html" title="class in org.apache.calcite.rel.core">Sort</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="decorrelateRel(org.apache.calcite.rel.core.Values)">decorrelateRel</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/core/Values.html" title="class in org.apache.calcite.rel.core">Values</a>&nbsp;rel)</span></div>
+<h3><a id="decorrelateRel(org.apache.calcite.rel.core.Values,boolean)">decorrelateRel</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/core/Values.html" title="class in org.apache.calcite.rel.core">Values</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="decorrelateRel(org.apache.calcite.rel.logical.LogicalAggregate)">decorrelateRel</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/logical/LogicalAggregate.html" title="class in org.apache.calcite.rel.logical">LogicalAggregate</a>&nbsp;rel)</span></div>
+<h3><a id="decorrelateRel(org.apache.calcite.rel.logical.LogicalAggregate,boolean)">decorrelateRel</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/logical/LogicalAggregate.html" title="class in org.apache.calcite.rel.logical">LogicalAggregate</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="decorrelateRel(org.apache.calcite.rel.core.Aggregate)">decorrelateRel</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/core/Aggregate.html" title="class in org.apache.calcite.rel.core">Aggregate</a>&nbsp;rel)</span></div>
+<h3><a id="decorrelateRel(org.apache.calcite.rel.core.Aggregate,boolean)">decorrelateRel</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/core/Aggregate.html" title="class in org.apache.calcite.rel.core">Aggregate</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="getInvoke(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode)">getInvoke</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">getInvoke</span>&#8203;(<span class="arguments"><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;r,
-<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;parent)</span></div>
+<h3><a id="getInvoke(org.apache.calcite.rel.RelNode,boolean,org.apache.calcite.rel.RelNode)">getInvoke</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">getInvoke</span>&#8203;(<span class="arguments"><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;r,
+boolean&nbsp;isCorVarDefined,
+@Nullable <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;parent)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="decorrelateRel(org.apache.calcite.rel.logical.LogicalProject)">decorrelateRel</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/logical/LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a>&nbsp;rel)</span></div>
+<h3><a id="decorrelateRel(org.apache.calcite.rel.logical.LogicalProject,boolean)">decorrelateRel</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/logical/LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="decorrelateRel(org.apache.calcite.rel.core.Project)">decorrelateRel</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/core/Project.html" title="class in org.apache.calcite.rel.core">Project</a>&nbsp;rel)</span></div>
+<h3><a id="decorrelateRel(org.apache.calcite.rel.core.Project,boolean)">decorrelateRel</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/core/Project.html" title="class in org.apache.calcite.rel.core">Project</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="decorrelateRel(org.apache.calcite.rel.logical.LogicalSnapshot)">decorrelateRel</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/logical/LogicalSnapshot.html" title="class in org.apache.calcite.rel.logical">LogicalSnapshot</a>&nbsp;rel)</span></div>
+<h3><a id="decorrelateRel(org.apache.calcite.rel.logical.LogicalSnapshot,boolean)">decorrelateRel</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/logical/LogicalSnapshot.html" title="class in org.apache.calcite.rel.logical">LogicalSnapshot</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="decorrelateRel(org.apache.calcite.rel.logical.LogicalTableFunctionScan)">decorrelateRel</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/logical/LogicalTableFunctionScan.html" title="class in org.apache.calcite.rel.logical">LogicalTableFunctionScan</a>&nbsp;rel)</span></div>
+<h3><a id="decorrelateRel(org.apache.calcite.rel.logical.LogicalTableFunctionScan,boolean)">decorrelateRel</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/logical/LogicalTableFunctionScan.html" title="class in org.apache.calcite.rel.logical">LogicalTableFunctionScan</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="decorrelateRel(org.apache.calcite.rel.logical.LogicalFilter)">decorrelateRel</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/logical/LogicalFilter.html" title="class in org.apache.calcite.rel.logical">LogicalFilter</a>&nbsp;rel)</span></div>
+<h3><a id="decorrelateRel(org.apache.calcite.rel.logical.LogicalFilter,boolean)">decorrelateRel</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/logical/LogicalFilter.html" title="class in org.apache.calcite.rel.logical">LogicalFilter</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="decorrelateRel(org.apache.calcite.rel.core.Filter)">decorrelateRel</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/core/Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;rel)</span></div>
+<h3><a id="decorrelateRel(org.apache.calcite.rel.core.Filter,boolean)">decorrelateRel</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/core/Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="decorrelateRel(org.apache.calcite.rel.logical.LogicalCorrelate)">decorrelateRel</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/logical/LogicalCorrelate.html" title="class in org.apache.calcite.rel.logical">LogicalCorrelate</a>&nbsp;rel)</span></div>
+<h3><a id="decorrelateRel(org.apache.calcite.rel.logical.LogicalCorrelate,boolean)">decorrelateRel</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/logical/LogicalCorrelate.html" title="class in org.apache.calcite.rel.logical">LogicalCorrelate</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="decorrelateRel(org.apache.calcite.rel.core.Correlate)">decorrelateRel</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/core/Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&nbsp;rel)</span></div>
+<h3><a id="decorrelateRel(org.apache.calcite.rel.core.Correlate,boolean)">decorrelateRel</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/core/Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="decorrelateRel(org.apache.calcite.rel.logical.LogicalJoin)">decorrelateRel</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/logical/LogicalJoin.html" title="class in org.apache.calcite.rel.logical">LogicalJoin</a>&nbsp;rel)</span></div>
+<h3><a id="decorrelateRel(org.apache.calcite.rel.logical.LogicalJoin,boolean)">decorrelateRel</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/logical/LogicalJoin.html" title="class in org.apache.calcite.rel.logical">LogicalJoin</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</span></div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
-<h3><a id="decorrelateRel(org.apache.calcite.rel.core.Join)">decorrelateRel</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&nbsp;rel)</span></div>
+<h3><a id="decorrelateRel(org.apache.calcite.rel.core.Join,boolean)">decorrelateRel</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="memberName">decorrelateRel</span>&#8203;(<span class="arguments"><a href="../rel/core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&nbsp;rel,
+boolean&nbsp;isCorVarDefined)</span></div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="getVisitor()">getVisitor</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType"><a href="RelDecorrelator.html" title="class in org.apache.calcite.sql2rel">RelDecorrelator</a></span>&nbsp;<span class="memberName">getVisitor</span>()</div>
+<div class="block">Returns the <code>visitor</code> on which the <code>MethodDispatcher</code> dispatches
+ each <code>decorrelateRel</code> method, the default implementation returns this instance,
+ if you got a sub-class, override this method to replace the <code>visitor</code> as the
+ sub-class instance.</div>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="getPostDecorrelateRules()">getPostDecorrelateRules</a></h3>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util" class="externalLink">Collection</a>&lt;<a href="../plan/RelOptRule.html" title="class in org.apache.calcite.plan">RelOptRule</a>&gt;</span>&nbsp;<span class="memberName">getPostDecorrelateRules</span>()</div>
+<div class="block">Returns the rules applied on the rel after decorrelation, never null.</div>
 </section>
 </li>
 </ul>
@@ -685,7 +827,7 @@ boolean&nbsp;projectPulledAboveLeftCorrelator,
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

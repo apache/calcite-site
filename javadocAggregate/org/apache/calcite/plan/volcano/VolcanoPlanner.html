@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":9,"i29":10,"i30":10,"i31":10,"i32":10,"i33":10,"i34":10,"i35":10,"i36":10,"i37":10,"i38":10,"i39":10,"i40":10,"i41":10,"i42":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":9,"i30":10,"i31":10,"i32":10,"i33":10,"i34":10,"i35":10,"i36":10,"i37":10,"i38":10,"i39":10,"i40":10,"i41":10,"i42":10,"i43":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -136,7 +136,7 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 </thead>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><code>protected <a href="RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a></code></td>
+<td class="colFirst"><code>protected @MonotonicNonNull <a href="RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#root">root</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -178,16 +178,16 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 </td>
 </tr>
 <tr class="rowColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.plan.Context)">VolcanoPlanner</a></span>&#8203;(<a href="../Context.html" title="interface in org.apache.calcite.plan">Context</a>&nbsp;externalContext)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.plan.RelOptCostFactory,org.apache.calcite.plan.Context)">VolcanoPlanner</a></span>&#8203;(@Nullable <a href="../RelOptCostFactory.html" title="interface in org.apache.calcite.plan">RelOptCostFactory</a>&nbsp;costFactory,
+@Nullable <a href="../Context.html" title="interface in org.apache.calcite.plan">Context</a>&nbsp;externalContext)</code></th>
 <td class="colLast">
-<div class="block">Creates a uninitialized <code>VolcanoPlanner</code>.</div>
+<div class="block">Creates a <code>VolcanoPlanner</code> with a given cost factory.</div>
 </td>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.plan.RelOptCostFactory,org.apache.calcite.plan.Context)">VolcanoPlanner</a></span>&#8203;(<a href="../RelOptCostFactory.html" title="interface in org.apache.calcite.plan">RelOptCostFactory</a>&nbsp;costFactory,
-<a href="../Context.html" title="interface in org.apache.calcite.plan">Context</a>&nbsp;externalContext)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.plan.Context)">VolcanoPlanner</a></span>&#8203;(<a href="../Context.html" title="interface in org.apache.calcite.plan">Context</a>&nbsp;externalContext)</code></th>
 <td class="colLast">
-<div class="block">Creates a <code>VolcanoPlanner</code> with a given cost factory.</div>
+<div class="block">Creates a uninitialized <code>VolcanoPlanner</code>.</div>
 </td>
 </tr>
 </tbody>
@@ -297,7 +297,7 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 <tr class="rowColor" id="i11">
 <td class="colFirst"><code><a href="RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#ensureRegistered(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode)">ensureRegistered</a></span>&#8203;(<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
-<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;equivRel)</code></th>
+@Nullable <a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;equivRel)</code></th>
 <td class="colLast">
 <div class="block">Registers a relational expression if it is not already registered.</div>
 </td>
@@ -311,7 +311,7 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 </td>
 </tr>
 <tr class="rowColor" id="i13">
-<td class="colFirst"><code><a href="../RelOptCost.html" title="interface in org.apache.calcite.plan">RelOptCost</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="../RelOptCost.html" title="interface in org.apache.calcite.plan">RelOptCost</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCost(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.metadata.RelMetadataQuery)">getCost</a></span>&#8203;(<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
 <a href="../../rel/metadata/RelMetadataQuery.html" title="class in org.apache.calcite.rel.metadata">RelMetadataQuery</a>&nbsp;mq)</code></th>
 <td class="colLast">
@@ -319,7 +319,7 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 </td>
 </tr>
 <tr class="altColor" id="i14">
-<td class="colFirst"><code><a href="../RelOptLattice.html" title="class in org.apache.calcite.plan">RelOptLattice</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="../RelOptLattice.html" title="class in org.apache.calcite.plan">RelOptLattice</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLattice(org.apache.calcite.plan.RelOptTable)">getLattice</a></span>&#8203;(<a href="../RelOptTable.html" title="interface in org.apache.calcite.plan">RelOptTable</a>&nbsp;table)</code></th>
 <td class="colLast">
 <div class="block">Retrieves a lattice, given its star table.</div>
@@ -354,108 +354,115 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 </td>
 </tr>
 <tr class="rowColor" id="i19">
-<td class="colFirst"><code><a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRoot()">getRoot</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the root node of this query.</div>
 </td>
 </tr>
 <tr class="altColor" id="i20">
-<td class="colFirst"><code>org.apache.calcite.plan.volcano.RelSet</code></td>
+<td class="colFirst"><code>@Nullable org.apache.calcite.plan.volcano.RelSet</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSet(org.apache.calcite.rel.RelNode)">getSet</a></span>&#8203;(<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel)</code></th>
 <td class="colLast">
 <div class="block">Finds an expression's equivalence set.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i21">
-<td class="colFirst"><code><a href="RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSubset(org.apache.calcite.rel.RelNode)">getSubset</a></span>&#8203;(<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel)</code></th>
 <td class="colLast">
 <div class="block">Returns the subset that a relational expression belongs to.</div>
 </td>
 </tr>
 <tr class="altColor" id="i22">
-<td class="colFirst"><code><a href="RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSubset(org.apache.calcite.rel.RelNode,org.apache.calcite.plan.RelTraitSet)">getSubset</a></span>&#8203;(<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
 <a href="../RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traits)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i23">
+<td class="colFirst"><code><a href="RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSubsetNonNull(org.apache.calcite.rel.RelNode)">getSubsetNonNull</a></span>&#8203;(<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel)</code></th>
+<td class="colLast">
+<div class="block">Returns the subset that a relational expression belongs to.</div>
+</td>
+</tr>
+<tr class="altColor" id="i24">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isLogical(org.apache.calcite.rel.RelNode)">isLogical</a></span>&#8203;(<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel)</code></th>
 <td class="colLast">
 <div class="block">Decide whether a rule is logical or not.</div>
 </td>
 </tr>
-<tr class="altColor" id="i24">
+<tr class="rowColor" id="i25">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isRegistered(org.apache.calcite.rel.RelNode)">isRegistered</a></span>&#8203;(<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel)</code></th>
 <td class="colLast">
 <div class="block">Determines whether a relational expression has been registered.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i25">
+<tr class="altColor" id="i26">
 <td class="colFirst"><code>protected boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isSubstituteRule(org.apache.calcite.plan.volcano.VolcanoRuleCall)">isSubstituteRule</a></span>&#8203;(<a href="VolcanoRuleCall.html" title="class in org.apache.calcite.plan.volcano">VolcanoRuleCall</a>&nbsp;match)</code></th>
 <td class="colLast">
-<div class="block">Check whether a rule match is a substitute rule match.</div>
-</td>
-</tr>
-<tr class="altColor" id="i26">
-<td class="colFirst"><code>protected boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isTransformationRule(org.apache.calcite.plan.volcano.VolcanoRuleCall)">isTransformationRule</a></span>&#8203;(<a href="VolcanoRuleCall.html" title="class in org.apache.calcite.plan.volcano">VolcanoRuleCall</a>&nbsp;match)</code></th>
-<td class="colLast">
-<div class="block">Check whether a rule match is a transformation rule match.</div>
+<div class="block">Checks whether a rule match is a substitution rule match.</div>
 </td>
 </tr>
 <tr class="rowColor" id="i27">
+<td class="colFirst"><code>protected boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isTransformationRule(org.apache.calcite.plan.volcano.VolcanoRuleCall)">isTransformationRule</a></span>&#8203;(<a href="VolcanoRuleCall.html" title="class in org.apache.calcite.plan.volcano">VolcanoRuleCall</a>&nbsp;match)</code></th>
+<td class="colLast">
+<div class="block">Checks whether a rule match is a transformation rule match.</div>
+</td>
+</tr>
+<tr class="altColor" id="i28">
 <td class="colFirst"><code>protected boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isValid(org.apache.calcite.util.Litmus)">isValid</a></span>&#8203;(<a href="../../util/Litmus.html" title="interface in org.apache.calcite.util">Litmus</a>&nbsp;litmus)</code></th>
 <td class="colLast">
 <div class="block">Checks internal consistency.</div>
 </td>
 </tr>
-<tr class="altColor" id="i28">
-<td class="colFirst"><code>static <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#normalizePlan(java.lang.String)">normalizePlan</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;plan)</code></th>
+<tr class="rowColor" id="i29">
+<td class="colFirst"><code>static @PolyNull <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#normalizePlan(java.lang.String)">normalizePlan</a></span>&#8203;(@PolyNull <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;plan)</code></th>
 <td class="colLast">
 <div class="block">Normalizes references to subsets within the string representation of a
  plan.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i29">
+<tr class="altColor" id="i30">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#onNewClass(org.apache.calcite.rel.RelNode)">onNewClass</a></span>&#8203;(<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;node)</code></th>
 <td class="colLast">
 <div class="block">Called when a new class of <a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel"><code>RelNode</code></a> is seen.</div>
 </td>
 </tr>
-<tr class="altColor" id="i30">
+<tr class="rowColor" id="i31">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#prune(org.apache.calcite.rel.RelNode)">prune</a></span>&#8203;(<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel)</code></th>
 <td class="colLast">
 <div class="block">Prunes a node from the planner.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i31">
+<tr class="altColor" id="i32">
 <td class="colFirst"><code><a href="RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#register(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode)">register</a></span>&#8203;(<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
-<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;equivRel)</code></th>
+@Nullable <a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;equivRel)</code></th>
 <td class="colLast">
 <div class="block">Registers a relational expression in the expression bank.</div>
 </td>
 </tr>
-<tr class="altColor" id="i32">
+<tr class="rowColor" id="i33">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerAbstractRelationalRules()">registerAbstractRelationalRules</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor" id="i33">
+<tr class="altColor" id="i34">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerMaterializations()">registerMaterializations</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor" id="i34">
+<tr class="rowColor" id="i35">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerMetadataProviders(java.util.List)">registerMetadataProviders</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../../rel/metadata/RelMetadataProvider.html" title="interface in org.apache.calcite.rel.metadata">RelMetadataProvider</a>&gt;&nbsp;list)</code></th>
 <td class="colLast">
@@ -464,28 +471,28 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
  metadata queries.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i35">
+<tr class="altColor" id="i36">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerSchema(org.apache.calcite.plan.RelOptSchema)">registerSchema</a></span>&#8203;(<a href="../RelOptSchema.html" title="interface in org.apache.calcite.plan">RelOptSchema</a>&nbsp;schema)</code></th>
 <td class="colLast">
 <div class="block">Tells this planner that a schema exists.</div>
 </td>
 </tr>
-<tr class="altColor" id="i36">
+<tr class="rowColor" id="i37">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeRule(org.apache.calcite.plan.RelOptRule)">removeRule</a></span>&#8203;(<a href="../RelOptRule.html" title="class in org.apache.calcite.plan">RelOptRule</a>&nbsp;rule)</code></th>
 <td class="colLast">
 <div class="block">Removes a rule.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i37">
+<tr class="altColor" id="i38">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setLocked(boolean)">setLocked</a></span>&#8203;(boolean&nbsp;locked)</code></th>
 <td class="colLast">
 <div class="block">Sets whether this planner is locked.</div>
 </td>
 </tr>
-<tr class="altColor" id="i38">
+<tr class="rowColor" id="i39">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setNoneConventionHasInfiniteCost(boolean)">setNoneConventionHasInfiniteCost</a></span>&#8203;(boolean&nbsp;infinite)</code></th>
 <td class="colLast">
@@ -493,26 +500,26 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
  to have infinite cost or not.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i39">
+<tr class="altColor" id="i40">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setRoot(org.apache.calcite.rel.RelNode)">setRoot</a></span>&#8203;(<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel)</code></th>
 <td class="colLast">
 <div class="block">Sets the root node of this query.</div>
 </td>
 </tr>
-<tr class="altColor" id="i40">
+<tr class="rowColor" id="i41">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setTopDownOpt(boolean)">setTopDownOpt</a></span>&#8203;(boolean&nbsp;value)</code></th>
 <td class="colLast">
 <div class="block">Enable or disable top-down optimization.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i41">
+<tr class="altColor" id="i42">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toDot()">toDot</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor" id="i42">
+<tr class="rowColor" id="i43">
 <td class="colFirst"><code>protected <a href="../RelOptCost.html" title="interface in org.apache.calcite.plan">RelOptCost</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#upperBoundForInputs(org.apache.calcite.rel.RelNode,org.apache.calcite.plan.RelOptCost)">upperBoundForInputs</a></span>&#8203;(<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;mExpr,
 <a href="../RelOptCost.html" title="interface in org.apache.calcite.plan">RelOptCost</a>&nbsp;upperBound)</code></th>
@@ -550,7 +557,7 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 <li class="blockList">
 <section class="detail">
 <h3><a id="root">root</a></h3>
-<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType"><a href="RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a></span>&nbsp;<span class="memberName">root</span></div>
+<div class="memberSignature"><span class="modifiers">protected</span>&nbsp;<span class="returnType">@MonotonicNonNull <a href="RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a></span>&nbsp;<span class="memberName">root</span></div>
 </section>
 </li>
 </ul>
@@ -584,8 +591,8 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 <li class="blockList">
 <section class="detail">
 <h3><a id="&lt;init&gt;(org.apache.calcite.plan.RelOptCostFactory,org.apache.calcite.plan.Context)">VolcanoPlanner</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">VolcanoPlanner</span>&#8203;(<span class="arguments"><a href="../RelOptCostFactory.html" title="interface in org.apache.calcite.plan">RelOptCostFactory</a>&nbsp;costFactory,
-<a href="../Context.html" title="interface in org.apache.calcite.plan">Context</a>&nbsp;externalContext)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">VolcanoPlanner</span>&#8203;(<span class="arguments">@Nullable <a href="../RelOptCostFactory.html" title="interface in org.apache.calcite.plan">RelOptCostFactory</a>&nbsp;costFactory,
+@Nullable <a href="../Context.html" title="interface in org.apache.calcite.plan">Context</a>&nbsp;externalContext)</span></div>
 <div class="block">Creates a <code>VolcanoPlanner</code> with a given cost factory.</div>
 </section>
 </li>
@@ -638,7 +645,8 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 <li class="blockList">
 <section class="detail">
 <h3><a id="getRoot()">getRoot</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></span>&nbsp;<span class="memberName">getRoot</span>()</div>
+<div class="memberSignature"><span class="annotations">@Pure
+</span><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></span>&nbsp;<span class="memberName">getRoot</span>()</div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../RelOptPlanner.html#getRoot()">RelOptPlanner</a></code></span></div>
 <div class="block">Returns the root node of this query.</div>
 <dl>
@@ -704,7 +712,7 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 <li class="blockList">
 <section class="detail">
 <h3><a id="getLattice(org.apache.calcite.plan.RelOptTable)">getLattice</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../RelOptLattice.html" title="class in org.apache.calcite.plan">RelOptLattice</a></span>&nbsp;<span class="memberName">getLattice</span>&#8203;(<span class="arguments"><a href="../RelOptTable.html" title="interface in org.apache.calcite.plan">RelOptTable</a>&nbsp;table)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="../RelOptLattice.html" title="class in org.apache.calcite.plan">RelOptLattice</a></span>&nbsp;<span class="memberName">getLattice</span>&#8203;(<span class="arguments"><a href="../RelOptTable.html" title="interface in org.apache.calcite.plan">RelOptTable</a>&nbsp;table)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../RelOptPlanner.html#getLattice(org.apache.calcite.plan.RelOptTable)">RelOptPlanner</a></code></span></div>
 <div class="block">Retrieves a lattice, given its star table.</div>
 <dl>
@@ -724,7 +732,7 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 <li class="blockList">
 <section class="detail">
 <h3><a id="getSet(org.apache.calcite.rel.RelNode)">getSet</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">org.apache.calcite.plan.volcano.RelSet</span>&nbsp;<span class="memberName">getSet</span>&#8203;(<span class="arguments"><a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable org.apache.calcite.plan.volcano.RelSet</span>&nbsp;<span class="memberName">getSet</span>&#8203;(<span class="arguments"><a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel)</span></div>
 <div class="block">Finds an expression's equivalence set. If the expression is not
  registered, returns null.</div>
 <dl>
@@ -935,7 +943,7 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 <section class="detail">
 <h3><a id="register(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode)">register</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a></span>&nbsp;<span class="memberName">register</span>&#8203;(<span class="arguments"><a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
-<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;equivRel)</span></div>
+@Nullable <a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;equivRel)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../RelOptPlanner.html#register(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode)">RelOptPlanner</a></code></span></div>
 <div class="block">Registers a relational expression in the expression bank.
 
@@ -958,7 +966,7 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 <section class="detail">
 <h3><a id="ensureRegistered(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode)">ensureRegistered</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a></span>&nbsp;<span class="memberName">ensureRegistered</span>&#8203;(<span class="arguments"><a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
-<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;equivRel)</span></div>
+@Nullable <a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;equivRel)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../RelOptPlanner.html#ensureRegistered(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode)">RelOptPlanner</a></code></span></div>
 <div class="block">Registers a relational expression if it is not already registered.
 
@@ -1019,7 +1027,7 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 <li class="blockList">
 <section class="detail">
 <h3><a id="getCost(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.metadata.RelMetadataQuery)">getCost</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../RelOptCost.html" title="interface in org.apache.calcite.plan">RelOptCost</a></span>&nbsp;<span class="memberName">getCost</span>&#8203;(<span class="arguments"><a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="../RelOptCost.html" title="interface in org.apache.calcite.plan">RelOptCost</a></span>&nbsp;<span class="memberName">getCost</span>&#8203;(<span class="arguments"><a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
 <a href="../../rel/metadata/RelMetadataQuery.html" title="class in org.apache.calcite.rel.metadata">RelMetadataQuery</a>&nbsp;mq)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../RelOptPlanner.html#getCost(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.metadata.RelMetadataQuery)">RelOptPlanner</a></code></span></div>
 <div class="block">Computes the cost of a RelNode. In most cases, this just dispatches to
@@ -1040,7 +1048,7 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 <li class="blockList">
 <section class="detail">
 <h3><a id="getSubset(org.apache.calcite.rel.RelNode)">getSubset</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a></span>&nbsp;<span class="memberName">getSubset</span>&#8203;(<span class="arguments"><a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a></span>&nbsp;<span class="memberName">getSubset</span>&#8203;(<span class="arguments"><a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel)</span></div>
 <div class="block">Returns the subset that a relational expression belongs to.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -1052,8 +1060,25 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 </li>
 <li class="blockList">
 <section class="detail">
+<h3><a id="getSubsetNonNull(org.apache.calcite.rel.RelNode)">getSubsetNonNull</a></h3>
+<div class="memberSignature"><span class="annotations">@API(since="1.26",
+     status=EXPERIMENTAL)
+</span><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a></span>&nbsp;<span class="memberName">getSubsetNonNull</span>&#8203;(<span class="arguments"><a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel)</span></div>
+<div class="block">Returns the subset that a relational expression belongs to.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>rel</code> - Relational expression</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Subset it belongs to, or null if it is not registered</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/AssertionError.html?is-external=true" title="class or interface in java.lang" class="externalLink">AssertionError</a></code> - in case subset is not found</dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="getSubset(org.apache.calcite.rel.RelNode,org.apache.calcite.plan.RelTraitSet)">getSubset</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a></span>&nbsp;<span class="memberName">getSubset</span>&#8203;(<span class="arguments"><a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a></span>&nbsp;<span class="memberName">getSubset</span>&#8203;(<span class="arguments"><a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
 <a href="../RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traits)</span></div>
 </section>
 </li>
@@ -1141,7 +1166,7 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 <li class="blockList">
 <section class="detail">
 <h3><a id="normalizePlan(java.lang.String)">normalizePlan</a></h3>
-<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></span>&nbsp;<span class="memberName">normalizePlan</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;plan)</span></div>
+<div class="memberSignature"><span class="modifiers">public static</span>&nbsp;<span class="returnType">@PolyNull <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></span>&nbsp;<span class="memberName">normalizePlan</span>&#8203;(<span class="arguments">@PolyNull <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;plan)</span></div>
 <div class="block">Normalizes references to subsets within the string representation of a
  plan.
 
@@ -1173,7 +1198,9 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
  child=Subset#{2}.FENNEL_EXEC,expr#0..8={inputs},expr#9=3456,DEPTNO=$t7,
  $f0=$t9)<br>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MockTableImplRel.FENNEL_EXEC(
- table=[CATALOG, SALES, EMP])</blockquote></div>
+ table=[CATALOG, SALES, EMP])</blockquote>
+
+ <p>Returns null if and only if <code>plan</code> is null.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>plan</code> - Plan</dd>
@@ -1216,12 +1243,12 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 <div class="memberSignature"><span class="annotations">@API(since="1.24",
      status=EXPERIMENTAL)
 </span><span class="modifiers">protected</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isSubstituteRule</span>&#8203;(<span class="arguments"><a href="VolcanoRuleCall.html" title="class in org.apache.calcite.plan.volcano">VolcanoRuleCall</a>&nbsp;match)</span></div>
-<div class="block">Check whether a rule match is a substitute rule match.</div>
+<div class="block">Checks whether a rule match is a substitution rule match.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>match</code> - The rule match to check</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>True if the rule match is a substitute rule match</dd>
+<dd>True if the rule match is a substitution rule match</dd>
 </dl>
 </section>
 </li>
@@ -1231,7 +1258,7 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 <div class="memberSignature"><span class="annotations">@API(since="1.24",
      status=EXPERIMENTAL)
 </span><span class="modifiers">protected</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">isTransformationRule</span>&#8203;(<span class="arguments"><a href="VolcanoRuleCall.html" title="class in org.apache.calcite.plan.volcano">VolcanoRuleCall</a>&nbsp;match)</span></div>
-<div class="block">Check whether a rule match is a transformation rule match.</div>
+<div class="block">Checks whether a rule match is a transformation rule match.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>match</code> - The rule match to check</dd>
@@ -1318,7 +1345,7 @@ extends <a href="../AbstractRelOptPlanner.html" title="class in org.apache.calci
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

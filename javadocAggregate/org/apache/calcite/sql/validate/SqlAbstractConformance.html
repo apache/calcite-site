@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -351,6 +351,14 @@ implements <a href="SqlConformance.html" title="interface in org.apache.calcite.
 </td>
 </tr>
 <tr class="altColor" id="i24">
+<td class="colFirst"><code><a href="../fun/SqlLibrary.html" title="enum in org.apache.calcite.sql.fun">SqlLibrary</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#semantics()">semantics</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Controls the behavior of operators that are part of Standard SQL but
+ nevertheless have different behavior in different databases.</div>
+</td>
+</tr>
+<tr class="rowColor" id="i25">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#shouldConvertRaggedUnionTypesToVarying()">shouldConvertRaggedUnionTypesToVarying</a></span>()</code></th>
 <td class="colLast">
@@ -358,7 +366,7 @@ implements <a href="SqlConformance.html" title="interface in org.apache.calcite.
  lengths should be a VARCHAR type.</div>
 </td>
 </tr>
-<tr class="rowColor" id="i25">
+<tr class="altColor" id="i26">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#splitQuotedTableName()">splitQuotedTableName</a></span>()</code></th>
 <td class="colLast">
@@ -472,6 +480,7 @@ implements <a href="SqlConformance.html" title="interface in org.apache.calcite.
 
  <p>Among the built-in conformance levels, true in
  <a href="SqlConformanceEnum.html#BABEL"><code>SqlConformanceEnum.BABEL</code></a>,
+ <a href="SqlConformanceEnum.html#BIG_QUERY"><code>SqlConformanceEnum.BIG_QUERY</code></a>,
  <a href="SqlConformanceEnum.html#LENIENT"><code>SqlConformanceEnum.LENIENT</code></a>,
  <a href="SqlConformanceEnum.html#MYSQL_5"><code>SqlConformanceEnum.MYSQL_5</code></a>,
  <a href="SqlConformanceEnum.html#PRESTO"><code>SqlConformanceEnum.PRESTO</code></a>;
@@ -1025,6 +1034,39 @@ implements <a href="SqlConformance.html" title="interface in org.apache.calcite.
 </dl>
 </section>
 </li>
+<li class="blockList">
+<section class="detail">
+<h3><a id="semantics()">semantics</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../fun/SqlLibrary.html" title="enum in org.apache.calcite.sql.fun">SqlLibrary</a></span>&nbsp;<span class="memberName">semantics</span>()</div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="SqlConformance.html#semantics()">SqlConformance</a></code></span></div>
+<div class="block">Controls the behavior of operators that are part of Standard SQL but
+ nevertheless have different behavior in different databases.
+
+ <p>Consider the <code>SUBSTRING</code> operator. In ISO standard SQL, negative
+ start indexes are converted to 1; in Google BigQuery, negative start
+ indexes are treated as offsets from the end of the string. For example,
+ <code>SUBSTRING('abcde' FROM -3 FOR 2)</code> returns <code>'ab'</code> in standard
+ SQL and 'cd' in BigQuery.
+
+ <p>If you specify <code>conformance=BIG_QUERY</code> in your connection
+ parameters, <code>SUBSTRING</code> will give the BigQuery behavior. Similarly
+ MySQL and Oracle.
+
+ <p>Among the built-in conformance levels:
+ <ul>
+ <li><a href="SqlConformanceEnum.html#BIG_QUERY"><code>SqlConformanceEnum.BIG_QUERY</code></a> returns
+     <a href="../fun/SqlLibrary.html#BIG_QUERY"><code>SqlLibrary.BIG_QUERY</code></a>;
+ <li><a href="SqlConformanceEnum.html#MYSQL_5"><code>SqlConformanceEnum.MYSQL_5</code></a> returns <a href="../fun/SqlLibrary.html#MYSQL"><code>SqlLibrary.MYSQL</code></a>;
+ <li><a href="SqlConformanceEnum.html#ORACLE_10"><code>SqlConformanceEnum.ORACLE_10</code></a> and
+     <a href="SqlConformanceEnum.html#ORACLE_12"><code>SqlConformanceEnum.ORACLE_12</code></a> return <a href="../fun/SqlLibrary.html#ORACLE"><code>SqlLibrary.ORACLE</code></a>;
+ <li>otherwise returns <a href="../fun/SqlLibrary.html#STANDARD"><code>SqlLibrary.STANDARD</code></a>.
+ </ul></div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="SqlConformance.html#semantics()">semantics</a></code>&nbsp;in interface&nbsp;<code><a href="SqlConformance.html" title="interface in org.apache.calcite.sql.validate">SqlConformance</a></code></dd>
+</dl>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -1076,7 +1118,7 @@ implements <a href="SqlConformance.html" title="interface in org.apache.calcite.
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

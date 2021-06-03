@@ -379,7 +379,7 @@ implements org.apache.calcite.avatica.ConnectionProperty</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i1">
-<td class="colFirst"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#defaultValue()">defaultValue</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -394,7 +394,7 @@ implements org.apache.calcite.avatica.ConnectionProperty</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i4">
-<td class="colFirst"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#valueClass()">valueClass</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -664,7 +664,22 @@ the order they are declared.</div>
 <section class="detail">
 <h3><a id="CONFORMANCE">CONFORMANCE</a></h3>
 <div class="memberSignature"><span class="modifiers">public static final</span>&nbsp;<span class="returnType"><a href="CalciteConnectionProperty.html" title="enum in org.apache.calcite.config">CalciteConnectionProperty</a></span>&nbsp;<span class="memberName">CONFORMANCE</span></div>
-<div class="block">SQL conformance level.</div>
+<div class="block">SQL conformance level.
+
+ <p>Controls the semantics of ISO standard SQL features that are implemented
+ in non-standard ways in some other systems.
+
+ <p>For example, the <code>SUBSTRING(string FROM start [FOR length])</code>
+ operator treats negative <code>start</code> values as 1, but BigQuery's
+ implementation regards negative <code>starts</code> as counting from the end.
+ If <code>conformance=BIG_QUERY</code> we will use BigQuery's behavior.
+
+ <p>This property only affects ISO standard SQL features. For example, the
+ <code>SUBSTR</code> function is non-standard, so is controlled by the
+ <a href="#FUN"><code>fun</code></a> property. If you set <code>fun=oracle</code> you will get
+ <code>SUBSTR</code> with Oracle's semantics; if you set <code>fun=postgres</code> you
+ will get <code>SUBSTR</code> with PostgreSQL's (slightly different)
+ semantics.</div>
 </section>
 </li>
 <li class="blockList">
@@ -763,7 +778,7 @@ not permitted.)</div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="defaultValue()">defaultValue</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a></span>&nbsp;<span class="memberName">defaultValue</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a></span>&nbsp;<span class="memberName">defaultValue</span>()</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code>defaultValue</code>&nbsp;in interface&nbsp;<code>org.apache.calcite.avatica.ConnectionProperty</code></dd>
@@ -783,7 +798,7 @@ not permitted.)</div>
 <li class="blockList">
 <section class="detail">
 <h3><a id="valueClass()">valueClass</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a></span>&nbsp;<span class="memberName">valueClass</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a></span>&nbsp;<span class="memberName">valueClass</span>()</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code>valueClass</code>&nbsp;in interface&nbsp;<code>org.apache.calcite.avatica.ConnectionProperty</code></dd>
@@ -861,7 +876,7 @@ not permitted.)</div>
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

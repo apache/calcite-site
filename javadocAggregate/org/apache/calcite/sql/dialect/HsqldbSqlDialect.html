@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.js"></script>
 </head>
 <body class="class-declaration">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -205,20 +205,28 @@ extends <a href="../SqlDialect.html" title="class in org.apache.calcite.sql">Sql
 </tr>
 <tr class="rowColor" id="i1">
 <td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#supportsAggregateFunctionFilter()">supportsAggregateFunctionFilter</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns whether this dialect supports the use of FILTER clauses for
+ aggregate functions.</div>
+</td>
+</tr>
+<tr class="altColor" id="i2">
+<td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#supportsCharSet()">supportsCharSet</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns whether the dialect supports character set names as part of a
  data type, for instance <code>VARCHAR(30) CHARACTER SET `ISO-8859-1`</code>.</div>
 </td>
 </tr>
-<tr class="altColor" id="i2">
+<tr class="rowColor" id="i3">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#supportsWindowFunctions()">supportsWindowFunctions</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns whether this dialect supports window functions (OVER clause).</div>
 </td>
 </tr>
-<tr class="rowColor" id="i3">
+<tr class="altColor" id="i4">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unparseCall(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,int,int)">unparseCall</a></span>&#8203;(<a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
 <a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
@@ -226,11 +234,11 @@ int&nbsp;leftPrec,
 int&nbsp;rightPrec)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor" id="i4">
+<tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#unparseOffsetFetch(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)">unparseOffsetFetch</a></span>&#8203;(<a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
-<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset,
-<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch)</code></th>
+@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset,
+@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch)</code></th>
 <td class="colLast">
 <div class="block">Converts an offset and fetch into SQL.</div>
 </td>
@@ -316,6 +324,19 @@ int&nbsp;rightPrec)</code></th>
 </li>
 <li class="blockList">
 <section class="detail">
+<h3><a id="supportsAggregateFunctionFilter()">supportsAggregateFunctionFilter</a></h3>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">supportsAggregateFunctionFilter</span>()</div>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../SqlDialect.html#supportsAggregateFunctionFilter()">SqlDialect</a></code></span></div>
+<div class="block">Returns whether this dialect supports the use of FILTER clauses for
+ aggregate functions. e.g. <code>COUNT(*) FILTER (WHERE a = 2)</code>.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../SqlDialect.html#supportsAggregateFunctionFilter()">supportsAggregateFunctionFilter</a></code>&nbsp;in class&nbsp;<code><a href="../SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a></code></dd>
+</dl>
+</section>
+</li>
+<li class="blockList">
+<section class="detail">
 <h3><a id="supportsWindowFunctions()">supportsWindowFunctions</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">supportsWindowFunctions</span>()</div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../SqlDialect.html#supportsWindowFunctions()">SqlDialect</a></code></span></div>
@@ -343,8 +364,8 @@ int&nbsp;rightPrec)</span></div>
 <section class="detail">
 <h3><a id="unparseOffsetFetch(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)">unparseOffsetFetch</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">unparseOffsetFetch</span>&#8203;(<span class="arguments"><a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
-<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset,
-<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch)</span></div>
+@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset,
+@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../SqlDialect.html#unparseOffsetFetch(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)">SqlDialect</a></code></span></div>
 <div class="block">Converts an offset and fetch into SQL.
 
@@ -433,7 +454,7 @@ int&nbsp;rightPrec)</span></div>
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

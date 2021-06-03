@@ -122,8 +122,8 @@ implements <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Comparab
 <tbody>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,java.lang.String,org.apache.calcite.sql.SqlCollation)">NlsString</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;stringValue,
-<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;charsetName,
-<a href="../sql/SqlCollation.html" title="class in org.apache.calcite.sql">SqlCollation</a>&nbsp;collation)</code></th>
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;charsetName,
+@Nullable <a href="../sql/SqlCollation.html" title="class in org.apache.calcite.sql">SqlCollation</a>&nbsp;collation)</code></th>
 <td class="colLast">
 <div class="block">Easy constructor for Java string.</div>
 </td>
@@ -131,7 +131,7 @@ implements <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Comparab
 <tr class="rowColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.apache.calcite.avatica.util.ByteString,java.lang.String,org.apache.calcite.sql.SqlCollation)">NlsString</a></span>&#8203;(org.apache.calcite.avatica.util.ByteString&nbsp;bytesValue,
 <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;charsetName,
-<a href="../sql/SqlCollation.html" title="class in org.apache.calcite.sql">SqlCollation</a>&nbsp;collation)</code></th>
+@Nullable <a href="../sql/SqlCollation.html" title="class in org.apache.calcite.sql">SqlCollation</a>&nbsp;collation)</code></th>
 <td class="colLast">
 <div class="block">Creates a string in a specified character set.</div>
 </td>
@@ -205,21 +205,21 @@ boolean&nbsp;suffix,
 </tr>
 <tr class="altColor" id="i6">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;obj)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;obj)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i7">
-<td class="colFirst"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/nio/charset/Charset.html?is-external=true" title="class or interface in java.nio.charset" class="externalLink">Charset</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/nio/charset/Charset.html?is-external=true" title="class or interface in java.nio.charset" class="externalLink">Charset</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCharset()">getCharset</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i8">
-<td class="colFirst"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCharsetName()">getCharsetName</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i9">
-<td class="colFirst"><code><a href="../sql/SqlCollation.html" title="class in org.apache.calcite.sql">SqlCollation</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="../sql/SqlCollation.html" title="class in org.apache.calcite.sql">SqlCollation</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCollation()">getCollation</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -229,7 +229,7 @@ boolean&nbsp;suffix,
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i11">
-<td class="colFirst"><code>org.apache.calcite.avatica.util.ByteString</code></td>
+<td class="colFirst"><code>@Nullable org.apache.calcite.avatica.util.ByteString</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getValueBytes()">getValueBytes</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the value as a <code>ByteString</code>.</div>
@@ -283,7 +283,7 @@ boolean&nbsp;suffix,
 <h3><a id="&lt;init&gt;(org.apache.calcite.avatica.util.ByteString,java.lang.String,org.apache.calcite.sql.SqlCollation)">NlsString</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">NlsString</span>&#8203;(<span class="arguments">org.apache.calcite.avatica.util.ByteString&nbsp;bytesValue,
 <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;charsetName,
-<a href="../sql/SqlCollation.html" title="class in org.apache.calcite.sql">SqlCollation</a>&nbsp;collation)</span></div>
+@Nullable <a href="../sql/SqlCollation.html" title="class in org.apache.calcite.sql">SqlCollation</a>&nbsp;collation)</span></div>
 <div class="block">Creates a string in a specified character set.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -303,8 +303,8 @@ boolean&nbsp;suffix,
 <section class="detail">
 <h3><a id="&lt;init&gt;(java.lang.String,java.lang.String,org.apache.calcite.sql.SqlCollation)">NlsString</a></h3>
 <div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="memberName">NlsString</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;stringValue,
-<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;charsetName,
-<a href="../sql/SqlCollation.html" title="class in org.apache.calcite.sql">SqlCollation</a>&nbsp;collation)</span></div>
+@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;charsetName,
+@Nullable <a href="../sql/SqlCollation.html" title="class in org.apache.calcite.sql">SqlCollation</a>&nbsp;collation)</span></div>
 <div class="block">Easy constructor for Java string.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -353,7 +353,7 @@ boolean&nbsp;suffix,
 <li class="blockList">
 <section class="detail">
 <h3><a id="equals(java.lang.Object)">equals</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">equals</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;obj)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">boolean</span>&nbsp;<span class="memberName">equals</span>&#8203;(<span class="arguments">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>&nbsp;obj)</span></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang" class="externalLink">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a></code></dd>
@@ -373,19 +373,22 @@ boolean&nbsp;suffix,
 <li class="blockList">
 <section class="detail">
 <h3><a id="getCharsetName()">getCharsetName</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></span>&nbsp;<span class="memberName">getCharsetName</span>()</div>
+<div class="memberSignature"><span class="annotations">@Pure
+</span><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a></span>&nbsp;<span class="memberName">getCharsetName</span>()</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getCharset()">getCharset</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="https://docs.oracle.com/javase/9/docs/api/java/nio/charset/Charset.html?is-external=true" title="class or interface in java.nio.charset" class="externalLink">Charset</a></span>&nbsp;<span class="memberName">getCharset</span>()</div>
+<div class="memberSignature"><span class="annotations">@Pure
+</span><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/nio/charset/Charset.html?is-external=true" title="class or interface in java.nio.charset" class="externalLink">Charset</a></span>&nbsp;<span class="memberName">getCharset</span>()</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="getCollation()">getCollation</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../sql/SqlCollation.html" title="class in org.apache.calcite.sql">SqlCollation</a></span>&nbsp;<span class="memberName">getCollation</span>()</div>
+<div class="memberSignature"><span class="annotations">@Pure
+</span><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="../sql/SqlCollation.html" title="class in org.apache.calcite.sql">SqlCollation</a></span>&nbsp;<span class="memberName">getCollation</span>()</div>
 </section>
 </li>
 <li class="blockList">
@@ -466,7 +469,8 @@ boolean&nbsp;suffix,
 <li class="blockList">
 <section class="detail">
 <h3><a id="getValueBytes()">getValueBytes</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">org.apache.calcite.avatica.util.ByteString</span>&nbsp;<span class="memberName">getValueBytes</span>()</div>
+<div class="memberSignature"><span class="annotations">@Pure
+</span><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable org.apache.calcite.avatica.util.ByteString</span>&nbsp;<span class="memberName">getValueBytes</span>()</div>
 <div class="block">Returns the value as a <code>ByteString</code>.</div>
 </section>
 </li>
@@ -521,7 +525,7 @@ boolean&nbsp;suffix,
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

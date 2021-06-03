@@ -145,7 +145,7 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i4">
-<td class="colFirst"><code><a href="../rel/metadata/RelMetadataProvider.html" title="interface in org.apache.calcite.rel.metadata">RelMetadataProvider</a></code></td>
+<td class="colFirst"><code>@Nullable <a href="../rel/metadata/RelMetadataProvider.html" title="interface in org.apache.calcite.rel.metadata">RelMetadataProvider</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getMetadataProvider()">getMetadataProvider</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -326,13 +326,15 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 <li class="blockList">
 <section class="detail">
 <h3><a id="getMetadataProvider()">getMetadataProvider</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType"><a href="../rel/metadata/RelMetadataProvider.html" title="interface in org.apache.calcite.rel.metadata">RelMetadataProvider</a></span>&nbsp;<span class="memberName">getMetadataProvider</span>()</div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">@Nullable <a href="../rel/metadata/RelMetadataProvider.html" title="interface in org.apache.calcite.rel.metadata">RelMetadataProvider</a></span>&nbsp;<span class="memberName">getMetadataProvider</span>()</div>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="setMetadataProvider(org.apache.calcite.rel.metadata.RelMetadataProvider)">setMetadataProvider</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setMetadataProvider</span>&#8203;(<span class="arguments"><a href="../rel/metadata/RelMetadataProvider.html" title="interface in org.apache.calcite.rel.metadata">RelMetadataProvider</a>&nbsp;metadataProvider)</span></div>
+<div class="memberSignature"><span class="annotations">@EnsuresNonNull({"this.metadataProvider","this.metadataFactory"})
+</span><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setMetadataProvider</span>&#8203;(<span class="arguments">@UnknownInitialization&nbsp;RelOptCluster&nbsp;this,
+<a href="../rel/metadata/RelMetadataProvider.html" title="interface in org.apache.calcite.rel.metadata">RelMetadataProvider</a>&nbsp;metadataProvider)</span></div>
 <div class="block">Overrides the default metadata provider for this cluster.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -349,7 +351,9 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 <li class="blockList">
 <section class="detail">
 <h3><a id="setMetadataQuerySupplier(java.util.function.Supplier)">setMetadataQuerySupplier</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setMetadataQuerySupplier</span>&#8203;(<span class="arguments"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;<a href="../rel/metadata/RelMetadataQuery.html" title="class in org.apache.calcite.rel.metadata">RelMetadataQuery</a>&gt;&nbsp;mqSupplier)</span></div>
+<div class="memberSignature"><span class="annotations">@EnsuresNonNull("this.mqSupplier")
+</span><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">setMetadataQuerySupplier</span>&#8203;(<span class="arguments">@UnknownInitialization&nbsp;RelOptCluster&nbsp;this,
+<a href="https://docs.oracle.com/javase/9/docs/api/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;<a href="../rel/metadata/RelMetadataQuery.html" title="class in org.apache.calcite.rel.metadata">RelMetadataQuery</a>&gt;&nbsp;mqSupplier)</span></div>
 <div class="block">Sets up the customized <a href="../rel/metadata/RelMetadataQuery.html" title="class in org.apache.calcite.rel.metadata"><code>RelMetadataQuery</code></a> instance supplier that to
  use during rule planning.
 
@@ -494,7 +498,7 @@ extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html
 </a>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 </nav>
-<p class="legalCopy"><small>Copyright &copy; 2012-2020 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2021 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

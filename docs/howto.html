@@ -121,19 +121,15 @@ adapters.</p>
       <li><a href="#set-up-nexus-repository-credentials" id="markdown-toc-set-up-nexus-repository-credentials">Set up Nexus repository credentials</a></li>
       <li><a href="#making-a-snapshot" id="markdown-toc-making-a-snapshot">Making a snapshot</a></li>
       <li><a href="#making-a-release-candidate" id="markdown-toc-making-a-release-candidate">Making a release candidate</a>        <ul>
-          <li><a href="#to-prepare-a-release-candidate-directly-in-your-environment" id="markdown-toc-to-prepare-a-release-candidate-directly-in-your-environment">To prepare a release candidate directly in your environment:</a>            <ul>
-              <li><a href="#checking-the-artifacts" id="markdown-toc-checking-the-artifacts">Checking the artifacts</a></li>
-            </ul>
-          </li>
+          <li><a href="#starting-the-release-candidate-build" id="markdown-toc-starting-the-release-candidate-build">Starting the release candidate build</a></li>
+          <li><a href="#troubleshooting" id="markdown-toc-troubleshooting">Troubleshooting</a></li>
+          <li><a href="#checking-the-artifacts" id="markdown-toc-checking-the-artifacts">Checking the artifacts</a></li>
         </ul>
       </li>
       <li><a href="#cleaning-up-after-a-failed-release-attempt" id="markdown-toc-cleaning-up-after-a-failed-release-attempt">Cleaning up after a failed release attempt</a></li>
-      <li><a href="#validate-a-release" id="markdown-toc-validate-a-release">Validate a release</a></li>
+      <li><a href="#validating-a-release" id="markdown-toc-validating-a-release">Validating a release</a></li>
       <li><a href="#get-approval-for-a-release-via-apache-voting-process" id="markdown-toc-get-approval-for-a-release-via-apache-voting-process">Get approval for a release via Apache voting process</a></li>
-      <li><a href="#publishing-a-release" id="markdown-toc-publishing-a-release">Publishing a release</a>        <ul>
-          <li><a href="#publishing-directly-in-your-environment" id="markdown-toc-publishing-directly-in-your-environment">Publishing directly in your environment:</a></li>
-        </ul>
-      </li>
+      <li><a href="#publishing-a-release" id="markdown-toc-publishing-a-release">Publishing a release</a></li>
       <li><a href="#publish-the-web-site" id="markdown-toc-publish-the-web-site">Publishing the web site</a></li>
     </ul>
   </li>
@@ -853,7 +849,7 @@ That would perform the same steps, however it would push changes to the mock Nex
 <p>If any of the steps fail, fix the problem, and
 start again from the top.</p>
 
-<h3 id="to-prepare-a-release-candidate-directly-in-your-environment">To prepare a release candidate directly in your environment:</h3>
+<h4 id="starting-the-release-candidate-build">Starting the release candidate build</h4>
 
 <p>Pick a release candidate index and ensure it does not interfere with previous candidates for the version.</p>
 
@@ -864,12 +860,13 @@ start again from the top.</p>
 git clean <span class="nt">-xn</span>
 
 <span class="c"># Dry run the release candidate (push to asf-like-environment)</span>
-./gradlew prepareVote <span class="nt">-Prc</span><span class="o">=</span>1
+./gradlew prepareVote <span class="nt">-Prc</span><span class="o">=</span>0
 
 <span class="c"># Push release candidate to ASF servers</span>
-./gradlew prepareVote <span class="nt">-Prc</span><span class="o">=</span>1 <span class="nt">-Pasf</span></code></pre></figure>
+./gradlew prepareVote <span class="nt">-Prc</span><span class="o">=</span>0 <span class="nt">-Pasf</span></code></pre></figure>
 
-<p>prepareVote troubleshooting:</p>
+<h4 id="troubleshooting">Troubleshooting</h4>
+
 <ul>
   <li><code class="highlighter-rouge">net.rubygrapefruit.platform.NativeException: Could not start 'svnmucc'</code>: Make sure you have <code class="highlighter-rouge">svnmucc</code> command
 installed in your machine.</li>
@@ -931,7 +928,7 @@ https://repository.apache.org/content/repositories/orgapachecalcite-1000
 <p>If something is not correct, you can fix it, commit it, and prepare the next candidate.
 The release candidate tags might be kept for a while.</p>
 
-<h2 id="validate-a-release">Validate a release</h2>
+<h2 id="validating-a-release">Validating a release</h2>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Check that the signing key (e.g. DDB6E9812AD3FAE3) is pushed</span>
 gpg <span class="nt">--recv-keys</span> key
@@ -963,53 +960,9 @@ checkHash apache-calcite-X.Y.Z-rcN</code></pre></figure>
 
 <h2 id="get-approval-for-a-release-via-apache-voting-process">Get approval for a release via Apache voting process</h2>
 
-<p>Release vote on dev list
-Note: the draft mail is printed as the final step of <code class="highlighter-rouge">prepareVote</code> task,
-and you can find the draft in <code class="highlighter-rouge">/build/prepareVote/mail.txt</code></p>
-
-<figure class="highlight"><pre><code class="language-text" data-lang="text">To: dev@calcite.apache.org
-Subject: [VOTE] Release apache-calcite-X.Y.Z (release candidate N)
-
-Hi all,
-
-I have created a build for Apache Calcite X.Y.Z, release candidate N.
-
-Thanks to everyone who has contributed to this release.
-&lt;Further details about release.&gt; You can read the release notes here:
-https://github.com/apache/calcite/blob/XXXX/site/_docs/history.md
-
-The commit to be voted upon:
-https://gitbox.apache.org/repos/asf?p=calcite.git;a=commit;h=NNNNNN
-
-Its hash is XXXX.
-
-The artifacts to be voted on are located here:
-https://dist.apache.org/repos/dist/dev/calcite/apache-calcite-X.Y.Z-rcN/
-
-The hashes of the artifacts are as follows:
-src.tar.gz.sha512 XXXX
-
-A staged Maven repository is available for review at:
-https://repository.apache.org/content/repositories/orgapachecalcite-NNNN
-
-Release artifacts are signed with the following key:
-https://people.apache.org/keys/committer/jhyde.asc
-
-Please vote on releasing this package as Apache Calcite X.Y.Z.
-
-The vote is open for the next 72 hours and passes if a majority of
-at least three +1 PMC votes are cast.
-
-[ ] +1 Release this package as Apache Calcite X.Y.Z
-[ ]  0 I don't feel strongly about it, but I'm okay with the release
-[ ] -1 Do not release this package because...
-
-
-Here is my vote:
-
-+1 (binding)
-
-Julian</code></pre></figure>
+<p>Start a vote by sending an email to the dev list. The Gradle <code class="highlighter-rouge">prepareVote</code> task
+prints a draft mail at the end, if it completes successfully. You can find the
+draft in <code class="highlighter-rouge">/build/prepareVote/mail.txt</code>.</p>
 
 <p>After vote finishes, send out the result:</p>
 
@@ -1029,14 +982,13 @@ N non-binding +1s:
 
 No 0s or -1s.
 
-Therefore I am delighted to announce that the proposal to release
+Therefore, I am delighted to announce that the proposal to release
 Apache Calcite X.Y.Z has passed.
 
 Thanks everyone. We’ll now roll the release out to the mirrors.
 
 There was some feedback during voting. I shall open a separate
 thread to discuss.
-
 
 Julian</code></pre></figure>
 
@@ -1055,13 +1007,11 @@ This is based on the time when you expect to announce the release.
 This is usually a day after the vote closes.
 Remember that UTC date changes at 4 pm Pacific time.</p>
 
-<h3 id="publishing-directly-in-your-environment">Publishing directly in your environment:</h3>
-
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Dry run publishing the release (push to asf-like-environment)</span>
-./gradlew publishDist <span class="nt">-Prc</span><span class="o">=</span>1
+./gradlew publishDist <span class="nt">-Prc</span><span class="o">=</span>0
 
 <span class="c"># Publish the release to ASF servers</span>
-./gradlew publishDist <span class="nt">-Prc</span><span class="o">=</span>1 <span class="nt">-Pasf</span></code></pre></figure>
+./gradlew publishDist <span class="nt">-Prc</span><span class="o">=</span>0 <span class="nt">-Pasf</span></code></pre></figure>
 
 <p>Svnpubsub will publish to the
 <a href="https://dist.apache.org/repos/dist/release/calcite">release repo</a> and propagate to the
@@ -1080,17 +1030,12 @@ svn ci</code></pre></figure>
 Make sure to add the version number and date of the latest release at the site linked to in the email.</p>
 
 <p>Update the site with the release note, the release announcement, and the javadoc of the new version.
-The javadoc can be generated only from a final version (not a SNAPSHOT) so checkout the most recent
-tag and start working there (<code class="highlighter-rouge">git checkout calcite-X.Y.Z</code>). Add a release announcement by copying
+Add a release announcement by copying
 <a href="https://github.com/apache/calcite/blob/master/site/_posts/2016-10-12-release-1.10.0.md">site/_posts/2016-10-12-release-1.10.0.md</a>.
 Generate the javadoc, and <a href="http://localhost:4000/news/">preview</a> the site by following the
-instructions in <a href="https://github.com/apache/calcite/blob/master/site/README.md">site/README.md</a>. Check that the announcement,
+instructions in <a href="https://github.com/apache/calcite/blob/master/site/README.md">site/README.md</a>. Ensure the announcement,
 javadoc, and release note appear correctly and then publish the site following the instructions
-in the same file. Now checkout again the release branch (<code class="highlighter-rouge">git checkout branch-X.Y</code>) and commit
-the release announcement.</p>
-
-<p>Merge the release branch back into <code class="highlighter-rouge">master</code> (e.g., <code class="highlighter-rouge">git merge --ff-only branch-X.Y</code>) and align
-the <code class="highlighter-rouge">master</code> with the <code class="highlighter-rouge">site</code> branch (e.g., <code class="highlighter-rouge">git merge --ff-only site</code>).</p>
+in the same file.</p>
 
 <p>In JIRA, search for
 <a href="https://issues.apache.org/jira/issues/?jql=project%20%3D%20CALCITE%20and%20fixVersion%20%3D%201.5.0%20and%20status%20%3D%20Resolved%20and%20resolution%20%3D%20Fixed">all issues resolved in this release</a>,
@@ -1108,7 +1053,7 @@ address. You can use
 <a href="https://mail-archives.apache.org/mod_mbox/www-announce/201906.mbox/%3CCA%2BEpF8tcJcZ41rVuwJODJmyRy-qAxZUQm9OxKsoDi07c2SKs_A%40mail.gmail.com%3E">the 1.20.0 announcement</a>
 as a template. Be sure to include a brief description of the project.</p>
 
-<p>Increase the <code class="highlighter-rouge">calcite.version</code> value in <code class="highlighter-rouge">/gradle.properties</code> and commit &amp; push
+<p>Increase the <code class="highlighter-rouge">calcite.version</code> value in <code class="highlighter-rouge">/gradle.properties</code>, commit and push
 the change with the message “Prepare for next development iteration”
 (see <a href="https://github.com/apache/calcite/commit/ed1470a3ea53a78c667354a5ec066425364eca73">ed1470a</a> as a reference)</p>
 

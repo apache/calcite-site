@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -50,7 +50,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../org/apache/calcite/avatica/remote/AuthenticationType.html" title="enum in org.apache.calcite.avatica.remote"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientSpnegoImpl.html" title="class in org.apache.calcite.avatica.remote"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttpClient.html" title="interface in org.apache.calcite.avatica.remote"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html" target="_top">Frames</a></li>
@@ -109,17 +109,13 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttpClient.html" title="interface in org.apache.calcite.avatica.remote">AvaticaHttpClient</a>, <a href="../../../../../org/apache/calcite/avatica/remote/HostnameVerificationConfigurable.html" title="interface in org.apache.calcite.avatica.remote">HostnameVerificationConfigurable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/KeyStoreConfigurable.html" title="interface in org.apache.calcite.avatica.remote">KeyStoreConfigurable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/TrustStoreConfigurable.html" title="interface in org.apache.calcite.avatica.remote">TrustStoreConfigurable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/UsernamePasswordAuthenticateable.html" title="interface in org.apache.calcite.avatica.remote">UsernamePasswordAuthenticateable</a></dd>
-</dl>
-<dl>
-<dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientSpnegoImpl.html" title="class in org.apache.calcite.avatica.remote">AvaticaCommonsHttpClientSpnegoImpl</a></dd>
+<dd><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttpClient.html" title="interface in org.apache.calcite.avatica.remote">AvaticaHttpClient</a>, <a href="../../../../../org/apache/calcite/avatica/remote/GSSAuthenticateable.html" title="interface in org.apache.calcite.avatica.remote">GSSAuthenticateable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/HttpClientPoolConfigurable.html" title="interface in org.apache.calcite.avatica.remote">HttpClientPoolConfigurable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/UsernamePasswordAuthenticateable.html" title="interface in org.apache.calcite.avatica.remote">UsernamePasswordAuthenticateable</a></dd>
 </dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">AvaticaCommonsHttpClientImpl</span>
 extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>
-implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttpClient.html" title="interface in org.apache.calcite.avatica.remote">AvaticaHttpClient</a>, <a href="../../../../../org/apache/calcite/avatica/remote/UsernamePasswordAuthenticateable.html" title="interface in org.apache.calcite.avatica.remote">UsernamePasswordAuthenticateable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/TrustStoreConfigurable.html" title="interface in org.apache.calcite.avatica.remote">TrustStoreConfigurable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/KeyStoreConfigurable.html" title="interface in org.apache.calcite.avatica.remote">KeyStoreConfigurable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/HostnameVerificationConfigurable.html" title="interface in org.apache.calcite.avatica.remote">HostnameVerificationConfigurable</a></pre>
+implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttpClient.html" title="interface in org.apache.calcite.avatica.remote">AvaticaHttpClient</a>, <a href="../../../../../org/apache/calcite/avatica/remote/HttpClientPoolConfigurable.html" title="interface in org.apache.calcite.avatica.remote">HttpClientPoolConfigurable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/UsernamePasswordAuthenticateable.html" title="interface in org.apache.calcite.avatica.remote">UsernamePasswordAuthenticateable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/GSSAuthenticateable.html" title="interface in org.apache.calcite.avatica.remote">GSSAuthenticateable</a></pre>
 <div class="block">A common class to invoke HTTP requests against the Avatica server agnostic of the data being
  sent and received across the wire.</div>
 </li>
@@ -128,21 +124,6 @@ implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttp
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- ======== NESTED CLASS SUMMARY ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="nested.class.summary">
-<!--   -->
-</a>
-<h3>Nested Class Summary</h3>
-<ul class="blockList">
-<li class="blockList"><a name="nested.classes.inherited.from.class.org.apache.calcite.avatica.remote.HostnameVerificationConfigurable">
-<!--   -->
-</a>
-<h3>Nested classes/interfaces inherited from interface&nbsp;org.apache.calcite.avatica.remote.<a href="../../../../../org/apache/calcite/avatica/remote/HostnameVerificationConfigurable.html" title="interface in org.apache.calcite.avatica.remote">HostnameVerificationConfigurable</a></h3>
-<code><a href="../../../../../org/apache/calcite/avatica/remote/HostnameVerificationConfigurable.HostnameVerification.html" title="enum in org.apache.calcite.avatica.remote">HostnameVerificationConfigurable.HostnameVerification</a></code></li>
-</ul>
-</li>
-</ul>
 <!-- =========== FIELD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="field.summary">
@@ -180,36 +161,12 @@ implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttp
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#host">host</a></span></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected <a href="../../../../../org/apache/calcite/avatica/remote/HostnameVerificationConfigurable.HostnameVerification.html" title="enum in org.apache.calcite.avatica.remote">HostnameVerificationConfigurable.HostnameVerification</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#hostnameVerification">hostnameVerification</a></span></code>&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>protected <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#keyPassword">keyPassword</a></span></code>&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code>protected <a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#keystore">keystore</a></span></code>&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>protected <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#keystorePassword">keystorePassword</a></span></code>&nbsp;</td>
-</tr>
-<tr class="altColor">
 <td class="colFirst"><code>protected org.apache.http.impl.conn.PoolingHttpClientConnectionManager</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#pool">pool</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected org.apache.http.config.Registry&lt;org.apache.http.conn.socket.ConnectionSocketFactory&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#socketFactoryRegistry">socketFactoryRegistry</a></span></code>&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code>protected <a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#truststore">truststore</a></span></code>&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>protected <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#truststorePassword">truststorePassword</a></span></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected <a href="https://docs.oracle.com/javase/8/docs/api/java/net/URI.html?is-external=true" title="class or interface in java.net">URI</a></code></td>
@@ -253,64 +210,29 @@ implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttp
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#configureConnectionPool-org.apache.http.config.Registry-">configureConnectionPool</a></span>(org.apache.http.config.Registry&lt;org.apache.http.conn.socket.ConnectionSocketFactory&gt;&nbsp;registry)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#initializeClient-org.apache.http.impl.conn.PoolingHttpClientConnectionManager-">initializeClient</a></span>(org.apache.http.impl.conn.PoolingHttpClientConnectionManager&nbsp;pool)</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#configureHttpRegistry-org.apache.http.config.RegistryBuilder-">configureHttpRegistry</a></span>(org.apache.http.config.RegistryBuilder&lt;org.apache.http.conn.socket.ConnectionSocketFactory&gt;&nbsp;registryBuilder)</code>&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#configureHttpsRegistry-org.apache.http.config.RegistryBuilder-">configureHttpsRegistry</a></span>(org.apache.http.config.RegistryBuilder&lt;org.apache.http.conn.socket.ConnectionSocketFactory&gt;&nbsp;registryBuilder)</code>&nbsp;</td>
-</tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code>protected org.apache.http.config.Registry&lt;org.apache.http.conn.socket.ConnectionSocketFactory&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#configureSocketFactories--">configureSocketFactories</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#initializeClient--">initializeClient</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#loadKeyStore-org.apache.http.ssl.SSLContextBuilder-">loadKeyStore</a></span>(org.apache.http.ssl.SSLContextBuilder&nbsp;sslContextBuilder)</code>&nbsp;</td>
-</tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#loadTrustStore-org.apache.http.ssl.SSLContextBuilder-">loadTrustStore</a></span>(org.apache.http.ssl.SSLContextBuilder&nbsp;sslContextBuilder)</code>&nbsp;</td>
-</tr>
-<tr id="i7" class="rowColor">
 <td class="colFirst"><code>byte[]</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#send-byte:A-">send</a></span>(byte[]&nbsp;request)</code>
 <div class="block">Sends a serialized request to the Avatica server.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#setHostnameVerification-org.apache.calcite.avatica.remote.HostnameVerificationConfigurable.HostnameVerification-">setHostnameVerification</a></span>(<a href="../../../../../org/apache/calcite/avatica/remote/HostnameVerificationConfigurable.HostnameVerification.html" title="enum in org.apache.calcite.avatica.remote">HostnameVerificationConfigurable.HostnameVerification</a>&nbsp;verification)</code>
-<div class="block">Instructs the <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttpClient.html" title="interface in org.apache.calcite.avatica.remote"><code>AvaticaHttpClient</code></a> how to perform hostname verification for SSL
- connections.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#setGSSCredential-org.ietf.jgss.GSSCredential-">setGSSCredential</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/org/ietf/jgss/GSSCredential.html?is-external=true" title="class or interface in org.ietf.jgss">GSSCredential</a>&nbsp;credential)</code>
+<div class="block">Sets the GSS Credential
+ If credential is null, then the current subject will be used</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#setKeyStore-java.io.File-java.lang.String-java.lang.String-">setKeyStore</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;keystore,
-           <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;keystorepassword,
-           <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;keypassword)</code>
-<div class="block">Sets a keystore containing the collection of client side certificates
- to use for HTTPS mutual authentication along with
- password for keystore and password for key</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#setHttpClientPool-org.apache.http.impl.conn.PoolingHttpClientConnectionManager-">setHttpClientPool</a></span>(org.apache.http.impl.conn.PoolingHttpClientConnectionManager&nbsp;pool)</code>
+<div class="block">Sets a PoolingHttpClientConnectionManager containing the collection of SSL/TLS server
+ keys and truststores to use for HTTPS calls.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#setTrustStore-java.io.File-java.lang.String-">setTrustStore</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;truststore,
-             <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;password)</code>
-<div class="block">Sets a truststore containing the collection of trust SSL/TLS server certificates
- to use for HTTPS calls and the password for that truststore.</div>
-</td>
-</tr>
-<tr id="i11" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#setUsernamePassword-org.apache.calcite.avatica.remote.AuthenticationType-java.lang.String-java.lang.String-">setUsernamePassword</a></span>(<a href="../../../../../org/apache/calcite/avatica/remote/AuthenticationType.html" title="enum in org.apache.calcite.avatica.remote">AuthenticationType</a>&nbsp;authType,
                    <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;username,
@@ -424,64 +346,10 @@ implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttp
 <a name="userToken">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>userToken</h4>
 <pre>protected&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a> userToken</pre>
-</li>
-</ul>
-<a name="truststore">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>truststore</h4>
-<pre>protected&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a> truststore</pre>
-</li>
-</ul>
-<a name="keystore">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>keystore</h4>
-<pre>protected&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a> keystore</pre>
-</li>
-</ul>
-<a name="truststorePassword">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>truststorePassword</h4>
-<pre>protected&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> truststorePassword</pre>
-</li>
-</ul>
-<a name="keystorePassword">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>keystorePassword</h4>
-<pre>protected&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> keystorePassword</pre>
-</li>
-</ul>
-<a name="keyPassword">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>keyPassword</h4>
-<pre>protected&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> keyPassword</pre>
-</li>
-</ul>
-<a name="hostnameVerification">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>hostnameVerification</h4>
-<pre>protected&nbsp;<a href="../../../../../org/apache/calcite/avatica/remote/HostnameVerificationConfigurable.HostnameVerification.html" title="enum in org.apache.calcite.avatica.remote">HostnameVerificationConfigurable.HostnameVerification</a> hostnameVerification</pre>
 </li>
 </ul>
 </li>
@@ -509,77 +377,13 @@ implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttp
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="initializeClient--">
+<a name="initializeClient-org.apache.http.impl.conn.PoolingHttpClientConnectionManager-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>initializeClient</h4>
-<pre>protected&nbsp;void&nbsp;initializeClient()</pre>
-</li>
-</ul>
-<a name="configureConnectionPool-org.apache.http.config.Registry-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>configureConnectionPool</h4>
-<pre>protected&nbsp;void&nbsp;configureConnectionPool(org.apache.http.config.Registry&lt;org.apache.http.conn.socket.ConnectionSocketFactory&gt;&nbsp;registry)</pre>
-</li>
-</ul>
-<a name="configureSocketFactories--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>configureSocketFactories</h4>
-<pre>protected&nbsp;org.apache.http.config.Registry&lt;org.apache.http.conn.socket.ConnectionSocketFactory&gt;&nbsp;configureSocketFactories()</pre>
-</li>
-</ul>
-<a name="configureHttpsRegistry-org.apache.http.config.RegistryBuilder-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>configureHttpsRegistry</h4>
-<pre>protected&nbsp;void&nbsp;configureHttpsRegistry(org.apache.http.config.RegistryBuilder&lt;org.apache.http.conn.socket.ConnectionSocketFactory&gt;&nbsp;registryBuilder)</pre>
-</li>
-</ul>
-<a name="loadKeyStore-org.apache.http.ssl.SSLContextBuilder-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>loadKeyStore</h4>
-<pre>protected&nbsp;void&nbsp;loadKeyStore(org.apache.http.ssl.SSLContextBuilder&nbsp;sslContextBuilder)
-                     throws <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</a></pre>
-<dl>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</a></code></dd>
-</dl>
-</li>
-</ul>
-<a name="loadTrustStore-org.apache.http.ssl.SSLContextBuilder-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>loadTrustStore</h4>
-<pre>protected&nbsp;void&nbsp;loadTrustStore(org.apache.http.ssl.SSLContextBuilder&nbsp;sslContextBuilder)
-                       throws <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</a></pre>
-<dl>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</a></code></dd>
-</dl>
-</li>
-</ul>
-<a name="configureHttpRegistry-org.apache.http.config.RegistryBuilder-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>configureHttpRegistry</h4>
-<pre>protected&nbsp;void&nbsp;configureHttpRegistry(org.apache.http.config.RegistryBuilder&lt;org.apache.http.conn.socket.ConnectionSocketFactory&gt;&nbsp;registryBuilder)</pre>
+<pre>protected&nbsp;void&nbsp;initializeClient(org.apache.http.impl.conn.PoolingHttpClientConnectionManager&nbsp;pool)</pre>
 </li>
 </ul>
 <a name="send-byte:A-">
@@ -622,64 +426,39 @@ implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttp
 </dl>
 </li>
 </ul>
-<a name="setTrustStore-java.io.File-java.lang.String-">
+<a name="setGSSCredential-org.ietf.jgss.GSSCredential-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>setTrustStore</h4>
-<pre>public&nbsp;void&nbsp;setTrustStore(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;truststore,
-                          <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;password)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../org/apache/calcite/avatica/remote/TrustStoreConfigurable.html#setTrustStore-java.io.File-java.lang.String-">TrustStoreConfigurable</a></code></span></div>
-<div class="block">Sets a truststore containing the collection of trust SSL/TLS server certificates
- to use for HTTPS calls and the password for that truststore.</div>
+<h4>setGSSCredential</h4>
+<pre>public&nbsp;void&nbsp;setGSSCredential(<a href="https://docs.oracle.com/javase/8/docs/api/org/ietf/jgss/GSSCredential.html?is-external=true" title="class or interface in org.ietf.jgss">GSSCredential</a>&nbsp;credential)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../org/apache/calcite/avatica/remote/GSSAuthenticateable.html#setGSSCredential-org.ietf.jgss.GSSCredential-">GSSAuthenticateable</a></code></span></div>
+<div class="block">Sets the GSS Credential
+ If credential is null, then the current subject will be used</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../org/apache/calcite/avatica/remote/TrustStoreConfigurable.html#setTrustStore-java.io.File-java.lang.String-">setTrustStore</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../org/apache/calcite/avatica/remote/TrustStoreConfigurable.html" title="interface in org.apache.calcite.avatica.remote">TrustStoreConfigurable</a></code></dd>
+<dd><code><a href="../../../../../org/apache/calcite/avatica/remote/GSSAuthenticateable.html#setGSSCredential-org.ietf.jgss.GSSCredential-">setGSSCredential</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../org/apache/calcite/avatica/remote/GSSAuthenticateable.html" title="interface in org.apache.calcite.avatica.remote">GSSAuthenticateable</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>truststore</code> - The truststore on the local filesystem</dd>
-<dd><code>password</code> - The truststore's password</dd>
+<dd><code>credential</code> - GSS Credentials</dd>
 </dl>
 </li>
 </ul>
-<a name="setKeyStore-java.io.File-java.lang.String-java.lang.String-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setKeyStore</h4>
-<pre>public&nbsp;void&nbsp;setKeyStore(<a href="https://docs.oracle.com/javase/8/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;keystore,
-                        <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;keystorepassword,
-                        <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;keypassword)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../org/apache/calcite/avatica/remote/KeyStoreConfigurable.html#setKeyStore-java.io.File-java.lang.String-java.lang.String-">KeyStoreConfigurable</a></code></span></div>
-<div class="block">Sets a keystore containing the collection of client side certificates
- to use for HTTPS mutual authentication along with
- password for keystore and password for key</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../org/apache/calcite/avatica/remote/KeyStoreConfigurable.html#setKeyStore-java.io.File-java.lang.String-java.lang.String-">setKeyStore</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../org/apache/calcite/avatica/remote/KeyStoreConfigurable.html" title="interface in org.apache.calcite.avatica.remote">KeyStoreConfigurable</a></code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>keystore</code> - The keystore on the local filesystem</dd>
-<dd><code>keystorepassword</code> - The keystore's password</dd>
-<dd><code>keypassword</code> - The key's password</dd>
-</dl>
-</li>
-</ul>
-<a name="setHostnameVerification-org.apache.calcite.avatica.remote.HostnameVerificationConfigurable.HostnameVerification-">
+<a name="setHttpClientPool-org.apache.http.impl.conn.PoolingHttpClientConnectionManager-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>setHostnameVerification</h4>
-<pre>public&nbsp;void&nbsp;setHostnameVerification(<a href="../../../../../org/apache/calcite/avatica/remote/HostnameVerificationConfigurable.HostnameVerification.html" title="enum in org.apache.calcite.avatica.remote">HostnameVerificationConfigurable.HostnameVerification</a>&nbsp;verification)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../org/apache/calcite/avatica/remote/HostnameVerificationConfigurable.html#setHostnameVerification-org.apache.calcite.avatica.remote.HostnameVerificationConfigurable.HostnameVerification-">HostnameVerificationConfigurable</a></code></span></div>
-<div class="block">Instructs the <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttpClient.html" title="interface in org.apache.calcite.avatica.remote"><code>AvaticaHttpClient</code></a> how to perform hostname verification for SSL
- connections.</div>
+<h4>setHttpClientPool</h4>
+<pre>public&nbsp;void&nbsp;setHttpClientPool(org.apache.http.impl.conn.PoolingHttpClientConnectionManager&nbsp;pool)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../org/apache/calcite/avatica/remote/HttpClientPoolConfigurable.html#setHttpClientPool-org.apache.http.impl.conn.PoolingHttpClientConnectionManager-">HttpClientPoolConfigurable</a></code></span></div>
+<div class="block">Sets a PoolingHttpClientConnectionManager containing the collection of SSL/TLS server
+ keys and truststores to use for HTTPS calls.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../org/apache/calcite/avatica/remote/HostnameVerificationConfigurable.html#setHostnameVerification-org.apache.calcite.avatica.remote.HostnameVerificationConfigurable.HostnameVerification-">setHostnameVerification</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../org/apache/calcite/avatica/remote/HostnameVerificationConfigurable.html" title="interface in org.apache.calcite.avatica.remote">HostnameVerificationConfigurable</a></code></dd>
+<dd><code><a href="../../../../../org/apache/calcite/avatica/remote/HttpClientPoolConfigurable.html#setHttpClientPool-org.apache.http.impl.conn.PoolingHttpClientConnectionManager-">setHttpClientPool</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../org/apache/calcite/avatica/remote/HttpClientPoolConfigurable.html" title="interface in org.apache.calcite.avatica.remote">HttpClientPoolConfigurable</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>verification</code> - The mode of hostname verification</dd>
+<dd><code>pool</code> - The http connection pool</dd>
 </dl>
 </li>
 </ul>
@@ -712,7 +491,7 @@ implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttp
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../org/apache/calcite/avatica/remote/AuthenticationType.html" title="enum in org.apache.calcite.avatica.remote"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientSpnegoImpl.html" title="class in org.apache.calcite.avatica.remote"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttpClient.html" title="interface in org.apache.calcite.avatica.remote"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html" target="_top">Frames</a></li>

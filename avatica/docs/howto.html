@@ -8,10 +8,6 @@
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/avatica/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/avatica/favicon.ico">
-  <!--[if lt IE 9]>
-  <script src="/js/html5shiv.min.js"></script>
-  <script src="/js/respond.min.js"></script>
-  <![endif]-->
 </head>
 
 
@@ -723,8 +719,8 @@
       <li><a href="#set-up-nexus-repository-credentials-for-calcite-committers" id="markdown-toc-set-up-nexus-repository-credentials-for-calcite-committers">Set up Nexus repository credentials (for Calcite committers)</a></li>
       <li><a href="#making-a-snapshot-for-calcite-committers" id="markdown-toc-making-a-snapshot-for-calcite-committers">Making a snapshot (for Calcite committers)</a></li>
       <li><a href="#making-a-release-candidate-for-calcite-committers" id="markdown-toc-making-a-release-candidate-for-calcite-committers">Making a release candidate (for Calcite committers)</a>        <ul>
-          <li><a href="#to-prepare-a-release-candidate-directly-in-your-environment" id="markdown-toc-to-prepare-a-release-candidate-directly-in-your-environment">To prepare a release candidate directly in your environment:</a></li>
-          <li><a href="#to-prepare-a-release-candidate-in-docker" id="markdown-toc-to-prepare-a-release-candidate-in-docker">To prepare a release candidate in Docker:</a></li>
+          <li><a href="#prepare-a-release-candidate-directly-in-your-environment" id="markdown-toc-prepare-a-release-candidate-directly-in-your-environment">Prepare a release candidate directly in your environment</a></li>
+          <li><a href="#prepare-a-release-candidate-in-docker" id="markdown-toc-prepare-a-release-candidate-in-docker">Prepare a release candidate in Docker</a></li>
         </ul>
       </li>
       <li><a href="#checking-the-artifacts" id="markdown-toc-checking-the-artifacts">Checking the artifacts</a></li>
@@ -732,8 +728,8 @@
       <li><a href="#validate-a-release" id="markdown-toc-validate-a-release">Validate a release</a></li>
       <li><a href="#get-approval-for-a-release-via-apache-voting-process-for-calcite-committers" id="markdown-toc-get-approval-for-a-release-via-apache-voting-process-for-calcite-committers">Get approval for a release via Apache voting process (for Calcite committers)</a></li>
       <li><a href="#publishing-a-release-for-calcite-committers" id="markdown-toc-publishing-a-release-for-calcite-committers">Publishing a release (for Calcite committers)</a>        <ul>
-          <li><a href="#publishing-directly-in-your-environment" id="markdown-toc-publishing-directly-in-your-environment">Publishing directly in your environment:</a></li>
-          <li><a href="#publishing-a-release-using-docker" id="markdown-toc-publishing-a-release-using-docker">Publishing a release using docker:</a></li>
+          <li><a href="#publishing-directly-in-your-environment" id="markdown-toc-publishing-directly-in-your-environment">Publishing directly in your environment</a></li>
+          <li><a href="#publishing-a-release-using-docker" id="markdown-toc-publishing-a-release-using-docker">Publishing a release using docker</a></li>
         </ul>
       </li>
       <li><a href="#add-release-notes-and-announce-the-release" id="markdown-toc-add-release-notes-and-announce-the-release">Add release notes and announce the release</a></li>
@@ -756,8 +752,8 @@ therefore you need to
 <code class="highlighter-rouge">cd</code> to the root directory of the unpacked source,
 then build using Gradle:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz apache-calcite-avatica-1.18.0-src.tar.gz
-<span class="nv">$ </span><span class="nb">cd </span>apache-calcite-avatica-1.18.0-src
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz apache-calcite-avatica-1.19.0-src.tar.gz
+<span class="nv">$ </span><span class="nb">cd </span>apache-calcite-avatica-1.19.0-src
 <span class="nv">$ </span>gradle build</code></pre></figure>
 
 <p><a href="#running-tests">Running tests</a> describes how to run more or fewer
@@ -908,6 +904,7 @@ git clean <span class="nt">-xn</span>
   <li>Check that <code class="highlighter-rouge">NOTICE</code> has the current copyright year.</li>
   <li>Check that <code class="highlighter-rouge">calcite.avatica.version</code> has the proper value in <code class="highlighter-rouge">/gradle.properties</code>.</li>
   <li>Add release notes to <code class="highlighter-rouge">site/_docs/history.md</code>. Include the commit history,
+names of people who contributed to the release,
 and say which versions of Java, Guava and operating systems the release is
 tested against.</li>
   <li>Generate a report of vulnerabilities that occur among dependencies,
@@ -923,26 +920,28 @@ just about to release)</li>
 so there’s no harm if it fails. It might leave <code class="highlighter-rouge">-rc</code> tag behind
 which can be removed if required.</p>
 
-<p>You can perform a dry-run release with a help of https://github.com/vlsi/asflike-release-environment
-That would perform the same steps, however it would push changes to the mock Nexus, Git, and SVN servers.</p>
+<p>You can perform a dry-run release with a help of
+<a href="https://github.com/vlsi/asflike-release-environment">vlsi/asflike-release-environment</a>.
+That performs the same steps, however it pushes changes to the mock Nexus, Git, and SVN servers.</p>
 
 <p>If any of the steps fail, fix the problem, and
 start again from the top.</p>
 
-<h3 id="to-prepare-a-release-candidate-directly-in-your-environment">To prepare a release candidate directly in your environment:</h3>
+<h3 id="prepare-a-release-candidate-directly-in-your-environment">Prepare a release candidate directly in your environment</h3>
 
-<p>Pick a release candidate index and ensure it does not interfere with previous candidates for the version.</p>
+<p>Pick a release candidate index (starting from 0) and ensure it does
+not interfere with previous candidates for the version.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Make sure that there are no junk files in the sandbox</span>
 git clean <span class="nt">-xn</span>
 
 <span class="c"># Dry run the release candidate (push to asf-like-environment)</span>
-./gradlew prepareVote <span class="nt">-Prc</span><span class="o">=</span>1
+./gradlew prepareVote <span class="nt">-Prc</span><span class="o">=</span>0
 
 <span class="c"># Push release candidate to ASF servers</span>
-./gradlew prepareVote <span class="nt">-Prc</span><span class="o">=</span>1 <span class="nt">-Pasf</span></code></pre></figure>
+./gradlew prepareVote <span class="nt">-Prc</span><span class="o">=</span>0 <span class="nt">-Pasf</span></code></pre></figure>
 
-<h3 id="to-prepare-a-release-candidate-in-docker">To prepare a release candidate in Docker:</h3>
+<h3 id="prepare-a-release-candidate-in-docker">Prepare a release candidate in Docker</h3>
 
 <ul>
   <li>
@@ -1154,13 +1153,13 @@ tag triggers Docker Hub to start building the docker images immediately and the 
 If the artifacts are not yet available, the build on Docker Hub will fail. It’s best to continue with the following steps
 after you have confirmed that the nexus artifacts were promoted properly.</p>
 
-<h3 id="publishing-directly-in-your-environment">Publishing directly in your environment:</h3>
+<h3 id="publishing-directly-in-your-environment">Publishing directly in your environment</h3>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Dry run publishing the release (push to asf-like-environment)</span>
-./gradlew publishDist <span class="nt">-Prc</span><span class="o">=</span>1
+./gradlew publishDist <span class="nt">-Prc</span><span class="o">=</span>0
 
 <span class="c"># Publish the release to ASF servers</span>
-./gradlew publishDist <span class="nt">-Prc</span><span class="o">=</span>1 <span class="nt">-Pasf</span></code></pre></figure>
+./gradlew publishDist <span class="nt">-Prc</span><span class="o">=</span>0 <span class="nt">-Pasf</span></code></pre></figure>
 
 <p>If there are more than 2 releases in SVN (see https://dist.apache.org/repos/dist/release/calcite),
 clear out the oldest ones:</p>
@@ -1170,15 +1169,18 @@ clear out the oldest ones:</p>
 <p>The old releases will remain available in the
 <a href="http://archive.apache.org/dist/calcite/">release archive</a>.</p>
 
-<h3 id="publishing-a-release-using-docker">Publishing a release using docker:</h3>
+<h3 id="publishing-a-release-using-docker">Publishing a release using docker</h3>
+
 <p>This assumes that a rc release was tagged and pushed to the git repository.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose run promote-release</code></pre></figure>
 
 <h2 id="add-release-notes-and-announce-the-release">Add release notes and announce the release</h2>
+
 <p>Add a release note by copying
 <a href="https://github.com/apache/calcite-avatica/tree/master/site/_posts/2016-11-01-release-1.9.0.md">site/_posts/2016-11-01-release-1.9.0.md</a>,
-generate the javadoc and copy to <code class="highlighter-rouge">site/target/avatica/javadocAggregate</code>
+update the version number in <code class="highlighter-rouge">gradle.properties</code>,
+generate the javadoc and copy to <code class="highlighter-rouge">site/target/avatica/javadocAggregate</code>,
 <a href="#publish-the-web-site">publish the site</a>,
 and check that it appears in the contents in <a href="http://localhost:4000/news/">news</a>.</p>
 

@@ -8,10 +8,6 @@
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/avatica/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/avatica/favicon.ico">
-  <!--[if lt IE 9]>
-  <script src="/js/html5shiv.min.js"></script>
-  <script src="/js/respond.min.js"></script>
-  <![endif]-->
 </head>
 
 
@@ -709,6 +705,79 @@
 <a href="https://github.com/apache/calcite-avatica/releases">github</a>.
 Downloads are available on the
 <a href="/avatica/downloads/avatica.html">downloads page</a>.</p>
+
+<h2 id="v1-19-0"><a href="https://github.com/apache/calcite-avatica/releases/tag/rel/avatica-1.19.0">1.19.0</a> / 2021-10-11</h2>
+
+<p>Apache Calcite Avatica 1.19.0 adds support for <code class="highlighter-rouge">BIT</code> and <code class="highlighter-rouge">NULL</code> data
+types, fixes issues with values of type <code class="highlighter-rouge">ARRAY</code>, and includes a few
+dependency updates.</p>
+
+<p>Compatibility: This release is tested
+on Linux, macOS, Microsoft Windows;
+using Oracle JDK 8, 9, 10, 11, 12, 13, 14, 15;
+using IBM Java 8;
+Guava versions 14.0.1 to 31.0.1-jre;
+other software versions as specified in <code class="highlighter-rouge">gradle.properties</code>.</p>
+
+<p>Contributors to this release:
+Alessandro Solimando,
+Amann Malik,
+chenyuzhi459,
+Francis Chuang,
+Istvan Toth,
+Julian Hyde (release manager),
+NobiGo,
+Jack Scott,
+Sergey Nuyanzin,
+Stamatis Zampetakis,
+Zeng Rui.</p>
+
+<p>Features and bug fixes</p>
+
+<ul>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4573">CALCITE-4573</a>]
+<code class="highlighter-rouge">NullPointerException</code> while fetching from a column of type <code class="highlighter-rouge">ARRAY</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4626">CALCITE-4626</a>]
+Upgrade protobuf version to 3.17.1 to remove <code class="highlighter-rouge">com.google.protobuf.UnsafeUtil</code>
+warnings</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4602">CALCITE-4602</a>]
+<code class="highlighter-rouge">ClassCastException</code> retrieving from <code class="highlighter-rouge">ARRAY</code> that has mixed <code class="highlighter-rouge">INTEGER</code> and
+<code class="highlighter-rouge">DECIMAL</code> elements</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4600">CALCITE-4600</a>]
+<code class="highlighter-rouge">ClassCastException</code> retrieving from an <code class="highlighter-rouge">ARRAY</code> that has <code class="highlighter-rouge">DATE</code>, <code class="highlighter-rouge">TIME</code> or
+<code class="highlighter-rouge">TIMESTAMP</code> elements</li>
+  <li>Upgrade forbiddenapis 2.7 → 3.2, and Guava to 14.0.1 → 31.0.1-jre</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4757">CALCITE-4757</a>]
+Allow columns of type <code class="highlighter-rouge">NULL</code> in <code class="highlighter-rouge">ResultSet</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4767">CALCITE-4767</a>]
+Add <code class="highlighter-rouge">Quoting.BACK_TICK_BACKSLASH</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4536">CALCITE-4536</a>]
+Add support for <code class="highlighter-rouge">BIT</code> data type</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4752">CALCITE-4752</a>]
+<code class="highlighter-rouge">PreparedStatement#SetObject()</code> fails for <code class="highlighter-rouge">BigDecimal</code> values</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4646">CALCITE-4646</a>]
+Bump Jetty version to 9.4.42.v20210604</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4676">CALCITE-4676</a>]
+Avatica client leaks TCP connections</li>
+</ul>
+
+<p>Build and tests</p>
+
+<ul>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4790">CALCITE-4790</a>]
+Make Gradle pass the <code class="highlighter-rouge">user.timezone</code> property to the test JVM</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4815">CALCITE-4815</a>]
+Enforce shaded artifacts include <code class="highlighter-rouge">checker-qual</code> 3.10.0 or later</li>
+  <li>Bump javadoc compilation gradle image to 6.8</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4755">CALCITE-4755</a>]
+Prepare for next development iteration</li>
+</ul>
+
+<p>Website and documentation</p>
+
+<ul>
+  <li>Site: Remove nowadays redundant minified javascript files</li>
+</ul>
 
 <h2 id="v1-18-0"><a href="https://github.com/apache/calcite-avatica/releases/tag/rel/avatica-1.18.0">1.18.0</a> / 2021-05-18</h2>
 

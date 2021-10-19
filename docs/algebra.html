@@ -686,6 +686,67 @@ added to the stack.</p>
   </tbody>
 </table>
 
+<h4 id="sub-query-methods">Sub-query methods</h4>
+
+<p>The following methods convert a sub-query into a scalar value (a <code class="highlighter-rouge">BOOLEAN</code> in
+the case of <code class="highlighter-rouge">in</code>, <code class="highlighter-rouge">exists</code>, <code class="highlighter-rouge">some</code>, <code class="highlighter-rouge">all</code>, <code class="highlighter-rouge">unique</code>;
+any scalar type for <code class="highlighter-rouge">scalarQuery</code>).
+an <code class="highlighter-rouge">ARRAY</code> for <code class="highlighter-rouge">arrayQuery</code>,
+a <code class="highlighter-rouge">MAP</code> for <code class="highlighter-rouge">mapQuery</code>,
+and a <code class="highlighter-rouge">MULTISET</code> for <code class="highlighter-rouge">multisetQuery</code>).</p>
+
+<p>In all the following, <code class="highlighter-rouge">relFn</code> is a function that takes a <code class="highlighter-rouge">RelBuilder</code> argument
+and returns a <code class="highlighter-rouge">RelNode</code>. You typically implement it as a lambda; the method
+calls your code with a <code class="highlighter-rouge">RelBuilder</code> that has the correct context, and your code
+returns the <code class="highlighter-rouge">RelNode</code> that is to be the sub-query.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Method</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">all(expr, op, relFn)</code></td>
+      <td style="text-align: left">Returns whether <em>expr</em> has a particular relation to all of the values of the sub-query</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">arrayQuery(relFn)</code></td>
+      <td style="text-align: left">Returns the rows of a sub-query as an <code class="highlighter-rouge">ARRAY</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">exists(relFn)</code></td>
+      <td style="text-align: left">Tests whether sub-query is non-empty</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">in(expr, relFn)</code><br /><code class="highlighter-rouge">in(exprList, relFn)</code></td>
+      <td style="text-align: left">Tests whether a value occurs in a sub-query</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">mapQuery(relFn)</code></td>
+      <td style="text-align: left">Returns the rows of a sub-query as a <code class="highlighter-rouge">MAP</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">multisetQuery(relFn)</code></td>
+      <td style="text-align: left">Returns the rows of a sub-query as a <code class="highlighter-rouge">MULTISET</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">scalarQuery(relFn)</code></td>
+      <td style="text-align: left">Returns the value of the sole column of the sole row of a sub-query</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">some(expr, op, relFn)</code></td>
+      <td style="text-align: left">Returns whether <em>expr</em> has a particular relation to one or more of the values of the sub-query</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">unique(relFn)</code></td>
+      <td style="text-align: left">Returns whether the rows of a sub-query are unique</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="pattern-methods">Pattern methods</h4>
 
 <p>The following methods return patterns for use in <code class="highlighter-rouge">match</code>.</p>

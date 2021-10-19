@@ -385,12 +385,12 @@ aggregate query, and only in a SELECT, HAVING or ORDER BY clause.</p>
 If the sub-query returns no rows, the value is NULL; if it
 returns more than one row, it is an error.</p>
 
-<p>IN, EXISTS and scalar sub-queries can occur
+<p>IN, EXISTS, UNIQUE and scalar sub-queries can occur
 in any place where an expression can occur (such as the SELECT clause,
 WHERE clause, ON clause of a JOIN, or as an argument to an aggregate
 function).</p>
 
-<p>An IN, EXISTS or scalar sub-query may be correlated; that is, it
+<p>An IN, EXISTS, UNIQUE or scalar sub-query may be correlated; that is, it
 may refer to tables in the FROM clause of an enclosing query.</p>
 
 <p><em>selectWithoutFrom</em> is equivalent to VALUES,
@@ -1571,6 +1571,10 @@ completeness.</p>
     <tr>
       <td style="text-align: left">EXISTS (sub-query)</td>
       <td style="text-align: left">Whether <em>sub-query</em> returns at least one row</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">UNIQUE (sub-query)</td>
+      <td style="text-align: left">Whether the rows returned by <em>sub-query</em> are unique (ignoring null values)</td>
     </tr>
   </tbody>
 </table>
@@ -3088,28 +3092,8 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">COLLECT( [ ALL | DISTINCT ] value)</td>
-      <td style="text-align: left">Returns a multiset of the values</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">LISTAGG( [ ALL | DISTINCT ] value [, separator])</td>
-      <td style="text-align: left">Returns values concatenated into a string, delimited by separator (default ‘,’)</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">COUNT( [ ALL | DISTINCT ] value [, value ]*)</td>
-      <td style="text-align: left">Returns the number of input rows for which <em>value</em> is not null (wholly not null if <em>value</em> is composite)</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">COUNT(*)</td>
-      <td style="text-align: left">Returns the number of input rows</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">FUSION(multiset)</td>
-      <td style="text-align: left">Returns the multiset union of <em>multiset</em> across all input values</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">INTERSECTION(multiset)</td>
-      <td style="text-align: left">Returns the multiset intersection of <em>multiset</em> across all input values</td>
+      <td style="text-align: left">ANY_VALUE( [ ALL | DISTINCT ] value)</td>
+      <td style="text-align: left">Returns one of the values of <em>value</em> across all input values; this is NOT specified in the SQL standard</td>
     </tr>
     <tr>
       <td style="text-align: left">APPROX_COUNT_DISTINCT(value [, value ]*)</td>
@@ -3118,30 +3102,6 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
     <tr>
       <td style="text-align: left">AVG( [ ALL | DISTINCT ] numeric)</td>
       <td style="text-align: left">Returns the average (arithmetic mean) of <em>numeric</em> across all input values</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">SUM( [ ALL | DISTINCT ] numeric)</td>
-      <td style="text-align: left">Returns the sum of <em>numeric</em> across all input values</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">MAX( [ ALL | DISTINCT ] value)</td>
-      <td style="text-align: left">Returns the maximum value of <em>value</em> across all input values</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">MIN( [ ALL | DISTINCT ] value)</td>
-      <td style="text-align: left">Returns the minimum value of <em>value</em> across all input values</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">ANY_VALUE( [ ALL | DISTINCT ] value)</td>
-      <td style="text-align: left">Returns one of the values of <em>value</em> across all input values; this is NOT specified in the SQL standard</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">SOME(condition)</td>
-      <td style="text-align: left">Returns TRUE if one or more of the values of <em>condition</em> is TRUE</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">EVERY(condition)</td>
-      <td style="text-align: left">Returns TRUE if all of the values of <em>condition</em> are TRUE</td>
     </tr>
     <tr>
       <td style="text-align: left">BIT_AND( [ ALL | DISTINCT ] value)</td>
@@ -3156,24 +3116,16 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
       <td style="text-align: left">Returns the bitwise XOR of all non-null input values, or null if none; integer and binary types are supported</td>
     </tr>
     <tr>
-      <td style="text-align: left">STDDEV_POP( [ ALL | DISTINCT ] numeric)</td>
-      <td style="text-align: left">Returns the population standard deviation of <em>numeric</em> across all input values</td>
+      <td style="text-align: left">COLLECT( [ ALL | DISTINCT ] value)</td>
+      <td style="text-align: left">Returns a multiset of the values</td>
     </tr>
     <tr>
-      <td style="text-align: left">STDDEV_SAMP( [ ALL | DISTINCT ] numeric)</td>
-      <td style="text-align: left">Returns the sample standard deviation of <em>numeric</em> across all input values</td>
+      <td style="text-align: left">COUNT(*)</td>
+      <td style="text-align: left">Returns the number of input rows</td>
     </tr>
     <tr>
-      <td style="text-align: left">STDDEV( [ ALL | DISTINCT ] numeric)</td>
-      <td style="text-align: left">Synonym for <code class="highlighter-rouge">STDDEV_SAMP</code></td>
-    </tr>
-    <tr>
-      <td style="text-align: left">VAR_POP( [ ALL | DISTINCT ] value)</td>
-      <td style="text-align: left">Returns the population variance (square of the population standard deviation) of <em>numeric</em> across all input values</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">VAR_SAMP( [ ALL | DISTINCT ] numeric)</td>
-      <td style="text-align: left">Returns the sample variance (square of the sample standard deviation) of <em>numeric</em> across all input values</td>
+      <td style="text-align: left">COUNT( [ ALL | DISTINCT ] value [, value ]*)</td>
+      <td style="text-align: left">Returns the number of input rows for which <em>value</em> is not null (wholly not null if <em>value</em> is composite)</td>
     </tr>
     <tr>
       <td style="text-align: left">COVAR_POP(numeric1, numeric2)</td>
@@ -3182,6 +3134,34 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
     <tr>
       <td style="text-align: left">COVAR_SAMP(numeric1, numeric2)</td>
       <td style="text-align: left">Returns the sample covariance of the pair (<em>numeric1</em>, <em>numeric2</em>) across all input values</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">EVERY(condition)</td>
+      <td style="text-align: left">Returns TRUE if all of the values of <em>condition</em> are TRUE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">FUSION(multiset)</td>
+      <td style="text-align: left">Returns the multiset union of <em>multiset</em> across all input values</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">INTERSECTION(multiset)</td>
+      <td style="text-align: left">Returns the multiset intersection of <em>multiset</em> across all input values</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">LISTAGG( [ ALL | DISTINCT ] value [, separator])</td>
+      <td style="text-align: left">Returns values concatenated into a string, delimited by separator (default ‘,’)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MAX( [ ALL | DISTINCT ] value)</td>
+      <td style="text-align: left">Returns the maximum value of <em>value</em> across all input values</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MIN( [ ALL | DISTINCT ] value)</td>
+      <td style="text-align: left">Returns the minimum value of <em>value</em> across all input values</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MODE(value)</td>
+      <td style="text-align: left">Returns the most frequent value of <em>value</em> across all input values</td>
     </tr>
     <tr>
       <td style="text-align: left">REGR_COUNT(numeric1, numeric2)</td>
@@ -3194,6 +3174,34 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
     <tr>
       <td style="text-align: left">REGR_SYY(numeric1, numeric2)</td>
       <td style="text-align: left">Returns the sum of squares of the independent expression in a linear regression model</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SOME(condition)</td>
+      <td style="text-align: left">Returns TRUE if one or more of the values of <em>condition</em> is TRUE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">STDDEV( [ ALL | DISTINCT ] numeric)</td>
+      <td style="text-align: left">Synonym for <code class="highlighter-rouge">STDDEV_SAMP</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">STDDEV_POP( [ ALL | DISTINCT ] numeric)</td>
+      <td style="text-align: left">Returns the population standard deviation of <em>numeric</em> across all input values</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">STDDEV_SAMP( [ ALL | DISTINCT ] numeric)</td>
+      <td style="text-align: left">Returns the sample standard deviation of <em>numeric</em> across all input values</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SUM( [ ALL | DISTINCT ] numeric)</td>
+      <td style="text-align: left">Returns the sum of <em>numeric</em> across all input values</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">VAR_POP( [ ALL | DISTINCT ] value)</td>
+      <td style="text-align: left">Returns the population variance (square of the population standard deviation) of <em>numeric</em> across all input values</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">VAR_SAMP( [ ALL | DISTINCT ] numeric)</td>
+      <td style="text-align: left">Returns the sample variance (square of the sample standard deviation) of <em>numeric</em> across all input values</td>
     </tr>
   </tbody>
 </table>
@@ -3208,6 +3216,37 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
   <li>REGR_SLOPE(numeric1, numeric2)</li>
   <li>REGR_SXY(numeric1, numeric2)</li>
 </ul>
+
+<h4 id="ordered-set-aggregate-functions">Ordered-Set Aggregate Functions</h4>
+
+<p>The syntax is as for <em>aggregateCall</em>, except that <code class="highlighter-rouge">WITHIN GROUP</code> is
+required.</p>
+
+<p>In the following:</p>
+
+<ul>
+  <li><em>fraction</em> is a numeric literal between 0 and 1, inclusive, and
+represents a percentage</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Operator syntax</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">PERCENTILE_CONT(fraction) WITHIN GROUP (ORDER BY orderItem)</td>
+      <td style="text-align: left">Returns a percentile based on a continuous distribution of the column values, interpolating between adjacent input items if needed</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">PERCENTILE_DISC(fraction) WITHIN GROUP (ORDER BY orderItem [, orderItem ]*)</td>
+      <td style="text-align: left">Returns a percentile based on a discrete distribution of the column values returning the first input value whose position in the ordering equals or exceeds the specified fraction</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="window-functions">Window functions</h3>
 

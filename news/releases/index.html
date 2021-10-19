@@ -57,7 +57,8 @@
     <option value="">Navigate the blog…</option>
     <option value="/news/">Home</option>
     <optgroup label="v1.x">
-            <option value="/news/2021/06/03/release-1.27.0/">Release 1.27.0</option>
+            <option value="/news/2021/10/19/release-1.28.0/">Release 1.28.0</option>
+      <option value="/news/2021/06/03/release-1.27.0/">Release 1.27.0</option>
       <option value="/news/2021/01/11/meetup/">Calcite Online Meetup January 2021</option>
       <option value="/news/2020/10/06/release-1.26.0/">Release 1.26.0</option>
       <option value="/news/2020/08/22/release-1.25.0/">Release 1.25.0</option>
@@ -98,7 +99,6 @@
       <option value="/news/2014/11/05/release-0.9.2-incubating/">Release 0.9.2 Incubating</option>
       <option value="/news/2014/10/02/release-0.9.1-incubating/">Release 0.9.1 Incubating</option>
       <option value="/news/2014/08/19/release-0.9.0-incubating/">Release 0.9.0 Incubating</option>
-      <option value="/news/2014/06/27/release-0.8.0-incubating/">Release 0.8.0 Incubating</option>
 
     </optgroup>
   </select>
@@ -107,6 +107,127 @@
 
       <div class="unit four-fifths">
         
+
+
+  
+<article>
+  <h2>
+    <a href="/news/2021/10/19/release-1.28.0/">
+      Release 1.28.0
+    </a>
+  </h2>
+  <span class="post-category">
+    <span class="label">
+      release
+    </span>
+  </span>
+  <div class="post-meta">
+    <span class="post-date">
+      19 Oct 2021
+    </span>
+    
+    
+    
+    <a href="http://people.apache.org/~jhyde" class="post-author">
+      <img src="https://github.com/julianhyde.png"
+           class="avatar" alt="jhyde avatar"
+           width="24" height="24">
+      jhyde
+    </a>
+  </div>
+  <div class="post-content">
+    <!--
+
+-->
+
+<p>The <a href="">Apache Calcite PMC</a>
+is pleased to announce
+<a href="/docs/history.html#v1-28-0">Apache Calcite release 1.28.0</a>.</p>
+
+<p>This release comes four months after <a href="#v1-27-0">1.27.0</a>,
+contains contributions from 38 authors,
+and resolves 76 issues.
+New features include the
+<a href="https://issues.apache.org/jira/browse/CALCITE-4486">UNIQUE</a>
+sub-query predicate, the
+<a href="https://issues.apache.org/jira/browse/CALCITE-4661">MODE</a> aggregate function,
+<a href="https://issues.apache.org/jira/browse/CALCITE-4644">PERCENTILE_CONT and PERCENTILE_DISC</a>
+inverse distribution functions, an
+<a href="https://issues.apache.org/jira/browse/CALCITE-4614">Exasol dialect</a>
+for the JDBC adapter, and improvements to
+<a href="https://issues.apache.org/jira/browse/CALCITE-4779">materialized</a>
+<a href="https://issues.apache.org/jira/browse/CALCITE-3935">view</a>
+<a href="https://issues.apache.org/jira/browse/CALCITE-4774">recognition</a>.</p>
+
+<p>This release contains some breaking changes (described below) due to the
+<a href="https://issues.apache.org/jira/browse/CALCITE-4798">replacement of ImmutableBeans with Immutables</a>.
+Two APIs are deprecated and will be
+<a href="/docs/history.html#to-be-removed-in-1-29-0">removed in release 1.29</a>.</p>
+
+<h2 id="breaking-changes-to-immutablebeans">Breaking changes to ImmutableBeans</h2>
+
+<p>In 1.28, Calcite converted the recently introduced
+<a href="https://issues.apache.org/jira/browse/CALCITE-3328">configuration system</a>
+from an internal system based on
+<a href="https://github.com/apache/calcite/blob/master/core/src/main/java/org/apache/calcite/util/ImmutableBeans.java">ImmutableBeans</a>
+to instead use the <a href="https://immutables.github.io/">Immutables</a>
+annotation processor. This library brings a large number of additional
+features that should make value-type classes in Calcite easier to
+build and leverage. It also reduces reliance on dynamic proxies, which
+should improve performance and reduce memory footprint. Lastly, this
+change increases compatibility with ahead-of-time compilation
+technologies such as <a href="https://www.graalvm.org/">GraalVM</a>. As part of
+this change, a number of minor changes have been made and key methods
+and classes have been deprecated. The change was designed to minimize
+disruption to existing consumers of Calcite but the following minor
+changes needed to be made:</p>
+<ul>
+  <li>The
+<a href="https://github.com/apache/calcite/blob/master/core/src/main/java/org/apache/calcite/plan/RelRule.java#L125">RelRule.Config.EMPTY</a>
+field is now deprecated. To create a new configuration subclass, you
+can either use your preferred interface-implementation based
+construction or you can leverage Immutables. To do the latter,
+<a href="https://immutables.github.io/getstarted.html">configure your project</a>
+to use the Immutables annotation processor and annotate your
+subclass with the
+<a href="https://immutables.github.io/immutable.html#value"><code class="highlighter-rouge">@Value.Immutable</code></a>
+annotation.</li>
+  <li>Where <code class="highlighter-rouge">RelRule.Config</code> subclasses were nested 2+ classes deep, the
+interfaces have been marked deprecated and are superceded by new,
+uniquely named interfaces. The original Configs extend the new
+uniquely named interfaces. Subclassing these work as before and the
+existing rule signatures accept any previously implemented Config
+implementations. However, this is a breaking change if a user stored
+an instance of the <code class="highlighter-rouge">DEFAULT</code> object using the Config class name (as
+the <code class="highlighter-rouge">DEFAULT</code> instance now only implements the uniquely named
+interface).</li>
+  <li>The <code class="highlighter-rouge">RelRule.Config.as()</code> method should only be used for safe
+downcasts. Before, it could do arbitrary casts. The exception is
+that arbitrary <code class="highlighter-rouge">as()</code> will continue to work when using the
+deprecated <code class="highlighter-rouge">RelRule.Config.EMPTY</code> field. In most cases, this should
+be a non-breaking change. However, all Calcite-defined <code class="highlighter-rouge">DEFAULT</code>
+rule config instances use Immutables. As such, if one had previously
+subclassed a <code class="highlighter-rouge">RelRule.Config</code> subclass and then used the <code class="highlighter-rouge">DEFAULT</code>
+instance from that subclass, the <code class="highlighter-rouge">as()</code> call will no longer work to
+coerce the <code class="highlighter-rouge">DEFAULT</code> instance into a arbitrary subclass. In essence,
+outside the <code class="highlighter-rouge">EMPTY</code> use, <code class="highlighter-rouge">as()</code> is now only safe to do if a Java
+cast is also safe.</li>
+  <li><code class="highlighter-rouge">ExchangeRemoveConstantKeysRule.Config</code> and
+<code class="highlighter-rouge">ValuesReduceRule.Config</code> now declare concrete bounds for their
+matchHandler configuration. This is a breaking change if one did not
+use the Rule as a bounding variable.</li>
+  <li>Collections used in Immutables value classes will be converted to
+Immutable collection types even if the passed in parameter is
+mutable (such as an <code class="highlighter-rouge">ArrayList</code>). As such, consumers of those
+configuration properties cannot mutate the returned collections.</li>
+</ul>
+
+    
+    <p>See the <a href="/docs/history.html#v1-28-0">release notes</a>;
+      <a href="/downloads#source-releases">download</a> the release.</p>
+    
+  </div>
+</article>
 
 
   
@@ -1910,49 +2031,6 @@ before you move on to 1.0.</p>
 </article>
 
 
-  
-<article>
-  <h2>
-    <a href="/news/2014/06/27/release-0.8.0-incubating/">
-      Release 0.8.0 Incubating
-    </a>
-  </h2>
-  <span class="post-category">
-    <span class="label">
-      release
-    </span>
-  </span>
-  <div class="post-meta">
-    <span class="post-date">
-      27 Jun 2014
-    </span>
-    
-    
-    
-    <a href="http://people.apache.org/~jhyde" class="post-author">
-      <img src="https://github.com/julianhyde.png"
-           class="avatar" alt="jhyde avatar"
-           width="24" height="24">
-      jhyde
-    </a>
-  </div>
-  <div class="post-content">
-    <!--
-
--->
-
-<p>Several new features, including a heuristic rule to plan queries with
-a large number of joins, a number of windowed aggregate functions, and
-new utility, <code class="highlighter-rouge">SqlRun</code>.</p>
-
-    
-    <p>See the <a href="/docs/history.html#v0-8">release notes</a>;
-      <a href="/downloads#source-releases">download</a> the release.</p>
-    
-  </div>
-</article>
-
-
 
       </div>
 
@@ -1970,6 +2048,10 @@ new utility, <code class="highlighter-rouge">SqlRun</code>.</p>
     <ul>
       
       <li class="">
+        <a href="/news/2021/10/19/release-1.28.0/">1.28.0</a>
+      </li>
+      
+      <li class="">
         <a href="/news/2021/06/03/release-1.27.0/">1.27.0</a>
       </li>
       
@@ -1983,10 +2065,6 @@ new utility, <code class="highlighter-rouge">SqlRun</code>.</p>
       
       <li class="">
         <a href="/news/2020/07/23/release-1.24.0/">1.24.0</a>
-      </li>
-      
-      <li class="">
-        <a href="/news/2020/05/23/release-1.23.0/">1.23.0</a>
       </li>
       
     </ul>

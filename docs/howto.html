@@ -138,14 +138,14 @@ adapters.</p>
 <h2 id="building-from-a-source-distribution">Building from a source distribution</h2>
 
 <p>Prerequisite is Java (JDK 8, 9, 10, 11, 12, 13, 14 or 15)
-and Gradle (version 6.8.1) on your path.</p>
+and Gradle (version 7.2) on your path.</p>
 
 <p>Unpack the source distribution <code class="highlighter-rouge">.tar.gz</code> file,
 <code class="highlighter-rouge">cd</code> to the root directory of the unpacked source,
 then build using Gradle:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz apache-calcite-1.27.0-src.tar.gz
-<span class="nv">$ </span><span class="nb">cd </span>apache-calcite-1.27.0-src
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz apache-calcite-1.28.0-src.tar.gz
+<span class="nv">$ </span><span class="nb">cd </span>apache-calcite-1.28.0-src
 <span class="nv">$ </span>gradle build</code></pre></figure>
 
 <p><a href="#running-tests">Running tests</a> describes how to run more or fewer
@@ -826,6 +826,16 @@ a fix version assigned (most likely the version we are
 just about to release)</li>
 </ul>
 
+<p>Generate a list of contributors by running the following (changing the
+date literal to the date of the previous release):</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># distinct authors
+./sqlsh "select distinct author from git_commits where author_timestamp &gt; DATE '2021-06-03' order by 1"
+# most prolific authors
+./sqlsh "select author, count(*) from git_commits where commit_timestamp &gt; DATE '2021-06-03' group by author order by 2"
+# number of commits, distinct authors, and JIRA cases
+./sqlsh "select count(*) as c, count(distinct author) as a, count(*) filter (where message like '%CALCITE-%') as j from git_commits where commit_timestamp &gt; DATE '2021-06-03' order by 1"
+</code></pre></div></div>
+
 <p>Smoke-test <code class="highlighter-rouge">sqlline</code> with Spatial and Oracle function tables:</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="err">$</span> <span class="p">.</span><span class="o">/</span><span class="n">sqlline</span>
@@ -843,8 +853,9 @@ just about to release)</li>
 so there’s no harm if it fails. It might leave <code class="highlighter-rouge">-rc</code> tag behind
 which can be removed if required.</p>
 
-<p>You can perform a dry-run release with a help of https://github.com/vlsi/asflike-release-environment
-That would perform the same steps, however it would push changes to the mock Nexus, Git, and SVN servers.</p>
+<p>You can perform a dry-run release with a help of
+<a href="https://github.com/vlsi/asflike-release-environment">asflike-release-environment</a>;
+it would perform the same steps, but it would push changes to the mock Nexus, Git, and SVN servers.</p>
 
 <p>If any of the steps fail, fix the problem, and
 start again from the top.</p>
@@ -863,7 +874,7 @@ git clean <span class="nt">-xn</span>
 ./gradlew prepareVote <span class="nt">-Prc</span><span class="o">=</span>0
 
 <span class="c"># Push release candidate to ASF servers</span>
-./gradlew prepareVote <span class="nt">-Prc</span><span class="o">=</span>0 <span class="nt">-Pasf</span></code></pre></figure>
+./gradlew prepareVote <span class="nt">-Prc</span><span class="o">=</span>0 <span class="nt">-Pasf</span> <span class="nt">-Pasf</span>.git.pushRepositoryProvider<span class="o">=</span>GITBOX</code></pre></figure>
 
 <h4 id="troubleshooting">Troubleshooting</h4>
 
@@ -1011,7 +1022,7 @@ Remember that UTC date changes at 4 pm Pacific time.</p>
 ./gradlew publishDist <span class="nt">-Prc</span><span class="o">=</span>0
 
 <span class="c"># Publish the release to ASF servers</span>
-./gradlew publishDist <span class="nt">-Prc</span><span class="o">=</span>0 <span class="nt">-Pasf</span></code></pre></figure>
+./gradlew publishDist <span class="nt">-Prc</span><span class="o">=</span>0 <span class="nt">-Pasf</span> <span class="nt">-Pasf</span>.git.pushRepositoryProvider<span class="o">=</span>GITBOX</code></pre></figure>
 
 <p>Svnpubsub will publish to the
 <a href="https://dist.apache.org/repos/dist/release/calcite">release repo</a> and propagate to the

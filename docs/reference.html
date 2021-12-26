@@ -3532,7 +3532,7 @@ completeness. Session is applied per product.</p>
 <p><strong>Note</strong>: The <code class="highlighter-rouge">Tumble</code>, <code class="highlighter-rouge">Hop</code> and <code class="highlighter-rouge">Session</code> window table functions assign
 each row in the original table to a window. The output table has all
 the same columns as the original table plus two additional columns <code class="highlighter-rouge">window_start</code>
-and <code class="highlighter-rouge">window_end</code>, which repesent the start and end of the window interval, respectively.</p>
+and <code class="highlighter-rouge">window_end</code>, which represent the start and end of the window interval, respectively.</p>
 
 <h3 id="grouped-window-functions">Grouped window functions</h3>
 <p><strong>warning</strong>: grouped window functions are deprecated.</p>
@@ -4412,6 +4412,21 @@ semantics.</p>
       <td style="text-align: left">Casts <em>expr</em> to <em>type</em></td>
     </tr>
     <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">ARRAY_CONCAT(array [, array ]*)</td>
+      <td style="text-align: left">Concatenates one or more arrays. If any input argument is <code class="highlighter-rouge">NULL</code> the function returns <code class="highlighter-rouge">NULL</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">ARRAY_LENGTH(array)</td>
+      <td style="text-align: left">Synonym for <code class="highlighter-rouge">CARDINALITY</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">ARRAY_REVERSE(array)</td>
+      <td style="text-align: left">Reverses elements of <em>array</em></td>
+    </tr>
+    <tr>
       <td style="text-align: left">o</td>
       <td style="text-align: left">CHR(integer)</td>
       <td style="text-align: left">Returns the character having the binary equivalent to <em>integer</em> as a CHAR value</td>
@@ -4904,7 +4919,7 @@ semantics.</p>
 
 <p>SQL</p>
 
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">ELECT</span> <span class="n">JSON_KEYS</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c1</span><span class="p">,</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">JSON_KEYS</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c1</span><span class="p">,</span>
   <span class="n">JSON_KEYS</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">'lax $.a'</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c2</span><span class="p">,</span>
   <span class="n">JSON_KEYS</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">'lax $.b'</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c2</span><span class="p">,</span>
   <span class="n">JSON_KEYS</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s1">'strict $.a[0]'</span><span class="p">)</span> <span class="k">AS</span> <span class="n">c3</span><span class="p">,</span>

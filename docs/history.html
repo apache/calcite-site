@@ -88,10 +88,15 @@ Downloads are available on the
 contains contributions from 23 authors,
 and resolves 47 issues.</p>
 
-<p>This release upgrades log4j2 to 2.17.0 to fixes security vulnerabiities like CVE-2021-45105.</p>
+<p>This release upgrades
+<a href="https://issues.apache.org/jira/browse/CALCITE-4950">log4j2 to 2.17.0</a>
+to fix security vulnerabiities such as
+<a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-44228">CVE-2021-44228</a>
+and
+<a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-45105">CVE-2021-45105</a>.</p>
 
 <p>Compatibility: This release is tested on Linux, macOS, Microsoft Windows;
-using JDK/OpenJDK versions 8 to 15;
+using JDK/OpenJDK versions 8 to 17;
 Guava versions 19.0 to 31.0.1-jre;
 other software versions as specified in gradle.properties.</p>
 
@@ -99,106 +104,122 @@ other software versions as specified in gradle.properties.</p>
 Ada Wong,
 Aleksey Plekhanov,
 Alessandro Solimando,
+Chunwei Lei,
 Francesco Gini,
 Jacques Nadeau,
-Jay,
+Jay Narale,
 Julian Hyde,
+liuyanze,
+Louis Kuang,
 NobiGo,
+Ruben Quesada Lopez,
+Rui Wang (release manager),
+Sergey Nuyanzin,
 Stamatis Zampetakis,
 Thomas Rebele,
 Vladimir Sitnikov,
 Will Noble,
-chunwei.lcw,
-huzhe,
-liuyanze,
-rubenada,
-snuyanzin,
-xwkuang5.</p>
+Zhe Hu.</p>
 
 <h4 id="new-features-1-29-0">New features</h4>
 
-<h4 id="fixes-1-29-0">Bug-fixes, API changes and minor enhancements</h4>
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4822">CALCITE-4822</a>]
-Add <code class="highlighter-rouge">ARRAY_CONCAT</code>, <code class="highlighter-rouge">ARRAY_REVERSE</code>, <code class="highlighter-rouge">ARRAY_LENGTH</code> for BigQuery dialect</li>
-  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4839">CALCITE-4839</a>]
-Remove remnants of ImmutableBeans post 1.28 release</li>
-  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4795">CALCITE-4795</a>]
-In class <code class="highlighter-rouge">SqlBasicCall</code>, make the “operands” field private</li>
-  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4818">CALCITE-4818</a>]
-AggregateExpandDistinctAggregatesRule must infer correct data type for top aggregate calls</li>
-  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4551">CALCITE-4551</a>]
-Reusing Immutable metadata cache keys</li>
-  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4131">CALCITE-4131</a>]
-the XmlFunctions exception handled by System.out</li>
-  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4875">CALCITE-4875</a>]
-<code class="highlighter-rouge">NVL</code> Function Incorrectly changes nullability field of its operands</li>
+Add <code class="highlighter-rouge">ARRAY_CONCAT</code>, <code class="highlighter-rouge">ARRAY_REVERSE</code>, <code class="highlighter-rouge">ARRAY_LENGTH</code> functions for BigQuery dialect</li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4877">CALCITE-4877</a>]
-Make the exception information of class not found more explicit</li>
-  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4844">CALCITE-4844</a>]
-IN-list that references columns is wrongly converted to Values, and gives incorrect results</li>
-  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4846">CALCITE-4846</a>]
-IN-list that includes NULL converted to Values throws exception</li>
-  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4884">CALCITE-4884</a>]
-Provide a new constructor for RelJsonWriter to allow customized JsonBuilder</li>
+When a plugin class is not found, make the exception more explicit</li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4841">CALCITE-4841</a>]
-Support decimal column type in CSV and File adapter</li>
+Support <code class="highlighter-rouge">decimal</code> column type in CSV and File adapters</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4925">CALCITE-4925</a>]
+<code class="highlighter-rouge">AggregateReduceFunctionsRule</code> should accept arbitrary predicates</li>
+</ul>
+
+<h4 id="fixes-1-29-0">Bug-fixes, API changes and minor enhancements</h4>
+
+<ul>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4839">CALCITE-4839</a>]
+Remove remnants of <code class="highlighter-rouge">ImmutableBeans</code> post 1.28 release</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4795">CALCITE-4795</a>]
+In class <code class="highlighter-rouge">SqlBasicCall</code>, make the <code class="highlighter-rouge">operands</code> field private</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4818">CALCITE-4818</a>]
+<code class="highlighter-rouge">AggregateExpandDistinctAggregatesRule</code> must infer correct data type for top
+aggregate calls</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4551">CALCITE-4551</a>]
+Reusing immutable metadata cache keys</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4131">CALCITE-4131</a>]
+The <code class="highlighter-rouge">XmlFunctions</code> exception handled by <code class="highlighter-rouge">System.out</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4875">CALCITE-4875</a>]
+<code class="highlighter-rouge">NVL</code> function incorrectly changes nullability of its operands</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4844">CALCITE-4844</a>]
+<code class="highlighter-rouge">IN</code>-list that references columns is wrongly converted to <code class="highlighter-rouge">Values</code>, and gives
+incorrect results</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4846">CALCITE-4846</a>]
+<code class="highlighter-rouge">IN</code>-list that includes <code class="highlighter-rouge">NULL</code> converted to <code class="highlighter-rouge">Values</code> throws exception</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4884">CALCITE-4884</a>]
+Provide a new constructor for <code class="highlighter-rouge">RelJsonWriter</code> to allow customized <code class="highlighter-rouge">JsonBuilder</code></li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4876">CALCITE-4876</a>]
-Converting <code class="highlighter-rouge">RelNode</code> to SQL with <code class="highlighter-rouge">CalciteSqlDialect</code> gets wrong result while <code class="highlighter-rouge">EnumerableIntersect</code> is followed by <code class="highlighter-rouge">EnumerableLimit</code></li>
+JDBC adapter generates wrong SQL in Calcite dialect when <code class="highlighter-rouge">EnumerableIntersect</code>
+is followed by <code class="highlighter-rouge">EnumerableLimit</code></li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4883">CALCITE-4883</a>]
-The traitset of Exchange operator losses the distribution when externalizing Exchange operator from JSON</li>
+When <code class="highlighter-rouge">Exchange</code> is created from externalized JSON, <code class="highlighter-rouge">RelDistribution</code> is not
+correctly set in its <code class="highlighter-rouge">traitSet</code></li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4783">CALCITE-4783</a>]
-RelFieldTrimmer incorrectly drops filter condition</li>
+<code class="highlighter-rouge">RelFieldTrimmer</code> incorrectly drops filter condition</li>
   <li>Log plan after physical tweaks in new line</li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4927">CALCITE-4927</a>]
-Remove deprecated RelBuilder#groupKey(ImmutableBitSet, ImmutableList) clashing with new replacement API</li>
-  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4925">CALCITE-4925</a>]
-AggregateReduceFunctionsRule should accept arbitrary predicates</li>
+Remove deprecated method <code class="highlighter-rouge">RelBuilder.groupKey(ImmutableBitSet, ImmutableList)</code>
+that clashes with newer API method</li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4928">CALCITE-4928</a>]
-Decouple Janino from RelMetadataQuery</li>
+Decouple Janino from <code class="highlighter-rouge">RelMetadataQuery</code></li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4932">CALCITE-4932</a>]
 Deprecate <code class="highlighter-rouge">JdbcCalc</code> and remove <code class="highlighter-rouge">JdbcCalcRule</code></li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4894">CALCITE-4894</a>]
-MV rewriting fails for conjunctive top expressions in <code class="highlighter-rouge">SELECT</code> clause</li>
+Materialized view rewriting fails for conjunctive top expressions in <code class="highlighter-rouge">SELECT</code>
+clause</li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4929">CALCITE-4929</a>]
-Add default methods for getDef on metadata handlers</li>
-  <li>Improve debug message in IterativeRuleDriver</li>
+Add default methods for <code class="highlighter-rouge">getDef</code> on metadata handlers</li>
+  <li>Improve debug message in <code class="highlighter-rouge">IterativeRuleDriver</code></li>
   <li>Remove duplicate entries from <code class="highlighter-rouge">RelOptRules.CALC_RULES</code></li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4906">CALCITE-4906</a>]
-Wrong result for scalar subquery (single value aggregation) from empty input</li>
+Wrong result for scalar sub-query (single value aggregation) from empty input</li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4941">CALCITE-4941</a>]
 <code class="highlighter-rouge">SemiJoinRule</code> loses hints</li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4895">CALCITE-4895</a>]
-MAP type in UDF cannot be externalized from json correctly</li>
+<code class="highlighter-rouge">MAP</code> type in user-defined function (UDF) cannot be created from externalized
+JSON</li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4946">CALCITE-4946</a>]
-Add method RelBuilder.size()</li>
-  <li>Finishing up [CALCITE-4937], remove workarounds for [CALCITE-4877]</li>
+Add method <code class="highlighter-rouge">RelBuilder.size()</code></li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4704">CALCITE-4704</a>]
 Log produced plan after rule application using explain formatting</li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4700">CALCITE-4700</a>]
-AggregateUnionTransposeRule produces wrong group sets for the top Aggregate</li>
+<code class="highlighter-rouge">AggregateUnionTransposeRule</code> produces wrong <code class="highlighter-rouge">groupingSets</code> for the top
+<code class="highlighter-rouge">Aggregate</code></li>
 </ul>
 
 <h4 id="build-1-29-0">Build and test suite</h4>
+
 <ul>
-  <li>Exclude kotlin-stdlib from :core runtime dependencies</li>
+  <li>Exclude kotlin-stdlib from <code class="highlighter-rouge">:core</code> runtime dependencies</li>
   <li>Clarify why squash commits option in GitHub PR merge is disabled</li>
-  <li>Keep backslash when autoformatting «…\n” +»</li>
+  <li>Keep backslash when autoformatting <code class="highlighter-rouge">...\n" +</code></li>
   <li>Use GitHub Action concurrency feature to cancel stale CI executions</li>
   <li>Set timeout for running Druid tests in GitHub CI</li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4917">CALCITE-4917</a>]
-Add test for ‘a IS NOT NULL AND a = b’ simplification</li>
+Add test for <code class="highlighter-rouge">a IS NOT NULL AND a = b</code> simplification</li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4851">CALCITE-4851</a>]
-Build gives lots of ‘Execution optimizations have been disabled’ warnings</li>
+Build gives lots of ‘<code class="highlighter-rouge">Execution optimizations have been disabled</code>’ warnings</li>
 </ul>
 
 <h4 id="dependency-1-29-0">Dependency version upgrade</h4>
+
 <ul>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4847">CALCITE-4847</a>]
+Support Java 16 and 17</li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4858">CALCITE-4858</a>]
 Use Log4j2 instead of unsupported Log4j (1.x) in tests</li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4768">CALCITE-4768</a>]
 Upgrade DataStax Driver for Apache Cassandra® version to latest 4.x</li>
-  <li>Bump com.github.vlsi.vlsi-release-plugins to 1.76</li>
+  <li>Bump <code class="highlighter-rouge">com.github.vlsi.vlsi-release-plugins</code> to 1.76</li>
   <li>Update Gradle to 7.3</li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4937">CALCITE-4937</a>]
 Upgrade Calcite to Avatica 1.20</li>
@@ -211,6 +232,7 @@ Upgrade log4j2 version 2.17.0</li>
 </ul>
 
 <h4 id="site-1-29-0">Web site and documentation</h4>
+
 <ul>
   <li>Site: Add Xiong Duan as committer</li>
   <li>Site: Fix typo in reference.md</li>
@@ -269,7 +291,7 @@ Narayanan Venkateswaran,
 Nick Riasanovsky,
 NobiGo,
 Rafay Qureshi,
-Ruben Q L,
+Ruben Quesada Lopez,
 Sergey Nuyanzin,
 Stamatis Zampetakis,
 Taras Ledkov,

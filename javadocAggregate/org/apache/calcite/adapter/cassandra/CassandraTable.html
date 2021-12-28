@@ -132,7 +132,7 @@ implements <a href="../../schema/TranslatableTable.html" title="interface in org
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.adapter.cassandra.CassandraSchema,java.lang.String,boolean)" class="member-name-link">CassandraTable</a><wbr>(<a href="CassandraSchema.html" title="class in org.apache.calcite.adapter.cassandra">CassandraSchema</a>&nbsp;schema,
  <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;columnFamily,
- boolean&nbsp;view)</code></div>
+ boolean&nbsp;isView)</code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 </div>
 </section>
@@ -155,40 +155,43 @@ implements <a href="../../schema/TranslatableTable.html" title="interface in org
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Converts this table into a <a href="../../linq4j/Queryable.html" title="interface in org.apache.calcite.linq4j"><code>Queryable</code></a>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../rel/RelFieldCollation.html" title="class in org.apache.calcite.rel">RelFieldCollation</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getClusteringOrder()" class="member-name-link">getClusteringOrder</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getClusteringKeys()" class="member-name-link">getClusteringKeys</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../util/Pair.html" title="class in org.apache.calcite.util">Pair</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;,<wbr><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getKeyFields()" class="member-name-link">getKeyFields</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../rel/RelFieldCollation.html" title="class in org.apache.calcite.rel">RelFieldCollation</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getClusteringOrder()" class="member-name-link">getClusteringOrder</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRowType(org.apache.calcite.rel.type.RelDataTypeFactory)" class="member-name-link">getRowType</a><wbr>(<a href="../../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPartitionKeys()" class="member-name-link">getPartitionKeys</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRowType(org.apache.calcite.rel.type.RelDataTypeFactory)" class="member-name-link">getRowType</a><wbr>(<a href="../../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns this table's row type.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../linq4j/Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#query(com.datastax.driver.core.Session)" class="member-name-link">query</a><wbr>(com.datastax.driver.core.Session&nbsp;session)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../linq4j/Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#query(com.datastax.driver.core.Session,java.util.List,java.util.List,java.util.List,java.util.List,java.lang.Integer,java.lang.Integer)" class="member-name-link">query</a><wbr>(com.datastax.driver.core.Session&nbsp;session,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#query(com.datastax.oss.driver.api.core.CqlSession)" class="member-name-link">query</a><wbr>(com.datastax.oss.driver.api.core.CqlSession&nbsp;session)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../linq4j/Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#query(com.datastax.oss.driver.api.core.CqlSession,java.util.List,java.util.List,java.util.List,java.util.List,java.lang.Integer,java.lang.Integer)" class="member-name-link">query</a><wbr>(com.datastax.oss.driver.api.core.CqlSession&nbsp;session,
  <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&gt;&gt;&nbsp;fields,
  <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&gt;&nbsp;selectFields,
  <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;predicates,
  <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;order,
  <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;offset,
  <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;fetch)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Executes a CQL query on the underlying table.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toRel(org.apache.calcite.plan.RelOptTable.ToRelContext,org.apache.calcite.plan.RelOptTable)" class="member-name-link">toRel</a><wbr>(<a href="../../plan/RelOptTable.ToRelContext.html" title="interface in org.apache.calcite.plan">RelOptTable.ToRelContext</a>&nbsp;context,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toRel(org.apache.calcite.plan.RelOptTable.ToRelContext,org.apache.calcite.plan.RelOptTable)" class="member-name-link">toRel</a><wbr>(<a href="../../plan/RelOptTable.ToRelContext.html" title="interface in org.apache.calcite.plan">RelOptTable.ToRelContext</a>&nbsp;context,
  <a href="../../plan/RelOptTable.html" title="interface in org.apache.calcite.plan">RelOptTable</a>&nbsp;relOptTable)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Converts this table into a <a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel"><code>relational expression</code></a>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -223,7 +226,7 @@ implements <a href="../../schema/TranslatableTable.html" title="interface in org
 <h3>CassandraTable</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CassandraTable</span><wbr><span class="parameters">(<a href="CassandraSchema.html" title="class in org.apache.calcite.adapter.cassandra">CassandraSchema</a>&nbsp;schema,
  <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;columnFamily,
- boolean&nbsp;view)</span></div>
+ boolean&nbsp;isView)</span></div>
 </section>
 </li>
 <li>
@@ -275,9 +278,15 @@ implements <a href="../../schema/TranslatableTable.html" title="interface in org
 </section>
 </li>
 <li>
-<section class="detail" id="getKeyFields()">
-<h3>getKeyFields</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../util/Pair.html" title="class in org.apache.calcite.util">Pair</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;,<wbr><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&gt;</span>&nbsp;<span class="element-name">getKeyFields</span>()</div>
+<section class="detail" id="getPartitionKeys()">
+<h3>getPartitionKeys</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getPartitionKeys</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getClusteringKeys()">
+<h3>getClusteringKeys</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getClusteringKeys</span>()</div>
 </section>
 </li>
 <li>
@@ -287,15 +296,15 @@ implements <a href="../../schema/TranslatableTable.html" title="interface in org
 </section>
 </li>
 <li>
-<section class="detail" id="query(com.datastax.driver.core.Session)">
+<section class="detail" id="query(com.datastax.oss.driver.api.core.CqlSession)">
 <h3>query</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../linq4j/Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name">query</span><wbr><span class="parameters">(com.datastax.driver.core.Session&nbsp;session)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../linq4j/Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name">query</span><wbr><span class="parameters">(com.datastax.oss.driver.api.core.CqlSession&nbsp;session)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="query(com.datastax.driver.core.Session,java.util.List,java.util.List,java.util.List,java.util.List,java.lang.Integer,java.lang.Integer)">
+<section class="detail" id="query(com.datastax.oss.driver.api.core.CqlSession,java.util.List,java.util.List,java.util.List,java.util.List,java.lang.Integer,java.lang.Integer)">
 <h3>query</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../linq4j/Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name">query</span><wbr><span class="parameters">(com.datastax.driver.core.Session&nbsp;session,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../linq4j/Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name">query</span><wbr><span class="parameters">(com.datastax.oss.driver.api.core.CqlSession&nbsp;session,
  <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&gt;&gt;&nbsp;fields,
  <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/util/Map.Entry.html" title="class or interface in java.util" class="external-link">Map.Entry</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&gt;&nbsp;selectFields,
  <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;predicates,

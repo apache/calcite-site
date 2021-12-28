@@ -141,6 +141,11 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates the instance with <a href="JaninoRelMetadataProvider.html" title="class in org.apache.calcite.rel.metadata"><code>JaninoRelMetadataProvider</code></a> instance
  from <a href="RelMetadataQueryBase.html#THREAD_PROVIDERS"><code>RelMetadataQueryBase.THREAD_PROVIDERS</code></a> and <code>EMPTY</code> as a prototype.</div>
 </div>
+<div class="col-first odd-row-color"><code>&nbsp;</code></div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.rel.metadata.MetadataHandlerProvider)" class="member-name-link">RelMetadataQuery</a><wbr>(<a href="MetadataHandlerProvider.html" title="interface in org.apache.calcite.rel.metadata">MetadataHandlerProvider</a>&nbsp;provider)</code></div>
+<div class="col-last odd-row-color">
+<div class="block">Create a RelMetadataQuery with a given <a href="MetadataHandlerProvider.html" title="interface in org.apache.calcite.rel.metadata"><code>MetadataHandlerProvider</code></a>.</div>
+</div>
 </div>
 </section>
 </li>
@@ -418,7 +423,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-org.apache.calcite.rel.metadata.RelMetadataQueryBase">Methods inherited from class&nbsp;org.apache.calcite.rel.metadata.<a href="RelMetadataQueryBase.html" title="class in org.apache.calcite.rel.metadata">RelMetadataQueryBase</a></h3>
-<code><a href="RelMetadataQueryBase.html#clearCache(org.apache.calcite.rel.RelNode)">clearCache</a>, <a href="RelMetadataQueryBase.html#initialHandler(java.lang.Class)">initialHandler</a>, <a href="RelMetadataQueryBase.html#revise(java.lang.Class,org.apache.calcite.rel.metadata.MetadataDef)">revise</a>, <a href="RelMetadataQueryBase.html#revise(java.lang.Class)">revise</a></code></div>
+<code><a href="RelMetadataQueryBase.html#clearCache(org.apache.calcite.rel.RelNode)">clearCache</a>, <a href="RelMetadataQueryBase.html#handler(java.lang.Class)">handler</a>, <a href="RelMetadataQueryBase.html#initialHandler(java.lang.Class)">initialHandler</a>, <a href="RelMetadataQueryBase.html#revise(java.lang.Class,org.apache.calcite.rel.metadata.MetadataDef)">revise</a>, <a href="RelMetadataQueryBase.html#revise(java.lang.Class)">revise</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
@@ -439,6 +444,17 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">RelMetadataQuery</span>()</div>
 <div class="block">Creates the instance with <a href="JaninoRelMetadataProvider.html" title="class in org.apache.calcite.rel.metadata"><code>JaninoRelMetadataProvider</code></a> instance
  from <a href="RelMetadataQueryBase.html#THREAD_PROVIDERS"><code>RelMetadataQueryBase.THREAD_PROVIDERS</code></a> and <code>EMPTY</code> as a prototype.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(org.apache.calcite.rel.metadata.MetadataHandlerProvider)">
+<h3>RelMetadataQuery</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">RelMetadataQuery</span><wbr><span class="parameters">(<a href="MetadataHandlerProvider.html" title="interface in org.apache.calcite.rel.metadata">MetadataHandlerProvider</a>&nbsp;provider)</span></div>
+<div class="block">Create a RelMetadataQuery with a given <a href="MetadataHandlerProvider.html" title="interface in org.apache.calcite.rel.metadata"><code>MetadataHandlerProvider</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>provider</code> - The provider to use for construction.</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -576,7 +592,7 @@ loadScripts(document, 'script');</script>
 <dd><code>column</code> - 0-based ordinal for output column of interest</dd>
 <dt>Returns:</dt>
 <dd>set of origin columns, or null if this information cannot be
- determined (whereas empty set indicates definitely no origin columns at
+ determined (whereas empty set indicates Handler.classinitely no origin columns at
  all)</dd>
 </dl>
 </section>
@@ -663,7 +679,7 @@ loadScripts(document, 'script');</script>
 <dd><code>rel</code> - the relational expression</dd>
 <dt>Returns:</dt>
 <dd>set of keys, or null if this information cannot be determined
- (whereas empty set indicates definitely no keys at all)</dd>
+ (whereas empty set indicates Handler.classinitely no keys at all)</dd>
 </dl>
 </section>
 </li>

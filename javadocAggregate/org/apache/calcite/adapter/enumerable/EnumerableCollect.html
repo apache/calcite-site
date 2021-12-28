@@ -112,9 +112,6 @@ implements <a href="EnumerableRel.html" title="interface in org.apache.calcite.a
 <section class="field-summary" id="field-summary">
 <h2>Field Summary</h2>
 <div class="inherited-list">
-<h3 id="fields-inherited-from-class-org.apache.calcite.rel.core.Collect">Fields inherited from class&nbsp;org.apache.calcite.rel.core.<a href="../../rel/core/Collect.html" title="class in org.apache.calcite.rel.core">Collect</a></h3>
-<code><a href="../../rel/core/Collect.html#fieldName">fieldName</a></code></div>
-<div class="inherited-list">
 <h3 id="fields-inherited-from-class-org.apache.calcite.rel.SingleRel">Fields inherited from class&nbsp;org.apache.calcite.rel.<a href="../../rel/SingleRel.html" title="class in org.apache.calcite.rel">SingleRel</a></h3>
 <code><a href="../../rel/SingleRel.html#input">input</a></code></div>
 <div class="inherited-list">
@@ -132,9 +129,18 @@ implements <a href="EnumerableRel.html" title="interface in org.apache.calcite.a
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,java.lang.String)" class="member-name-link">EnumerableCollect</a><wbr>(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
  <a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
- <a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;child,
+ <a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
  <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fieldName)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+</div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">EnumerableCollect</a><wbr>(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
+ <a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
+ <a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+ <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType)</code></div>
+<div class="col-last odd-row-color">
+<div class="block">Creates an EnumerableCollect.</div>
+</div>
 </div>
 </section>
 </li>
@@ -143,7 +149,7 @@ implements <a href="EnumerableRel.html" title="interface in org.apache.calcite.a
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel">
 <div class="summary-table three-column-summary" aria-labelledby="method-summary-table-tab0">
 <div class="table-header col-first">Modifier and Type</div>
@@ -153,10 +159,16 @@ implements <a href="EnumerableRel.html" title="interface in org.apache.calcite.a
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#copy(org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode)" class="member-name-link">copy</a><wbr>(<a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
  <a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;newInput)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="EnumerableRel.Result.html" title="class in org.apache.calcite.adapter.enumerable">EnumerableRel.Result</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#implement(org.apache.calcite.adapter.enumerable.EnumerableRelImplementor,org.apache.calcite.adapter.enumerable.EnumerableRel.Prefer)" class="member-name-link">implement</a><wbr>(<a href="EnumerableRelImplementor.html" title="class in org.apache.calcite.adapter.enumerable">EnumerableRelImplementor</a>&nbsp;implementor,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../rel/core/Collect.html" title="class in org.apache.calcite.rel.core">Collect</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#create(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">create</a><wbr>(<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+ <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Creates an EnumerableCollect.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="EnumerableRel.Result.html" title="class in org.apache.calcite.adapter.enumerable">EnumerableRel.Result</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#implement(org.apache.calcite.adapter.enumerable.EnumerableRelImplementor,org.apache.calcite.adapter.enumerable.EnumerableRel.Prefer)" class="member-name-link">implement</a><wbr>(<a href="EnumerableRelImplementor.html" title="class in org.apache.calcite.adapter.enumerable">EnumerableRelImplementor</a>&nbsp;implementor,
  <a href="EnumerableRel.Prefer.html" title="enum in org.apache.calcite.adapter.enumerable">EnumerableRel.Prefer</a>&nbsp;pref)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a plan for this expression according to a calling convention.</div>
 </div>
 </div>
@@ -164,7 +176,7 @@ implements <a href="EnumerableRel.html" title="interface in org.apache.calcite.a
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-org.apache.calcite.rel.core.Collect">Methods inherited from class&nbsp;org.apache.calcite.rel.core.<a href="../../rel/core/Collect.html" title="class in org.apache.calcite.rel.core">Collect</a></h3>
-<code><a href="../../rel/core/Collect.html#copy(org.apache.calcite.plan.RelTraitSet,java.util.List)">copy</a>, <a href="../../rel/core/Collect.html#deriveCollectRowType(org.apache.calcite.rel.SingleRel,java.lang.String)">deriveCollectRowType</a>, <a href="../../rel/core/Collect.html#deriveRowType()">deriveRowType</a>, <a href="../../rel/core/Collect.html#explainTerms(org.apache.calcite.rel.RelWriter)">explainTerms</a>, <a href="../../rel/core/Collect.html#getFieldName()">getFieldName</a></code></div>
+<code><a href="../../rel/core/Collect.html#copy(org.apache.calcite.plan.RelTraitSet,java.util.List)">copy</a>, <a href="../../rel/core/Collect.html#create(org.apache.calcite.rel.RelNode,org.apache.calcite.sql.type.SqlTypeName,java.lang.String)">create</a>, <a href="../../rel/core/Collect.html#deriveCollectRowType(org.apache.calcite.rel.SingleRel,java.lang.String)">deriveCollectRowType</a>, <a href="../../rel/core/Collect.html#deriveRowType()">deriveRowType</a>, <a href="../../rel/core/Collect.html#deriveRowType(org.apache.calcite.rel.type.RelDataTypeFactory,org.apache.calcite.sql.type.SqlTypeName,java.lang.String,org.apache.calcite.rel.type.RelDataType)">deriveRowType</a>, <a href="../../rel/core/Collect.html#explainTerms(org.apache.calcite.rel.RelWriter)">explainTerms</a>, <a href="../../rel/core/Collect.html#getCollectionType()">getCollectionType</a>, <a href="../../rel/core/Collect.html#getFieldName()">getFieldName</a>, <a href="../../rel/core/Collect.html#rowType()">rowType</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-org.apache.calcite.rel.SingleRel">Methods inherited from class&nbsp;org.apache.calcite.rel.<a href="../../rel/SingleRel.html" title="class in org.apache.calcite.rel">SingleRel</a></h3>
 <code><a href="../../rel/SingleRel.html#childrenAccept(org.apache.calcite.rel.RelVisitor)">childrenAccept</a>, <a href="../../rel/SingleRel.html#estimateRowCount(org.apache.calcite.rel.metadata.RelMetadataQuery)">estimateRowCount</a>, <a href="../../rel/SingleRel.html#getInput()">getInput</a>, <a href="../../rel/SingleRel.html#getInputs()">getInputs</a>, <a href="../../rel/SingleRel.html#replaceInput(int,org.apache.calcite.rel.RelNode)">replaceInput</a></code></div>
@@ -198,12 +210,33 @@ implements <a href="EnumerableRel.html" title="interface in org.apache.calcite.a
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,java.lang.String)">
+<section class="detail" id="&lt;init&gt;(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType)">
 <h3>EnumerableCollect</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">EnumerableCollect</span><wbr><span class="parameters">(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
  <a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
- <a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;child,
+ <a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+ <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType)</span></div>
+<div class="block">Creates an EnumerableCollect.
+
+ <p>Use <a href="#create(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType)"><code>create(org.apache.calcite.rel.RelNode, org.apache.calcite.rel.type.RelDataType)</code></a> unless you know what you're doing.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>cluster</code> - Cluster</dd>
+<dd><code>traitSet</code> - Trait set</dd>
+<dd><code>input</code> - Input relational expression</dd>
+<dd><code>rowType</code> - Row type</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,java.lang.String)">
+<h3>EnumerableCollect</h3>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public</span>&nbsp;<span class="element-name">EnumerableCollect</span><wbr><span class="parameters">(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
+ <a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
+ <a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
  <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fieldName)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 </ul>
@@ -214,6 +247,19 @@ implements <a href="EnumerableRel.html" title="interface in org.apache.calcite.a
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="create(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType)">
+<h3>create</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../../rel/core/Collect.html" title="class in org.apache.calcite.rel.core">Collect</a></span>&nbsp;<span class="element-name">create</span><wbr><span class="parameters">(<a href="../../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+ <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType)</span></div>
+<div class="block">Creates an EnumerableCollect.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>input</code> - Input relational expression</dd>
+<dd><code>rowType</code> - Row type</dd>
+</dl>
+</section>
+</li>
 <li>
 <section class="detail" id="copy(org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode)">
 <h3>copy</h3>

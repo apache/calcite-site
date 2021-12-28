@@ -105,9 +105,6 @@ extends <a href="../../plan/RelRule.Config.html" title="interface in org.apache.
 <div class="col-second odd-row-color"><code><a href="#DEFAULT_FUNCTIONS_TO_REDUCE" class="member-name-link">DEFAULT_FUNCTIONS_TO_REDUCE</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 </div>
-<div class="inherited-list">
-<h3 id="fields-inherited-from-class-org.apache.calcite.plan.RelRule.Config">Fields inherited from interface&nbsp;org.apache.calcite.plan.<a href="../../plan/RelRule.Config.html" title="interface in org.apache.calcite.plan">RelRule.Config</a></h3>
-<code><a href="../../plan/RelRule.Config.html#EMPTY">EMPTY</a></code></div>
 </section>
 </li>
 <!-- ========== METHOD SUMMARY =========== -->
@@ -127,13 +124,25 @@ extends <a href="../../plan/RelRule.Config.html" title="interface in org.apache.
 <div class="block">Returns the validated set of functions to reduce, or the default set
  if not specified.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../../sql/SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#functionsToReduce()" class="member-name-link">functionsToReduce</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="AggregateReduceFunctionsRule.html" title="class in org.apache.calcite.rel.rules">AggregateReduceFunctionsRule</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#toRule()" class="member-name-link">toRule</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="https://docs.oracle.com/javase/9/docs/api/java/util/function/Predicate.html" title="class or interface in java.util.function" class="external-link">Predicate</a>&lt;<a href="../core/AggregateCall.html" title="class in org.apache.calcite.rel.core">AggregateCall</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#extraCondition()" class="member-name-link">extraCondition</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">A test that must pass before attempting to reduce any aggregate function.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../../sql/SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#functionsToReduce()" class="member-name-link">functionsToReduce</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">The set of aggregate function types to try to reduce.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="AggregateReduceFunctionsRule.html" title="class in org.apache.calcite.rel.rules">AggregateReduceFunctionsRule</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#toRule()" class="member-name-link">toRule</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Creates a rule that uses this configuration.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="AggregateReduceFunctionsRule.Config.html" title="interface in org.apache.calcite.rel.rules">AggregateReduceFunctionsRule.Config</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withExtraCondition(java.util.function.Predicate)" class="member-name-link">withExtraCondition</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/function/Predicate.html" title="class or interface in java.util.function" class="external-link">Predicate</a>&lt;<a href="../core/AggregateCall.html" title="class in org.apache.calcite.rel.core">AggregateCall</a>&gt;&nbsp;test)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Sets <a href="#extraCondition()"><code>extraCondition()</code></a>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="AggregateReduceFunctionsRule.Config.html" title="interface in org.apache.calcite.rel.rules">AggregateReduceFunctionsRule.Config</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withFunctionsToReduce(java.lang.Iterable)" class="member-name-link">withFunctionsToReduce</a><wbr>(@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;<a href="../../sql/SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&gt;&nbsp;functionSet)</code></div>
@@ -201,6 +210,22 @@ extends <a href="../../plan/RelRule.Config.html" title="interface in org.apache.
 <section class="detail" id="functionsToReduce()">
 <h3>functionsToReduce</h3>
 <div class="member-signature"><span class="return-type">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../../sql/SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&gt;</span>&nbsp;<span class="element-name">functionsToReduce</span>()</div>
+<div class="block">The set of aggregate function types to try to reduce.
+
+ <p>Any aggregate function whose type is omitted from this set, OR which
+ does not pass the <a href="#extraCondition()"><code>extraCondition()</code></a>, will be ignored.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="extraCondition()">
+<h3>extraCondition</h3>
+<div class="member-signature"><span class="annotations">@Default
+</span><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/function/Predicate.html" title="class or interface in java.util.function" class="external-link">Predicate</a>&lt;<a href="../core/AggregateCall.html" title="class in org.apache.calcite.rel.core">AggregateCall</a>&gt;</span>&nbsp;<span class="element-name">extraCondition</span>()</div>
+<div class="block">A test that must pass before attempting to reduce any aggregate function.
+
+ <p>Any aggegate function which does not pass, OR whose type is omitted
+ from <a href="#functionsToReduce()"><code>functionsToReduce()</code></a>, will be ignored. The default predicate
+ always passes.</div>
 </section>
 </li>
 <li>
@@ -214,6 +239,13 @@ extends <a href="../../plan/RelRule.Config.html" title="interface in org.apache.
 <section class="detail" id="withFunctionsToReduce(java.util.Set)">
 <h3>withFunctionsToReduce</h3>
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="AggregateReduceFunctionsRule.Config.html" title="interface in org.apache.calcite.rel.rules">AggregateReduceFunctionsRule.Config</a></span>&nbsp;<span class="element-name">withFunctionsToReduce</span><wbr><span class="parameters">(@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../../sql/SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&gt;&nbsp;functionSet)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="withExtraCondition(java.util.function.Predicate)">
+<h3>withExtraCondition</h3>
+<div class="member-signature"><span class="return-type"><a href="AggregateReduceFunctionsRule.Config.html" title="interface in org.apache.calcite.rel.rules">AggregateReduceFunctionsRule.Config</a></span>&nbsp;<span class="element-name">withExtraCondition</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/function/Predicate.html" title="class or interface in java.util.function" class="external-link">Predicate</a>&lt;<a href="../core/AggregateCall.html" title="class in org.apache.calcite.rel.core">AggregateCall</a>&gt;&nbsp;test)</span></div>
+<div class="block">Sets <a href="#extraCondition()"><code>extraCondition()</code></a>.</div>
 </section>
 </li>
 <li>

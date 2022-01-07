@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8">
   <title>HOWTO</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -85,7 +86,8 @@ adapters.</p>
   <li><a href="#building-from-git" id="markdown-toc-building-from-git">Building from Git</a></li>
   <li><a href="#gradle-vs-gradle-wrapper" id="markdown-toc-gradle-vs-gradle-wrapper">Gradle vs Gradle wrapper</a></li>
   <li><a href="#running-tests" id="markdown-toc-running-tests">Running tests</a></li>
-  <li><a href="#running-integration-tests" id="markdown-toc-running-integration-tests">Running integration tests</a>    <ul>
+  <li>
+<a href="#running-integration-tests" id="markdown-toc-running-integration-tests">Running integration tests</a>    <ul>
       <li><a href="#vm-preparation" id="markdown-toc-vm-preparation">VM preparation</a></li>
       <li><a href="#vm-management" id="markdown-toc-vm-management">VM management</a></li>
       <li><a href="#suggested-test-flow" id="markdown-toc-suggested-test-flow">Suggested test flow</a></li>
@@ -94,7 +96,8 @@ adapters.</p>
   </li>
   <li><a href="#contributing" id="markdown-toc-contributing">Contributing</a></li>
   <li><a href="#getting-started" id="markdown-toc-getting-started">Getting started</a></li>
-  <li><a href="#setting-up-an-ide-for-contributing" id="markdown-toc-setting-up-an-ide-for-contributing">Setting up an IDE for contributing</a>    <ul>
+  <li>
+<a href="#setting-up-an-ide-for-contributing" id="markdown-toc-setting-up-an-ide-for-contributing">Setting up an IDE for contributing</a>    <ul>
       <li><a href="#setting-up-intellij-idea" id="markdown-toc-setting-up-intellij-idea">Setting up IntelliJ IDEA</a></li>
       <li><a href="#setting-up-netbeans" id="markdown-toc-setting-up-netbeans">Setting up NetBeans</a></li>
     </ul>
@@ -104,23 +107,27 @@ adapters.</p>
   <li><a href="#csv-adapter" id="markdown-toc-csv-adapter">CSV adapter</a></li>
   <li><a href="#mongodb-adapter" id="markdown-toc-mongodb-adapter">MongoDB adapter</a></li>
   <li><a href="#splunk-adapter" id="markdown-toc-splunk-adapter">Splunk adapter</a></li>
-  <li><a href="#implementing-an-adapter" id="markdown-toc-implementing-an-adapter">Implementing an adapter</a>    <ul>
+  <li>
+<a href="#implementing-an-adapter" id="markdown-toc-implementing-an-adapter">Implementing an adapter</a>    <ul>
       <li><a href="#testing-adapter-in-java" id="markdown-toc-testing-adapter-in-java">Testing adapter in Java</a></li>
     </ul>
   </li>
-  <li><a href="#advanced-topics-for-developers" id="markdown-toc-advanced-topics-for-developers">Advanced topics for developers</a>    <ul>
+  <li>
+<a href="#advanced-topics-for-developers" id="markdown-toc-advanced-topics-for-developers">Advanced topics for developers</a>    <ul>
       <li><a href="#javatypefactory" id="markdown-toc-javatypefactory">JavaTypeFactory</a></li>
       <li><a href="#rebuilding-generated-protocol-buffer-code" id="markdown-toc-rebuilding-generated-protocol-buffer-code">Rebuilding generated Protocol Buffer code</a></li>
       <li><a href="#create-a-planner-rule" id="markdown-toc-create-a-planner-rule">Create a planner rule</a></li>
     </ul>
   </li>
-  <li><a href="#advanced-topics-for-committers" id="markdown-toc-advanced-topics-for-committers">Advanced topics for committers</a>    <ul>
+  <li>
+<a href="#advanced-topics-for-committers" id="markdown-toc-advanced-topics-for-committers">Advanced topics for committers</a>    <ul>
       <li><a href="#managing-calcite-repositories-through-github" id="markdown-toc-managing-calcite-repositories-through-github">Managing Calcite repositories through GitHub</a></li>
       <li><a href="#merging-pull-requests" id="markdown-toc-merging-pull-requests">Merging pull requests</a></li>
       <li><a href="#set-up-pgp-signing-keys" id="markdown-toc-set-up-pgp-signing-keys">Set up PGP signing keys</a></li>
       <li><a href="#set-up-nexus-repository-credentials" id="markdown-toc-set-up-nexus-repository-credentials">Set up Nexus repository credentials</a></li>
       <li><a href="#making-a-snapshot" id="markdown-toc-making-a-snapshot">Making a snapshot</a></li>
-      <li><a href="#making-a-release-candidate" id="markdown-toc-making-a-release-candidate">Making a release candidate</a>        <ul>
+      <li>
+<a href="#making-a-release-candidate" id="markdown-toc-making-a-release-candidate">Making a release candidate</a>        <ul>
           <li><a href="#starting-the-release-candidate-build" id="markdown-toc-starting-the-release-candidate-build">Starting the release candidate build</a></li>
           <li><a href="#troubleshooting" id="markdown-toc-troubleshooting">Troubleshooting</a></li>
           <li><a href="#checking-the-artifacts" id="markdown-toc-checking-the-artifacts">Checking the artifacts</a></li>
@@ -210,22 +217,27 @@ be impedance mismatch between different versions.</p>
 environment, as follows.</p>
 
 <ul>
-  <li><code class="highlighter-rouge">-Dcalcite.test.db=DB</code> (where db is <code class="highlighter-rouge">h2</code>, <code class="highlighter-rouge">hsqldb</code>, <code class="highlighter-rouge">mysql</code>, or <code class="highlighter-rouge">postgresql</code>) allows you
+  <li>
+<code class="highlighter-rouge">-Dcalcite.test.db=DB</code> (where db is <code class="highlighter-rouge">h2</code>, <code class="highlighter-rouge">hsqldb</code>, <code class="highlighter-rouge">mysql</code>, or <code class="highlighter-rouge">postgresql</code>) allows you
 to change the JDBC data source for the test suite. Calcite’s test
 suite requires a JDBC data source populated with the foodmart data
 set.
     <ul>
-      <li><code class="highlighter-rouge">hsqldb</code>, the default, uses an in-memory hsqldb database.</li>
+      <li>
+<code class="highlighter-rouge">hsqldb</code>, the default, uses an in-memory hsqldb database.</li>
       <li>All others access a test virtual machine
 (see <a href="#running-integration-tests">integration tests</a> below).
 <code class="highlighter-rouge">mysql</code> and <code class="highlighter-rouge">postgresql</code> might be somewhat faster than hsqldb, but you need
 to populate it (i.e. provision a VM).</li>
     </ul>
   </li>
-  <li><code class="highlighter-rouge">-Dcalcite.debug</code> prints extra debugging information to stdout.</li>
-  <li><code class="highlighter-rouge">-Dcalcite.test.splunk</code> enables tests that run against Splunk.
+  <li>
+<code class="highlighter-rouge">-Dcalcite.debug</code> prints extra debugging information to stdout.</li>
+  <li>
+<code class="highlighter-rouge">-Dcalcite.test.splunk</code> enables tests that run against Splunk.
 Splunk must be installed and running.</li>
-  <li><code class="highlighter-rouge">./gradlew testSlow</code> runs tests that take longer to execute. For
+  <li>
+<code class="highlighter-rouge">./gradlew testSlow</code> runs tests that take longer to execute. For
 example, there are tests that create virtual TPC-H and TPC-DS schemas
 in-memory and run tests from those benchmarks.</li>
 </ul>
@@ -237,11 +249,20 @@ By default, the build script passes the following <code class="highlighter-rouge
 
 <ul>
   <li><code class="highlighter-rouge">java.awt.headless</code></li>
-  <li><code class="highlighter-rouge">junit.jupiter.execution.parallel.enabled</code>, default: <code class="highlighter-rouge">true</code></li>
-  <li><code class="highlighter-rouge">junit.jupiter.execution.timeout.default</code>, default: <code class="highlighter-rouge">5 m</code></li>
-  <li><code class="highlighter-rouge">user.language</code>, default: <code class="highlighter-rouge">TR</code></li>
-  <li><code class="highlighter-rouge">user.country</code>, default: <code class="highlighter-rouge">tr</code></li>
-  <li><code class="highlighter-rouge">calcite.**</code> (to enable <code class="highlighter-rouge">calcite.test.db</code> and others above)</li>
+  <li>
+<code class="highlighter-rouge">junit.jupiter.execution.parallel.enabled</code>, default: <code class="highlighter-rouge">true</code>
+</li>
+  <li>
+<code class="highlighter-rouge">junit.jupiter.execution.timeout.default</code>, default: <code class="highlighter-rouge">5 m</code>
+</li>
+  <li>
+<code class="highlighter-rouge">user.language</code>, default: <code class="highlighter-rouge">TR</code>
+</li>
+  <li>
+<code class="highlighter-rouge">user.country</code>, default: <code class="highlighter-rouge">tr</code>
+</li>
+  <li>
+<code class="highlighter-rouge">calcite.**</code> (to enable <code class="highlighter-rouge">calcite.test.db</code> and others above)</li>
 </ul>
 
 <h2 id="running-integration-tests">Running integration tests</h2>
@@ -286,9 +307,12 @@ The connection strings for different databases are listed in <a href="https://gi
 <ul>
   <li>Executing regular unit tests (does not require external data): no change. <code class="highlighter-rouge">./gradlew test</code> or <code class="highlighter-rouge">./gradlew build</code>.</li>
   <li>Executing all tests, for all the DBs: <code class="highlighter-rouge">./gradlew test integTestAll</code>.</li>
-  <li>Executing just tests for external DBs, excluding unit tests: <code class="highlighter-rouge">./gradlew integTestAll</code></li>
-  <li>Executing PostgreSQL JDBC tests: <code class="highlighter-rouge">./gradlew integTestPostgresql</code></li>
-  <li>Executing just MongoDB tests: <code class="highlighter-rouge">./gradlew :mongo:build</code></li>
+  <li>Executing just tests for external DBs, excluding unit tests: <code class="highlighter-rouge">./gradlew integTestAll</code>
+</li>
+  <li>Executing PostgreSQL JDBC tests: <code class="highlighter-rouge">./gradlew integTestPostgresql</code>
+</li>
+  <li>Executing just MongoDB tests: <code class="highlighter-rouge">./gradlew :mongo:build</code>
+</li>
 </ul>
 
 <p>From within IDE:</p>
@@ -296,8 +320,10 @@ The connection strings for different databases are listed in <a href="https://gi
 <ul>
   <li>Executing regular unit tests: no change.</li>
   <li>Executing MongoDB tests: run <code class="highlighter-rouge">MongoAdapterTest.java</code> with <code class="highlighter-rouge">calcite.integrationTest=true</code> system property</li>
-  <li>Executing MySQL tests: run <code class="highlighter-rouge">JdbcTest</code> and <code class="highlighter-rouge">JdbcAdapterTest</code> with setting <code class="highlighter-rouge">-Dcalcite.test.db=mysql</code></li>
-  <li>Executing PostgreSQL tests: run <code class="highlighter-rouge">JdbcTest</code> and <code class="highlighter-rouge">JdbcAdapterTest</code> with setting <code class="highlighter-rouge">-Dcalcite.test.db=postgresql</code></li>
+  <li>Executing MySQL tests: run <code class="highlighter-rouge">JdbcTest</code> and <code class="highlighter-rouge">JdbcAdapterTest</code> with setting <code class="highlighter-rouge">-Dcalcite.test.db=mysql</code>
+</li>
+  <li>Executing PostgreSQL tests: run <code class="highlighter-rouge">JdbcTest</code> and <code class="highlighter-rouge">JdbcAdapterTest</code> with setting <code class="highlighter-rouge">-Dcalcite.test.db=postgresql</code>
+</li>
 </ul>
 
 <h3 id="integration-tests-technical-details">Integration tests technical details</h3>
@@ -391,7 +417,8 @@ code. The generated classes can be debugged interactively
 
 <ul>
   <li><code class="highlighter-rouge">-Dorg.codehaus.janino.source_debugging.enable=true</code></li>
-  <li><code class="highlighter-rouge">-Dorg.codehaus.janino.source_debugging.dir=C:\tmp</code> (This property is optional;
+  <li>
+<code class="highlighter-rouge">-Dorg.codehaus.janino.source_debugging.dir=C:\tmp</code> (This property is optional;
 if not set, Janino will create temporary files in the system’s default location
 for temporary files, such as <code class="highlighter-rouge">/tmp</code> on Unix-based systems.)</li>
 </ul>
@@ -802,7 +829,8 @@ if new critical vulnerabilities are found among dependencies.</li>
   <li>Decide the supported configurations of JDK, operating system and
 Guava.  These will probably be the same as those described in the
 release notes of the previous release.  Document them in the release
-notes.  To test Guava version <em>x.y</em>, specify <code class="highlighter-rouge">-Pguava.version=x.y</code></li>
+notes.  To test Guava version <em>x.y</em>, specify <code class="highlighter-rouge">-Pguava.version=x.y</code>
+</li>
   <li>Optional tests using properties:
     <ul>
       <li><code class="highlighter-rouge">-Dcalcite.test.db=mysql</code></li>
@@ -879,9 +907,11 @@ git clean <span class="nt">-xn</span>
 <h4 id="troubleshooting">Troubleshooting</h4>
 
 <ul>
-  <li><code class="highlighter-rouge">net.rubygrapefruit.platform.NativeException: Could not start 'svnmucc'</code>: Make sure you have <code class="highlighter-rouge">svnmucc</code> command
+  <li>
+<code class="highlighter-rouge">net.rubygrapefruit.platform.NativeException: Could not start 'svnmucc'</code>: Make sure you have <code class="highlighter-rouge">svnmucc</code> command
 installed in your machine.</li>
-  <li><code class="highlighter-rouge">Execution failed for task ':closeRepository' ... Possible staging rules violation. Check repository status using Nexus UI</code>:
+  <li>
+<code class="highlighter-rouge">Execution failed for task ':closeRepository' ... Possible staging rules violation. Check repository status using Nexus UI</code>:
 Log into <a href="https://repository.apache.org/#stagingRepositories">Nexus UI</a> to see the actual error. In case of
 <code class="highlighter-rouge">Failed: Signature Validation. No public key: Key with id: ... was not able to be located</code>, make sure you have uploaded
 your key to the keyservers used by Nexus, see above.</li>
@@ -911,22 +941,27 @@ no binary distro), check that all files belong to a directory called
   </li>
   <li>Make sure that the following files do not occur in the source
 distros: <code class="highlighter-rouge">KEYS</code>, <code class="highlighter-rouge">gradlew</code>, <code class="highlighter-rouge">gradlew.bat</code>, <code class="highlighter-rouge">gradle-wrapper.jar</code>,
-<code class="highlighter-rouge">gradle-wrapper.properties</code></li>
+<code class="highlighter-rouge">gradle-wrapper.properties</code>
+</li>
   <li>Make sure that there is no <code class="highlighter-rouge">KEYS</code> file in the source distros</li>
   <li>In each .jar (for example
 <code class="highlighter-rouge">core/build/libs/calcite-core-X.Y.Z.jar</code> and
 <code class="highlighter-rouge">mongodb/build/libs/calcite-mongodb-X.Y.Z-sources.jar</code>), check
 that the <code class="highlighter-rouge">META-INF</code> directory contains <code class="highlighter-rouge">LICENSE</code>,
-<code class="highlighter-rouge">NOTICE</code></li>
-  <li>Check PGP, per <a href="https://httpd.apache.org/dev/verification.html">this</a></li>
+<code class="highlighter-rouge">NOTICE</code>
+</li>
+  <li>Check PGP, per <a href="https://httpd.apache.org/dev/verification.html">this</a>
+</li>
 </ul>
 
 <p>Verify the staged artifacts in the Nexus repository:</p>
 
 <ul>
   <li>Go to <a href="https://repository.apache.org/">https://repository.apache.org/</a> and login</li>
-  <li>Under <code class="highlighter-rouge">Build Promotion</code>, click <code class="highlighter-rouge">Staging Repositories</code></li>
-  <li>In the <code class="highlighter-rouge">Staging Repositories</code> tab there should be a line with profile <code class="highlighter-rouge">org.apache.calcite</code></li>
+  <li>Under <code class="highlighter-rouge">Build Promotion</code>, click <code class="highlighter-rouge">Staging Repositories</code>
+</li>
+  <li>In the <code class="highlighter-rouge">Staging Repositories</code> tab there should be a line with profile <code class="highlighter-rouge">org.apache.calcite</code>
+</li>
   <li>Navigate through the artifact tree and make sure the .jar, .pom, .asc files are present</li>
   <li>Check the box on in the first column of the row,
 and press the ‘Close’ button to publish the repository at
@@ -1390,11 +1425,11 @@ that <code class="highlighter-rouge">master</code> code freeze is over and commi
       <img src="/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
   </div>
   <div id="copyright">
-  <p>The contents of this website are Copyright &copy;&nbsp;2021
+  <p>The contents of this website are Copyright © 2022
      <a href="https://www.apache.org/">Apache Software Foundation</a>
      under the terms of
      the <a href="https://www.apache.org/licenses/">
-     Apache&nbsp;License&nbsp;v2</a>. Apache Calcite and its logo are
+     Apache License v2</a>. Apache Calcite and its logo are
      trademarks of the Apache Software Foundation.</p>
   </div>
 </footer>

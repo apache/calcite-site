@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8">
   <title>Spatial</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -105,8 +106,10 @@ that represents objects defined in a geometric space.</p>
 <ul>
   <li>A <a href="reference.html#data-types">GEOMETRY</a> data type and
 <a href="reference.html#spatial-types">sub-types</a> including <code class="highlighter-rouge">POINT</code>, <code class="highlighter-rouge">LINESTRING</code>
-and <code class="highlighter-rouge">POLYGON</code></li>
-  <li><a href="reference.html#spatial-functions">Spatial functions</a> (prefixed <code class="highlighter-rouge">ST_</code>;
+and <code class="highlighter-rouge">POLYGON</code>
+</li>
+  <li>
+<a href="reference.html#spatial-functions">Spatial functions</a> (prefixed <code class="highlighter-rouge">ST_</code>;
 we have implemented about 35 of the 150 in the OpenGIS specification)</li>
 </ul>
 
@@ -182,7 +185,7 @@ are very fast because the table is sorted on <code class="highlighter-rouge">h</
 
 <p>Here is the full set of transformations:</p>
 
-<table>
+<div class="scroll-table-style"><table>
   <thead>
     <tr>
       <th style="text-align: left">Description</th>
@@ -191,27 +194,28 @@ are very fast because the table is sorted on <code class="highlighter-rouge">h</
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">Test whether a constant rectangle (X, X2, Y, Y2) contains a point (a, b)<br /><br />Rewrite to use Hilbert index</td>
-      <td>ST_Contains(​ST_Rectangle(​X, X2, Y, Y2), ST_Point(a, b)))<br /><br />h BETWEEN C1 AND C2<br />OR …<br />OR h BETWEEN C<sub>2k</sub> AND C<sub>2k+1</sub></td>
+      <td style="text-align: left">Test whether a constant rectangle (X, X2, Y, Y2) contains a point (a, b)<br><br>Rewrite to use Hilbert index</td>
+      <td>ST_Contains(​ST_Rectangle(​X, X2, Y, Y2), ST_Point(a, b)))<br><br>h BETWEEN C1 AND C2<br>OR …<br>OR h BETWEEN C<sub>2k</sub> AND C<sub>2k+1</sub>
+</td>
     </tr>
     <tr>
-      <td style="text-align: left">Test whether a constant geometry G contains a point (a, b)<br /><br />Rewrite to use bounding box of constant geometry, which is also constant, then rewrite to Hilbert range(s) as above</td>
-      <td>ST_Contains(​ST_Envelope(​G), ST_Point(a, b))<br /><br />ST_Contains(​ST_Rectangle(​X, X2, Y, Y2), ST_Point(a, b)))</td>
+      <td style="text-align: left">Test whether a constant geometry G contains a point (a, b)<br><br>Rewrite to use bounding box of constant geometry, which is also constant, then rewrite to Hilbert range(s) as above</td>
+      <td>ST_Contains(​ST_Envelope(​G), ST_Point(a, b))<br><br>ST_Contains(​ST_Rectangle(​X, X2, Y, Y2), ST_Point(a, b)))</td>
     </tr>
     <tr>
-      <td style="text-align: left">Test whether a point (a, b) is within a buffer around a constant point (X, Y)<br /><br />Special case of previous, because buffer is a constant geometry</td>
+      <td style="text-align: left">Test whether a point (a, b) is within a buffer around a constant point (X, Y)<br><br>Special case of previous, because buffer is a constant geometry</td>
       <td>ST_Contains(​ST_Buffer(​ST_Point(a, b), D), ST_Point(X, Y))</td>
     </tr>
     <tr>
-      <td style="text-align: left">Test whether a point (a, b) is within a constant distance D of a constant point (X, Y)<br /><br />First, convert to buffer, then use previous rewrite for constant geometry</td>
-      <td>ST_DWithin(​ST_Point(a, b), ST_Point(X, Y), D))<br /><br />ST_Contains(​ST_Buffer(​ST_Point(​X, Y), D), ST_Point(a, b))</td>
+      <td style="text-align: left">Test whether a point (a, b) is within a constant distance D of a constant point (X, Y)<br><br>First, convert to buffer, then use previous rewrite for constant geometry</td>
+      <td>ST_DWithin(​ST_Point(a, b), ST_Point(X, Y), D))<br><br>ST_Contains(​ST_Buffer(​ST_Point(​X, Y), D), ST_Point(a, b))</td>
     </tr>
     <tr>
-      <td style="text-align: left">Test whether a constant point (X, Y) is within a constant distance D of a point (a, b)<br /><br />Reverse arguments of call to <code>ST_DWithin</code>, then use previous rewrite</td>
-      <td>ST_DWithin(​ST_Point(X, Y), ST_Point(a, b), D))<br /><br />ST_Contains(​ST_Buffer(​ST_Point(​X, Y), D), ST_Point(a, b))</td>
+      <td style="text-align: left">Test whether a constant point (X, Y) is within a constant distance D of a point (a, b)<br><br>Reverse arguments of call to <code>ST_DWithin</code>, then use previous rewrite</td>
+      <td>ST_DWithin(​ST_Point(X, Y), ST_Point(a, b), D))<br><br>ST_Contains(​ST_Buffer(​ST_Point(​X, Y), D), ST_Point(a, b))</td>
     </tr>
   </tbody>
-</table>
+</table></div>
 
 <p>In the above, <code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">b</code> are variables, <code class="highlighter-rouge">X</code>, <code class="highlighter-rouge">X2</code>, <code class="highlighter-rouge">Y</code>, <code class="highlighter-rouge">Y2</code>, <code class="highlighter-rouge">D</code> and <code class="highlighter-rouge">G</code> are
 constants.</p>
@@ -519,11 +523,11 @@ when the specification wasn’t clear. Thank you to these awesome projects.</p>
       <img src="/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
   </div>
   <div id="copyright">
-  <p>The contents of this website are Copyright &copy;&nbsp;2021
+  <p>The contents of this website are Copyright © 2022
      <a href="https://www.apache.org/">Apache Software Foundation</a>
      under the terms of
      the <a href="https://www.apache.org/licenses/">
-     Apache&nbsp;License&nbsp;v2</a>. Apache Calcite and its logo are
+     Apache License v2</a>. Apache Calcite and its logo are
      trademarks of the Apache Software Foundation.</p>
   </div>
 </footer>

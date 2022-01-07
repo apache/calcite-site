@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8">
   <title>Tutorial</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -130,44 +131,44 @@ sqlline&gt; <span class="o">!</span>connect jdbc:calcite:model<span class="o">=<
 <p>Execute a metadata query:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="o">!</span>tables
-+------------+--------------+-------------+---------------+----------+------+
-| TABLE_CAT  | TABLE_SCHEM  | TABLE_NAME  |  TABLE_TYPE   | REMARKS  | TYPE |
-+------------+--------------+-------------+---------------+----------+------+
-| null       | SALES        | DEPTS       | TABLE         | null     | null |
-| null       | SALES        | EMPS        | TABLE         | null     | null |
-| null       | SALES        | HOBBIES     | TABLE         | null     | null |
-| null       | metadata     | COLUMNS     | SYSTEM_TABLE  | null     | null |
-| null       | metadata     | TABLES      | SYSTEM_TABLE  | null     | null |
-+------------+--------------+-------------+---------------+----------+------+</code></pre></figure>
++-----------+-------------+------------+--------------+---------+----------+------------+-----------+---------------------------+----------------+
+| TABLE_CAT | TABLE_SCHEM | TABLE_NAME |  TABLE_TYPE  | REMARKS | TYPE_CAT | TYPE_SCHEM | TYPE_NAME | SELF_REFERENCING_COL_NAME | REF_GENERATION |
++-----------+-------------+------------+--------------+---------+----------+------------+-----------+---------------------------+----------------+
+|           | SALES       | DEPTS      | TABLE        |         |          |            |           |                           |                |
+|           | SALES       | EMPS       | TABLE        |         |          |            |           |                           |                |
+|           | SALES       | SDEPTS     | TABLE        |         |          |            |           |                           |                |
+|           | metadata    | COLUMNS    | SYSTEM TABLE |         |          |            |           |                           |                |
+|           | metadata    | TABLES     | SYSTEM TABLE |         |          |            |           |                           |                |
++-----------+-------------+------------+--------------+---------+----------+------------+-----------+---------------------------+----------------+</code></pre></figure>
 
 <p>(JDBC experts, note: sqlline’s <code>!tables</code> command is just executing
-<a href="https://docs.oracle.com/javase/7/docs/api/java/sql/DatabaseMetaData.html#getTables(java.lang.String, java.lang.String, java.lang.String, java.lang.String[])"><code>DatabaseMetaData.getTables()</code></a>
+<a href="https://docs.oracle.com/javase/7/docs/api/java/sql/DatabaseMetaData.html#getTables(java.lang.String,%20java.lang.String,%20java.lang.String,%20java.lang.String%5B%5D)"><code>DatabaseMetaData.getTables()</code></a>
 behind the scenes.
 It has other commands to query JDBC metadata, such as <code>!columns</code> and <code>!describe</code>.)</p>
 
 <p>As you can see there are 5 tables in the system: tables
-<code>EMPS</code>, <code>DEPTS</code> and <code>HOBBIES</code> in the current
+<code>EMPS</code>, <code>DEPTS</code> and <code>SDEPTS</code> in the current
 <code>SALES</code> schema, and <code>COLUMNS</code> and
 <code>TABLES</code> in the system <code>metadata</code> schema. The
 system tables are always present in Calcite, but the other tables are
 provided by the specific implementation of the schema; in this case,
-the <code>EMPS</code> and <code>DEPTS</code> tables are based on the
-<code>EMPS.csv</code> and <code>DEPTS.csv</code> files in the
+the <code>EMPS</code>, <code>DEPTS</code> and <code>SDEPTS</code> tables are based on the
+<code>EMPS.csv.gz</code>, <code>DEPTS.csv</code> and <code>SDEPTS.csv</code> files in the
 <code>resources/sales</code> directory.</p>
 
 <p>Let’s execute some queries on those tables, to show that Calcite is providing
 a full implementation of SQL. First, a table scan:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; SELECT <span class="k">*</span> FROM emps<span class="p">;</span>
-+--------+--------+---------+---------+----------------+--------+-------+---+
-| EMPNO  |  NAME  | DEPTNO  | GENDER  |      CITY      | EMPID  |  AGE  | S |
-+--------+--------+---------+---------+----------------+--------+-------+---+
-| 100    | Fred   | 10      |         |                | 30     | 25    | t |
-| 110    | Eric   | 20      | M       | San Francisco  | 3      | 80    | n |
-| 110    | John   | 40      | M       | Vancouver      | 2      | null  | f |
-| 120    | Wilma  | 20      | F       |                | 1      | 5     | n |
-| 130    | Alice  | 40      | F       | Vancouver      | 2      | null  | f |
-+--------+--------+---------+---------+----------------+--------+-------+---+</code></pre></figure>
++-------+-------+--------+--------+---------------+-------+------+---------+---------+------------+
+| EMPNO | NAME  | DEPTNO | GENDER |     CITY      | EMPID | AGE  | SLACKER | MANAGER |  JOINEDAT  |
++-------+-------+--------+--------+---------------+-------+------+---------+---------+------------+
+| 100   | Fred  | 10     |        |               | 30    | 25   | <span class="nb">true</span>    | <span class="nb">false</span>   | 1996-08-03 |
+| 110   | Eric  | 20     | M      | San Francisco | 3     | 80   |         | <span class="nb">false</span>   | 2001-01-01 |
+| 110   | John  | 40     | M      | Vancouver     | 2     | null | <span class="nb">false</span>   | <span class="nb">true</span>    | 2002-05-03 |
+| 120   | Wilma | 20     | F      |               | 1     | 5    |         | <span class="nb">true</span>    | 2005-09-07 |
+| 130   | Alice | 40     | F      | Vancouver     | 2     | null | <span class="nb">false</span>   | <span class="nb">true</span>    | 2007-01-01 |
++-------+-------+--------+--------+---------------+-------+------+---------+---------+------------+</code></pre></figure>
 
 <p>Now JOIN and GROUP BY:</p>
 
@@ -316,11 +317,11 @@ method in the <code>AbstractSchema</code> base class.</p>
   <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
-<p>The schema scans the directory and finds all files whose name ends
-with “.csv” and creates tables for them. In this case, the directory
+<p>The schema scans the directory, finds all files with the appropriate extension,
+and creates tables for them. In this case, the directory
 is <code>sales</code> and contains files
-<code>EMPS.csv</code> and <code>DEPTS.csv</code>, which these become
-the tables <code>EMPS</code> and <code>DEPTS</code>.</p>
+<code>EMPS.csv.gz</code>, <code>DEPTS.csv</code> and <code>SDEPTS.csv</code>, which these become
+the tables <code>EMPS</code>, <code>DEPTS</code> and <code>SDEPTS</code>.</p>
 
 <h2 id="tables-and-views-in-schemas">Tables and views in schemas</h2>
 
@@ -504,7 +505,7 @@ similar schemas:</p>
 <span class="o">+</span><span class="c1">-----------------------------------------------------+</span>
 <span class="o">|</span> <span class="n">PLAN</span>                                                <span class="o">|</span>
 <span class="o">+</span><span class="c1">-----------------------------------------------------+</span>
-<span class="o">|</span> <span class="n">EnumerableCalcRel</span><span class="p">(</span><span class="n">expr</span><span class="o">#</span><span class="mi">0</span><span class="p">..</span><span class="mi">9</span><span class="o">=</span><span class="p">[</span><span class="err">{</span><span class="n">inputs</span><span class="err">}</span><span class="p">],</span> <span class="n">NAME</span><span class="o">=</span><span class="p">[</span><span class="err">$</span><span class="n">t1</span><span class="p">])</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">EnumerableCalc</span><span class="p">(</span><span class="n">expr</span><span class="o">#</span><span class="mi">0</span><span class="p">..</span><span class="mi">9</span><span class="o">=</span><span class="p">[</span><span class="err">{</span><span class="n">inputs</span><span class="err">}</span><span class="p">],</span> <span class="n">NAME</span><span class="o">=</span><span class="p">[</span><span class="err">$</span><span class="n">t1</span><span class="p">])</span>    <span class="o">|</span>
 <span class="o">|</span>   <span class="n">EnumerableTableScan</span><span class="p">(</span><span class="k">table</span><span class="o">=</span><span class="p">[[</span><span class="n">SALES</span><span class="p">,</span> <span class="n">EMPS</span><span class="p">]])</span>        <span class="o">|</span>
 <span class="o">+</span><span class="c1">-----------------------------------------------------+</span>
 <span class="n">sqlline</span><span class="o">&gt;</span> <span class="o">!</span><span class="k">connect</span> <span class="n">jdbc</span><span class="p">:</span><span class="n">calcite</span><span class="p">:</span><span class="n">model</span><span class="o">=</span><span class="n">src</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">resources</span><span class="o">/</span><span class="n">smart</span><span class="p">.</span><span class="n">json</span> <span class="k">admin</span> <span class="k">admin</span>
@@ -512,8 +513,7 @@ similar schemas:</p>
 <span class="o">+</span><span class="c1">-----------------------------------------------------+</span>
 <span class="o">|</span> <span class="n">PLAN</span>                                                <span class="o">|</span>
 <span class="o">+</span><span class="c1">-----------------------------------------------------+</span>
-<span class="o">|</span> <span class="n">EnumerableCalcRel</span><span class="p">(</span><span class="n">expr</span><span class="o">#</span><span class="mi">0</span><span class="p">..</span><span class="mi">9</span><span class="o">=</span><span class="p">[</span><span class="err">{</span><span class="n">inputs</span><span class="err">}</span><span class="p">],</span> <span class="n">NAME</span><span class="o">=</span><span class="p">[</span><span class="err">$</span><span class="n">t1</span><span class="p">])</span> <span class="o">|</span>
-<span class="o">|</span>   <span class="n">CsvTableScan</span><span class="p">(</span><span class="k">table</span><span class="o">=</span><span class="p">[[</span><span class="n">SALES</span><span class="p">,</span> <span class="n">EMPS</span><span class="p">]])</span>               <span class="o">|</span>
+<span class="o">|</span> <span class="n">CsvTableScan</span><span class="p">(</span><span class="k">table</span><span class="o">=</span><span class="p">[[</span><span class="n">SALES</span><span class="p">,</span> <span class="n">EMPS</span><span class="p">]],</span> <span class="n">fields</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">]])</span>   <span class="o">|</span>
 <span class="o">+</span><span class="c1">-----------------------------------------------------+</span></code></pre></figure>
 
 <p>What causes the difference in plan? Let’s follow the trail of evidence. In the
@@ -1028,11 +1028,11 @@ The <a href="adapter.html">adapter specification</a> describes the APIs involved
       <img src="/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
   </div>
   <div id="copyright">
-  <p>The contents of this website are Copyright &copy;&nbsp;2021
+  <p>The contents of this website are Copyright © 2022
      <a href="https://www.apache.org/">Apache Software Foundation</a>
      under the terms of
      the <a href="https://www.apache.org/licenses/">
-     Apache&nbsp;License&nbsp;v2</a>. Apache Calcite and its logo are
+     Apache License v2</a>. Apache Calcite and its logo are
      trademarks of the Apache Software Foundation.</p>
   </div>
 </footer>

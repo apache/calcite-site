@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8">
   <title>Streaming</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -102,7 +103,8 @@ streaming queries.</p>
   <li><a href="#joining-streams-to-streams" id="markdown-toc-joining-streams-to-streams">Joining streams to streams</a></li>
   <li><a href="#dml" id="markdown-toc-dml">DML</a></li>
   <li><a href="#punctuation" id="markdown-toc-punctuation">Punctuation</a></li>
-  <li><a href="#state-of-the-stream" id="markdown-toc-state-of-the-stream">State of the stream</a>    <ul>
+  <li>
+<a href="#state-of-the-stream" id="markdown-toc-state-of-the-stream">State of the stream</a>    <ul>
       <li><a href="#implemented" id="markdown-toc-implemented">Implemented</a></li>
       <li><a href="#not-implemented" id="markdown-toc-not-implemented">Not implemented</a></li>
       <li><a href="#to-do-in-this-document" id="markdown-toc-to-do-in-this-document">To do in this document</a></li>
@@ -146,9 +148,12 @@ standard SQL.</p>
 <p>Our streaming SQL examples use the following schema:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">Orders (rowtime, productId, orderId, units)</code> - a stream and a table</li>
-  <li><code class="highlighter-rouge">Products (rowtime, productId, name)</code> - a table</li>
-  <li><code class="highlighter-rouge">Shipments (rowtime, orderId)</code> - a stream</li>
+  <li>
+<code class="highlighter-rouge">Orders (rowtime, productId, orderId, units)</code> - a stream and a table</li>
+  <li>
+<code class="highlighter-rouge">Products (rowtime, productId, name)</code> - a table</li>
+  <li>
+<code class="highlighter-rouge">Shipments (rowtime, orderId)</code> - a stream</li>
 </ul>
 
 <h2 id="a-simple-query">A simple query</h2>
@@ -271,7 +276,7 @@ differences are:</p>
 
 <p>and the following diagram shows the kinds of query in which to use them:</p>
 
-<p><img src="/img/window-types.png" alt="Window types" /></p>
+<p><img src="/img/window-types.png" alt="Window types"></p>
 
 <p>First we’ll look a <em>tumbling window</em>, which is defined by a streaming
 <code class="highlighter-rouge">GROUP BY</code>. Here is an example:</p>
@@ -608,7 +613,7 @@ occurs in what I call the “pie chart problem”. Imagine that you need to
 write a web page with a chart, like the following, that summarizes the
 number of orders for each product over the last hour.</p>
 
-<p><img src="/img/pie-chart.png" alt="Pie chart" /></p>
+<p><img src="/img/pie-chart.png" alt="Pie chart"></p>
 
 <p>But the <code class="highlighter-rouge">Orders</code> stream only contains a few records, not an hour’s summary.
 We need to run a relational query on the history of the stream:</p>
@@ -974,8 +979,10 @@ such as SamzaSQL [<a href="#ref3">3</a>] [<a href="#ref4">4</a>].</p>
 <h2 id="implemented">Implemented</h2>
 
 <ul>
-  <li>Streaming <code class="highlighter-rouge">SELECT</code>, <code class="highlighter-rouge">WHERE</code>, <code class="highlighter-rouge">GROUP BY</code>, <code class="highlighter-rouge">HAVING</code>, <code class="highlighter-rouge">UNION ALL</code>, <code class="highlighter-rouge">ORDER BY</code></li>
-  <li><code class="highlighter-rouge">FLOOR</code> and <code class="highlighter-rouge">CEIL</code> functions</li>
+  <li>Streaming <code class="highlighter-rouge">SELECT</code>, <code class="highlighter-rouge">WHERE</code>, <code class="highlighter-rouge">GROUP BY</code>, <code class="highlighter-rouge">HAVING</code>, <code class="highlighter-rouge">UNION ALL</code>, <code class="highlighter-rouge">ORDER BY</code>
+</li>
+  <li>
+<code class="highlighter-rouge">FLOOR</code> and <code class="highlighter-rouge">CEIL</code> functions</li>
   <li>Monotonicity</li>
   <li>Streaming <code class="highlighter-rouge">VALUES</code> is disallowed</li>
 </ul>
@@ -988,26 +995,32 @@ that the reference implementation supports the feature (including
 negative cases) and the TCK tests it.</p>
 
 <ul>
-  <li>Stream-to-stream <code class="highlighter-rouge">JOIN</code></li>
-  <li>Stream-to-table <code class="highlighter-rouge">JOIN</code></li>
+  <li>Stream-to-stream <code class="highlighter-rouge">JOIN</code>
+</li>
+  <li>Stream-to-table <code class="highlighter-rouge">JOIN</code>
+</li>
   <li>Stream on view</li>
   <li>Streaming <code class="highlighter-rouge">UNION ALL</code> with <code class="highlighter-rouge">ORDER BY</code> (merge)</li>
   <li>Relational query on stream</li>
   <li>Streaming windowed aggregation (sliding and cascading windows)</li>
   <li>Check that <code class="highlighter-rouge">STREAM</code> in sub-queries and views is ignored</li>
-  <li>Check that streaming <code class="highlighter-rouge">ORDER BY</code> cannot have <code class="highlighter-rouge">OFFSET</code> or <code class="highlighter-rouge">LIMIT</code></li>
+  <li>Check that streaming <code class="highlighter-rouge">ORDER BY</code> cannot have <code class="highlighter-rouge">OFFSET</code> or <code class="highlighter-rouge">LIMIT</code>
+</li>
   <li>Limited history; at run time, check that there is sufficient history
 to run the query.</li>
   <li><a href="https://issues.apache.org/jira/browse/CALCITE-1096">Quasi-monotonicity</a></li>
-  <li><code class="highlighter-rouge">HOP</code> and <code class="highlighter-rouge">TUMBLE</code> (and auxiliary <code class="highlighter-rouge">HOP_START</code>, <code class="highlighter-rouge">HOP_END</code>,
+  <li>
+<code class="highlighter-rouge">HOP</code> and <code class="highlighter-rouge">TUMBLE</code> (and auxiliary <code class="highlighter-rouge">HOP_START</code>, <code class="highlighter-rouge">HOP_END</code>,
 <code class="highlighter-rouge">TUMBLE_START</code>, <code class="highlighter-rouge">TUMBLE_END</code>) functions</li>
 </ul>
 
 <h2 id="to-do-in-this-document">To do in this document</h2>
 
 <ul>
-  <li>Re-visit whether you can stream <code class="highlighter-rouge">VALUES</code></li>
-  <li><code class="highlighter-rouge">OVER</code> clause to define window on stream</li>
+  <li>Re-visit whether you can stream <code class="highlighter-rouge">VALUES</code>
+</li>
+  <li>
+<code class="highlighter-rouge">OVER</code> clause to define window on stream</li>
   <li>Consider whether to allow <code class="highlighter-rouge">CUBE</code> and <code class="highlighter-rouge">ROLLUP</code> in streaming queries,
 with an understanding that some levels of aggregation will never complete
 (because they have no monotonic expressions) and thus will never be emitted.</li>
@@ -1025,22 +1038,28 @@ but are defined in streaming SQL.</p>
 <p>Scalar functions:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">FLOOR(dateTime TO intervalType)</code> rounds a date, time or timestamp value
+  <li>
+<code class="highlighter-rouge">FLOOR(dateTime TO intervalType)</code> rounds a date, time or timestamp value
 down to a given interval type</li>
-  <li><code class="highlighter-rouge">CEIL(dateTime TO intervalType)</code> rounds a date, time or timestamp value
+  <li>
+<code class="highlighter-rouge">CEIL(dateTime TO intervalType)</code> rounds a date, time or timestamp value
 up to a given interval type</li>
 </ul>
 
 <p>Partitioning functions:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">HOP(t, emit, retain)</code> returns a collection of group keys for a row
+  <li>
+<code class="highlighter-rouge">HOP(t, emit, retain)</code> returns a collection of group keys for a row
 to be part of a hopping window</li>
-  <li><code class="highlighter-rouge">HOP(t, emit, retain, align)</code> returns a collection of group keys for a row
+  <li>
+<code class="highlighter-rouge">HOP(t, emit, retain, align)</code> returns a collection of group keys for a row
 to be part of a hopping window with a given alignment</li>
-  <li><code class="highlighter-rouge">TUMBLE(t, emit)</code> returns a group key for a row
+  <li>
+<code class="highlighter-rouge">TUMBLE(t, emit)</code> returns a group key for a row
 to be part of a tumbling window</li>
-  <li><code class="highlighter-rouge">TUMBLE(t, emit, align)</code> returns a group key for a row
+  <li>
+<code class="highlighter-rouge">TUMBLE(t, emit, align)</code> returns a group key for a row
 to be part of a tumbling window with a given alignment</li>
 </ul>
 
@@ -1359,11 +1378,11 @@ MillWheel: Fault-Tolerant Stream Processing at Internet Scale</a>.</li>
       <img src="/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
   </div>
   <div id="copyright">
-  <p>The contents of this website are Copyright &copy;&nbsp;2021
+  <p>The contents of this website are Copyright © 2022
      <a href="https://www.apache.org/">Apache Software Foundation</a>
      under the terms of
      the <a href="https://www.apache.org/licenses/">
-     Apache&nbsp;License&nbsp;v2</a>. Apache Calcite and its logo are
+     Apache License v2</a>. Apache Calcite and its logo are
      trademarks of the Apache Software Foundation.</p>
   </div>
 </footer>

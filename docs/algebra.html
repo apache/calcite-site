@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8">
   <title>Algebra</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -249,9 +250,11 @@ will be called something like DEPTNO_1.</p>
 <p>Some relational expression methods give you more control over field names:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">project</code> lets you wrap expressions using <code class="highlighter-rouge">alias(expr, fieldName)</code>. It
+  <li>
+<code class="highlighter-rouge">project</code> lets you wrap expressions using <code class="highlighter-rouge">alias(expr, fieldName)</code>. It
 removes the wrapper but keeps the suggested name (as long as it is unique).</li>
-  <li><code class="highlighter-rouge">values(String[] fieldNames, Object... values)</code> accepts an array of field
+  <li>
+<code class="highlighter-rouge">values(String[] fieldNames, Object... values)</code> accepts an array of field
 names. If any element of the array is null, the builder will generate a unique
 name.</li>
 </ul>
@@ -345,7 +348,7 @@ A SQL recursive query, e.g. this one that generates the sequence 1, 2, 3, …10:
 push it onto the stack, and
 return the <code class="highlighter-rouge">RelBuilder</code>.</p>
 
-<table>
+<div class="scroll-table-style"><table>
   <thead>
     <tr>
       <th style="text-align: left">Method</th>
@@ -358,7 +361,9 @@ return the <code class="highlighter-rouge">RelBuilder</code>.</p>
       <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/TableScan.html">TableScan</a>.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">functionScan(operator, n, expr...)</code><br /><code class="highlighter-rouge">functionScan(operator, n, exprList)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">functionScan(operator, n, expr...)</code><br><code class="highlighter-rouge">functionScan(operator, n, exprList)</code>
+</td>
       <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/TableFunctionScan.html">TableFunctionScan</a> of the <code class="highlighter-rouge">n</code> most recent relational expressions.</td>
     </tr>
     <tr>
@@ -366,23 +371,33 @@ return the <code class="highlighter-rouge">RelBuilder</code>.</p>
       <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/TableScan.html">TableScan</a> on a <a href="/javadocAggregate/org/apache/calcite/schema/TransientTable.html">TransientTable</a> with the given type (if not specified, the most recent relational expression’s type will be used).</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">values(fieldNames, value...)</code><br /><code class="highlighter-rouge">values(rowType, tupleList)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">values(fieldNames, value...)</code><br><code class="highlighter-rouge">values(rowType, tupleList)</code>
+</td>
       <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Values.html">Values</a>.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">filter([variablesSet, ] exprList)</code><br /><code class="highlighter-rouge">filter([variablesSet, ] expr...)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">filter([variablesSet, ] exprList)</code><br><code class="highlighter-rouge">filter([variablesSet, ] expr...)</code>
+</td>
       <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Filter.html">Filter</a> over the AND of the given predicates; if <code class="highlighter-rouge">variablesSet</code> is specified, the predicates may reference those variables.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">project(expr...)</code><br /><code class="highlighter-rouge">project(exprList [, fieldNames])</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">project(expr...)</code><br><code class="highlighter-rouge">project(exprList [, fieldNames])</code>
+</td>
       <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Project.html">Project</a>. To override the default name, wrap expressions using <code class="highlighter-rouge">alias</code>, or specify the <code class="highlighter-rouge">fieldNames</code> argument.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">projectPlus(expr...)</code><br /><code class="highlighter-rouge">projectPlus(exprList)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">projectPlus(expr...)</code><br><code class="highlighter-rouge">projectPlus(exprList)</code>
+</td>
       <td style="text-align: left">Variant of <code class="highlighter-rouge">project</code> that keeps original fields and appends the given expressions.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">projectExcept(expr...)</code><br /><code class="highlighter-rouge">projectExcept(exprList)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">projectExcept(expr...)</code><br><code class="highlighter-rouge">projectExcept(exprList)</code>
+</td>
       <td style="text-align: left">Variant of <code class="highlighter-rouge">project</code> that keeps original fields and removes the given expressions.</td>
     </tr>
     <tr>
@@ -394,7 +409,9 @@ return the <code class="highlighter-rouge">RelBuilder</code>.</p>
       <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Project.html">Project</a> that converts the fields to the given types, optionally also renaming them.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">aggregate(groupKey, aggCall...)</code><br /><code class="highlighter-rouge">aggregate(groupKey, aggCallList)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">aggregate(groupKey, aggCall...)</code><br><code class="highlighter-rouge">aggregate(groupKey, aggCallList)</code>
+</td>
       <td style="text-align: left">Creates an <a href="/javadocAggregate/org/apache/calcite/rel/core/Aggregate.html">Aggregate</a>.</td>
     </tr>
     <tr>
@@ -410,11 +427,15 @@ return the <code class="highlighter-rouge">RelBuilder</code>.</p>
       <td style="text-align: left">Adds an unpivot operation, implemented by generating a <a href="/javadocAggregate/org/apache/calcite/rel/core/Join.html">Join</a> to a <a href="/javadocAggregate/org/apache/calcite/rel/core/Values.html">Values</a> that converts each row to several rows</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">sort(fieldOrdinal...)</code><br /><code class="highlighter-rouge">sort(expr...)</code><br /><code class="highlighter-rouge">sort(exprList)</code></td>
-      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Sort.html">Sort</a>.<br /><br />In the first form, field ordinals are 0-based, and a negative ordinal indicates descending; for example, -2 means field 1 descending.<br /><br />In the other forms, you can wrap expressions in <code class="highlighter-rouge">as</code>, <code class="highlighter-rouge">nullsFirst</code> or <code class="highlighter-rouge">nullsLast</code>.</td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">sort(fieldOrdinal...)</code><br><code class="highlighter-rouge">sort(expr...)</code><br><code class="highlighter-rouge">sort(exprList)</code>
+</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Sort.html">Sort</a>.<br><br>In the first form, field ordinals are 0-based, and a negative ordinal indicates descending; for example, -2 means field 1 descending.<br><br>In the other forms, you can wrap expressions in <code class="highlighter-rouge">as</code>, <code class="highlighter-rouge">nullsFirst</code> or <code class="highlighter-rouge">nullsLast</code>.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">sortLimit(offset, fetch, expr...)</code><br /><code class="highlighter-rouge">sortLimit(offset, fetch, exprList)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">sortLimit(offset, fetch, expr...)</code><br><code class="highlighter-rouge">sortLimit(offset, fetch, exprList)</code>
+</td>
       <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Sort.html">Sort</a> with offset and limit.</td>
     </tr>
     <tr>
@@ -430,12 +451,16 @@ return the <code class="highlighter-rouge">RelBuilder</code>.</p>
       <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/SortExchange.html">SortExchange</a>.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">correlate(joinType, correlationId, requiredField...)</code><br /><code class="highlighter-rouge">correlate(joinType, correlationId, requiredFieldList)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">correlate(joinType, correlationId, requiredField...)</code><br><code class="highlighter-rouge">correlate(joinType, correlationId, requiredFieldList)</code>
+</td>
       <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Correlate.html">Correlate</a> of the two most recent relational expressions, with a variable name and required field expressions for the left relation.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">join(joinType, expr...)</code><br /><code class="highlighter-rouge">join(joinType, exprList)</code><br /><code class="highlighter-rouge">join(joinType, fieldName...)</code></td>
-      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Join.html">Join</a> of the two most recent relational expressions.<br /><br />The first form joins on a boolean expression (multiple conditions are combined using AND).<br /><br />The last form joins on named fields; each side must have a field of each name.</td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">join(joinType, expr...)</code><br><code class="highlighter-rouge">join(joinType, exprList)</code><br><code class="highlighter-rouge">join(joinType, fieldName...)</code>
+</td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Join.html">Join</a> of the two most recent relational expressions.<br><br>The first form joins on a boolean expression (multiple conditions are combined using AND).<br><br>The last form joins on named fields; each side must have a field of each name.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">semiJoin(expr)</code></td>
@@ -466,59 +491,105 @@ return the <code class="highlighter-rouge">RelBuilder</code>.</p>
       <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Snapshot.html">Snapshot</a> of the given snapshot period.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">match(pattern, strictStart,</code> <code class="highlighter-rouge">strictEnd, patterns, measures,</code> <code class="highlighter-rouge">after, subsets, allRows,</code> <code class="highlighter-rouge">partitionKeys, orderKeys,</code> <code class="highlighter-rouge">interval)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">match(pattern, strictStart,</code> <code class="highlighter-rouge">strictEnd, patterns, measures,</code> <code class="highlighter-rouge">after, subsets, allRows,</code> <code class="highlighter-rouge">partitionKeys, orderKeys,</code> <code class="highlighter-rouge">interval)</code>
+</td>
       <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Match.html">Match</a>.</td>
     </tr>
   </tbody>
-</table>
+</table></div>
 
 <p>Argument types:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">expr</code>, <code class="highlighter-rouge">interval</code> <a href="/javadocAggregate/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
-  <li><code class="highlighter-rouge">expr...</code>, <code class="highlighter-rouge">requiredField...</code> Array of
-<a href="/javadocAggregate/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
-  <li><code class="highlighter-rouge">exprList</code>, <code class="highlighter-rouge">measureList</code>, <code class="highlighter-rouge">partitionKeys</code>, <code class="highlighter-rouge">orderKeys</code>,
+  <li>
+<code class="highlighter-rouge">expr</code>, <code class="highlighter-rouge">interval</code> <a href="/javadocAggregate/org/apache/calcite/rex/RexNode.html">RexNode</a>
+</li>
+  <li>
+<code class="highlighter-rouge">expr...</code>, <code class="highlighter-rouge">requiredField...</code> Array of
+<a href="/javadocAggregate/org/apache/calcite/rex/RexNode.html">RexNode</a>
+</li>
+  <li>
+<code class="highlighter-rouge">exprList</code>, <code class="highlighter-rouge">measureList</code>, <code class="highlighter-rouge">partitionKeys</code>, <code class="highlighter-rouge">orderKeys</code>,
 <code class="highlighter-rouge">requiredFieldList</code> Iterable of
-<a href="/javadocAggregate/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
-  <li><code class="highlighter-rouge">fieldOrdinal</code> Ordinal of a field within its row (starting from 0)</li>
-  <li><code class="highlighter-rouge">fieldName</code> Name of a field, unique within its row</li>
-  <li><code class="highlighter-rouge">fieldName...</code> Array of String</li>
-  <li><code class="highlighter-rouge">fieldNames</code> Iterable of String</li>
-  <li><code class="highlighter-rouge">rowType</code> <a href="/javadocAggregate/org/apache/calcite/rel/type/RelDataType.html">RelDataType</a></li>
-  <li><code class="highlighter-rouge">groupKey</code> <a href="/javadocAggregate/org/apache/calcite/tools/RelBuilder.GroupKey.html">RelBuilder.GroupKey</a></li>
-  <li><code class="highlighter-rouge">aggCall...</code> Array of <a href="/javadocAggregate/org/apache/calcite/tools/RelBuilder.AggCall.html">RelBuilder.AggCall</a></li>
-  <li><code class="highlighter-rouge">aggCallList</code> Iterable of <a href="/javadocAggregate/org/apache/calcite/tools/RelBuilder.AggCall.html">RelBuilder.AggCall</a></li>
-  <li><code class="highlighter-rouge">value...</code> Array of Object</li>
-  <li><code class="highlighter-rouge">value</code> Object</li>
-  <li><code class="highlighter-rouge">tupleList</code> Iterable of List of <a href="/javadocAggregate/org/apache/calcite/rex/RexLiteral.html">RexLiteral</a></li>
-  <li><code class="highlighter-rouge">all</code>, <code class="highlighter-rouge">distinct</code>, <code class="highlighter-rouge">strictStart</code>, <code class="highlighter-rouge">strictEnd</code>, <code class="highlighter-rouge">allRows</code> boolean</li>
-  <li><code class="highlighter-rouge">alias</code> String</li>
-  <li><code class="highlighter-rouge">correlationId</code> <a href="/javadocAggregate/org/apache/calcite/rel/core/CorrelationId.html">CorrelationId</a></li>
-  <li><code class="highlighter-rouge">variablesSet</code> Iterable of
-<a href="/javadocAggregate/org/apache/calcite/rel/core/CorrelationId.html">CorrelationId</a></li>
-  <li><code class="highlighter-rouge">varHolder</code> <a href="/javadocAggregate/org/apache/calcite/util/Holder.html">Holder</a> of <a href="/javadocAggregate/org/apache/calcite/rex/RexCorrelVariable.html">RexCorrelVariable</a></li>
-  <li><code class="highlighter-rouge">patterns</code> Map whose key is String, value is <a href="/javadocAggregate/org/apache/calcite/rex/RexNode.html">RexNode</a></li>
-  <li><code class="highlighter-rouge">subsets</code> Map whose key is String, value is a sorted set of String</li>
-  <li><code class="highlighter-rouge">distribution</code> <a href="/javadocAggregate/org/apache/calcite/rel/RelDistribution.html">RelDistribution</a></li>
-  <li><code class="highlighter-rouge">collation</code> <a href="/javadocAggregate/org/apache/calcite/rel/RelCollation.html">RelCollation</a></li>
-  <li><code class="highlighter-rouge">operator</code> <a href="/javadocAggregate/org/apache/calcite/sql/SqlOperator.html">SqlOperator</a></li>
-  <li><code class="highlighter-rouge">joinType</code> <a href="/javadocAggregate/org/apache/calcite/rel/core/JoinRelType.html">JoinRelType</a></li>
+<a href="/javadocAggregate/org/apache/calcite/rex/RexNode.html">RexNode</a>
+</li>
+  <li>
+<code class="highlighter-rouge">fieldOrdinal</code> Ordinal of a field within its row (starting from 0)</li>
+  <li>
+<code class="highlighter-rouge">fieldName</code> Name of a field, unique within its row</li>
+  <li>
+<code class="highlighter-rouge">fieldName...</code> Array of String</li>
+  <li>
+<code class="highlighter-rouge">fieldNames</code> Iterable of String</li>
+  <li>
+<code class="highlighter-rouge">rowType</code> <a href="/javadocAggregate/org/apache/calcite/rel/type/RelDataType.html">RelDataType</a>
+</li>
+  <li>
+<code class="highlighter-rouge">groupKey</code> <a href="/javadocAggregate/org/apache/calcite/tools/RelBuilder.GroupKey.html">RelBuilder.GroupKey</a>
+</li>
+  <li>
+<code class="highlighter-rouge">aggCall...</code> Array of <a href="/javadocAggregate/org/apache/calcite/tools/RelBuilder.AggCall.html">RelBuilder.AggCall</a>
+</li>
+  <li>
+<code class="highlighter-rouge">aggCallList</code> Iterable of <a href="/javadocAggregate/org/apache/calcite/tools/RelBuilder.AggCall.html">RelBuilder.AggCall</a>
+</li>
+  <li>
+<code class="highlighter-rouge">value...</code> Array of Object</li>
+  <li>
+<code class="highlighter-rouge">value</code> Object</li>
+  <li>
+<code class="highlighter-rouge">tupleList</code> Iterable of List of <a href="/javadocAggregate/org/apache/calcite/rex/RexLiteral.html">RexLiteral</a>
+</li>
+  <li>
+<code class="highlighter-rouge">all</code>, <code class="highlighter-rouge">distinct</code>, <code class="highlighter-rouge">strictStart</code>, <code class="highlighter-rouge">strictEnd</code>, <code class="highlighter-rouge">allRows</code> boolean</li>
+  <li>
+<code class="highlighter-rouge">alias</code> String</li>
+  <li>
+<code class="highlighter-rouge">correlationId</code> <a href="/javadocAggregate/org/apache/calcite/rel/core/CorrelationId.html">CorrelationId</a>
+</li>
+  <li>
+<code class="highlighter-rouge">variablesSet</code> Iterable of
+<a href="/javadocAggregate/org/apache/calcite/rel/core/CorrelationId.html">CorrelationId</a>
+</li>
+  <li>
+<code class="highlighter-rouge">varHolder</code> <a href="/javadocAggregate/org/apache/calcite/util/Holder.html">Holder</a> of <a href="/javadocAggregate/org/apache/calcite/rex/RexCorrelVariable.html">RexCorrelVariable</a>
+</li>
+  <li>
+<code class="highlighter-rouge">patterns</code> Map whose key is String, value is <a href="/javadocAggregate/org/apache/calcite/rex/RexNode.html">RexNode</a>
+</li>
+  <li>
+<code class="highlighter-rouge">subsets</code> Map whose key is String, value is a sorted set of String</li>
+  <li>
+<code class="highlighter-rouge">distribution</code> <a href="/javadocAggregate/org/apache/calcite/rel/RelDistribution.html">RelDistribution</a>
+</li>
+  <li>
+<code class="highlighter-rouge">collation</code> <a href="/javadocAggregate/org/apache/calcite/rel/RelCollation.html">RelCollation</a>
+</li>
+  <li>
+<code class="highlighter-rouge">operator</code> <a href="/javadocAggregate/org/apache/calcite/sql/SqlOperator.html">SqlOperator</a>
+</li>
+  <li>
+<code class="highlighter-rouge">joinType</code> <a href="/javadocAggregate/org/apache/calcite/rel/core/JoinRelType.html">JoinRelType</a>
+</li>
 </ul>
 
 <p>The builder methods perform various optimizations, including:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">project</code> returns its input if asked to project all columns in order</li>
-  <li><code class="highlighter-rouge">filter</code> flattens the condition (so an <code class="highlighter-rouge">AND</code> and <code class="highlighter-rouge">OR</code> may have more than 2 children),
+  <li>
+<code class="highlighter-rouge">project</code> returns its input if asked to project all columns in order</li>
+  <li>
+<code class="highlighter-rouge">filter</code> flattens the condition (so an <code class="highlighter-rouge">AND</code> and <code class="highlighter-rouge">OR</code> may have more than 2 children),
 simplifies (converting say <code class="highlighter-rouge">x = 1 AND TRUE</code> to <code class="highlighter-rouge">x = 1</code>)</li>
-  <li>If you apply <code class="highlighter-rouge">sort</code> then <code class="highlighter-rouge">limit</code>, the effect is as if you had called <code class="highlighter-rouge">sortLimit</code></li>
+  <li>If you apply <code class="highlighter-rouge">sort</code> then <code class="highlighter-rouge">limit</code>, the effect is as if you had called <code class="highlighter-rouge">sortLimit</code>
+</li>
 </ul>
 
 <p>There are annotation methods that add information to the top relational
 expression on the stack:</p>
 
-<table>
+<div class="scroll-table-style"><table>
   <thead>
     <tr>
       <th style="text-align: left">Method</th>
@@ -535,11 +606,11 @@ expression on the stack:</p>
       <td style="text-align: left">Creates a correlation variable referencing the top relational expression</td>
     </tr>
   </tbody>
-</table>
+</table></div>
 
 <h4 id="stack-methods">Stack methods</h4>
 
-<table>
+<div class="scroll-table-style"><table>
   <thead>
     <tr>
       <th style="text-align: left">Method</th>
@@ -564,7 +635,7 @@ expression on the stack:</p>
       <td style="text-align: left">Returns the relational expression most recently put onto the stack, but does not remove it</td>
     </tr>
   </tbody>
-</table>
+</table></div>
 
 <h4 id="scalar-expression-methods">Scalar expression methods</h4>
 
@@ -575,7 +646,7 @@ expression on the stack:</p>
 returns a reference to the “DEPTNO” field of the relational expression just
 added to the stack.</p>
 
-<table>
+<div class="scroll-table-style"><table>
   <thead>
     <tr>
       <th style="text-align: left">Method</th>
@@ -632,15 +703,21 @@ added to the stack.</p>
       <td style="text-align: left">List of expressions, <code class="highlighter-rouge">exprList</code>, such that <code class="highlighter-rouge">sort(exprList)</code> would replicate collation</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">call(op, expr...)</code><br /><code class="highlighter-rouge">call(op, exprList)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">call(op, expr...)</code><br><code class="highlighter-rouge">call(op, exprList)</code>
+</td>
       <td style="text-align: left">Call to a function or operator</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">and(expr...)</code><br /><code class="highlighter-rouge">and(exprList)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">and(expr...)</code><br><code class="highlighter-rouge">and(exprList)</code>
+</td>
       <td style="text-align: left">Logical AND. Flattens nested ANDs, and optimizes cases involving TRUE and FALSE.</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">or(expr...)</code><br /><code class="highlighter-rouge">or(exprList)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">or(expr...)</code><br><code class="highlighter-rouge">or(exprList)</code>
+</td>
       <td style="text-align: left">Logical OR. Flattens nested ORs, and optimizes cases involving TRUE and FALSE.</td>
     </tr>
     <tr>
@@ -664,7 +741,9 @@ added to the stack.</p>
       <td style="text-align: left">Renames an expression (only valid as an argument to <code class="highlighter-rouge">project</code>)</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">cast(expr, typeName)</code><br /><code class="highlighter-rouge">cast(expr, typeName, precision)</code><br /><code class="highlighter-rouge">cast(expr, typeName, precision, scale)</code><br /></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">cast(expr, typeName)</code><br><code class="highlighter-rouge">cast(expr, typeName, precision)</code><br><code class="highlighter-rouge">cast(expr, typeName, precision, scale)</code><br>
+</td>
       <td style="text-align: left">Converts an expression to a given type</td>
     </tr>
     <tr>
@@ -684,7 +763,7 @@ added to the stack.</p>
       <td style="text-align: left">Reference to <code class="highlighter-rouge">input</code>th (0-based) relational input of a <code class="highlighter-rouge">TableFunctionScan</code> with <code class="highlighter-rouge">n</code> inputs (see <code class="highlighter-rouge">functionScan</code>)</td>
     </tr>
   </tbody>
-</table>
+</table></div>
 
 <h4 id="sub-query-methods">Sub-query methods</h4>
 
@@ -700,7 +779,7 @@ and returns a <code class="highlighter-rouge">RelNode</code>. You typically impl
 calls your code with a <code class="highlighter-rouge">RelBuilder</code> that has the correct context, and your code
 returns the <code class="highlighter-rouge">RelNode</code> that is to be the sub-query.</p>
 
-<table>
+<div class="scroll-table-style"><table>
   <thead>
     <tr>
       <th style="text-align: left">Method</th>
@@ -714,23 +793,28 @@ returns the <code class="highlighter-rouge">RelNode</code> that is to be the sub
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">arrayQuery(relFn)</code></td>
-      <td style="text-align: left">Returns the rows of a sub-query as an <code class="highlighter-rouge">ARRAY</code></td>
+      <td style="text-align: left">Returns the rows of a sub-query as an <code class="highlighter-rouge">ARRAY</code>
+</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">exists(relFn)</code></td>
       <td style="text-align: left">Tests whether sub-query is non-empty</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">in(expr, relFn)</code><br /><code class="highlighter-rouge">in(exprList, relFn)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">in(expr, relFn)</code><br><code class="highlighter-rouge">in(exprList, relFn)</code>
+</td>
       <td style="text-align: left">Tests whether a value occurs in a sub-query</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">mapQuery(relFn)</code></td>
-      <td style="text-align: left">Returns the rows of a sub-query as a <code class="highlighter-rouge">MAP</code></td>
+      <td style="text-align: left">Returns the rows of a sub-query as a <code class="highlighter-rouge">MAP</code>
+</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">multisetQuery(relFn)</code></td>
-      <td style="text-align: left">Returns the rows of a sub-query as a <code class="highlighter-rouge">MULTISET</code></td>
+      <td style="text-align: left">Returns the rows of a sub-query as a <code class="highlighter-rouge">MULTISET</code>
+</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">scalarQuery(relFn)</code></td>
@@ -745,13 +829,13 @@ returns the <code class="highlighter-rouge">RelNode</code> that is to be the sub
       <td style="text-align: left">Returns whether the rows of a sub-query are unique</td>
     </tr>
   </tbody>
-</table>
+</table></div>
 
 <h4 id="pattern-methods">Pattern methods</h4>
 
 <p>The following methods return patterns for use in <code class="highlighter-rouge">match</code>.</p>
 
-<table>
+<div class="scroll-table-style"><table>
   <thead>
     <tr>
       <th style="text-align: left">Method</th>
@@ -780,14 +864,14 @@ returns the <code class="highlighter-rouge">RelNode</code> that is to be the sub
       <td style="text-align: left">Excludes a pattern</td>
     </tr>
   </tbody>
-</table>
+</table></div>
 
 <h4 id="group-key-methods">Group key methods</h4>
 
 <p>The following methods return a
 <a href="/javadocAggregate/org/apache/calcite/tools/RelBuilder.GroupKey.html">RelBuilder.GroupKey</a>.</p>
 
-<table>
+<div class="scroll-table-style"><table>
   <thead>
     <tr>
       <th style="text-align: left">Method</th>
@@ -796,7 +880,9 @@ returns the <code class="highlighter-rouge">RelNode</code> that is to be the sub
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">groupKey(fieldName...)</code><br /><code class="highlighter-rouge">groupKey(fieldOrdinal...)</code><br /><code class="highlighter-rouge">groupKey(expr...)</code><br /><code class="highlighter-rouge">groupKey(exprList)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">groupKey(fieldName...)</code><br><code class="highlighter-rouge">groupKey(fieldOrdinal...)</code><br><code class="highlighter-rouge">groupKey(expr...)</code><br><code class="highlighter-rouge">groupKey(exprList)</code>
+</td>
       <td style="text-align: left">Creates a group key of the given expressions</td>
     </tr>
     <tr>
@@ -808,14 +894,14 @@ returns the <code class="highlighter-rouge">RelNode</code> that is to be the sub
       <td style="text-align: left">Creates a group key of the given input columns, with multiple grouping sets if <code class="highlighter-rouge">bitSets</code> is specified</td>
     </tr>
   </tbody>
-</table>
+</table></div>
 
 <h4 id="aggregate-call-methods">Aggregate call methods</h4>
 
 <p>The following methods return an
 <a href="/javadocAggregate/org/apache/calcite/tools/RelBuilder.AggCall.html">RelBuilder.AggCall</a>.</p>
 
-<table>
+<div class="scroll-table-style"><table>
   <thead>
     <tr>
       <th style="text-align: left">Method</th>
@@ -824,11 +910,15 @@ returns the <code class="highlighter-rouge">RelNode</code> that is to be the sub
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">aggregateCall(op, expr...)</code><br /><code class="highlighter-rouge">aggregateCall(op, exprList)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">aggregateCall(op, expr...)</code><br><code class="highlighter-rouge">aggregateCall(op, exprList)</code>
+</td>
       <td style="text-align: left">Creates a call to a given aggregate function</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">count([ distinct, alias, ] expr...)</code><br /><code class="highlighter-rouge">count([ distinct, alias, ] exprList)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">count([ distinct, alias, ] expr...)</code><br><code class="highlighter-rouge">count([ distinct, alias, ] exprList)</code>
+</td>
       <td style="text-align: left">Creates a call to the <code class="highlighter-rouge">COUNT</code> aggregate function</td>
     </tr>
     <tr>
@@ -848,11 +938,11 @@ returns the <code class="highlighter-rouge">RelNode</code> that is to be the sub
       <td style="text-align: left">Creates a call to the <code class="highlighter-rouge">MAX</code> aggregate function</td>
     </tr>
   </tbody>
-</table>
+</table></div>
 
 <p>To further modify the <code class="highlighter-rouge">AggCall</code>, call its methods:</p>
 
-<table>
+<div class="scroll-table-style"><table>
   <thead>
     <tr>
       <th style="text-align: left">Method</th>
@@ -862,7 +952,8 @@ returns the <code class="highlighter-rouge">RelNode</code> that is to be the sub
   <tbody>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">approximate(approximate)</code></td>
-      <td style="text-align: left">Allows approximate value for the aggregate of <code class="highlighter-rouge">approximate</code></td>
+      <td style="text-align: left">Allows approximate value for the aggregate of <code class="highlighter-rouge">approximate</code>
+</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">as(alias)</code></td>
@@ -874,18 +965,23 @@ returns the <code class="highlighter-rouge">RelNode</code> that is to be the sub
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">distinct(distinct)</code></td>
-      <td style="text-align: left">Eliminates duplicate values before aggregating if <code class="highlighter-rouge">distinct</code></td>
+      <td style="text-align: left">Eliminates duplicate values before aggregating if <code class="highlighter-rouge">distinct</code>
+</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">filter(expr)</code></td>
       <td style="text-align: left">Filters rows before aggregating (see SQL <code class="highlighter-rouge">FILTER (WHERE ...)</code>)</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">sort(expr...)</code><br /><code class="highlighter-rouge">sort(exprList)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">sort(expr...)</code><br><code class="highlighter-rouge">sort(exprList)</code>
+</td>
       <td style="text-align: left">Sorts rows before aggregating (see SQL <code class="highlighter-rouge">WITHIN GROUP</code>)</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">unique(expr...)</code><br /><code class="highlighter-rouge">unique(exprList)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">unique(expr...)</code><br><code class="highlighter-rouge">unique(exprList)</code>
+</td>
       <td style="text-align: left">Makes rows unique before aggregating (see SQL <code class="highlighter-rouge">WITHIN DISTINCT</code>)</td>
     </tr>
     <tr>
@@ -893,7 +989,7 @@ returns the <code class="highlighter-rouge">RelNode</code> that is to be the sub
       <td style="text-align: left">Converts this <code class="highlighter-rouge">AggCall</code> into a windowed aggregate (see <code class="highlighter-rouge">OverCall</code> below)</td>
     </tr>
   </tbody>
-</table>
+</table></div>
 
 <h4 id="windowed-aggregate-call-methods">Windowed aggregate call methods</h4>
 
@@ -904,7 +1000,7 @@ call and then call its <code class="highlighter-rouge">over()</code> method, for
 
 <p>To further modify the <code class="highlighter-rouge">OverCall</code>, call its methods:</p>
 
-<table>
+<div class="scroll-table-style"><table>
   <thead>
     <tr>
       <th style="text-align: left">Method</th>
@@ -914,42 +1010,54 @@ call and then call its <code class="highlighter-rouge">over()</code> method, for
   <tbody>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">rangeUnbounded()</code></td>
-      <td style="text-align: left">Creates an unbounded range-based window, <code class="highlighter-rouge">RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING</code></td>
+      <td style="text-align: left">Creates an unbounded range-based window, <code class="highlighter-rouge">RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING</code>
+</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">rangeFrom(lower)</code></td>
-      <td style="text-align: left">Creates a range-based window bounded below, <code class="highlighter-rouge">RANGE BETWEEN lower AND CURRENT ROW</code></td>
+      <td style="text-align: left">Creates a range-based window bounded below, <code class="highlighter-rouge">RANGE BETWEEN lower AND CURRENT ROW</code>
+</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">rangeTo(upper)</code></td>
-      <td style="text-align: left">Creates a range-based window bounded above, <code class="highlighter-rouge">RANGE BETWEEN CURRENT ROW AND upper</code></td>
+      <td style="text-align: left">Creates a range-based window bounded above, <code class="highlighter-rouge">RANGE BETWEEN CURRENT ROW AND upper</code>
+</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">rangeBetween(lower, upper)</code></td>
-      <td style="text-align: left">Creates a range-based window, <code class="highlighter-rouge">RANGE BETWEEN lower AND upper</code></td>
+      <td style="text-align: left">Creates a range-based window, <code class="highlighter-rouge">RANGE BETWEEN lower AND upper</code>
+</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">rowsUnbounded()</code></td>
-      <td style="text-align: left">Creates an unbounded row-based window, <code class="highlighter-rouge">ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING</code></td>
+      <td style="text-align: left">Creates an unbounded row-based window, <code class="highlighter-rouge">ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING</code>
+</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">rowsFrom(lower)</code></td>
-      <td style="text-align: left">Creates a row-based window bounded below, <code class="highlighter-rouge">ROWS BETWEEN lower AND CURRENT ROW</code></td>
+      <td style="text-align: left">Creates a row-based window bounded below, <code class="highlighter-rouge">ROWS BETWEEN lower AND CURRENT ROW</code>
+</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">rowsTo(upper)</code></td>
-      <td style="text-align: left">Creates a row-based window bounded above, <code class="highlighter-rouge">ROWS BETWEEN CURRENT ROW AND upper</code></td>
+      <td style="text-align: left">Creates a row-based window bounded above, <code class="highlighter-rouge">ROWS BETWEEN CURRENT ROW AND upper</code>
+</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">rowsBetween(lower, upper)</code></td>
-      <td style="text-align: left">Creates a rows-based window, <code class="highlighter-rouge">ROWS BETWEEN lower AND upper</code></td>
+      <td style="text-align: left">Creates a rows-based window, <code class="highlighter-rouge">ROWS BETWEEN lower AND upper</code>
+</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">partitionBy(expr...)</code><br /><code class="highlighter-rouge">partitionBy(exprList)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">partitionBy(expr...)</code><br><code class="highlighter-rouge">partitionBy(exprList)</code>
+</td>
       <td style="text-align: left">Partitions the window on the given expressions (see SQL <code class="highlighter-rouge">PARTITION BY</code>)</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="highlighter-rouge">orderBy(expr...)</code><br /><code class="highlighter-rouge">sort(exprList)</code></td>
+      <td style="text-align: left">
+<code class="highlighter-rouge">orderBy(expr...)</code><br><code class="highlighter-rouge">sort(exprList)</code>
+</td>
       <td style="text-align: left">Sorts the rows in the window (see SQL <code class="highlighter-rouge">ORDER BY</code>)</td>
     </tr>
     <tr>
@@ -962,14 +1070,16 @@ call and then call its <code class="highlighter-rouge">over()</code> method, for
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">as(alias)</code></td>
-      <td style="text-align: left">Assigns a column alias (see SQL <code class="highlighter-rouge">AS</code>) and converts this <code class="highlighter-rouge">OverCall</code> to a <code class="highlighter-rouge">RexNode</code></td>
+      <td style="text-align: left">Assigns a column alias (see SQL <code class="highlighter-rouge">AS</code>) and converts this <code class="highlighter-rouge">OverCall</code> to a <code class="highlighter-rouge">RexNode</code>
+</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="highlighter-rouge">toRex()</code></td>
-      <td style="text-align: left">Converts this <code class="highlighter-rouge">OverCall</code> to a <code class="highlighter-rouge">RexNode</code></td>
+      <td style="text-align: left">Converts this <code class="highlighter-rouge">OverCall</code> to a <code class="highlighter-rouge">RexNode</code>
+</td>
     </tr>
   </tbody>
-</table>
+</table></div>
 
           
 
@@ -1249,11 +1359,11 @@ call and then call its <code class="highlighter-rouge">over()</code> method, for
       <img src="/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
   </div>
   <div id="copyright">
-  <p>The contents of this website are Copyright &copy;&nbsp;2021
+  <p>The contents of this website are Copyright © 2022
      <a href="https://www.apache.org/">Apache Software Foundation</a>
      under the terms of
      the <a href="https://www.apache.org/licenses/">
-     Apache&nbsp;License&nbsp;v2</a>. Apache Calcite and its logo are
+     Apache License v2</a>. Apache Calcite and its logo are
      trademarks of the Apache Software Foundation.</p>
   </div>
 </footer>

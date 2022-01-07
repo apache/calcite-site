@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8">
   <title>Materialized Views</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -81,11 +82,15 @@
 
 <ul id="markdown-toc">
   <li><a href="#materialized-views-maintained-by-calcite" id="markdown-toc-materialized-views-maintained-by-calcite">Materialized views maintained by Calcite</a></li>
-  <li><a href="#expose-materialized-views-to-calcite" id="markdown-toc-expose-materialized-views-to-calcite">Expose materialized views to Calcite</a>    <ul>
-      <li><a href="#view-based-query-rewriting" id="markdown-toc-view-based-query-rewriting">View-based query rewriting</a>        <ul>
+  <li>
+<a href="#expose-materialized-views-to-calcite" id="markdown-toc-expose-materialized-views-to-calcite">Expose materialized views to Calcite</a>    <ul>
+      <li>
+<a href="#view-based-query-rewriting" id="markdown-toc-view-based-query-rewriting">View-based query rewriting</a>        <ul>
           <li><a href="#substitution-via-rules-transformation" id="markdown-toc-substitution-via-rules-transformation">Substitution via rules transformation</a></li>
-          <li><a href="#rewriting-using-plan-structural-information" id="markdown-toc-rewriting-using-plan-structural-information">Rewriting using plan structural information</a>            <ul>
-              <li><a href="#rewriting-coverage" id="markdown-toc-rewriting-coverage">Rewriting coverage</a>                <ul>
+          <li>
+<a href="#rewriting-using-plan-structural-information" id="markdown-toc-rewriting-using-plan-structural-information">Rewriting using plan structural information</a>            <ul>
+              <li>
+<a href="#rewriting-coverage" id="markdown-toc-rewriting-coverage">Rewriting coverage</a>                <ul>
                   <li><a href="#join-rewriting" id="markdown-toc-join-rewriting">Join rewriting</a></li>
                   <li><a href="#aggregate-rewriting" id="markdown-toc-aggregate-rewriting">Aggregate rewriting</a></li>
                   <li><a href="#aggregate-rewriting-with-aggregation-rollup" id="markdown-toc-aggregate-rewriting-with-aggregation-rollup">Aggregate rewriting (with aggregation rollup)</a></li>
@@ -133,9 +138,12 @@ Currently, Calcite has two implementations of view-based query rewriting.</p>
 <p>The following example is taken from the documentation of <code class="highlighter-rouge">SubstitutionVisitor</code>:</p>
 
 <ul>
-  <li>Query: <code class="highlighter-rouge">SELECT a, c FROM t WHERE x = 5 AND b = 4</code></li>
-  <li>Target (materialized view definition): <code class="highlighter-rouge">SELECT a, b, c FROM t WHERE x = 5</code></li>
-  <li>Result: <code class="highlighter-rouge">SELECT a, c FROM mv WHERE b = 4</code></li>
+  <li>Query: <code class="highlighter-rouge">SELECT a, c FROM t WHERE x = 5 AND b = 4</code>
+</li>
+  <li>Target (materialized view definition): <code class="highlighter-rouge">SELECT a, b, c FROM t WHERE x = 5</code>
+</li>
+  <li>Result: <code class="highlighter-rouge">SELECT a, c FROM mv WHERE b = 4</code>
+</li>
 </ul>
 
 <p>Note that <code class="highlighter-rouge">result</code> uses the materialized view table <code class="highlighter-rouge">mv</code> and a simplified condition <code class="highlighter-rouge">b = 4</code>.</p>
@@ -157,26 +165,26 @@ Additionally, the rule can rewrite expressions rooted at an Aggregate operator, 
 
 <p>Let us illustrate with some examples the coverage of the view rewriting algorithm implemented in <code class="highlighter-rouge">MaterializedViewRule</code>. The examples are based on the following database schema.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE depts(
-  deptno INT NOT NULL,
-  deptname VARCHAR(20),
-  PRIMARY KEY (deptno)
-);
-CREATE TABLE locations(
-  locationid INT NOT NULL,
-  state CHAR(2),
-  PRIMARY KEY (locationid)
-);
-CREATE TABLE emps(
-  empid INT NOT NULL,
-  deptno INT NOT NULL,
-  locationid INT NOT NULL,
-  empname VARCHAR(20) NOT NULL,
-  salary DECIMAL (18, 2),
-  PRIMARY KEY (empid),
-  FOREIGN KEY (deptno) REFERENCES depts(deptno),
-  FOREIGN KEY (locationid) REFERENCES locations(locationid)
-);
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">depts</span><span class="p">(</span>
+  <span class="n">deptno</span> <span class="n">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">deptname</span> <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">deptno</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">locations</span><span class="p">(</span>
+  <span class="n">locationid</span> <span class="n">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="k">state</span> <span class="n">CHAR</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">locationid</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">emps</span><span class="p">(</span>
+  <span class="n">empid</span> <span class="n">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">deptno</span> <span class="n">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">locationid</span> <span class="n">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">empname</span> <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">salary</span> <span class="n">DECIMAL</span> <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">empid</span><span class="p">),</span>
+  <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">deptno</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">depts</span><span class="p">(</span><span class="n">deptno</span><span class="p">),</span>
+  <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">locationid</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">locations</span><span class="p">(</span><span class="n">locationid</span><span class="p">)</span>
+<span class="p">);</span>
 </code></pre></div></div>
 
 <h6 id="join-rewriting">Join rewriting</h6>
@@ -187,31 +195,31 @@ CREATE TABLE emps(
   <li>Query:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid
-FROM depts
-JOIN (
-  SELECT empid, deptno
-  FROM emps
-  WHERE empid = 1) AS subq
-ON depts.deptno = subq.deptno
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span>
+<span class="k">FROM</span> <span class="n">depts</span>
+<span class="k">JOIN</span> <span class="p">(</span>
+  <span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span>
+  <span class="k">FROM</span> <span class="n">emps</span>
+  <span class="k">WHERE</span> <span class="n">empid</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">AS</span> <span class="n">subq</span>
+<span class="k">ON</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">subq</span><span class="p">.</span><span class="n">deptno</span>
 </code></pre></div></div>
 
 <ul>
   <li>Materialized view definition:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid
-FROM emps
-JOIN depts USING (deptno)
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span>
+<span class="k">FROM</span> <span class="n">emps</span>
+<span class="k">JOIN</span> <span class="n">depts</span> <span class="k">USING</span> <span class="p">(</span><span class="n">deptno</span><span class="p">)</span>
 </code></pre></div></div>
 
 <ul>
   <li>Rewriting:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid
-FROM mv
-WHERE empid = 1
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span>
+<span class="k">FROM</span> <span class="n">mv</span>
+<span class="k">WHERE</span> <span class="n">empid</span> <span class="o">=</span> <span class="mi">1</span>
 </code></pre></div></div>
 
 <h6 id="aggregate-rewriting">Aggregate rewriting</h6>
@@ -220,30 +228,30 @@ WHERE empid = 1
   <li>Query:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT deptno
-FROM emps
-WHERE deptno &gt; 10
-GROUP BY deptno
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptno</span>
+<span class="k">FROM</span> <span class="n">emps</span>
+<span class="k">WHERE</span> <span class="n">deptno</span> <span class="o">&gt;</span> <span class="mi">10</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span>
 </code></pre></div></div>
 
 <ul>
   <li>Materialized view definition:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, deptno
-FROM emps
-WHERE deptno &gt; 5
-GROUP BY empid, deptno
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span>
+<span class="k">FROM</span> <span class="n">emps</span>
+<span class="k">WHERE</span> <span class="n">deptno</span> <span class="o">&gt;</span> <span class="mi">5</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span>
 </code></pre></div></div>
 
 <ul>
   <li>Rewriting:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT deptno
-FROM mv
-WHERE deptno &gt; 10
-GROUP BY deptno
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptno</span>
+<span class="k">FROM</span> <span class="n">mv</span>
+<span class="k">WHERE</span> <span class="n">deptno</span> <span class="o">&gt;</span> <span class="mi">10</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span>
 </code></pre></div></div>
 
 <h6 id="aggregate-rewriting-with-aggregation-rollup">Aggregate rewriting (with aggregation rollup)</h6>
@@ -252,27 +260,27 @@ GROUP BY deptno
   <li>Query:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT deptno, COUNT(*) AS c, SUM(salary) AS s
-FROM emps
-GROUP BY deptno
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="k">c</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
+<span class="k">FROM</span> <span class="n">emps</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span>
 </code></pre></div></div>
 
 <ul>
   <li>Materialized view definition:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, deptno, COUNT(*) AS c, SUM(salary) AS s
-FROM emps
-GROUP BY empid, deptno
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="k">c</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
+<span class="k">FROM</span> <span class="n">emps</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span>
 </code></pre></div></div>
 
 <ul>
   <li>Rewriting:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT deptno, SUM(c), SUM(s)
-FROM mv
-GROUP BY deptno
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="k">c</span><span class="p">),</span> <span class="k">SUM</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">mv</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span>
 </code></pre></div></div>
 
 <h6 id="query-partial-rewriting">Query partial rewriting</h6>
@@ -283,28 +291,28 @@ GROUP BY deptno
   <li>Query:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT deptno, COUNT(*)
-FROM emps
-GROUP BY deptno
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">emps</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span>
 </code></pre></div></div>
 
 <ul>
   <li>Materialized view definition:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, depts.deptno, COUNT(*) AS c, SUM(salary) AS s
-FROM emps
-JOIN depts USING (deptno)
-GROUP BY empid, depts.deptno
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="k">c</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
+<span class="k">FROM</span> <span class="n">emps</span>
+<span class="k">JOIN</span> <span class="n">depts</span> <span class="k">USING</span> <span class="p">(</span><span class="n">deptno</span><span class="p">)</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span>
 </code></pre></div></div>
 
 <ul>
   <li>Rewriting:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT deptno, SUM(c)
-FROM mv
-GROUP BY deptno
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="k">c</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">mv</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span>
 </code></pre></div></div>
 
 <h6 id="view-partial-rewriting">View partial rewriting</h6>
@@ -313,31 +321,31 @@ GROUP BY deptno
   <li>Query:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT deptname, state, SUM(salary) AS s
-FROM emps
-JOIN depts ON emps.deptno = depts.deptno
-JOIN locations ON emps.locationid = locations.locationid
-GROUP BY deptname, state
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">state</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
+<span class="k">FROM</span> <span class="n">emps</span>
+<span class="k">JOIN</span> <span class="n">depts</span> <span class="k">ON</span> <span class="n">emps</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span>
+<span class="k">JOIN</span> <span class="n">locations</span> <span class="k">ON</span> <span class="n">emps</span><span class="p">.</span><span class="n">locationid</span> <span class="o">=</span> <span class="n">locations</span><span class="p">.</span><span class="n">locationid</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">state</span>
 </code></pre></div></div>
 
 <ul>
   <li>Materialized view definition:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, deptno, state, SUM(salary) AS s
-FROM emps
-JOIN locations ON emps.locationid = locations.locationid
-GROUP BY empid, deptno, state
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">state</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
+<span class="k">FROM</span> <span class="n">emps</span>
+<span class="k">JOIN</span> <span class="n">locations</span> <span class="k">ON</span> <span class="n">emps</span><span class="p">.</span><span class="n">locationid</span> <span class="o">=</span> <span class="n">locations</span><span class="p">.</span><span class="n">locationid</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">state</span>
 </code></pre></div></div>
 
 <ul>
   <li>Rewriting:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT deptname, state, SUM(s)
-FROM mv
-JOIN depts ON mv.deptno = depts.deptno
-GROUP BY deptname, state
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">state</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">mv</span>
+<span class="k">JOIN</span> <span class="n">depts</span> <span class="k">ON</span> <span class="n">mv</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">state</span>
 </code></pre></div></div>
 
 <h6 id="union-rewriting">Union rewriting</h6>
@@ -346,33 +354,33 @@ GROUP BY deptname, state
   <li>Query:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, deptname
-FROM emps
-JOIN depts ON emps.deptno = depts.deptno
-WHERE salary &gt; 10000
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span>
+<span class="k">FROM</span> <span class="n">emps</span>
+<span class="k">JOIN</span> <span class="n">depts</span> <span class="k">ON</span> <span class="n">emps</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span>
+<span class="k">WHERE</span> <span class="n">salary</span> <span class="o">&gt;</span> <span class="mi">10000</span>
 </code></pre></div></div>
 
 <ul>
   <li>Materialized view definition:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, deptname
-FROM emps
-JOIN depts ON emps.deptno = depts.deptno
-WHERE salary &gt; 12000
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span>
+<span class="k">FROM</span> <span class="n">emps</span>
+<span class="k">JOIN</span> <span class="n">depts</span> <span class="k">ON</span> <span class="n">emps</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span>
+<span class="k">WHERE</span> <span class="n">salary</span> <span class="o">&gt;</span> <span class="mi">12000</span>
 </code></pre></div></div>
 
 <ul>
   <li>Rewriting:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, deptname
-FROM mv
-UNION ALL
-SELECT empid, deptname
-FROM emps
-JOIN depts ON emps.deptno = depts.deptno
-WHERE salary &gt; 10000 AND salary &lt;= 12000
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span>
+<span class="k">FROM</span> <span class="n">mv</span>
+<span class="k">UNION</span> <span class="k">ALL</span>
+<span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span>
+<span class="k">FROM</span> <span class="n">emps</span>
+<span class="k">JOIN</span> <span class="n">depts</span> <span class="k">ON</span> <span class="n">emps</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span>
+<span class="k">WHERE</span> <span class="n">salary</span> <span class="o">&gt;</span> <span class="mi">10000</span> <span class="k">AND</span> <span class="n">salary</span> <span class="o">&lt;=</span> <span class="mi">12000</span>
 </code></pre></div></div>
 
 <h6 id="union-rewriting-with-aggregate">Union rewriting with aggregate</h6>
@@ -381,39 +389,39 @@ WHERE salary &gt; 10000 AND salary &lt;= 12000
   <li>Query:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, deptname, SUM(salary) AS s
-FROM emps
-JOIN depts ON emps.deptno = depts.deptno
-WHERE salary &gt; 10000
-GROUP BY empid, deptname
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
+<span class="k">FROM</span> <span class="n">emps</span>
+<span class="k">JOIN</span> <span class="n">depts</span> <span class="k">ON</span> <span class="n">emps</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span>
+<span class="k">WHERE</span> <span class="n">salary</span> <span class="o">&gt;</span> <span class="mi">10000</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span>
 </code></pre></div></div>
 
 <ul>
   <li>Materialized view definition:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, deptname, SUM(salary) AS s
-FROM emps
-JOIN depts ON emps.deptno = depts.deptno
-WHERE salary &gt; 12000
-GROUP BY empid, deptname
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
+<span class="k">FROM</span> <span class="n">emps</span>
+<span class="k">JOIN</span> <span class="n">depts</span> <span class="k">ON</span> <span class="n">emps</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span>
+<span class="k">WHERE</span> <span class="n">salary</span> <span class="o">&gt;</span> <span class="mi">12000</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span>
 </code></pre></div></div>
 
 <ul>
   <li>Rewriting:</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT empid, deptname, SUM(s)
-FROM (
-  SELECT empid, deptname, s
-  FROM mv
-  UNION ALL
-  SELECT empid, deptname, SUM(salary) AS s
-  FROM emps
-  JOIN depts ON emps.deptno = depts.deptno
-  WHERE salary &gt; 10000 AND salary &lt;= 12000
-  GROUP BY empid, deptname) AS subq
-GROUP BY empid, deptname
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="p">(</span>
+  <span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span><span class="p">,</span> <span class="n">s</span>
+  <span class="k">FROM</span> <span class="n">mv</span>
+  <span class="k">UNION</span> <span class="k">ALL</span>
+  <span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
+  <span class="k">FROM</span> <span class="n">emps</span>
+  <span class="k">JOIN</span> <span class="n">depts</span> <span class="k">ON</span> <span class="n">emps</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span>
+  <span class="k">WHERE</span> <span class="n">salary</span> <span class="o">&gt;</span> <span class="mi">10000</span> <span class="k">AND</span> <span class="n">salary</span> <span class="o">&lt;=</span> <span class="mi">12000</span>
+  <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span><span class="p">)</span> <span class="k">AS</span> <span class="n">subq</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span>
 </code></pre></div></div>
 
 <h5 id="limitations">Limitations</h5>
@@ -718,11 +726,11 @@ GROUP BY empid, deptname
       <img src="/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
   </div>
   <div id="copyright">
-  <p>The contents of this website are Copyright &copy;&nbsp;2021
+  <p>The contents of this website are Copyright © 2022
      <a href="https://www.apache.org/">Apache Software Foundation</a>
      under the terms of
      the <a href="https://www.apache.org/licenses/">
-     Apache&nbsp;License&nbsp;v2</a>. Apache Calcite and its logo are
+     Apache License v2</a>. Apache Calcite and its logo are
      trademarks of the Apache Software Foundation.</p>
   </div>
 </footer>

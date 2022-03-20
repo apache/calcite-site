@@ -151,8 +151,8 @@ and Gradle (version 7.3) on your path.</p>
 <code class="highlighter-rouge">cd</code> to the root directory of the unpacked source,
 then build using Gradle:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz apache-calcite-1.29.0-src.tar.gz
-<span class="nv">$ </span><span class="nb">cd </span>apache-calcite-1.29.0-src
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz apache-calcite-1.30.0-src.tar.gz
+<span class="nv">$ </span><span class="nb">cd </span>apache-calcite-1.30.0-src
 <span class="nv">$ </span>gradle build</code></pre></figure>
 
 <p><a href="#running-tests">Running tests</a> describes how to run more or fewer
@@ -726,7 +726,7 @@ must:</p>
   <li>resolve the issue (do not close it as this will be done by the release
 manager);</li>
   <li>select “Fixed” as resolution cause;</li>
-  <li>mark the appropriate version (e.g., 1.29.0) in the “Fix version” field;</li>
+  <li>mark the appropriate version (e.g., 1.30.0) in the “Fix version” field;</li>
   <li>add a comment (e.g., “Fixed in …”) with a hyperlink pointing to the commit
 which resolves the issue (in GitHub or GitBox), and also thank the contributor
 for their contribution.</li>
@@ -812,9 +812,11 @@ git clean <span class="nt">-xn</span>
 is starting and therefore <code class="highlighter-rouge">master</code> branch is in code freeze until further notice.</li>
   <li>Set up signing keys as described above.</li>
   <li>Make sure you are using JDK 8 (not 9 or 10).</li>
-  <li>Make sure <code class="highlighter-rouge">master</code> branch and <code class="highlighter-rouge">site</code> branch are in sync, i.e. there is no commit on <code class="highlighter-rouge">site</code> that has not
-been applied also to <code class="highlighter-rouge">master</code>.
-This can be achieved by doing <code class="highlighter-rouge">git switch site &amp;&amp; git rebase --empty=drop master &amp;&amp; git switch master &amp;&amp; git reset --hard site</code>.</li>
+  <li>Make sure <code class="highlighter-rouge">master</code> branch and <code class="highlighter-rouge">site</code> branch are in sync, i.e. there is no
+commit on <code class="highlighter-rouge">site</code> that has not been applied also to <code class="highlighter-rouge">master</code>.
+We are talking about the commit content, you need to pay attention to the commit message
+and change, not hash: it is normal to have the same change in <code class="highlighter-rouge">site</code> and
+<code class="highlighter-rouge">master</code>, but with different hashes. If you spot missing commits then port them to <code class="highlighter-rouge">master</code>.</li>
   <li>Check that <code class="highlighter-rouge">README</code> and <code class="highlighter-rouge">site/_docs/howto.md</code> have the correct version number.</li>
   <li>Check that <code class="highlighter-rouge">site/_docs/howto.md</code> has the correct Gradle version.</li>
   <li>Check that <code class="highlighter-rouge">NOTICE</code> has the current copyright year.</li>
@@ -1061,7 +1063,8 @@ Remember that UTC date changes at 4 pm Pacific time.</p>
 
 <p>Svnpubsub will publish to the
 <a href="https://dist.apache.org/repos/dist/release/calcite">release repo</a> and propagate to the
-<a href="https://www.apache.org/dyn/closer.cgi/calcite">mirrors</a> within 24 hours.</p>
+<a href="https://www.apache.org/dyn/closer.cgi/calcite">mirrors</a> almost immediately.
+So there is no need to wait more than fifteen minutes before announcing the release.</p>
 
 <p>If there are now more than 2 releases, clear out the oldest ones:</p>
 
@@ -1081,7 +1084,9 @@ Add a release announcement by copying
 Generate the javadoc, and <a href="http://localhost:4000/news/">preview</a> the site by following the
 instructions in <a href="https://github.com/apache/calcite/blob/master/site/README.md">site/README.md</a>. Ensure the announcement,
 javadoc, and release note appear correctly and then publish the site following the instructions
-in the same file.</p>
+in the same file. Rebase the <code class="highlighter-rouge">site</code> branch with <code class="highlighter-rouge">master</code> (e.g., <code class="highlighter-rouge">git checkout site &amp;&amp; git rebase master</code>);
+at this point there shouldn’t be any commits in <code class="highlighter-rouge">site</code> that are not in <code class="highlighter-rouge">master</code>, so the rebase is
+essentially a noop.</p>
 
 <p>In JIRA, search for
 <a href="https://issues.apache.org/jira/issues/?jql=project%20%3D%20CALCITE%20and%20fixVersion%20%3D%201.5.0%20and%20status%20%3D%20Resolved%20and%20resolution%20%3D%20Fixed">all issues resolved in this release</a>,

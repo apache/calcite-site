@@ -1270,7 +1270,12 @@ we also allow their plurals, YEARS, MONTHS, DAYS, HOURS, MINUTES and SECONDS.</l
   <tbody>
     <tr>
       <td style="text-align: left">ANY</td>
-      <td style="text-align: left">A value of an unknown type</td>
+      <td style="text-align: left">The union of all types</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">UNKNOWN</td>
+      <td style="text-align: left">A value of an unknown type; used as a placeholder</td>
       <td style="text-align: left"> </td>
     </tr>
     <tr>
@@ -1442,7 +1447,7 @@ for example <code class="highlighter-rouge">ST_GeomFromText('POINT (30 10)')</co
       <td style="text-align: left">-</td>
     </tr>
     <tr>
-      <td style="text-align: left">&lt; &gt; = &lt;= &gt;= &lt;&gt; !=</td>
+      <td style="text-align: left">&lt; &gt; = &lt;= &gt;= &lt;&gt; != &lt;=&gt;</td>
       <td style="text-align: left">left</td>
     </tr>
     <tr>
@@ -1464,7 +1469,7 @@ for example <code class="highlighter-rouge">ST_GeomFromText('POINT (30 10)')</co
   </tbody>
 </table></div>
 
-<p>Note that <code class="highlighter-rouge">::</code> is dialect-specific, but is shown in this table for
+<p>Note that <code class="highlighter-rouge">::</code>,<code class="highlighter-rouge">&lt;=&gt;</code> is dialect-specific, but is shown in this table for
 completeness.</p>
 
 <h3 id="comparison-operators">Comparison operators</h3>
@@ -1504,6 +1509,10 @@ completeness.</p>
     <tr>
       <td style="text-align: left">value1 &lt;= value2</td>
       <td style="text-align: left">Less than or equal</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">value1 &lt;=&gt; value2</td>
+      <td style="text-align: left">Whether two values are equal, treating null values as the same</td>
     </tr>
     <tr>
       <td style="text-align: left">value IS NULL</td>
@@ -1601,7 +1610,8 @@ completeness.</p>
   <span class="o">|</span>   <span class="o">&gt;</span>
   <span class="o">|</span>   <span class="o">&gt;=</span>
   <span class="o">|</span>   <span class="o">&lt;</span>
-  <span class="o">|</span>   <span class="o">&lt;=</span></code></pre></figure>
+  <span class="o">|</span>   <span class="o">&lt;=</span>
+  <span class="o">|</span>   <span class="o">&lt;=&gt;</span></code></pre></figure>
 
 <h3 id="logical-operators">Logical operators</h3>
 
@@ -4655,6 +4665,12 @@ semantics.</p>
       <td style="text-align: left">p</td>
       <td style="text-align: left">expr :: type</td>
       <td style="text-align: left">Casts <em>expr</em> to <em>type</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
+      <td style="text-align: left">expr1 &lt;=&gt; expr2</td>
+      <td style="text-align: left">Whether two values are equal, treating null values as the same, and it’s similar to <code class="highlighter-rouge">IS NOT DISTINCT FROM</code>
 </td>
     </tr>
     <tr>

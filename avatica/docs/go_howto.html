@@ -755,18 +755,18 @@ the script will make a copy of the contents and move it to a different location,
 </ul>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># On Linux:</span>
-docker-compose run <span class="nt">-v</span> ~/.gnupg:/.gnupg dry-run
+docker compose run <span class="nt">-v</span> ~/.gnupg:/.gnupg dry-run
 
 <span class="c"># On Windows</span>
-docker-compose run <span class="nt">-v</span> /c/Users/username/AppData/Roaming/gnupg:/.gnupg dry-run</code></pre></figure>
+docker compose run <span class="nt">-v</span> /c/Users/username/AppData/Roaming/gnupg:/.gnupg dry-run</code></pre></figure>
 
 <h3 id="build-the-release">Build the release</h3>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># On Linux:</span>
-docker-compose run <span class="nt">-v</span> ~/.gnupg:/.gnupg release
+docker compose run <span class="nt">-v</span> ~/.gnupg:/.gnupg release
 
 <span class="c"># On Windows</span>
-docker-compose run <span class="nt">-v</span> /c/Users/username/AppData/Roaming/gnupg:/.gnupg release</code></pre></figure>
+docker compose run <span class="nt">-v</span> /c/Users/username/AppData/Roaming/gnupg:/.gnupg release</code></pre></figure>
 
 <p>If the build fails, perform a clean:</p>
 <ol>
@@ -780,7 +780,7 @@ git push origin :refs/tags/vX.Y.Z-rcA</code></pre></figure>
   <li>Clean the local repository</li>
 </ol>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose run clean</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker compose run clean</code></pre></figure>
 
 <h3 id="check-the-release-before-uploading">Check the release before uploading</h3>
 <p>The name of the release folder must be in the following format: <code class="highlighter-rouge">apache-calcite-avatica-go-X.Y.Z-rcN</code>. The version must 
@@ -822,7 +822,7 @@ Note the use of <code class="highlighter-rouge">--force-log</code> to suppress t
 <h4 id="using-docker">Using docker</h4>
 <p>This assumes that a release was built and the artifacts are in the <code class="highlighter-rouge">dist/</code> folder.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose run publish-release-for-voting</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker compose run publish-release-for-voting</code></pre></figure>
 
 <p>The script will also generate a vote email to send to the dev list. You can use this email, but make sure to check that
 all the details are correct.</p>
@@ -861,10 +861,10 @@ https://github.com/apache/calcite-avatica-go/blob/$COMMIT/site/develop/avatica-g
 
 Please vote on releasing this package as Apache Calcite Avatica Go X.Y.Z.
 
-To run the tests without a Go environment, install docker and docker-compose. Then, in the root of the release's directory, run:
-docker-compose run test
+To run the tests without a Go environment, install docker and docker compose. Then, in the root of the release's directory, run:
+docker compose run test
 
-When the test suite completes, run \"docker-compose down\" to remove and shutdown all the containers.
+When the test suite completes, run \"docker compose down\" to remove and shutdown all the containers.
 
 The vote is open for the next 72 hours and passes if a majority of
 at least three +1 PMC votes are cast.
@@ -938,7 +938,7 @@ git push origin vX.Y.Z</code></pre></figure>
 <h4 id="using-docker-1">Using docker</h4>
 <p>This assumes that a rc release was tagged and pushed to the git repository.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose run promote-release</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker compose run promote-release</code></pre></figure>
 
 <h3 id="announce-the-release">Announce the release</h3>
 <p>After 24 hours, announce the release by sending an announcement to the <a href="https://mail-archives.apache.org/mod_mbox/calcite-dev/">dev list</a>
@@ -1268,7 +1268,7 @@ Francis Chuang, on behalf of the Apache Calcite Team</code></pre></figure>
       <img src="/avatica/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
   </div>
   <div id="copyright">
-  <p>The contents of this website are &copy;&nbsp;2021
+  <p>The contents of this website are &copy;&nbsp;2022
      <a href="https://www.apache.org/">Apache Software Foundation</a>
      under the terms of
      the <a href="https://www.apache.org/licenses/LICENSE-2.0.html">

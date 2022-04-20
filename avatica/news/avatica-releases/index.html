@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Avatica Releases</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v3.9.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/avatica/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/avatica/favicon.ico">
@@ -223,8 +223,8 @@ for more information.</p>
 
 -->
 
-<p>Apache Calcite Avatica 1.19.0 adds support for <code class="highlighter-rouge">BIT</code> and <code class="highlighter-rouge">NULL</code> data
-types, fixes issues with values of type <code class="highlighter-rouge">ARRAY</code>, and includes a few
+<p>Apache Calcite Avatica 1.19.0 adds support for <code class="language-plaintext highlighter-rouge">BIT</code> and <code class="language-plaintext highlighter-rouge">NULL</code> data
+types, fixes issues with values of type <code class="language-plaintext highlighter-rouge">ARRAY</code>, and includes a few
 dependency updates. See the list of
 <a href="/avatica/docs/history.html#v1-19-0">bug fixes and new features</a>
 for more information.</p>
@@ -279,10 +279,10 @@ for more information.</p>
 
 <p><strong>Breaking change (<a href="https://issues.apache.org/jira/browse/CALCITE-4503">CALCITE-4503</a>)</strong>: Order of fields in records should follow that of the SQL types</p>
 
-<p><code class="highlighter-rouge">Meta#deduce(List&lt;ColumnMetaData&gt; columns, Class resultClazz)</code> now only derives the order of the fields from the list of provided column metadata <code class="highlighter-rouge">columns</code> when generating a record from the given Java class <code class="highlighter-rouge">resultClazz</code>, instead of relying on the field order provided by <code class="highlighter-rouge">Object#getFields()</code>, which is a JVM-dependent feature.</p>
+<p><code class="language-plaintext highlighter-rouge">Meta#deduce(List&lt;ColumnMetaData&gt; columns, Class resultClazz)</code> now only derives the order of the fields from the list of provided column metadata <code class="language-plaintext highlighter-rouge">columns</code> when generating a record from the given Java class <code class="language-plaintext highlighter-rouge">resultClazz</code>, instead of relying on the field order provided by <code class="language-plaintext highlighter-rouge">Object#getFields()</code>, which is a JVM-dependent feature.</p>
 
-<p>Before, the field names where not checked against the field names of the provided class. Now, if <code class="highlighter-rouge">resultClazz</code> is not null, the provided field names are expected to match existing fields in that class. If a column metadata has name <code class="highlighter-rouge">column</code>, and no public field in <code class="highlighter-rouge">resultClazz</code> with that name exists, the following exception is thrown:
-<code class="highlighter-rouge">java.lang.RuntimeException: java.lang.NoSuchFieldException: C</code>.</p>
+<p>Before, the field names where not checked against the field names of the provided class. Now, if <code class="language-plaintext highlighter-rouge">resultClazz</code> is not null, the provided field names are expected to match existing fields in that class. If a column metadata has name <code class="language-plaintext highlighter-rouge">column</code>, and no public field in <code class="language-plaintext highlighter-rouge">resultClazz</code> with that name exists, the following exception is thrown:
+<code class="language-plaintext highlighter-rouge">java.lang.RuntimeException: java.lang.NoSuchFieldException: C</code>.</p>
 
     
         
@@ -831,10 +831,10 @@ basic “impersonation” (where the Avatica server issues requests on behalf of
 
 <p>Building on top of the work done in Avatica-1.7.0 in <a href="https://issues.apache.org/jira/browse/CALCITE-1091">CALCITE-1091</a>,
 this release also contains <a href="https://issues.apache.org/jira/browse/CALCITE-1128">CALCITE-1128</a> which
-implements the batch-oriented JDBC APIs on <code class="highlighter-rouge">Statement</code>. Through careful inspection, it
+implements the batch-oriented JDBC APIs on <code class="language-plaintext highlighter-rouge">Statement</code>. Through careful inspection, it
 was observed that the overall performance of Avatica clients in 100% write workloads was
-dominated by the cost of the HTTP calls. By leveraging the <code class="highlighter-rouge">Statement#addBatch()</code>
-and <code class="highlighter-rouge">Statement#executeBatch()</code> API calls, clients can efficiently batch multiple updates
+dominated by the cost of the HTTP calls. By leveraging the <code class="language-plaintext highlighter-rouge">Statement#addBatch()</code>
+and <code class="language-plaintext highlighter-rouge">Statement#executeBatch()</code> API calls, clients can efficiently batch multiple updates
 in a single HTTP call. In testing this over the previous single HTTP call per update with
 <a href="https://phoenix.apache.org">Apache Phoenix</a>, it was observed that performance increased by
 two to three times, bringing Avatica’s performance on par with the Phoenix “native” driver.</p>
@@ -957,9 +957,9 @@ to fix a
 <a href="https://blog.gdssecurity.com/labs/2015/2/25/jetleak-vulnerability-remote-leakage-of-shared-buffers-in-je.html">security issue</a>.</li>
 </ul>
 
-<p>Note that Avatica’s Maven coordinates have changed. The <code class="highlighter-rouge">groupId</code> is
+<p>Note that Avatica’s Maven coordinates have changed. The <code class="language-plaintext highlighter-rouge">groupId</code> is
 now “org.apache.calcite.avatica” (previously “org.apache.calcite”),
-and <code class="highlighter-rouge">artifactId</code>s are
+and <code class="language-plaintext highlighter-rouge">artifactId</code>s are
 “avatica”,
 “avatica-metrics”,
 “avatica-metrics-dropwizardmetrics3”,

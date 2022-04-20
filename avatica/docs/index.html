@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Background</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v3.9.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/avatica/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/avatica/favicon.ico">
@@ -723,9 +723,9 @@ request/response command objects to/from JSON.</p>
   <li><a href="/avatica/javadocAggregate/org/apache/calcite/avatica/Meta.html">Meta</a>
 is a local API sufficient to implement any Avatica provider</li>
   <li><a href="/avatica/javadocAggregate/org/apache/calcite/avatica/AvaticaFactory.html">AvaticaFactory</a>
-creates implementations of the JDBC classes on top of a <code class="highlighter-rouge">Meta</code></li>
+creates implementations of the JDBC classes on top of a <code class="language-plaintext highlighter-rouge">Meta</code></li>
   <li><a href="/avatica/javadocAggregate/org/apache/calcite/avatica/remote/Service.html">Service</a>
-is an interface that implements the functions of <code class="highlighter-rouge">Meta</code> in terms
+is an interface that implements the functions of <code class="language-plaintext highlighter-rouge">Meta</code> in terms
 of request and response command objects</li>
 </ul>
 
@@ -733,12 +733,12 @@ of request and response command objects</li>
 
 <p>Avatica implements JDBC by means of
 <a href="/avatica/javadocAggregate/org/apache/calcite/avatica/AvaticaFactory.html">AvaticaFactory</a>.
-An implementation of <code class="highlighter-rouge">AvaticaFactory</code> creates implementations of the
+An implementation of <code class="language-plaintext highlighter-rouge">AvaticaFactory</code> creates implementations of the
 JDBC classes (<a href="https://docs.oracle.com/javase/8/docs/api//java/sql/Driver.html">Driver</a>,
 <a href="https://docs.oracle.com/javase/8/docs/api//java/sql/Connection.html">Connection</a>,
 <a href="https://docs.oracle.com/javase/8/docs/api//java/sql/Statement.html">Statement</a>,
 <a href="https://docs.oracle.com/javase/8/docs/api//java/sql/ResultSet.html">ResultSet</a>)
-on top of a <code class="highlighter-rouge">Meta</code>.</p>
+on top of a <code class="language-plaintext highlighter-rouge">Meta</code>.</p>
 
 <h2 id="odbc">ODBC</h2>
 
@@ -762,14 +762,14 @@ that implements the Avatica RPC protocol
 and can be run as a standalone Java application.</p>
 
 <p>Connectors in HTTP server can be configured if needed by extending
-<code class="highlighter-rouge">HttpServer</code> class and overriding its <code class="highlighter-rouge">configureConnector()</code> method.
-For example, user can set <code class="highlighter-rouge">requestHeaderSize</code> to 64K bytes as follows:</p>
+<code class="language-plaintext highlighter-rouge">HttpServer</code> class and overriding its <code class="language-plaintext highlighter-rouge">configureConnector()</code> method.
+For example, user can set <code class="language-plaintext highlighter-rouge">requestHeaderSize</code> to 64K bytes as follows:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">HttpServer</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpServer</span><span class="o">(</span><span class="n">handler</span><span class="o">)</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">HttpServer</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HttpServer</span><span class="o">(</span><span class="n">handler</span><span class="o">)</span> <span class="o">{</span>
   <span class="nd">@Override</span>
-  <span class="kd">protected</span> <span class="n">ServerConnector</span> <span class="nf">configureConnector</span><span class="o">(</span>
-      <span class="n">ServerConnector</span> <span class="n">connector</span><span class="o">,</span> <span class="kt">int</span> <span class="n">port</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">HttpConnectionFactory</span> <span class="n">factory</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpConnectionFactory</span><span class="o">)</span>
+  <span class="kd">protected</span> <span class="nc">ServerConnector</span> <span class="nf">configureConnector</span><span class="o">(</span>
+      <span class="nc">ServerConnector</span> <span class="n">connector</span><span class="o">,</span> <span class="kt">int</span> <span class="n">port</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">HttpConnectionFactory</span> <span class="n">factory</span> <span class="o">=</span> <span class="o">(</span><span class="nc">HttpConnectionFactory</span><span class="o">)</span>
         <span class="n">connector</span><span class="o">.</span><span class="na">getDefaultConnectionFactory</span><span class="o">();</span>
     <span class="n">factory</span><span class="o">.</span><span class="na">getHttpConfiguration</span><span class="o">().</span><span class="na">setRequestHeaderSize</span><span class="o">(</span><span class="mi">64</span> <span class="o">&lt;&lt;</span> <span class="mi">10</span><span class="o">);</span>
     <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">configureConnector</span><span class="o">(</span><span class="n">connector</span><span class="o">,</span> <span class="n">port</span><span class="o">);</span>

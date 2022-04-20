@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Release 1.8.0</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v3.9.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/avatica/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/avatica/favicon.ico">
@@ -188,10 +188,10 @@ basic “impersonation” (where the Avatica server issues requests on behalf of
 
 <p>Building on top of the work done in Avatica-1.7.0 in <a href="https://issues.apache.org/jira/browse/CALCITE-1091">CALCITE-1091</a>,
 this release also contains <a href="https://issues.apache.org/jira/browse/CALCITE-1128">CALCITE-1128</a> which
-implements the batch-oriented JDBC APIs on <code class="highlighter-rouge">Statement</code>. Through careful inspection, it
+implements the batch-oriented JDBC APIs on <code class="language-plaintext highlighter-rouge">Statement</code>. Through careful inspection, it
 was observed that the overall performance of Avatica clients in 100% write workloads was
-dominated by the cost of the HTTP calls. By leveraging the <code class="highlighter-rouge">Statement#addBatch()</code>
-and <code class="highlighter-rouge">Statement#executeBatch()</code> API calls, clients can efficiently batch multiple updates
+dominated by the cost of the HTTP calls. By leveraging the <code class="language-plaintext highlighter-rouge">Statement#addBatch()</code>
+and <code class="language-plaintext highlighter-rouge">Statement#executeBatch()</code> API calls, clients can efficiently batch multiple updates
 in a single HTTP call. In testing this over the previous single HTTP call per update with
 <a href="https://phoenix.apache.org">Apache Phoenix</a>, it was observed that performance increased by
 two to three times, bringing Avatica’s performance on par with the Phoenix “native” driver.</p>

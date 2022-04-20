@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Release Avatica Go 5.0.0</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v3.9.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/avatica/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/avatica/favicon.ico">
@@ -162,22 +162,22 @@
 
 <p>Apache Calcite Avatica Go 5.0.0 is a major release with numerous improvements and a breaking change.
 As this is a new major version, users of this package will need to upgrade their import paths to 
-<code class="highlighter-rouge">"github.com/apache/calcite-avatica-go/v5"</code>.</p>
+<code class="language-plaintext highlighter-rouge">"github.com/apache/calcite-avatica-go/v5"</code>.</p>
 
 <p>Since Go modules have been available since Go 1.11 (3 versions back as of writing), users of this library should 
 install it using Go modules as support for dep has been removed.</p>
 
-<p>This release also introduces the <code class="highlighter-rouge">batching</code> query string parameter in the DSN, which allows updates to the server using
-a prepared statement to be batched together and executed once <code class="highlighter-rouge">Close()</code> is called on the statement.</p>
+<p>This release also introduces the <code class="language-plaintext highlighter-rouge">batching</code> query string parameter in the DSN, which allows updates to the server using
+a prepared statement to be batched together and executed once <code class="language-plaintext highlighter-rouge">Close()</code> is called on the statement.</p>
 
 <p><strong>Breaking change for connection metadata (<a href="https://issues.apache.org/jira/browse/CALCITE-3248">CALCITE-3248</a>):</strong> 
-Previously, it is possible to set the HTTP username and password using the <code class="highlighter-rouge">username</code> and <code class="highlighter-rouge">password</code> parameters in the
+Previously, it is possible to set the HTTP username and password using the <code class="language-plaintext highlighter-rouge">username</code> and <code class="language-plaintext highlighter-rouge">password</code> parameters in the
 query string of the DSN. These parameters were confusing and didn’t signal the intent and effect of the parameters in addition
-to clashing with the <code class="highlighter-rouge">avaticaUser</code> and <code class="highlighter-rouge">avaticaPassword</code> parameters. The <code class="highlighter-rouge">username</code> and <code class="highlighter-rouge">password</code> parameters have now been
+to clashing with the <code class="language-plaintext highlighter-rouge">avaticaUser</code> and <code class="language-plaintext highlighter-rouge">avaticaPassword</code> parameters. The <code class="language-plaintext highlighter-rouge">username</code> and <code class="language-plaintext highlighter-rouge">password</code> parameters have now been
 removed as CALCITE-3248 implements the <a href="https://golang.org/pkg/database/sql/driver/#Connector">Connector interface</a> via the
-<code class="highlighter-rouge">NewConnector()</code> method, which allows the driver to be instantiated with a custom HTTP client. Subsequently, it is now
-possible to set up the driver with a custom HTTP client and decorate it with the <code class="highlighter-rouge">WithDigestAuth()</code>, <code class="highlighter-rouge">WithBasicAuth()</code>,
-<code class="highlighter-rouge">WithKerberosAuth()</code> and <code class="highlighter-rouge">WithAdditionalHeaders()</code> methods.</p>
+<code class="language-plaintext highlighter-rouge">NewConnector()</code> method, which allows the driver to be instantiated with a custom HTTP client. Subsequently, it is now
+possible to set up the driver with a custom HTTP client and decorate it with the <code class="language-plaintext highlighter-rouge">WithDigestAuth()</code>, <code class="language-plaintext highlighter-rouge">WithBasicAuth()</code>,
+<code class="language-plaintext highlighter-rouge">WithKerberosAuth()</code> and <code class="language-plaintext highlighter-rouge">WithAdditionalHeaders()</code> methods.</p>
 
 <p>The Calcite team recommends users of this package to upgrade to this version, where practical, as the dependencies being
 used by this package have also been upgraded.</p>

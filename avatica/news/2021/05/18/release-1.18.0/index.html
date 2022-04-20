@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Release 1.18.0</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v3.9.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/avatica/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/avatica/favicon.ico">
@@ -167,10 +167,10 @@ for more information.</p>
 
 <p><strong>Breaking change (<a href="https://issues.apache.org/jira/browse/CALCITE-4503">CALCITE-4503</a>)</strong>: Order of fields in records should follow that of the SQL types</p>
 
-<p><code class="highlighter-rouge">Meta#deduce(List&lt;ColumnMetaData&gt; columns, Class resultClazz)</code> now only derives the order of the fields from the list of provided column metadata <code class="highlighter-rouge">columns</code> when generating a record from the given Java class <code class="highlighter-rouge">resultClazz</code>, instead of relying on the field order provided by <code class="highlighter-rouge">Object#getFields()</code>, which is a JVM-dependent feature.</p>
+<p><code class="language-plaintext highlighter-rouge">Meta#deduce(List&lt;ColumnMetaData&gt; columns, Class resultClazz)</code> now only derives the order of the fields from the list of provided column metadata <code class="language-plaintext highlighter-rouge">columns</code> when generating a record from the given Java class <code class="language-plaintext highlighter-rouge">resultClazz</code>, instead of relying on the field order provided by <code class="language-plaintext highlighter-rouge">Object#getFields()</code>, which is a JVM-dependent feature.</p>
 
-<p>Before, the field names where not checked against the field names of the provided class. Now, if <code class="highlighter-rouge">resultClazz</code> is not null, the provided field names are expected to match existing fields in that class. If a column metadata has name <code class="highlighter-rouge">column</code>, and no public field in <code class="highlighter-rouge">resultClazz</code> with that name exists, the following exception is thrown:
-<code class="highlighter-rouge">java.lang.RuntimeException: java.lang.NoSuchFieldException: C</code>.</p>
+<p>Before, the field names where not checked against the field names of the provided class. Now, if <code class="language-plaintext highlighter-rouge">resultClazz</code> is not null, the provided field names are expected to match existing fields in that class. If a column metadata has name <code class="language-plaintext highlighter-rouge">column</code>, and no public field in <code class="language-plaintext highlighter-rouge">resultClazz</code> with that name exists, the following exception is thrown:
+<code class="language-plaintext highlighter-rouge">java.lang.RuntimeException: java.lang.NoSuchFieldException: C</code>.</p>
 
     
       

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Custom Client Artifacts</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v3.9.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/avatica/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/avatica/favicon.ico">
@@ -717,11 +717,11 @@ to an Avatica server over JDBC.</p>
   <span class="nt">&lt;/dependency&gt;</span>
 <span class="nt">&lt;/dependencies&gt;</span></code></pre></figure>
 
-<p>In keeping with the convention of previous releases, <code class="highlighter-rouge">org.apache.calcite.avatica:avatica</code> is a JAR
+<p>In keeping with the convention of previous releases, <code class="language-plaintext highlighter-rouge">org.apache.calcite.avatica:avatica</code> is a JAR
 which contains all of the necessary dependencies of the Avatica client code base. Those classes which
 can be safely relocated are done so to reduce the potential for classpath issues.</p>
 
-<p>Avatica 1.9.0 will introduce a new artifact <code class="highlighter-rouge">org.apache.calcite.avatica:avatica-core</code> which is only
+<p>Avatica 1.9.0 will introduce a new artifact <code class="language-plaintext highlighter-rouge">org.apache.calcite.avatica:avatica-core</code> which is only
 the Avatica client classes without any bundled dependencies. This artifact enables users to build a
 classpath with different versions of JARs than what Avatica presently depends upon. This is a “your-mileage-may-vary”
 or “void-your-warranty” type of decision (as you are using Avatica with dependecies which we have not tested);
@@ -730,7 +730,7 @@ however, some downstream projects do provide reasonable assurances of compatibil
 <h2 id="building-your-own-avatica-client-artifact">Building your own Avatica client artifact</h2>
 
 <p>In some cases, it may be beneficial to provide specific versions of Avatica dependencies. Here is
-a brief <code class="highlighter-rouge">pom.xml</code> which outlines how this can be done.</p>
+a brief <code class="language-plaintext highlighter-rouge">pom.xml</code> which outlines how this can be done.</p>
 
 <figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span class="nt">&gt;</span>

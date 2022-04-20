@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Protocol Testing</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v3.9.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/avatica/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/avatica/favicon.ico">
@@ -718,7 +718,7 @@ serialization. The below was tested to work with Avatica 1.10.0:</p>
 <span class="nv">AVATICA</span><span class="o">=</span><span class="nv">$1</span>
 <span class="nv">SQL</span><span class="o">=</span><span class="nv">$2</span>
 
-<span class="nv">CONNECTION_ID</span><span class="o">=</span><span class="s2">"conn-</span><span class="k">$(</span>whoami<span class="k">)</span><span class="s2">-</span><span class="k">$(</span>date +%s<span class="k">)</span><span class="s2">"</span>
+<span class="nv">CONNECTION_ID</span><span class="o">=</span><span class="s2">"conn-</span><span class="si">$(</span><span class="nb">whoami</span><span class="si">)</span><span class="s2">-</span><span class="si">$(</span><span class="nb">date</span> +%s<span class="si">)</span><span class="s2">"</span>
 <span class="nv">MAX_ROW_COUNT</span><span class="o">=</span>100
 <span class="nv">NUM_ROWS</span><span class="o">=</span>2
 <span class="nv">OFFSET</span><span class="o">=</span>0
@@ -731,8 +731,8 @@ curl <span class="nt">-i</span> <span class="nt">-w</span> <span class="s2">"</s
 <span class="nb">echo
 
 echo</span> <span class="s2">"Create statement"</span>
-<span class="nv">STATEMENTRSP</span><span class="o">=</span><span class="k">$(</span>curl <span class="nt">-s</span> <span class="s2">"</span><span class="nv">$AVATICA</span><span class="s2">"</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">--data</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">request</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">createStatement</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">connectionId</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="k">${</span><span class="nv">CONNECTION_ID</span><span class="k">}</span><span class="se">\"</span><span class="s2">}"</span><span class="k">)</span>
-<span class="nv">STATEMENTID</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$STATEMENTRSP</span><span class="s2">"</span> | jq .statementId<span class="k">)</span>
+<span class="nv">STATEMENTRSP</span><span class="o">=</span><span class="si">$(</span>curl <span class="nt">-s</span> <span class="s2">"</span><span class="nv">$AVATICA</span><span class="s2">"</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">--data</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">request</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">createStatement</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">connectionId</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="k">${</span><span class="nv">CONNECTION_ID</span><span class="k">}</span><span class="se">\"</span><span class="s2">}"</span><span class="si">)</span>
+<span class="nv">STATEMENTID</span><span class="o">=</span><span class="si">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$STATEMENTRSP</span><span class="s2">"</span> | jq .statementId<span class="si">)</span>
 <span class="nb">echo
 
 echo</span> <span class="s2">"PrepareAndExecuteRequest"</span>
@@ -744,9 +744,9 @@ curl <span class="nt">-i</span> <span class="nt">-w</span> <span class="s2">"</s
 </span><span class="k">while</span> <span class="o">!</span> <span class="nv">$ISDONE</span><span class="p">;</span> <span class="k">do
   </span><span class="nv">OFFSET</span><span class="o">=</span><span class="k">$((</span>OFFSET <span class="o">+</span> NUM_ROWS<span class="k">))</span>
   <span class="nb">echo</span> <span class="s2">"FetchRequest - Offset=</span><span class="nv">$OFFSET</span><span class="s2">"</span>
-  <span class="nv">FETCHRSP</span><span class="o">=</span><span class="k">$(</span>curl <span class="nt">-s</span> <span class="s2">"</span><span class="nv">$AVATICA</span><span class="s2">"</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">--data</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">request</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">fetch</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">connectionId</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="k">${</span><span class="nv">CONNECTION_ID</span><span class="k">}</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">statementId</span><span class="se">\"</span><span class="s2">: </span><span class="nv">$STATEMENTID</span><span class="s2">,</span><span class="se">\"</span><span class="s2">offset</span><span class="se">\"</span><span class="s2">: </span><span class="k">${</span><span class="nv">OFFSET</span><span class="k">}</span><span class="s2">,</span><span class="se">\"</span><span class="s2">fetchMaxRowCount</span><span class="se">\"</span><span class="s2">: </span><span class="k">${</span><span class="nv">NUM_ROWS</span><span class="k">}</span><span class="s2">}"</span><span class="k">)</span>
+  <span class="nv">FETCHRSP</span><span class="o">=</span><span class="si">$(</span>curl <span class="nt">-s</span> <span class="s2">"</span><span class="nv">$AVATICA</span><span class="s2">"</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">--data</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">request</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">fetch</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">connectionId</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="k">${</span><span class="nv">CONNECTION_ID</span><span class="k">}</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">statementId</span><span class="se">\"</span><span class="s2">: </span><span class="nv">$STATEMENTID</span><span class="s2">,</span><span class="se">\"</span><span class="s2">offset</span><span class="se">\"</span><span class="s2">: </span><span class="k">${</span><span class="nv">OFFSET</span><span class="k">}</span><span class="s2">,</span><span class="se">\"</span><span class="s2">fetchMaxRowCount</span><span class="se">\"</span><span class="s2">: </span><span class="k">${</span><span class="nv">NUM_ROWS</span><span class="k">}</span><span class="s2">}"</span><span class="si">)</span>
   <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$FETCHRSP</span><span class="s2">"</span>
-  <span class="nv">ISDONE</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$FETCHRSP</span><span class="s2">"</span> | jq .frame.done<span class="k">)</span>
+  <span class="nv">ISDONE</span><span class="o">=</span><span class="si">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$FETCHRSP</span><span class="s2">"</span> | jq .frame.done<span class="si">)</span>
   <span class="nb">echo
 </span><span class="k">done
 

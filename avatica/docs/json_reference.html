@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>JSON Reference</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v3.9.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/avatica/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/avatica/favicon.ico">
@@ -730,7 +730,7 @@ in Java. For support outside of Java, see the Protocol Buffer
 
 <h2 id="requests-1">Requests</h2>
 
-<p>The collection of all JSON objects accepted as requests to Avatica. All Requests include a <code class="highlighter-rouge">request</code> attribute
+<p>The collection of all JSON objects accepted as requests to Avatica. All Requests include a <code class="language-plaintext highlighter-rouge">request</code> attribute
 which uniquely identifies the concrete Request from all other Requests.</p>
 
 <h3 id="catalogsrequest">CatalogsRequest</h3>
@@ -738,123 +738,123 @@ which uniquely identifies the concrete Request from all other Requests.</p>
 <p>This request is used to fetch the available catalog names in the database.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"getCatalogs"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"getCatalogs"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> (required string) The identifier of the connection to use.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> (required string) The identifier of the connection to use.</p>
 
 <h3 id="closeconnectionrequest">CloseConnectionRequest</h3>
 
 <p>This request is used to close the Connection object in the Avatica server identified by the given IDs.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closeConnection"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closeConnection"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> (required string) The identifier of the connection to close.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> (required string) The identifier of the connection to close.</p>
 
 <h3 id="closestatementrequest">CloseStatementRequest</h3>
 
 <p>This request is used to close the Statement object in the Avatica server identified by the given IDs.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closeStatement"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"statementId"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closeStatement"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"statementId"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> (required string) The identifier of the connection to which the statement belongs.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> (required string) The identifier of the connection to which the statement belongs.</p>
 
-<p><code class="highlighter-rouge">statementId</code> (required integer) The identifier of the statement to close.</p>
+<p><code class="language-plaintext highlighter-rouge">statementId</code> (required integer) The identifier of the statement to close.</p>
 
 <h3 id="columnsrequest">ColumnsRequest</h3>
 
 <p>This request is used to fetch columns in the database given some optional filtering criteria.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"getColumns"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"catalog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"catalog"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"schemaPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schema_pattern.*"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"tableNamePattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"table_pattern.*"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"columnNamePattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"column_pattern.*"</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"getColumns"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"catalog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"catalog"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"schemaPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schema_pattern.*"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tableNamePattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"table_pattern.*"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"columnNamePattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"column_pattern.*"</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> (required string) The identifier of the connection on which to fetch the columns.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> (required string) The identifier of the connection on which to fetch the columns.</p>
 
-<p><code class="highlighter-rouge">catalog</code> (optional string) The name of a catalog to limit returned columns.</p>
+<p><code class="language-plaintext highlighter-rouge">catalog</code> (optional string) The name of a catalog to limit returned columns.</p>
 
-<p><code class="highlighter-rouge">schemaPattern</code> (optional string) A Java Pattern against schemas to limit returned columns.</p>
+<p><code class="language-plaintext highlighter-rouge">schemaPattern</code> (optional string) A Java Pattern against schemas to limit returned columns.</p>
 
-<p><code class="highlighter-rouge">tableNamePattern</code> (optional string) A Java Pattern against table names to limit returned columns.</p>
+<p><code class="language-plaintext highlighter-rouge">tableNamePattern</code> (optional string) A Java Pattern against table names to limit returned columns.</p>
 
-<p><code class="highlighter-rouge">columnNamePattern</code> (optional string) A Java Pattern against column names to limit returned columns.</p>
+<p><code class="language-plaintext highlighter-rouge">columnNamePattern</code> (optional string) A Java Pattern against column names to limit returned columns.</p>
 
 <h3 id="commitrequest">CommitRequest</h3>
 
-<p>This request is used to issue a <code class="highlighter-rouge">commit</code> on the Connection in the Avatica server identified by the given ID.</p>
+<p>This request is used to issue a <code class="language-plaintext highlighter-rouge">commit</code> on the Connection in the Avatica server identified by the given ID.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"commit"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"commit"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> (required string) The identifier of the connection on which to invoke commit.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> (required string) The identifier of the connection on which to invoke commit.</p>
 
 <h3 id="connectionsyncrequest">ConnectionSyncRequest</h3>
 
 <p>This request is used to ensure that the client and server have a consistent view of the database properties.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"connectionSync"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connProps"</span><span class="p">:</span><span class="w"> </span><span class="err">ConnectionProperties</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"connectionSync"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connProps"</span><span class="p">:</span><span class="w"> </span><span class="err">ConnectionProperties</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> (required string) The identifier of the connection to synchronize.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> (required string) The identifier of the connection to synchronize.</p>
 
-<p><code class="highlighter-rouge">connProps</code> (optional nested object) A <a href="#connectionproperties">ConnectionProperties</a> object to synchronize between the client and server.</p>
+<p><code class="language-plaintext highlighter-rouge">connProps</code> (optional nested object) A <a href="#connectionproperties">ConnectionProperties</a> object to synchronize between the client and server.</p>
 
 <h3 id="createstatementrequest">CreateStatementRequest</h3>
 
 <p>This request is used to create a new Statement in the Avatica server.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"createStatement"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"createStatement"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> (required string) The identifier of the connection to use in creating a statement.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> (required string) The identifier of the connection to use in creating a statement.</p>
 
 <h3 id="databasepropertyrequest">DatabasePropertyRequest</h3>
 
 <p>This request is used to fetch all <a href="#databaseproperty">database properties</a>.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"databaseProperties"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"databaseProperties"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> (required string) The identifier of the connection to use when fetching the database properties.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> (required string) The identifier of the connection to use when fetching the database properties.</p>
 
 <h3 id="executebatchrequest">ExecuteBatchRequest</h3>
 
 <p>This request is used to execute a batch of updates on a PreparedStatement.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"executeBatch"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"statementId"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"parameterValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">TypedValue</span><span class="p">,</span><span class="w"> </span><span class="err">TypedValue</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">TypedValue</span><span class="p">,</span><span class="w"> </span><span class="err">TypedValue</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">],</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"executeBatch"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"statementId"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"parameterValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">TypedValue</span><span class="p">,</span><span class="w"> </span><span class="err">TypedValue</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">TypedValue</span><span class="p">,</span><span class="w"> </span><span class="err">TypedValue</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">],</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> (required string) The identifier of the connection to use when fetching the database properties.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> (required string) The identifier of the connection to use when fetching the database properties.</p>
 
-<p><code class="highlighter-rouge">statementId</code> (required integer) The identifier of the statement created using the above connection.</p>
+<p><code class="language-plaintext highlighter-rouge">statementId</code> (required integer) The identifier of the statement created using the above connection.</p>
 
-<p><code class="highlighter-rouge">parameterValues</code> (required array of array) An array of arrays of <a href="#typedvalue">TypedValue</a>’s. Each element
+<p><code class="language-plaintext highlighter-rouge">parameterValues</code> (required array of array) An array of arrays of <a href="#typedvalue">TypedValue</a>’s. Each element
   in the array is an update to a row, while the outer array represents the entire “batch” of updates.</p>
 
 <h3 id="executerequest">ExecuteRequest</h3>
@@ -862,202 +862,202 @@ which uniquely identifies the concrete Request from all other Requests.</p>
 <p>This request is used to execute a PreparedStatement, optionally with values to bind to the parameters in the Statement.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"execute"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"statementHandle"</span><span class="p">:</span><span class="w"> </span><span class="err">StatementHandle</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"parameterValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">TypedValue</span><span class="p">,</span><span class="w"> </span><span class="err">TypedValue</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"maxRowCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"execute"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"statementHandle"</span><span class="p">:</span><span class="w"> </span><span class="err">StatementHandle</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"parameterValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">TypedValue</span><span class="p">,</span><span class="w"> </span><span class="err">TypedValue</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"maxRowCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">statementHandle</code> (required object) A <a href="#statementhandle">StatementHandle</a> object.</p>
+<p><code class="language-plaintext highlighter-rouge">statementHandle</code> (required object) A <a href="#statementhandle">StatementHandle</a> object.</p>
 
-<p><code class="highlighter-rouge">parameterValues</code> (optional array of nested objects) The <a href="#typedvalue">TypedValue</a> for each parameter on the prepared statement.</p>
+<p><code class="language-plaintext highlighter-rouge">parameterValues</code> (optional array of nested objects) The <a href="#typedvalue">TypedValue</a> for each parameter on the prepared statement.</p>
 
-<p><code class="highlighter-rouge">maxRowCount</code> (required long) The maximum number of rows returned in the response.</p>
+<p><code class="language-plaintext highlighter-rouge">maxRowCount</code> (required long) The maximum number of rows returned in the response.</p>
 
 <h3 id="fetchrequest">FetchRequest</h3>
 
 <p>This request is used to fetch a batch of rows from a Statement previously created.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fetch"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"statementId"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fetchMaxRowCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fetch"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"statementId"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fetchMaxRowCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> (required string) The identifier of the connection to use.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> (required string) The identifier of the connection to use.</p>
 
-<p><code class="highlighter-rouge">statementId</code> (required integer) The identifier of the statement created using the above connection.</p>
+<p><code class="language-plaintext highlighter-rouge">statementId</code> (required integer) The identifier of the statement created using the above connection.</p>
 
-<p><code class="highlighter-rouge">offset</code> (required integer) The positional offset into a result set to fetch.</p>
+<p><code class="language-plaintext highlighter-rouge">offset</code> (required integer) The positional offset into a result set to fetch.</p>
 
-<p><code class="highlighter-rouge">fetchMatchRowCount</code> (required integer) The maximum number of rows to return in the response to this request.</p>
+<p><code class="language-plaintext highlighter-rouge">fetchMatchRowCount</code> (required integer) The maximum number of rows to return in the response to this request.</p>
 
 <h3 id="openconnectionrequest">OpenConnectionRequest</h3>
 
 <p>This request is used to open a new Connection in the Avatica server.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openConnection"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"key"</span><span class="p">:</span><span class="s2">"value"</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">}</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openConnection"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"key"</span><span class="p">:</span><span class="s2">"value"</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> (required string) The identifier of the connection to open in the server.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> (required string) The identifier of the connection to open in the server.</p>
 
-<p><code class="highlighter-rouge">info</code> (optional string-to-string map) A Map containing properties to include when creating the Connection.</p>
+<p><code class="language-plaintext highlighter-rouge">info</code> (optional string-to-string map) A Map containing properties to include when creating the Connection.</p>
 
 <h3 id="prepareandexecutebatchrequest">PrepareAndExecuteBatchRequest</h3>
 
 <p>This request is used as short-hand to create a Statement and execute an batch of SQL commands in that Statement.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prepareAndExecuteBatch"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"statementId"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"sqlCommands"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"SQL Command"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SQL Command"</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prepareAndExecuteBatch"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"statementId"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sqlCommands"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"SQL Command"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SQL Command"</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> (required string) The identifier for the connection to use.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> (required string) The identifier for the connection to use.</p>
 
-<p><code class="highlighter-rouge">statementId</code> (required integer) The identifier for the statement created by the above connection to use.</p>
+<p><code class="language-plaintext highlighter-rouge">statementId</code> (required integer) The identifier for the statement created by the above connection to use.</p>
 
-<p><code class="highlighter-rouge">sqlCommands</code> (required array of strings) An array of SQL commands</p>
+<p><code class="language-plaintext highlighter-rouge">sqlCommands</code> (required array of strings) An array of SQL commands</p>
 
 <h3 id="prepareandexecuterequest">PrepareAndExecuteRequest</h3>
 
 <p>This request is used as a short-hand for create a Statement and fetching the first batch of results in a single call without any parameter substitution.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prepareAndExecute"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"statementId"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"sql"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELECT * FROM table"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"maxRowCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prepareAndExecute"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"statementId"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sql"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELECT * FROM table"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"maxRowCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> (required string) The identifier for the connection to use.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> (required string) The identifier for the connection to use.</p>
 
-<p><code class="highlighter-rouge">statementId</code> (required integer) The identifier for the statement created by the above connection to use.</p>
+<p><code class="language-plaintext highlighter-rouge">statementId</code> (required integer) The identifier for the statement created by the above connection to use.</p>
 
-<p><code class="highlighter-rouge">sql</code> (required string) A SQL statement</p>
+<p><code class="language-plaintext highlighter-rouge">sql</code> (required string) A SQL statement</p>
 
-<p><code class="highlighter-rouge">maxRowCount</code> (required long) The maximum number of rows returned in the response.</p>
+<p><code class="language-plaintext highlighter-rouge">maxRowCount</code> (required long) The maximum number of rows returned in the response.</p>
 
 <h3 id="preparerequest">PrepareRequest</h3>
 
 <p>This request is used to create create a new Statement with the given query in the Avatica server.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prepare"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"sql"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELECT * FROM table"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"maxRowCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prepare"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sql"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELECT * FROM table"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"maxRowCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> (required string) The identifier for the connection to use.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> (required string) The identifier for the connection to use.</p>
 
-<p><code class="highlighter-rouge">sql</code> (required string) A SQL statement</p>
+<p><code class="language-plaintext highlighter-rouge">sql</code> (required string) A SQL statement</p>
 
-<p><code class="highlighter-rouge">maxRowCount</code> (required long) The maximum number of rows returned in the response.</p>
+<p><code class="language-plaintext highlighter-rouge">maxRowCount</code> (required long) The maximum number of rows returned in the response.</p>
 
 <h3 id="syncresultsrequest">SyncResultsRequest</h3>
 
 <p>This request is used to reset a ResultSet’s iterator to a specific offset in the Avatica server.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"syncResults"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"statementId"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="err">QueryState</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"syncResults"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"statementId"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="err">QueryState</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> (required string) The identifier for the connection to use.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> (required string) The identifier for the connection to use.</p>
 
-<p><code class="highlighter-rouge">statementId</code> (required integer) The identifier for the statement to use.</p>
+<p><code class="language-plaintext highlighter-rouge">statementId</code> (required integer) The identifier for the statement to use.</p>
 
-<p><code class="highlighter-rouge">state</code> (required object) The <a href="#querystate">QueryState</a> object.</p>
+<p><code class="language-plaintext highlighter-rouge">state</code> (required object) The <a href="#querystate">QueryState</a> object.</p>
 
-<p><code class="highlighter-rouge">offset</code> (required long) The offset into the ResultSet to seek to.</p>
+<p><code class="language-plaintext highlighter-rouge">offset</code> (required long) The offset into the ResultSet to seek to.</p>
 
 <h3 id="rollbackrequest">RollbackRequest</h3>
 
-<p>This request is used to issue a <code class="highlighter-rouge">rollback</code> on the Connection in the Avatica server identified by the given ID.</p>
+<p>This request is used to issue a <code class="language-plaintext highlighter-rouge">rollback</code> on the Connection in the Avatica server identified by the given ID.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rollback"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rollback"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> (required string) The identifier for the connection on which to invoke rollback.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> (required string) The identifier for the connection on which to invoke rollback.</p>
 
 <h3 id="schemasrequest">SchemasRequest</h3>
 
 <p>This request is used to fetch the schemas matching the provided criteria in the database.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"getSchemas"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"catalog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"schemaPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pattern.*"</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"getSchemas"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"catalog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"schemaPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pattern.*"</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier for the connection to fetch schemas from.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier for the connection to fetch schemas from.</p>
 
-<p><code class="highlighter-rouge">catalog</code> (optional string) The name of the catalog to fetch the schema from.</p>
+<p><code class="language-plaintext highlighter-rouge">catalog</code> (optional string) The name of the catalog to fetch the schema from.</p>
 
-<p><code class="highlighter-rouge">schemaPattern</code> (optional string) A Java pattern of schemas to fetch.</p>
+<p><code class="language-plaintext highlighter-rouge">schemaPattern</code> (optional string) A Java pattern of schemas to fetch.</p>
 
 <h3 id="tabletypesrequest">TableTypesRequest</h3>
 
 <p>This request is used to fetch the table types available in this database.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"getTableTypes"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"getTableTypes"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> The identifier of the connection to fetch the table types from.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> The identifier of the connection to fetch the table types from.</p>
 
 <h3 id="tablesrequest">TablesRequest</h3>
 
 <p>This request is used to fetch the tables available in this database filtered by the provided criteria.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"getTables"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"catalog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"catalog_name"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"schemaPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schema_pattern.*"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"tableNamePattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"table_name_pattern.*"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"typeList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"TABLE"</span><span class="p">,</span><span class="w"> </span><span class="s2">"VIEW"</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"getTables"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"catalog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"catalog_name"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"schemaPattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schema_pattern.*"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tableNamePattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"table_name_pattern.*"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typeList"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"TABLE"</span><span class="p">,</span><span class="w"> </span><span class="s2">"VIEW"</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">catalog</code> (optional string) The name of a catalog to restrict fetched tables.</p>
+<p><code class="language-plaintext highlighter-rouge">catalog</code> (optional string) The name of a catalog to restrict fetched tables.</p>
 
-<p><code class="highlighter-rouge">connectionId</code> The identifier of the connection to fetch the tables from.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> The identifier of the connection to fetch the tables from.</p>
 
-<p><code class="highlighter-rouge">schemaPattern</code> (optional string) A Java Pattern representing schemas to include in fetched tables.</p>
+<p><code class="language-plaintext highlighter-rouge">schemaPattern</code> (optional string) A Java Pattern representing schemas to include in fetched tables.</p>
 
-<p><code class="highlighter-rouge">tableNamePattern</code> (optional string) A Java Pattern representing table names to include in fetched tables.</p>
+<p><code class="language-plaintext highlighter-rouge">tableNamePattern</code> (optional string) A Java Pattern representing table names to include in fetched tables.</p>
 
-<p><code class="highlighter-rouge">typeList</code> (optional array of string) A list of table types used to restrict fetched tables.</p>
+<p><code class="language-plaintext highlighter-rouge">typeList</code> (optional array of string) A list of table types used to restrict fetched tables.</p>
 
 <h3 id="typeinforequest">TypeInfoRequest</h3>
 
 <p>This request is used to fetch the types available in this database.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"getTypeInfo"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="w">
+  </span><span class="nl">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"getTypeInfo"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> The identifier of the connection to fetch the types from.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> The identifier of the connection to fetch the types from.</p>
 
 <h2 id="responses-1">Responses</h2>
 
-<p>The collection of all JSON objects returned as responses from Avatica. All Responses include a <code class="highlighter-rouge">response</code> attribute
+<p>The collection of all JSON objects returned as responses from Avatica. All Responses include a <code class="language-plaintext highlighter-rouge">response</code> attribute
 which uniquely identifies the concrete Response from all other Responses.</p>
 
 <h3 id="closeconnectionresponse">CloseConnectionResponse</h3>
@@ -1065,29 +1065,29 @@ which uniquely identifies the concrete Response from all other Responses.</p>
 <p>A response to the <a href="#closeconnectionrequest">CloseConnectionRequest</a>.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closeConnection"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closeConnection"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="closestatementresponse">CloseStatementResponse</h3>
 
 <p>A response to the <a href="#closestatementrequest">CloseStatementRequest</a>.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closeStatement"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closeStatement"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="commitresponse">CommitResponse</h3>
 
 <p>A response to the <a href="#commitrequest">CommitRequest</a>.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"commit"</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"commit"</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
 <p>There are no extra attributes on this Response.</p>
@@ -1098,32 +1098,32 @@ which uniquely identifies the concrete Response from all other Responses.</p>
 response are those of the Connection in the Avatica server.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"connectionSync"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connProps"</span><span class="p">:</span><span class="w"> </span><span class="err">ConnectionProperties</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"connectionSync"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connProps"</span><span class="p">:</span><span class="w"> </span><span class="err">ConnectionProperties</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connProps</code> The <a href="#connectionproperties">ConnectionProperties</a> that were synchronized.</p>
+<p><code class="language-plaintext highlighter-rouge">connProps</code> The <a href="#connectionproperties">ConnectionProperties</a> that were synchronized.</p>
 
-<p><code class="highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="createstatementresponse">CreateStatementResponse</h3>
 
 <p>A response to the <a href="#createstatementrequest">CreateStatementRequest</a>. The ID of the statement
-that was created is included in the response. Clients will use this <code class="highlighter-rouge">statementId</code> in subsequent calls.</p>
+that was created is included in the response. Clients will use this <code class="language-plaintext highlighter-rouge">statementId</code> in subsequent calls.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"createStatement"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"statementId"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"createStatement"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"statementId"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> The identifier for the connection used to create the statement.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> The identifier for the connection used to create the statement.</p>
 
-<p><code class="highlighter-rouge">statementId</code> The identifier for the created statement.</p>
+<p><code class="language-plaintext highlighter-rouge">statementId</code> The identifier for the created statement.</p>
 
-<p><code class="highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="databasepropertyresponse">DatabasePropertyResponse</h3>
 
@@ -1131,41 +1131,41 @@ that was created is included in the response. Clients will use this <code class=
 for information on the available property keys.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"databaseProperties"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"map"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">DatabaseProperty</span><span class="p">:</span><span class="w"> </span><span class="err">Object</span><span class="p">,</span><span class="w"> </span><span class="err">DatabaseProperty</span><span class="p">:</span><span class="w"> </span><span class="err">Object</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"databaseProperties"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"map"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">DatabaseProperty:</span><span class="w"> </span><span class="err">Object</span><span class="p">,</span><span class="w"> </span><span class="err">DatabaseProperty:</span><span class="w"> </span><span class="err">Object</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">map</code> A map of <a href="#databaseproperty">DatabaseProperty</a> to value of that property. The value may be some
+<p><code class="language-plaintext highlighter-rouge">map</code> A map of <a href="#databaseproperty">DatabaseProperty</a> to value of that property. The value may be some
 primitive type or an array of primitive types.</p>
 
-<p><code class="highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="errorresponse">ErrorResponse</h3>
 
 <p>A response when an error was caught executing a request. Any request may return this response.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"exceptions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"stacktrace"</span><span class="p">,</span><span class="w"> </span><span class="s2">"stacktrace"</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"errorMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The error message"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"sqlState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABC12"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"severity"</span><span class="p">:</span><span class="w"> </span><span class="err">AvaticaSeverity</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"exceptions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"stacktrace"</span><span class="p">,</span><span class="w"> </span><span class="s2">"stacktrace"</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"errorMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The error message"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sqlState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABC12"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"severity"</span><span class="p">:</span><span class="w"> </span><span class="err">AvaticaSeverity</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">exceptions</code> A list of stringified Java StackTraces.</p>
+<p><code class="language-plaintext highlighter-rouge">exceptions</code> A list of stringified Java StackTraces.</p>
 
-<p><code class="highlighter-rouge">errorMessage</code> A human-readable error message.</p>
+<p><code class="language-plaintext highlighter-rouge">errorMessage</code> A human-readable error message.</p>
 
-<p><code class="highlighter-rouge">errorCode</code> A numeric code for this error.</p>
+<p><code class="language-plaintext highlighter-rouge">errorCode</code> A numeric code for this error.</p>
 
-<p><code class="highlighter-rouge">sqlState</code> A five character alphanumeric code for this error.</p>
+<p><code class="language-plaintext highlighter-rouge">sqlState</code> A five character alphanumeric code for this error.</p>
 
-<p><code class="highlighter-rouge">severity</code> An <a href="#avaticaseverity">AvaticaSeverity</a> object which denotes how critical the error is.</p>
+<p><code class="language-plaintext highlighter-rouge">severity</code> An <a href="#avaticaseverity">AvaticaSeverity</a> object which denotes how critical the error is.</p>
 
-<p><code class="highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="executebatchresponse">ExecuteBatchResponse</h3>
 
@@ -1173,60 +1173,60 @@ primitive type or an array of primitive types.</p>
 which encapsulates the update counts for a batch of updates.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"executeBatch"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"statementId"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"updateCounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"missingStatement"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"executeBatch"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"statementId"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"updateCounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"missingStatement"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> The identifier for the connection used to create the statement.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> The identifier for the connection used to create the statement.</p>
 
-<p><code class="highlighter-rouge">statementId</code> The identifier for the created statement.</p>
+<p><code class="language-plaintext highlighter-rouge">statementId</code> The identifier for the created statement.</p>
 
-<p><code class="highlighter-rouge">updateCounts</code> An array of integers corresponding to each update contained in the batch that was executed.</p>
+<p><code class="language-plaintext highlighter-rouge">updateCounts</code> An array of integers corresponding to each update contained in the batch that was executed.</p>
 
-<p><code class="highlighter-rouge">missingStatement</code> True if the operation failed because the Statement is not cached in the server, false otherwise.</p>
+<p><code class="language-plaintext highlighter-rouge">missingStatement</code> True if the operation failed because the Statement is not cached in the server, false otherwise.</p>
 
-<p><code class="highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="executeresponse">ExecuteResponse</h3>
 
 <p>A response to the <a href="#executerequest">ExecuteRequest</a> which contains the results for a metadata query.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"executeResults"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"resultSets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">ResultSetResponse</span><span class="p">,</span><span class="w"> </span><span class="err">ResultSetResponse</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"missingStatement"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"executeResults"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"resultSets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">ResultSetResponse</span><span class="p">,</span><span class="w"> </span><span class="err">ResultSetResponse</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"missingStatement"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">resultSets</code> An array of <a href="#resultsetresponse">ResultSetResponse</a>s.</p>
+<p><code class="language-plaintext highlighter-rouge">resultSets</code> An array of <a href="#resultsetresponse">ResultSetResponse</a>s.</p>
 
-<p><code class="highlighter-rouge">missingStatement</code> A boolean which denotes if the request failed due to a missing Statement.</p>
+<p><code class="language-plaintext highlighter-rouge">missingStatement</code> A boolean which denotes if the request failed due to a missing Statement.</p>
 
-<p><code class="highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="fetchresponse">FetchResponse</h3>
 
 <p>A response to the <a href="#fetchrequest">FetchRequest</a> which contains the request for the query.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fetch"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"frame"</span><span class="p">:</span><span class="w"> </span><span class="err">Frame</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"missingStatement"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"missingResults"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fetch"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"frame"</span><span class="p">:</span><span class="w"> </span><span class="err">Frame</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"missingStatement"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"missingResults"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">frame</code> A <a href="#frame">Frame</a> containing the results of the fetch.</p>
+<p><code class="language-plaintext highlighter-rouge">frame</code> A <a href="#frame">Frame</a> containing the results of the fetch.</p>
 
-<p><code class="highlighter-rouge">missingStatement</code> A boolean which denotes if the request failed due to a missing Statement.</p>
+<p><code class="language-plaintext highlighter-rouge">missingStatement</code> A boolean which denotes if the request failed due to a missing Statement.</p>
 
-<p><code class="highlighter-rouge">missingResults</code> A boolean which denotes if the request failed due to a missing ResultSet.</p>
+<p><code class="language-plaintext highlighter-rouge">missingResults</code> A boolean which denotes if the request failed due to a missing ResultSet.</p>
 
-<p><code class="highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="openconnectionresponse">OpenConnectionResponse</h3>
 
@@ -1234,11 +1234,11 @@ which encapsulates the update counts for a batch of updates.</p>
 the client should use in subsequent calls was provided by the client in the request.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openConnection"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openConnection"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="prepareresponse">PrepareResponse</h3>
 
@@ -1246,74 +1246,74 @@ the client should use in subsequent calls was provided by the client in the requ
 which clients must use to fetch the results from the Statement.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prepare"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"statement"</span><span class="p">:</span><span class="w"> </span><span class="err">StatementHandle</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prepare"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"statement"</span><span class="p">:</span><span class="w"> </span><span class="err">StatementHandle</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">statement</code> A <a href="#statementhandle">StatementHandle</a> object.</p>
+<p><code class="language-plaintext highlighter-rouge">statement</code> A <a href="#statementhandle">StatementHandle</a> object.</p>
 
-<p><code class="highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="resultsetresponse">ResultSetResponse</h3>
 
 <p>A response which contains the results and type details from a query.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"resultSet"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"statementId"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"ownStatement"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"signature"</span><span class="p">:</span><span class="w"> </span><span class="err">Signature</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"firstFrame"</span><span class="p">:</span><span class="w"> </span><span class="err">Frame</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"updateCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"resultSet"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"statementId"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"ownStatement"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"signature"</span><span class="p">:</span><span class="w"> </span><span class="err">Signature</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"firstFrame"</span><span class="p">:</span><span class="w"> </span><span class="err">Frame</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"updateCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> The identifier for the connection used to generate this response.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> The identifier for the connection used to generate this response.</p>
 
-<p><code class="highlighter-rouge">statementId</code> The identifier for the statement used to generate this response.</p>
+<p><code class="language-plaintext highlighter-rouge">statementId</code> The identifier for the statement used to generate this response.</p>
 
-<p><code class="highlighter-rouge">ownStatement</code> Whether the result set has its own dedicated statement. If true, the server must automatically close the
+<p><code class="language-plaintext highlighter-rouge">ownStatement</code> Whether the result set has its own dedicated statement. If true, the server must automatically close the
 statement when the result set is closed. This is used for JDBC metadata result sets, for instance.</p>
 
-<p><code class="highlighter-rouge">signature</code> A non-optional nested object <a href="#signature">Signature</a></p>
+<p><code class="language-plaintext highlighter-rouge">signature</code> A non-optional nested object <a href="#signature">Signature</a></p>
 
-<p><code class="highlighter-rouge">firstFrame</code> A optional nested object <a href="#frame">Frame</a></p>
+<p><code class="language-plaintext highlighter-rouge">firstFrame</code> A optional nested object <a href="#frame">Frame</a></p>
 
-<p><code class="highlighter-rouge">updateCount</code> A number which is always <code class="highlighter-rouge">-1</code> for normal result sets. Any other value denotes a “dummy” result set
+<p><code class="language-plaintext highlighter-rouge">updateCount</code> A number which is always <code class="language-plaintext highlighter-rouge">-1</code> for normal result sets. Any other value denotes a “dummy” result set
 that only contains this count and no additional data.</p>
 
-<p><code class="highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="rollbackresponse">RollbackResponse</h3>
 
 <p>A response to the <a href="#rollbackrequest">RollBackRequest</a>.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rollback"</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rollback"</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
 <p>There are no extra attributes on this Response.</p>
 
 <h3 id="syncresultsresponse">SyncResultsResponse</h3>
 
-<p>A response to the <a href="#syncresultsrequest">SyncResultsRequest</a>. When <code class="highlighter-rouge">moreResults</code> is true, a <a href="#fetchrequest">FetchRequest</a>
-should be issued to get the next batch of records. When <code class="highlighter-rouge">missingStatement</code> is true, the statement must be re-created using <a href="#preparerequest">PrepareRequest</a>
+<p>A response to the <a href="#syncresultsrequest">SyncResultsRequest</a>. When <code class="language-plaintext highlighter-rouge">moreResults</code> is true, a <a href="#fetchrequest">FetchRequest</a>
+should be issued to get the next batch of records. When <code class="language-plaintext highlighter-rouge">missingStatement</code> is true, the statement must be re-created using <a href="#preparerequest">PrepareRequest</a>
 or the appropriate Request for a DDL request (e.g. <a href="#catalogsrequest">CatalogsRequest</a> or <a href="#schemasrequest">SchemasRequest</a>).</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"syncResults"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"moreResults"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"missingStatement"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"syncResults"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"moreResults"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"missingStatement"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rpcMetadata"</span><span class="p">:</span><span class="w"> </span><span class="err">RpcMetadata</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">moreResults</code> A boolean which denotes if results exist for the ResultSet being “synced” per the request.</p>
+<p><code class="language-plaintext highlighter-rouge">moreResults</code> A boolean which denotes if results exist for the ResultSet being “synced” per the request.</p>
 
-<p><code class="highlighter-rouge">missingStatement</code> A boolean which denotes if the statement for the ResultSet still exists.</p>
+<p><code class="language-plaintext highlighter-rouge">missingStatement</code> A boolean which denotes if the statement for the ResultSet still exists.</p>
 
-<p><code class="highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">rpcMetadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h2 id="miscellaneous-1">Miscellaneous</h2>
 
@@ -1323,28 +1323,28 @@ or the appropriate Request for a DDL request (e.g. <a href="#catalogsrequest">Ca
 complex types such as arrays.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"signed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"precision"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"parameterType"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"typeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"className"</span><span class="p">:</span><span class="w"> </span><span class="s2">"java.lang.Integer"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w">
+  </span><span class="nl">"signed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"precision"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"parameterType"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"className"</span><span class="p">:</span><span class="w"> </span><span class="s2">"java.lang.Integer"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">signed</code> A boolean denoting whether the column is a signed numeric.</p>
+<p><code class="language-plaintext highlighter-rouge">signed</code> A boolean denoting whether the column is a signed numeric.</p>
 
-<p><code class="highlighter-rouge">precision</code> The maximum numeric precision supported by this column.</p>
+<p><code class="language-plaintext highlighter-rouge">precision</code> The maximum numeric precision supported by this column.</p>
 
-<p><code class="highlighter-rouge">scale</code> The maximum numeric scale supported by this column.</p>
+<p><code class="language-plaintext highlighter-rouge">scale</code> The maximum numeric scale supported by this column.</p>
 
-<p><code class="highlighter-rouge">parameterType</code> An integer corresponding to the JDBC Types class denoting the column’s type.</p>
+<p><code class="language-plaintext highlighter-rouge">parameterType</code> An integer corresponding to the JDBC Types class denoting the column’s type.</p>
 
-<p><code class="highlighter-rouge">typeName</code> The JDBC type name for this column.</p>
+<p><code class="language-plaintext highlighter-rouge">typeName</code> The JDBC type name for this column.</p>
 
-<p><code class="highlighter-rouge">className</code> The Java class backing the JDBC type for this column.</p>
+<p><code class="language-plaintext highlighter-rouge">className</code> The Java class backing the JDBC type for this column.</p>
 
-<p><code class="highlighter-rouge">name</code> The name of the column.</p>
+<p><code class="language-plaintext highlighter-rouge">name</code> The name of the column.</p>
 
 <h3 id="avaticaseverity">AvaticaSeverity</h3>
 
@@ -1353,77 +1353,77 @@ complex types such as arrays.</p>
 <p>One of:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">UNKNOWN</code></li>
-  <li><code class="highlighter-rouge">FATAL</code></li>
-  <li><code class="highlighter-rouge">ERROR</code></li>
-  <li><code class="highlighter-rouge">WARNING</code></li>
+  <li><code class="language-plaintext highlighter-rouge">UNKNOWN</code></li>
+  <li><code class="language-plaintext highlighter-rouge">FATAL</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ERROR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">WARNING</code></li>
 </ul>
 
 <h3 id="avaticatype">AvaticaType</h3>
 
 <p>This object describes a simple or complex type for a column. Complex types will contain
-additional information in the <code class="highlighter-rouge">component</code> or <code class="highlighter-rouge">columns</code> attribute which describe the nested
+additional information in the <code class="language-plaintext highlighter-rouge">component</code> or <code class="language-plaintext highlighter-rouge">columns</code> attribute which describe the nested
 types of the complex parent type.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scalar"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"identifier"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"column"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"rep"</span><span class="p">:</span><span class="w"> </span><span class="err">Rep</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">ColumnMetaData</span><span class="p">,</span><span class="w"> </span><span class="err">ColumnMetaData</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"component"</span><span class="p">:</span><span class="w"> </span><span class="err">AvaticaType</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scalar"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"identifier"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"column"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rep"</span><span class="p">:</span><span class="w"> </span><span class="err">Rep</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">ColumnMetaData</span><span class="p">,</span><span class="w"> </span><span class="err">ColumnMetaData</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"component"</span><span class="p">:</span><span class="w"> </span><span class="err">AvaticaType</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">type</code> One of: <code class="highlighter-rouge">scalar</code>, <code class="highlighter-rouge">array</code>, <code class="highlighter-rouge">struct</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">type</code> One of: <code class="language-plaintext highlighter-rouge">scalar</code>, <code class="language-plaintext highlighter-rouge">array</code>, <code class="language-plaintext highlighter-rouge">struct</code>.</p>
 
-<p><code class="highlighter-rouge">id</code> A numeric value corresponding to the type of the object per the JDBC Types class.</p>
+<p><code class="language-plaintext highlighter-rouge">id</code> A numeric value corresponding to the type of the object per the JDBC Types class.</p>
 
-<p><code class="highlighter-rouge">name</code> The readable name of the JDBC type.</p>
+<p><code class="language-plaintext highlighter-rouge">name</code> The readable name of the JDBC type.</p>
 
-<p><code class="highlighter-rouge">rep</code> A nested <a href="#rep">Rep</a> object used by Avatica to hold additional type information.</p>
+<p><code class="language-plaintext highlighter-rouge">rep</code> A nested <a href="#rep">Rep</a> object used by Avatica to hold additional type information.</p>
 
-<p><code class="highlighter-rouge">columns</code> For <code class="highlighter-rouge">STRUCT</code> types, a list of the columns contained in that <code class="highlighter-rouge">STRUCT</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">columns</code> For <code class="language-plaintext highlighter-rouge">STRUCT</code> types, a list of the columns contained in that <code class="language-plaintext highlighter-rouge">STRUCT</code>.</p>
 
-<p><code class="highlighter-rouge">component</code> For <code class="highlighter-rouge">ARRAY</code> types, the type of the elements contained in that <code class="highlighter-rouge">ARRAY</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">component</code> For <code class="language-plaintext highlighter-rouge">ARRAY</code> types, the type of the elements contained in that <code class="language-plaintext highlighter-rouge">ARRAY</code>.</p>
 
 <h3 id="columnmetadata">ColumnMetaData</h3>
 
 <p>This object represents the JDBC ResultSetMetaData for a column.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"ordinal"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"autoIncrement"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"caseSensitive"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"searchable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"signed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"displaySize"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Description"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"columnName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"col1"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"schemaName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schema"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"precision"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"tableName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"table"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"catalogName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"catalog"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="err">AvaticaType</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"readOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"writable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"definitelyWritable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"columnClassName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"java.lang.String"</span><span class="w">
+  </span><span class="nl">"ordinal"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"autoIncrement"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"caseSensitive"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"searchable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"signed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"displaySize"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Description"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"columnName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"col1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"schemaName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"precision"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tableName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"table"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"catalogName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"catalog"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="err">AvaticaType</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"readOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"writable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"definitelyWritable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"columnClassName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"java.lang.String"</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">ordinal</code> A positional offset number.</p>
+<p><code class="language-plaintext highlighter-rouge">ordinal</code> A positional offset number.</p>
 
-<p><code class="highlighter-rouge">autoIncrement</code> A boolean denoting whether the column is automatically incremented.</p>
+<p><code class="language-plaintext highlighter-rouge">autoIncrement</code> A boolean denoting whether the column is automatically incremented.</p>
 
-<p><code class="highlighter-rouge">caseSensitive</code> A boolean denoting whether the column is case sensitive.</p>
+<p><code class="language-plaintext highlighter-rouge">caseSensitive</code> A boolean denoting whether the column is case sensitive.</p>
 
-<p><code class="highlighter-rouge">searchable</code> A boolean denoting whether this column supports all WHERE search clauses.</p>
+<p><code class="language-plaintext highlighter-rouge">searchable</code> A boolean denoting whether this column supports all WHERE search clauses.</p>
 
-<p><code class="highlighter-rouge">currency</code> A boolean denoting whether this column represents currency.</p>
+<p><code class="language-plaintext highlighter-rouge">currency</code> A boolean denoting whether this column represents currency.</p>
 
-<p><code class="highlighter-rouge">nullable</code> A number denoting whether this column supports null values.</p>
+<p><code class="language-plaintext highlighter-rouge">nullable</code> A number denoting whether this column supports null values.</p>
 
 <ul>
   <li>0 = No null values are allowed</li>
@@ -1431,53 +1431,53 @@ types of the complex parent type.</p>
   <li>2 = It is unknown if null values are allowed</li>
 </ul>
 
-<p><code class="highlighter-rouge">signed</code> A boolean denoting whether the column is a signed numeric.</p>
+<p><code class="language-plaintext highlighter-rouge">signed</code> A boolean denoting whether the column is a signed numeric.</p>
 
-<p><code class="highlighter-rouge">displaySize</code> The character width of the column.</p>
+<p><code class="language-plaintext highlighter-rouge">displaySize</code> The character width of the column.</p>
 
-<p><code class="highlighter-rouge">label</code> A description for this column.</p>
+<p><code class="language-plaintext highlighter-rouge">label</code> A description for this column.</p>
 
-<p><code class="highlighter-rouge">columnName</code> The name of the column.</p>
+<p><code class="language-plaintext highlighter-rouge">columnName</code> The name of the column.</p>
 
-<p><code class="highlighter-rouge">schemaName</code> The schema to which this column belongs.</p>
+<p><code class="language-plaintext highlighter-rouge">schemaName</code> The schema to which this column belongs.</p>
 
-<p><code class="highlighter-rouge">precision</code> The maximum numeric precision supported by this column.</p>
+<p><code class="language-plaintext highlighter-rouge">precision</code> The maximum numeric precision supported by this column.</p>
 
-<p><code class="highlighter-rouge">scale</code> The maximum numeric scale supported by this column.</p>
+<p><code class="language-plaintext highlighter-rouge">scale</code> The maximum numeric scale supported by this column.</p>
 
-<p><code class="highlighter-rouge">tableName</code> The name of the table to which this column belongs.</p>
+<p><code class="language-plaintext highlighter-rouge">tableName</code> The name of the table to which this column belongs.</p>
 
-<p><code class="highlighter-rouge">catalogName</code> The name of the catalog to which this column belongs.</p>
+<p><code class="language-plaintext highlighter-rouge">catalogName</code> The name of the catalog to which this column belongs.</p>
 
-<p><code class="highlighter-rouge">type</code> A nested <a href="#avaticatype">AvaticaType</a> representing the type of the column.</p>
+<p><code class="language-plaintext highlighter-rouge">type</code> A nested <a href="#avaticatype">AvaticaType</a> representing the type of the column.</p>
 
-<p><code class="highlighter-rouge">readOnly</code> A boolean denoting whether the column is read-only.</p>
+<p><code class="language-plaintext highlighter-rouge">readOnly</code> A boolean denoting whether the column is read-only.</p>
 
-<p><code class="highlighter-rouge">writable</code> A boolean denoting whether the column is possible to be updated.</p>
+<p><code class="language-plaintext highlighter-rouge">writable</code> A boolean denoting whether the column is possible to be updated.</p>
 
-<p><code class="highlighter-rouge">definitelyWritable</code> A boolean denoting whether the column definitely can be updated.</p>
+<p><code class="language-plaintext highlighter-rouge">definitelyWritable</code> A boolean denoting whether the column definitely can be updated.</p>
 
-<p><code class="highlighter-rouge">columnClassName</code> The name of the Java class backing the column’s type.</p>
+<p><code class="language-plaintext highlighter-rouge">columnClassName</code> The name of the Java class backing the column’s type.</p>
 
 <h3 id="connectionproperties">ConnectionProperties</h3>
 
 <p>This object represents the properties for a given JDBC Connection.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"connProps"</span><span class="p">:</span><span class="w"> </span><span class="s2">"connPropsImpl"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"autoCommit"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"readOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"transactionIsolation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"catalog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"catalog"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schema"</span><span class="w">
+  </span><span class="nl">"connProps"</span><span class="p">:</span><span class="w"> </span><span class="s2">"connPropsImpl"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"autoCommit"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"readOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"transactionIsolation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"catalog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"catalog"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schema"</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">autoCommit</code> (optional boolean) A boolean denoting if autoCommit is enabled for transactions.</p>
+<p><code class="language-plaintext highlighter-rouge">autoCommit</code> (optional boolean) A boolean denoting if autoCommit is enabled for transactions.</p>
 
-<p><code class="highlighter-rouge">readOnly</code> (optional boolean) A boolean denoting if a JDBC connection is read-only.</p>
+<p><code class="language-plaintext highlighter-rouge">readOnly</code> (optional boolean) A boolean denoting if a JDBC connection is read-only.</p>
 
-<p><code class="highlighter-rouge">transactionIsolation</code> (optional integer) An integer which denotes the level of transactions isolation per the JDBC
-specification. This value is analogous to the values defined in <code class="highlighter-rouge">java.sql.Connection</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">transactionIsolation</code> (optional integer) An integer which denotes the level of transactions isolation per the JDBC
+specification. This value is analogous to the values defined in <code class="language-plaintext highlighter-rouge">java.sql.Connection</code>.</p>
 
 <ul>
   <li>0 = Transactions are not supported</li>
@@ -1487,11 +1487,11 @@ specification. This value is analogous to the values defined in <code class="hig
   <li>8 = Dirty reads, non-repeatable reads, and phantom reads are all prevented.</li>
 </ul>
 
-<p><code class="highlighter-rouge">catalog</code> (optional string) The name of the catalog to include when fetching connection properties.</p>
+<p><code class="language-plaintext highlighter-rouge">catalog</code> (optional string) The name of the catalog to include when fetching connection properties.</p>
 
-<p><code class="highlighter-rouge">schema</code> (optional string) The name of the schema to include when fetching connection properties.</p>
+<p><code class="language-plaintext highlighter-rouge">schema</code> (optional string) The name of the schema to include when fetching connection properties.</p>
 
-<p><code class="highlighter-rouge">isDirty</code> (internal boolean) A boolean used for internal purposes only (not required by the Avatica protocol).
+<p><code class="language-plaintext highlighter-rouge">isDirty</code> (internal boolean) A boolean used for internal purposes only (not required by the Avatica protocol).
 This field will be removed from the protocol in future releases.</p>
 
 <h3 id="cursorfactory">CursorFactory</h3>
@@ -1499,12 +1499,12 @@ This field will be removed from the protocol in future releases.</p>
 <p>This object represents the information required to cast untyped objects into the necessary type for some results.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"style"</span><span class="p">:</span><span class="w"> </span><span class="err">Style</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"clazz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"java.lang.String"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fieldNames"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"column1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"column2"</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"style"</span><span class="p">:</span><span class="w"> </span><span class="err">Style</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"clazz"</span><span class="p">:</span><span class="w"> </span><span class="s2">"java.lang.String"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fieldNames"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"column1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"column2"</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">style</code> A string denoting the <a href="#style">Style</a> of the contained objects.</p>
+<p><code class="language-plaintext highlighter-rouge">style</code> A string denoting the <a href="#style">Style</a> of the contained objects.</p>
 
 <h3 id="databaseproperty">DatabaseProperty</h3>
 
@@ -1513,12 +1513,12 @@ This field will be removed from the protocol in future releases.</p>
 <p>One of:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">GET_STRING_FUNCTIONS</code></li>
-  <li><code class="highlighter-rouge">GET_NUMERIC_FUNCTIONS</code></li>
-  <li><code class="highlighter-rouge">GET_SYSTEM_FUNCTIONS</code></li>
-  <li><code class="highlighter-rouge">GET_TIME_DATE_FUNCTIONS</code></li>
-  <li><code class="highlighter-rouge">GET_S_Q_L_KEYWORDS</code></li>
-  <li><code class="highlighter-rouge">GET_DEFAULT_TRANSACTION_ISOLATION</code></li>
+  <li><code class="language-plaintext highlighter-rouge">GET_STRING_FUNCTIONS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">GET_NUMERIC_FUNCTIONS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">GET_SYSTEM_FUNCTIONS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">GET_TIME_DATE_FUNCTIONS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">GET_S_Q_L_KEYWORDS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">GET_DEFAULT_TRANSACTION_ISOLATION</code></li>
 </ul>
 
 <h3 id="frame">Frame</h3>
@@ -1527,16 +1527,16 @@ This field will be removed from the protocol in future releases.</p>
 to be fetched in the Avatica server.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"done"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"rows"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">val</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">val</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"done"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rows"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">val</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">val</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">offset</code> The starting position of these <code class="highlighter-rouge">rows</code> in the encompassing result set.</p>
+<p><code class="language-plaintext highlighter-rouge">offset</code> The starting position of these <code class="language-plaintext highlighter-rouge">rows</code> in the encompassing result set.</p>
 
-<p><code class="highlighter-rouge">done</code> A boolean denoting whether more results exist for this result set.</p>
+<p><code class="language-plaintext highlighter-rouge">done</code> A boolean denoting whether more results exist for this result set.</p>
 
-<p><code class="highlighter-rouge">rows</code> An array of arrays corresponding to the rows and columns for the result set.</p>
+<p><code class="language-plaintext highlighter-rouge">rows</code> An array of arrays corresponding to the rows and columns for the result set.</p>
 
 <h3 id="querystate">QueryState</h3>
 
@@ -1544,19 +1544,19 @@ to be fetched in the Avatica server.</p>
 SQL or by a DatabaseMetaData operation with arguments on that operation.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="err">StateType</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"sql"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELECT * FROM table"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"metaDataOperation"</span><span class="p">:</span><span class="w"> </span><span class="err">MetaDataOperation</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"operationArgs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"arg0"</span><span class="p">,</span><span class="w"> </span><span class="s2">"arg1"</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="err">StateType</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sql"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELECT * FROM table"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"metaDataOperation"</span><span class="p">:</span><span class="w"> </span><span class="err">MetaDataOperation</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"operationArgs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"arg0"</span><span class="p">,</span><span class="w"> </span><span class="s2">"arg1"</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">type</code> A <a href="#statetype">StateType</a> object denoting what type of operation backs the ResultSet for this query.</p>
+<p><code class="language-plaintext highlighter-rouge">type</code> A <a href="#statetype">StateType</a> object denoting what type of operation backs the ResultSet for this query.</p>
 
-<p><code class="highlighter-rouge">sql</code> The SQL statement which created the ResultSet for this query. Required if the <code class="highlighter-rouge">type</code> is <code class="highlighter-rouge">SQL</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">sql</code> The SQL statement which created the ResultSet for this query. Required if the <code class="language-plaintext highlighter-rouge">type</code> is <code class="language-plaintext highlighter-rouge">SQL</code>.</p>
 
-<p><code class="highlighter-rouge">metaDataOperation</code> The DML operation which created the ResultSet for this query. Required if the <code class="highlighter-rouge">type</code> is <code class="highlighter-rouge">METADATA</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">metaDataOperation</code> The DML operation which created the ResultSet for this query. Required if the <code class="language-plaintext highlighter-rouge">type</code> is <code class="language-plaintext highlighter-rouge">METADATA</code>.</p>
 
-<p><code class="highlighter-rouge">operationArgs</code> The arguments to the invoked DML operation. Required if the <code class="highlighter-rouge">type</code> is <code class="highlighter-rouge">METADATA</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">operationArgs</code> The arguments to the invoked DML operation. Required if the <code class="language-plaintext highlighter-rouge">type</code> is <code class="language-plaintext highlighter-rouge">METADATA</code>.</p>
 
 <h3 id="rep">Rep</h3>
 
@@ -1565,30 +1565,30 @@ SQL or by a DatabaseMetaData operation with arguments on that operation.</p>
 <p>One of:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">PRIMITIVE_BOOLEAN</code></li>
-  <li><code class="highlighter-rouge">PRIMITIVE_BYTE</code></li>
-  <li><code class="highlighter-rouge">PRIMITIVE_CHAR</code></li>
-  <li><code class="highlighter-rouge">PRIMITIVE_SHORT</code></li>
-  <li><code class="highlighter-rouge">PRIMITIVE_INT</code></li>
-  <li><code class="highlighter-rouge">PRIMITIVE_LONG</code></li>
-  <li><code class="highlighter-rouge">PRIMITIVE_FLOAT</code></li>
-  <li><code class="highlighter-rouge">PRIMITIVE_DOUBLE</code></li>
-  <li><code class="highlighter-rouge">BOOLEAN</code></li>
-  <li><code class="highlighter-rouge">BYTE</code></li>
-  <li><code class="highlighter-rouge">CHARACTER</code></li>
-  <li><code class="highlighter-rouge">SHORT</code></li>
-  <li><code class="highlighter-rouge">INTEGER</code></li>
-  <li><code class="highlighter-rouge">LONG</code></li>
-  <li><code class="highlighter-rouge">FLOAT</code></li>
-  <li><code class="highlighter-rouge">DOUBLE</code></li>
-  <li><code class="highlighter-rouge">JAVA_SQL_TIME</code></li>
-  <li><code class="highlighter-rouge">JAVA_SQL_TIMESTAMP</code></li>
-  <li><code class="highlighter-rouge">JAVA_SQL_DATE</code></li>
-  <li><code class="highlighter-rouge">JAVA_UTIL_DATE</code></li>
-  <li><code class="highlighter-rouge">BYTE_STRING</code></li>
-  <li><code class="highlighter-rouge">STRING</code></li>
-  <li><code class="highlighter-rouge">NUMBER</code></li>
-  <li><code class="highlighter-rouge">OBJECT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">PRIMITIVE_BOOLEAN</code></li>
+  <li><code class="language-plaintext highlighter-rouge">PRIMITIVE_BYTE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">PRIMITIVE_CHAR</code></li>
+  <li><code class="language-plaintext highlighter-rouge">PRIMITIVE_SHORT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">PRIMITIVE_INT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">PRIMITIVE_LONG</code></li>
+  <li><code class="language-plaintext highlighter-rouge">PRIMITIVE_FLOAT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">PRIMITIVE_DOUBLE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">BOOLEAN</code></li>
+  <li><code class="language-plaintext highlighter-rouge">BYTE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">CHARACTER</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SHORT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">INTEGER</code></li>
+  <li><code class="language-plaintext highlighter-rouge">LONG</code></li>
+  <li><code class="language-plaintext highlighter-rouge">FLOAT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">DOUBLE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">JAVA_SQL_TIME</code></li>
+  <li><code class="language-plaintext highlighter-rouge">JAVA_SQL_TIMESTAMP</code></li>
+  <li><code class="language-plaintext highlighter-rouge">JAVA_SQL_DATE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">JAVA_UTIL_DATE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">BYTE_STRING</code></li>
+  <li><code class="language-plaintext highlighter-rouge">STRING</code></li>
+  <li><code class="language-plaintext highlighter-rouge">NUMBER</code></li>
+  <li><code class="language-plaintext highlighter-rouge">OBJECT</code></li>
 </ul>
 
 <h3 id="rpcmetadata">RpcMetadata</h3>
@@ -1596,32 +1596,32 @@ SQL or by a DatabaseMetaData operation with arguments on that operation.</p>
 <p>This object contains assorted per-call/contextual metadata returned by the Avatica server.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"serverAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"localhost:8765"</span><span class="w">
+  </span><span class="nl">"serverAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"localhost:8765"</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">serverAddress</code> The <code class="highlighter-rouge">host:port</code> of the server which created this object.</p>
+<p><code class="language-plaintext highlighter-rouge">serverAddress</code> The <code class="language-plaintext highlighter-rouge">host:port</code> of the server which created this object.</p>
 
 <h3 id="signature">Signature</h3>
 
 <p>This object represents the result of preparing a Statement in the Avatica server.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">ColumnMetaData</span><span class="p">,</span><span class="w"> </span><span class="err">ColumnMetaData</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"sql"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELECT * FROM table"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">AvaticaParameter</span><span class="p">,</span><span class="w"> </span><span class="err">AvaticaParameter</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"cursorFactory"</span><span class="p">:</span><span class="w"> </span><span class="err">CursorFactory</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"statementType"</span><span class="p">:</span><span class="w"> </span><span class="err">StatementType</span><span class="w">
+  </span><span class="nl">"columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">ColumnMetaData</span><span class="p">,</span><span class="w"> </span><span class="err">ColumnMetaData</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"sql"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELECT * FROM table"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">AvaticaParameter</span><span class="p">,</span><span class="w"> </span><span class="err">AvaticaParameter</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"cursorFactory"</span><span class="p">:</span><span class="w"> </span><span class="err">CursorFactory</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"statementType"</span><span class="p">:</span><span class="w"> </span><span class="err">StatementType</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">columns</code> An array of <a href="#columnmetadata">ColumnMetaData</a> objects denoting the schema of the result set.</p>
+<p><code class="language-plaintext highlighter-rouge">columns</code> An array of <a href="#columnmetadata">ColumnMetaData</a> objects denoting the schema of the result set.</p>
 
-<p><code class="highlighter-rouge">sql</code> The SQL executed.</p>
+<p><code class="language-plaintext highlighter-rouge">sql</code> The SQL executed.</p>
 
-<p><code class="highlighter-rouge">parameters</code> An array of <a href="#avaticaparameter">AvaticaParameter</a> objects denoting type-specific details.</p>
+<p><code class="language-plaintext highlighter-rouge">parameters</code> An array of <a href="#avaticaparameter">AvaticaParameter</a> objects denoting type-specific details.</p>
 
-<p><code class="highlighter-rouge">cursorFactory</code> An <a href="#cursorfactory">CursorFactory</a> object representing the Java representation of the frame.</p>
+<p><code class="language-plaintext highlighter-rouge">cursorFactory</code> An <a href="#cursorfactory">CursorFactory</a> object representing the Java representation of the frame.</p>
 
-<p><code class="highlighter-rouge">statementType</code> An <a href="#statementtype">StatementType</a> object representing the type of Statement.</p>
+<p><code class="language-plaintext highlighter-rouge">statementType</code> An <a href="#statementtype">StatementType</a> object representing the type of Statement.</p>
 
 <h3 id="statetype">StateType</h3>
 
@@ -1630,8 +1630,8 @@ SQL or by a DatabaseMetaData operation with arguments on that operation.</p>
 <p>One of:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">SQL</code></li>
-  <li><code class="highlighter-rouge">METADATA</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SQL</code></li>
+  <li><code class="language-plaintext highlighter-rouge">METADATA</code></li>
 </ul>
 
 <h3 id="statementhandle">StatementHandle</h3>
@@ -1639,16 +1639,16 @@ SQL or by a DatabaseMetaData operation with arguments on that operation.</p>
 <p>This object encapsulates all of the information of a Statement created in the Avatica server.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"signature"</span><span class="p">:</span><span class="w"> </span><span class="err">Signature</span><span class="w">
+  </span><span class="nl">"connectionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"000000-0000-0000-00000000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"signature"</span><span class="p">:</span><span class="w"> </span><span class="err">Signature</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connectionId</code> The identifier of the connection to which this statement belongs.</p>
+<p><code class="language-plaintext highlighter-rouge">connectionId</code> The identifier of the connection to which this statement belongs.</p>
 
-<p><code class="highlighter-rouge">id</code> The identifier of the statement.</p>
+<p><code class="language-plaintext highlighter-rouge">id</code> The identifier of the statement.</p>
 
-<p><code class="highlighter-rouge">signature</code> A <a href="#signature">Signature</a> object for the statement.</p>
+<p><code class="language-plaintext highlighter-rouge">signature</code> A <a href="#signature">Signature</a> object for the statement.</p>
 
 <h3 id="statementtype">StatementType</h3>
 
@@ -1657,18 +1657,18 @@ SQL or by a DatabaseMetaData operation with arguments on that operation.</p>
 <p>One of:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">SELECT</code></li>
-  <li><code class="highlighter-rouge">INSERT</code></li>
-  <li><code class="highlighter-rouge">UPDATE</code></li>
-  <li><code class="highlighter-rouge">DELETE</code></li>
-  <li><code class="highlighter-rouge">UPSERT</code></li>
-  <li><code class="highlighter-rouge">MERGE</code></li>
-  <li><code class="highlighter-rouge">OTHER_DML</code></li>
-  <li><code class="highlighter-rouge">CREATE</code></li>
-  <li><code class="highlighter-rouge">DROP</code></li>
-  <li><code class="highlighter-rouge">ALTER</code></li>
-  <li><code class="highlighter-rouge">OTHER_DDL</code></li>
-  <li><code class="highlighter-rouge">CALL</code></li>
+  <li><code class="language-plaintext highlighter-rouge">SELECT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">INSERT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">UPDATE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">DELETE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">UPSERT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">MERGE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">OTHER_DML</code></li>
+  <li><code class="language-plaintext highlighter-rouge">CREATE</code></li>
+  <li><code class="language-plaintext highlighter-rouge">DROP</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ALTER</code></li>
+  <li><code class="language-plaintext highlighter-rouge">OTHER_DDL</code></li>
+  <li><code class="language-plaintext highlighter-rouge">CALL</code></li>
 </ul>
 
 <h3 id="style">Style</h3>
@@ -1678,12 +1678,12 @@ SQL or by a DatabaseMetaData operation with arguments on that operation.</p>
 <p>One of:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">OBJECT</code></li>
-  <li><code class="highlighter-rouge">RECORD</code></li>
-  <li><code class="highlighter-rouge">RECORD_PROJECTION</code></li>
-  <li><code class="highlighter-rouge">ARRAY</code></li>
-  <li><code class="highlighter-rouge">LIST</code></li>
-  <li><code class="highlighter-rouge">MAP</code></li>
+  <li><code class="language-plaintext highlighter-rouge">OBJECT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">RECORD</code></li>
+  <li><code class="language-plaintext highlighter-rouge">RECORD_PROJECTION</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ARRAY</code></li>
+  <li><code class="language-plaintext highlighter-rouge">LIST</code></li>
+  <li><code class="language-plaintext highlighter-rouge">MAP</code></li>
 </ul>
 
 <h3 id="typedvalue">TypedValue</h3>
@@ -1691,13 +1691,13 @@ SQL or by a DatabaseMetaData operation with arguments on that operation.</p>
 <p>This object encapsulates the type and value for a column in a row.</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"type_name"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="err">object</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"type_name"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="err">object</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">type</code> A name referring to the type of the object stored in <code class="highlighter-rouge">value</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">type</code> A name referring to the type of the object stored in <code class="language-plaintext highlighter-rouge">value</code>.</p>
 
-<p><code class="highlighter-rouge">value</code> A JSON representation of a JDBC type.</p>
+<p><code class="language-plaintext highlighter-rouge">value</code> A JSON representation of a JDBC type.</p>
 
 <p>The following chart documents how each <a href="#rep">Rep</a> value is serialized
 into a JSON value. Consult the <a href="http://json-spec.readthedocs.org/en/latest/reference.html">JSON documentation</a>
@@ -1723,7 +1723,7 @@ for more information on valid attributes in JSON.</p>
     <tr>
       <td>PRIMITIVE_BYTE</td>
       <td>number</td>
-      <td>The numeric value of the <code class="highlighter-rouge">byte</code>.</td>
+      <td>The numeric value of the <code class="language-plaintext highlighter-rouge">byte</code>.</td>
     </tr>
     <tr>
       <td>BYTE</td>

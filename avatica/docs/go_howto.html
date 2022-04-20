@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>HOWTO</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v3.9.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/avatica/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/avatica/favicon.ico">
@@ -737,21 +737,21 @@
   </li>
   <li>
     <p>If this release is a new major version (we are releasing 4.0.0 vs the current version 3.0.0), update the version in the
-import path in <code class="highlighter-rouge">go.mod</code>. The import paths in the various sample code snippets should also be updated.</p>
+import path in <code class="language-plaintext highlighter-rouge">go.mod</code>. The import paths in the various sample code snippets should also be updated.</p>
   </li>
   <li>
-    <p>Since we need to support Go modules, tags must be prefixed with a <code class="highlighter-rouge">v</code>. For example, tag as <code class="highlighter-rouge">v3.1.0</code> rather than <code class="highlighter-rouge">3.1.0</code>.</p>
+    <p>Since we need to support Go modules, tags must be prefixed with a <code class="language-plaintext highlighter-rouge">v</code>. For example, tag as <code class="language-plaintext highlighter-rouge">v3.1.0</code> rather than <code class="language-plaintext highlighter-rouge">3.1.0</code>.</p>
   </li>
   <li>
-    <p>Check that <code class="highlighter-rouge">NOTICE</code> has the current copyright year.</p>
+    <p>Check that <code class="language-plaintext highlighter-rouge">NOTICE</code> has the current copyright year.</p>
   </li>
 </ol>
 
 <h3 id="perform-a-dry-run">Perform a dry-run</h3>
 <ul>
-  <li>The script expects you to mount your <code class="highlighter-rouge">~/.gnupg</code> directory into the <code class="highlighter-rouge">/.gnupg</code> directory in the container. Once mounted into the container,
+  <li>The script expects you to mount your <code class="language-plaintext highlighter-rouge">~/.gnupg</code> directory into the <code class="language-plaintext highlighter-rouge">/.gnupg</code> directory in the container. Once mounted into the container,
 the script will make a copy of the contents and move it to a different location, so that it will not modify the contents of your original
-<code class="highlighter-rouge">~/.gnupg</code> directory during the build.</li>
+<code class="language-plaintext highlighter-rouge">~/.gnupg</code> directory during the build.</li>
 </ul>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># On Linux:</span>
@@ -783,44 +783,44 @@ git push origin :refs/tags/vX.Y.Z-rcA</code></pre></figure>
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker compose run clean</code></pre></figure>
 
 <h3 id="check-the-release-before-uploading">Check the release before uploading</h3>
-<p>The name of the release folder must be in the following format: <code class="highlighter-rouge">apache-calcite-avatica-go-X.Y.Z-rcN</code>. The version must 
-include release candidate identifiers such as <code class="highlighter-rouge">-rc0</code>, if they are present.</p>
+<p>The name of the release folder must be in the following format: <code class="language-plaintext highlighter-rouge">apache-calcite-avatica-go-X.Y.Z-rcN</code>. The version must 
+include release candidate identifiers such as <code class="language-plaintext highlighter-rouge">-rc0</code>, if they are present.</p>
 
-<p>The files inside the release folder must have any release candidate identifiers such as <code class="highlighter-rouge">-rc1</code> removed, even if the
-release is a release candidate. <code class="highlighter-rouge">src</code> must also be added to the filename.</p>
+<p>The files inside the release folder must have any release candidate identifiers such as <code class="language-plaintext highlighter-rouge">-rc1</code> removed, even if the
+release is a release candidate. <code class="language-plaintext highlighter-rouge">src</code> must also be added to the filename.</p>
 
-<p>For example, if we are uploading the <code class="highlighter-rouge">apache-calcite-avatica-go-3.0.0-rc1</code> folder, the files must be named 
-<code class="highlighter-rouge">apache-calcite-avatica-go-3.0.0-src.tar.gz</code>. Note the inclusion of <code class="highlighter-rouge">src</code> in the filename.</p>
+<p>For example, if we are uploading the <code class="language-plaintext highlighter-rouge">apache-calcite-avatica-go-3.0.0-rc1</code> folder, the files must be named 
+<code class="language-plaintext highlighter-rouge">apache-calcite-avatica-go-3.0.0-src.tar.gz</code>. Note the inclusion of <code class="language-plaintext highlighter-rouge">src</code> in the filename.</p>
 
-<p>The tar.gz must be named <code class="highlighter-rouge">apache-calcite-avatica-go-X.Y.Z-src.tar.gz</code>.</p>
+<p>The tar.gz must be named <code class="language-plaintext highlighter-rouge">apache-calcite-avatica-go-X.Y.Z-src.tar.gz</code>.</p>
 
-<p>There must be a GPG signature for the tar.gz named: <code class="highlighter-rouge">apache-calcite-avatica-go-X.Y.Z-src.tar.gz.asc</code></p>
+<p>There must be a GPG signature for the tar.gz named: <code class="language-plaintext highlighter-rouge">apache-calcite-avatica-go-X.Y.Z-src.tar.gz.asc</code></p>
 
-<p>There must be a SHA512 hash for the tar.gz named: <code class="highlighter-rouge">apache-calcite-avatica-go-X.Y.Z-src.tar.gz.sha512</code></p>
+<p>There must be a SHA512 hash for the tar.gz named: <code class="language-plaintext highlighter-rouge">apache-calcite-avatica-go-X.Y.Z-src.tar.gz.sha512</code></p>
 
 <h3 id="uploading-release-artifacts-to-dev-for-voting">Uploading release artifacts to dev for voting</h3>
 <h4 id="manually">Manually</h4>
-<p><code class="highlighter-rouge">svn</code> must be installed in order to upload release artifacts.</p>
+<p><code class="language-plaintext highlighter-rouge">svn</code> must be installed in order to upload release artifacts.</p>
 
 <ol>
   <li>
-    <p>Check out the Calcite dev release subdirectory: <code class="highlighter-rouge">svn co "https://dist.apache.org/repos/dist/dev/calcite/" calcite-dev</code>.</p>
+    <p>Check out the Calcite dev release subdirectory: <code class="language-plaintext highlighter-rouge">svn co "https://dist.apache.org/repos/dist/dev/calcite/" calcite-dev</code>.</p>
   </li>
   <li>
-    <p>Move the release folder under <code class="highlighter-rouge">dist/</code> into the <code class="highlighter-rouge">calcite-dev</code> folder.</p>
+    <p>Move the release folder under <code class="language-plaintext highlighter-rouge">dist/</code> into the <code class="language-plaintext highlighter-rouge">calcite-dev</code> folder.</p>
   </li>
   <li>
-    <p>Add the new release to the svn repository: <code class="highlighter-rouge">svn add apache-calcite-avatica-go-X.Y.Z-rcN</code>. Remember to change the folder name to the
+    <p>Add the new release to the svn repository: <code class="language-plaintext highlighter-rouge">svn add apache-calcite-avatica-go-X.Y.Z-rcN</code>. Remember to change the folder name to the
 correct release in the command.</p>
   </li>
   <li>
-    <p>Commit to upload the artifacts: <code class="highlighter-rouge">svn commit -m "apache-calcite-avatica-go-X.Y.Z-rcN" --username yourapacheusername --force-log</code>
-Note the use of <code class="highlighter-rouge">--force-log</code> to suppress the svn warning, because the commit message is the same as the name of the directory.</p>
+    <p>Commit to upload the artifacts: <code class="language-plaintext highlighter-rouge">svn commit -m "apache-calcite-avatica-go-X.Y.Z-rcN" --username yourapacheusername --force-log</code>
+Note the use of <code class="language-plaintext highlighter-rouge">--force-log</code> to suppress the svn warning, because the commit message is the same as the name of the directory.</p>
   </li>
 </ol>
 
 <h4 id="using-docker">Using docker</h4>
-<p>This assumes that a release was built and the artifacts are in the <code class="highlighter-rouge">dist/</code> folder.</p>
+<p>This assumes that a release was built and the artifacts are in the <code class="language-plaintext highlighter-rouge">dist/</code> folder.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker compose run publish-release-for-voting</code></pre></figure>
 
@@ -908,24 +908,24 @@ Francis</code></pre></figure>
 
 <h3 id="promoting-a-release-after-voting">Promoting a release after voting</h3>
 <h4 id="manually-1">Manually</h4>
-<p><code class="highlighter-rouge">svn</code> must be installed in order to upload release artifacts.</p>
+<p><code class="language-plaintext highlighter-rouge">svn</code> must be installed in order to upload release artifacts.</p>
 
 <p>NOTE: Only official releases that has passed a vote may be uploaded to the release directory.</p>
 
 <ol>
   <li>
-    <p>Check out the Calcite release directory: <code class="highlighter-rouge">svn co "https://dist.apache.org/repos/dist/release/calcite/" calcite-release</code>.</p>
+    <p>Check out the Calcite release directory: <code class="language-plaintext highlighter-rouge">svn co "https://dist.apache.org/repos/dist/release/calcite/" calcite-release</code>.</p>
   </li>
   <li>
-    <p>Copy the release into the <code class="highlighter-rouge">calcite-release</code> folder. Remember to check the name of the release’s folder to ensure that it is in
+    <p>Copy the release into the <code class="language-plaintext highlighter-rouge">calcite-release</code> folder. Remember to check the name of the release’s folder to ensure that it is in
 the correct format.</p>
   </li>
   <li>
-    <p>Add the release to the svn repository: <code class="highlighter-rouge">svn add apache-calcite-avatica-go-X.Y.Z</code>. Remember to change the folder name to the
+    <p>Add the release to the svn repository: <code class="language-plaintext highlighter-rouge">svn add apache-calcite-avatica-go-X.Y.Z</code>. Remember to change the folder name to the
 correct release in the command.</p>
   </li>
   <li>
-    <p>Commit to upload the artifacts: <code class="highlighter-rouge">svn commit -m "Release apache-calcite-avatica-go-X.Y.Z" --username yourapacheusername</code>.</p>
+    <p>Commit to upload the artifacts: <code class="language-plaintext highlighter-rouge">svn commit -m "Release apache-calcite-avatica-go-X.Y.Z" --username yourapacheusername</code>.</p>
   </li>
   <li>
     <p>Tag the final release in git and push it:</p>

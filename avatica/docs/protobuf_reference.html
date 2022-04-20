@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Protocol Buffers Reference</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v3.9.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/avatica/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/avatica/favicon.ico">
@@ -709,14 +709,14 @@ and inability to differentiate between the default value for a field and the
 absence of a value for a field.</p>
 
 <p>Other notable structural differences to JSON include the addition of a
-<code class="highlighter-rouge">WireMessage</code> message which is used to identify the type of the wrapped message
-returned by the server (synonymous with <code class="highlighter-rouge">request</code> or <code class="highlighter-rouge">response</code> attribute on the
-JSON messages) and a change to <code class="highlighter-rouge">TypedValue</code> containing an <code class="highlighter-rouge">Object</code> value to
+<code class="language-plaintext highlighter-rouge">WireMessage</code> message which is used to identify the type of the wrapped message
+returned by the server (synonymous with <code class="language-plaintext highlighter-rouge">request</code> or <code class="language-plaintext highlighter-rouge">response</code> attribute on the
+JSON messages) and a change to <code class="language-plaintext highlighter-rouge">TypedValue</code> containing an <code class="language-plaintext highlighter-rouge">Object</code> value to
 a collection of optional strongly-typed values (as protobuf does not natively
-support an <code class="highlighter-rouge">Object</code> type that is unwrapped at runtime).</p>
+support an <code class="language-plaintext highlighter-rouge">Object</code> type that is unwrapped at runtime).</p>
 
-<p>Unless otherwise specified with use of the <code class="highlighter-rouge">required</code> modifier, all fields in
-all protocol buffer messages are <code class="highlighter-rouge">optional</code> by default.</p>
+<p>Unless otherwise specified with use of the <code class="language-plaintext highlighter-rouge">required</code> modifier, all fields in
+all protocol buffer messages are <code class="language-plaintext highlighter-rouge">optional</code> by default.</p>
 
 <h2 id="index">Index</h2>
 
@@ -738,7 +738,7 @@ all protocol buffer messages are <code class="highlighter-rouge">optional</code>
 <h2 id="requests-1">Requests</h2>
 
 <p>The collection of all protobuf objects accepted as requests to Avatica. All request
-objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code> before being sent to Avatica.</p>
+objects should be wrapped in a <code class="language-plaintext highlighter-rouge">WireMessage</code> before being sent to Avatica.</p>
 
 <h3 id="catalogsrequest">CatalogsRequest</h3>
 
@@ -748,7 +748,7 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="kt">string</span> <span class="na">connection_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier for the connection to use.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier for the connection to use.</p>
 
 <h3 id="closeconnectionrequest">CloseConnectionRequest</h3>
 
@@ -758,7 +758,7 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="kt">string</span> <span class="na">connection_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier of the connection to close.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier of the connection to close.</p>
 
 <h3 id="closestatementrequest">CloseStatementRequest</h3>
 
@@ -769,9 +769,9 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="kt">uint32</span> <span class="na">statement_id</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier of the connection to which the statement belongs.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier of the connection to which the statement belongs.</p>
 
-<p><code class="highlighter-rouge">statement_id</code> The identifier of the statement to close.</p>
+<p><code class="language-plaintext highlighter-rouge">statement_id</code> The identifier of the statement to close.</p>
 
 <h3 id="columnsrequest">ColumnsRequest</h3>
 
@@ -789,33 +789,33 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="kt">bool</span>   <span class="na">has_column_name_pattern</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">catalog</code> The name of a catalog to limit returned columns.</p>
+<p><code class="language-plaintext highlighter-rouge">catalog</code> The name of a catalog to limit returned columns.</p>
 
-<p><code class="highlighter-rouge">schema_pattern</code> A Java Pattern against schemas to limit returned columns.</p>
+<p><code class="language-plaintext highlighter-rouge">schema_pattern</code> A Java Pattern against schemas to limit returned columns.</p>
 
-<p><code class="highlighter-rouge">table_name_pattern</code> A Java Pattern against table names to limit returned columns.</p>
+<p><code class="language-plaintext highlighter-rouge">table_name_pattern</code> A Java Pattern against table names to limit returned columns.</p>
 
-<p><code class="highlighter-rouge">column_name_pattern</code> A Java Pattern against column names to limit returned columns.</p>
+<p><code class="language-plaintext highlighter-rouge">column_name_pattern</code> A Java Pattern against column names to limit returned columns.</p>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier of the connection which to use to fetch the columns.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier of the connection which to use to fetch the columns.</p>
 
-<p><code class="highlighter-rouge">has_catalog</code> A boolean denoting if <code class="highlighter-rouge">catalog</code> was set.</p>
+<p><code class="language-plaintext highlighter-rouge">has_catalog</code> A boolean denoting if <code class="language-plaintext highlighter-rouge">catalog</code> was set.</p>
 
-<p><code class="highlighter-rouge">has_schema_pattern</code> A boolean denoting if <code class="highlighter-rouge">schema_pattern</code> was set.</p>
+<p><code class="language-plaintext highlighter-rouge">has_schema_pattern</code> A boolean denoting if <code class="language-plaintext highlighter-rouge">schema_pattern</code> was set.</p>
 
-<p><code class="highlighter-rouge">has_table_name_pattern</code> A boolean denoting if <code class="highlighter-rouge">table_name_pattern</code> was set.</p>
+<p><code class="language-plaintext highlighter-rouge">has_table_name_pattern</code> A boolean denoting if <code class="language-plaintext highlighter-rouge">table_name_pattern</code> was set.</p>
 
-<p><code class="highlighter-rouge">has_column_name_pattern</code> A boolean denoting if <code class="highlighter-rouge">column_name_pattern</code> was set.</p>
+<p><code class="language-plaintext highlighter-rouge">has_column_name_pattern</code> A boolean denoting if <code class="language-plaintext highlighter-rouge">column_name_pattern</code> was set.</p>
 
 <h3 id="commitrequest">CommitRequest</h3>
 
-<p>This request is used to issue a <code class="highlighter-rouge">commit</code> on the Connection in the Avatica server identified by the given ID.</p>
+<p>This request is used to issue a <code class="language-plaintext highlighter-rouge">commit</code> on the Connection in the Avatica server identified by the given ID.</p>
 
 <figure class="highlight"><pre><code class="language-protobuf" data-lang="protobuf"><span class="kd">message</span> <span class="nc">CommitRequest</span> <span class="p">{</span>
   <span class="kt">string</span> <span class="na">connection_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier of the connection on which to invoke commit.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier of the connection on which to invoke commit.</p>
 
 <h3 id="connectionsyncrequest">ConnectionSyncRequest</h3>
 
@@ -826,9 +826,9 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="n">ConnectionProperties</span> <span class="na">conn_props</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier of the connection to synchronize.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier of the connection to synchronize.</p>
 
-<p><code class="highlighter-rouge">conn_props</code> A <a href="#connectionproperties">ConnectionProperties</a> object to synchronize between the client and server.</p>
+<p><code class="language-plaintext highlighter-rouge">conn_props</code> A <a href="#connectionproperties">ConnectionProperties</a> object to synchronize between the client and server.</p>
 
 <h3 id="createstatementrequest">CreateStatementRequest</h3>
 
@@ -838,7 +838,7 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="kt">string</span> <span class="na">connection_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier of the connection to use in creating a statement.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier of the connection to use in creating a statement.</p>
 
 <h3 id="databasepropertyrequest">DatabasePropertyRequest</h3>
 
@@ -848,7 +848,7 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="kt">string</span> <span class="na">connection_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier of the connection to use when fetching the database properties.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier of the connection to use when fetching the database properties.</p>
 
 <h3 id="executebatchrequest">ExecuteBatchRequest</h3>
 
@@ -860,11 +860,11 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="k">repeated</span> <span class="n">UpdateBatch</span> <span class="na">updates</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> A string which refers to a connection.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> A string which refers to a connection.</p>
 
-<p><code class="highlighter-rouge">statement_id</code> An integer which refers to a statement.</p>
+<p><code class="language-plaintext highlighter-rouge">statement_id</code> An integer which refers to a statement.</p>
 
-<p><code class="highlighter-rouge">updates</code> A list of <a href="#updatebatch">UpdateBatch</a>’s; the batch of updates.</p>
+<p><code class="language-plaintext highlighter-rouge">updates</code> A list of <a href="#updatebatch">UpdateBatch</a>’s; the batch of updates.</p>
 
 <h3 id="executerequest">ExecuteRequest</h3>
 
@@ -878,15 +878,15 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="kt">int32</span> <span class="na">first_frame_max_size</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">statementHandle</code> A <a href="#statementhandle">StatementHandle</a> object.</p>
+<p><code class="language-plaintext highlighter-rouge">statementHandle</code> A <a href="#statementhandle">StatementHandle</a> object.</p>
 
-<p><code class="highlighter-rouge">parameter_values</code> The <a href="#typedvalue">TypedValue</a> for each parameter on the prepared statement.</p>
+<p><code class="language-plaintext highlighter-rouge">parameter_values</code> The <a href="#typedvalue">TypedValue</a> for each parameter on the prepared statement.</p>
 
-<p><code class="highlighter-rouge">deprecated_first_frame_max_size</code> <em>Deprecated</em>, use <code class="highlighter-rouge">first_frame_max_size</code> instead. Previously, the maximum number of rows returned in the response.</p>
+<p><code class="language-plaintext highlighter-rouge">deprecated_first_frame_max_size</code> <em>Deprecated</em>, use <code class="language-plaintext highlighter-rouge">first_frame_max_size</code> instead. Previously, the maximum number of rows returned in the response.</p>
 
-<p><code class="highlighter-rouge">has_parameter_values</code> A boolean which denotes if the user set a value for the <code class="highlighter-rouge">parameter_values</code> field.</p>
+<p><code class="language-plaintext highlighter-rouge">has_parameter_values</code> A boolean which denotes if the user set a value for the <code class="language-plaintext highlighter-rouge">parameter_values</code> field.</p>
 
-<p><code class="highlighter-rouge">first_frame_max_size</code> The maximum number of rows to return in the first <code class="highlighter-rouge">Frame</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">first_frame_max_size</code> The maximum number of rows to return in the first <code class="language-plaintext highlighter-rouge">Frame</code>.</p>
 
 <h3 id="fetchrequest">FetchRequest</h3>
 
@@ -896,19 +896,19 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="kt">string</span> <span class="na">connection_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
   <span class="kt">uint32</span> <span class="na">statement_id</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
   <span class="kt">uint64</span> <span class="na">offset</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-  <span class="kt">uint32</span> <span class="na">fetch_max_row_count</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">// Deprecated!
-</span>  <span class="kt">int32</span> <span class="na">frame_max_size</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="kt">uint32</span> <span class="na">fetch_max_row_count</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">// Deprecated!</span>
+  <span class="kt">int32</span> <span class="na">frame_max_size</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier of the connection to use.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier of the connection to use.</p>
 
-<p><code class="highlighter-rouge">statement_id</code> The identifier of the statement created using the above connection.</p>
+<p><code class="language-plaintext highlighter-rouge">statement_id</code> The identifier of the statement created using the above connection.</p>
 
-<p><code class="highlighter-rouge">offset</code> The positional offset into a result set to fetch.</p>
+<p><code class="language-plaintext highlighter-rouge">offset</code> The positional offset into a result set to fetch.</p>
 
-<p><code class="highlighter-rouge">fetch_match_row_count</code> The maximum number of rows to return in the response to this request. Negative means no limit. <em>Deprecated</em>, use <code class="highlighter-rouge">frame_max_size</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">fetch_match_row_count</code> The maximum number of rows to return in the response to this request. Negative means no limit. <em>Deprecated</em>, use <code class="language-plaintext highlighter-rouge">frame_max_size</code>.</p>
 
-<p><code class="highlighter-rouge">frame_max_size</code> The maximum number of rows to return in the response. Negative means no limit.</p>
+<p><code class="language-plaintext highlighter-rouge">frame_max_size</code> The maximum number of rows to return in the response. Negative means no limit.</p>
 
 <h3 id="openconnectionrequest">OpenConnectionRequest</h3>
 
@@ -919,9 +919,9 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="n">map</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="err">&gt;</span> <span class="na">info</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier of the connection to open in the server.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier of the connection to open in the server.</p>
 
-<p><code class="highlighter-rouge">info</code> A Map containing properties to include when creating the Connection.</p>
+<p><code class="language-plaintext highlighter-rouge">info</code> A Map containing properties to include when creating the Connection.</p>
 
 <h3 id="prepareandexecutebatchrequest">PrepareAndExecuteBatchRequest</h3>
 
@@ -933,11 +933,11 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="k">repeated</span> <span class="kt">string</span> <span class="na">sql_commands</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier for the connection to use.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier for the connection to use.</p>
 
-<p><code class="highlighter-rouge">statement_id</code> The identifier for the statement created by the above connection to use.</p>
+<p><code class="language-plaintext highlighter-rouge">statement_id</code> The identifier for the statement created by the above connection to use.</p>
 
-<p><code class="highlighter-rouge">sql_commands</code> A list of SQL commands to execute; a batch.</p>
+<p><code class="language-plaintext highlighter-rouge">sql_commands</code> A list of SQL commands to execute; a batch.</p>
 
 <h3 id="prepareandexecuterequest">PrepareAndExecuteRequest</h3>
 
@@ -947,22 +947,22 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="kt">string</span> <span class="na">connection_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
   <span class="kt">uint32</span> <span class="na">statement_id</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
   <span class="kt">string</span> <span class="na">sql</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-  <span class="kt">uint64</span> <span class="na">max_row_count</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// Deprecated!
-</span>  <span class="kt">int64</span> <span class="na">max_rows_total</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="kt">uint64</span> <span class="na">max_row_count</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// Deprecated!</span>
+  <span class="kt">int64</span> <span class="na">max_rows_total</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
   <span class="kt">int32</span> <span class="na">first_frame_max_size</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier for the connection to use.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier for the connection to use.</p>
 
-<p><code class="highlighter-rouge">statement_id</code> The identifier for the statement created by the above connection to use.</p>
+<p><code class="language-plaintext highlighter-rouge">statement_id</code> The identifier for the statement created by the above connection to use.</p>
 
-<p><code class="highlighter-rouge">sql</code> A SQL statement</p>
+<p><code class="language-plaintext highlighter-rouge">sql</code> A SQL statement</p>
 
-<p><code class="highlighter-rouge">max_row_count</code> The maximum number of rows returned in the response. <em>Deprecated</em>, use <code class="highlighter-rouge">max_rows_total</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">max_row_count</code> The maximum number of rows returned in the response. <em>Deprecated</em>, use <code class="language-plaintext highlighter-rouge">max_rows_total</code>.</p>
 
-<p><code class="highlighter-rouge">max_rows_total</code> The maximum number of rows which this query should return (over all <code class="highlighter-rouge">Frame</code>s).</p>
+<p><code class="language-plaintext highlighter-rouge">max_rows_total</code> The maximum number of rows which this query should return (over all <code class="language-plaintext highlighter-rouge">Frame</code>s).</p>
 
-<p><code class="highlighter-rouge">first_frame_max_size</code> The maximum number of rows which should be included in the first <code class="highlighter-rouge">Frame</code> in the <code class="highlighter-rouge">ExecuteResponse</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">first_frame_max_size</code> The maximum number of rows which should be included in the first <code class="language-plaintext highlighter-rouge">Frame</code> in the <code class="language-plaintext highlighter-rouge">ExecuteResponse</code>.</p>
 
 <h3 id="preparerequest">PrepareRequest</h3>
 
@@ -971,17 +971,17 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
 <figure class="highlight"><pre><code class="language-protobuf" data-lang="protobuf"><span class="kd">message</span> <span class="nc">PrepareRequest</span> <span class="p">{</span>
   <span class="kt">string</span> <span class="na">connection_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
   <span class="kt">string</span> <span class="na">sql</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-  <span class="kt">uint64</span> <span class="na">max_row_count</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// Deprecated!
-</span>  <span class="kt">int64</span> <span class="na">max_rows_total</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="kt">uint64</span> <span class="na">max_row_count</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// Deprecated!</span>
+  <span class="kt">int64</span> <span class="na">max_rows_total</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier for the connection to use.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier for the connection to use.</p>
 
-<p><code class="highlighter-rouge">sql</code> A SQL statement</p>
+<p><code class="language-plaintext highlighter-rouge">sql</code> A SQL statement</p>
 
-<p><code class="highlighter-rouge">max_row_count</code> The maximum number of rows returned in the response. <em>Deprecated</em>, use <code class="highlighter-rouge">max_rows_total</code> instead.</p>
+<p><code class="language-plaintext highlighter-rouge">max_row_count</code> The maximum number of rows returned in the response. <em>Deprecated</em>, use <code class="language-plaintext highlighter-rouge">max_rows_total</code> instead.</p>
 
-<p><code class="highlighter-rouge">max_rows_total</code> The maximum number of rows returned for the query in total.</p>
+<p><code class="language-plaintext highlighter-rouge">max_rows_total</code> The maximum number of rows returned for the query in total.</p>
 
 <h3 id="syncresultsrequest">SyncResultsRequest</h3>
 
@@ -994,23 +994,23 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="kt">uint64</span> <span class="na">offset</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier for the connection to use.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier for the connection to use.</p>
 
-<p><code class="highlighter-rouge">statement_id</code> The identifier for the statement to use.</p>
+<p><code class="language-plaintext highlighter-rouge">statement_id</code> The identifier for the statement to use.</p>
 
-<p><code class="highlighter-rouge">state</code> The <a href="#querystate">QueryState</a> object.</p>
+<p><code class="language-plaintext highlighter-rouge">state</code> The <a href="#querystate">QueryState</a> object.</p>
 
-<p><code class="highlighter-rouge">offset</code> The offset into the ResultSet to seek to.</p>
+<p><code class="language-plaintext highlighter-rouge">offset</code> The offset into the ResultSet to seek to.</p>
 
 <h3 id="rollbackrequest">RollbackRequest</h3>
 
-<p>This request is used to issue a <code class="highlighter-rouge">rollback</code> on the Connection in the Avatica server identified by the given ID.</p>
+<p>This request is used to issue a <code class="language-plaintext highlighter-rouge">rollback</code> on the Connection in the Avatica server identified by the given ID.</p>
 
 <figure class="highlight"><pre><code class="language-protobuf" data-lang="protobuf"><span class="kd">message</span> <span class="nc">RollbackRequest</span> <span class="p">{</span>
   <span class="kt">string</span> <span class="na">connection_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier for the connection on which to invoke rollback.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier for the connection on which to invoke rollback.</p>
 
 <h3 id="schemasrequest">SchemasRequest</h3>
 
@@ -1024,15 +1024,15 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="kt">bool</span>   <span class="na">has_schema_pattern</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">catalog</code> The name of the catalog to fetch the schema from.</p>
+<p><code class="language-plaintext highlighter-rouge">catalog</code> The name of the catalog to fetch the schema from.</p>
 
-<p><code class="highlighter-rouge">schema_pattern</code> A Java pattern of schemas to fetch.</p>
+<p><code class="language-plaintext highlighter-rouge">schema_pattern</code> A Java pattern of schemas to fetch.</p>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier for the connection to fetch schemas from.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier for the connection to fetch schemas from.</p>
 
-<p><code class="highlighter-rouge">has_catalog</code> A boolean denoting if <code class="highlighter-rouge">catalog</code> was set.</p>
+<p><code class="language-plaintext highlighter-rouge">has_catalog</code> A boolean denoting if <code class="language-plaintext highlighter-rouge">catalog</code> was set.</p>
 
-<p><code class="highlighter-rouge">has_schema_pattern</code> A boolean denoting if <code class="highlighter-rouge">schema_pattern</code> was set.</p>
+<p><code class="language-plaintext highlighter-rouge">has_schema_pattern</code> A boolean denoting if <code class="language-plaintext highlighter-rouge">schema_pattern</code> was set.</p>
 
 <h3 id="tabletypesrequest">TableTypesRequest</h3>
 
@@ -1042,7 +1042,7 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="kt">string</span> <span class="na">connection_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier of the connection to fetch the table types from.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier of the connection to fetch the table types from.</p>
 
 <h3 id="tablesrequest">TablesRequest</h3>
 
@@ -1060,23 +1060,23 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="kt">bool</span>   <span class="na">has_table_name_pattern</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">catalog</code> The name of a catalog to restrict fetched tables.</p>
+<p><code class="language-plaintext highlighter-rouge">catalog</code> The name of a catalog to restrict fetched tables.</p>
 
-<p><code class="highlighter-rouge">schema_pattern</code> A Java Pattern representing schemas to include in fetched tables.</p>
+<p><code class="language-plaintext highlighter-rouge">schema_pattern</code> A Java Pattern representing schemas to include in fetched tables.</p>
 
-<p><code class="highlighter-rouge">table_name_pattern</code> A Java Pattern representing table names to include in fetched tables.</p>
+<p><code class="language-plaintext highlighter-rouge">table_name_pattern</code> A Java Pattern representing table names to include in fetched tables.</p>
 
-<p><code class="highlighter-rouge">type_list</code> A list of table types used to restrict fetched tables.</p>
+<p><code class="language-plaintext highlighter-rouge">type_list</code> A list of table types used to restrict fetched tables.</p>
 
-<p><code class="highlighter-rouge">has_type_list</code> A boolean which denotes if the field <code class="highlighter-rouge">type_list</code> was provided.</p>
+<p><code class="language-plaintext highlighter-rouge">has_type_list</code> A boolean which denotes if the field <code class="language-plaintext highlighter-rouge">type_list</code> was provided.</p>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier of the connection to fetch the tables from.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier of the connection to fetch the tables from.</p>
 
-<p><code class="highlighter-rouge">has_catalog</code> A boolean denoting if <code class="highlighter-rouge">catalog</code> was set.</p>
+<p><code class="language-plaintext highlighter-rouge">has_catalog</code> A boolean denoting if <code class="language-plaintext highlighter-rouge">catalog</code> was set.</p>
 
-<p><code class="highlighter-rouge">has_schema_pattern</code> A boolean denoting if <code class="highlighter-rouge">schema_pattern</code> was set.</p>
+<p><code class="language-plaintext highlighter-rouge">has_schema_pattern</code> A boolean denoting if <code class="language-plaintext highlighter-rouge">schema_pattern</code> was set.</p>
 
-<p><code class="highlighter-rouge">has_table_name_pattern</code> A boolean denoting if <code class="highlighter-rouge">table_name_pattern</code> was set.</p>
+<p><code class="language-plaintext highlighter-rouge">has_table_name_pattern</code> A boolean denoting if <code class="language-plaintext highlighter-rouge">table_name_pattern</code> was set.</p>
 
 <h3 id="typeinforequest">TypeInfoRequest</h3>
 
@@ -1086,12 +1086,12 @@ objects should be wrapped in a <code class="highlighter-rouge">WireMessage</code
   <span class="kt">string</span> <span class="na">connection_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier of the connection to fetch the types from.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier of the connection to fetch the types from.</p>
 
 <h2 id="responses-1">Responses</h2>
 
 <p>The collection of all protobuf objects accepted as requests to Avatica. All response
-objects will be wrapped in a <code class="highlighter-rouge">WireMessage</code> before being returned from Avatica.</p>
+objects will be wrapped in a <code class="language-plaintext highlighter-rouge">WireMessage</code> before being returned from Avatica.</p>
 
 <h3 id="closeconnectionresponse">CloseConnectionResponse</h3>
 
@@ -1101,7 +1101,7 @@ objects will be wrapped in a <code class="highlighter-rouge">WireMessage</code> 
   <span class="n">RpcMetadata</span> <span class="na">metadata</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="closestatementresponse">CloseStatementResponse</h3>
 
@@ -1111,7 +1111,7 @@ objects will be wrapped in a <code class="highlighter-rouge">WireMessage</code> 
   <span class="n">RpcMetadata</span> <span class="na">metadata</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="commitresponse">CommitResponse</h3>
 
@@ -1133,14 +1133,14 @@ response are those of the Connection in the Avatica server.</p>
   <span class="n">RpcMetadata</span> <span class="na">metadata</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">conn_props</code> The <a href="#connectionproperties">ConnectionProperties</a> that were synchronized.</p>
+<p><code class="language-plaintext highlighter-rouge">conn_props</code> The <a href="#connectionproperties">ConnectionProperties</a> that were synchronized.</p>
 
-<p><code class="highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="createstatementresponse">CreateStatementResponse</h3>
 
 <p>A response to the <a href="#createstatementrequest">CreateStatementRequest</a>. The ID of the statement
-that was created is included in the response. Clients will use this <code class="highlighter-rouge">statement_id</code> in subsequent calls.</p>
+that was created is included in the response. Clients will use this <code class="language-plaintext highlighter-rouge">statement_id</code> in subsequent calls.</p>
 
 <figure class="highlight"><pre><code class="language-protobuf" data-lang="protobuf"><span class="kd">message</span> <span class="nc">CreateStatementResponse</span> <span class="p">{</span>
   <span class="kt">string</span> <span class="na">connection_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
@@ -1148,11 +1148,11 @@ that was created is included in the response. Clients will use this <code class=
   <span class="n">RpcMetadata</span> <span class="na">metadata</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier for the connection used to create the statement.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier for the connection used to create the statement.</p>
 
-<p><code class="highlighter-rouge">statement_id</code> The identifier for the created statement.</p>
+<p><code class="language-plaintext highlighter-rouge">statement_id</code> The identifier for the created statement.</p>
 
-<p><code class="highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="databasepropertyresponse">DatabasePropertyResponse</h3>
 
@@ -1164,9 +1164,9 @@ for information on the available property keys.</p>
   <span class="n">RpcMetadata</span> <span class="na">metadata</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">props</code> A collection of <a href="#databaseproperty">DatabaseProperty</a>’s.</p>
+<p><code class="language-plaintext highlighter-rouge">props</code> A collection of <a href="#databaseproperty">DatabaseProperty</a>’s.</p>
 
-<p><code class="highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="errorresponse">ErrorResponse</h3>
 
@@ -1182,19 +1182,19 @@ for information on the available property keys.</p>
   <span class="n">RpcMetadata</span> <span class="na">metadata</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">exceptions</code> A list of stringified Java StackTraces.</p>
+<p><code class="language-plaintext highlighter-rouge">exceptions</code> A list of stringified Java StackTraces.</p>
 
-<p><code class="highlighter-rouge">has_exceptions</code> A boolean which denotes the presence of <code class="highlighter-rouge">exceptions</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">has_exceptions</code> A boolean which denotes the presence of <code class="language-plaintext highlighter-rouge">exceptions</code>.</p>
 
-<p><code class="highlighter-rouge">error_message</code> A human-readable error message.</p>
+<p><code class="language-plaintext highlighter-rouge">error_message</code> A human-readable error message.</p>
 
-<p><code class="highlighter-rouge">error_code</code> A numeric code for this error.</p>
+<p><code class="language-plaintext highlighter-rouge">error_code</code> A numeric code for this error.</p>
 
-<p><code class="highlighter-rouge">sql_state</code> A five character alphanumeric code for this error.</p>
+<p><code class="language-plaintext highlighter-rouge">sql_state</code> A five character alphanumeric code for this error.</p>
 
-<p><code class="highlighter-rouge">severity</code> An <a href="#avaticaseverity">AvaticaSeverity</a> object which denotes how critical the error is.</p>
+<p><code class="language-plaintext highlighter-rouge">severity</code> An <a href="#avaticaseverity">AvaticaSeverity</a> object which denotes how critical the error is.</p>
 
-<p><code class="highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="executebatchresponse">ExecuteBatchResponse</h3>
 
@@ -1208,15 +1208,15 @@ for information on the available property keys.</p>
   <span class="n">RpcMetadata</span> <span class="na">metadata</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The ID referring to the connection that was used.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The ID referring to the connection that was used.</p>
 
-<p><code class="highlighter-rouge">statment_id</code> The ID referring to the statement that was used.</p>
+<p><code class="language-plaintext highlighter-rouge">statment_id</code> The ID referring to the statement that was used.</p>
 
-<p><code class="highlighter-rouge">update_counts</code> An array of integer values corresponding to the update count for each update in the batch.</p>
+<p><code class="language-plaintext highlighter-rouge">update_counts</code> An array of integer values corresponding to the update count for each update in the batch.</p>
 
-<p><code class="highlighter-rouge">missing_statement</code> A boolean which denotes if the request failed due to a missing statement.</p>
+<p><code class="language-plaintext highlighter-rouge">missing_statement</code> A boolean which denotes if the request failed due to a missing statement.</p>
 
-<p><code class="highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="executeresponse">ExecuteResponse</h3>
 
@@ -1228,11 +1228,11 @@ for information on the available property keys.</p>
   <span class="n">RpcMetadata</span> <span class="na">metadata</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">results</code> An array of <a href="#resultsetresponse">ResultSetResponse</a>s.</p>
+<p><code class="language-plaintext highlighter-rouge">results</code> An array of <a href="#resultsetresponse">ResultSetResponse</a>s.</p>
 
-<p><code class="highlighter-rouge">missing_statement</code> A boolean which denotes if the request failed due to a missing statement.</p>
+<p><code class="language-plaintext highlighter-rouge">missing_statement</code> A boolean which denotes if the request failed due to a missing statement.</p>
 
-<p><code class="highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="fetchresponse">FetchResponse</h3>
 
@@ -1245,13 +1245,13 @@ for information on the available property keys.</p>
   <span class="n">RpcMetadata</span> <span class="na">metadata</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">frame</code> A <a href="#frame">Frame</a> containing the results of the fetch.</p>
+<p><code class="language-plaintext highlighter-rouge">frame</code> A <a href="#frame">Frame</a> containing the results of the fetch.</p>
 
-<p><code class="highlighter-rouge">missing_statement</code> A boolean which denotes if the request failed due to a missing Statement.</p>
+<p><code class="language-plaintext highlighter-rouge">missing_statement</code> A boolean which denotes if the request failed due to a missing Statement.</p>
 
-<p><code class="highlighter-rouge">missing_results</code> A boolean which denotes if the request failed due to a missing ResultSet.</p>
+<p><code class="language-plaintext highlighter-rouge">missing_results</code> A boolean which denotes if the request failed due to a missing ResultSet.</p>
 
-<p><code class="highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="openconnectionresponse">OpenConnectionResponse</h3>
 
@@ -1262,7 +1262,7 @@ the client should use in subsequent calls was provided by the client in the requ
   <span class="n">RpcMetadata</span> <span class="na">metadata</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="prepareresponse">PrepareResponse</h3>
 
@@ -1274,9 +1274,9 @@ which clients must use to fetch the results from the Statement.</p>
   <span class="n">RpcMetadata</span> <span class="na">metadata</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">statement</code> A <a href="#statementhandle">StatementHandle</a> object.</p>
+<p><code class="language-plaintext highlighter-rouge">statement</code> A <a href="#statementhandle">StatementHandle</a> object.</p>
 
-<p><code class="highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="resultsetresponse">ResultSetResponse</h3>
 
@@ -1292,21 +1292,21 @@ which clients must use to fetch the results from the Statement.</p>
   <span class="n">RpcMetadata</span> <span class="na">metadata</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier for the connection used to generate this response.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier for the connection used to generate this response.</p>
 
-<p><code class="highlighter-rouge">statement_id</code> The identifier for the statement used to generate this response.</p>
+<p><code class="language-plaintext highlighter-rouge">statement_id</code> The identifier for the statement used to generate this response.</p>
 
-<p><code class="highlighter-rouge">own_statement</code> Whether the result set has its own dedicated statement. If true, the server must automatically close the
+<p><code class="language-plaintext highlighter-rouge">own_statement</code> Whether the result set has its own dedicated statement. If true, the server must automatically close the
 statement when the result set is closed. This is used for JDBC metadata result sets, for instance.</p>
 
-<p><code class="highlighter-rouge">signature</code> A nested object <a href="#signature">Signature</a>. This field will only be present for queries that return data.</p>
+<p><code class="language-plaintext highlighter-rouge">signature</code> A nested object <a href="#signature">Signature</a>. This field will only be present for queries that return data.</p>
 
-<p><code class="highlighter-rouge">first_frame</code> A optional nested object <a href="#frame">Frame</a></p>
+<p><code class="language-plaintext highlighter-rouge">first_frame</code> A optional nested object <a href="#frame">Frame</a></p>
 
-<p><code class="highlighter-rouge">update_count</code> A number which is always <code class="highlighter-rouge">-1</code> for normal result sets. Any other value denotes a “dummy” result set
+<p><code class="language-plaintext highlighter-rouge">update_count</code> A number which is always <code class="language-plaintext highlighter-rouge">-1</code> for normal result sets. Any other value denotes a “dummy” result set
 that only contains this count and no additional data.</p>
 
-<p><code class="highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h3 id="rollbackresponse">RollbackResponse</h3>
 
@@ -1320,8 +1320,8 @@ that only contains this count and no additional data.</p>
 
 <h3 id="syncresultsresponse">SyncResultsResponse</h3>
 
-<p>A response to the <a href="#syncresultsrequest">SyncResultsRequest</a>. When <code class="highlighter-rouge">moreResults</code> is true, a <a href="#fetchrequest">FetchRequest</a>
-should be issued to get the next batch of records. When <code class="highlighter-rouge">missingStatement</code> is true, the statement must be re-created using <a href="#preparerequest">PrepareRequest</a>
+<p>A response to the <a href="#syncresultsrequest">SyncResultsRequest</a>. When <code class="language-plaintext highlighter-rouge">moreResults</code> is true, a <a href="#fetchrequest">FetchRequest</a>
+should be issued to get the next batch of records. When <code class="language-plaintext highlighter-rouge">missingStatement</code> is true, the statement must be re-created using <a href="#preparerequest">PrepareRequest</a>
 or the appropriate Request for a DDL request (e.g. <a href="#catalogsrequest">CatalogsRequest</a> or <a href="#schemasrequest">SchemasRequest</a>).</p>
 
 <figure class="highlight"><pre><code class="language-protobuf" data-lang="protobuf"><span class="kd">message</span> <span class="nc">SyncResultsResponse</span> <span class="p">{</span>
@@ -1330,11 +1330,11 @@ or the appropriate Request for a DDL request (e.g. <a href="#catalogsrequest">Ca
   <span class="n">RpcMetadata</span> <span class="na">metadata</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">more_results</code> A boolean which denotes if results exist for the ResultSet being “synced” per the request.</p>
+<p><code class="language-plaintext highlighter-rouge">more_results</code> A boolean which denotes if results exist for the ResultSet being “synced” per the request.</p>
 
-<p><code class="highlighter-rouge">missing_statement</code> A boolean which denotes if the statement for the ResultSet still exists.</p>
+<p><code class="language-plaintext highlighter-rouge">missing_statement</code> A boolean which denotes if the statement for the ResultSet still exists.</p>
 
-<p><code class="highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
+<p><code class="language-plaintext highlighter-rouge">metadata</code> <a href="#rpcmetadata">Server metadata</a> about this call.</p>
 
 <h2 id="miscellaneous-1">Miscellaneous</h2>
 
@@ -1353,19 +1353,19 @@ complex types such as arrays.</p>
   <span class="kt">string</span> <span class="na">name</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">signed</code> A boolean denoting whether the column is a signed numeric.</p>
+<p><code class="language-plaintext highlighter-rouge">signed</code> A boolean denoting whether the column is a signed numeric.</p>
 
-<p><code class="highlighter-rouge">precision</code> The maximum numeric precision supported by this column.</p>
+<p><code class="language-plaintext highlighter-rouge">precision</code> The maximum numeric precision supported by this column.</p>
 
-<p><code class="highlighter-rouge">scale</code> The maximum numeric scale supported by this column.</p>
+<p><code class="language-plaintext highlighter-rouge">scale</code> The maximum numeric scale supported by this column.</p>
 
-<p><code class="highlighter-rouge">parameter_type</code> An integer corresponding to the JDBC Types class denoting the column’s type.</p>
+<p><code class="language-plaintext highlighter-rouge">parameter_type</code> An integer corresponding to the JDBC Types class denoting the column’s type.</p>
 
-<p><code class="highlighter-rouge">type_name</code> The JDBC type name for this column.</p>
+<p><code class="language-plaintext highlighter-rouge">type_name</code> The JDBC type name for this column.</p>
 
-<p><code class="highlighter-rouge">class_name</code> The Java class backing the JDBC type for this column.</p>
+<p><code class="language-plaintext highlighter-rouge">class_name</code> The Java class backing the JDBC type for this column.</p>
 
-<p><code class="highlighter-rouge">name</code> The name of the column.</p>
+<p><code class="language-plaintext highlighter-rouge">name</code> The name of the column.</p>
 
 <h3 id="avaticaseverity">AvaticaSeverity</h3>
 
@@ -1381,7 +1381,7 @@ complex types such as arrays.</p>
 <h3 id="avaticatype">AvaticaType</h3>
 
 <p>This object describes a simple or complex type for a column. Complex types will contain
-additional information in the <code class="highlighter-rouge">component</code> or <code class="highlighter-rouge">columns</code> attribute which describe the nested
+additional information in the <code class="language-plaintext highlighter-rouge">component</code> or <code class="language-plaintext highlighter-rouge">columns</code> attribute which describe the nested
 types of the complex parent type.</p>
 
 <figure class="highlight"><pre><code class="language-protobuf" data-lang="protobuf"><span class="kd">message</span> <span class="nc">AvaticaType</span> <span class="p">{</span>
@@ -1392,17 +1392,17 @@ types of the complex parent type.</p>
   <span class="n">AvaticaType</span> <span class="na">component</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">type</code> One of: <code class="highlighter-rouge">scalar</code>, <code class="highlighter-rouge">array</code>, <code class="highlighter-rouge">struct</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">type</code> One of: <code class="language-plaintext highlighter-rouge">scalar</code>, <code class="language-plaintext highlighter-rouge">array</code>, <code class="language-plaintext highlighter-rouge">struct</code>.</p>
 
-<p><code class="highlighter-rouge">id</code> A numeric value corresponding to the type of the object per the JDBC Types class.</p>
+<p><code class="language-plaintext highlighter-rouge">id</code> A numeric value corresponding to the type of the object per the JDBC Types class.</p>
 
-<p><code class="highlighter-rouge">name</code> The readable name of the JDBC type.</p>
+<p><code class="language-plaintext highlighter-rouge">name</code> The readable name of the JDBC type.</p>
 
-<p><code class="highlighter-rouge">rep</code> A nested <a href="#rep">Rep</a> object used by Avatica to hold additional type information.</p>
+<p><code class="language-plaintext highlighter-rouge">rep</code> A nested <a href="#rep">Rep</a> object used by Avatica to hold additional type information.</p>
 
-<p><code class="highlighter-rouge">columns</code> For <code class="highlighter-rouge">STRUCT</code> types, a list of the columns contained in that <code class="highlighter-rouge">STRUCT</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">columns</code> For <code class="language-plaintext highlighter-rouge">STRUCT</code> types, a list of the columns contained in that <code class="language-plaintext highlighter-rouge">STRUCT</code>.</p>
 
-<p><code class="highlighter-rouge">component</code> For <code class="highlighter-rouge">ARRAY</code> types, the type of the elements contained in that <code class="highlighter-rouge">ARRAY</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">component</code> For <code class="language-plaintext highlighter-rouge">ARRAY</code> types, the type of the elements contained in that <code class="language-plaintext highlighter-rouge">ARRAY</code>.</p>
 
 <h3 id="columnmetadata">ColumnMetaData</h3>
 
@@ -1431,17 +1431,17 @@ types of the complex parent type.</p>
   <span class="n">AvaticaType</span> <span class="na">type</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">ordinal</code> A positional offset number.</p>
+<p><code class="language-plaintext highlighter-rouge">ordinal</code> A positional offset number.</p>
 
-<p><code class="highlighter-rouge">auto_increment</code> A boolean denoting whether the column is automatically incremented.</p>
+<p><code class="language-plaintext highlighter-rouge">auto_increment</code> A boolean denoting whether the column is automatically incremented.</p>
 
-<p><code class="highlighter-rouge">case_sensitive</code> A boolean denoting whether the column is case sensitive.</p>
+<p><code class="language-plaintext highlighter-rouge">case_sensitive</code> A boolean denoting whether the column is case sensitive.</p>
 
-<p><code class="highlighter-rouge">searchable</code> A boolean denoting whether this column supports all WHERE search clauses.</p>
+<p><code class="language-plaintext highlighter-rouge">searchable</code> A boolean denoting whether this column supports all WHERE search clauses.</p>
 
-<p><code class="highlighter-rouge">currency</code> A boolean denoting whether this column represents currency.</p>
+<p><code class="language-plaintext highlighter-rouge">currency</code> A boolean denoting whether this column represents currency.</p>
 
-<p><code class="highlighter-rouge">nullable</code> A number denoting whether this column supports null values.</p>
+<p><code class="language-plaintext highlighter-rouge">nullable</code> A number denoting whether this column supports null values.</p>
 
 <ul>
   <li>0 = No null values are allowed</li>
@@ -1449,33 +1449,33 @@ types of the complex parent type.</p>
   <li>2 = It is unknown if null values are allowed</li>
 </ul>
 
-<p><code class="highlighter-rouge">signed</code> A boolean denoting whether the column is a signed numeric.</p>
+<p><code class="language-plaintext highlighter-rouge">signed</code> A boolean denoting whether the column is a signed numeric.</p>
 
-<p><code class="highlighter-rouge">display_size</code> The character width of the column.</p>
+<p><code class="language-plaintext highlighter-rouge">display_size</code> The character width of the column.</p>
 
-<p><code class="highlighter-rouge">label</code> A description for this column.</p>
+<p><code class="language-plaintext highlighter-rouge">label</code> A description for this column.</p>
 
-<p><code class="highlighter-rouge">column_name</code> The name of the column.</p>
+<p><code class="language-plaintext highlighter-rouge">column_name</code> The name of the column.</p>
 
-<p><code class="highlighter-rouge">schema_name</code> The schema to which this column belongs.</p>
+<p><code class="language-plaintext highlighter-rouge">schema_name</code> The schema to which this column belongs.</p>
 
-<p><code class="highlighter-rouge">precision</code> The maximum numeric precision supported by this column.</p>
+<p><code class="language-plaintext highlighter-rouge">precision</code> The maximum numeric precision supported by this column.</p>
 
-<p><code class="highlighter-rouge">scale</code> The maximum numeric scale supported by this column.</p>
+<p><code class="language-plaintext highlighter-rouge">scale</code> The maximum numeric scale supported by this column.</p>
 
-<p><code class="highlighter-rouge">table_name</code> The name of the table to which this column belongs.</p>
+<p><code class="language-plaintext highlighter-rouge">table_name</code> The name of the table to which this column belongs.</p>
 
-<p><code class="highlighter-rouge">catalog_name</code> The name of the catalog to which this column belongs.</p>
+<p><code class="language-plaintext highlighter-rouge">catalog_name</code> The name of the catalog to which this column belongs.</p>
 
-<p><code class="highlighter-rouge">type</code> A nested <a href="#avaticatype">AvaticaType</a> representing the type of the column.</p>
+<p><code class="language-plaintext highlighter-rouge">type</code> A nested <a href="#avaticatype">AvaticaType</a> representing the type of the column.</p>
 
-<p><code class="highlighter-rouge">read_only</code> A boolean denoting whether the column is read-only.</p>
+<p><code class="language-plaintext highlighter-rouge">read_only</code> A boolean denoting whether the column is read-only.</p>
 
-<p><code class="highlighter-rouge">writable</code> A boolean denoting whether the column is possible to be updated.</p>
+<p><code class="language-plaintext highlighter-rouge">writable</code> A boolean denoting whether the column is possible to be updated.</p>
 
-<p><code class="highlighter-rouge">definitely_writable</code> A boolean denoting whether the column definitely can be updated.</p>
+<p><code class="language-plaintext highlighter-rouge">definitely_writable</code> A boolean denoting whether the column definitely can be updated.</p>
 
-<p><code class="highlighter-rouge">column_class_name</code> The name of the Java class backing the column’s type.</p>
+<p><code class="language-plaintext highlighter-rouge">column_class_name</code> The name of the Java class backing the column’s type.</p>
 
 <h3 id="connectionproperties">ConnectionProperties</h3>
 
@@ -1492,19 +1492,19 @@ types of the complex parent type.</p>
   <span class="kt">string</span> <span class="na">schema</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">is_dirty</code> A boolean denoting if the properties have been altered. This field should not be present as it
+<p><code class="language-plaintext highlighter-rouge">is_dirty</code> A boolean denoting if the properties have been altered. This field should not be present as it
 never and will be removed from the protocol in future releases.</p>
 
-<p><code class="highlighter-rouge">auto_commit</code> A boolean denoting if autoCommit is enabled for transactions.</p>
+<p><code class="language-plaintext highlighter-rouge">auto_commit</code> A boolean denoting if autoCommit is enabled for transactions.</p>
 
-<p><code class="highlighter-rouge">has_auto_commit</code> A boolean denoting if <code class="highlighter-rouge">auto_commit</code> was set.</p>
+<p><code class="language-plaintext highlighter-rouge">has_auto_commit</code> A boolean denoting if <code class="language-plaintext highlighter-rouge">auto_commit</code> was set.</p>
 
-<p><code class="highlighter-rouge">read_only</code> A boolean denoting if a JDBC connection is read-only.</p>
+<p><code class="language-plaintext highlighter-rouge">read_only</code> A boolean denoting if a JDBC connection is read-only.</p>
 
-<p><code class="highlighter-rouge">has_read_only</code> A boolean denoting if <code class="highlighter-rouge">read_only</code> was set.</p>
+<p><code class="language-plaintext highlighter-rouge">has_read_only</code> A boolean denoting if <code class="language-plaintext highlighter-rouge">read_only</code> was set.</p>
 
-<p><code class="highlighter-rouge">transaction_isolation</code> An integer which denotes the level of transactions isolation per the JDBC
-specification. This value is analogous to the values defined in <code class="highlighter-rouge">java.sql.Connection</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">transaction_isolation</code> An integer which denotes the level of transactions isolation per the JDBC
+specification. This value is analogous to the values defined in <code class="language-plaintext highlighter-rouge">java.sql.Connection</code>.</p>
 
 <ul>
   <li>0 = Transactions are not supported</li>
@@ -1514,9 +1514,9 @@ specification. This value is analogous to the values defined in <code class="hig
   <li>8 = Dirty reads, non-repeatable reads, and phantom reads are all prevented.</li>
 </ul>
 
-<p><code class="highlighter-rouge">catalog</code> The name of a catalog to use when fetching connection properties.</p>
+<p><code class="language-plaintext highlighter-rouge">catalog</code> The name of a catalog to use when fetching connection properties.</p>
 
-<p><code class="highlighter-rouge">schema</code> The name of the schema to use when fetching connection properties.</p>
+<p><code class="language-plaintext highlighter-rouge">schema</code> The name of the schema to use when fetching connection properties.</p>
 
 <h3 id="cursorfactory">CursorFactory</h3>
 
@@ -1537,9 +1537,9 @@ specification. This value is analogous to the values defined in <code class="hig
   <span class="k">repeated</span> <span class="kt">string</span> <span class="na">field_names</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">style</code> A string denoting the <a href="#style">Style</a> of the contained objects.</p>
+<p><code class="language-plaintext highlighter-rouge">style</code> A string denoting the <a href="#style">Style</a> of the contained objects.</p>
 
-<p><code class="highlighter-rouge">class_name</code> The name of the for <code class="highlighter-rouge">RECORD</code> or <code class="highlighter-rouge">RECORD_PROJECTION</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">class_name</code> The name of the for <code class="language-plaintext highlighter-rouge">RECORD</code> or <code class="language-plaintext highlighter-rouge">RECORD_PROJECTION</code>.</p>
 
 <h3 id="databaseproperty">DatabaseProperty</h3>
 
@@ -1550,9 +1550,9 @@ specification. This value is analogous to the values defined in <code class="hig
   <span class="k">repeated</span> <span class="kt">string</span> <span class="na">functions</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">name</code> The name of the database property.</p>
+<p><code class="language-plaintext highlighter-rouge">name</code> The name of the database property.</p>
 
-<p><code class="highlighter-rouge">functions</code> A collection of values for the property.</p>
+<p><code class="language-plaintext highlighter-rouge">functions</code> A collection of values for the property.</p>
 
 <h3 id="frame">Frame</h3>
 
@@ -1565,11 +1565,11 @@ to be fetched in the Avatica server.</p>
   <span class="k">repeated</span> <span class="n">Row</span> <span class="na">rows</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">offset</code> The starting position of these <code class="highlighter-rouge">rows</code> in the encompassing result set.</p>
+<p><code class="language-plaintext highlighter-rouge">offset</code> The starting position of these <code class="language-plaintext highlighter-rouge">rows</code> in the encompassing result set.</p>
 
-<p><code class="highlighter-rouge">done</code> A boolean denoting whether more results exist for this result set.</p>
+<p><code class="language-plaintext highlighter-rouge">done</code> A boolean denoting whether more results exist for this result set.</p>
 
-<p><code class="highlighter-rouge">rows</code> A collection of <a href="#row">Row</a>s.</p>
+<p><code class="language-plaintext highlighter-rouge">rows</code> A collection of <a href="#row">Row</a>s.</p>
 
 <h3 id="row">Row</h3>
 
@@ -1579,24 +1579,24 @@ to be fetched in the Avatica server.</p>
   <span class="k">repeated</span> <span class="n">ColumnValue</span> <span class="na">value</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">value</code> A collection of <a href="#columnvalue">ColumnValue</a>s, the columns in the row.</p>
+<p><code class="language-plaintext highlighter-rouge">value</code> A collection of <a href="#columnvalue">ColumnValue</a>s, the columns in the row.</p>
 
 <h3 id="columnvalue">ColumnValue</h3>
 
 <figure class="highlight"><pre><code class="language-protobuf" data-lang="protobuf"><span class="kd">message</span> <span class="nc">ColumnValue</span> <span class="p">{</span>
-  <span class="k">repeated</span> <span class="n">TypedValue</span> <span class="na">value</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Deprecated!
-</span>  <span class="k">repeated</span> <span class="n">ColumnValue</span> <span class="na">array_value</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="k">repeated</span> <span class="n">TypedValue</span> <span class="na">value</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Deprecated!</span>
+  <span class="k">repeated</span> <span class="n">ColumnValue</span> <span class="na">array_value</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
   <span class="n">boolean</span> <span class="na">has_array_value</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
   <span class="n">TypedValue</span> <span class="na">scalar_value</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">value</code> The pre Calcite-1.6 means of serializing <a href="#typedvalue">TypedValue</a>s. Not used anymore.</p>
+<p><code class="language-plaintext highlighter-rouge">value</code> The pre Calcite-1.6 means of serializing <a href="#typedvalue">TypedValue</a>s. Not used anymore.</p>
 
-<p><code class="highlighter-rouge">array_value</code> The value of this column if it is an array (not a scalar).</p>
+<p><code class="language-plaintext highlighter-rouge">array_value</code> The value of this column if it is an array (not a scalar).</p>
 
-<p><code class="highlighter-rouge">has_array_value</code> Should be set to true if <code class="highlighter-rouge">array_value</code> is set.</p>
+<p><code class="language-plaintext highlighter-rouge">has_array_value</code> Should be set to true if <code class="language-plaintext highlighter-rouge">array_value</code> is set.</p>
 
-<p><code class="highlighter-rouge">scalar_value</code> The value of this column if it is a scalar (not an array).</p>
+<p><code class="language-plaintext highlighter-rouge">scalar_value</code> The value of this column if it is a scalar (not an array).</p>
 
 <h3 id="querystate">QueryState</h3>
 
@@ -1613,19 +1613,19 @@ SQL or by a DatabaseMetaData operation with arguments on that operation.</p>
   <span class="kt">bool</span> <span class="na">has_op</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">type</code> A <a href="#statetype">StateType</a> object denoting what type of operation backs the ResultSet for this query.</p>
+<p><code class="language-plaintext highlighter-rouge">type</code> A <a href="#statetype">StateType</a> object denoting what type of operation backs the ResultSet for this query.</p>
 
-<p><code class="highlighter-rouge">sql</code> The SQL statement which created the ResultSet for this query. Required if the <code class="highlighter-rouge">type</code> is <code class="highlighter-rouge">SQL</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">sql</code> The SQL statement which created the ResultSet for this query. Required if the <code class="language-plaintext highlighter-rouge">type</code> is <code class="language-plaintext highlighter-rouge">SQL</code>.</p>
 
-<p><code class="highlighter-rouge">op</code> The DML operation which created the ResultSet for this query. Required if the <code class="highlighter-rouge">type</code> is <code class="highlighter-rouge">METADATA</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">op</code> The DML operation which created the ResultSet for this query. Required if the <code class="language-plaintext highlighter-rouge">type</code> is <code class="language-plaintext highlighter-rouge">METADATA</code>.</p>
 
-<p><code class="highlighter-rouge">args</code> The arguments to the invoked DML operation. Required if the <code class="highlighter-rouge">type</code> is <code class="highlighter-rouge">METADATA</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">args</code> The arguments to the invoked DML operation. Required if the <code class="language-plaintext highlighter-rouge">type</code> is <code class="language-plaintext highlighter-rouge">METADATA</code>.</p>
 
-<p><code class="highlighter-rouge">has_args</code> A boolean which denotes if the field <code class="highlighter-rouge">args</code> is provided.</p>
+<p><code class="language-plaintext highlighter-rouge">has_args</code> A boolean which denotes if the field <code class="language-plaintext highlighter-rouge">args</code> is provided.</p>
 
-<p><code class="highlighter-rouge">has_sql</code> A boolean which denotes if the field <code class="highlighter-rouge">sql</code> is provided.</p>
+<p><code class="language-plaintext highlighter-rouge">has_sql</code> A boolean which denotes if the field <code class="language-plaintext highlighter-rouge">sql</code> is provided.</p>
 
-<p><code class="highlighter-rouge">has_op</code> A boolean which denotes if the field <code class="highlighter-rouge">op</code> is provided.</p>
+<p><code class="language-plaintext highlighter-rouge">has_op</code> A boolean which denotes if the field <code class="language-plaintext highlighter-rouge">op</code> is provided.</p>
 
 <h3 id="rep">Rep</h3>
 
@@ -1672,7 +1672,7 @@ SQL or by a DatabaseMetaData operation with arguments on that operation.</p>
   <span class="kt">string</span> <span class="na">server_address</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">serverAddress</code> The <code class="highlighter-rouge">host:port</code> of the server which created this object.</p>
+<p><code class="language-plaintext highlighter-rouge">serverAddress</code> The <code class="language-plaintext highlighter-rouge">host:port</code> of the server which created this object.</p>
 
 <h3 id="signature">Signature</h3>
 
@@ -1686,15 +1686,15 @@ SQL or by a DatabaseMetaData operation with arguments on that operation.</p>
   <span class="n">StatementType</span> <span class="na">statementType</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">columns</code> An array of <a href="#columnmetadata">ColumnMetaData</a> objects denoting the schema of the result set.</p>
+<p><code class="language-plaintext highlighter-rouge">columns</code> An array of <a href="#columnmetadata">ColumnMetaData</a> objects denoting the schema of the result set.</p>
 
-<p><code class="highlighter-rouge">sql</code> The SQL executed.</p>
+<p><code class="language-plaintext highlighter-rouge">sql</code> The SQL executed.</p>
 
-<p><code class="highlighter-rouge">parameters</code> An array of <a href="#avaticaparameter">AvaticaParameter</a> objects denoting type-specific details.</p>
+<p><code class="language-plaintext highlighter-rouge">parameters</code> An array of <a href="#avaticaparameter">AvaticaParameter</a> objects denoting type-specific details.</p>
 
-<p><code class="highlighter-rouge">cursor_factory</code> An <a href="#cursorfactory">CursorFactory</a> object representing the Java representation of the frame.</p>
+<p><code class="language-plaintext highlighter-rouge">cursor_factory</code> An <a href="#cursorfactory">CursorFactory</a> object representing the Java representation of the frame.</p>
 
-<p><code class="highlighter-rouge">statementType</code> The type of the statement.</p>
+<p><code class="language-plaintext highlighter-rouge">statementType</code> The type of the statement.</p>
 
 <h3 id="statetype">StateType</h3>
 
@@ -1715,11 +1715,11 @@ SQL or by a DatabaseMetaData operation with arguments on that operation.</p>
   <span class="n">Signature</span> <span class="na">signature</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">connection_id</code> The identifier of the connection to which this statement belongs.</p>
+<p><code class="language-plaintext highlighter-rouge">connection_id</code> The identifier of the connection to which this statement belongs.</p>
 
-<p><code class="highlighter-rouge">id</code> The identifier of the statement.</p>
+<p><code class="language-plaintext highlighter-rouge">id</code> The identifier of the statement.</p>
 
-<p><code class="highlighter-rouge">signature</code> A <a href="#signature">Signature</a> object for the statement.</p>
+<p><code class="language-plaintext highlighter-rouge">signature</code> A <a href="#signature">Signature</a> object for the statement.</p>
 
 <h3 id="statementtype">StatementType</h3>
 
@@ -1770,25 +1770,25 @@ SQL or by a DatabaseMetaData operation with arguments on that operation.</p>
   <span class="kt">bool</span> <span class="na">implicitly_null</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">type</code> A name referring to which attribute is populated with the column’s value.</p>
+<p><code class="language-plaintext highlighter-rouge">type</code> A name referring to which attribute is populated with the column’s value.</p>
 
-<p><code class="highlighter-rouge">bool_value</code> A boolean value.</p>
+<p><code class="language-plaintext highlighter-rouge">bool_value</code> A boolean value.</p>
 
-<p><code class="highlighter-rouge">string_value</code> A character/string value.</p>
+<p><code class="language-plaintext highlighter-rouge">string_value</code> A character/string value.</p>
 
-<p><code class="highlighter-rouge">number_value</code> A numeric value (non-<code class="highlighter-rouge">double</code>).</p>
+<p><code class="language-plaintext highlighter-rouge">number_value</code> A numeric value (non-<code class="language-plaintext highlighter-rouge">double</code>).</p>
 
-<p><code class="highlighter-rouge">bytes_value</code> A byte-array value.</p>
+<p><code class="language-plaintext highlighter-rouge">bytes_value</code> A byte-array value.</p>
 
-<p><code class="highlighter-rouge">double_value</code> A <code class="highlighter-rouge">double</code> value.</p>
+<p><code class="language-plaintext highlighter-rouge">double_value</code> A <code class="language-plaintext highlighter-rouge">double</code> value.</p>
 
-<p><code class="highlighter-rouge">null</code> A boolean which denotes if the value was null.</p>
+<p><code class="language-plaintext highlighter-rouge">null</code> A boolean which denotes if the value was null.</p>
 
-<p><code class="highlighter-rouge">array_value</code> A repetition of TypedValue messages, each of which are an element of an array_value (recursive)</p>
+<p><code class="language-plaintext highlighter-rouge">array_value</code> A repetition of TypedValue messages, each of which are an element of an array_value (recursive)</p>
 
-<p><code class="highlighter-rouge">component_type</code> When this TypedValue represents an Array, this is the Array type’s representation.</p>
+<p><code class="language-plaintext highlighter-rouge">component_type</code> When this TypedValue represents an Array, this is the Array type’s representation.</p>
 
-<p><code class="highlighter-rouge">implicitly_null</code> A boolean to differentiate between explicitly (user-set) and implicitly null (user un-set) values</p>
+<p><code class="language-plaintext highlighter-rouge">implicitly_null</code> A boolean to differentiate between explicitly (user-set) and implicitly null (user un-set) values</p>
 
 <p>The following chart documents how each <a href="#rep">Rep</a> value corresponds
 to the attributes in this message:</p>
@@ -1802,137 +1802,137 @@ to the attributes in this message:</p>
     </tr>
     <tr>
       <td>PRIMITIVE_BOOLEAN</td>
-      <td><code class="highlighter-rouge">bool_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool_value</code></td>
       <td> </td>
     </tr>
     <tr>
       <td>BOOLEAN</td>
-      <td><code class="highlighter-rouge">bool_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool_value</code></td>
       <td> </td>
     </tr>
     <tr>
       <td>PRIMITIVE_BYTE</td>
-      <td><code class="highlighter-rouge">number_value</code></td>
-      <td>The numeric value of the <code class="highlighter-rouge">byte</code>.</td>
+      <td><code class="language-plaintext highlighter-rouge">number_value</code></td>
+      <td>The numeric value of the <code class="language-plaintext highlighter-rouge">byte</code>.</td>
     </tr>
     <tr>
       <td>BYTE</td>
-      <td><code class="highlighter-rouge">number_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">number_value</code></td>
       <td> </td>
     </tr>
     <tr>
       <td>PRIMITIVE_CHAR</td>
-      <td><code class="highlighter-rouge">string_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">string_value</code></td>
       <td> </td>
     </tr>
     <tr>
       <td>CHARACTER</td>
-      <td><code class="highlighter-rouge">string_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">string_value</code></td>
       <td> </td>
     </tr>
     <tr>
       <td>PRIMITIVE_SHORT</td>
-      <td><code class="highlighter-rouge">number_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">number_value</code></td>
       <td> </td>
     </tr>
     <tr>
       <td>SHORT</td>
-      <td><code class="highlighter-rouge">number_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">number_value</code></td>
       <td> </td>
     </tr>
     <tr>
       <td>PRIMITIVE_INT</td>
-      <td><code class="highlighter-rouge">number_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">number_value</code></td>
       <td> </td>
     </tr>
     <tr>
       <td>INTEGER</td>
-      <td><code class="highlighter-rouge">number_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">number_value</code></td>
       <td> </td>
     </tr>
     <tr>
       <td>PRIMITIVE_LONG</td>
-      <td><code class="highlighter-rouge">number_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">number_value</code></td>
       <td> </td>
     </tr>
     <tr>
       <td>LONG</td>
-      <td><code class="highlighter-rouge">number_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">number_value</code></td>
       <td> </td>
     </tr>
     <tr>
       <td>PRIMITIVE_FLOAT</td>
-      <td><code class="highlighter-rouge">number_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">number_value</code></td>
       <td> </td>
     </tr>
     <tr>
       <td>FLOAT</td>
-      <td><code class="highlighter-rouge">number_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">number_value</code></td>
       <td>IEEE 754 floating-point “single format” bit layout.</td>
     </tr>
     <tr>
       <td>PRIMITIVE_DOUBLE</td>
-      <td><code class="highlighter-rouge">number_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">number_value</code></td>
       <td> </td>
     </tr>
     <tr>
       <td>DOUBLE</td>
-      <td><code class="highlighter-rouge">number_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">number_value</code></td>
       <td> </td>
     </tr>
     <tr>
       <td>BIG_INTEGER</td>
-      <td><code class="highlighter-rouge">bytes_value</code></td>
-      <td>The two’s-complement representation of the BigInteger. See <code class="highlighter-rouge">BigInteger#toByteArray().</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bytes_value</code></td>
+      <td>The two’s-complement representation of the BigInteger. See <code class="language-plaintext highlighter-rouge">BigInteger#toByteArray().</code></td>
     </tr>
     <tr>
       <td>BIG_DECIMAL</td>
-      <td><code class="highlighter-rouge">string_value</code></td>
-      <td>A string-ified representation of the value. See <code class="highlighter-rouge">BigDecimal#toString()</code>.</td>
+      <td><code class="language-plaintext highlighter-rouge">string_value</code></td>
+      <td>A string-ified representation of the value. See <code class="language-plaintext highlighter-rouge">BigDecimal#toString()</code>.</td>
     </tr>
     <tr>
       <td>JAVA_SQL_TIME</td>
-      <td><code class="highlighter-rouge">number_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">number_value</code></td>
       <td>As an integer, milliseconds since midnight.</td>
     </tr>
     <tr>
       <td>JAVA_SQL_DATE</td>
-      <td><code class="highlighter-rouge">number_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">number_value</code></td>
       <td>As an integer, the number of days since the epoch.</td>
     </tr>
     <tr>
       <td>JAVA_SQL_TIMESTAMP</td>
-      <td><code class="highlighter-rouge">number_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">number_value</code></td>
       <td>As a long, milliseconds since the epoch.</td>
     </tr>
     <tr>
       <td>JAVA_UTIL_DATE</td>
-      <td><code class="highlighter-rouge">number_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">number_value</code></td>
       <td>As a long, milliseconds since the epoch.</td>
     </tr>
     <tr>
       <td>BYTE_STRING</td>
-      <td><code class="highlighter-rouge">bytes_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bytes_value</code></td>
       <td> </td>
     </tr>
     <tr>
       <td>STRING</td>
-      <td><code class="highlighter-rouge">string_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">string_value</code></td>
       <td>This must be a UTF-8 string.</td>
     </tr>
     <tr>
       <td>NUMBER</td>
-      <td><code class="highlighter-rouge">number_value</code></td>
+      <td><code class="language-plaintext highlighter-rouge">number_value</code></td>
       <td>A general number, unknown what concrete type.</td>
     </tr>
     <tr>
       <td>OBJECT</td>
-      <td><code class="highlighter-rouge">null</code></td>
+      <td><code class="language-plaintext highlighter-rouge">null</code></td>
       <td>The only general Object we can serialize is “null”. Non-null OBJECT’s will throw an error.</td>
     </tr>
     <tr>
       <td>NULL</td>
-      <td><code class="highlighter-rouge">null</code></td>
+      <td><code class="language-plaintext highlighter-rouge">null</code></td>
       <td> </td>
     </tr>
     <tr>
@@ -1961,20 +1961,20 @@ to the attributes in this message:</p>
   <span class="k">repeated</span> <span class="n">TypedValue</span> <span class="na">parameter_values</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">parameter_values</code> A collection of parameter values for one SQL command update.</p>
+<p><code class="language-plaintext highlighter-rouge">parameter_values</code> A collection of parameter values for one SQL command update.</p>
 
 <h3 id="wiremessage">WireMessage</h3>
 
-<p>This message wraps all <code class="highlighter-rouge">Request</code>s and <code class="highlighter-rouge">Response</code>s.</p>
+<p>This message wraps all <code class="language-plaintext highlighter-rouge">Request</code>s and <code class="language-plaintext highlighter-rouge">Response</code>s.</p>
 
 <figure class="highlight"><pre><code class="language-protobuf" data-lang="protobuf"><span class="kd">message</span> <span class="nc">WireMessage</span> <span class="p">{</span>
   <span class="kt">string</span> <span class="na">name</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
   <span class="kt">bytes</span> <span class="na">wrapped_message</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">name</code> The Java class name of the wrapped message.</p>
+<p><code class="language-plaintext highlighter-rouge">name</code> The Java class name of the wrapped message.</p>
 
-<p><code class="highlighter-rouge">wrapped_message</code> A serialized representation of the wrapped message of the same type specified by <code class="highlighter-rouge">name</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">wrapped_message</code> A serialized representation of the wrapped message of the same type specified by <code class="language-plaintext highlighter-rouge">name</code>.</p>
 
           
 

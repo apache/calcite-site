@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>News</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v3.9.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/avatica/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/avatica/favicon.ico">
@@ -270,8 +270,8 @@ for more information.</p>
 
 -->
 
-<p>Apache Calcite Avatica 1.19.0 adds support for <code class="highlighter-rouge">BIT</code> and <code class="highlighter-rouge">NULL</code> data
-types, fixes issues with values of type <code class="highlighter-rouge">ARRAY</code>, and includes a few
+<p>Apache Calcite Avatica 1.19.0 adds support for <code class="language-plaintext highlighter-rouge">BIT</code> and <code class="language-plaintext highlighter-rouge">NULL</code> data
+types, fixes issues with values of type <code class="language-plaintext highlighter-rouge">ARRAY</code>, and includes a few
 dependency updates. See the list of
 <a href="/avatica/docs/history.html#v1-19-0">bug fixes and new features</a>
 for more information.</p>
@@ -324,10 +324,10 @@ for more information.</p>
 
 <p><strong>Breaking change (<a href="https://issues.apache.org/jira/browse/CALCITE-4503">CALCITE-4503</a>)</strong>: Order of fields in records should follow that of the SQL types</p>
 
-<p><code class="highlighter-rouge">Meta#deduce(List&lt;ColumnMetaData&gt; columns, Class resultClazz)</code> now only derives the order of the fields from the list of provided column metadata <code class="highlighter-rouge">columns</code> when generating a record from the given Java class <code class="highlighter-rouge">resultClazz</code>, instead of relying on the field order provided by <code class="highlighter-rouge">Object#getFields()</code>, which is a JVM-dependent feature.</p>
+<p><code class="language-plaintext highlighter-rouge">Meta#deduce(List&lt;ColumnMetaData&gt; columns, Class resultClazz)</code> now only derives the order of the fields from the list of provided column metadata <code class="language-plaintext highlighter-rouge">columns</code> when generating a record from the given Java class <code class="language-plaintext highlighter-rouge">resultClazz</code>, instead of relying on the field order provided by <code class="language-plaintext highlighter-rouge">Object#getFields()</code>, which is a JVM-dependent feature.</p>
 
-<p>Before, the field names where not checked against the field names of the provided class. Now, if <code class="highlighter-rouge">resultClazz</code> is not null, the provided field names are expected to match existing fields in that class. If a column metadata has name <code class="highlighter-rouge">column</code>, and no public field in <code class="highlighter-rouge">resultClazz</code> with that name exists, the following exception is thrown:
-<code class="highlighter-rouge">java.lang.RuntimeException: java.lang.NoSuchFieldException: C</code>.</p>
+<p>Before, the field names where not checked against the field names of the provided class. Now, if <code class="language-plaintext highlighter-rouge">resultClazz</code> is not null, the provided field names are expected to match existing fields in that class. If a column metadata has name <code class="language-plaintext highlighter-rouge">column</code>, and no public field in <code class="language-plaintext highlighter-rouge">resultClazz</code> with that name exists, the following exception is thrown:
+<code class="language-plaintext highlighter-rouge">java.lang.RuntimeException: java.lang.NoSuchFieldException: C</code>.</p>
 
     
         
@@ -372,22 +372,22 @@ for more information.</p>
 
 <p>Apache Calcite Avatica Go 5.0.0 is a major release with numerous improvements and a breaking change.
 As this is a new major version, users of this package will need to upgrade their import paths to 
-<code class="highlighter-rouge">"github.com/apache/calcite-avatica-go/v5"</code>.</p>
+<code class="language-plaintext highlighter-rouge">"github.com/apache/calcite-avatica-go/v5"</code>.</p>
 
 <p>Since Go modules have been available since Go 1.11 (3 versions back as of writing), users of this library should 
 install it using Go modules as support for dep has been removed.</p>
 
-<p>This release also introduces the <code class="highlighter-rouge">batching</code> query string parameter in the DSN, which allows updates to the server using
-a prepared statement to be batched together and executed once <code class="highlighter-rouge">Close()</code> is called on the statement.</p>
+<p>This release also introduces the <code class="language-plaintext highlighter-rouge">batching</code> query string parameter in the DSN, which allows updates to the server using
+a prepared statement to be batched together and executed once <code class="language-plaintext highlighter-rouge">Close()</code> is called on the statement.</p>
 
 <p><strong>Breaking change for connection metadata (<a href="https://issues.apache.org/jira/browse/CALCITE-3248">CALCITE-3248</a>):</strong> 
-Previously, it is possible to set the HTTP username and password using the <code class="highlighter-rouge">username</code> and <code class="highlighter-rouge">password</code> parameters in the
+Previously, it is possible to set the HTTP username and password using the <code class="language-plaintext highlighter-rouge">username</code> and <code class="language-plaintext highlighter-rouge">password</code> parameters in the
 query string of the DSN. These parameters were confusing and didn’t signal the intent and effect of the parameters in addition
-to clashing with the <code class="highlighter-rouge">avaticaUser</code> and <code class="highlighter-rouge">avaticaPassword</code> parameters. The <code class="highlighter-rouge">username</code> and <code class="highlighter-rouge">password</code> parameters have now been
+to clashing with the <code class="language-plaintext highlighter-rouge">avaticaUser</code> and <code class="language-plaintext highlighter-rouge">avaticaPassword</code> parameters. The <code class="language-plaintext highlighter-rouge">username</code> and <code class="language-plaintext highlighter-rouge">password</code> parameters have now been
 removed as CALCITE-3248 implements the <a href="https://golang.org/pkg/database/sql/driver/#Connector">Connector interface</a> via the
-<code class="highlighter-rouge">NewConnector()</code> method, which allows the driver to be instantiated with a custom HTTP client. Subsequently, it is now
-possible to set up the driver with a custom HTTP client and decorate it with the <code class="highlighter-rouge">WithDigestAuth()</code>, <code class="highlighter-rouge">WithBasicAuth()</code>,
-<code class="highlighter-rouge">WithKerberosAuth()</code> and <code class="highlighter-rouge">WithAdditionalHeaders()</code> methods.</p>
+<code class="language-plaintext highlighter-rouge">NewConnector()</code> method, which allows the driver to be instantiated with a custom HTTP client. Subsequently, it is now
+possible to set up the driver with a custom HTTP client and decorate it with the <code class="language-plaintext highlighter-rouge">WithDigestAuth()</code>, <code class="language-plaintext highlighter-rouge">WithBasicAuth()</code>,
+<code class="language-plaintext highlighter-rouge">WithKerberosAuth()</code> and <code class="language-plaintext highlighter-rouge">WithAdditionalHeaders()</code> methods.</p>
 
 <p>The Calcite team recommends users of this package to upgrade to this version, where practical, as the dependencies being
 used by this package have also been upgraded.</p>
@@ -531,14 +531,14 @@ for more information.</p>
 
 <p>Apache Calcite Avatica Go 4.0.0 is a major release with numerous improvements and a breaking change for Apache Phoenix.
 As this is a new major version, users of this package will need to upgrade their import paths to 
-<code class="highlighter-rouge">"github.com/apache/calcite-avatica-go/v4"</code>.</p>
+<code class="language-plaintext highlighter-rouge">"github.com/apache/calcite-avatica-go/v4"</code>.</p>
 
 <p><strong>Breaking change for Apache Phoenix (<a href="https://issues.apache.org/jira/browse/CALCITE-2724">CALCITE-2763</a>):</strong> 
 In Apache Phoenix, null and empty strings are equivalent. For some background on why this is the case, see
 <a href="https://issues.apache.org/jira/browse/PHOENIX-947">PHOENIX-947</a>. In version 3 of Avatica-Go and below, null and empty
-strings are returned as an empty string <code class="highlighter-rouge">""</code> to the client. This prevented database/sql’s built in NullString type from
-working correctly. From 4.0.0 onwards, null and empty strings will be returned as a <code class="highlighter-rouge">nil</code>. This allows the usage of the
-<code class="highlighter-rouge">sql.NullString</code> type.</p>
+strings are returned as an empty string <code class="language-plaintext highlighter-rouge">""</code> to the client. This prevented database/sql’s built in NullString type from
+working correctly. From 4.0.0 onwards, null and empty strings will be returned as a <code class="language-plaintext highlighter-rouge">nil</code>. This allows the usage of the
+<code class="language-plaintext highlighter-rouge">sql.NullString</code> type.</p>
 
 <p>For this release, both <a href="https://github.com/golang/dep">dep</a> and Go modules are supported for package management. As 
 Go modules will be turned on by default in Go 1.13.0 (estimated to be released in September/October 2019), it is highly
@@ -733,8 +733,8 @@ Avatica users are encouraged to upgrade to 1.14.0 where practical.</p>
 <p>Apache Calcite Avatica Go 3.2.0 is a minor release of Avatica Go with fixes to the import paths after enabling
 support for Go modules.</p>
 
-<p>The 3.1.0 release contained a bug where packages within the library used the <code class="highlighter-rouge">"github.com/apache/calcite-avatica-go"</code>
-import path rather than the <code class="highlighter-rouge">"github.com/apache/calcite-avatica-go/v3"</code> import path. This resulted in an issue where
+<p>The 3.1.0 release contained a bug where packages within the library used the <code class="language-plaintext highlighter-rouge">"github.com/apache/calcite-avatica-go"</code>
+import path rather than the <code class="language-plaintext highlighter-rouge">"github.com/apache/calcite-avatica-go/v3"</code> import path. This resulted in an issue where
 2 versions of the library are being used at the same time, causing some programs to not build.</p>
 
 <p><strong>The Calcite team recommends consumers of the Avatica Go library to not use the 3.1.0 release and ensure that the
@@ -880,12 +880,12 @@ ZIP archives will no longer be produced from this release onwards.</p>
 <a href="https://golang.org/pkg/database/sql/">database/sql</a> driver since the code has been donated to the Apache Calcite
 project. This release includes support for Avatica with the HSQLDB backend, updated dependencies and <a href="/avatica/docs/go_history.html#v3-0-0">bug fixes</a>.</p>
 
-<p>There is a breaking change where the <code class="highlighter-rouge">Name()</code> method on the <code class="highlighter-rouge">ResponseError</code> error type has been changed to a property, <code class="highlighter-rouge">Name</code>.</p>
+<p>There is a breaking change where the <code class="language-plaintext highlighter-rouge">Name()</code> method on the <code class="language-plaintext highlighter-rouge">ResponseError</code> error type has been changed to a property, <code class="language-plaintext highlighter-rouge">Name</code>.</p>
 
-<p>Users of the current <code class="highlighter-rouge">Boostport/avatica</code> library are encouraged to update to this new version of <code class="highlighter-rouge">apache/calcite-avatica-go</code>
-as further development will take place in the <code class="highlighter-rouge">apache/calcite-avatica-go</code> repository.</p>
+<p>Users of the current <code class="language-plaintext highlighter-rouge">Boostport/avatica</code> library are encouraged to update to this new version of <code class="language-plaintext highlighter-rouge">apache/calcite-avatica-go</code>
+as further development will take place in the <code class="language-plaintext highlighter-rouge">apache/calcite-avatica-go</code> repository.</p>
 
-<p>For most users, the updating is simply replacing the import path <code class="highlighter-rouge">_ github.com/Boostport/avatica</code> with <code class="highlighter-rouge">_ github.com/apache/calcite-avatica-go</code>.</p>
+<p>For most users, the updating is simply replacing the import path <code class="language-plaintext highlighter-rouge">_ github.com/Boostport/avatica</code> with <code class="language-plaintext highlighter-rouge">_ github.com/apache/calcite-avatica-go</code>.</p>
 
     
         
@@ -1169,10 +1169,10 @@ basic “impersonation” (where the Avatica server issues requests on behalf of
 
 <p>Building on top of the work done in Avatica-1.7.0 in <a href="https://issues.apache.org/jira/browse/CALCITE-1091">CALCITE-1091</a>,
 this release also contains <a href="https://issues.apache.org/jira/browse/CALCITE-1128">CALCITE-1128</a> which
-implements the batch-oriented JDBC APIs on <code class="highlighter-rouge">Statement</code>. Through careful inspection, it
+implements the batch-oriented JDBC APIs on <code class="language-plaintext highlighter-rouge">Statement</code>. Through careful inspection, it
 was observed that the overall performance of Avatica clients in 100% write workloads was
-dominated by the cost of the HTTP calls. By leveraging the <code class="highlighter-rouge">Statement#addBatch()</code>
-and <code class="highlighter-rouge">Statement#executeBatch()</code> API calls, clients can efficiently batch multiple updates
+dominated by the cost of the HTTP calls. By leveraging the <code class="language-plaintext highlighter-rouge">Statement#addBatch()</code>
+and <code class="language-plaintext highlighter-rouge">Statement#executeBatch()</code> API calls, clients can efficiently batch multiple updates
 in a single HTTP call. In testing this over the previous single HTTP call per update with
 <a href="https://phoenix.apache.org">Apache Phoenix</a>, it was observed that performance increased by
 two to three times, bringing Avatica’s performance on par with the Phoenix “native” driver.</p>
@@ -1293,9 +1293,9 @@ to fix a
 <a href="https://blog.gdssecurity.com/labs/2015/2/25/jetleak-vulnerability-remote-leakage-of-shared-buffers-in-je.html">security issue</a>.</li>
 </ul>
 
-<p>Note that Avatica’s Maven coordinates have changed. The <code class="highlighter-rouge">groupId</code> is
+<p>Note that Avatica’s Maven coordinates have changed. The <code class="language-plaintext highlighter-rouge">groupId</code> is
 now “org.apache.calcite.avatica” (previously “org.apache.calcite”),
-and <code class="highlighter-rouge">artifactId</code>s are
+and <code class="language-plaintext highlighter-rouge">artifactId</code>s are
 “avatica”,
 “avatica-metrics”,
 “avatica-metrics-dropwizardmetrics3”,

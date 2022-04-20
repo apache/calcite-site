@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Go Client History</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v3.9.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/avatica/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/avatica/favicon.ico">
@@ -714,8 +714,8 @@ This release supports Go 1.17 and 1.18, which are currently the versions support
 <p>The protobuf library <a href="https://github.com/golang/protobuf">github.com/golang/protobuf</a> was replaced by
 <a href="https://pkg.go.dev/google.golang.org/protobuf">google.golang.org/protobuf</a>, which is the successor and replacement for
 the former. In addition, the <a href="https://pkg.go.dev/golang.org/x/xerrors">golang.org/x/xerrors</a> package has been replaced with 
-the standard library’s built-in <a href="https://pkg.go.dev/errors">errors</a> package as the features in the experimental <code class="highlighter-rouge">xerrors</code>
-package have been available in the standard library’s <code class="highlighter-rouge">errors</code> package since Go 1.13.</p>
+the standard library’s built-in <a href="https://pkg.go.dev/errors">errors</a> package as the features in the experimental <code class="language-plaintext highlighter-rouge">xerrors</code>
+package have been available in the standard library’s <code class="language-plaintext highlighter-rouge">errors</code> package since Go 1.13.</p>
 
 <p>Contributors to this release:
 Francis Chuang, Josiah Goodson</p>
@@ -752,23 +752,23 @@ Update Github Actions to latest versions</li>
 As Go modules has been available since Go 1.11 (3 versions back as of writing), users of this library should
 install it using Go modules as support for dep has been removed.</p>
 
-<p>This release also introduces the <code class="highlighter-rouge">batching</code> query string parameter in the DSN, which allows updates to the server using
-a prepared statement to be batched together and executed once <code class="highlighter-rouge">Close()</code> is called on the statement.</p>
+<p>This release also introduces the <code class="language-plaintext highlighter-rouge">batching</code> query string parameter in the DSN, which allows updates to the server using
+a prepared statement to be batched together and executed once <code class="language-plaintext highlighter-rouge">Close()</code> is called on the statement.</p>
 
 <p><strong>Breaking change for connection metadata (<a href="https://issues.apache.org/jira/browse/CALCITE-3248">CALCITE-3248</a>):</strong> 
-Previously, it is possible to set the HTTP username and password using the <code class="highlighter-rouge">username</code> and <code class="highlighter-rouge">password</code> parameters in the
+Previously, it is possible to set the HTTP username and password using the <code class="language-plaintext highlighter-rouge">username</code> and <code class="language-plaintext highlighter-rouge">password</code> parameters in the
 query string of the DSN. These parameters were confusing and didn’t signal the intent and effect of the parameters in addition
-to clashing with the <code class="highlighter-rouge">avaticaUser</code> and <code class="highlighter-rouge">avaticaPassword</code> parameters. The <code class="highlighter-rouge">username</code> and <code class="highlighter-rouge">password</code> parameters have now been
+to clashing with the <code class="language-plaintext highlighter-rouge">avaticaUser</code> and <code class="language-plaintext highlighter-rouge">avaticaPassword</code> parameters. The <code class="language-plaintext highlighter-rouge">username</code> and <code class="language-plaintext highlighter-rouge">password</code> parameters have now been
 removed as CALCITE-3248 implements the <a href="https://golang.org/pkg/database/sql/driver/#Connector">Connector interface</a> via the
-<code class="highlighter-rouge">NewConnector()</code> method, which allows the driver to be instantiated with a custom HTTP client. Subsequently, it is now
-possible to set up the driver with a custom HTTP client and decorate it with the <code class="highlighter-rouge">WithDigestAuth()</code>, <code class="highlighter-rouge">WithBasicAuth()</code>,
-<code class="highlighter-rouge">WithKerberosAuth()</code> and <code class="highlighter-rouge">WithAdditionalHeaders()</code> methods.</p>
+<code class="language-plaintext highlighter-rouge">NewConnector()</code> method, which allows the driver to be instantiated with a custom HTTP client. Subsequently, it is now
+possible to set up the driver with a custom HTTP client and decorate it with the <code class="language-plaintext highlighter-rouge">WithDigestAuth()</code>, <code class="language-plaintext highlighter-rouge">WithBasicAuth()</code>,
+<code class="language-plaintext highlighter-rouge">WithKerberosAuth()</code> and <code class="language-plaintext highlighter-rouge">WithAdditionalHeaders()</code> methods.</p>
 
 <p>Features and bug fixes</p>
 
 <ul>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3248">CALCITE-3248</a>]
-Add Connector implementation and remove <code class="highlighter-rouge">username</code> and <code class="highlighter-rouge">password</code> query string parameters from DSN (Tino Rusch)</li>
+Add Connector implementation and remove <code class="language-plaintext highlighter-rouge">username</code> and <code class="language-plaintext highlighter-rouge">password</code> query string parameters from DSN (Tino Rusch)</li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3253">CALCITE-3253</a>]
 Check server address exists before returning it in an Avatica response error (Tino Rusch)</li>
   <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3264">CALCITE-3264</a>]
@@ -822,9 +822,9 @@ that users of this package start migrating to using Go modules to ease the trans
 <p><strong>Breaking change for Phoenix (<a href="https://issues.apache.org/jira/browse/CALCITE-2724">CALCITE-2763</a>):</strong> 
 In Apache Phoenix, null and empty strings are equivalent. For some background on why this is the case, see
 <a href="https://issues.apache.org/jira/browse/PHOENIX-947">PHOENIX-947</a>. In version 3 of Avatica-Go and below, null and empty
-strings are returned as an empty string <code class="highlighter-rouge">""</code> to the client. This prevented database/sql’s built in NullString type from
-working correctly. From 4.0.0 onwards, null and empty strings will be returned as a <code class="highlighter-rouge">nil</code>. This allows the usage of the
-<code class="highlighter-rouge">sql.NullString</code> type.</p>
+strings are returned as an empty string <code class="language-plaintext highlighter-rouge">""</code> to the client. This prevented database/sql’s built in NullString type from
+working correctly. From 4.0.0 onwards, null and empty strings will be returned as a <code class="language-plaintext highlighter-rouge">nil</code>. This allows the usage of the
+<code class="language-plaintext highlighter-rouge">sql.NullString</code> type.</p>
 
 <p>Features and bug fixes</p>
 
@@ -878,8 +878,8 @@ Move release process to separate HOWTO document so that it’s consistent with h
 <p>Apache Calcite Avatica Go 3.2.0 is a minor release of Avatica Go with fixes to the import paths after enabling
 support for Go modules.</p>
 
-<p>The 3.1.0 release contained a bug where packages within the library used the <code class="highlighter-rouge">"github.com/apache/calcite-avatica-go"</code>
-import path rather than the <code class="highlighter-rouge">"github.com/apache/calcite-avatica-go/v3"</code> import path. This resulted in an issue where
+<p>The 3.1.0 release contained a bug where packages within the library used the <code class="language-plaintext highlighter-rouge">"github.com/apache/calcite-avatica-go"</code>
+import path rather than the <code class="language-plaintext highlighter-rouge">"github.com/apache/calcite-avatica-go/v3"</code> import path. This resulted in an issue where
 2 versions of the library are being used at the same time, causing some programs to not build.</p>
 
 <p><strong>The Calcite team recommends consumers of the Avatica Go library to not use the 3.1.0 release and ensure that the

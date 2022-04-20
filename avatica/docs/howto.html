@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>HOWTO</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v3.9.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/avatica/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/avatica/favicon.ico">
@@ -741,15 +741,15 @@
 <h2 id="building-from-a-source-distribution">Building from a source distribution</h2>
 
 <p>Prerequisites are Java (JDK 8 or later)
-and Gradle (version 6.8.1) on your path.</p>
+and Gradle (version 7.4.2) on your path.</p>
 
 <p>(The source distribution
 <a href="https://issues.apache.org/jira/browse/CALCITE-4575">does not include the Gradle wrapper</a>;
 therefore you need to
 <a href="https://gradle.org/releases/">install Gradle manually</a>.)</p>
 
-<p>Unpack the source distribution <code class="highlighter-rouge">.tar.gz</code> file,
-<code class="highlighter-rouge">cd</code> to the root directory of the unpacked source,
+<p>Unpack the source distribution <code class="language-plaintext highlighter-rouge">.tar.gz</code> file,
+<code class="language-plaintext highlighter-rouge">cd</code> to the root directory of the unpacked source,
 then build using Gradle:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz apache-calcite-avatica-1.20.0-src.tar.gz
@@ -757,8 +757,8 @@ then build using Gradle:</p>
 <span class="nv">$ </span>gradle build</code></pre></figure>
 
 <p><a href="#running-tests">Running tests</a> describes how to run more or fewer
-tests (but you should use the <code class="highlighter-rouge">gradle</code> command rather than
-<code class="highlighter-rouge">./gradlew</code>).</p>
+tests (but you should use the <code class="language-plaintext highlighter-rouge">gradle</code> command rather than
+<code class="language-plaintext highlighter-rouge">./gradlew</code>).</p>
 
 <h2 id="building-from-git">Building from Git</h2>
 
@@ -766,7 +766,7 @@ tests (but you should use the <code class="highlighter-rouge">gradle</code> comm
 and Java (JDK 8 or later) on your path.</p>
 
 <p>Create a local copy of the GitHub repository,
-<code class="highlighter-rouge">cd</code> to its root directory,
+<code class="language-plaintext highlighter-rouge">cd</code> to its root directory,
 then build using Gradle:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git clone git://github.com/apache/calcite-avatica.git avatica
@@ -779,7 +779,7 @@ tests.</p>
 <h2 id="running-tests">Running tests</h2>
 
 <p>The test suite will run by default when you build, unless you specify
-<code class="highlighter-rouge">-x test</code></p>
+<code class="language-plaintext highlighter-rouge">-x test</code></p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./gradlew assemble <span class="c"># build the artifacts</span>
 <span class="nv">$ </span>./gradlew build <span class="nt">-x</span> <span class="nb">test</span> <span class="c"># build the artifacts, verify code style, skip tests</span>
@@ -787,7 +787,7 @@ tests.</p>
 <span class="nv">$ </span>./gradlew <span class="nb">test</span> <span class="c"># execute tests</span>
 <span class="nv">$ </span>./gradlew checkstyleMain checkstyleTest <span class="c"># verify code style</span></code></pre></figure>
 
-<p>You can use <code class="highlighter-rouge">./gradlew assemble</code> to build the artifacts and skip all tests and verifications.</p>
+<p>You can use <code class="language-plaintext highlighter-rouge">./gradlew assemble</code> to build the artifacts and skip all tests and verifications.</p>
 
 <h3 id="to-run-tests-in-docker">To run tests in docker:</h3>
 
@@ -818,13 +818,13 @@ particular release managers.</p>
 <h2 id="set-up-pgp-signing-keys-for-calcite-committers">Set up PGP signing keys (for Calcite committers)</h2>
 
 <p>Follow instructions <a href="http://www.apache.org/dev/release-signing">here</a> to
-create a key pair. (On Mac OS X, I did <code class="highlighter-rouge">brew install gpg</code> and
-<code class="highlighter-rouge">gpg --gen-key</code>.)</p>
+create a key pair. (On Mac OS X, I did <code class="language-plaintext highlighter-rouge">brew install gpg</code> and
+<code class="language-plaintext highlighter-rouge">gpg --gen-key</code>.)</p>
 
 <p>Add your public key to the
-<a href="https://dist.apache.org/repos/dist/release/calcite/KEYS"><code class="highlighter-rouge">KEYS</code></a>
-file by following instructions in the <code class="highlighter-rouge">KEYS</code> file.
-(The <code class="highlighter-rouge">KEYS</code> file is not present in the git repo or in a release tar
+<a href="https://dist.apache.org/repos/dist/release/calcite/KEYS"><code class="language-plaintext highlighter-rouge">KEYS</code></a>
+file by following instructions in the <code class="language-plaintext highlighter-rouge">KEYS</code> file.
+(The <code class="language-plaintext highlighter-rouge">KEYS</code> file is not present in the git repo or in a release tar
 ball because that would be
 <a href="https://issues.apache.org/jira/browse/CALCITE-1746">redundant</a>.)</p>
 
@@ -833,32 +833,32 @@ ball because that would be
 <p>By default, Gradle plugins which require you to unlock a GPG secret key
 will prompt you in the terminal. To prevent you from having to enter
 this password numerous times, it is highly recommended to install and
-run <code class="highlighter-rouge">gpg-agent</code>.</p>
+run <code class="language-plaintext highlighter-rouge">gpg-agent</code>.</p>
 
-<p>This can be started automatically via an <code class="highlighter-rouge">~/.xsession</code> on Linux or some
-scripting in your shell’s configuration script of choice (e.g. <code class="highlighter-rouge">~/.bashrc</code> or <code class="highlighter-rouge">~/.zshrc</code>)</p>
+<p>This can be started automatically via an <code class="language-plaintext highlighter-rouge">~/.xsession</code> on Linux or some
+scripting in your shell’s configuration script of choice (e.g. <code class="language-plaintext highlighter-rouge">~/.bashrc</code> or <code class="language-plaintext highlighter-rouge">~/.zshrc</code>)</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">GPG_AGENT</span><span class="o">=</span><span class="k">$(</span>which gpg-agent<span class="k">)</span>
-<span class="nv">GPG_TTY</span><span class="o">=</span><span class="sb">`</span>tty<span class="sb">`</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">GPG_AGENT</span><span class="o">=</span><span class="si">$(</span>which gpg-agent<span class="si">)</span>
+<span class="nv">GPG_TTY</span><span class="o">=</span><span class="sb">`</span><span class="nb">tty</span><span class="sb">`</span>
 <span class="nb">export </span>GPG_TTY
 <span class="k">if</span> <span class="o">[[</span> <span class="nt">-f</span> <span class="s2">"</span><span class="nv">$GPG_AGENT</span><span class="s2">"</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then
   </span><span class="nv">envfile</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span><span class="s2">/.gnupg/gpg-agent.env"</span>
 
-  <span class="k">if </span><span class="nb">test</span> <span class="nt">-f</span> <span class="s2">"</span><span class="nv">$envfile</span><span class="s2">"</span> <span class="o">&amp;&amp;</span> <span class="nb">kill</span> <span class="nt">-0</span> <span class="k">$(</span><span class="nb">grep </span>GPG_AGENT_INFO <span class="s2">"</span><span class="nv">$envfile</span><span class="s2">"</span> | cut <span class="nt">-d</span>: <span class="nt">-f</span> 2<span class="k">)</span> 2&gt;/dev/null<span class="p">;</span> <span class="k">then
+  <span class="k">if </span><span class="nb">test</span> <span class="nt">-f</span> <span class="s2">"</span><span class="nv">$envfile</span><span class="s2">"</span> <span class="o">&amp;&amp;</span> <span class="nb">kill</span> <span class="nt">-0</span> <span class="si">$(</span><span class="nb">grep </span>GPG_AGENT_INFO <span class="s2">"</span><span class="nv">$envfile</span><span class="s2">"</span> | <span class="nb">cut</span> <span class="nt">-d</span>: <span class="nt">-f</span> 2<span class="si">)</span> 2&gt;/dev/null<span class="p">;</span> <span class="k">then
       </span><span class="nb">source</span> <span class="s2">"</span><span class="nv">$envfile</span><span class="s2">"</span>
   <span class="k">else
-      </span><span class="nb">eval</span> <span class="s2">"</span><span class="k">$(</span>gpg-agent <span class="nt">--daemon</span> <span class="nt">--log-file</span><span class="o">=</span>~/.gpg/gpg.log <span class="nt">--write-env-file</span> <span class="s2">"</span><span class="nv">$envfile</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span>
+      </span><span class="nb">eval</span> <span class="s2">"</span><span class="si">$(</span>gpg-agent <span class="nt">--daemon</span> <span class="nt">--log-file</span><span class="o">=</span>~/.gpg/gpg.log <span class="nt">--write-env-file</span> <span class="s2">"</span><span class="nv">$envfile</span><span class="s2">"</span><span class="si">)</span><span class="s2">"</span>
   <span class="k">fi
   </span><span class="nb">export </span>GPG_AGENT_INFO  <span class="c"># the env file does not contain the export statement</span>
 <span class="k">fi</span></code></pre></figure>
 
-<p>Also, ensure that <code class="highlighter-rouge">default-cache-ttl 6000</code> is set in <code class="highlighter-rouge">~/.gnupg/gpg-agent.conf</code>
+<p>Also, ensure that <code class="language-plaintext highlighter-rouge">default-cache-ttl 6000</code> is set in <code class="language-plaintext highlighter-rouge">~/.gnupg/gpg-agent.conf</code>
 to guarantee that your credentials will be cached for the duration of the build.</p>
 
 <h2 id="set-up-nexus-repository-credentials-for-calcite-committers">Set up Nexus repository credentials (for Calcite committers)</h2>
 
 <p>Gradle provides multiple ways to <a href="https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties">configure project properties</a>.
-For instance, you could update <code class="highlighter-rouge">$HOME/.gradle/gradle.properties</code>.</p>
+For instance, you could update <code class="language-plaintext highlighter-rouge">$HOME/.gradle/gradle.properties</code>.</p>
 
 <p>Note: the build script would print the missing properties, so you can try running it and let it complain on the missing ones.</p>
 
@@ -872,11 +872,11 @@ For instance, you could update <code class="highlighter-rouge">$HOME/.gradle/gra
 
 <p>When
 <a href="https://github.com/vlsi/asflike-release-environment">asflike-release-environment</a>
-is used, the credentials are taken from <code class="highlighter-rouge">asfTest...</code>
-(e.g. <code class="highlighter-rouge">asfTestNexusUsername=test</code>)</p>
+is used, the credentials are taken from <code class="language-plaintext highlighter-rouge">asfTest...</code>
+(e.g. <code class="language-plaintext highlighter-rouge">asfTestNexusUsername=test</code>)</p>
 
-<p>Note: if you want to uses <code class="highlighter-rouge">gpg-agent</code>, you need to pass <code class="highlighter-rouge">useGpgCmd</code> property, and specify the key id
-via <code class="highlighter-rouge">signing.gnupg.keyName</code>.</p>
+<p>Note: if you want to uses <code class="language-plaintext highlighter-rouge">gpg-agent</code>, you need to pass <code class="language-plaintext highlighter-rouge">useGpgCmd</code> property, and specify the key id
+via <code class="language-plaintext highlighter-rouge">signing.gnupg.keyName</code>.</p>
 
 <h2 id="making-a-snapshot-for-calcite-committers">Making a snapshot (for Calcite committers)</h2>
 
@@ -899,16 +899,16 @@ git clean <span class="nt">-xn</span>
 <ul>
   <li>Set up signing keys as described above.</li>
   <li>Make sure you are using JDK 8 (not 9 or 10).</li>
-  <li>Check that <code class="highlighter-rouge">README</code>, <code class="highlighter-rouge">site/_docs/howto.md</code>, <code class="highlighter-rouge">site/_docs/docker_images.md</code> have the correct version number.</li>
-  <li>Check that <code class="highlighter-rouge">site/_docs/howto.md</code> has the correct Gradle version.</li>
-  <li>Check that <code class="highlighter-rouge">NOTICE</code> has the current copyright year.</li>
-  <li>Check that <code class="highlighter-rouge">calcite.avatica.version</code> has the proper value in <code class="highlighter-rouge">/gradle.properties</code>.</li>
-  <li>Add release notes to <code class="highlighter-rouge">site/_docs/history.md</code>. Include the commit history,
+  <li>Check that <code class="language-plaintext highlighter-rouge">README</code>, <code class="language-plaintext highlighter-rouge">site/_docs/howto.md</code>, <code class="language-plaintext highlighter-rouge">site/_docs/docker_images.md</code> have the correct version number.</li>
+  <li>Check that <code class="language-plaintext highlighter-rouge">site/_docs/howto.md</code> has the correct Gradle version.</li>
+  <li>Check that <code class="language-plaintext highlighter-rouge">NOTICE</code> has the current copyright year.</li>
+  <li>Check that <code class="language-plaintext highlighter-rouge">calcite.avatica.version</code> has the proper value in <code class="language-plaintext highlighter-rouge">/gradle.properties</code>.</li>
+  <li>Add release notes to <code class="language-plaintext highlighter-rouge">site/_docs/history.md</code>. Include the commit history,
 names of people who contributed to the release,
 and say which versions of Java, Guava and operating systems the release is
 tested against.</li>
   <li>Generate a report of vulnerabilities that occur among dependencies,
-using <code class="highlighter-rouge">./gradlew dependencyCheckUpdate dependencyCheckAggregate</code>.</li>
+using <code class="language-plaintext highlighter-rouge">./gradlew dependencyCheckUpdate dependencyCheckAggregate</code>.</li>
   <li>Make sure that
 <a href="https://issues.apache.org/jira/issues/?jql=project%20%3D%20CALCITE%20AND%20status%20%3D%20Resolved%20and%20fixVersion%20is%20null">
 every “resolved” JIRA case</a> (including duplicates) has
@@ -917,7 +917,7 @@ just about to release)</li>
 </ul>
 
 <p>The release candidate process does not add commits,
-so there’s no harm if it fails. It might leave <code class="highlighter-rouge">-rc</code> tag behind
+so there’s no harm if it fails. It might leave <code class="language-plaintext highlighter-rouge">-rc</code> tag behind
 which can be removed if required.</p>
 
 <p>You can perform a dry-run release with a help of
@@ -948,9 +948,9 @@ git clean <span class="nt">-xn</span>
     <p>You will need to have <a href="https://docs.docker.com/install/">Docker</a> and <a href="https://docs.docker.com/compose/install/">Docker Compose</a> installed.</p>
   </li>
   <li>
-    <p>The script expects you to mount your <code class="highlighter-rouge">~/.gnupg</code> directory into the <code class="highlighter-rouge">/.gnupg</code> directory in the container. Once mounted into the container,
+    <p>The script expects you to mount your <code class="language-plaintext highlighter-rouge">~/.gnupg</code> directory into the <code class="language-plaintext highlighter-rouge">/.gnupg</code> directory in the container. Once mounted into the container,
 the script will make a copy of the contents and move it to a different location, so that it will not modify the contents of your original
-<code class="highlighter-rouge">~/.gnupg</code> directory during the build.</p>
+<code class="language-plaintext highlighter-rouge">~/.gnupg</code> directory during the build.</p>
   </li>
   <li>
     <p>Start the <a href="https://github.com/vlsi/asflike-release-environment">asflike-release-environment</a> to prepare a staging environment for a dry-run.</p>
@@ -972,31 +972,31 @@ docker-compose run <span class="nt">-v</span> /c/Users/username/AppData/Roaming/
 <h2 id="checking-the-artifacts">Checking the artifacts</h2>
 
 <ul>
-  <li>In the <code class="highlighter-rouge">release/build/distributions</code> directory should be these 3 files, among others:
+  <li>In the <code class="language-plaintext highlighter-rouge">release/build/distributions</code> directory should be these 3 files, among others:
     <ul>
       <li>apache-calcite-avatica-X.Y.Z-src.tar.gz</li>
       <li>apache-calcite-avatica-X.Y.Z-src.tar.gz.asc</li>
       <li>apache-calcite-avatica-X.Y.Z-src.tar.gz.sha512</li>
     </ul>
   </li>
-  <li>Note that the file names start <code class="highlighter-rouge">apache-calcite-avatica-</code>.</li>
-  <li>In the source distro <code class="highlighter-rouge">.tar.gz</code> (currently there is
+  <li>Note that the file names start <code class="language-plaintext highlighter-rouge">apache-calcite-avatica-</code>.</li>
+  <li>In the source distro <code class="language-plaintext highlighter-rouge">.tar.gz</code> (currently there is
 no binary distro), check that all files belong to a directory called
-<code class="highlighter-rouge">apache-calcite-avatica-X.Y.Z-src</code>.</li>
-  <li>That directory must contain files <code class="highlighter-rouge">NOTICE</code>, <code class="highlighter-rouge">LICENSE</code>,
-<code class="highlighter-rouge">README</code>, <code class="highlighter-rouge">README.md</code>
+<code class="language-plaintext highlighter-rouge">apache-calcite-avatica-X.Y.Z-src</code>.</li>
+  <li>That directory must contain files <code class="language-plaintext highlighter-rouge">NOTICE</code>, <code class="language-plaintext highlighter-rouge">LICENSE</code>,
+<code class="language-plaintext highlighter-rouge">README</code>, <code class="language-plaintext highlighter-rouge">README.md</code>
     <ul>
-      <li>Check that the version in <code class="highlighter-rouge">README</code> is correct</li>
-      <li>Check that <code class="highlighter-rouge">LICENSE</code> is identical to the file checked into git</li>
+      <li>Check that the version in <code class="language-plaintext highlighter-rouge">README</code> is correct</li>
+      <li>Check that <code class="language-plaintext highlighter-rouge">LICENSE</code> is identical to the file checked into git</li>
     </ul>
   </li>
   <li>Make sure that the following files do not occur in the source
-distros: <code class="highlighter-rouge">KEYS</code>, <code class="highlighter-rouge">gradlew</code>, <code class="highlighter-rouge">gradlew.bat</code>, <code class="highlighter-rouge">gradle-wrapper.jar</code>,
-<code class="highlighter-rouge">gradle-wrapper.properties</code></li>
-  <li>For each .jar (for example <code class="highlighter-rouge">core/build/libs/avatica-core-X.Y.Z.jar</code>
-and <code class="highlighter-rouge">server/build/libs/avatica-server-X.Y.Z-sources.jar</code>),
-verify that the <code class="highlighter-rouge">META-INF</code> directory contains the correct
-contents for <code class="highlighter-rouge">LICENSE</code> and <code class="highlighter-rouge">NOTICE</code> per the
+distros: <code class="language-plaintext highlighter-rouge">KEYS</code>, <code class="language-plaintext highlighter-rouge">gradlew</code>, <code class="language-plaintext highlighter-rouge">gradlew.bat</code>, <code class="language-plaintext highlighter-rouge">gradle-wrapper.jar</code>,
+<code class="language-plaintext highlighter-rouge">gradle-wrapper.properties</code></li>
+  <li>For each .jar (for example <code class="language-plaintext highlighter-rouge">core/build/libs/avatica-core-X.Y.Z.jar</code>
+and <code class="language-plaintext highlighter-rouge">server/build/libs/avatica-server-X.Y.Z-sources.jar</code>),
+verify that the <code class="language-plaintext highlighter-rouge">META-INF</code> directory contains the correct
+contents for <code class="language-plaintext highlighter-rouge">LICENSE</code> and <code class="language-plaintext highlighter-rouge">NOTICE</code> per the
 source/classes contained. Refer to the ASF licensing documentation on
 what is required.</li>
   <li>Check PGP, per <a href="https://httpd.apache.org/dev/verification.html">this</a></li>
@@ -1006,8 +1006,8 @@ what is required.</li>
 
 <ul>
   <li>Go to <a href="https://repository.apache.org/">https://repository.apache.org/</a> and login</li>
-  <li>Under <code class="highlighter-rouge">Build Promotion</code>, click <code class="highlighter-rouge">Staging Repositories</code></li>
-  <li>In the <code class="highlighter-rouge">Staging Repositories</code> tab there should be a line with profile <code class="highlighter-rouge">org.apache.calcite</code></li>
+  <li>Under <code class="language-plaintext highlighter-rouge">Build Promotion</code>, click <code class="language-plaintext highlighter-rouge">Staging Repositories</code></li>
+  <li>In the <code class="language-plaintext highlighter-rouge">Staging Repositories</code> tab there should be a line with profile <code class="language-plaintext highlighter-rouge">org.apache.calcite</code></li>
   <li>Navigate through the artifact tree and make sure the .jar, .pom, .asc files are present</li>
 </ul>
 
@@ -1033,7 +1033,7 @@ curl <span class="nt">-O</span> https://dist.apache.org/repos/dist/release/calci
       continue
     fi
     if</span> <span class="o">[</span> <span class="nt">-f</span> <span class="nv">$i</span>.sha512 <span class="o">]</span><span class="p">;</span> <span class="k">then
-      if</span> <span class="o">[</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">cat</span> <span class="nv">$i</span>.sha512<span class="k">)</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"</span><span class="k">$(</span>shasum <span class="nt">-a</span> 512 <span class="nv">$i</span><span class="k">)</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+      if</span> <span class="o">[</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">cat</span> <span class="nv">$i</span>.sha512<span class="si">)</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"</span><span class="si">$(</span>shasum <span class="nt">-a</span> 512 <span class="nv">$i</span><span class="si">)</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
         </span><span class="nb">echo</span> <span class="nv">$i</span>.sha512 present and correct
       <span class="k">else
         </span><span class="nb">echo</span> <span class="nv">$i</span>.sha512 does not match
@@ -1049,8 +1049,8 @@ checkHash apache-calcite-avatica-X.Y.Z-rcN</code></pre></figure>
 <h2 id="get-approval-for-a-release-via-apache-voting-process-for-calcite-committers">Get approval for a release via Apache voting process (for Calcite committers)</h2>
 
 <p>Release vote on dev list.
-Note: the draft mail is printed as the final step of <code class="highlighter-rouge">prepareVote</code> task,
-and you can find the draft in <code class="highlighter-rouge">/build/prepareVote/mail.txt</code></p>
+Note: the draft mail is printed as the final step of <code class="language-plaintext highlighter-rouge">prepareVote</code> task,
+and you can find the draft in <code class="language-plaintext highlighter-rouge">/build/prepareVote/mail.txt</code></p>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">To: dev@calcite.apache.org
 Subject: [VOTE] Release apache-calcite-avatica-X.Y.Z (release candidate N)
@@ -1164,7 +1164,7 @@ after you have confirmed that the nexus artifacts were promoted properly.</p>
 <p>If there are more than 2 releases in SVN (see https://dist.apache.org/repos/dist/release/calcite),
 clear out the oldest ones:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">svn rm https://dist.apache.org/repos/dist/release/calcite/apache-calcite-avatica-X.Y.Z</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">svn <span class="nb">rm </span>https://dist.apache.org/repos/dist/release/calcite/apache-calcite-avatica-X.Y.Z</code></pre></figure>
 
 <p>The old releases will remain available in the
 <a href="http://archive.apache.org/dist/calcite/">release archive</a>.</p>
@@ -1179,8 +1179,8 @@ clear out the oldest ones:</p>
 
 <p>Add a release note by copying
 <a href="https://github.com/apache/calcite-avatica/tree/master/site/_posts/2016-11-01-release-1.9.0.md">site/_posts/2016-11-01-release-1.9.0.md</a>,
-update the version number in <code class="highlighter-rouge">gradle.properties</code>,
-generate the javadoc and copy to <code class="highlighter-rouge">site/target/avatica/javadocAggregate</code>,
+update the version number in <code class="language-plaintext highlighter-rouge">gradle.properties</code>,
+generate the javadoc and copy to <code class="language-plaintext highlighter-rouge">site/target/avatica/javadocAggregate</code>,
 <a href="#publish-the-web-site">publish the site</a>,
 and check that it appears in the contents in <a href="http://localhost:4000/news/">news</a>.</p>
 

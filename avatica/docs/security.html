@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Security</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v3.9.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/avatica/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/avatica/favicon.ico">
@@ -713,7 +713,7 @@ HTTP Basic, and HTTP Digest.</p>
 
 <p>The authentication and authorization provided by Avatica are designed for use
 <em>instead</em> of the authentication and authorization provided by the underlying database.
-The typical <code class="highlighter-rouge">user</code> and <code class="highlighter-rouge">password</code> JDBC properties are <strong>always</strong> passed through to
+The typical <code class="language-plaintext highlighter-rouge">user</code> and <code class="language-plaintext highlighter-rouge">password</code> JDBC properties are <strong>always</strong> passed through to
 the Avatica server which will cause the server to enforce those credentials. As such,
 Avatica’s authentication types mentioned here only have relevance when the underlying database’s authentication
 and authorization features are not used. (The Kerberos/SPNEGO integration is one difference as the impersonation feature
@@ -736,19 +736,19 @@ already, this authentication is unnecessary.</p>
 
 <h3 id="enabling-basic-authentication">Enabling Basic Authentication</h3>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">String</span> <span class="n">propertiesFile</span> <span class="o">=</span> <span class="s">"/path/to/jetty-users.properties"</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">String</span> <span class="n">propertiesFile</span> <span class="o">=</span> <span class="s">"/path/to/jetty-users.properties"</span><span class="o">;</span>
 <span class="c1">// All roles allowed</span>
-<span class="n">String</span><span class="o">[]</span> <span class="n">allowedRoles</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[]</span>  <span class="o">{</span><span class="s">"*"</span><span class="o">};</span>
+<span class="nc">String</span><span class="o">[]</span> <span class="n">allowedRoles</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">[]</span>  <span class="o">{</span><span class="s">"*"</span><span class="o">};</span>
 <span class="c1">// Only specific roles are allowed</span>
-<span class="n">allowedRoles</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[]</span> <span class="o">{</span> <span class="s">"users"</span><span class="o">,</span> <span class="s">"admins"</span> <span class="o">};</span>
-<span class="n">HttpServer</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpServer</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+<span class="n">allowedRoles</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">[]</span> <span class="o">{</span> <span class="s">"users"</span><span class="o">,</span> <span class="s">"admins"</span> <span class="o">};</span>
+<span class="nc">HttpServer</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HttpServer</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
     <span class="o">.</span><span class="na">withPort</span><span class="o">(</span><span class="mi">8765</span><span class="o">)</span>
-    <span class="o">.</span><span class="na">withHandler</span><span class="o">(</span><span class="k">new</span> <span class="n">LocalService</span><span class="o">(),</span> <span class="n">Driver</span><span class="o">.</span><span class="na">Serialization</span><span class="o">.</span><span class="na">PROTOBUF</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">withHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">LocalService</span><span class="o">(),</span> <span class="nc">Driver</span><span class="o">.</span><span class="na">Serialization</span><span class="o">.</span><span class="na">PROTOBUF</span><span class="o">)</span>
     <span class="o">.</span><span class="na">withBasicAuthentication</span><span class="o">(</span><span class="n">propertiesFile</span><span class="o">,</span> <span class="n">allowedRoles</span><span class="o">)</span>
     <span class="o">.</span><span class="na">build</span><span class="o">();</span></code></pre></figure>
 
 <p>The properties file must be in a form consumable by Jetty. Each line in this
-file is of the form: <code class="highlighter-rouge">username: password[,rolename ...]</code></p>
+file is of the form: <code class="language-plaintext highlighter-rouge">username: password[,rolename ...]</code></p>
 
 <p>For example:</p>
 
@@ -769,19 +769,19 @@ If credentials are passed to the database already, this authentication is unnece
 
 <h3 id="enabling-digest-authentication">Enabling Digest Authentication</h3>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">String</span> <span class="n">propertiesFile</span> <span class="o">=</span> <span class="s">"/path/to/jetty-users.properties"</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">String</span> <span class="n">propertiesFile</span> <span class="o">=</span> <span class="s">"/path/to/jetty-users.properties"</span><span class="o">;</span>
 <span class="c1">// All roles allowed</span>
-<span class="n">String</span><span class="o">[]</span> <span class="n">allowedRoles</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[]</span>  <span class="o">{</span><span class="s">"*"</span><span class="o">};</span>
+<span class="nc">String</span><span class="o">[]</span> <span class="n">allowedRoles</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">[]</span>  <span class="o">{</span><span class="s">"*"</span><span class="o">};</span>
 <span class="c1">// Only specific roles are allowed</span>
-<span class="n">allowedRoles</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[]</span> <span class="o">{</span> <span class="s">"users"</span><span class="o">,</span> <span class="s">"admins"</span> <span class="o">};</span>
-<span class="n">HttpServer</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpServer</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+<span class="n">allowedRoles</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">[]</span> <span class="o">{</span> <span class="s">"users"</span><span class="o">,</span> <span class="s">"admins"</span> <span class="o">};</span>
+<span class="nc">HttpServer</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HttpServer</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
     <span class="o">.</span><span class="na">withPort</span><span class="o">(</span><span class="mi">8765</span><span class="o">)</span>
-    <span class="o">.</span><span class="na">withHandler</span><span class="o">(</span><span class="k">new</span> <span class="n">LocalService</span><span class="o">(),</span> <span class="n">Driver</span><span class="o">.</span><span class="na">Serialization</span><span class="o">.</span><span class="na">PROTOBUF</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">withHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">LocalService</span><span class="o">(),</span> <span class="nc">Driver</span><span class="o">.</span><span class="na">Serialization</span><span class="o">.</span><span class="na">PROTOBUF</span><span class="o">)</span>
     <span class="o">.</span><span class="na">withDigestAuthentication</span><span class="o">(</span><span class="n">propertiesFile</span><span class="o">,</span> <span class="n">allowedRoles</span><span class="o">)</span>
     <span class="o">.</span><span class="na">build</span><span class="o">();</span></code></pre></figure>
 
 <p>The properties file must be in a form consumable by Jetty. Each line in this
-file is of the form: <code class="highlighter-rouge">username: password[,rolename ...]</code></p>
+file is of the form: <code class="language-plaintext highlighter-rouge">username: password[,rolename ...]</code></p>
 
 <p>For example:</p>
 
@@ -807,17 +807,17 @@ will have queries executed as the Avatica server’s kerberos user. <a href="#im
 is the feature which enables actions to be run in the server as the actual end-user.</p>
 
 <p>As a note, it is required that the Kerberos principal in use by the Avatica server
-<strong>must</strong> have an primary of <code class="highlighter-rouge">HTTP</code> (where Kerberos principals are of the form
-<code class="highlighter-rouge">primary[/instance]@REALM</code>). This is specified by <a href="https://tools.ietf.org/html/rfc4559">RFC-4559</a>.</p>
+<strong>must</strong> have an primary of <code class="language-plaintext highlighter-rouge">HTTP</code> (where Kerberos principals are of the form
+<code class="language-plaintext highlighter-rouge">primary[/instance]@REALM</code>). This is specified by <a href="https://tools.ietf.org/html/rfc4559">RFC-4559</a>.</p>
 
 <h4 id="programmatic-login">Programmatic Login</h4>
 
 <p>This approach requires no external file configurations and only requires a
 keytab file for the principal.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">HttpServer</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpServer</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">HttpServer</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HttpServer</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
     <span class="o">.</span><span class="na">withPort</span><span class="o">(</span><span class="mi">8765</span><span class="o">)</span>
-    <span class="o">.</span><span class="na">withHandler</span><span class="o">(</span><span class="k">new</span> <span class="n">LocalService</span><span class="o">(),</span> <span class="n">Driver</span><span class="o">.</span><span class="na">Serialization</span><span class="o">.</span><span class="na">PROTOBUF</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">withHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">LocalService</span><span class="o">(),</span> <span class="nc">Driver</span><span class="o">.</span><span class="na">Serialization</span><span class="o">.</span><span class="na">PROTOBUF</span><span class="o">)</span>
     <span class="o">.</span><span class="na">withSpnego</span><span class="o">(</span><span class="s">"HTTP/host.domain.com@DOMAIN.COM"</span><span class="o">)</span>
     <span class="o">.</span><span class="na">withAutomaticLogin</span><span class="o">(</span>
         <span class="k">new</span> <span class="nf">File</span><span class="o">(</span><span class="s">"/etc/security/keytabs/avatica.spnego.keytab"</span><span class="o">))</span>
@@ -829,14 +829,14 @@ keytab file for the principal.</p>
 also does not support Avatica server login via JAAS configuration file. The Avatica
 programmatic login is the only manner to do this.</strong></p>
 
-<p>A JAAS configuration file can be set via the system property <code class="highlighter-rouge">java.security.auth.login.config</code>.
+<p>A JAAS configuration file can be set via the system property <code class="language-plaintext highlighter-rouge">java.security.auth.login.config</code>.
 The user must set this property when launching their Java application invoking the Avatica server.
 The presence of this file will automatically perform login as necessary in the first use
 of the Avatica server. The invocation is nearly the same as the programmatic login.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">HttpServer</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpServer</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">HttpServer</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HttpServer</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
     <span class="o">.</span><span class="na">withPort</span><span class="o">(</span><span class="mi">8765</span><span class="o">)</span>
-    <span class="o">.</span><span class="na">withHandler</span><span class="o">(</span><span class="k">new</span> <span class="n">LocalService</span><span class="o">(),</span> <span class="n">Driver</span><span class="o">.</span><span class="na">Serialization</span><span class="o">.</span><span class="na">PROTOBUF</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">withHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">LocalService</span><span class="o">(),</span> <span class="nc">Driver</span><span class="o">.</span><span class="na">Serialization</span><span class="o">.</span><span class="na">PROTOBUF</span><span class="o">)</span>
     <span class="o">.</span><span class="na">withSpnego</span><span class="o">(</span><span class="s">"HTTP/host.domain.com@DOMAIN.COM"</span><span class="o">)</span>
     <span class="o">.</span><span class="na">build</span><span class="o">();</span></code></pre></figure>
 
@@ -847,14 +847,14 @@ of the Avatica server. The invocation is nearly the same as the programmatic log
   <span class="n">storeKey</span><span class="o">=</span><span class="kc">true</span>
   <span class="n">useKeyTab</span><span class="o">=</span><span class="kc">true</span>
   <span class="n">keyTab</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">security</span><span class="o">/</span><span class="n">keytabs</span><span class="o">/</span><span class="n">avatica</span><span class="o">.</span><span class="na">spnego</span><span class="o">.</span><span class="na">keyTab</span>
-  <span class="n">principal</span><span class="o">=</span><span class="n">HTTP</span><span class="o">/</span><span class="n">host</span><span class="o">.</span><span class="na">domain</span><span class="o">.</span><span class="na">com</span><span class="nd">@DOMAIN</span><span class="o">.</span><span class="na">COM</span><span class="o">;</span>
+  <span class="n">principal</span><span class="o">=</span><span class="no">HTTP</span><span class="o">/</span><span class="n">host</span><span class="o">.</span><span class="na">domain</span><span class="o">.</span><span class="na">com</span><span class="nd">@DOMAIN</span><span class="o">.</span><span class="na">COM</span><span class="o">;</span>
 <span class="o">};</span></code></pre></figure>
 
-<p>Ensure the <code class="highlighter-rouge">keyTab</code> and <code class="highlighter-rouge">principal</code> attributes are set correctly for your system.</p>
+<p>Ensure the <code class="language-plaintext highlighter-rouge">keyTab</code> and <code class="language-plaintext highlighter-rouge">principal</code> attributes are set correctly for your system.</p>
 
 <h4 id="additional-allowed-realms">Additional Allowed Realms</h4>
 
-<p>Versions of Avatica prior to 1.20.0 provided API to specify a list of <code class="highlighter-rouge">additionalAllowedRealms</code>.
+<p>Versions of Avatica prior to 1.20.0 provided API to specify a list of <code class="language-plaintext highlighter-rouge">additionalAllowedRealms</code>.
 While this API could have been leveraged by other integrators of Avatica, the only provided
 usage of this API was to specify additional Kerberos realms (realms other than the kerberos
 realm which the server’s principal was a part of) which should be allowed to authenticate
@@ -873,31 +873,31 @@ to execute the server-side calls (e.g. the underlying JDBC calls). Because the d
 on what it means to execute such an operation are dependent on the actual system, a
 callback is exposed for downstream integrators to implement.</p>
 
-<p>For example, the following is an example for creating an Apache Hadoop <code class="highlighter-rouge">UserGroupInformation</code>
-“proxy user”. This example takes a <code class="highlighter-rouge">UserGroupInformation</code> object representing the Avatica server’s
+<p>For example, the following is an example for creating an Apache Hadoop <code class="language-plaintext highlighter-rouge">UserGroupInformation</code>
+“proxy user”. This example takes a <code class="language-plaintext highlighter-rouge">UserGroupInformation</code> object representing the Avatica server’s
 identity, creates a “proxy user” with the client’s username, and performs the action as that
 client but using the server’s identity.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PhoenixDoAsCallback</span> <span class="kd">implements</span> <span class="n">DoAsRemoteUserCallback</span> <span class="o">{</span>
-  <span class="kd">private</span> <span class="kd">final</span> <span class="n">UserGroupInformation</span> <span class="n">serverUgi</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PhoenixDoAsCallback</span> <span class="kd">implements</span> <span class="nc">DoAsRemoteUserCallback</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kd">final</span> <span class="nc">UserGroupInformation</span> <span class="n">serverUgi</span><span class="o">;</span>
 
-  <span class="kd">public</span> <span class="nf">PhoenixDoAsCallback</span><span class="o">(</span><span class="n">UserGroupInformation</span> <span class="n">serverUgi</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">serverUgi</span> <span class="o">=</span> <span class="n">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">serverUgi</span><span class="o">);</span>
+  <span class="kd">public</span> <span class="nf">PhoenixDoAsCallback</span><span class="o">(</span><span class="nc">UserGroupInformation</span> <span class="n">serverUgi</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">serverUgi</span> <span class="o">=</span> <span class="nc">Objects</span><span class="o">.</span><span class="na">requireNonNull</span><span class="o">(</span><span class="n">serverUgi</span><span class="o">);</span>
   <span class="o">}</span>
 
   <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span> <span class="nf">doAsRemoteUser</span><span class="o">(</span><span class="n">String</span> <span class="n">remoteUserName</span><span class="o">,</span> <span class="n">String</span> <span class="n">remoteAddress</span><span class="o">,</span> <span class="kd">final</span> <span class="n">Callable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">action</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="no">T</span> <span class="nf">doAsRemoteUser</span><span class="o">(</span><span class="nc">String</span> <span class="n">remoteUserName</span><span class="o">,</span> <span class="nc">String</span> <span class="n">remoteAddress</span><span class="o">,</span> <span class="kd">final</span> <span class="nc">Callable</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">action</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
     <span class="c1">// Proxy this user on top of the server's user (the real user)</span>
-    <span class="n">UserGroupInformation</span> <span class="n">proxyUser</span> <span class="o">=</span> <span class="n">UserGroupInformation</span><span class="o">.</span><span class="na">createProxyUser</span><span class="o">(</span><span class="n">remoteUserName</span><span class="o">,</span> <span class="n">serverUgi</span><span class="o">);</span>
+    <span class="nc">UserGroupInformation</span> <span class="n">proxyUser</span> <span class="o">=</span> <span class="nc">UserGroupInformation</span><span class="o">.</span><span class="na">createProxyUser</span><span class="o">(</span><span class="n">remoteUserName</span><span class="o">,</span> <span class="n">serverUgi</span><span class="o">);</span>
 
     <span class="c1">// Check if this user is allowed to be impersonated.</span>
     <span class="c1">// Will throw AuthorizationException if the impersonation as this user is not allowed</span>
-    <span class="n">ProxyUsers</span><span class="o">.</span><span class="na">authorize</span><span class="o">(</span><span class="n">proxyUser</span><span class="o">,</span> <span class="n">remoteAddress</span><span class="o">);</span>
+    <span class="nc">ProxyUsers</span><span class="o">.</span><span class="na">authorize</span><span class="o">(</span><span class="n">proxyUser</span><span class="o">,</span> <span class="n">remoteAddress</span><span class="o">);</span>
 
     <span class="c1">// Execute the actual call as this proxy user</span>
-    <span class="k">return</span> <span class="n">proxyUser</span><span class="o">.</span><span class="na">doAs</span><span class="o">(</span><span class="k">new</span> <span class="n">PrivilegedExceptionAction</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">proxyUser</span><span class="o">.</span><span class="na">doAs</span><span class="o">(</span><span class="k">new</span> <span class="nc">PrivilegedExceptionAction</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;()</span> <span class="o">{</span>
       <span class="nd">@Override</span>
-      <span class="kd">public</span> <span class="n">T</span> <span class="nf">run</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+      <span class="kd">public</span> <span class="no">T</span> <span class="nf">run</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">action</span><span class="o">.</span><span class="na">call</span><span class="o">();</span>
       <span class="o">}</span>
     <span class="o">});</span>
@@ -914,16 +914,16 @@ the real user communicating with Knox.</p>
 <p>There are presently two options to extract the “real” user from HTTP requests:</p>
 
 <ul>
-  <li>The authenticated user from the HTTP request, <code class="highlighter-rouge">org.apache.calcite.avatica.server.HttpRequestRemoteUserExtractor</code> (default)</li>
-  <li>The value of a parameter in the HTTP query string, <code class="highlighter-rouge">org.apache.calcite.avatica.server.HttpQueryStringParameterRemoteUserExtractor</code> (e.g “doAs”)</li>
+  <li>The authenticated user from the HTTP request, <code class="language-plaintext highlighter-rouge">org.apache.calcite.avatica.server.HttpRequestRemoteUserExtractor</code> (default)</li>
+  <li>The value of a parameter in the HTTP query string, <code class="language-plaintext highlighter-rouge">org.apache.calcite.avatica.server.HttpQueryStringParameterRemoteUserExtractor</code> (e.g “doAs”)</li>
 </ul>
 
-<p>Implementations of Avatica can configure this using the <code class="highlighter-rouge">AvaticaServerConfiguration</code> and providing
-an implementation of <code class="highlighter-rouge">RemoteUserExtractor</code>. There are two implementations provided as listed above.</p>
+<p>Implementations of Avatica can configure this using the <code class="language-plaintext highlighter-rouge">AvaticaServerConfiguration</code> and providing
+an implementation of <code class="language-plaintext highlighter-rouge">RemoteUserExtractor</code>. There are two implementations provided as listed above.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">config</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AvaticaServerConfiguration</span><span class="o">()</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">config</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AvaticaServerConfiguration</span><span class="o">()</span> <span class="o">{</span>
   <span class="cm">/* ... */</span>
-  <span class="nd">@Override</span> <span class="kd">public</span> <span class="n">RemoteUserExtractor</span> <span class="nf">getRemoteUserExtractor</span><span class="o">()</span> <span class="o">{</span>
+  <span class="nd">@Override</span> <span class="kd">public</span> <span class="nc">RemoteUserExtractor</span> <span class="nf">getRemoteUserExtractor</span><span class="o">()</span> <span class="o">{</span>
     <span class="c1">// We extract the "real" user via the "doAs" query string parameter</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nf">HttpQueryStringParameterRemoteUserExtractor</span><span class="o">(</span><span class="s">"doAs"</span><span class="o">);</span>
   <span class="o">}</span>
@@ -937,13 +937,13 @@ mechanism through the HTTPServer Builder.  This is useful if users
 want to combine features of various authentication types. Examples
 include combining basic authentication with impersonation or adding
 mutual authentication with impersonation. More Examples are available
-in <code class="highlighter-rouge">CustomAuthHttpServerTest</code> class.</p>
+in <code class="language-plaintext highlighter-rouge">CustomAuthHttpServerTest</code> class.</p>
 
-<p>Note: Users need to configure their own <code class="highlighter-rouge">ServerConnectors</code> and
-<code class="highlighter-rouge">Handlers</code> with the help of <code class="highlighter-rouge">ServerCustomizers</code>.</p>
+<p>Note: Users need to configure their own <code class="language-plaintext highlighter-rouge">ServerConnectors</code> and
+<code class="language-plaintext highlighter-rouge">Handlers</code> with the help of <code class="language-plaintext highlighter-rouge">ServerCustomizers</code>.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">AvaticaServerConfiguration</span> <span class="n">configuration</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ExampleAvaticaServerConfiguration</span><span class="o">();</span>
-<span class="n">HttpServer</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpServer</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">AvaticaServerConfiguration</span> <span class="n">configuration</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ExampleAvaticaServerConfiguration</span><span class="o">();</span>
+<span class="nc">HttpServer</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HttpServer</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
     <span class="o">.</span><span class="na">withCustomAuthentication</span><span class="o">(</span><span class="n">configuration</span><span class="o">)</span>
     <span class="o">.</span><span class="na">withPort</span><span class="o">(</span><span class="mi">8765</span><span class="o">)</span>
     <span class="o">.</span><span class="na">build</span><span class="o">();</span></code></pre></figure>
@@ -957,7 +957,7 @@ these implementations as it is likely correct.</p>
 <h3 id="spnego">SPNEGO</h3>
 
 <p>For information on building SPNEGO support by hand, consult <a href="https://tools.ietf.org/html/rfc4559">RFC-4559</a>
-which describes how the authentication handshake, through use of the <code class="highlighter-rouge">WWW-Authenticate=Negotiate</code>
+which describes how the authentication handshake, through use of the <code class="language-plaintext highlighter-rouge">WWW-Authenticate=Negotiate</code>
 HTTP header, is used to authenticate a client. Prior to Avatica 1.20.0, this handshake is done
 for every HTTP call to the Avatica server.</p>
 
@@ -986,12 +986,12 @@ superfluous.</p>
 <h2 id="tls">TLS</h2>
 
 <p>Deploying the Avatica server with TLS is common practice, like it is for any HTTP server. To do this,
-use the method <code class="highlighter-rouge">withTls(File, String, File, String)</code> to provide the server’s TLS private key (a.k.a keystore)
+use the method <code class="language-plaintext highlighter-rouge">withTls(File, String, File, String)</code> to provide the server’s TLS private key (a.k.a keystore)
 and the certificate authority’s public key (a.k.a. truststore) as a Java Key Store (JKS) files, along with
 passwords to validate that the JKS files have not been tampered with.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">HttpServer</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpServer</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-    <span class="o">.</span><span class="na">withTLS</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"/avatica/server.jks"</span><span class="o">),</span> <span class="s">"MyKeystorePassword"</span><span class="o">,</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">HttpServer</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HttpServer</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">withTLS</span><span class="o">(</span><span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"/avatica/server.jks"</span><span class="o">),</span> <span class="s">"MyKeystorePassword"</span><span class="o">,</span>
         <span class="k">new</span> <span class="nf">File</span><span class="o">(</span><span class="s">"/avatica/truststore.jks"</span><span class="o">),</span> <span class="s">"MyTruststorePassword"</span><span class="o">)</span>
     <span class="o">.</span><span class="na">build</span><span class="o">();</span></code></pre></figure>
 

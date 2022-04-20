@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Docker Images</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v3.9.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/avatica/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/avatica/favicon.ico">
@@ -737,10 +737,10 @@ images are provided for some common databases. The current databases include:</p
 <p>These images are not deployed as the licensing on each database driver is varied. Please
 understand and accept the license of each before using in any software project.</p>
 
-<p>Each of these images include a <code class="highlighter-rouge">build.sh</code> script which will build the docker image using
-the latest <code class="highlighter-rouge">avatica-server</code> Docker image. The resulting Docker image will be named according
-to the following format: <code class="highlighter-rouge">avatica-&lt;database&gt;-server</code>. For example, <code class="highlighter-rouge">avatica-hsqldb-server</code>,
-<code class="highlighter-rouge">avatica-mysql-server</code>, and <code class="highlighter-rouge">avatica-postgresql-server</code>.</p>
+<p>Each of these images include a <code class="language-plaintext highlighter-rouge">build.sh</code> script which will build the docker image using
+the latest <code class="language-plaintext highlighter-rouge">avatica-server</code> Docker image. The resulting Docker image will be named according
+to the following format: <code class="language-plaintext highlighter-rouge">avatica-&lt;database&gt;-server</code>. For example, <code class="language-plaintext highlighter-rouge">avatica-hsqldb-server</code>,
+<code class="language-plaintext highlighter-rouge">avatica-mysql-server</code>, and <code class="language-plaintext highlighter-rouge">avatica-postgresql-server</code>.</p>
 
 <p>Additionally, <a href="https://github.com/docker/compose">Docker Compose</a> configuration files for the above
 databases (sans HyperSQL) are provided which configure the database’s standard Docker image
@@ -748,10 +748,10 @@ and then connect Avatica to that Docker container. For example, the PostgreSQL d
 file will start an instance of PostgreSQL and an instance of the Avatica server, each in their own container,
 exposing an Avatica server configured against a “real” PostgreSQL database.</p>
 
-<p>All of the <code class="highlighter-rouge">Dockerfile</code> and <code class="highlighter-rouge">docker-compose.yml</code> files are conveniently provided in an archive for
+<p>All of the <code class="language-plaintext highlighter-rouge">Dockerfile</code> and <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> files are conveniently provided in an archive for
 each release. Here is the layout for release 1.20.0:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>avatica-docker-1.20.0/
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>avatica-docker-1.20.0/
 avatica-docker-1.20.0/hypersql/
 avatica-docker-1.20.0/mysql/
 avatica-docker-1.20.0/postgresql/
@@ -768,10 +768,10 @@ avatica-docker-1.20.0/postgresql/Dockerfile
 
 <h4 id="running">Running</h4>
 
-<p>Each of the provided database-specific Docker images set an <code class="highlighter-rouge">ENTRYPOINT</code> which
+<p>Each of the provided database-specific Docker images set an <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> which
 encapsulate most of the Java command. The following options are available to specify:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Usage: &lt;main class&gt; [options]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Usage: &lt;main class&gt; [options]
   Options:
     -h, -help, --help
        Print the help message
@@ -789,28 +789,28 @@ encapsulate most of the Java command. The following options are available to spe
 
 <p>For example, to connect to a MySQL server, the following could be used:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./avatica-docker-*/mysql/build.sh
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./avatica-docker-*/mysql/build.sh
 $ docker run --rm -it avatica-mysql-server \
     -u jdbc:mysql://&lt;fqdn&gt;:3306/my_database
 </code></pre></div></div>
 
-<p>To debug these docker images, the <code class="highlighter-rouge">ENTRYPOINT</code> can be overriden to launch a shell</p>
+<p>To debug these docker images, the <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code> can be overriden to launch a shell</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm --entrypoint='' -it avatica-mysql-server /bin/sh
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm --entrypoint='' -it avatica-mysql-server /bin/sh
 </code></pre></div></div>
 
 <h3 id="running-docker-containers-for-custom-databases">Running Docker containers for custom databases</h3>
 
-<p>The provided <code class="highlighter-rouge">avatica-server</code> Docker image is designed to be generally reusable
+<p>The provided <code class="language-plaintext highlighter-rouge">avatica-server</code> Docker image is designed to be generally reusable
 for developers that want to expose a database of their choosing. A custom Dockerfile
-can be created by copying what the <code class="highlighter-rouge">avatica-mysql-server</code> or <code class="highlighter-rouge">avatica-postgresql-server</code>
+can be created by copying what the <code class="language-plaintext highlighter-rouge">avatica-mysql-server</code> or <code class="language-plaintext highlighter-rouge">avatica-postgresql-server</code>
 do, but this is also achievable via the Docker volumes.</p>
 
 <p>For example, consider we have a JAR with a JDBC driver for our database on our local
-machine <code class="highlighter-rouge">/home/user/my-database-jars/my-database-jdbc-1.0.jar</code>. We can run the following command to
+machine <code class="language-plaintext highlighter-rouge">/home/user/my-database-jars/my-database-jdbc-1.0.jar</code>. We can run the following command to
 launch a custom Avatica server against our database with this JDBC driver.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm -p 8765:8765 \
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ docker run --rm -p 8765:8765 \
     -v /home/user/my-database-jars/:/my-database-jars --entrypoint="" -it avatica-server \
     /usr/bin/java -cp "/home/avatica/classpath/*:/my-database-jars/*" \
     org.apache.calcite.avatica.standalone.StandaloneServer -p 8765 \

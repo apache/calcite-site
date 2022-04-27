@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Release 1.28.0</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v4.2.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -165,7 +165,7 @@ Two APIs are deprecated and will be
 <p>In 1.28, Calcite converted the recently introduced
 <a href="https://issues.apache.org/jira/browse/CALCITE-3328">configuration system</a>
 from an internal system based on
-<a href="https://github.com/apache/calcite/blob/master/core/src/main/java/org/apache/calcite/util/ImmutableBeans.java">ImmutableBeans</a>
+<a href="https://github.com/apache/calcite/blob/main/core/src/main/java/org/apache/calcite/util/ImmutableBeans.java">ImmutableBeans</a>
 to instead use the <a href="https://immutables.github.io/">Immutables</a>
 annotation processor. This library brings a large number of additional
 features that should make value-type classes in Calcite easier to
@@ -179,43 +179,43 @@ disruption to existing consumers of Calcite but the following minor
 changes needed to be made:</p>
 <ul>
   <li>The
-<a href="https://github.com/apache/calcite/blob/master/core/src/main/java/org/apache/calcite/plan/RelRule.java#L125">RelRule.Config.EMPTY</a>
+<a href="https://github.com/apache/calcite/blob/main/core/src/main/java/org/apache/calcite/plan/RelRule.java#L125">RelRule.Config.EMPTY</a>
 field is now deprecated. To create a new configuration subclass, you
 can either use your preferred interface-implementation based
 construction or you can leverage Immutables. To do the latter,
 <a href="https://immutables.github.io/getstarted.html">configure your project</a>
 to use the Immutables annotation processor and annotate your
 subclass with the
-<a href="https://immutables.github.io/immutable.html#value"><code class="highlighter-rouge">@Value.Immutable</code></a>
+<a href="https://immutables.github.io/immutable.html#value"><code class="language-plaintext highlighter-rouge">@Value.Immutable</code></a>
 annotation.</li>
-  <li>Where <code class="highlighter-rouge">RelRule.Config</code> subclasses were nested 2+ classes deep, the
+  <li>Where <code class="language-plaintext highlighter-rouge">RelRule.Config</code> subclasses were nested 2+ classes deep, the
 interfaces have been marked deprecated and are superceded by new,
 uniquely named interfaces. The original Configs extend the new
 uniquely named interfaces. Subclassing these work as before and the
 existing rule signatures accept any previously implemented Config
 implementations. However, this is a breaking change if a user stored
-an instance of the <code class="highlighter-rouge">DEFAULT</code> object using the Config class name (as
-the <code class="highlighter-rouge">DEFAULT</code> instance now only implements the uniquely named
+an instance of the <code class="language-plaintext highlighter-rouge">DEFAULT</code> object using the Config class name (as
+the <code class="language-plaintext highlighter-rouge">DEFAULT</code> instance now only implements the uniquely named
 interface).</li>
-  <li>The <code class="highlighter-rouge">RelRule.Config.as()</code> method should only be used for safe
+  <li>The <code class="language-plaintext highlighter-rouge">RelRule.Config.as()</code> method should only be used for safe
 downcasts. Before, it could do arbitrary casts. The exception is
-that arbitrary <code class="highlighter-rouge">as()</code> will continue to work when using the
-deprecated <code class="highlighter-rouge">RelRule.Config.EMPTY</code> field. In most cases, this should
-be a non-breaking change. However, all Calcite-defined <code class="highlighter-rouge">DEFAULT</code>
+that arbitrary <code class="language-plaintext highlighter-rouge">as()</code> will continue to work when using the
+deprecated <code class="language-plaintext highlighter-rouge">RelRule.Config.EMPTY</code> field. In most cases, this should
+be a non-breaking change. However, all Calcite-defined <code class="language-plaintext highlighter-rouge">DEFAULT</code>
 rule config instances use Immutables. As such, if one had previously
-subclassed a <code class="highlighter-rouge">RelRule.Config</code> subclass and then used the <code class="highlighter-rouge">DEFAULT</code>
-instance from that subclass, the <code class="highlighter-rouge">as()</code> call will no longer work to
-coerce the <code class="highlighter-rouge">DEFAULT</code> instance into a arbitrary subclass. In essence,
-outside the <code class="highlighter-rouge">EMPTY</code> use, <code class="highlighter-rouge">as()</code> is now only safe to do if a Java
+subclassed a <code class="language-plaintext highlighter-rouge">RelRule.Config</code> subclass and then used the <code class="language-plaintext highlighter-rouge">DEFAULT</code>
+instance from that subclass, the <code class="language-plaintext highlighter-rouge">as()</code> call will no longer work to
+coerce the <code class="language-plaintext highlighter-rouge">DEFAULT</code> instance into a arbitrary subclass. In essence,
+outside the <code class="language-plaintext highlighter-rouge">EMPTY</code> use, <code class="language-plaintext highlighter-rouge">as()</code> is now only safe to do if a Java
 cast is also safe.</li>
   <li>
-<code class="highlighter-rouge">ExchangeRemoveConstantKeysRule.Config</code> and
-<code class="highlighter-rouge">ValuesReduceRule.Config</code> now declare concrete bounds for their
+<code class="language-plaintext highlighter-rouge">ExchangeRemoveConstantKeysRule.Config</code> and
+<code class="language-plaintext highlighter-rouge">ValuesReduceRule.Config</code> now declare concrete bounds for their
 matchHandler configuration. This is a breaking change if one did not
 use the Rule as a bounding variable.</li>
   <li>Collections used in Immutables value classes will be converted to
 Immutable collection types even if the passed in parameter is
-mutable (such as an <code class="highlighter-rouge">ArrayList</code>). As such, consumers of those
+mutable (such as an <code class="language-plaintext highlighter-rouge">ArrayList</code>). As such, consumers of those
 configuration properties cannot mutate the returned collections.</li>
 </ul>
 
@@ -328,7 +328,11 @@ configuration properties cannot mutate the returned collections.</li>
      under the terms of
      the <a href="https://www.apache.org/licenses/">
      Apache License v2</a>. Apache Calcite and its logo are
-     trademarks of the Apache Software Foundation.</p>
+     trademarks of the Apache Software Foundation.
+  </p>
+  <p>
+      <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a>
+  </p>
   </div>
 </footer>
 

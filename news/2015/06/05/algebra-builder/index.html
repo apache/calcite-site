@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Algebra builder</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v4.2.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -147,19 +147,19 @@ expression.</p>
 
 <p>For example,</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">final</span> <span class="n">FrameworkConfig</span> <span class="n">config</span><span class="o">;</span>
-<span class="kd">final</span> <span class="n">RelBuilder</span> <span class="n">builder</span> <span class="o">=</span> <span class="n">RelBuilder</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">config</span><span class="o">);</span>
-<span class="kd">final</span> <span class="n">RelNode</span> <span class="n">node</span> <span class="o">=</span> <span class="n">builder</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">final</span> <span class="nc">FrameworkConfig</span> <span class="n">config</span><span class="o">;</span>
+<span class="kd">final</span> <span class="nc">RelBuilder</span> <span class="n">builder</span> <span class="o">=</span> <span class="nc">RelBuilder</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">config</span><span class="o">);</span>
+<span class="kd">final</span> <span class="nc">RelNode</span> <span class="n">node</span> <span class="o">=</span> <span class="n">builder</span>
   <span class="o">.</span><span class="na">scan</span><span class="o">(</span><span class="s">"EMP"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">aggregate</span><span class="o">(</span><span class="n">builder</span><span class="o">.</span><span class="na">groupKey</span><span class="o">(</span><span class="s">"DEPTNO"</span><span class="o">),</span>
       <span class="n">builder</span><span class="o">.</span><span class="na">count</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="s">"C"</span><span class="o">),</span>
       <span class="n">builder</span><span class="o">.</span><span class="na">sum</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="s">"S"</span><span class="o">,</span> <span class="n">builder</span><span class="o">.</span><span class="na">field</span><span class="o">(</span><span class="s">"SAL"</span><span class="o">)))</span>
   <span class="o">.</span><span class="na">filter</span><span class="o">(</span>
-      <span class="n">builder</span><span class="o">.</span><span class="na">call</span><span class="o">(</span><span class="n">SqlStdOperatorTable</span><span class="o">.</span><span class="na">GREATER_THAN</span><span class="o">,</span>
+      <span class="n">builder</span><span class="o">.</span><span class="na">call</span><span class="o">(</span><span class="nc">SqlStdOperatorTable</span><span class="o">.</span><span class="na">GREATER_THAN</span><span class="o">,</span>
           <span class="n">builder</span><span class="o">.</span><span class="na">field</span><span class="o">(</span><span class="s">"C"</span><span class="o">),</span>
           <span class="n">builder</span><span class="o">.</span><span class="na">literal</span><span class="o">(</span><span class="mi">10</span><span class="o">)))</span>
   <span class="o">.</span><span class="na">build</span><span class="o">();</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">RelOptUtil</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">node</span><span class="o">));</span></code></pre></figure>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">RelOptUtil</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">node</span><span class="o">));</span></code></pre></figure>
 
 <p>creates the algebra</p>
 
@@ -298,7 +298,11 @@ extensive set of query-optimization rules.</p>
      under the terms of
      the <a href="https://www.apache.org/licenses/">
      Apache License v2</a>. Apache Calcite and its logo are
-     trademarks of the Apache Software Foundation.</p>
+     trademarks of the Apache Software Foundation.
+  </p>
+  <p>
+      <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a>
+  </p>
   </div>
 </footer>
 

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Apache Geode adapter</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v4.2.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -82,7 +82,7 @@
 <a href="/docs/tutorial.html">tutorial</a>.</p>
 
 <blockquote>
-  <p>Optionally: add <code class="highlighter-rouge">-Puberjdbc</code> to your maven build to create a single self-contained Geode JDBC adapter jar.</p>
+  <p>Optionally: add <code class="language-plaintext highlighter-rouge">-Puberjdbc</code> to your maven build to create a single self-contained Geode JDBC adapter jar.</p>
 </blockquote>
 
 <p>Once you’ve managed to compile the project, you can return here to
@@ -98,34 +98,34 @@ in Geode.</p>
 <p>A basic example of a model file is given below:</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"defaultSchema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"geode"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"schemas"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"defaultSchema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"geode"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"schemas"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"geode_raw"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.geode.rel.GeodeSchemaFactory"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"locatorHost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"localhost"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"locatorPort"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10334"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"regions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zips"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"pdxSerializablePackagePath"</span><span class="p">:</span><span class="w"> </span><span class="s2">".*"</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"geode_raw"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.geode.rel.GeodeSchemaFactory"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"locatorHost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"localhost"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"locatorPort"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10334"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"regions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Zips"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"pdxSerializablePackagePath"</span><span class="p">:</span><span class="w"> </span><span class="s2">".*"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p>This adapter is targeted for Geode 1.3.x. The <code class="highlighter-rouge">regions</code> field allows to list (comma separated)
+<p>This adapter is targeted for Geode 1.3.x. The <code class="language-plaintext highlighter-rouge">regions</code> field allows to list (comma separated)
 all Geode regions to appear as relational tables.</p>
 
-<p>Assuming this file is stored as <code class="highlighter-rouge">model.json</code>, you can connect to
-Geode via <a href="https://github.com/julianhyde/sqlline"><code class="highlighter-rouge">sqlline</code></a> as
+<p>Assuming this file is stored as <code class="language-plaintext highlighter-rouge">model.json</code>, you can connect to
+Geode via <a href="https://github.com/julianhyde/sqlline"><code class="language-plaintext highlighter-rouge">sqlline</code></a> as
 follows:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./sqlline
 sqlline&gt; <span class="o">!</span>connect jdbc:calcite:model<span class="o">=</span>model.json admin admin</code></pre></figure>
 
-<p><code class="highlighter-rouge">sqlline</code> will now accept SQL queries which access your Regions using OQL.
+<p><code class="language-plaintext highlighter-rouge">sqlline</code> will now accept SQL queries which access your Regions using OQL.
 However, you’re not restricted to issuing queries supported by
 <a href="https://geode.apache.org/docs/guide/latest/developing/querying_basics/chapter_overview.html">OQL</a>.
 Calcite allows you to perform complex operations such as aggregations
@@ -133,7 +133,7 @@ or joins. The adapter will attempt to compile the query into the most
 efficient OQL possible by exploiting filtering, sorting and aggregation directly
 in Geode where possible.</p>
 
-<p>For example, in the example Bookshop dataset there is a Regions <code class="highlighter-rouge">BookMaster</code>.</p>
+<p>For example, in the example Bookshop dataset there is a Regions <code class="language-plaintext highlighter-rouge">BookMaster</code>.</p>
 
 <p>We can issue a SQL query to fetch the annual retail cost ordered by the cost:</p>
 
@@ -187,7 +187,7 @@ For example the following JOIN query on the same Bookshop dataset</p>
 
 <p>And the result will be joined in Calcite.</p>
 
-<p>To select a particular item in Geode array field use the <code class="highlighter-rouge">fieldName[index]</code>
+<p>To select a particular item in Geode array field use the <code class="language-plaintext highlighter-rouge">fieldName[index]</code>
 syntax:</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="k">SELECT</span>
@@ -195,14 +195,14 @@ syntax:</p>
            <span class="nv">"loc"</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">AS</span> <span class="nv">"lat"</span>
          <span class="k">FROM</span> <span class="nv">"geode"</span><span class="p">.</span><span class="n">ZIPS</span></code></pre></figure>
 
-<p>To select a nested fields use the map <code class="highlighter-rouge">fieldName[nestedFiledName]</code>
+<p>To select a nested fields use the map <code class="language-plaintext highlighter-rouge">fieldName[nestedFiledName]</code>
 syntax:</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="k">SELECT</span> <span class="nv">"primaryAddress"</span> <span class="p">[</span><span class="s1">'postalCode'</span><span class="p">]</span> <span class="k">AS</span> <span class="nv">"postalCode"</span>
          <span class="k">FROM</span> <span class="nv">"TEST"</span><span class="p">.</span><span class="nv">"BookCustomer"</span>
          <span class="k">WHERE</span> <span class="nv">"primaryAddress"</span> <span class="p">[</span><span class="s1">'postalCode'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="s1">'0'</span><span class="p">;</span></code></pre></figure>
 
-<p>This will project <code class="highlighter-rouge">BookCustomer.primaryAddress.postalCode</code> value field.</p>
+<p>This will project <code class="language-plaintext highlighter-rouge">BookCustomer.primaryAddress.postalCode</code> value field.</p>
 
 <p>The following presentations and video tutorials provide further dails
 about Geode adapter:</p>
@@ -534,7 +534,11 @@ prove useful.</p>
      under the terms of
      the <a href="https://www.apache.org/licenses/">
      Apache License v2</a>. Apache Calcite and its logo are
-     trademarks of the Apache Software Foundation.</p>
+     trademarks of the Apache Software Foundation.
+  </p>
+  <p>
+      <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a>
+  </p>
   </div>
 </footer>
 

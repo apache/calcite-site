@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Spatial</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v4.2.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -105,11 +105,11 @@ that represents objects defined in a geometric space.</p>
 
 <ul>
   <li>A <a href="reference.html#data-types">GEOMETRY</a> data type and
-<a href="reference.html#spatial-types">sub-types</a> including <code class="highlighter-rouge">POINT</code>, <code class="highlighter-rouge">LINESTRING</code>
-and <code class="highlighter-rouge">POLYGON</code>
+<a href="reference.html#spatial-types">sub-types</a> including <code class="language-plaintext highlighter-rouge">POINT</code>, <code class="language-plaintext highlighter-rouge">LINESTRING</code>
+and <code class="language-plaintext highlighter-rouge">POLYGON</code>
 </li>
   <li>
-<a href="reference.html#spatial-functions">Spatial functions</a> (prefixed <code class="highlighter-rouge">ST_</code>;
+<a href="reference.html#spatial-functions">Spatial functions</a> (prefixed <code class="language-plaintext highlighter-rouge">ST_</code>;
 we have implemented about 35 of the 150 in the OpenGIS specification)</li>
 </ul>
 
@@ -117,9 +117,9 @@ we have implemented about 35 of the 150 in the OpenGIS specification)</li>
 
 <h2 id="enabling-spatial-support">Enabling spatial support</h2>
 
-<p>Though the <code class="highlighter-rouge">GEOMETRY</code> data type is built-in, the functions are not enabled by
-default. You need to add <code class="highlighter-rouge">fun=spatial</code> to the JDBC connect string to enable
-the functions. For example, <code class="highlighter-rouge">sqlline</code>:</p>
+<p>Though the <code class="language-plaintext highlighter-rouge">GEOMETRY</code> data type is built-in, the functions are not enabled by
+default. You need to add <code class="language-plaintext highlighter-rouge">fun=spatial</code> to the JDBC connect string to enable
+the functions. For example, <code class="language-plaintext highlighter-rouge">sqlline</code>:</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="err">$</span> <span class="p">.</span><span class="o">/</span><span class="n">sqlline</span>
 <span class="o">&gt;</span> <span class="o">!</span><span class="k">connect</span> <span class="n">jdbc</span><span class="p">:</span><span class="n">calcite</span><span class="p">:</span><span class="n">fun</span><span class="o">=</span><span class="n">spatial</span> <span class="nv">"sa"</span> <span class="nv">""</span>
@@ -127,7 +127,7 @@ the functions. For example, <code class="highlighter-rouge">sqlline</code>:</p>
 <span class="o">+</span><span class="c1">-------------------------------+</span>
 <span class="o">|</span> <span class="n">EXPR</span><span class="err">$</span><span class="mi">0</span>                        <span class="o">|</span>
 <span class="o">+</span><span class="c1">-------------------------------+</span>
-<span class="o">|</span> <span class="err">{</span><span class="nv">"x"</span><span class="p">:</span><span class="o">-</span><span class="mi">71</span><span class="p">.</span><span class="mi">064544</span><span class="p">,</span><span class="nv">"y"</span><span class="p">:</span><span class="mi">42</span><span class="p">.</span><span class="mi">28787</span><span class="err">}</span> <span class="o">|</span>
+<span class="o">|</span> <span class="p">{</span><span class="nv">"x"</span><span class="p">:</span><span class="o">-</span><span class="mi">71</span><span class="p">.</span><span class="mi">064544</span><span class="p">,</span><span class="nv">"y"</span><span class="p">:</span><span class="mi">42</span><span class="p">.</span><span class="mi">28787</span><span class="p">}</span> <span class="o">|</span>
 <span class="o">+</span><span class="c1">-------------------------------+</span>
 <span class="mi">1</span> <span class="k">row</span> <span class="n">selected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">323</span> <span class="n">seconds</span><span class="p">)</span></code></pre></figure>
 
@@ -136,7 +136,7 @@ the functions. For example, <code class="highlighter-rouge">sqlline</code>:</p>
 <p>One class of rewrites uses
 <a href="https://en.wikipedia.org/wiki/Hilbert_curve">Hilbert space-filling curves</a>.
 Suppose that a table
-has columns <code class="highlighter-rouge">x</code> and <code class="highlighter-rouge">y</code> denoting the position of a point and also a column <code class="highlighter-rouge">h</code>
+has columns <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> denoting the position of a point and also a column <code class="language-plaintext highlighter-rouge">h</code>
 denoting the distance of that point along a curve. Then a predicate involving
 distance of (x, y) from a fixed point can be translated into a predicate
 involving ranges of h.</p>
@@ -144,18 +144,18 @@ involving ranges of h.</p>
 <p>Suppose we have a table with the locations of restaurants:</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">Restaurants</span> <span class="p">(</span>
-  <span class="n">INT</span> <span class="n">id</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
-  <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">name</span><span class="p">,</span>
-  <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="n">cuisine</span><span class="p">,</span>
-  <span class="n">INT</span> <span class="n">x</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-  <span class="n">INT</span> <span class="n">y</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-  <span class="n">INT</span> <span class="n">h</span>  <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">DERIVED</span> <span class="p">(</span><span class="n">ST_Hilbert</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)))</span>
+  <span class="nb">INT</span> <span class="n">id</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+  <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">name</span><span class="p">,</span>
+  <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="n">cuisine</span><span class="p">,</span>
+  <span class="nb">INT</span> <span class="n">x</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="nb">INT</span> <span class="n">y</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="nb">INT</span> <span class="n">h</span>  <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">DERIVED</span> <span class="p">(</span><span class="n">ST_Hilbert</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)))</span>
 <span class="n">SORT</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">h</span><span class="p">);</span></code></pre></figure>
 
-<p>The optimizer requires that <code class="highlighter-rouge">h</code> is the position on the Hilbert curve of
-point (<code class="highlighter-rouge">x</code>, <code class="highlighter-rouge">y</code>), and also requires that the table is sorted on <code class="highlighter-rouge">h</code>.
-The <code class="highlighter-rouge">DERIVED</code> and <code class="highlighter-rouge">SORT KEY</code> clauses in the DDL syntax are invented for the
-purposes of this example, but a clustered table with a <code class="highlighter-rouge">CHECK</code> constraint
+<p>The optimizer requires that <code class="language-plaintext highlighter-rouge">h</code> is the position on the Hilbert curve of
+point (<code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code>), and also requires that the table is sorted on <code class="language-plaintext highlighter-rouge">h</code>.
+The <code class="language-plaintext highlighter-rouge">DERIVED</code> and <code class="language-plaintext highlighter-rouge">SORT KEY</code> clauses in the DDL syntax are invented for the
+purposes of this example, but a clustered table with a <code class="language-plaintext highlighter-rouge">CHECK</code> constraint
 would work just as well.</p>
 
 <p>The query</p>
@@ -179,9 +179,9 @@ would work just as well.</p>
     <span class="k">OR</span> <span class="n">h</span> <span class="k">BETWEEN</span> <span class="mi">33033</span> <span class="k">AND</span> <span class="mi">33035</span><span class="p">)</span>
 <span class="k">AND</span> <span class="n">ST_DWithin</span><span class="p">(</span><span class="n">ST_Point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">ST_Point</span><span class="p">(</span><span class="mi">10</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">.</span><span class="mi">0</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span></code></pre></figure>
 
-<p>The rewritten query contains a collection of ranges on <code class="highlighter-rouge">h</code> followed by the
-original <code class="highlighter-rouge">ST_DWithin</code> predicate. The range predicates are evaluated first and
-are very fast because the table is sorted on <code class="highlighter-rouge">h</code>.</p>
+<p>The rewritten query contains a collection of ranges on <code class="language-plaintext highlighter-rouge">h</code> followed by the
+original <code class="language-plaintext highlighter-rouge">ST_DWithin</code> predicate. The range predicates are evaluated first and
+are very fast because the table is sorted on <code class="language-plaintext highlighter-rouge">h</code>.</p>
 
 <p>Here is the full set of transformations:</p>
 
@@ -217,7 +217,7 @@ are very fast because the table is sorted on <code class="highlighter-rouge">h</
   </tbody>
 </table></div>
 
-<p>In the above, <code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">b</code> are variables, <code class="highlighter-rouge">X</code>, <code class="highlighter-rouge">X2</code>, <code class="highlighter-rouge">Y</code>, <code class="highlighter-rouge">Y2</code>, <code class="highlighter-rouge">D</code> and <code class="highlighter-rouge">G</code> are
+<p>In the above, <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> are variables, <code class="language-plaintext highlighter-rouge">X</code>, <code class="language-plaintext highlighter-rouge">X2</code>, <code class="language-plaintext highlighter-rouge">Y</code>, <code class="language-plaintext highlighter-rouge">Y2</code>, <code class="language-plaintext highlighter-rouge">D</code> and <code class="language-plaintext highlighter-rouge">G</code> are
 constants.</p>
 
 <p>Many rewrites are inexact: there are some points where the predicate would
@@ -528,7 +528,11 @@ when the specification wasn’t clear. Thank you to these awesome projects.</p>
      under the terms of
      the <a href="https://www.apache.org/licenses/">
      Apache License v2</a>. Apache Calcite and its logo are
-     trademarks of the Apache Software Foundation.</p>
+     trademarks of the Apache Software Foundation.
+  </p>
+  <p>
+      <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a>
+  </p>
   </div>
 </footer>
 

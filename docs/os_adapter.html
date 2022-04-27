@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>OS adapter and sqlsh</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v4.2.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -86,7 +86,7 @@ system and environment using SQL queries.</p>
 <p>It aims to solve similar problems that have traditionally been solved using UNIX
 command pipelines, but with the power and type-safety of SQL.</p>
 
-<p>The adapter also includes a wrapper called <code class="highlighter-rouge">sqlsh</code> that allows you to execute
+<p>The adapter also includes a wrapper called <code class="language-plaintext highlighter-rouge">sqlsh</code> that allows you to execute
 commands from your favorite shell.</p>
 
 <h1 id="security-warning">Security warning</h1>
@@ -104,9 +104,9 @@ commands, and these differ widely. So:</p>
 <ul>
   <li>These commands only work on Linux and macOS (not Windows, even with Cygwin);</li>
   <li>
-<code class="highlighter-rouge">vmstat</code> has very different columns between Linux and macOS;</li>
+<code class="language-plaintext highlighter-rouge">vmstat</code> has very different columns between Linux and macOS;</li>
   <li>
-<code class="highlighter-rouge">files</code> and <code class="highlighter-rouge">ps</code> have the same column names but semantics differ;</li>
+<code class="language-plaintext highlighter-rouge">files</code> and <code class="language-plaintext highlighter-rouge">ps</code> have the same column names but semantics differ;</li>
   <li>Other commands work largely the same.</li>
 </ul>
 
@@ -114,7 +114,7 @@ commands, and these differ widely. So:</p>
 
 <p>Every bash hacker knows that to find the 3 largest files you type</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>find <span class="nb">.</span> <span class="nt">-type</span> f <span class="nt">-print0</span> | xargs <span class="nt">-0</span> <span class="nb">ls</span> <span class="nt">-l</span>  | sort <span class="nt">-nr</span> <span class="nt">-k</span> 5 | head <span class="nt">-3</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>find <span class="nb">.</span> <span class="nt">-type</span> f <span class="nt">-print0</span> | xargs <span class="nt">-0</span> <span class="nb">ls</span> <span class="nt">-l</span>  | <span class="nb">sort</span> <span class="nt">-nr</span> <span class="nt">-k</span> 5 | <span class="nb">head</span> <span class="nt">-3</span>
 <span class="nt">-rw-r--r--</span> 1 jhyde jhyde 194877 Jul 16 16:10 ./validate/SqlValidatorImpl.java
 <span class="nt">-rw-r--r--</span> 1 jhyde jhyde  73826 Jul  4 21:51 ./fun/SqlStdOperatorTable.java
 <span class="nt">-rw-r--r--</span> 1 jhyde jhyde  39214 Jul  4 21:51 ./type/SqlTypeUtil.java</code></pre></figure>
@@ -122,7 +122,7 @@ commands, and these differ widely. So:</p>
 <p>This actually a pipeline of relational operations, each tuple represented
 by line of space-separated fields. What if we were able to access the list of
 files as a relation and use it in a SQL query? And what if we could easily
-execute that SQL query from the shell? This is what <code class="highlighter-rouge">sqlsh</code> does:</p>
+execute that SQL query from the shell? This is what <code class="language-plaintext highlighter-rouge">sqlsh</code> does:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>sqlsh <span class="k">select </span>size, path from files where <span class="nb">type</span> <span class="o">=</span> <span class="se">\'</span>f<span class="se">\'</span> order by size desc limit 3
 194877 validate/SqlValidatorImpl.java
@@ -131,13 +131,13 @@ execute that SQL query from the shell? This is what <code class="highlighter-rou
 
 <h1 id="sqlsh">sqlsh</h1>
 
-<p><code class="highlighter-rouge">sqlsh</code> launches a connection to Calcite whose default schema is the OS adapter.</p>
+<p><code class="language-plaintext highlighter-rouge">sqlsh</code> launches a connection to Calcite whose default schema is the OS adapter.</p>
 
 <p>It uses the JAVA lexical mode, which means that unquoted table and column names
 remain in the case that they were written. This is consistent with how shells like
 bash behave.</p>
 
-<p>Shell meta-characters such as <code class="highlighter-rouge">*</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">(</code>, and <code class="highlighter-rouge">)</code> have to be treated with
+<p>Shell meta-characters such as <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;</code>, <code class="language-plaintext highlighter-rouge">(</code>, and <code class="language-plaintext highlighter-rouge">)</code> have to be treated with
 care. Often adding a back-slash will suffice.</p>
 
 <h1 id="tables-and-commands">Tables and commands</h1>
@@ -146,17 +146,17 @@ care. Often adding a back-slash will suffice.</p>
 
 <ul>
   <li>
-<code class="highlighter-rouge">du</code> - Disk usage (based on <code class="highlighter-rouge">du</code> command)</li>
+<code class="language-plaintext highlighter-rouge">du</code> - Disk usage (based on <code class="language-plaintext highlighter-rouge">du</code> command)</li>
   <li>
-<code class="highlighter-rouge">ps</code> - Processes (based on <code class="highlighter-rouge">ps</code> command)</li>
+<code class="language-plaintext highlighter-rouge">ps</code> - Processes (based on <code class="language-plaintext highlighter-rouge">ps</code> command)</li>
   <li>
-<code class="highlighter-rouge">stdin</code> - Standard input</li>
+<code class="language-plaintext highlighter-rouge">stdin</code> - Standard input</li>
   <li>
-<code class="highlighter-rouge">files</code> - Files (based on the <code class="highlighter-rouge">find</code> command)</li>
+<code class="language-plaintext highlighter-rouge">files</code> - Files (based on the <code class="language-plaintext highlighter-rouge">find</code> command)</li>
   <li>
-<code class="highlighter-rouge">git_commits</code> - Git commits (based on <code class="highlighter-rouge">git log</code>)</li>
+<code class="language-plaintext highlighter-rouge">git_commits</code> - Git commits (based on <code class="language-plaintext highlighter-rouge">git log</code>)</li>
   <li>
-<code class="highlighter-rouge">vmstat</code> - Virtual memory (based on <code class="highlighter-rouge">vmstat</code> command)</li>
+<code class="language-plaintext highlighter-rouge">vmstat</code> - Virtual memory (based on <code class="language-plaintext highlighter-rouge">vmstat</code> command)</li>
 </ul>
 
 <p>Most tables are implemented as views on top of table functions.</p>
@@ -165,27 +165,27 @@ care. Often adding a back-slash will suffice.</p>
 
 <h2 id="example-du">Example: du</h2>
 
-<p>How many class files, and what is their total size? In <code class="highlighter-rouge">bash</code>:</p>
+<p>How many class files, and what is their total size? In <code class="language-plaintext highlighter-rouge">bash</code>:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>du <span class="nt">-ka</span> <span class="nb">.</span> | <span class="nb">grep</span> <span class="s1">'\.class$'</span> | awk <span class="s1">'{size+=$1} END {print FNR, size}'</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">du</span> <span class="nt">-ka</span> <span class="nb">.</span> | <span class="nb">grep</span> <span class="s1">'\.class$'</span> | <span class="nb">awk</span> <span class="s1">'{size+=$1} END {print FNR, size}'</span>
 4416 27960</code></pre></figure>
 
-<p>In <code class="highlighter-rouge">sqlsh</code>:</p>
+<p>In <code class="language-plaintext highlighter-rouge">sqlsh</code>:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>sqlsh <span class="k">select </span>count<span class="se">\(\*\)</span>, sum<span class="se">\(</span>size_k<span class="se">\)</span> from du where path like <span class="se">\'</span>%.class<span class="se">\'</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>sqlsh <span class="k">select </span>count<span class="se">\(\*\)</span>, <span class="nb">sum</span><span class="se">\(</span>size_k<span class="se">\)</span> from <span class="nb">du </span>where path like <span class="se">\'</span>%.class<span class="se">\'</span>
 4416 27960</code></pre></figure>
 
-<p>The back-slashes are necessary because <code class="highlighter-rouge">(</code>, <code class="highlighter-rouge">*</code>, <code class="highlighter-rouge">)</code>, and <code class="highlighter-rouge">'</code> are shell meta-characters.</p>
+<p>The back-slashes are necessary because <code class="language-plaintext highlighter-rouge">(</code>, <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">)</code>, and <code class="language-plaintext highlighter-rouge">'</code> are shell meta-characters.</p>
 
 <h2 id="example-files">Example: files</h2>
 
-<p>How many files and directories? In <code class="highlighter-rouge">bash</code>, you would use <code class="highlighter-rouge">find</code>:</p>
+<p>How many files and directories? In <code class="language-plaintext highlighter-rouge">bash</code>, you would use <code class="language-plaintext highlighter-rouge">find</code>:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>find <span class="nb">.</span> <span class="nt">-printf</span> <span class="s2">"%Y %p</span><span class="se">\n</span><span class="s2">"</span> | <span class="nb">grep</span> <span class="s1">'/test/'</span> | cut <span class="nt">-d</span><span class="s1">' '</span> <span class="nt">-f1</span> | sort | uniq <span class="nt">-c</span>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>find <span class="nb">.</span> <span class="nt">-printf</span> <span class="s2">"%Y %p</span><span class="se">\n</span><span class="s2">"</span> | <span class="nb">grep</span> <span class="s1">'/test/'</span> | <span class="nb">cut</span> <span class="nt">-d</span><span class="s1">' '</span> <span class="nt">-f1</span> | <span class="nb">sort</span> | <span class="nb">uniq</span> <span class="nt">-c</span>
     143 d
    1336 f</code></pre></figure>
 
-<p>In <code class="highlighter-rouge">sqlsh</code>, use the <code class="highlighter-rouge">files</code> table:</p>
+<p>In <code class="language-plaintext highlighter-rouge">sqlsh</code>, use the <code class="language-plaintext highlighter-rouge">files</code> table:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>sqlsh <span class="k">select </span><span class="nb">type</span>, count<span class="se">\(\*\)</span> from files where path like <span class="se">\'</span>%/test/%<span class="se">\'</span> group by <span class="nb">type
 </span>d 143
@@ -193,7 +193,7 @@ f 1336</code></pre></figure>
 
 <h2 id="example-ps">Example: ps</h2>
 
-<p>Which users have processes running? In <code class="highlighter-rouge">sqlsh</code>:</p>
+<p>Which users have processes running? In <code class="language-plaintext highlighter-rouge">sqlsh</code>:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>sqlsh <span class="k">select </span>distinct ps.<span class="se">\`</span>user<span class="se">\`</span> from ps
 avahi
@@ -203,13 +203,13 @@ syslog
 nobody
 daemon</code></pre></figure>
 
-<p>The <code class="highlighter-rouge">ps.</code> qualifier and back-quotes are necessary because USER is a SQL reserved word.</p>
+<p>The <code class="language-plaintext highlighter-rouge">ps.</code> qualifier and back-quotes are necessary because USER is a SQL reserved word.</p>
 
-<p>Now a ‘top N’ problem: Which three users have the most processes? In <code class="highlighter-rouge">bash</code>:</p>
+<p>Now a ‘top N’ problem: Which three users have the most processes? In <code class="language-plaintext highlighter-rouge">bash</code>:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>ps aux | awk <span class="s1">'{print $1}'</span> | sort | uniq <span class="nt">-c</span> | sort <span class="nt">-nr</span> | head <span class="nt">-3</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>ps aux | <span class="nb">awk</span> <span class="s1">'{print $1}'</span> | <span class="nb">sort</span> | <span class="nb">uniq</span> <span class="nt">-c</span> | <span class="nb">sort</span> <span class="nt">-nr</span> | <span class="nb">head</span> <span class="nt">-3</span></code></pre></figure>
 
-<p>In <code class="highlighter-rouge">sqlsh</code>:</p>
+<p>In <code class="language-plaintext highlighter-rouge">sqlsh</code>:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./sqlsh <span class="k">select </span>count<span class="se">\(\*\)</span>, ps.<span class="se">\`</span>user<span class="se">\`</span> from ps group by ps.<span class="se">\`</span>user<span class="se">\`</span> order by 1 desc limit 3
 185 root
@@ -230,17 +230,17 @@ daemon</code></pre></figure>
 
 <h2 id="example-explain">Example: explain</h2>
 
-<p>To find out what columns a table has, use <code class="highlighter-rouge">explain</code>:</p>
+<p>To find out what columns a table has, use <code class="language-plaintext highlighter-rouge">explain</code>:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>sqlsh explain plan with <span class="nb">type </span><span class="k">for select</span> <span class="se">\*</span> from du
-size_k BIGINT NOT NULL,
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>sqlsh explain plan with <span class="nb">type </span><span class="k">for select</span> <span class="se">\*</span> from <span class="nb">du
+</span>size_k BIGINT NOT NULL,
 path VARCHAR NOT NULL,
 size_b BIGINT NOT NULL</code></pre></figure>
 
 <h2 id="example-git">Example: git</h2>
 
 <p>How many commits and distinct authors per year?
-The <code class="highlighter-rouge">git_commits</code> table is based upon the <code class="highlighter-rouge">git log</code> command.</p>
+The <code class="language-plaintext highlighter-rouge">git_commits</code> table is based upon the <code class="language-plaintext highlighter-rouge">git log</code> command.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">./sqlsh <span class="k">select </span>floor<span class="se">\(</span>commit_timestamp to year<span class="se">\)</span> as y, count<span class="se">\(\*\)</span>, count<span class="se">\(</span>distinct author<span class="se">\)</span> from git_commits group by y order by 1
 2012-01-01 00:00:00 180 6
@@ -250,7 +250,7 @@ The <code class="highlighter-rouge">git_commits</code> table is based upon the <
 2016-01-01 00:00:00 465 67
 2017-01-01 00:00:00 279 53</code></pre></figure>
 
-<p>Note that <code class="highlighter-rouge">group by y</code> is possible because <code class="highlighter-rouge">sqlsh</code> uses Calcite’s
+<p>Note that <code class="language-plaintext highlighter-rouge">group by y</code> is possible because <code class="language-plaintext highlighter-rouge">sqlsh</code> uses Calcite’s
 <a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#isGroupByAlias--">lenient mode</a>.</p>
 
 <h2 id="example-stdin">Example: stdin</h2>
@@ -261,7 +261,7 @@ The <code class="highlighter-rouge">git_commits</code> table is based upon the <
      1  cats
      2  and dogs</code></pre></figure>
 
-<p>In <code class="highlighter-rouge">sqlsh</code>:</p>
+<p>In <code class="language-plaintext highlighter-rouge">sqlsh</code>:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="o">(</span><span class="nb">echo </span>cats<span class="p">;</span> <span class="nb">echo </span>and dogs<span class="o">)</span> | ./sqlsh <span class="k">select</span> <span class="se">\*</span> from stdin
 1 cats
@@ -269,9 +269,9 @@ The <code class="highlighter-rouge">git_commits</code> table is based upon the <
 
 <h2 id="example-output-format">Example: output format</h2>
 
-<p>The <code class="highlighter-rouge">-o</code> option controls output format.</p>
+<p>The <code class="language-plaintext highlighter-rouge">-o</code> option controls output format.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./sqlsh <span class="nt">-o</span> mysql <span class="k">select </span>min<span class="se">\(</span>size_k<span class="se">\)</span>, max<span class="se">\(</span>size_k<span class="se">\)</span> from du
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./sqlsh <span class="nt">-o</span> mysql <span class="k">select </span>min<span class="se">\(</span>size_k<span class="se">\)</span>, max<span class="se">\(</span>size_k<span class="se">\)</span> from <span class="nb">du</span>
 +--------+--------+
 | EXPR<span class="nv">$0</span> | EXPR<span class="nv">$1</span> |
 +--------+--------+
@@ -281,7 +281,7 @@ The <code class="highlighter-rouge">git_commits</code> table is based upon the <
 
 <h2 id="example-jps">Example: jps</h2>
 
-<p>provides a display of all current java process pids In <code class="highlighter-rouge">sqlsh</code>:</p>
+<p>provides a display of all current java process pids In <code class="language-plaintext highlighter-rouge">sqlsh</code>:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./sqlsh <span class="k">select </span>distinct jps.<span class="se">\`</span>pid<span class="se">\`</span>, jps.<span class="se">\`</span>info<span class="se">\`</span> from jps
 +--------+---------------------+
@@ -313,16 +313,16 @@ but is not complete.</p>
 <ul>
   <li>Allow ‘-‘and ‘.’ in unquoted table names (to match typical file names)</li>
   <li>Allow ordinal field references, for example ‘$3’. This would help for files
-that do not have named fields, for instance <code class="highlighter-rouge">stdin</code>, but you could use them
+that do not have named fields, for instance <code class="language-plaintext highlighter-rouge">stdin</code>, but you could use them
 even if fields have names. Also ‘$0’ to mean the whole input line.</li>
-  <li>Use the file adapter, e.g. <code class="highlighter-rouge">select * from file.scott.emp</code> would use the
-<a href="file_adapter.html">file adapter</a> to open the file <code class="highlighter-rouge">scott/emp.csv</code>
+  <li>Use the file adapter, e.g. <code class="language-plaintext highlighter-rouge">select * from file.scott.emp</code> would use the
+<a href="file_adapter.html">file adapter</a> to open the file <code class="language-plaintext highlighter-rouge">scott/emp.csv</code>
 </li>
   <li>More tables based on git, e.g. branches, tags, files changed in each commit</li>
   <li>
-<code class="highlighter-rouge">wc</code> function, e.g. <code class="highlighter-rouge">select path, lineCount from git_ls_files cross apply wc(path)</code>
+<code class="language-plaintext highlighter-rouge">wc</code> function, e.g. <code class="language-plaintext highlighter-rouge">select path, lineCount from git_ls_files cross apply wc(path)</code>
 </li>
-  <li>Move <code class="highlighter-rouge">sqlsh</code> command, or at least the java code underneath it,
+  <li>Move <code class="language-plaintext highlighter-rouge">sqlsh</code> command, or at least the java code underneath it,
 into <a href="https://github.com/julianhyde/sqlline">sqlline</a>
 </li>
 </ul>
@@ -636,7 +636,11 @@ into <a href="https://github.com/julianhyde/sqlline">sqlline</a>
      under the terms of
      the <a href="https://www.apache.org/licenses/">
      Apache License v2</a>. Apache Calcite and its logo are
-     trademarks of the Apache Software Foundation.</p>
+     trademarks of the Apache Software Foundation.
+  </p>
+  <p>
+      <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a>
+  </p>
   </div>
 </footer>
 

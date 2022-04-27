@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>InnoDB adapter</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v4.2.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -86,12 +86,12 @@ InnoDB has become the default MySQL storage engine.</p>
 
 <p>Calcite’s InnoDB adapter allows you to query the data based on InnoDB
 data files directly as illustrated below, data files are also known as
-<code class="highlighter-rouge">.ibd</code> files. It leverages the
+<code class="language-plaintext highlighter-rouge">.ibd</code> files. It leverages the
 <a href="https://github.com/alibaba/innodb-java-reader">innodb-java-reader</a>. This
 adapter is different from JDBC adapter which maps a schema in a JDBC
 data source and requires a MySQL server to serve response.</p>
 
-<p>With <code class="highlighter-rouge">.ibd</code> files and the corresponding DDLs, the InnoDB adapter acts
+<p>With <code class="language-plaintext highlighter-rouge">.ibd</code> files and the corresponding DDLs, the InnoDB adapter acts
 as a simple “MySQL server”: it accepts SQL queries and attempts to
 compile each query based on InnoDB file access APIs provided by
 <a href="https://github.com/alibaba/innodb-java-reader">innodb-java-reader</a>.
@@ -129,22 +129,22 @@ particular index.</p>
 a MySQL “scott” database:</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"defaultSchema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scott"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"schemas"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"defaultSchema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scott"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"schemas"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scott"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.innodb.InnodbSchemaFactory"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"sqlFilePath"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"/path/scott.sql"</span><span class="w"> </span><span class="p">],</span><span class="w">
-        </span><span class="s2">"ibdDataFileBasePath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/local/mysql/data/scott"</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scott"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.innodb.InnodbSchemaFactory"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"sqlFilePath"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"/path/scott.sql"</span><span class="w"> </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"ibdDataFileBasePath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/usr/local/mysql/data/scott"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p><code class="highlighter-rouge">sqlFilePath</code> is a list of DDL files, you can generate table
+<p><code class="language-plaintext highlighter-rouge">sqlFilePath</code> is a list of DDL files, you can generate table
 definitions by executing `mysqldump -d -u<username> -p<password> -h</password></username></p>
 <hostname> <dbname>` in command-line.
 
@@ -739,7 +739,11 @@ leveraging cost based optimization.
      under the terms of
      the <a href="https://www.apache.org/licenses/">
      Apache License v2</a>. Apache Calcite and its logo are
-     trademarks of the Apache Software Foundation.</p>
+     trademarks of the Apache Software Foundation.
+  </p>
+  <p>
+      <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a>
+  </p>
   </div>
 </footer>
 

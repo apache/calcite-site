@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Kafka adapter</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v4.2.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -91,23 +91,23 @@ instead, users need to configure tables manually, one Kafka stream table is mapp
 <p>A basic example of a model file is given below:</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"defaultSchema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KAFKA"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"schemas"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"defaultSchema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KAFKA"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"schemas"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KAFKA"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"tables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KAFKA"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TABLE_NAME"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.kafka.KafkaTableFactory"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"row.converter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.example.CustKafkaRowConverter"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"bootstrap.servers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"host1:port,host2:port"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"topic.name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kafka.topic.name"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"consumer.params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="s2">"key.deserializer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.kafka.common.serialization.ByteArrayDeserializer"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"value.deserializer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.kafka.common.serialization.ByteArrayDeserializer"</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TABLE_NAME"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.kafka.KafkaTableFactory"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"row.converter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.example.CustKafkaRowConverter"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"bootstrap.servers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"host1:port,host2:port"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"topic.name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kafka.topic.name"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"consumer.params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"key.deserializer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.kafka.common.serialization.ByteArrayDeserializer"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"value.deserializer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.kafka.common.serialization.ByteArrayDeserializer"</span><span class="w">
             </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -121,22 +121,22 @@ instead, users need to configure tables manually, one Kafka stream table is mapp
 <ol>
   <li>
     <p>As Kafka message is schemaless, a <a href="/javadocAggregate/org/apache/calcite/adapter/kafka/KafkaRowConverter.html">KafkaRowConverter</a>
- is required to specify row schema explicitly(with parameter <code class="highlighter-rouge">row.converter</code>), and
+ is required to specify row schema explicitly(with parameter <code class="language-plaintext highlighter-rouge">row.converter</code>), and
  how to decode Kafka message to Calcite row. <a href="/javadocAggregate/org/apache/calcite/adapter/kafka/KafkaRowConverterImpl.html">KafkaRowConverterImpl</a>
  is used if not provided;</p>
   </li>
   <li>
-    <p>More consumer settings can be added in parameter <code class="highlighter-rouge">consumer.params</code>;</p>
+    <p>More consumer settings can be added in parameter <code class="language-plaintext highlighter-rouge">consumer.params</code>;</p>
   </li>
 </ol>
 
-<p>Assuming this file is stored as <code class="highlighter-rouge">kafka.model.json</code>, you can connect to Kafka via
-<a href="https://github.com/julianhyde/sqlline"><code class="highlighter-rouge">sqlline</code></a> as follows:</p>
+<p>Assuming this file is stored as <code class="language-plaintext highlighter-rouge">kafka.model.json</code>, you can connect to Kafka via
+<a href="https://github.com/julianhyde/sqlline"><code class="language-plaintext highlighter-rouge">sqlline</code></a> as follows:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./sqlline
 sqlline&gt; <span class="o">!</span>connect jdbc:calcite:model<span class="o">=</span>kafka.model.json admin admin</code></pre></figure>
 
-<p><code class="highlighter-rouge">sqlline</code> will now accept SQL queries which access your Kafka topics.</p>
+<p><code class="language-plaintext highlighter-rouge">sqlline</code> will now accept SQL queries which access your Kafka topics.</p>
 
 <p>With the Kafka table configured in the above model. We can run a simple query to fetch messages:</p>
 
@@ -151,7 +151,7 @@ sqlline&gt; <span class="o">!</span>connect jdbc:calcite:model<span class="o">=<
 
 <p>Kafka table is a streaming table, which runs continuously.</p>
 
-<p>If you want the query to end quickly, add <code class="highlighter-rouge">LIMIT</code> as follows:</p>
+<p>If you want the query to end quickly, add <code class="language-plaintext highlighter-rouge">LIMIT</code> as follows:</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">sqlline</span><span class="o">&gt;</span> <span class="k">SELECT</span> <span class="n">STREAM</span> <span class="o">*</span>
          <span class="k">FROM</span> <span class="n">KAFKA</span><span class="p">.</span><span class="k">TABLE_NAME</span>
@@ -467,7 +467,11 @@ sqlline&gt; <span class="o">!</span>connect jdbc:calcite:model<span class="o">=<
      under the terms of
      the <a href="https://www.apache.org/licenses/">
      Apache License v2</a>. Apache Calcite and its logo are
-     trademarks of the Apache Software Foundation.</p>
+     trademarks of the Apache Software Foundation.
+  </p>
+  <p>
+      <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a>
+  </p>
   </div>
 </footer>
 

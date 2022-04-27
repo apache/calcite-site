@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Cassandra adapter</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v4.2.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -94,31 +94,31 @@ the adapter will attempt to automatically populate any materialized views
 <p>A basic example of a model file is given below:</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="err">version</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">1.0</span><span class="err">'</span><span class="p">,</span><span class="w">
-  </span><span class="err">defaultSchema</span><span class="p">:</span><span class="w"> </span><span class="err">'twissandra'</span><span class="p">,</span><span class="w">
-  </span><span class="err">schemas</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="err">version:</span><span class="w"> </span><span class="err">'</span><span class="mf">1.0</span><span class="err">'</span><span class="p">,</span><span class="w">
+  </span><span class="err">defaultSchema:</span><span class="w"> </span><span class="err">'twissandra'</span><span class="p">,</span><span class="w">
+  </span><span class="err">schemas:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="err">'twissandra'</span><span class="p">,</span><span class="w">
-      </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
-      </span><span class="err">factory</span><span class="p">:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.cassandra.CassandraSchemaFactory'</span><span class="p">,</span><span class="w">
-      </span><span class="err">operand</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="err">host</span><span class="p">:</span><span class="w"> </span><span class="err">'localhost'</span><span class="p">,</span><span class="w">
-        </span><span class="err">keyspace</span><span class="p">:</span><span class="w"> </span><span class="err">'twissandra'</span><span class="w">
+      </span><span class="err">name:</span><span class="w"> </span><span class="err">'twissandra'</span><span class="p">,</span><span class="w">
+      </span><span class="err">type:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
+      </span><span class="err">factory:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.cassandra.CassandraSchemaFactory'</span><span class="p">,</span><span class="w">
+      </span><span class="err">operand:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">host:</span><span class="w"> </span><span class="err">'localhost'</span><span class="p">,</span><span class="w">
+        </span><span class="err">keyspace:</span><span class="w"> </span><span class="err">'twissandra'</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p>Note that you can also specify <code class="highlighter-rouge">username</code> and <code class="highlighter-rouge">password</code> keys along with
-the <code class="highlighter-rouge">host</code> and <code class="highlighter-rouge">keyspace</code> if your server requires authentication.
-Assuming this file is stored as <code class="highlighter-rouge">model.json</code>, you can connect to
-Cassandra via <a href="https://github.com/julianhyde/sqlline"><code class="highlighter-rouge">sqlline</code></a> as
+<p>Note that you can also specify <code class="language-plaintext highlighter-rouge">username</code> and <code class="language-plaintext highlighter-rouge">password</code> keys along with
+the <code class="language-plaintext highlighter-rouge">host</code> and <code class="language-plaintext highlighter-rouge">keyspace</code> if your server requires authentication.
+Assuming this file is stored as <code class="language-plaintext highlighter-rouge">model.json</code>, you can connect to
+Cassandra via <a href="https://github.com/julianhyde/sqlline"><code class="language-plaintext highlighter-rouge">sqlline</code></a> as
 follows:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./sqlline
 sqlline&gt; <span class="o">!</span>connect jdbc:calcite:model<span class="o">=</span>model.json admin admin</code></pre></figure>
 
-<p><code class="highlighter-rouge">sqlline</code> will now accept SQL queries which access your CQL tables.
+<p><code class="language-plaintext highlighter-rouge">sqlline</code> will now accept SQL queries which access your CQL tables.
 However, you’re not restricted to issuing queries supported by
 <a href="https://cassandra.apache.org/doc/cql3/CQL-2.2.html">CQL</a>.
 Calcite allows you to perform complex operations such as aggregations
@@ -126,8 +126,8 @@ or joins. The adapter will attempt to compile the query into the most
 efficient CQL possible by exploiting filtering and sorting directly in
 Cassandra where possible.</p>
 
-<p>For example, in the example dataset there is a CQL table named <code class="highlighter-rouge">timeline</code>
-with <code class="highlighter-rouge">username</code> as the partition key and <code class="highlighter-rouge">time</code> as the clustering key.</p>
+<p>For example, in the example dataset there is a CQL table named <code class="language-plaintext highlighter-rouge">timeline</code>
+with <code class="language-plaintext highlighter-rouge">username</code> as the partition key and <code class="language-plaintext highlighter-rouge">time</code> as the clustering key.</p>
 
 <p>We can issue a simple query to fetch the most recent tweet ID of the
 user by writing standard SQL:</p>
@@ -143,16 +143,16 @@ user by writing standard SQL:</p>
 <span class="o">+</span><span class="c1">--------------------------------------+</span></code></pre></figure>
 
 <p>While executing this query, the Cassandra adapter is able to recognize
-that <code class="highlighter-rouge">username</code> is the partition key and can be filtered by Cassandra.
-It also recognizes the clustering key <code class="highlighter-rouge">time</code> and pushes the ordering to
+that <code class="language-plaintext highlighter-rouge">username</code> is the partition key and can be filtered by Cassandra.
+It also recognizes the clustering key <code class="language-plaintext highlighter-rouge">time</code> and pushes the ordering to
 Cassandra as well.</p>
 
 <p>The final CQL query given to Cassandra is below:</p>
 
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">username</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">tweet_id</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">username</span><span class="p">,</span> <span class="nb">time</span><span class="p">,</span> <span class="n">tweet_id</span>
 <span class="k">FROM</span> <span class="nv">"timeline"</span>
 <span class="k">WHERE</span> <span class="n">username</span> <span class="o">=</span> <span class="s1">'JmuhsAaMdw'</span>
-<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">time</span> <span class="k">DESC</span> <span class="n">ALLOW</span> <span class="n">FILTERING</span><span class="p">;</span></code></pre></figure>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="nb">time</span> <span class="k">DESC</span> <span class="n">ALLOW</span> <span class="n">FILTERING</span><span class="p">;</span></code></pre></figure>
 
 <p>There is still significant work to do in improving the flexibility and
 performance of the adapter, but if you’re looking for a quick way to
@@ -468,7 +468,11 @@ prove useful.</p>
      under the terms of
      the <a href="https://www.apache.org/licenses/">
      Apache License v2</a>. Apache Calcite and its logo are
-     trademarks of the Apache Software Foundation.</p>
+     trademarks of the Apache Software Foundation.
+  </p>
+  <p>
+      <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a>
+  </p>
   </div>
 </footer>
 

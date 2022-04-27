@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Background</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v4.2.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -94,21 +94,21 @@ for building a database: just add data.</p>
 point it at some data.</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">HrSchema</span> <span class="o">{</span>
-  <span class="kd">public</span> <span class="kd">final</span> <span class="n">Employee</span><span class="o">[]</span> <span class="n">emps</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-  <span class="kd">public</span> <span class="kd">final</span> <span class="n">Department</span><span class="o">[]</span> <span class="n">depts</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+  <span class="kd">public</span> <span class="kd">final</span> <span class="nc">Employee</span><span class="o">[]</span> <span class="n">emps</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+  <span class="kd">public</span> <span class="kd">final</span> <span class="nc">Department</span><span class="o">[]</span> <span class="n">depts</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 <span class="o">}</span>
-<span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"org.apache.calcite.jdbc.Driver"</span><span class="o">);</span>
-<span class="n">Properties</span> <span class="n">info</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="o">();</span>
+<span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"org.apache.calcite.jdbc.Driver"</span><span class="o">);</span>
+<span class="nc">Properties</span> <span class="n">info</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Properties</span><span class="o">();</span>
 <span class="n">info</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">"lex"</span><span class="o">,</span> <span class="s">"JAVA"</span><span class="o">);</span>
-<span class="n">Connection</span> <span class="n">connection</span> <span class="o">=</span>
-    <span class="n">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="s">"jdbc:calcite:"</span><span class="o">,</span> <span class="n">info</span><span class="o">);</span>
-<span class="n">CalciteConnection</span> <span class="n">calciteConnection</span> <span class="o">=</span>
-    <span class="n">connection</span><span class="o">.</span><span class="na">unwrap</span><span class="o">(</span><span class="n">CalciteConnection</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-<span class="n">SchemaPlus</span> <span class="n">rootSchema</span> <span class="o">=</span> <span class="n">calciteConnection</span><span class="o">.</span><span class="na">getRootSchema</span><span class="o">();</span>
-<span class="n">Schema</span> <span class="n">schema</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReflectiveSchema</span><span class="o">(</span><span class="k">new</span> <span class="n">HrSchema</span><span class="o">());</span>
+<span class="nc">Connection</span> <span class="n">connection</span> <span class="o">=</span>
+    <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="s">"jdbc:calcite:"</span><span class="o">,</span> <span class="n">info</span><span class="o">);</span>
+<span class="nc">CalciteConnection</span> <span class="n">calciteConnection</span> <span class="o">=</span>
+    <span class="n">connection</span><span class="o">.</span><span class="na">unwrap</span><span class="o">(</span><span class="nc">CalciteConnection</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="nc">SchemaPlus</span> <span class="n">rootSchema</span> <span class="o">=</span> <span class="n">calciteConnection</span><span class="o">.</span><span class="na">getRootSchema</span><span class="o">();</span>
+<span class="nc">Schema</span> <span class="n">schema</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ReflectiveSchema</span><span class="o">(</span><span class="k">new</span> <span class="nc">HrSchema</span><span class="o">());</span>
 <span class="n">rootSchema</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"hr"</span><span class="o">,</span> <span class="n">schema</span><span class="o">);</span>
-<span class="n">Statement</span> <span class="n">statement</span> <span class="o">=</span> <span class="n">calciteConnection</span><span class="o">.</span><span class="na">createStatement</span><span class="o">();</span>
-<span class="n">ResultSet</span> <span class="n">resultSet</span> <span class="o">=</span> <span class="n">statement</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">(</span>
+<span class="nc">Statement</span> <span class="n">statement</span> <span class="o">=</span> <span class="n">calciteConnection</span><span class="o">.</span><span class="na">createStatement</span><span class="o">();</span>
+<span class="nc">ResultSet</span> <span class="n">resultSet</span> <span class="o">=</span> <span class="n">statement</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">(</span>
     <span class="s">"select d.deptno, min(e.empid)\n"</span>
     <span class="o">+</span> <span class="s">"from hr.emps as e\n"</span>
     <span class="o">+</span> <span class="s">"join hr.depts as d\n"</span>
@@ -121,32 +121,32 @@ point it at some data.</p>
 <span class="n">connection</span><span class="o">.</span><span class="na">close</span><span class="o">();</span></code></pre></figure>
 
 <p>Where is the database? There is no database. The connection is
-completely empty until <code class="highlighter-rouge">new ReflectiveSchema</code> registers a Java
-object as a schema and its collection fields <code class="highlighter-rouge">emps</code> and <code class="highlighter-rouge">depts</code> as
+completely empty until <code class="language-plaintext highlighter-rouge">new ReflectiveSchema</code> registers a Java
+object as a schema and its collection fields <code class="language-plaintext highlighter-rouge">emps</code> and <code class="language-plaintext highlighter-rouge">depts</code> as
 tables.</p>
 
 <p>Calcite does not want to own data; it does not even have a favorite data
 format. This example used in-memory data sets, and processed them
-using operators such as <code class="highlighter-rouge">groupBy</code> and <code class="highlighter-rouge">join</code> from the linq4j
+using operators such as <code class="language-plaintext highlighter-rouge">groupBy</code> and <code class="language-plaintext highlighter-rouge">join</code> from the linq4j
 library. But Calcite can also process data in other data formats, such
 as JDBC. In the first example, replace</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Schema</span> <span class="n">schema</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReflectiveSchema</span><span class="o">(</span><span class="k">new</span> <span class="n">HrSchema</span><span class="o">());</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Schema</span> <span class="n">schema</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ReflectiveSchema</span><span class="o">(</span><span class="k">new</span> <span class="nc">HrSchema</span><span class="o">());</span></code></pre></figure>
 
 <p>with</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"com.mysql.jdbc.Driver"</span><span class="o">);</span>
-<span class="n">BasicDataSource</span> <span class="n">dataSource</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BasicDataSource</span><span class="o">();</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"com.mysql.jdbc.Driver"</span><span class="o">);</span>
+<span class="nc">BasicDataSource</span> <span class="n">dataSource</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BasicDataSource</span><span class="o">();</span>
 <span class="n">dataSource</span><span class="o">.</span><span class="na">setUrl</span><span class="o">(</span><span class="s">"jdbc:mysql://localhost"</span><span class="o">);</span>
 <span class="n">dataSource</span><span class="o">.</span><span class="na">setUsername</span><span class="o">(</span><span class="s">"username"</span><span class="o">);</span>
 <span class="n">dataSource</span><span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="s">"password"</span><span class="o">);</span>
-<span class="n">Schema</span> <span class="n">schema</span> <span class="o">=</span> <span class="n">JdbcSchema</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">rootSchema</span><span class="o">,</span> <span class="s">"hr"</span><span class="o">,</span> <span class="n">dataSource</span><span class="o">,</span>
+<span class="nc">Schema</span> <span class="n">schema</span> <span class="o">=</span> <span class="nc">JdbcSchema</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">rootSchema</span><span class="o">,</span> <span class="s">"hr"</span><span class="o">,</span> <span class="n">dataSource</span><span class="o">,</span>
     <span class="kc">null</span><span class="o">,</span> <span class="s">"name"</span><span class="o">);</span></code></pre></figure>
 
 <p>and Calcite will execute the same query in JDBC. To the application,
 the data and API are the same, but behind the scenes the
 implementation is very different. Calcite uses optimizer rules to push
-the <code class="highlighter-rouge">JOIN</code> and <code class="highlighter-rouge">GROUP BY</code> operations to the source database.</p>
+the <code class="language-plaintext highlighter-rouge">JOIN</code> and <code class="language-plaintext highlighter-rouge">GROUP BY</code> operations to the source database.</p>
 
 <p>In-memory and JDBC are just two familiar examples. Calcite can handle
 any data source and data format. To add a data source, you need to
@@ -472,7 +472,11 @@ more details in the <a href="reference.html">SQL reference</a>
      under the terms of
      the <a href="https://www.apache.org/licenses/">
      Apache License v2</a>. Apache Calcite and its logo are
-     trademarks of the Apache Software Foundation.</p>
+     trademarks of the Apache Software Foundation.
+  </p>
+  <p>
+      <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a>
+  </p>
   </div>
 </footer>
 

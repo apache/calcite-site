@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>HOWTO</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v4.2.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -147,8 +147,8 @@ adapters.</p>
 <p>Prerequisite is Java (JDK 8, 9, 10, 11, 12, 13, 14, 15, 16 or 17)
 and Gradle (version 7.3) on your path.</p>
 
-<p>Unpack the source distribution <code class="highlighter-rouge">.tar.gz</code> file,
-<code class="highlighter-rouge">cd</code> to the root directory of the unpacked source,
+<p>Unpack the source distribution <code class="language-plaintext highlighter-rouge">.tar.gz</code> file,
+<code class="language-plaintext highlighter-rouge">cd</code> to the root directory of the unpacked source,
 then build using Gradle:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz apache-calcite-1.30.0-src.tar.gz
@@ -156,8 +156,8 @@ then build using Gradle:</p>
 <span class="nv">$ </span>gradle build</code></pre></figure>
 
 <p><a href="#running-tests">Running tests</a> describes how to run more or fewer
-tests  (but you should use the <code class="highlighter-rouge">gradle</code> command rather than
-<code class="highlighter-rouge">./gradlew</code>).</p>
+tests  (but you should use the <code class="language-plaintext highlighter-rouge">gradle</code> command rather than
+<code class="language-plaintext highlighter-rouge">./gradlew</code>).</p>
 
 <h2 id="building-from-git">Building from Git</h2>
 
@@ -165,7 +165,7 @@ tests  (but you should use the <code class="highlighter-rouge">gradle</code> com
 and Java (JDK 8, 9, 10, 11, 12, 13, 14, 15, 16 or 17) on your path.</p>
 
 <p>Create a local copy of the GitHub repository,
-<code class="highlighter-rouge">cd</code> to its root directory,
+<code class="language-plaintext highlighter-rouge">cd</code> to its root directory,
 then build using the included Gradle wrapper:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git clone git://github.com/apache/calcite.git
@@ -179,8 +179,8 @@ has not changed.</p>
 
 <p>Typically re-generation is called automatically when the relevant templates
 are changed, and it should work transparently.
-However, if your IDE does not generate sources (e.g. <code class="highlighter-rouge">core/build/javacc/javaCCMain/org/apache/calcite/sql/parser/impl/SqlParserImpl.java</code>),
-then you can call <code class="highlighter-rouge">./gradlew generateSources</code> tasks manually.</p>
+However, if your IDE does not generate sources (e.g. <code class="language-plaintext highlighter-rouge">core/build/javacc/javaCCMain/org/apache/calcite/sql/parser/impl/SqlParserImpl.java</code>),
+then you can call <code class="language-plaintext highlighter-rouge">./gradlew generateSources</code> tasks manually.</p>
 
 <p><a href="#running-tests">Running tests</a> describes how to run more or fewer
 tests.</p>
@@ -189,7 +189,7 @@ tests.</p>
 
 <p>Calcite uses Gradle wrapper to make a consistent build environment.
 In the typical case you don’t need to install Gradle manually, and
-<code class="highlighter-rouge">./gradlew</code> would download the proper version for you and verify the expected checksum.</p>
+<code class="language-plaintext highlighter-rouge">./gradlew</code> would download the proper version for you and verify the expected checksum.</p>
 
 <p>You can install Gradle manually, however please note that there might
 be impedance mismatch between different versions.</p>
@@ -201,7 +201,7 @@ be impedance mismatch between different versions.</p>
 <h2 id="running-tests">Running tests</h2>
 
 <p>The test suite will run by default when you build, unless you specify
-<code class="highlighter-rouge">-x test</code></p>
+<code class="language-plaintext highlighter-rouge">-x test</code></p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./gradlew assemble <span class="c"># build the artifacts</span>
 <span class="nv">$ </span>./gradlew build <span class="nt">-x</span> <span class="nb">test</span> <span class="c"># build the artifacts, verify code style, skip tests</span>
@@ -211,58 +211,58 @@ be impedance mismatch between different versions.</p>
 <span class="nv">$ </span>./gradlew autostyleCheck checkstyleAll <span class="c"># report code style violations</span>
 <span class="nv">$ </span>./gradlew <span class="nt">-PenableErrorprone</span> classes <span class="c"># verify Java code with Error Prone compiler, requires Java 11</span></code></pre></figure>
 
-<p>You can use <code class="highlighter-rouge">./gradlew assemble</code> to build the artifacts and skip all tests and verifications.</p>
+<p>You can use <code class="language-plaintext highlighter-rouge">./gradlew assemble</code> to build the artifacts and skip all tests and verifications.</p>
 
 <p>There are other options that control which tests are run, and in what
 environment, as follows.</p>
 
 <ul>
   <li>
-<code class="highlighter-rouge">-Dcalcite.test.db=DB</code> (where DB is <code class="highlighter-rouge">h2</code>, <code class="highlighter-rouge">hsqldb</code>, <code class="highlighter-rouge">mysql</code>, or <code class="highlighter-rouge">postgresql</code>) allows you
+<code class="language-plaintext highlighter-rouge">-Dcalcite.test.db=DB</code> (where DB is <code class="language-plaintext highlighter-rouge">h2</code>, <code class="language-plaintext highlighter-rouge">hsqldb</code>, <code class="language-plaintext highlighter-rouge">mysql</code>, or <code class="language-plaintext highlighter-rouge">postgresql</code>) allows you
 to change the JDBC data source for the test suite. Calcite’s test
 suite requires a JDBC data source populated with the foodmart data
 set.
     <ul>
       <li>
-<code class="highlighter-rouge">hsqldb</code>, the default, uses an in-memory hsqldb database.</li>
+<code class="language-plaintext highlighter-rouge">hsqldb</code>, the default, uses an in-memory hsqldb database.</li>
       <li>All others access a test virtual machine
 (see <a href="#running-integration-tests">integration tests</a> below).
-<code class="highlighter-rouge">mysql</code> and <code class="highlighter-rouge">postgresql</code> might be somewhat faster than hsqldb, but you need
+<code class="language-plaintext highlighter-rouge">mysql</code> and <code class="language-plaintext highlighter-rouge">postgresql</code> might be somewhat faster than hsqldb, but you need
 to populate it (i.e. provision a VM).</li>
     </ul>
   </li>
   <li>
-<code class="highlighter-rouge">-Dcalcite.debug</code> prints extra debugging information to stdout.</li>
+<code class="language-plaintext highlighter-rouge">-Dcalcite.debug</code> prints extra debugging information to stdout.</li>
   <li>
-<code class="highlighter-rouge">-Dcalcite.test.splunk</code> enables tests that run against Splunk.
+<code class="language-plaintext highlighter-rouge">-Dcalcite.test.splunk</code> enables tests that run against Splunk.
 Splunk must be installed and running.</li>
   <li>
-<code class="highlighter-rouge">./gradlew testSlow</code> runs tests that take longer to execute. For
+<code class="language-plaintext highlighter-rouge">./gradlew testSlow</code> runs tests that take longer to execute. For
 example, there are tests that create virtual TPC-H and TPC-DS schemas
 in-memory and run tests from those benchmarks.</li>
 </ul>
 
 <p>Note: tests are executed in a forked JVM, so system properties are not passed automatically
 when running tests with Gradle.
-By default, the build script passes the following <code class="highlighter-rouge">-D...</code> properties
-(see <code class="highlighter-rouge">passProperty</code> in <code class="highlighter-rouge">build.gradle.kts</code>):</p>
+By default, the build script passes the following <code class="language-plaintext highlighter-rouge">-D...</code> properties
+(see <code class="language-plaintext highlighter-rouge">passProperty</code> in <code class="language-plaintext highlighter-rouge">build.gradle.kts</code>):</p>
 
 <ul>
-  <li><code class="highlighter-rouge">java.awt.headless</code></li>
+  <li><code class="language-plaintext highlighter-rouge">java.awt.headless</code></li>
   <li>
-<code class="highlighter-rouge">junit.jupiter.execution.parallel.enabled</code>, default: <code class="highlighter-rouge">true</code>
+<code class="language-plaintext highlighter-rouge">junit.jupiter.execution.parallel.enabled</code>, default: <code class="language-plaintext highlighter-rouge">true</code>
 </li>
   <li>
-<code class="highlighter-rouge">junit.jupiter.execution.timeout.default</code>, default: <code class="highlighter-rouge">5 m</code>
+<code class="language-plaintext highlighter-rouge">junit.jupiter.execution.timeout.default</code>, default: <code class="language-plaintext highlighter-rouge">5 m</code>
 </li>
   <li>
-<code class="highlighter-rouge">user.language</code>, default: <code class="highlighter-rouge">TR</code>
+<code class="language-plaintext highlighter-rouge">user.language</code>, default: <code class="language-plaintext highlighter-rouge">TR</code>
 </li>
   <li>
-<code class="highlighter-rouge">user.country</code>, default: <code class="highlighter-rouge">tr</code>
+<code class="language-plaintext highlighter-rouge">user.country</code>, default: <code class="language-plaintext highlighter-rouge">tr</code>
 </li>
   <li>
-<code class="highlighter-rouge">calcite.**</code> (to enable <code class="highlighter-rouge">calcite.test.db</code> and others above)</li>
+<code class="language-plaintext highlighter-rouge">calcite.**</code> (to enable <code class="language-plaintext highlighter-rouge">calcite.test.db</code> and others above)</li>
 </ul>
 
 <h2 id="running-integration-tests">Running integration tests</h2>
@@ -291,11 +291,11 @@ For instance:</p>
 
 <p>2) Build and start the VM:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd </span>calcite-test-dataset <span class="o">&amp;&amp;</span> mvn install</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd </span>calcite-test-dataset <span class="o">&amp;&amp;</span> mvn <span class="nb">install</span></code></pre></figure>
 
 <h3 id="vm-management">VM management</h3>
 
-<p>Test VM is provisioned by Vagrant, so regular Vagrant <code class="highlighter-rouge">vagrant up</code> and <code class="highlighter-rouge">vagrant halt</code> should be used to start and stop the VM.
+<p>Test VM is provisioned by Vagrant, so regular Vagrant <code class="language-plaintext highlighter-rouge">vagrant up</code> and <code class="language-plaintext highlighter-rouge">vagrant halt</code> should be used to start and stop the VM.
 The connection strings for different databases are listed in <a href="https://github.com/vlsi/calcite-test-dataset">calcite-test-dataset</a> readme.</p>
 
 <h3 id="suggested-test-flow">Suggested test flow</h3>
@@ -305,13 +305,13 @@ The connection strings for different databases are listed in <a href="https://gi
 <p>Command line:</p>
 
 <ul>
-  <li>Executing regular unit tests (does not require external data): no change. <code class="highlighter-rouge">./gradlew test</code> or <code class="highlighter-rouge">./gradlew build</code>.</li>
-  <li>Executing all tests, for all the DBs: <code class="highlighter-rouge">./gradlew test integTestAll</code>.</li>
-  <li>Executing just tests for external DBs, excluding unit tests: <code class="highlighter-rouge">./gradlew integTestAll</code>
+  <li>Executing regular unit tests (does not require external data): no change. <code class="language-plaintext highlighter-rouge">./gradlew test</code> or <code class="language-plaintext highlighter-rouge">./gradlew build</code>.</li>
+  <li>Executing all tests, for all the DBs: <code class="language-plaintext highlighter-rouge">./gradlew test integTestAll</code>.</li>
+  <li>Executing just tests for external DBs, excluding unit tests: <code class="language-plaintext highlighter-rouge">./gradlew integTestAll</code>
 </li>
-  <li>Executing PostgreSQL JDBC tests: <code class="highlighter-rouge">./gradlew integTestPostgresql</code>
+  <li>Executing PostgreSQL JDBC tests: <code class="language-plaintext highlighter-rouge">./gradlew integTestPostgresql</code>
 </li>
-  <li>Executing just MongoDB tests: <code class="highlighter-rouge">./gradlew :mongo:build</code>
+  <li>Executing just MongoDB tests: <code class="language-plaintext highlighter-rouge">./gradlew :mongo:build</code>
 </li>
 </ul>
 
@@ -319,10 +319,10 @@ The connection strings for different databases are listed in <a href="https://gi
 
 <ul>
   <li>Executing regular unit tests: no change.</li>
-  <li>Executing MongoDB tests: run <code class="highlighter-rouge">MongoAdapterTest.java</code> with <code class="highlighter-rouge">calcite.integrationTest=true</code> system property</li>
-  <li>Executing MySQL tests: run <code class="highlighter-rouge">JdbcTest</code> and <code class="highlighter-rouge">JdbcAdapterTest</code> with setting <code class="highlighter-rouge">-Dcalcite.test.db=mysql</code>
+  <li>Executing MongoDB tests: run <code class="language-plaintext highlighter-rouge">MongoAdapterTest.java</code> with <code class="language-plaintext highlighter-rouge">calcite.integrationTest=true</code> system property</li>
+  <li>Executing MySQL tests: run <code class="language-plaintext highlighter-rouge">JdbcTest</code> and <code class="language-plaintext highlighter-rouge">JdbcAdapterTest</code> with setting <code class="language-plaintext highlighter-rouge">-Dcalcite.test.db=mysql</code>
 </li>
-  <li>Executing PostgreSQL tests: run <code class="highlighter-rouge">JdbcTest</code> and <code class="highlighter-rouge">JdbcAdapterTest</code> with setting <code class="highlighter-rouge">-Dcalcite.test.db=postgresql</code>
+  <li>Executing PostgreSQL tests: run <code class="language-plaintext highlighter-rouge">JdbcTest</code> and <code class="language-plaintext highlighter-rouge">JdbcAdapterTest</code> with setting <code class="language-plaintext highlighter-rouge">-Dcalcite.test.db=postgresql</code>
 </li>
 </ul>
 
@@ -331,7 +331,7 @@ The connection strings for different databases are listed in <a href="https://gi
 <p>Tests with external data are executed during Gradle’s integration-test phase.
 We do not currently use pre-integration-test/post-integration-test, however, we could use that in the future.
 The verification of build pass/failure is performed during the verify phase.
-Integration tests should be named <code class="highlighter-rouge">...IT.java</code>, so they are not picked up on unit test execution.</p>
+Integration tests should be named <code class="language-plaintext highlighter-rouge">...IT.java</code>, so they are not picked up on unit test execution.</p>
 
 <h2 id="contributing">Contributing</h2>
 
@@ -353,7 +353,7 @@ without problems for Calcite sources that do not use the Gradle build (release 1
 
 <p>Start with <a href="#building-from-a-source-distribution">building Calcite from the command line</a>.</p>
 
-<p>Go to <em>File &gt; Open…</em> and open up Calcite’s root <code class="highlighter-rouge">build.gradle.kts</code> file.
+<p>Go to <em>File &gt; Open…</em> and open up Calcite’s root <code class="language-plaintext highlighter-rouge">build.gradle.kts</code> file.
 When IntelliJ asks if you want to open it as a project or a file, select project.
 Also, say yes when it asks if you want a new window.
 IntelliJ’s Gradle project importer should handle the rest.</p>
@@ -365,38 +365,38 @@ To import, go to <em>Preferences &gt; Editor &gt; Code Style</em>, click the gea
 then <em>Import Scheme &gt; IntelliJ IDEA Code Style XML</em>.</p>
 
 <p>Once the importer is finished, test the project setup.
-For example, navigate to the method <code class="highlighter-rouge">JdbcTest.testWinAgg</code> with
-<em>Navigate &gt; Symbol</em> and enter <code class="highlighter-rouge">testWinAgg</code>. Run <code class="highlighter-rouge">testWinAgg</code> by right-clicking and selecting <em>Run</em> (or the equivalent keyboard shortcut).</p>
+For example, navigate to the method <code class="language-plaintext highlighter-rouge">JdbcTest.testWinAgg</code> with
+<em>Navigate &gt; Symbol</em> and enter <code class="language-plaintext highlighter-rouge">testWinAgg</code>. Run <code class="language-plaintext highlighter-rouge">testWinAgg</code> by right-clicking and selecting <em>Run</em> (or the equivalent keyboard shortcut).</p>
 
 <h3 id="setting-up-netbeans">Setting up NetBeans</h3>
 
 <p>From the main menu, select <em>File &gt; Open Project</em> and navigate to a name of the project (Calcite) with a small Gradle icon, and choose to open.
 Wait for NetBeans to finish importing all dependencies.</p>
 
-<p>To ensure that the project is configured successfully, navigate to the method <code class="highlighter-rouge">testWinAgg</code> in <code class="highlighter-rouge">org.apache.calcite.test.JdbcTest</code>.
+<p>To ensure that the project is configured successfully, navigate to the method <code class="language-plaintext highlighter-rouge">testWinAgg</code> in <code class="language-plaintext highlighter-rouge">org.apache.calcite.test.JdbcTest</code>.
 Right-click on the method and select to <em>Run Focused Test Method</em>.
 NetBeans will run a Gradle process, and you should see in the command output window a line with
- <code class="highlighter-rouge">Running org.apache.calcite.test.JdbcTest</code> followed by <code class="highlighter-rouge">"BUILD SUCCESS"</code>.</p>
+ <code class="language-plaintext highlighter-rouge">Running org.apache.calcite.test.JdbcTest</code> followed by <code class="language-plaintext highlighter-rouge">"BUILD SUCCESS"</code>.</p>
 
 <p>Note: it is not clear if NetBeans automatically generates relevant sources on project import,
-so you might need to run <code class="highlighter-rouge">./gradlew generateSources</code> before importing the project (and when you
+so you might need to run <code class="language-plaintext highlighter-rouge">./gradlew generateSources</code> before importing the project (and when you
 update template parser sources, and project version)</p>
 
 <h2 id="tracing">Tracing</h2>
 
 <p>To enable tracing, add the following flags to the java command line:</p>
 
-<p><code class="highlighter-rouge">-Dcalcite.debug=true</code></p>
+<p><code class="language-plaintext highlighter-rouge">-Dcalcite.debug=true</code></p>
 
 <p>The first flag causes Calcite to print the Java code it generates
 (to execute queries) to stdout. It is especially useful if you are debugging
 mysterious problems like this:</p>
 
-<p><code class="highlighter-rouge">Exception in thread "main" java.lang.ClassCastException: Integer cannot be cast to Long
+<p><code class="language-plaintext highlighter-rouge">Exception in thread "main" java.lang.ClassCastException: Integer cannot be cast to Long
   at Baz$1$1.current(Unknown Source)</code></p>
 
 <p>By default, Calcite uses the Log4j bindings for SLF4J. There is a provided configuration
-file which outputs logging at the INFO level to the console in <code class="highlighter-rouge">core/src/test/resources/log4j.properties</code>.
+file which outputs logging at the INFO level to the console in <code class="language-plaintext highlighter-rouge">core/src/test/resources/log4j.properties</code>.
 You can modify the level for the rootLogger to increase verbosity or change the level
 for a specific class if you so choose.</p>
 
@@ -416,16 +416,16 @@ code. The generated classes can be debugged interactively
 <p>To debug generated classes, set two system properties when starting the JVM:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">-Dorg.codehaus.janino.source_debugging.enable=true</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-Dorg.codehaus.janino.source_debugging.enable=true</code></li>
   <li>
-<code class="highlighter-rouge">-Dorg.codehaus.janino.source_debugging.dir=C:\tmp</code> (This property is optional;
+<code class="language-plaintext highlighter-rouge">-Dorg.codehaus.janino.source_debugging.dir=C:\tmp</code> (This property is optional;
 if not set, Janino will create temporary files in the system’s default location
-for temporary files, such as <code class="highlighter-rouge">/tmp</code> on Unix-based systems.)</li>
+for temporary files, such as <code class="language-plaintext highlighter-rouge">/tmp</code> on Unix-based systems.)</li>
 </ul>
 
 <p>After code is generated, either go into Intellij and mark the folder that
 contains generated temporary files as generated sources root or sources root,
-or directly set the value of <code class="highlighter-rouge">org.codehaus.janino.source_debugging.dir</code> to an
+or directly set the value of <code class="language-plaintext highlighter-rouge">org.codehaus.janino.source_debugging.dir</code> to an
 existing source root when starting the JVM.</p>
 
 <h2 id="csv-adapter">CSV adapter</h2>
@@ -459,7 +459,7 @@ connecting to: <span class="nb">test</span>
 </span>bye</code></pre></figure>
 
 <p>Connect using the
-<a href="https://github.com/apache/calcite/blob/master/mongodb/src/test/resources/mongo-model.json">mongo-model.json</a>
+<a href="https://github.com/apache/calcite/blob/main/mongodb/src/test/resources/mongo-model.json">mongo-model.json</a>
 Calcite model:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./sqlline
@@ -493,30 +493,30 @@ Closing: org.apache.calcite.jdbc.FactoryJdbc41<span class="nv">$CalciteConnectio
 <h2 id="splunk-adapter">Splunk adapter</h2>
 
 <p>To run the test suite and sample queries against Splunk,
-load Splunk’s <code class="highlighter-rouge">tutorialdata.zip</code> data set as described in
+load Splunk’s <code class="language-plaintext highlighter-rouge">tutorialdata.zip</code> data set as described in
 <a href="https://docs.splunk.com/Documentation/Splunk/6.0.2/PivotTutorial/GetthetutorialdataintoSplunk">the Splunk tutorial</a>.</p>
 
 <p>(This step is optional, but it provides some interesting data for the sample
 queries. It is also necessary if you intend to run the test suite, using
-<code class="highlighter-rouge">-Dcalcite.test.splunk=true</code>.)</p>
+<code class="language-plaintext highlighter-rouge">-Dcalcite.test.splunk=true</code>.)</p>
 
 <h2 id="implementing-an-adapter">Implementing an adapter</h2>
 
-<p>New adapters can be created by implementing <code class="highlighter-rouge">CalcitePrepare.Context</code>:</p>
+<p>New adapters can be created by implementing <code class="language-plaintext highlighter-rouge">CalcitePrepare.Context</code>:</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">org.apache.calcite.adapter.java.JavaTypeFactory</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.calcite.jdbc.CalcitePrepare</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.calcite.jdbc.CalciteSchema</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AdapterContext</span> <span class="kd">implements</span> <span class="n">CalcitePrepare</span><span class="o">.</span><span class="na">Context</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AdapterContext</span> <span class="kd">implements</span> <span class="nc">CalcitePrepare</span><span class="o">.</span><span class="na">Context</span> <span class="o">{</span>
   <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="n">JavaTypeFactory</span> <span class="nf">getTypeFactory</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="nc">JavaTypeFactory</span> <span class="nf">getTypeFactory</span><span class="o">()</span> <span class="o">{</span>
     <span class="c1">// adapter implementation</span>
     <span class="k">return</span> <span class="n">typeFactory</span><span class="o">;</span>
   <span class="o">}</span>
 
   <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="n">CalciteSchema</span> <span class="nf">getRootSchema</span><span class="o">()</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="nc">CalciteSchema</span> <span class="nf">getRootSchema</span><span class="o">()</span> <span class="o">{</span>
     <span class="c1">// adapter implementation</span>
     <span class="k">return</span> <span class="n">rootSchema</span><span class="o">;</span>
   <span class="o">}</span>
@@ -525,9 +525,9 @@ queries. It is also necessary if you intend to run the test suite, using
 <h3 id="testing-adapter-in-java">Testing adapter in Java</h3>
 
 <p>The example below shows how SQL query can be submitted to
-<code class="highlighter-rouge">CalcitePrepare</code> with a custom context (<code class="highlighter-rouge">AdapterContext</code> in this
+<code class="language-plaintext highlighter-rouge">CalcitePrepare</code> with a custom context (<code class="language-plaintext highlighter-rouge">AdapterContext</code> in this
 case). Calcite prepares and implements the query execution, using the
-resources provided by the <code class="highlighter-rouge">Context</code>. <code class="highlighter-rouge">CalcitePrepare.PrepareResult</code>
+resources provided by the <code class="language-plaintext highlighter-rouge">Context</code>. <code class="language-plaintext highlighter-rouge">CalcitePrepare.PrepareResult</code>
 provides access to the underlying enumerable and methods for
 enumeration. The enumerable itself can naturally be some adapter
 specific implementation.</p>
@@ -539,12 +539,12 @@ specific implementation.</p>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AdapterContextTest</span> <span class="o">{</span>
   <span class="nd">@Test</span>
   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testSelectAllFromTable</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">AdapterContext</span> <span class="n">ctx</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AdapterContext</span><span class="o">();</span>
-    <span class="n">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"SELECT * FROM TABLENAME"</span><span class="o">;</span>
-    <span class="n">Class</span> <span class="n">elementType</span> <span class="o">=</span> <span class="n">Object</span><span class="o">[].</span><span class="na">class</span><span class="o">;</span>
-    <span class="n">CalcitePrepare</span><span class="o">.</span><span class="na">PrepareResult</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">prepared</span> <span class="o">=</span>
+    <span class="nc">AdapterContext</span> <span class="n">ctx</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AdapterContext</span><span class="o">();</span>
+    <span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">"SELECT * FROM TABLENAME"</span><span class="o">;</span>
+    <span class="nc">Class</span> <span class="n">elementType</span> <span class="o">=</span> <span class="nc">Object</span><span class="o">[].</span><span class="na">class</span><span class="o">;</span>
+    <span class="nc">CalcitePrepare</span><span class="o">.</span><span class="na">PrepareResult</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">prepared</span> <span class="o">=</span>
         <span class="k">new</span> <span class="nf">CalcitePrepareImpl</span><span class="o">().</span><span class="na">prepareSql</span><span class="o">(</span><span class="n">ctx</span><span class="o">,</span> <span class="n">sql</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">elementType</span><span class="o">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">);</span>
-    <span class="n">Object</span> <span class="n">enumerable</span> <span class="o">=</span> <span class="n">prepared</span><span class="o">.</span><span class="na">getExecutable</span><span class="o">();</span>
+    <span class="nc">Object</span> <span class="n">enumerable</span> <span class="o">=</span> <span class="n">prepared</span><span class="o">.</span><span class="na">getExecutable</span><span class="o">();</span>
     <span class="c1">// etc.</span>
   <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
@@ -557,13 +557,13 @@ these topics if you are just building from source and running tests.</p>
 
 <h2 id="javatypefactory">JavaTypeFactory</h2>
 
-<p>When Calcite compares types (instances of <code class="highlighter-rouge">RelDataType</code>), it requires them to be the same
+<p>When Calcite compares types (instances of <code class="language-plaintext highlighter-rouge">RelDataType</code>), it requires them to be the same
 object. If there are two distinct type instances that refer to the
 same Java type, Calcite may fail to recognize that they match.  It is
 recommended to:</p>
 
 <ul>
-  <li>Use a single instance of <code class="highlighter-rouge">JavaTypeFactory</code> within the calcite context;</li>
+  <li>Use a single instance of <code class="language-plaintext highlighter-rouge">JavaTypeFactory</code> within the calcite context;</li>
   <li>Store the types so that the same object is always returned for the same type.</li>
 </ul>
 
@@ -587,7 +587,7 @@ need to be re-generated only every build, only when the schema changes.</p>
 <span class="nv">$ </span><span class="nb">tar </span>xf protobuf-java-3.0.0-beta-1.tar.gz <span class="o">&amp;&amp;</span> <span class="nb">cd </span>protobuf-3.0.0-beta-1
 <span class="nv">$ </span>./configure
 <span class="nv">$ </span>make
-<span class="nv">$ </span><span class="nb">sudo </span>make install</code></pre></figure>
+<span class="nv">$ </span><span class="nb">sudo </span>make <span class="nb">install</span></code></pre></figure>
 
 <p>Then, re-generate the compiled code:</p>
 
@@ -596,62 +596,62 @@ need to be re-generated only every build, only when the schema changes.</p>
 
 <h2 id="create-a-planner-rule">Create a planner rule</h2>
 
-<p>Create a class that extends <code class="highlighter-rouge">RelRule</code> (or occasionally a sub-class).</p>
+<p>Create a class that extends <code class="language-plaintext highlighter-rouge">RelRule</code> (or occasionally a sub-class).</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="cm">/** Planner rule that matches a {@link Filter} and futzes with it.
  *
  * @see CoreRules#FILTER_FUTZ
  */</span>
-<span class="kd">class</span> <span class="nc">FilterFutzRule</span> <span class="kd">extends</span> <span class="n">RelRule</span><span class="o">&lt;</span><span class="n">FilterFutzRule</span><span class="o">.</span><span class="na">Config</span><span class="o">&gt;</span> <span class="o">{</span>
+<span class="kd">class</span> <span class="nc">FilterFutzRule</span> <span class="kd">extends</span> <span class="nc">RelRule</span><span class="o">&lt;</span><span class="nc">FilterFutzRule</span><span class="o">.</span><span class="na">Config</span><span class="o">&gt;</span> <span class="o">{</span>
   <span class="cm">/** Creates a FilterFutzRule. */</span>
-  <span class="kd">protected</span> <span class="nf">FilterFutzRule</span><span class="o">(</span><span class="n">Config</span> <span class="n">config</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kd">protected</span> <span class="nf">FilterFutzRule</span><span class="o">(</span><span class="nc">Config</span> <span class="n">config</span><span class="o">)</span> <span class="o">{</span>
     <span class="kd">super</span><span class="o">(</span><span class="n">config</span><span class="o">);</span>
   <span class="o">}</span>
 
-  <span class="nd">@Override</span> <span class="n">onMatch</span><span class="o">(</span><span class="n">RelOptRuleCall</span> <span class="n">call</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">final</span> <span class="n">Filter</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">call</span><span class="o">.</span><span class="na">rels</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
-    <span class="kd">final</span> <span class="n">RelNode</span> <span class="n">newRel</span> <span class="o">=</span> <span class="o">...;</span>
+  <span class="nd">@Override</span> <span class="n">onMatch</span><span class="o">(</span><span class="nc">RelOptRuleCall</span> <span class="n">call</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">final</span> <span class="nc">Filter</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">call</span><span class="o">.</span><span class="na">rels</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+    <span class="kd">final</span> <span class="nc">RelNode</span> <span class="n">newRel</span> <span class="o">=</span> <span class="o">...;</span>
     <span class="n">call</span><span class="o">.</span><span class="na">transformTo</span><span class="o">(</span><span class="n">newRel</span><span class="o">);</span>
   <span class="o">}</span>
 
   <span class="cm">/** Rule configuration. */</span>
-  <span class="kd">interface</span> <span class="nc">Config</span> <span class="kd">extends</span> <span class="n">RelRule</span><span class="o">.</span><span class="na">Config</span> <span class="o">{</span>
-    <span class="n">Config</span> <span class="n">DEFAULT</span> <span class="o">=</span> <span class="n">EMPTY</span><span class="o">.</span><span class="na">as</span><span class="o">(</span><span class="n">Config</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+  <span class="kd">interface</span> <span class="nc">Config</span> <span class="kd">extends</span> <span class="nc">RelRule</span><span class="o">.</span><span class="na">Config</span> <span class="o">{</span>
+    <span class="nc">Config</span> <span class="no">DEFAULT</span> <span class="o">=</span> <span class="no">EMPTY</span><span class="o">.</span><span class="na">as</span><span class="o">(</span><span class="nc">Config</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
         <span class="o">.</span><span class="na">withOperandSupplier</span><span class="o">(</span><span class="n">b0</span> <span class="o">-&gt;</span>
-            <span class="n">b0</span><span class="o">.</span><span class="na">operand</span><span class="o">(</span><span class="n">LogicalFilter</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">anyInputs</span><span class="o">())</span>
-        <span class="o">.</span><span class="na">as</span><span class="o">(</span><span class="n">Config</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+            <span class="n">b0</span><span class="o">.</span><span class="na">operand</span><span class="o">(</span><span class="nc">LogicalFilter</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">anyInputs</span><span class="o">())</span>
+        <span class="o">.</span><span class="na">as</span><span class="o">(</span><span class="nc">Config</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 
-    <span class="nd">@Override</span> <span class="k">default</span> <span class="n">FilterFutzRule</span> <span class="nf">toRule</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span> <span class="k">default</span> <span class="nc">FilterFutzRule</span> <span class="nf">toRule</span><span class="o">()</span> <span class="o">{</span>
       <span class="k">return</span> <span class="k">new</span> <span class="nf">FilterFutzRule</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
     <span class="o">}</span>
   <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>The <em>class name</em> should indicate the basic RelNode types that are matched,
-sometimes followed by what the rule does, then the word <code class="highlighter-rouge">Rule</code>.
-Examples: <code class="highlighter-rouge">ProjectFilterTransposeRule</code>, <code class="highlighter-rouge">FilterMergeRule</code>.</p>
+sometimes followed by what the rule does, then the word <code class="language-plaintext highlighter-rouge">Rule</code>.
+Examples: <code class="language-plaintext highlighter-rouge">ProjectFilterTransposeRule</code>, <code class="language-plaintext highlighter-rouge">FilterMergeRule</code>.</p>
 
-<p>The rule must have a constructor that takes a <code class="highlighter-rouge">Config</code> as an argument.
-It should be <code class="highlighter-rouge">protected</code>, and will only be called from <code class="highlighter-rouge">Config.toRule()</code>.</p>
+<p>The rule must have a constructor that takes a <code class="language-plaintext highlighter-rouge">Config</code> as an argument.
+It should be <code class="language-plaintext highlighter-rouge">protected</code>, and will only be called from <code class="language-plaintext highlighter-rouge">Config.toRule()</code>.</p>
 
-<p>The class must contain an interface called <code class="highlighter-rouge">Config</code> that extends
-<code class="highlighter-rouge">RelRule.Config</code> (or the config of the rule’s super-class).</p>
+<p>The class must contain an interface called <code class="language-plaintext highlighter-rouge">Config</code> that extends
+<code class="language-plaintext highlighter-rouge">RelRule.Config</code> (or the config of the rule’s super-class).</p>
 
-<p><code class="highlighter-rouge">Config</code> must implement the <code class="highlighter-rouge">toRule</code> method and create a rule.</p>
+<p><code class="language-plaintext highlighter-rouge">Config</code> must implement the <code class="language-plaintext highlighter-rouge">toRule</code> method and create a rule.</p>
 
-<p><code class="highlighter-rouge">Config</code> must have a member called <code class="highlighter-rouge">DEFAULT</code> that creates a typical
-configuration. At a minimum, it must call <code class="highlighter-rouge">withOperandSupplier</code> to create
+<p><code class="language-plaintext highlighter-rouge">Config</code> must have a member called <code class="language-plaintext highlighter-rouge">DEFAULT</code> that creates a typical
+configuration. At a minimum, it must call <code class="language-plaintext highlighter-rouge">withOperandSupplier</code> to create
 a typical tree of operands.</p>
 
-<p>The rule <em>should not</em> have a static <code class="highlighter-rouge">INSTANCE</code> field.
-There <em>should</em> be an instance of the rule in a holder class such as <code class="highlighter-rouge">CoreRules</code>
-or <code class="highlighter-rouge">EnumerableRules</code>:</p>
+<p>The rule <em>should not</em> have a static <code class="language-plaintext highlighter-rouge">INSTANCE</code> field.
+There <em>should</em> be an instance of the rule in a holder class such as <code class="language-plaintext highlighter-rouge">CoreRules</code>
+or <code class="language-plaintext highlighter-rouge">EnumerableRules</code>:</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CoreRules</span> <span class="o">{</span>
   <span class="o">...</span>
 
   <span class="cm">/** Rule that matches a {@link Filter} and futzes with it. */</span>
-  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">FILTER_FUTZ</span> <span class="o">=</span> <span class="n">FilterFutzRule</span><span class="o">.</span><span class="na">Config</span><span class="o">.</span><span class="na">DEFAULT</span><span class="o">.</span><span class="na">toRule</span><span class="o">();</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="no">FILTER_FUTZ</span> <span class="o">=</span> <span class="nc">FilterFutzRule</span><span class="o">.</span><span class="na">Config</span><span class="o">.</span><span class="na">DEFAULT</span><span class="o">.</span><span class="na">toRule</span><span class="o">();</span>
 <span class="o">}</span></code></pre></figure>
 
 <p>The holder class <em>may</em> contain other instances of the rule with
@@ -659,9 +659,9 @@ different parameters, if they are commonly used.</p>
 
 <p>If the rule is instantiated with several patterns of operands
 (for instance, with different sub-classes of the same base RelNode classes,
-or with different predicates) the config <em>may</em> contain a method <code class="highlighter-rouge">withOperandFor</code>
+or with different predicates) the config <em>may</em> contain a method <code class="language-plaintext highlighter-rouge">withOperandFor</code>
 to make it easier to build common operand patterns.
-(See <code class="highlighter-rouge">FilterAggregateTransposeRule</code> for an example.)</p>
+(See <code class="language-plaintext highlighter-rouge">FilterAggregateTransposeRule</code> for an example.)</p>
 
 <h1 id="advanced-topics-for-committers">Advanced topics for committers</h1>
 
@@ -699,14 +699,14 @@ protocol that you are using (HTTPS vs. SSH).</li>
 <h2 id="merging-pull-requests">Merging pull requests</h2>
 
 <p>These are instructions for a Calcite committer who has reviewed a pull request
-from a contributor, found it satisfactory, and is about to merge it to master.
+from a contributor, found it satisfactory, and is about to merge it to main.
 Usually the contributor is not a committer (otherwise they would be committing
 it themselves, after you gave approval in a review).</p>
 
 <p>There are certain kinds of continuous integration tests that are not run
 automatically against the PR. These tests can be triggered explicitly by adding
 an appropriate label to the PR. For instance, you can run slow tests by adding
-the <code class="highlighter-rouge">slow-tests-needed</code> label. It is up to you to decide if these additional
+the <code class="language-plaintext highlighter-rouge">slow-tests-needed</code> label. It is up to you to decide if these additional
 tests need to run before merging.</p>
 
 <p>If the PR has multiple commits, squash them into a single commit. The
@@ -735,14 +735,14 @@ for their contribution.</li>
 <h2 id="set-up-pgp-signing-keys">Set up PGP signing keys</h2>
 
 <p>Follow instructions <a href="https://www.apache.org/dev/release-signing">here</a> to
-create a key pair. (On macOS, I did <code class="highlighter-rouge">brew install gpg</code> and
-<code class="highlighter-rouge">gpg --full-generate-key</code>.)</p>
+create a key pair. (On macOS, I did <code class="language-plaintext highlighter-rouge">brew install gpg</code> and
+<code class="language-plaintext highlighter-rouge">gpg --full-generate-key</code>.)</p>
 
 <p>Add your public key to the
-<a href="https://dist.apache.org/repos/dist/release/calcite/KEYS"><code class="highlighter-rouge">KEYS</code></a>
-file by following instructions in the <code class="highlighter-rouge">KEYS</code> file. If you don’t have
-the permission to update the <code class="highlighter-rouge">KEYS</code> file, ask PMC for help.
-(The <code class="highlighter-rouge">KEYS</code> file is not present in the git repo or in a release tar
+<a href="https://dist.apache.org/repos/dist/release/calcite/KEYS"><code class="language-plaintext highlighter-rouge">KEYS</code></a>
+file by following instructions in the <code class="language-plaintext highlighter-rouge">KEYS</code> file. If you don’t have
+the permission to update the <code class="language-plaintext highlighter-rouge">KEYS</code> file, ask PMC for help.
+(The <code class="language-plaintext highlighter-rouge">KEYS</code> file is not present in the git repo or in a release tar
 ball because that would be
 <a href="https://issues.apache.org/jira/browse/CALCITE-1746">redundant</a>.)</p>
 
@@ -753,7 +753,7 @@ your key to <a href="https://keyserver.ubuntu.com">https://keyserver.ubuntu.com<
 <h2 id="set-up-nexus-repository-credentials">Set up Nexus repository credentials</h2>
 
 <p>Gradle provides multiple ways to <a href="https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties">configure project properties</a>.
-For instance, you could update <code class="highlighter-rouge">$HOME/.gradle/gradle.properties</code>.</p>
+For instance, you could update <code class="language-plaintext highlighter-rouge">$HOME/.gradle/gradle.properties</code>.</p>
 
 <p>Note: the build script would print the missing properties, so you can try running it and let it complain on the missing ones.</p>
 
@@ -769,18 +769,18 @@ For instance, you could update <code class="highlighter-rouge">$HOME/.gradle/gra
 <span class="py">asfGitSourceUsername</span><span class="p">=</span>
 <span class="py">asfGitSourcePassword</span><span class="p">=</span></code></pre></figure>
 
-<p>Note: Both <code class="highlighter-rouge">asfNexusUsername</code> and <code class="highlighter-rouge">asfSvnUsername</code> are your apache id with <code class="highlighter-rouge">asfNexusPassword</code> and
-<code class="highlighter-rouge">asfSvnPassword</code> are corresponding password.</p>
+<p>Note: Both <code class="language-plaintext highlighter-rouge">asfNexusUsername</code> and <code class="language-plaintext highlighter-rouge">asfSvnUsername</code> are your apache id with <code class="language-plaintext highlighter-rouge">asfNexusPassword</code> and
+<code class="language-plaintext highlighter-rouge">asfSvnPassword</code> are corresponding password.</p>
 
 <p>When
 <a href="https://github.com/vlsi/asflike-release-environment">asflike-release-environment</a>
 is used, the credentials are taken from
-<code class="highlighter-rouge">asfTest...</code> (e.g. <code class="highlighter-rouge">asfTestNexusUsername=test</code>)</p>
+<code class="language-plaintext highlighter-rouge">asfTest...</code> (e.g. <code class="language-plaintext highlighter-rouge">asfTestNexusUsername=test</code>)</p>
 
-<p>Note: <code class="highlighter-rouge">asfGitSourceUsername</code> is your GitHub id while <code class="highlighter-rouge">asfGitSourcePassword</code> is not your GitHub password.
-You need to generate it in https://github.com/settings/tokens choosing <code class="highlighter-rouge">Personal access tokens</code>.</p>
+<p>Note: <code class="language-plaintext highlighter-rouge">asfGitSourceUsername</code> is your GitHub id while <code class="language-plaintext highlighter-rouge">asfGitSourcePassword</code> is not your GitHub password.
+You need to generate it in https://github.com/settings/tokens choosing <code class="language-plaintext highlighter-rouge">Personal access tokens</code>.</p>
 
-<p>Note: if you want to use <code class="highlighter-rouge">gpg-agent</code>, you need to pass some more properties:</p>
+<p>Note: if you want to use <code class="language-plaintext highlighter-rouge">gpg-agent</code>, you need to pass some more properties:</p>
 
 <figure class="highlight"><pre><code class="language-properties" data-lang="properties"><span class="py">useGpgCmd</span><span class="p">=</span><span class="s">true</span>
 <span class="py">signing.gnupg.keyName</span><span class="p">=</span>
@@ -792,7 +792,7 @@ You need to generate it in https://github.com/settings/tokens choosing <code cla
 
 <ul>
   <li>Make sure you are using JDK 8. Note: you need Java 8u202 or later in case you use OpenJDK-based Java.</li>
-  <li>Make sure build and tests succeed with <code class="highlighter-rouge">-Dcalcite.test.db=hsqldb</code> (the default)</li>
+  <li>Make sure build and tests succeed with <code class="language-plaintext highlighter-rouge">-Dcalcite.test.db=hsqldb</code> (the default)</li>
 </ul>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Make sure that there are no junk files in the sandbox</span>
@@ -809,45 +809,40 @@ git clean <span class="nt">-xn</span>
 
 <ul>
   <li>Send an email to <a href="mailto:dev@calcite.apache.org">dev@calcite.apache.org</a> notifying that RC build process
-is starting and therefore <code class="highlighter-rouge">master</code> branch is in code freeze until further notice.</li>
+is starting and therefore <code class="language-plaintext highlighter-rouge">main</code> branch is in code freeze until further notice.</li>
   <li>Set up signing keys as described above.</li>
   <li>Make sure you are using JDK 8 (not 9 or 10).</li>
-  <li>Make sure <code class="highlighter-rouge">master</code> branch and <code class="highlighter-rouge">site</code> branch are in sync, i.e. there is no
-commit on <code class="highlighter-rouge">site</code> that has not been applied also to <code class="highlighter-rouge">master</code>.
-We are talking about the commit content, you need to pay attention to the commit message
-and change, not hash: it is normal to have the same change in <code class="highlighter-rouge">site</code> and
-<code class="highlighter-rouge">master</code>, but with different hashes. If you spot missing commits then port them to <code class="highlighter-rouge">master</code>.</li>
-  <li>Check that <code class="highlighter-rouge">README</code> and <code class="highlighter-rouge">site/_docs/howto.md</code> have the correct version number.</li>
-  <li>Check that <code class="highlighter-rouge">site/_docs/howto.md</code> has the correct Gradle version.</li>
-  <li>Check that <code class="highlighter-rouge">NOTICE</code> has the current copyright year.</li>
-  <li>Check that <code class="highlighter-rouge">calcite.version</code> has the proper value in <code class="highlighter-rouge">/gradle.properties</code>.</li>
+  <li>Check that <code class="language-plaintext highlighter-rouge">README</code> and <code class="language-plaintext highlighter-rouge">site/_docs/howto.md</code> have the correct version number.</li>
+  <li>Check that <code class="language-plaintext highlighter-rouge">site/_docs/howto.md</code> has the correct Gradle version.</li>
+  <li>Check that <code class="language-plaintext highlighter-rouge">NOTICE</code> has the current copyright year.</li>
+  <li>Check that <code class="language-plaintext highlighter-rouge">calcite.version</code> has the proper value in <code class="language-plaintext highlighter-rouge">/gradle.properties</code>.</li>
   <li>Make sure build and tests succeed</li>
-  <li>Make sure that <code class="highlighter-rouge">./gradlew javadoc</code> succeeds
+  <li>Make sure that <code class="language-plaintext highlighter-rouge">./gradlew javadoc</code> succeeds
 (i.e. gives no errors; warnings are OK)</li>
   <li>Generate a report of vulnerabilities that occur among dependencies,
-using <code class="highlighter-rouge">./gradlew dependencyCheckUpdate dependencyCheckAggregate</code>.
+using <code class="language-plaintext highlighter-rouge">./gradlew dependencyCheckUpdate dependencyCheckAggregate</code>.
 Report to <a href="mailto:private@calcite.apache.org">private@calcite.apache.org</a>
 if new critical vulnerabilities are found among dependencies.</li>
   <li>Decide the supported configurations of JDK, operating system and
 Guava.  These will probably be the same as those described in the
 release notes of the previous release.  Document them in the release
-notes.  To test Guava version <em>x.y</em>, specify <code class="highlighter-rouge">-Pguava.version=x.y</code>
+notes.  To test Guava version <em>x.y</em>, specify <code class="language-plaintext highlighter-rouge">-Pguava.version=x.y</code>
 </li>
   <li>Optional tests using properties:
     <ul>
-      <li><code class="highlighter-rouge">-Dcalcite.test.db=mysql</code></li>
-      <li><code class="highlighter-rouge">-Dcalcite.test.db=hsqldb</code></li>
-      <li><code class="highlighter-rouge">-Dcalcite.test.mongodb</code></li>
-      <li><code class="highlighter-rouge">-Dcalcite.test.splunk</code></li>
+      <li><code class="language-plaintext highlighter-rouge">-Dcalcite.test.db=mysql</code></li>
+      <li><code class="language-plaintext highlighter-rouge">-Dcalcite.test.db=hsqldb</code></li>
+      <li><code class="language-plaintext highlighter-rouge">-Dcalcite.test.mongodb</code></li>
+      <li><code class="language-plaintext highlighter-rouge">-Dcalcite.test.splunk</code></li>
     </ul>
   </li>
   <li>Optional tests using tasks:
     <ul>
-      <li><code class="highlighter-rouge">./gradlew testSlow</code></li>
+      <li><code class="language-plaintext highlighter-rouge">./gradlew testSlow</code></li>
     </ul>
   </li>
-  <li>Add release notes to <code class="highlighter-rouge">site/_docs/history.md</code>. If release notes already exist for the version to be released, but
-are commented out, remove the comments (``). Include the commit history,
+  <li>Add release notes to <code class="language-plaintext highlighter-rouge">site/_docs/history.md</code>. If release notes already exist for the version to be released, but
+are commented out, remove the comments (<code class="language-plaintext highlighter-rouge">{% comment %}</code> and <code class="language-plaintext highlighter-rouge">{% endcomment %}</code>). Include the commit history,
 names of people who contributed to the release, and say which versions of Java, Guava and operating systems the
 release is tested against.</li>
   <li>Make sure that
@@ -859,7 +854,7 @@ just about to release)</li>
 
 <p>Generate a list of contributors by running the following (changing the
 date literal to the date of the previous release):</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># distinct authors
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># distinct authors
 ./sqlsh "select distinct author from git_commits where author_timestamp &gt; DATE '2021-06-03' order by 1"
 # most prolific authors
 ./sqlsh "select author, count(*) from git_commits where commit_timestamp &gt; DATE '2021-06-03' group by author order by 2"
@@ -867,7 +862,7 @@ date literal to the date of the previous release):</p>
 ./sqlsh "select count(*) as c, count(distinct author) as a, count(*) filter (where message like '%CALCITE-%') as j from git_commits where commit_timestamp &gt; DATE '2021-06-03' order by 1"
 </code></pre></div></div>
 
-<p>Smoke-test <code class="highlighter-rouge">sqlline</code> with Spatial and Oracle function tables:</p>
+<p>Smoke-test <code class="language-plaintext highlighter-rouge">sqlline</code> with Spatial and Oracle function tables:</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="err">$</span> <span class="p">.</span><span class="o">/</span><span class="n">sqlline</span>
 <span class="o">&gt;</span> <span class="o">!</span><span class="k">connect</span> <span class="n">jdbc</span><span class="p">:</span><span class="n">calcite</span><span class="p">:</span><span class="n">fun</span><span class="o">=</span><span class="n">spatial</span><span class="p">,</span><span class="n">oracle</span> <span class="nv">"sa"</span> <span class="nv">""</span>
@@ -881,7 +876,7 @@ date literal to the date of the previous release):</p>
 <span class="o">&gt;</span> <span class="o">!</span><span class="n">quit</span></code></pre></figure>
 
 <p>The release candidate process does not add commits,
-so there’s no harm if it fails. It might leave <code class="highlighter-rouge">-rc</code> tag behind
+so there’s no harm if it fails. It might leave <code class="language-plaintext highlighter-rouge">-rc</code> tag behind
 which can be removed if required.</p>
 
 <p>You can perform a dry-run release with a help of
@@ -896,7 +891,7 @@ start again from the top.</p>
 <p>Pick a release candidate index and ensure it does not interfere with previous candidates for the version.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Tell GPG how to read a password from your terminal</span>
-<span class="nb">export </span><span class="nv">GPG_TTY</span><span class="o">=</span><span class="k">$(</span>tty<span class="k">)</span>
+<span class="nb">export </span><span class="nv">GPG_TTY</span><span class="o">=</span><span class="si">$(</span><span class="nb">tty</span><span class="si">)</span>
 
 <span class="c"># Make sure that there are no junk files in the sandbox</span>
 git clean <span class="nt">-xn</span>
@@ -911,47 +906,47 @@ git clean <span class="nt">-xn</span>
 
 <ul>
   <li>
-<code class="highlighter-rouge">net.rubygrapefruit.platform.NativeException: Could not start 'svnmucc'</code>: Make sure you have <code class="highlighter-rouge">svnmucc</code> command
+<code class="language-plaintext highlighter-rouge">net.rubygrapefruit.platform.NativeException: Could not start 'svnmucc'</code>: Make sure you have <code class="language-plaintext highlighter-rouge">svnmucc</code> command
 installed in your machine.</li>
   <li>
-<code class="highlighter-rouge">Execution failed for task ':closeRepository' ... Possible staging rules violation. Check repository status using Nexus UI</code>:
+<code class="language-plaintext highlighter-rouge">Execution failed for task ':closeRepository' ... Possible staging rules violation. Check repository status using Nexus UI</code>:
 Log into <a href="https://repository.apache.org/#stagingRepositories">Nexus UI</a> to see the actual error. In case of
-<code class="highlighter-rouge">Failed: Signature Validation. No public key: Key with id: ... was not able to be located</code>, make sure you have uploaded
+<code class="language-plaintext highlighter-rouge">Failed: Signature Validation. No public key: Key with id: ... was not able to be located</code>, make sure you have uploaded
 your key to the keyservers used by Nexus, see above.</li>
 </ul>
 
 <h4 id="checking-the-artifacts">Checking the artifacts</h4>
 
 <ul>
-  <li>In the <code class="highlighter-rouge">release/build/distributions</code> directory should be these 3 files, among others:
+  <li>In the <code class="language-plaintext highlighter-rouge">release/build/distributions</code> directory should be these 3 files, among others:
     <ul>
-      <li><code class="highlighter-rouge">apache-calcite-X.Y.Z-src.tar.gz</code></li>
-      <li><code class="highlighter-rouge">apache-calcite-X.Y.Z-src.tar.gz.asc</code></li>
-      <li><code class="highlighter-rouge">apache-calcite-X.Y.Z-src.tar.gz.sha256</code></li>
+      <li><code class="language-plaintext highlighter-rouge">apache-calcite-X.Y.Z-src.tar.gz</code></li>
+      <li><code class="language-plaintext highlighter-rouge">apache-calcite-X.Y.Z-src.tar.gz.asc</code></li>
+      <li><code class="language-plaintext highlighter-rouge">apache-calcite-X.Y.Z-src.tar.gz.sha256</code></li>
     </ul>
   </li>
-  <li>Note that the file names start <code class="highlighter-rouge">apache-calcite-</code>.</li>
-  <li>In the source distro <code class="highlighter-rouge">.tar.gz</code> (currently there is
+  <li>Note that the file names start <code class="language-plaintext highlighter-rouge">apache-calcite-</code>.</li>
+  <li>In the source distro <code class="language-plaintext highlighter-rouge">.tar.gz</code> (currently there is
 no binary distro), check that all files belong to a directory called
-<code class="highlighter-rouge">apache-calcite-X.Y.Z-src</code>.</li>
-  <li>That directory must contain files <code class="highlighter-rouge">NOTICE</code>, <code class="highlighter-rouge">LICENSE</code>,
-<code class="highlighter-rouge">README</code>, <code class="highlighter-rouge">README.md</code>
+<code class="language-plaintext highlighter-rouge">apache-calcite-X.Y.Z-src</code>.</li>
+  <li>That directory must contain files <code class="language-plaintext highlighter-rouge">NOTICE</code>, <code class="language-plaintext highlighter-rouge">LICENSE</code>,
+<code class="language-plaintext highlighter-rouge">README</code>, <code class="language-plaintext highlighter-rouge">README.md</code>
     <ul>
-      <li>Check that the version in <code class="highlighter-rouge">README</code> is correct</li>
-      <li>Check that the copyright year in <code class="highlighter-rouge">NOTICE</code> is correct</li>
-      <li>Check that <code class="highlighter-rouge">LICENSE</code> is identical to the file checked into git</li>
+      <li>Check that the version in <code class="language-plaintext highlighter-rouge">README</code> is correct</li>
+      <li>Check that the copyright year in <code class="language-plaintext highlighter-rouge">NOTICE</code> is correct</li>
+      <li>Check that <code class="language-plaintext highlighter-rouge">LICENSE</code> is identical to the file checked into git</li>
     </ul>
   </li>
   <li>Make sure that the following files do not occur in the source
-distros: <code class="highlighter-rouge">KEYS</code>, <code class="highlighter-rouge">gradlew</code>, <code class="highlighter-rouge">gradlew.bat</code>, <code class="highlighter-rouge">gradle-wrapper.jar</code>,
-<code class="highlighter-rouge">gradle-wrapper.properties</code>
+distros: <code class="language-plaintext highlighter-rouge">KEYS</code>, <code class="language-plaintext highlighter-rouge">gradlew</code>, <code class="language-plaintext highlighter-rouge">gradlew.bat</code>, <code class="language-plaintext highlighter-rouge">gradle-wrapper.jar</code>,
+<code class="language-plaintext highlighter-rouge">gradle-wrapper.properties</code>
 </li>
-  <li>Make sure that there is no <code class="highlighter-rouge">KEYS</code> file in the source distros</li>
+  <li>Make sure that there is no <code class="language-plaintext highlighter-rouge">KEYS</code> file in the source distros</li>
   <li>In each .jar (for example
-<code class="highlighter-rouge">core/build/libs/calcite-core-X.Y.Z.jar</code> and
-<code class="highlighter-rouge">mongodb/build/libs/calcite-mongodb-X.Y.Z-sources.jar</code>), check
-that the <code class="highlighter-rouge">META-INF</code> directory contains <code class="highlighter-rouge">LICENSE</code>,
-<code class="highlighter-rouge">NOTICE</code>
+<code class="language-plaintext highlighter-rouge">core/build/libs/calcite-core-X.Y.Z.jar</code> and
+<code class="language-plaintext highlighter-rouge">mongodb/build/libs/calcite-mongodb-X.Y.Z-sources.jar</code>), check
+that the <code class="language-plaintext highlighter-rouge">META-INF</code> directory contains <code class="language-plaintext highlighter-rouge">LICENSE</code>,
+<code class="language-plaintext highlighter-rouge">NOTICE</code>
 </li>
   <li>Check PGP, per <a href="https://httpd.apache.org/dev/verification.html">this</a>
 </li>
@@ -961,9 +956,9 @@ that the <code class="highlighter-rouge">META-INF</code> directory contains <cod
 
 <ul>
   <li>Go to <a href="https://repository.apache.org/">https://repository.apache.org/</a> and login</li>
-  <li>Under <code class="highlighter-rouge">Build Promotion</code>, click <code class="highlighter-rouge">Staging Repositories</code>
+  <li>Under <code class="language-plaintext highlighter-rouge">Build Promotion</code>, click <code class="language-plaintext highlighter-rouge">Staging Repositories</code>
 </li>
-  <li>In the <code class="highlighter-rouge">Staging Repositories</code> tab there should be a line with profile <code class="highlighter-rouge">org.apache.calcite</code>
+  <li>In the <code class="language-plaintext highlighter-rouge">Staging Repositories</code> tab there should be a line with profile <code class="language-plaintext highlighter-rouge">org.apache.calcite</code>
 </li>
   <li>Navigate through the artifact tree and make sure the .jar, .pom, .asc files are present</li>
   <li>Check the box on in the first column of the row,
@@ -994,7 +989,7 @@ curl <span class="nt">-O</span> https://dist.apache.org/repos/dist/release/calci
       continue
     fi
     if</span> <span class="o">[</span> <span class="nt">-f</span> <span class="nv">$i</span>.sha512 <span class="o">]</span><span class="p">;</span> <span class="k">then
-      if</span> <span class="o">[</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">cat</span> <span class="nv">$i</span>.sha512<span class="k">)</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"</span><span class="k">$(</span>shasum <span class="nt">-a</span> 512 <span class="nv">$i</span><span class="k">)</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+      if</span> <span class="o">[</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">cat</span> <span class="nv">$i</span>.sha512<span class="si">)</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"</span><span class="si">$(</span>shasum <span class="nt">-a</span> 512 <span class="nv">$i</span><span class="si">)</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
         </span><span class="nb">echo</span> <span class="nv">$i</span>.sha512 present and correct
       <span class="k">else
         </span><span class="nb">echo</span> <span class="nv">$i</span>.sha512 does not match
@@ -1009,9 +1004,9 @@ checkHash apache-calcite-X.Y.Z-rcN</code></pre></figure>
 
 <h2 id="get-approval-for-a-release-via-apache-voting-process">Get approval for a release via Apache voting process</h2>
 
-<p>Start a vote by sending an email to the dev list. The Gradle <code class="highlighter-rouge">prepareVote</code> task
+<p>Start a vote by sending an email to the dev list. The Gradle <code class="language-plaintext highlighter-rouge">prepareVote</code> task
 prints a draft mail at the end, if it completes successfully. You can find the
-draft in <code class="highlighter-rouge">/build/prepareVote/mail.txt</code>.</p>
+draft in <code class="language-plaintext highlighter-rouge">/build/prepareVote/mail.txt</code>.</p>
 
 <p>After vote finishes, send out the result:</p>
 
@@ -1070,7 +1065,7 @@ So there is no need to wait more than fifteen minutes before announcing the rele
 <p>If there are now more than 2 releases, clear out the oldest ones:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> ~/dist/release/calcite
-svn rm apache-calcite-X.Y.Z
+svn <span class="nb">rm </span>apache-calcite-X.Y.Z
 svn ci</code></pre></figure>
 
 <p>The old releases will remain available in the
@@ -1081,17 +1076,17 @@ Make sure to add the version number and date of the latest release at the site l
 
 <p>Update the site with the release note, the release announcement, and the javadoc of the new version.
 Add a release announcement by copying
-<a href="https://github.com/apache/calcite/blob/master/site/_posts/2016-10-12-release-1.10.0.md">site/_posts/2016-10-12-release-1.10.0.md</a>.
+<a href="https://github.com/apache/calcite/blob/main/site/_posts/2016-10-12-release-1.10.0.md">site/_posts/2016-10-12-release-1.10.0.md</a>.
 Generate the javadoc, and <a href="http://localhost:4000/news/">preview</a> the site by following the
-instructions in <a href="https://github.com/apache/calcite/blob/master/site/README.md">site/README.md</a>. Ensure the announcement,
+instructions in <a href="https://github.com/apache/calcite/blob/main/site/README.md">site/README.md</a>. Ensure the announcement,
 javadoc, and release note appear correctly and then publish the site following the instructions
-in the same file. Rebase the <code class="highlighter-rouge">site</code> branch with <code class="highlighter-rouge">master</code> (e.g., <code class="highlighter-rouge">git checkout site &amp;&amp; git rebase master</code>);
-at this point there shouldn’t be any commits in <code class="highlighter-rouge">site</code> that are not in <code class="highlighter-rouge">master</code>, so the rebase is
+in the same file. Rebase the <code class="language-plaintext highlighter-rouge">site</code> branch with <code class="language-plaintext highlighter-rouge">main</code> (e.g., <code class="language-plaintext highlighter-rouge">git checkout site &amp;&amp; git rebase main</code>);
+at this point there shouldn’t be any commits in <code class="language-plaintext highlighter-rouge">site</code> that are not in <code class="language-plaintext highlighter-rouge">main</code>, so the rebase is
 essentially a noop.</p>
 
 <p>In JIRA, search for
 <a href="https://issues.apache.org/jira/issues/?jql=project%20%3D%20CALCITE%20and%20fixVersion%20%3D%201.5.0%20and%20status%20%3D%20Resolved%20and%20resolution%20%3D%20Fixed">all issues resolved in this release</a>,
-and do a bulk update(choose the <code class="highlighter-rouge">transition issues</code> option) changing their status to “Closed”,
+and do a bulk update(choose the <code class="language-plaintext highlighter-rouge">transition issues</code> option) changing their status to “Closed”,
 with a change comment
 “Resolved in release X.Y.Z (YYYY-MM-DD)”
 (fill in release number and date appropriately).
@@ -1100,22 +1095,22 @@ of the Calcite project mark the release X.Y.Z as released. If it does not alread
 a new version (e.g., X.Y+1.Z) for the next release.</p>
 
 <p>After 24 hours, announce the release by sending an email to
-<a href="https://mail-archives.apache.org/mod_mbox/www-announce/">announce@apache.org</a> using an <code class="highlighter-rouge">@apache.org</code>
+<a href="https://mail-archives.apache.org/mod_mbox/www-announce/">announce@apache.org</a> using an <code class="language-plaintext highlighter-rouge">@apache.org</code>
 address. You can use
 <a href="https://mail-archives.apache.org/mod_mbox/www-announce/201906.mbox/%3CCA%2BEpF8tcJcZ41rVuwJODJmyRy-qAxZUQm9OxKsoDi07c2SKs_A%40mail.gmail.com%3E">the 1.20.0 announcement</a>
 as a template. Be sure to include a brief description of the project.</p>
 
-<p>Increase the <code class="highlighter-rouge">calcite.version</code> value in <code class="highlighter-rouge">/gradle.properties</code>, commit and push
+<p>Increase the <code class="language-plaintext highlighter-rouge">calcite.version</code> value in <code class="language-plaintext highlighter-rouge">/gradle.properties</code>, commit and push
 the change with the message “Prepare for next development iteration”
 (see <a href="https://github.com/apache/calcite/commit/ed1470a3ea53a78c667354a5ec066425364eca73">ed1470a</a> as a reference)</p>
 
-<p>Re-open the <code class="highlighter-rouge">master</code> branch. Send an email to <a href="mailto:dev@calcite.apache.org">dev@calcite.apache.org</a> notifying
-that <code class="highlighter-rouge">master</code> code freeze is over and commits can resume.</p>
+<p>Re-open the <code class="language-plaintext highlighter-rouge">main</code> branch. Send an email to <a href="mailto:dev@calcite.apache.org">dev@calcite.apache.org</a> notifying
+that <code class="language-plaintext highlighter-rouge">main</code> code freeze is over and commits can resume.</p>
 
 <h2 id="publish-the-web-site">Publishing the web site</h2>
 
 <p>See instructions in
-<a href="https://github.com/apache/calcite/blob/master/site/README.md">site/README.md</a>.</p>
+<a href="https://github.com/apache/calcite/blob/main/site/README.md">site/README.md</a>.</p>
 
           
 
@@ -1436,7 +1431,11 @@ that <code class="highlighter-rouge">master</code> code freeze is over and commi
      under the terms of
      the <a href="https://www.apache.org/licenses/">
      Apache License v2</a>. Apache Calcite and its logo are
-     trademarks of the Apache Software Foundation.</p>
+     trademarks of the Apache Software Foundation.
+  </p>
+  <p>
+      <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a>
+  </p>
   </div>
 </footer>
 

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Tutorial</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v4.2.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -126,7 +126,7 @@ that is included in this project.</p>
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>./sqlline
 sqlline&gt; <span class="o">!</span>connect jdbc:calcite:model<span class="o">=</span>src/test/resources/model.json admin admin</code></pre></figure>
 
-<p>(If you are running Windows, the command is <code class="highlighter-rouge">sqlline.bat</code>.)</p>
+<p>(If you are running Windows, the command is <code class="language-plaintext highlighter-rouge">sqlline.bat</code>.)</p>
 
 <p>Execute a metadata query:</p>
 
@@ -215,15 +215,15 @@ executed. Now let’s look at those steps in more detail.</p>
 format. Here is the model:</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="err">version</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">1.0</span><span class="err">'</span><span class="p">,</span><span class="w">
-  </span><span class="err">defaultSchema</span><span class="p">:</span><span class="w"> </span><span class="err">'SALES'</span><span class="p">,</span><span class="w">
-  </span><span class="err">schemas</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="err">version:</span><span class="w"> </span><span class="err">'</span><span class="mf">1.0</span><span class="err">'</span><span class="p">,</span><span class="w">
+  </span><span class="err">defaultSchema:</span><span class="w"> </span><span class="err">'SALES'</span><span class="p">,</span><span class="w">
+  </span><span class="err">schemas:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="err">'SALES'</span><span class="p">,</span><span class="w">
-      </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
-      </span><span class="err">factory</span><span class="p">:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.csv.CsvSchemaFactory'</span><span class="p">,</span><span class="w">
-      </span><span class="err">operand</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="err">directory</span><span class="p">:</span><span class="w"> </span><span class="err">'sales'</span><span class="w">
+      </span><span class="err">name:</span><span class="w"> </span><span class="err">'SALES'</span><span class="p">,</span><span class="w">
+      </span><span class="err">type:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
+      </span><span class="err">factory:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.csv.CsvSchemaFactory'</span><span class="p">,</span><span class="w">
+      </span><span class="err">operand:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">directory:</span><span class="w"> </span><span class="err">'sales'</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -231,22 +231,22 @@ format. Here is the model:</p>
 
 <p>The model defines a single schema called ‘SALES’. The schema is
 powered by a plugin class,
-<a href="https://github.com/apache/calcite/blob/master/example/csv/src/main/java/org/apache/calcite/adapter/csv/CsvSchemaFactory.java">org.apache.calcite.adapter.csv.CsvSchemaFactory</a>,
+<a href="https://github.com/apache/calcite/blob/main/example/csv/src/main/java/org/apache/calcite/adapter/csv/CsvSchemaFactory.java">org.apache.calcite.adapter.csv.CsvSchemaFactory</a>,
 which is part of the
 calcite-example-csv project and implements the Calcite interface
 <a href="/javadocAggregate/org/apache/calcite/schema/SchemaFactory.html">SchemaFactory</a>.
 Its <code>create</code> method instantiates a
 schema, passing in the <code>directory</code> argument from the model file:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">Schema</span> <span class="nf">create</span><span class="o">(</span><span class="n">SchemaPlus</span> <span class="n">parentSchema</span><span class="o">,</span> <span class="n">String</span> <span class="n">name</span><span class="o">,</span>
-    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">operand</span><span class="o">)</span> <span class="o">{</span>
-  <span class="n">String</span> <span class="n">directory</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="n">operand</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"directory"</span><span class="o">);</span>
-  <span class="n">String</span> <span class="n">flavorName</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="n">operand</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"flavor"</span><span class="o">);</span>
-  <span class="n">CsvTable</span><span class="o">.</span><span class="na">Flavor</span> <span class="n">flavor</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nc">Schema</span> <span class="nf">create</span><span class="o">(</span><span class="nc">SchemaPlus</span> <span class="n">parentSchema</span><span class="o">,</span> <span class="nc">String</span> <span class="n">name</span><span class="o">,</span>
+    <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">operand</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">String</span> <span class="n">directory</span> <span class="o">=</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">operand</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"directory"</span><span class="o">);</span>
+  <span class="nc">String</span> <span class="n">flavorName</span> <span class="o">=</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">operand</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"flavor"</span><span class="o">);</span>
+  <span class="nc">CsvTable</span><span class="o">.</span><span class="na">Flavor</span> <span class="n">flavor</span><span class="o">;</span>
   <span class="k">if</span> <span class="o">(</span><span class="n">flavorName</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">flavor</span> <span class="o">=</span> <span class="n">CsvTable</span><span class="o">.</span><span class="na">Flavor</span><span class="o">.</span><span class="na">SCANNABLE</span><span class="o">;</span>
+    <span class="n">flavor</span> <span class="o">=</span> <span class="nc">CsvTable</span><span class="o">.</span><span class="na">Flavor</span><span class="o">.</span><span class="na">SCANNABLE</span><span class="o">;</span>
   <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-    <span class="n">flavor</span> <span class="o">=</span> <span class="n">CsvTable</span><span class="o">.</span><span class="na">Flavor</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">flavorName</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">());</span>
+    <span class="n">flavor</span> <span class="o">=</span> <span class="nc">CsvTable</span><span class="o">.</span><span class="na">Flavor</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">flavorName</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">());</span>
   <span class="o">}</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nf">CsvSchema</span><span class="o">(</span>
       <span class="k">new</span> <span class="nf">File</span><span class="o">(</span><span class="n">directory</span><span class="o">),</span>
@@ -255,7 +255,7 @@ schema, passing in the <code>directory</code> argument from the model file:</p>
 
 <p>Driven by the model, the schema factory instantiates a single schema
 called ‘SALES’.  The schema is an instance of
-<a href="https://github.com/apache/calcite/blob/master/example/csv/src/main/java/org/apache/calcite/adapter/csv/CsvSchema.java">org.apache.calcite.adapter.csv.CsvSchema</a>
+<a href="https://github.com/apache/calcite/blob/main/example/csv/src/main/java/org/apache/calcite/adapter/csv/CsvSchema.java">org.apache.calcite.adapter.csv.CsvSchema</a>
 and implements the Calcite interface
 <a href="/javadocAggregate/org/apache/calcite/schema/Schema.html">Schema</a>.</p>
 
@@ -264,47 +264,47 @@ table-functions, but these are advanced features and calcite-example-csv does
 not support them.) The tables implement Calcite’s
 <a href="/javadocAggregate/org/apache/calcite/schema/Table.html">Table</a>
 interface. <code>CsvSchema</code> produces tables that are instances of
-<a href="https://github.com/apache/calcite/blob/master/example/csv/src/main/java/org/apache/calcite/adapter/csv/CsvTable.java">CsvTable</a>
+<a href="https://github.com/apache/calcite/blob/main/example/csv/src/main/java/org/apache/calcite/adapter/csv/CsvTable.java">CsvTable</a>
 and its sub-classes.</p>
 
 <p>Here is the relevant code from <code>CsvSchema</code>, overriding the
 <code><a href="/javadocAggregate/org/apache/calcite/schema/impl/AbstractSchema.html#getTableMap()">getTableMap()</a></code>
 method in the <code>AbstractSchema</code> base class.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">protected</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Table</span><span class="o">&gt;</span> <span class="nf">getTableMap</span><span class="o">()</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">protected</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Table</span><span class="o">&gt;</span> <span class="nf">getTableMap</span><span class="o">()</span> <span class="o">{</span>
   <span class="c1">// Look for files in the directory ending in ".csv", ".csv.gz", ".json",</span>
   <span class="c1">// ".json.gz".</span>
-  <span class="n">File</span><span class="o">[]</span> <span class="n">files</span> <span class="o">=</span> <span class="n">directoryFile</span><span class="o">.</span><span class="na">listFiles</span><span class="o">(</span>
+  <span class="nc">File</span><span class="o">[]</span> <span class="n">files</span> <span class="o">=</span> <span class="n">directoryFile</span><span class="o">.</span><span class="na">listFiles</span><span class="o">(</span>
       <span class="k">new</span> <span class="nf">FilenameFilter</span><span class="o">()</span> <span class="o">{</span>
-        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">accept</span><span class="o">(</span><span class="n">File</span> <span class="n">dir</span><span class="o">,</span> <span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
-          <span class="kd">final</span> <span class="n">String</span> <span class="n">nameSansGz</span> <span class="o">=</span> <span class="n">trim</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="s">".gz"</span><span class="o">);</span>
+        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">accept</span><span class="o">(</span><span class="nc">File</span> <span class="n">dir</span><span class="o">,</span> <span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+          <span class="kd">final</span> <span class="nc">String</span> <span class="n">nameSansGz</span> <span class="o">=</span> <span class="n">trim</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="s">".gz"</span><span class="o">);</span>
           <span class="k">return</span> <span class="n">nameSansGz</span><span class="o">.</span><span class="na">endsWith</span><span class="o">(</span><span class="s">".csv"</span><span class="o">)</span>
               <span class="o">||</span> <span class="n">nameSansGz</span><span class="o">.</span><span class="na">endsWith</span><span class="o">(</span><span class="s">".json"</span><span class="o">);</span>
         <span class="o">}</span>
       <span class="o">});</span>
   <span class="k">if</span> <span class="o">(</span><span class="n">files</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"directory "</span> <span class="o">+</span> <span class="n">directoryFile</span> <span class="o">+</span> <span class="s">" not found"</span><span class="o">);</span>
-    <span class="n">files</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"directory "</span> <span class="o">+</span> <span class="n">directoryFile</span> <span class="o">+</span> <span class="s">" not found"</span><span class="o">);</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
   <span class="o">}</span>
   <span class="c1">// Build a map from table name to table; each file becomes a table.</span>
-  <span class="kd">final</span> <span class="n">ImmutableMap</span><span class="o">.</span><span class="na">Builder</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Table</span><span class="o">&gt;</span> <span class="n">builder</span> <span class="o">=</span> <span class="n">ImmutableMap</span><span class="o">.</span><span class="na">builder</span><span class="o">();</span>
-  <span class="k">for</span> <span class="o">(</span><span class="n">File</span> <span class="n">file</span> <span class="o">:</span> <span class="n">files</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">String</span> <span class="n">tableName</span> <span class="o">=</span> <span class="n">trim</span><span class="o">(</span><span class="n">file</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="s">".gz"</span><span class="o">);</span>
-    <span class="kd">final</span> <span class="n">String</span> <span class="n">tableNameSansJson</span> <span class="o">=</span> <span class="n">trimOrNull</span><span class="o">(</span><span class="n">tableName</span><span class="o">,</span> <span class="s">".json"</span><span class="o">);</span>
+  <span class="kd">final</span> <span class="nc">ImmutableMap</span><span class="o">.</span><span class="na">Builder</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Table</span><span class="o">&gt;</span> <span class="n">builder</span> <span class="o">=</span> <span class="nc">ImmutableMap</span><span class="o">.</span><span class="na">builder</span><span class="o">();</span>
+  <span class="k">for</span> <span class="o">(</span><span class="nc">File</span> <span class="n">file</span> <span class="o">:</span> <span class="n">files</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">String</span> <span class="n">tableName</span> <span class="o">=</span> <span class="n">trim</span><span class="o">(</span><span class="n">file</span><span class="o">.</span><span class="na">getName</span><span class="o">(),</span> <span class="s">".gz"</span><span class="o">);</span>
+    <span class="kd">final</span> <span class="nc">String</span> <span class="n">tableNameSansJson</span> <span class="o">=</span> <span class="n">trimOrNull</span><span class="o">(</span><span class="n">tableName</span><span class="o">,</span> <span class="s">".json"</span><span class="o">);</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">tableNameSansJson</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">JsonTable</span> <span class="n">table</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JsonTable</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
+      <span class="nc">JsonTable</span> <span class="n">table</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JsonTable</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
       <span class="n">builder</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">tableNameSansJson</span><span class="o">,</span> <span class="n">table</span><span class="o">);</span>
       <span class="k">continue</span><span class="o">;</span>
     <span class="o">}</span>
     <span class="n">tableName</span> <span class="o">=</span> <span class="n">trim</span><span class="o">(</span><span class="n">tableName</span><span class="o">,</span> <span class="s">".csv"</span><span class="o">);</span>
-    <span class="kd">final</span> <span class="n">Table</span> <span class="n">table</span> <span class="o">=</span> <span class="n">createTable</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
+    <span class="kd">final</span> <span class="nc">Table</span> <span class="n">table</span> <span class="o">=</span> <span class="n">createTable</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
     <span class="n">builder</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">tableName</span><span class="o">,</span> <span class="n">table</span><span class="o">);</span>
   <span class="o">}</span>
   <span class="k">return</span> <span class="n">builder</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
 <span class="o">}</span>
 
 <span class="cm">/** Creates different sub-type of table based on the "flavor" attribute. */</span>
-<span class="kd">private</span> <span class="n">Table</span> <span class="nf">createTable</span><span class="o">(</span><span class="n">File</span> <span class="n">file</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">private</span> <span class="nc">Table</span> <span class="nf">createTable</span><span class="o">(</span><span class="nc">File</span> <span class="n">file</span><span class="o">)</span> <span class="o">{</span>
   <span class="k">switch</span> <span class="o">(</span><span class="n">flavor</span><span class="o">)</span> <span class="o">{</span>
   <span class="k">case</span> <span class="nl">TRANSLATABLE:</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nf">CsvTranslatableTable</span><span class="o">(</span><span class="n">file</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
@@ -344,21 +344,21 @@ clause that are not used in the final result.</p>
 <p>Here is a schema that defines a view:</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="err">version</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">1.0</span><span class="err">'</span><span class="p">,</span><span class="w">
-  </span><span class="err">defaultSchema</span><span class="p">:</span><span class="w"> </span><span class="err">'SALES'</span><span class="p">,</span><span class="w">
-  </span><span class="err">schemas</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="err">version:</span><span class="w"> </span><span class="err">'</span><span class="mf">1.0</span><span class="err">'</span><span class="p">,</span><span class="w">
+  </span><span class="err">defaultSchema:</span><span class="w"> </span><span class="err">'SALES'</span><span class="p">,</span><span class="w">
+  </span><span class="err">schemas:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="err">'SALES'</span><span class="p">,</span><span class="w">
-      </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
-      </span><span class="err">factory</span><span class="p">:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.csv.CsvSchemaFactory'</span><span class="p">,</span><span class="w">
-      </span><span class="err">operand</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="err">directory</span><span class="p">:</span><span class="w"> </span><span class="err">'sales'</span><span class="w">
+      </span><span class="err">name:</span><span class="w"> </span><span class="err">'SALES'</span><span class="p">,</span><span class="w">
+      </span><span class="err">type:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
+      </span><span class="err">factory:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.csv.CsvSchemaFactory'</span><span class="p">,</span><span class="w">
+      </span><span class="err">operand:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">directory:</span><span class="w"> </span><span class="err">'sales'</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="err">tables</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="err">tables:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="err">'FEMALE_EMPS'</span><span class="p">,</span><span class="w">
-          </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="err">'view'</span><span class="p">,</span><span class="w">
-          </span><span class="err">sql</span><span class="p">:</span><span class="w"> </span><span class="err">'SELECT</span><span class="w"> </span><span class="err">*</span><span class="w"> </span><span class="err">FROM</span><span class="w"> </span><span class="err">emps</span><span class="w"> </span><span class="err">WHERE</span><span class="w"> </span><span class="err">gender</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">\'F\''</span><span class="w">
+          </span><span class="err">name:</span><span class="w"> </span><span class="err">'FEMALE_EMPS'</span><span class="p">,</span><span class="w">
+          </span><span class="err">type:</span><span class="w"> </span><span class="err">'view'</span><span class="p">,</span><span class="w">
+          </span><span class="err">sql:</span><span class="w"> </span><span class="err">'SELECT</span><span class="w"> </span><span class="err">*</span><span class="w"> </span><span class="err">FROM</span><span class="w"> </span><span class="err">emps</span><span class="w"> </span><span class="err">WHERE</span><span class="w"> </span><span class="err">gender</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">\'F\''</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -375,9 +375,9 @@ alternative syntax. If your view has a long SQL statement, you can instead
 supply a list of lines rather than a single string:</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="err">'FEMALE_EMPS'</span><span class="p">,</span><span class="w">
-  </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="err">'view'</span><span class="p">,</span><span class="w">
-  </span><span class="err">sql</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="err">name:</span><span class="w"> </span><span class="err">'FEMALE_EMPS'</span><span class="p">,</span><span class="w">
+  </span><span class="err">type:</span><span class="w"> </span><span class="err">'view'</span><span class="p">,</span><span class="w">
+  </span><span class="err">sql:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="err">'SELECT</span><span class="w"> </span><span class="err">*</span><span class="w"> </span><span class="err">FROM</span><span class="w"> </span><span class="err">emps'</span><span class="p">,</span><span class="w">
     </span><span class="err">'WHERE</span><span class="w"> </span><span class="err">gender</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">\'F\''</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -400,19 +400,19 @@ They don’t need to live in a custom schema.</p>
 <p>There is an example in <code>model-with-custom-table.json</code>:</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="err">version</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">1.0</span><span class="err">'</span><span class="p">,</span><span class="w">
-  </span><span class="err">defaultSchema</span><span class="p">:</span><span class="w"> </span><span class="err">'CUSTOM_TABLE'</span><span class="p">,</span><span class="w">
-  </span><span class="err">schemas</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="err">version:</span><span class="w"> </span><span class="err">'</span><span class="mf">1.0</span><span class="err">'</span><span class="p">,</span><span class="w">
+  </span><span class="err">defaultSchema:</span><span class="w"> </span><span class="err">'CUSTOM_TABLE'</span><span class="p">,</span><span class="w">
+  </span><span class="err">schemas:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="err">'CUSTOM_TABLE'</span><span class="p">,</span><span class="w">
-      </span><span class="err">tables</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="err">name:</span><span class="w"> </span><span class="err">'CUSTOM_TABLE'</span><span class="p">,</span><span class="w">
+      </span><span class="err">tables:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="err">'EMPS'</span><span class="p">,</span><span class="w">
-          </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
-          </span><span class="err">factory</span><span class="p">:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.csv.CsvTableFactory'</span><span class="p">,</span><span class="w">
-          </span><span class="err">operand</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="err">file</span><span class="p">:</span><span class="w"> </span><span class="err">'sales/EMPS.csv.gz'</span><span class="p">,</span><span class="w">
-            </span><span class="err">flavor</span><span class="p">:</span><span class="w"> </span><span class="s2">"scannable"</span><span class="w">
+          </span><span class="err">name:</span><span class="w"> </span><span class="err">'EMPS'</span><span class="p">,</span><span class="w">
+          </span><span class="err">type:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
+          </span><span class="err">factory:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.csv.CsvTableFactory'</span><span class="p">,</span><span class="w">
+          </span><span class="err">operand:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="err">file:</span><span class="w"> </span><span class="err">'sales/EMPS.csv.gz'</span><span class="p">,</span><span class="w">
+            </span><span class="err">flavor:</span><span class="w"> </span><span class="s2">"scannable"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">]</span><span class="w">
@@ -435,18 +435,18 @@ They don’t need to live in a custom schema.</p>
 <span class="o">+</span><span class="c1">--------+--------+</span></code></pre></figure>
 
 <p>The schema is a regular one, and contains a custom table powered by
-<a href="https://github.com/apache/calcite/blob/master/example/csv/src/main/java/org/apache/calcite/adapter/csv/CsvTableFactory.java">org.apache.calcite.adapter.csv.CsvTableFactory</a>,
+<a href="https://github.com/apache/calcite/blob/main/example/csv/src/main/java/org/apache/calcite/adapter/csv/CsvTableFactory.java">org.apache.calcite.adapter.csv.CsvTableFactory</a>,
 which implements the Calcite interface
 <a href="/javadocAggregate/org/apache/calcite/schema/TableFactory.html">TableFactory</a>.
 Its <code>create</code> method instantiates a <code>CsvScannableTable</code>,
 passing in the <code>file</code> argument from the model file:</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">CsvTable</span> <span class="nf">create</span><span class="o">(</span><span class="n">SchemaPlus</span> <span class="n">schema</span><span class="o">,</span> <span class="n">String</span> <span class="n">name</span><span class="o">,</span>
-    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">map</span><span class="o">,</span> <span class="n">RelDataType</span> <span class="n">rowType</span><span class="o">)</span> <span class="o">{</span>
-  <span class="n">String</span> <span class="n">fileName</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"file"</span><span class="o">);</span>
-  <span class="kd">final</span> <span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">fileName</span><span class="o">);</span>
-  <span class="kd">final</span> <span class="n">RelProtoDataType</span> <span class="n">protoRowType</span> <span class="o">=</span>
-      <span class="n">rowType</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">RelDataTypeImpl</span><span class="o">.</span><span class="na">proto</span><span class="o">(</span><span class="n">rowType</span><span class="o">)</span> <span class="o">:</span> <span class="kc">null</span><span class="o">;</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nc">CsvTable</span> <span class="nf">create</span><span class="o">(</span><span class="nc">SchemaPlus</span> <span class="n">schema</span><span class="o">,</span> <span class="nc">String</span> <span class="n">name</span><span class="o">,</span>
+    <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">map</span><span class="o">,</span> <span class="nc">RelDataType</span> <span class="n">rowType</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">String</span> <span class="n">fileName</span> <span class="o">=</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"file"</span><span class="o">);</span>
+  <span class="kd">final</span> <span class="nc">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="n">fileName</span><span class="o">);</span>
+  <span class="kd">final</span> <span class="nc">RelProtoDataType</span> <span class="n">protoRowType</span> <span class="o">=</span>
+      <span class="n">rowType</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="nc">RelDataTypeImpl</span><span class="o">.</span><span class="na">proto</span><span class="o">(</span><span class="n">rowType</span><span class="o">)</span> <span class="o">:</span> <span class="kc">null</span><span class="o">;</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nf">CsvScannableTable</span><span class="o">(</span><span class="n">file</span><span class="o">,</span> <span class="n">protoRowType</span><span class="o">);</span>
 <span class="o">}</span></code></pre></figure>
 
@@ -463,15 +463,15 @@ more control (say, providing different parameters for each table).</p>
 
 <h2 id="comments-in-models">Comments in models</h2>
 
-<p>Models can include comments using <code class="highlighter-rouge">/* ... */</code> and <code class="highlighter-rouge">//</code> syntax:</p>
+<p>Models can include comments using <code class="language-plaintext highlighter-rouge">/* ... */</code> and <code class="language-plaintext highlighter-rouge">//</code> syntax:</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="err">version</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">1.0</span><span class="err">'</span><span class="p">,</span><span class="w">
+  </span><span class="err">version:</span><span class="w"> </span><span class="err">'</span><span class="mf">1.0</span><span class="err">'</span><span class="p">,</span><span class="w">
   </span><span class="err">/*</span><span class="w"> </span><span class="err">Multi-line</span><span class="w">
      </span><span class="err">comment.</span><span class="w"> </span><span class="err">*/</span><span class="w">
-  </span><span class="err">defaultSchema</span><span class="p">:</span><span class="w"> </span><span class="err">'CUSTOM_TABLE'</span><span class="p">,</span><span class="w">
+  </span><span class="err">defaultSchema:</span><span class="w"> </span><span class="err">'CUSTOM_TABLE'</span><span class="p">,</span><span class="w">
   </span><span class="err">//</span><span class="w"> </span><span class="err">Single-line</span><span class="w"> </span><span class="err">comment.</span><span class="w">
-  </span><span class="err">schemas</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="err">schemas:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="err">..</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
@@ -505,7 +505,7 @@ similar schemas:</p>
 <span class="o">+</span><span class="c1">-----------------------------------------------------+</span>
 <span class="o">|</span> <span class="n">PLAN</span>                                                <span class="o">|</span>
 <span class="o">+</span><span class="c1">-----------------------------------------------------+</span>
-<span class="o">|</span> <span class="n">EnumerableCalc</span><span class="p">(</span><span class="n">expr</span><span class="o">#</span><span class="mi">0</span><span class="p">..</span><span class="mi">9</span><span class="o">=</span><span class="p">[</span><span class="err">{</span><span class="n">inputs</span><span class="err">}</span><span class="p">],</span> <span class="n">NAME</span><span class="o">=</span><span class="p">[</span><span class="err">$</span><span class="n">t1</span><span class="p">])</span>    <span class="o">|</span>
+<span class="o">|</span> <span class="n">EnumerableCalc</span><span class="p">(</span><span class="n">expr</span><span class="o">#</span><span class="mi">0</span><span class="p">..</span><span class="mi">9</span><span class="o">=</span><span class="p">[{</span><span class="n">inputs</span><span class="p">}],</span> <span class="n">NAME</span><span class="o">=</span><span class="p">[</span><span class="err">$</span><span class="n">t1</span><span class="p">])</span>    <span class="o">|</span>
 <span class="o">|</span>   <span class="n">EnumerableTableScan</span><span class="p">(</span><span class="k">table</span><span class="o">=</span><span class="p">[[</span><span class="n">SALES</span><span class="p">,</span> <span class="n">EMPS</span><span class="p">]])</span>        <span class="o">|</span>
 <span class="o">+</span><span class="c1">-----------------------------------------------------+</span>
 <span class="n">sqlline</span><span class="o">&gt;</span> <span class="o">!</span><span class="k">connect</span> <span class="n">jdbc</span><span class="p">:</span><span class="n">calcite</span><span class="p">:</span><span class="n">model</span><span class="o">=</span><span class="n">src</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">resources</span><span class="o">/</span><span class="n">smart</span><span class="p">.</span><span class="n">json</span> <span class="k">admin</span> <span class="k">admin</span>
@@ -519,18 +519,18 @@ similar schemas:</p>
 <p>What causes the difference in plan? Let’s follow the trail of evidence. In the
 <code>smart.json</code> model file, there is just one extra line:</p>
 
-<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="err">flavor</span><span class="p">:</span><span class="w"> </span><span class="s2">"translatable"</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="err">flavor:</span><span class="w"> </span><span class="s2">"translatable"</span></code></pre></figure>
 
 <p>This causes a <code>CsvSchema</code> to be created with
 <code>flavor = TRANSLATABLE</code>,
 and its <code>createTable</code> method creates instances of
-<a href="https://github.com/apache/calcite/blob/master/example/csv/src/main/java/org/apache/calcite/adapter/csv/CsvTranslatableTable.java">CsvTranslatableTable</a>
+<a href="https://github.com/apache/calcite/blob/main/example/csv/src/main/java/org/apache/calcite/adapter/csv/CsvTranslatableTable.java">CsvTranslatableTable</a>
 rather than a <code>CsvScannableTable</code>.</p>
 
 <p><code>CsvTranslatableTable</code> implements the
 <code><a href="/javadocAggregate/org/apache/calcite/schema/TranslatableTable.html#toRel()">TranslatableTable.toRel()</a></code>
 method to create
-<a href="https://github.com/apache/calcite/blob/master/example/csv/src/main/java/org/apache/calcite/adapter/csv/CsvTableScan.java">CsvTableScan</a>.
+<a href="https://github.com/apache/calcite/blob/main/example/csv/src/main/java/org/apache/calcite/adapter/csv/CsvTableScan.java">CsvTableScan</a>.
 Table scans are the leaves of a query operator tree.
 The usual implementation is
 <code><a href="/javadocAggregate/org/apache/calcite/adapter/enumerable/EnumerableTableScan.html">EnumerableTableScan</a></code>,
@@ -539,15 +539,15 @@ but we have created a distinctive sub-type that will cause rules to fire.</p>
 <p>Here is the rule in its entirety:</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CsvProjectTableScanRule</span>
-    <span class="kd">extends</span> <span class="n">RelRule</span><span class="o">&lt;</span><span class="n">CsvProjectTableScanRule</span><span class="o">.</span><span class="na">Config</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">extends</span> <span class="nc">RelRule</span><span class="o">&lt;</span><span class="nc">CsvProjectTableScanRule</span><span class="o">.</span><span class="na">Config</span><span class="o">&gt;</span> <span class="o">{</span>
   <span class="cm">/** Creates a CsvProjectTableScanRule. */</span>
-  <span class="kd">protected</span> <span class="nf">CsvProjectTableScanRule</span><span class="o">(</span><span class="n">Config</span> <span class="n">config</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kd">protected</span> <span class="nf">CsvProjectTableScanRule</span><span class="o">(</span><span class="nc">Config</span> <span class="n">config</span><span class="o">)</span> <span class="o">{</span>
     <span class="kd">super</span><span class="o">(</span><span class="n">config</span><span class="o">);</span>
   <span class="o">}</span>
 
-  <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onMatch</span><span class="o">(</span><span class="n">RelOptRuleCall</span> <span class="n">call</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">final</span> <span class="n">LogicalProject</span> <span class="n">project</span> <span class="o">=</span> <span class="n">call</span><span class="o">.</span><span class="na">rel</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
-    <span class="kd">final</span> <span class="n">CsvTableScan</span> <span class="n">scan</span> <span class="o">=</span> <span class="n">call</span><span class="o">.</span><span class="na">rel</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+  <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onMatch</span><span class="o">(</span><span class="nc">RelOptRuleCall</span> <span class="n">call</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">final</span> <span class="nc">LogicalProject</span> <span class="n">project</span> <span class="o">=</span> <span class="n">call</span><span class="o">.</span><span class="na">rel</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+    <span class="kd">final</span> <span class="nc">CsvTableScan</span> <span class="n">scan</span> <span class="o">=</span> <span class="n">call</span><span class="o">.</span><span class="na">rel</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
     <span class="kt">int</span><span class="o">[]</span> <span class="n">fields</span> <span class="o">=</span> <span class="n">getProjectFields</span><span class="o">(</span><span class="n">project</span><span class="o">.</span><span class="na">getProjects</span><span class="o">());</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">fields</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
       <span class="c1">// Project contains expressions more complex than just field references.</span>
@@ -561,12 +561,12 @@ but we have created a distinctive sub-type that will cause rules to fire.</p>
             <span class="n">fields</span><span class="o">));</span>
   <span class="o">}</span>
 
-  <span class="kd">private</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">getProjectFields</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">RexNode</span><span class="o">&gt;</span> <span class="n">exps</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">getProjectFields</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">RexNode</span><span class="o">&gt;</span> <span class="n">exps</span><span class="o">)</span> <span class="o">{</span>
     <span class="kd">final</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">fields</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">exps</span><span class="o">.</span><span class="na">size</span><span class="o">()];</span>
     <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">exps</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-      <span class="kd">final</span> <span class="n">RexNode</span> <span class="n">exp</span> <span class="o">=</span> <span class="n">exps</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-      <span class="k">if</span> <span class="o">(</span><span class="n">exp</span> <span class="k">instanceof</span> <span class="n">RexInputRef</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">fields</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="o">((</span><span class="n">RexInputRef</span><span class="o">)</span> <span class="n">exp</span><span class="o">).</span><span class="na">getIndex</span><span class="o">();</span>
+      <span class="kd">final</span> <span class="nc">RexNode</span> <span class="n">exp</span> <span class="o">=</span> <span class="n">exps</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">exp</span> <span class="k">instanceof</span> <span class="nc">RexInputRef</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">fields</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="o">((</span><span class="nc">RexInputRef</span><span class="o">)</span> <span class="n">exp</span><span class="o">).</span><span class="na">getIndex</span><span class="o">();</span>
       <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
         <span class="k">return</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// not a simple projection</span>
       <span class="o">}</span>
@@ -575,33 +575,33 @@ but we have created a distinctive sub-type that will cause rules to fire.</p>
   <span class="o">}</span>
 
   <span class="cm">/** Rule configuration. */</span>
-  <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Config</span> <span class="kd">extends</span> <span class="n">RelRule</span><span class="o">.</span><span class="na">Config</span> <span class="o">{</span>
-    <span class="n">Config</span> <span class="n">DEFAULT</span> <span class="o">=</span> <span class="n">EMPTY</span>
+  <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Config</span> <span class="kd">extends</span> <span class="nc">RelRule</span><span class="o">.</span><span class="na">Config</span> <span class="o">{</span>
+    <span class="nc">Config</span> <span class="no">DEFAULT</span> <span class="o">=</span> <span class="no">EMPTY</span>
         <span class="o">.</span><span class="na">withOperandSupplier</span><span class="o">(</span><span class="n">b0</span> <span class="o">-&gt;</span>
-            <span class="n">b0</span><span class="o">.</span><span class="na">operand</span><span class="o">(</span><span class="n">LogicalProject</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">oneInput</span><span class="o">(</span><span class="n">b1</span> <span class="o">-&gt;</span>
-                <span class="n">b1</span><span class="o">.</span><span class="na">operand</span><span class="o">(</span><span class="n">CsvTableScan</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">noInputs</span><span class="o">()))</span>
-        <span class="o">.</span><span class="na">as</span><span class="o">(</span><span class="n">Config</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+            <span class="n">b0</span><span class="o">.</span><span class="na">operand</span><span class="o">(</span><span class="nc">LogicalProject</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">oneInput</span><span class="o">(</span><span class="n">b1</span> <span class="o">-&gt;</span>
+                <span class="n">b1</span><span class="o">.</span><span class="na">operand</span><span class="o">(</span><span class="nc">CsvTableScan</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">noInputs</span><span class="o">()))</span>
+        <span class="o">.</span><span class="na">as</span><span class="o">(</span><span class="nc">Config</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 
-    <span class="nd">@Override</span> <span class="k">default</span> <span class="n">CsvProjectTableScanRule</span> <span class="nf">toRule</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span> <span class="k">default</span> <span class="nc">CsvProjectTableScanRule</span> <span class="nf">toRule</span><span class="o">()</span> <span class="o">{</span>
       <span class="k">return</span> <span class="k">new</span> <span class="nf">CsvProjectTableScanRule</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
 
-<p>The default instance of the rule resides in the <code class="highlighter-rouge">CsvRules</code> holder class:</p>
+<p>The default instance of the rule resides in the <code class="language-plaintext highlighter-rouge">CsvRules</code> holder class:</p>
 
 <figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">CsvRules</span> <span class="o">{</span>
-  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">CsvProjectTableScanRule</span> <span class="n">PROJECT_SCAN</span> <span class="o">=</span>
-      <span class="n">CsvProjectTableScanRule</span><span class="o">.</span><span class="na">Config</span><span class="o">.</span><span class="na">DEFAULT</span><span class="o">.</span><span class="na">toRule</span><span class="o">();</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">CsvProjectTableScanRule</span> <span class="no">PROJECT_SCAN</span> <span class="o">=</span>
+      <span class="nc">CsvProjectTableScanRule</span><span class="o">.</span><span class="na">Config</span><span class="o">.</span><span class="na">DEFAULT</span><span class="o">.</span><span class="na">toRule</span><span class="o">();</span>
 <span class="o">}</span></code></pre></figure>
 
-<p>The call to the <code class="highlighter-rouge">withOperandSupplier</code> method in the default configuration
-(the <code class="highlighter-rouge">DEFAULT</code> field in <code class="highlighter-rouge">interface Config</code>) declares the pattern of relational
+<p>The call to the <code class="language-plaintext highlighter-rouge">withOperandSupplier</code> method in the default configuration
+(the <code class="language-plaintext highlighter-rouge">DEFAULT</code> field in <code class="language-plaintext highlighter-rouge">interface Config</code>) declares the pattern of relational
 expressions that will cause the rule to fire. The planner will invoke the rule
-if it sees a <code class="highlighter-rouge">LogicalProject</code> whose sole input is a <code class="highlighter-rouge">CsvTableScan</code> with no
+if it sees a <code class="language-plaintext highlighter-rouge">LogicalProject</code> whose sole input is a <code class="language-plaintext highlighter-rouge">CsvTableScan</code> with no
 inputs.</p>
 
 <p>Variants of the rule are possible. For example, a different rule instance
-might instead match a <code class="highlighter-rouge">EnumerableProject</code> on a <code class="highlighter-rouge">CsvTableScan</code>.</p>
+might instead match a <code class="language-plaintext highlighter-rouge">EnumerableProject</code> on a <code class="language-plaintext highlighter-rouge">CsvTableScan</code>.</p>
 
 <p>The <code>onMatch</code> method generates a new relational expression and calls
 <code><a href="/javadocAggregate/org/apache/calcite/plan/RelOptRuleCall.html#transformTo(org.apache.calcite.rel.RelNode)">RelOptRuleCall.transformTo()</a></code>
@@ -649,18 +649,18 @@ operator statistics it is based upon. But that can be a subject for later.</p>
 <p>For example, this schema reads from a MySQL “foodmart” database:</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="err">version</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">1.0</span><span class="err">'</span><span class="p">,</span><span class="w">
-  </span><span class="err">defaultSchema</span><span class="p">:</span><span class="w"> </span><span class="err">'FOODMART'</span><span class="p">,</span><span class="w">
-  </span><span class="err">schemas</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="err">version:</span><span class="w"> </span><span class="err">'</span><span class="mf">1.0</span><span class="err">'</span><span class="p">,</span><span class="w">
+  </span><span class="err">defaultSchema:</span><span class="w"> </span><span class="err">'FOODMART'</span><span class="p">,</span><span class="w">
+  </span><span class="err">schemas:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="err">'FOODMART'</span><span class="p">,</span><span class="w">
-      </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
-      </span><span class="err">factory</span><span class="p">:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.jdbc.JdbcSchema$Factory'</span><span class="p">,</span><span class="w">
-      </span><span class="err">operand</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="err">jdbcDriver</span><span class="p">:</span><span class="w"> </span><span class="err">'com.mysql.jdbc.Driver'</span><span class="p">,</span><span class="w">
-        </span><span class="err">jdbcUrl</span><span class="p">:</span><span class="w"> </span><span class="err">'jdbc</span><span class="p">:</span><span class="err">mysql</span><span class="p">:</span><span class="err">//localhost/foodmart'</span><span class="p">,</span><span class="w">
-        </span><span class="err">jdbcUser</span><span class="p">:</span><span class="w"> </span><span class="err">'foodmart'</span><span class="p">,</span><span class="w">
-        </span><span class="err">jdbcPassword</span><span class="p">:</span><span class="w"> </span><span class="err">'foodmart'</span><span class="w">
+      </span><span class="err">name:</span><span class="w"> </span><span class="err">'FOODMART'</span><span class="p">,</span><span class="w">
+      </span><span class="err">type:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
+      </span><span class="err">factory:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.jdbc.JdbcSchema$Factory'</span><span class="p">,</span><span class="w">
+      </span><span class="err">operand:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">jdbcDriver:</span><span class="w"> </span><span class="err">'com.mysql.jdbc.Driver'</span><span class="p">,</span><span class="w">
+        </span><span class="err">jdbcUrl:</span><span class="w"> </span><span class="err">'jdbc:mysql://localhost/foodmart'</span><span class="p">,</span><span class="w">
+        </span><span class="err">jdbcUser:</span><span class="w"> </span><span class="err">'foodmart'</span><span class="p">,</span><span class="w">
+        </span><span class="err">jdbcPassword:</span><span class="w"> </span><span class="err">'foodmart'</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -692,18 +692,18 @@ those in-memory tables, effectively a cache of the database.</p>
 “foodmart” database:</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="err">version</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">1.0</span><span class="err">'</span><span class="p">,</span><span class="w">
-  </span><span class="err">defaultSchema</span><span class="p">:</span><span class="w"> </span><span class="err">'FOODMART_CLONE'</span><span class="p">,</span><span class="w">
-  </span><span class="err">schemas</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="err">version:</span><span class="w"> </span><span class="err">'</span><span class="mf">1.0</span><span class="err">'</span><span class="p">,</span><span class="w">
+  </span><span class="err">defaultSchema:</span><span class="w"> </span><span class="err">'FOODMART_CLONE'</span><span class="p">,</span><span class="w">
+  </span><span class="err">schemas:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="err">'FOODMART_CLONE'</span><span class="p">,</span><span class="w">
-      </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
-      </span><span class="err">factory</span><span class="p">:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.clone.CloneSchema$Factory'</span><span class="p">,</span><span class="w">
-      </span><span class="err">operand</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="err">jdbcDriver</span><span class="p">:</span><span class="w"> </span><span class="err">'com.mysql.jdbc.Driver'</span><span class="p">,</span><span class="w">
-        </span><span class="err">jdbcUrl</span><span class="p">:</span><span class="w"> </span><span class="err">'jdbc</span><span class="p">:</span><span class="err">mysql</span><span class="p">:</span><span class="err">//localhost/foodmart'</span><span class="p">,</span><span class="w">
-        </span><span class="err">jdbcUser</span><span class="p">:</span><span class="w"> </span><span class="err">'foodmart'</span><span class="p">,</span><span class="w">
-        </span><span class="err">jdbcPassword</span><span class="p">:</span><span class="w"> </span><span class="err">'foodmart'</span><span class="w">
+      </span><span class="err">name:</span><span class="w"> </span><span class="err">'FOODMART_CLONE'</span><span class="p">,</span><span class="w">
+      </span><span class="err">type:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
+      </span><span class="err">factory:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.clone.CloneSchema$Factory'</span><span class="p">,</span><span class="w">
+      </span><span class="err">operand:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">jdbcDriver:</span><span class="w"> </span><span class="err">'com.mysql.jdbc.Driver'</span><span class="p">,</span><span class="w">
+        </span><span class="err">jdbcUrl:</span><span class="w"> </span><span class="err">'jdbc:mysql://localhost/foodmart'</span><span class="p">,</span><span class="w">
+        </span><span class="err">jdbcUser:</span><span class="w"> </span><span class="err">'foodmart'</span><span class="p">,</span><span class="w">
+        </span><span class="err">jdbcPassword:</span><span class="w"> </span><span class="err">'foodmart'</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -714,26 +714,26 @@ schema. You use the <code>source</code> property to reference a schema
 defined earlier in the model, like this:</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="err">version</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">1.0</span><span class="err">'</span><span class="p">,</span><span class="w">
-  </span><span class="err">defaultSchema</span><span class="p">:</span><span class="w"> </span><span class="err">'FOODMART_CLONE'</span><span class="p">,</span><span class="w">
-  </span><span class="err">schemas</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="err">version:</span><span class="w"> </span><span class="err">'</span><span class="mf">1.0</span><span class="err">'</span><span class="p">,</span><span class="w">
+  </span><span class="err">defaultSchema:</span><span class="w"> </span><span class="err">'FOODMART_CLONE'</span><span class="p">,</span><span class="w">
+  </span><span class="err">schemas:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="err">'FOODMART'</span><span class="p">,</span><span class="w">
-      </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
-      </span><span class="err">factory</span><span class="p">:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.jdbc.JdbcSchema$Factory'</span><span class="p">,</span><span class="w">
-      </span><span class="err">operand</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="err">jdbcDriver</span><span class="p">:</span><span class="w"> </span><span class="err">'com.mysql.jdbc.Driver'</span><span class="p">,</span><span class="w">
-        </span><span class="err">jdbcUrl</span><span class="p">:</span><span class="w"> </span><span class="err">'jdbc</span><span class="p">:</span><span class="err">mysql</span><span class="p">:</span><span class="err">//localhost/foodmart'</span><span class="p">,</span><span class="w">
-        </span><span class="err">jdbcUser</span><span class="p">:</span><span class="w"> </span><span class="err">'foodmart'</span><span class="p">,</span><span class="w">
-        </span><span class="err">jdbcPassword</span><span class="p">:</span><span class="w"> </span><span class="err">'foodmart'</span><span class="w">
+      </span><span class="err">name:</span><span class="w"> </span><span class="err">'FOODMART'</span><span class="p">,</span><span class="w">
+      </span><span class="err">type:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
+      </span><span class="err">factory:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.jdbc.JdbcSchema$Factory'</span><span class="p">,</span><span class="w">
+      </span><span class="err">operand:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">jdbcDriver:</span><span class="w"> </span><span class="err">'com.mysql.jdbc.Driver'</span><span class="p">,</span><span class="w">
+        </span><span class="err">jdbcUrl:</span><span class="w"> </span><span class="err">'jdbc:mysql://localhost/foodmart'</span><span class="p">,</span><span class="w">
+        </span><span class="err">jdbcUser:</span><span class="w"> </span><span class="err">'foodmart'</span><span class="p">,</span><span class="w">
+        </span><span class="err">jdbcPassword:</span><span class="w"> </span><span class="err">'foodmart'</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="err">'FOODMART_CLONE'</span><span class="p">,</span><span class="w">
-      </span><span class="err">type</span><span class="p">:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
-      </span><span class="err">factory</span><span class="p">:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.clone.CloneSchema$Factory'</span><span class="p">,</span><span class="w">
-      </span><span class="err">operand</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="err">source</span><span class="p">:</span><span class="w"> </span><span class="err">'FOODMART'</span><span class="w">
+      </span><span class="err">name:</span><span class="w"> </span><span class="err">'FOODMART_CLONE'</span><span class="p">,</span><span class="w">
+      </span><span class="err">type:</span><span class="w"> </span><span class="err">'custom'</span><span class="p">,</span><span class="w">
+      </span><span class="err">factory:</span><span class="w"> </span><span class="err">'org.apache.calcite.adapter.clone.CloneSchema$Factory'</span><span class="p">,</span><span class="w">
+      </span><span class="err">operand:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">source:</span><span class="w"> </span><span class="err">'FOODMART'</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -1033,7 +1033,11 @@ The <a href="adapter.html">adapter specification</a> describes the APIs involved
      under the terms of
      the <a href="https://www.apache.org/licenses/">
      Apache License v2</a>. Apache Calcite and its logo are
-     trademarks of the Apache Software Foundation.</p>
+     trademarks of the Apache Software Foundation.
+  </p>
+  <p>
+      <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a>
+  </p>
   </div>
 </footer>
 

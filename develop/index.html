@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Developing Calcite</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v4.2.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -95,7 +95,7 @@ producing bytecode for type annotations (see <a href="https://bugs.openjdk.java.
 <a href="https://bugs.openjdk.java.net/browse/JDK-8160928">JDK-8160928</a>,
 <a href="https://bugs.openjdk.java.net/browse/JDK-8144185">JDK-8144185</a> ), so make sure you use up to date Java.</p>
 
-<p>Create a local copy of the Git repository, <code class="highlighter-rouge">cd</code> to its root directory,
+<p>Create a local copy of the Git repository, <code class="language-plaintext highlighter-rouge">cd</code> to its root directory,
 then build using Gradle:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>git clone git://github.com/apache/calcite.git
@@ -182,14 +182,14 @@ the contributor(s) involved in the discussion should:</p>
 <p>Fork the GitHub repository, and create a branch for your feature.</p>
 
 <p>Develop your feature and test cases, and make sure that
-<code class="highlighter-rouge">./gradlew build</code> succeeds. (Run extra tests if your change warrants it.)</p>
+<code class="language-plaintext highlighter-rouge">./gradlew build</code> succeeds. (Run extra tests if your change warrants it.)</p>
 
 <p>Commit your change to your branch, and use a comment that starts with
 the JIRA case number, like this:</p>
 
 <figure class="highlight"><pre><code class="language-text" data-lang="text">[CALCITE-345] AssertionError in RexToLixTranslator comparing to date literal</code></pre></figure>
 
-<p>If your change had multiple commits, use <code class="highlighter-rouge">git rebase -i master</code> to
+<p>If your change had multiple commits, use <code class="language-plaintext highlighter-rouge">git rebase -i main</code> to
 squash them into a single commit, and to bring your code up to date
 with the latest on the main line.</p>
 
@@ -216,7 +216,7 @@ the implementation (“Add handler for FileNotFound”).</li>
 </ul>
 
 <p>Then push your commit(s) to GitHub, and create a pull request from
-your branch to the calcite master branch. Update the JIRA case
+your branch to the calcite main branch. Update the JIRA case
 to reference your pull request, and a committer will review your
 changes.</p>
 
@@ -232,70 +232,70 @@ reasons:</p>
 branch and then push the commit(s) to GitHub. You are encouraged to use regular
  (non-rebased) commits on top of previously existing ones.</p>
 
-<p>When pushing the changes to GitHub, you should refrain from using the <code class="highlighter-rouge">--force</code>
+<p>When pushing the changes to GitHub, you should refrain from using the <code class="language-plaintext highlighter-rouge">--force</code>
 parameter and its alternatives. You may choose to force push your changes under
  certain conditions:</p>
 <ul>
   <li>the pull request has been submitted less than 10 minutes ago and there is no
  pending discussion (in the PR and/or in JIRA) concerning it;</li>
   <li>a reviewer has explicitly asked you to perform some modifications that
- require the use of the <code class="highlighter-rouge">--force</code> option.</li>
+ require the use of the <code class="language-plaintext highlighter-rouge">--force</code> option.</li>
 </ul>
 
 <p>In the special case, that the CI build failed, and the failure is not
-caused by your changes create an empty commit (<code class="highlighter-rouge">git commit --allow-empty</code>) and
+caused by your changes create an empty commit (<code class="language-plaintext highlighter-rouge">git commit --allow-empty</code>) and
 push it.</p>
 
 <h2 id="null-safety">Null safety</h2>
 
-<p>Apache Calcite uses the Checker Framework to avoid unexpected <code class="highlighter-rouge">NullPointerExceptions</code>.
+<p>Apache Calcite uses the Checker Framework to avoid unexpected <code class="language-plaintext highlighter-rouge">NullPointerExceptions</code>.
 You might find a detailed documentation at https://checkerframework.org/</p>
 
 <p>Note: only main code is verified for now, so nullness annotation is not enforced in test code.</p>
 
 <p>To execute the Checker Framework locally please use the following command:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./gradlew -PenableCheckerframework :linq4j:classes :core:classes
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./gradlew -PenableCheckerframework :linq4j:classes :core:classes
 </code></pre></div></div>
 
 <p>Here’s a small introduction to null-safe programming:</p>
 
 <ul>
-  <li>By default, parameters, return values and fields are non-nullable, so refrain from using <code class="highlighter-rouge">@NonNull</code>
+  <li>By default, parameters, return values and fields are non-nullable, so refrain from using <code class="language-plaintext highlighter-rouge">@NonNull</code>
 </li>
-  <li>Local variables infer nullness from the expression, so you can write <code class="highlighter-rouge">Object v = ...</code> instead of <code class="highlighter-rouge">@Nullable Object v = ...</code>
+  <li>Local variables infer nullness from the expression, so you can write <code class="language-plaintext highlighter-rouge">Object v = ...</code> instead of <code class="language-plaintext highlighter-rouge">@Nullable Object v = ...</code>
 </li>
   <li>
-    <p>Avoid the use of <code class="highlighter-rouge">javax.annotation.*</code> annotations. The annotations from <code class="highlighter-rouge">jsr305</code> do not support cases like <code class="highlighter-rouge">List&lt;@Nullable String&gt;</code>
-so it is better to stick with <code class="highlighter-rouge">org.checkerframework.checker.nullness.qual.Nullable</code>.
-Unfortunately, Guava (as of <code class="highlighter-rouge">29-jre</code>) has <strong>both</strong> <code class="highlighter-rouge">jsr305</code> and <code class="highlighter-rouge">checker-qual</code> dependencies at the same time,
-so you might want to configure your IDE to exclude <code class="highlighter-rouge">javax.annotation.*</code> annotations from code completion.</p>
+    <p>Avoid the use of <code class="language-plaintext highlighter-rouge">javax.annotation.*</code> annotations. The annotations from <code class="language-plaintext highlighter-rouge">jsr305</code> do not support cases like <code class="language-plaintext highlighter-rouge">List&lt;@Nullable String&gt;</code>
+so it is better to stick with <code class="language-plaintext highlighter-rouge">org.checkerframework.checker.nullness.qual.Nullable</code>.
+Unfortunately, Guava (as of <code class="language-plaintext highlighter-rouge">29-jre</code>) has <strong>both</strong> <code class="language-plaintext highlighter-rouge">jsr305</code> and <code class="language-plaintext highlighter-rouge">checker-qual</code> dependencies at the same time,
+so you might want to configure your IDE to exclude <code class="language-plaintext highlighter-rouge">javax.annotation.*</code> annotations from code completion.</p>
   </li>
   <li>
     <p>The Checker Framework verifies code method by method. That means, it can’t account for method execution order.
-That is why <code class="highlighter-rouge">@Nullable</code> fields should be verified in each method where they are used.
+That is why <code class="language-plaintext highlighter-rouge">@Nullable</code> fields should be verified in each method where they are used.
 If you split logic into multiple methods, you might want verify null once, then pass it via non-nullable parameters.
-For fields that start as null and become non-null later, use <code class="highlighter-rouge">@MonotonicNonNull</code>.
-For fields that have already been checked against null, use <code class="highlighter-rouge">@RequiresNonNull</code>.</p>
+For fields that start as null and become non-null later, use <code class="language-plaintext highlighter-rouge">@MonotonicNonNull</code>.
+For fields that have already been checked against null, use <code class="language-plaintext highlighter-rouge">@RequiresNonNull</code>.</p>
   </li>
   <li>
-    <p>If you are absolutely sure the value is non-null, you might use <code class="highlighter-rouge">org.apache.calcite.linq4j.Nullness.castNonNull(T)</code>.
-The intention behind <code class="highlighter-rouge">castNonNull</code> is like <code class="highlighter-rouge">trustMeThisIsNeverNullHoweverTheVerifierCantTellYet(...)</code></p>
+    <p>If you are absolutely sure the value is non-null, you might use <code class="language-plaintext highlighter-rouge">org.apache.calcite.linq4j.Nullness.castNonNull(T)</code>.
+The intention behind <code class="language-plaintext highlighter-rouge">castNonNull</code> is like <code class="language-plaintext highlighter-rouge">trustMeThisIsNeverNullHoweverTheVerifierCantTellYet(...)</code></p>
   </li>
   <li>
-    <p>If the expression is nullable, however, you need to pass it to a non-null method, use <code class="highlighter-rouge">Objects.requireNonNull</code>.
+    <p>If the expression is nullable, however, you need to pass it to a non-null method, use <code class="language-plaintext highlighter-rouge">Objects.requireNonNull</code>.
 It allows to have a better error message that includes context information.</p>
   </li>
   <li>
     <p>The Checker Framework comes with an annotated JDK, however, there might be invalid annotations.
-In that cases, stub files can be placed to <code class="highlighter-rouge">/src/main/config/checkerframework</code> to override the annotations.
-It is important the files have <code class="highlighter-rouge">.astub</code> extension otherwise they will be ignored.</p>
+In that cases, stub files can be placed to <code class="language-plaintext highlighter-rouge">/src/main/config/checkerframework</code> to override the annotations.
+It is important the files have <code class="language-plaintext highlighter-rouge">.astub</code> extension otherwise they will be ignored.</p>
   </li>
   <li>
     <p>In array types, a type annotation appears immediately before the type component (either the array or the array component) it refers to.
 This is explained in the <a href="https://docs.oracle.com/javase/specs/jls/se8/html/jls-9.html#jls-9.7.4">Java Language Specification</a>.</p>
 
-    <div class="highlighter-rouge">
+    <div class="language-plaintext highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code>  String nonNullable;
   @Nullable String nullable;
 
@@ -333,7 +333,7 @@ This is explained in the <a href="https://docs.oracle.com/javase/specs/jls/se8/h
   <li>
     <p>By default, generic parameters can be both nullable and non-nullable:</p>
 
-    <div class="highlighter-rouge">
+    <div class="language-plaintext highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code>  class Holder&lt;T&gt; { // can be both nullable
       final T value;
       T get() {
@@ -345,10 +345,10 @@ This is explained in the <a href="https://docs.oracle.com/javase/specs/jls/se8/h
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>However, default bounds are non-nullable, so if you write <code class="highlighter-rouge">&lt;T extends Number&gt;</code>,
-then it is the same as <code class="highlighter-rouge">&lt;T extends @NonNull Number&gt;</code>.</p>
+    <p>However, default bounds are non-nullable, so if you write <code class="language-plaintext highlighter-rouge">&lt;T extends Number&gt;</code>,
+then it is the same as <code class="language-plaintext highlighter-rouge">&lt;T extends @NonNull Number&gt;</code>.</p>
 
-    <div class="highlighter-rouge">
+    <div class="language-plaintext highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code>  class Holder&lt;T extends Number&gt; { // note how this T never permits nulls
       final T value;
       Holder(T value) {
@@ -360,12 +360,12 @@ then it is the same as <code class="highlighter-rouge">&lt;T extends @NonNull Nu
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>If you need “either nullable or non-nullable <code class="highlighter-rouge">Number</code>”, then use <code class="highlighter-rouge">&lt;T extends @Nullable Number&gt;</code>,</p>
+    <p>If you need “either nullable or non-nullable <code class="language-plaintext highlighter-rouge">Number</code>”, then use <code class="language-plaintext highlighter-rouge">&lt;T extends @Nullable Number&gt;</code>,</p>
   </li>
   <li>
-    <p>If you need to ensure the type is <strong>always</strong> nullable, then use <code class="highlighter-rouge">&lt;@Nullable T&gt;</code> as follows:</p>
+    <p>If you need to ensure the type is <strong>always</strong> nullable, then use <code class="language-plaintext highlighter-rouge">&lt;@Nullable T&gt;</code> as follows:</p>
 
-    <div class="highlighter-rouge">
+    <div class="language-plaintext highlighter-rouge">
 <div class="highlight"><pre class="highlight"><code>  class Holder&lt;@Nullable T&gt; { // note how this requires T to always be nullable
       protected T get() { // Default implementation.
           // Default implementation returns null, so it requires that T must always be nullable
@@ -382,7 +382,7 @@ then it is the same as <code class="highlighter-rouge">&lt;T extends @NonNull Nu
 
 <h2 id="continuous-integration-testing">Continuous Integration Testing</h2>
 
-<p>Calcite exploits <a href="https://github.com/apache/calcite/actions?query=branch%3Amaster">GitHub actions</a>
+<p>Calcite exploits <a href="https://github.com/apache/calcite/actions?query=branch%3Amain">GitHub actions</a>
 and <a href="https://app.travis-ci.com/github/apache/calcite">Travis</a> for continuous integration testing.
 In the past, there were also Jenkins jobs on the <a href="https://builds.apache.org/">ASF-hosted</a>
 infrastructure, but they are not maintained anymore.</p>
@@ -430,7 +430,11 @@ or just by answering questions on the list.</p>
      under the terms of
      the <a href="https://www.apache.org/licenses/">
      Apache License v2</a>. Apache Calcite and its logo are
-     trademarks of the Apache Software Foundation.</p>
+     trademarks of the Apache Software Foundation.
+  </p>
+  <p>
+      <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a>
+  </p>
   </div>
 </footer>
 

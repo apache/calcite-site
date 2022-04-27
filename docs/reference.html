@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>SQL language</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v4.2.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -155,28 +155,28 @@ form.</p>
       <span class="k">statement</span> <span class="p">[</span> <span class="s1">';'</span> <span class="k">statement</span> <span class="p">]</span><span class="o">*</span> <span class="p">[</span> <span class="s1">';'</span> <span class="p">]</span>
 
 <span class="n">setStatement</span><span class="p">:</span>
-      <span class="p">[</span> <span class="k">ALTER</span> <span class="err">{</span> <span class="k">SYSTEM</span> <span class="o">|</span> <span class="k">SESSION</span> <span class="err">}</span> <span class="p">]</span> <span class="k">SET</span> <span class="n">identifier</span> <span class="s1">'='</span> <span class="n">expression</span>
+      <span class="p">[</span> <span class="k">ALTER</span> <span class="p">{</span> <span class="k">SYSTEM</span> <span class="o">|</span> <span class="k">SESSION</span> <span class="p">}</span> <span class="p">]</span> <span class="k">SET</span> <span class="n">identifier</span> <span class="s1">'='</span> <span class="n">expression</span>
 
 <span class="n">resetStatement</span><span class="p">:</span>
-      <span class="p">[</span> <span class="k">ALTER</span> <span class="err">{</span> <span class="k">SYSTEM</span> <span class="o">|</span> <span class="k">SESSION</span> <span class="err">}</span> <span class="p">]</span> <span class="k">RESET</span> <span class="n">identifier</span>
-  <span class="o">|</span>   <span class="p">[</span> <span class="k">ALTER</span> <span class="err">{</span> <span class="k">SYSTEM</span> <span class="o">|</span> <span class="k">SESSION</span> <span class="err">}</span> <span class="p">]</span> <span class="k">RESET</span> <span class="k">ALL</span>
+      <span class="p">[</span> <span class="k">ALTER</span> <span class="p">{</span> <span class="k">SYSTEM</span> <span class="o">|</span> <span class="k">SESSION</span> <span class="p">}</span> <span class="p">]</span> <span class="k">RESET</span> <span class="n">identifier</span>
+  <span class="o">|</span>   <span class="p">[</span> <span class="k">ALTER</span> <span class="p">{</span> <span class="k">SYSTEM</span> <span class="o">|</span> <span class="k">SESSION</span> <span class="p">}</span> <span class="p">]</span> <span class="k">RESET</span> <span class="k">ALL</span>
 
 <span class="k">explain</span><span class="p">:</span>
       <span class="k">EXPLAIN</span> <span class="n">PLAN</span>
       <span class="p">[</span> <span class="k">WITH</span> <span class="k">TYPE</span> <span class="o">|</span> <span class="k">WITH</span> <span class="k">IMPLEMENTATION</span> <span class="o">|</span> <span class="k">WITHOUT</span> <span class="k">IMPLEMENTATION</span> <span class="p">]</span>
       <span class="p">[</span> <span class="k">EXCLUDING</span> <span class="n">ATTRIBUTES</span> <span class="o">|</span> <span class="k">INCLUDING</span> <span class="p">[</span> <span class="k">ALL</span> <span class="p">]</span> <span class="n">ATTRIBUTES</span> <span class="p">]</span>
       <span class="p">[</span> <span class="k">AS</span> <span class="n">JSON</span> <span class="o">|</span> <span class="k">AS</span> <span class="n">XML</span> <span class="o">|</span> <span class="k">AS</span> <span class="n">DOT</span> <span class="p">]</span>
-      <span class="k">FOR</span> <span class="err">{</span> <span class="n">query</span> <span class="o">|</span> <span class="k">insert</span> <span class="o">|</span> <span class="k">update</span> <span class="o">|</span> <span class="n">merge</span> <span class="o">|</span> <span class="k">delete</span> <span class="err">}</span>
+      <span class="k">FOR</span> <span class="p">{</span> <span class="n">query</span> <span class="o">|</span> <span class="k">insert</span> <span class="o">|</span> <span class="k">update</span> <span class="o">|</span> <span class="n">merge</span> <span class="o">|</span> <span class="k">delete</span> <span class="p">}</span>
 
 <span class="k">describe</span><span class="p">:</span>
       <span class="k">DESCRIBE</span> <span class="k">DATABASE</span> <span class="n">databaseName</span>
   <span class="o">|</span>   <span class="k">DESCRIBE</span> <span class="k">CATALOG</span> <span class="p">[</span> <span class="n">databaseName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">catalogName</span>
   <span class="o">|</span>   <span class="k">DESCRIBE</span> <span class="k">SCHEMA</span> <span class="p">[</span> <span class="p">[</span> <span class="n">databaseName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">catalogName</span> <span class="p">]</span> <span class="p">.</span> <span class="n">schemaName</span>
   <span class="o">|</span>   <span class="k">DESCRIBE</span> <span class="p">[</span> <span class="k">TABLE</span> <span class="p">]</span> <span class="p">[</span> <span class="p">[</span> <span class="p">[</span> <span class="n">databaseName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">catalogName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">schemaName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">tableName</span> <span class="p">[</span> <span class="n">columnName</span> <span class="p">]</span>
-  <span class="o">|</span>   <span class="k">DESCRIBE</span> <span class="p">[</span> <span class="k">STATEMENT</span> <span class="p">]</span> <span class="err">{</span> <span class="n">query</span> <span class="o">|</span> <span class="k">insert</span> <span class="o">|</span> <span class="k">update</span> <span class="o">|</span> <span class="n">merge</span> <span class="o">|</span> <span class="k">delete</span> <span class="err">}</span>
+  <span class="o">|</span>   <span class="k">DESCRIBE</span> <span class="p">[</span> <span class="k">STATEMENT</span> <span class="p">]</span> <span class="p">{</span> <span class="n">query</span> <span class="o">|</span> <span class="k">insert</span> <span class="o">|</span> <span class="k">update</span> <span class="o">|</span> <span class="n">merge</span> <span class="o">|</span> <span class="k">delete</span> <span class="p">}</span>
 
 <span class="k">insert</span><span class="p">:</span>
-      <span class="err">{</span> <span class="k">INSERT</span> <span class="o">|</span> <span class="n">UPSERT</span> <span class="err">}</span> <span class="k">INTO</span> <span class="n">tablePrimary</span>
+      <span class="p">{</span> <span class="k">INSERT</span> <span class="o">|</span> <span class="n">UPSERT</span> <span class="p">}</span> <span class="k">INTO</span> <span class="n">tablePrimary</span>
       <span class="p">[</span> <span class="s1">'('</span> <span class="k">column</span> <span class="p">[,</span> <span class="k">column</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="p">]</span>
       <span class="n">query</span>
 
@@ -202,18 +202,18 @@ form.</p>
 <span class="n">query</span><span class="p">:</span>
       <span class="k">values</span>
   <span class="o">|</span>   <span class="k">WITH</span> <span class="n">withItem</span> <span class="p">[</span> <span class="p">,</span> <span class="n">withItem</span> <span class="p">]</span><span class="o">*</span> <span class="n">query</span>
-  <span class="o">|</span>   <span class="err">{</span>
+  <span class="o">|</span>   <span class="p">{</span>
           <span class="k">select</span>
       <span class="o">|</span>   <span class="n">selectWithoutFrom</span>
       <span class="o">|</span>   <span class="n">query</span> <span class="k">UNION</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span> <span class="n">query</span>
       <span class="o">|</span>   <span class="n">query</span> <span class="k">EXCEPT</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span> <span class="n">query</span>
       <span class="o">|</span>   <span class="n">query</span> <span class="n">MINUS</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span> <span class="n">query</span>
       <span class="o">|</span>   <span class="n">query</span> <span class="k">INTERSECT</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span> <span class="n">query</span>
-      <span class="err">}</span>
+      <span class="p">}</span>
       <span class="p">[</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">orderItem</span> <span class="p">[,</span> <span class="n">orderItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
-      <span class="p">[</span> <span class="k">LIMIT</span> <span class="p">[</span> <span class="k">start</span><span class="p">,</span> <span class="p">]</span> <span class="err">{</span> <span class="k">count</span> <span class="o">|</span> <span class="k">ALL</span> <span class="err">}</span> <span class="p">]</span>
-      <span class="p">[</span> <span class="k">OFFSET</span> <span class="k">start</span> <span class="err">{</span> <span class="k">ROW</span> <span class="o">|</span> <span class="k">ROWS</span> <span class="err">}</span> <span class="p">]</span>
-      <span class="p">[</span> <span class="k">FETCH</span> <span class="err">{</span> <span class="k">FIRST</span> <span class="o">|</span> <span class="k">NEXT</span> <span class="err">}</span> <span class="p">[</span> <span class="k">count</span> <span class="p">]</span> <span class="err">{</span> <span class="k">ROW</span> <span class="o">|</span> <span class="k">ROWS</span> <span class="err">}</span> <span class="k">ONLY</span> <span class="p">]</span>
+      <span class="p">[</span> <span class="k">LIMIT</span> <span class="p">[</span> <span class="k">start</span><span class="p">,</span> <span class="p">]</span> <span class="p">{</span> <span class="k">count</span> <span class="o">|</span> <span class="k">ALL</span> <span class="p">}</span> <span class="p">]</span>
+      <span class="p">[</span> <span class="k">OFFSET</span> <span class="k">start</span> <span class="p">{</span> <span class="k">ROW</span> <span class="o">|</span> <span class="k">ROWS</span> <span class="p">}</span> <span class="p">]</span>
+      <span class="p">[</span> <span class="k">FETCH</span> <span class="p">{</span> <span class="k">FIRST</span> <span class="o">|</span> <span class="k">NEXT</span> <span class="p">}</span> <span class="p">[</span> <span class="k">count</span> <span class="p">]</span> <span class="p">{</span> <span class="k">ROW</span> <span class="o">|</span> <span class="k">ROWS</span> <span class="p">}</span> <span class="k">ONLY</span> <span class="p">]</span>
 
 <span class="n">withItem</span><span class="p">:</span>
       <span class="n">name</span>
@@ -225,16 +225,16 @@ form.</p>
 
 <span class="k">select</span><span class="p">:</span>
       <span class="k">SELECT</span> <span class="p">[</span> <span class="n">hintComment</span> <span class="p">]</span> <span class="p">[</span> <span class="n">STREAM</span> <span class="p">]</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span>
-          <span class="err">{</span> <span class="o">*</span> <span class="o">|</span> <span class="n">projectItem</span> <span class="p">[,</span> <span class="n">projectItem</span> <span class="p">]</span><span class="o">*</span> <span class="err">}</span>
+          <span class="p">{</span> <span class="o">*</span> <span class="o">|</span> <span class="n">projectItem</span> <span class="p">[,</span> <span class="n">projectItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">}</span>
       <span class="k">FROM</span> <span class="n">tableExpression</span>
       <span class="p">[</span> <span class="k">WHERE</span> <span class="n">booleanExpression</span> <span class="p">]</span>
-      <span class="p">[</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="err">{</span> <span class="n">groupItem</span> <span class="p">[,</span> <span class="n">groupItem</span> <span class="p">]</span><span class="o">*</span> <span class="err">}</span> <span class="p">]</span>
+      <span class="p">[</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="p">{</span> <span class="n">groupItem</span> <span class="p">[,</span> <span class="n">groupItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">}</span> <span class="p">]</span>
       <span class="p">[</span> <span class="k">HAVING</span> <span class="n">booleanExpression</span> <span class="p">]</span>
-      <span class="p">[</span> <span class="n">WINDOW</span> <span class="n">windowName</span> <span class="k">AS</span> <span class="n">windowSpec</span> <span class="p">[,</span> <span class="n">windowName</span> <span class="k">AS</span> <span class="n">windowSpec</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
+      <span class="p">[</span> <span class="k">WINDOW</span> <span class="n">windowName</span> <span class="k">AS</span> <span class="n">windowSpec</span> <span class="p">[,</span> <span class="n">windowName</span> <span class="k">AS</span> <span class="n">windowSpec</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
 
 <span class="n">selectWithoutFrom</span><span class="p">:</span>
       <span class="k">SELECT</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span>
-          <span class="err">{</span> <span class="o">*</span> <span class="o">|</span> <span class="n">projectItem</span> <span class="p">[,</span> <span class="n">projectItem</span> <span class="p">]</span><span class="o">*</span> <span class="err">}</span>
+          <span class="p">{</span> <span class="o">*</span> <span class="o">|</span> <span class="n">projectItem</span> <span class="p">[,</span> <span class="n">projectItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">}</span>
 
 <span class="n">projectItem</span><span class="p">:</span>
       <span class="n">expression</span> <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="n">columnAlias</span> <span class="p">]</span>
@@ -242,7 +242,7 @@ form.</p>
 
 <span class="n">tableExpression</span><span class="p">:</span>
       <span class="n">tableReference</span> <span class="p">[,</span> <span class="n">tableReference</span> <span class="p">]</span><span class="o">*</span>
-  <span class="o">|</span>   <span class="n">tableExpression</span> <span class="p">[</span> <span class="k">NATURAL</span> <span class="p">]</span> <span class="p">[</span> <span class="err">{</span> <span class="k">LEFT</span> <span class="o">|</span> <span class="k">RIGHT</span> <span class="o">|</span> <span class="k">FULL</span> <span class="err">}</span> <span class="p">[</span> <span class="k">OUTER</span> <span class="p">]</span> <span class="p">]</span> <span class="k">JOIN</span> <span class="n">tableExpression</span> <span class="p">[</span> <span class="n">joinCondition</span> <span class="p">]</span>
+  <span class="o">|</span>   <span class="n">tableExpression</span> <span class="p">[</span> <span class="k">NATURAL</span> <span class="p">]</span> <span class="p">[</span> <span class="p">{</span> <span class="k">LEFT</span> <span class="o">|</span> <span class="k">RIGHT</span> <span class="o">|</span> <span class="k">FULL</span> <span class="p">}</span> <span class="p">[</span> <span class="k">OUTER</span> <span class="p">]</span> <span class="p">]</span> <span class="k">JOIN</span> <span class="n">tableExpression</span> <span class="p">[</span> <span class="n">joinCondition</span> <span class="p">]</span>
   <span class="o">|</span>   <span class="n">tableExpression</span> <span class="k">CROSS</span> <span class="k">JOIN</span> <span class="n">tableExpression</span>
   <span class="o">|</span>   <span class="n">tableExpression</span> <span class="p">[</span> <span class="k">CROSS</span> <span class="o">|</span> <span class="k">OUTER</span> <span class="p">]</span> <span class="n">APPLY</span> <span class="n">tableExpression</span>
 
@@ -339,7 +339,7 @@ form.</p>
   <span class="o">|</span>   <span class="k">ROLLUP</span> <span class="s1">'('</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
   <span class="o">|</span>   <span class="k">GROUPING</span> <span class="k">SETS</span> <span class="s1">'('</span> <span class="n">groupItem</span> <span class="p">[,</span> <span class="n">groupItem</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
 
-<span class="n">window</span><span class="p">:</span>
+<span class="k">window</span><span class="p">:</span>
       <span class="n">windowName</span>
   <span class="o">|</span>   <span class="n">windowSpec</span>
 
@@ -347,10 +347,10 @@ form.</p>
       <span class="s1">'('</span>
       <span class="p">[</span> <span class="n">windowName</span> <span class="p">]</span>
       <span class="p">[</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">orderItem</span> <span class="p">[,</span> <span class="n">orderItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
-      <span class="p">[</span> <span class="n">PARTITION</span> <span class="k">BY</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
+      <span class="p">[</span> <span class="k">PARTITION</span> <span class="k">BY</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
       <span class="p">[</span>
-          <span class="n">RANGE</span> <span class="n">numericOrIntervalExpression</span> <span class="err">{</span> <span class="n">PRECEDING</span> <span class="o">|</span> <span class="n">FOLLOWING</span> <span class="err">}</span>
-      <span class="o">|</span>   <span class="k">ROWS</span> <span class="n">numericExpression</span> <span class="err">{</span> <span class="n">PRECEDING</span> <span class="o">|</span> <span class="n">FOLLOWING</span> <span class="err">}</span>
+          <span class="k">RANGE</span> <span class="n">numericOrIntervalExpression</span> <span class="p">{</span> <span class="k">PRECEDING</span> <span class="o">|</span> <span class="k">FOLLOWING</span> <span class="p">}</span>
+      <span class="o">|</span>   <span class="k">ROWS</span> <span class="n">numericExpression</span> <span class="p">{</span> <span class="k">PRECEDING</span> <span class="o">|</span> <span class="k">FOLLOWING</span> <span class="p">}</span>
       <span class="p">]</span>
       <span class="s1">')'</span></code></pre></figure>
 
@@ -1108,11 +1108,11 @@ elements used in a SQL query.</p>
 only contain letters, digits, and underscores. They are implicitly
 converted to upper case.</p>
 
-<p>Quoted identifiers, such as <code class="highlighter-rouge">"Employee Name"</code>, start and end with
+<p>Quoted identifiers, such as <code class="language-plaintext highlighter-rouge">"Employee Name"</code>, start and end with
 double quotes.  They may contain virtually any character, including
 spaces and other punctuation.  If you wish to include a double quote
 in an identifier, use another double quote to escape it, like this:
-<code class="highlighter-rouge">"An employee called ""Fred""."</code>.</p>
+<code class="language-plaintext highlighter-rouge">"An employee called ""Fred""."</code>.</p>
 
 <p>In Calcite, matching identifiers to the name of the referenced object is
 case-sensitive.  But remember that unquoted identifiers are implicitly
@@ -1239,7 +1239,7 @@ name will have been converted to upper case also.</p>
 <p>Where:</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">timeUnit</span><span class="p">:</span>
-  <span class="n">MILLENNIUM</span> <span class="o">|</span> <span class="n">CENTURY</span> <span class="o">|</span> <span class="n">DECADE</span> <span class="o">|</span> <span class="k">YEAR</span> <span class="o">|</span> <span class="n">QUARTER</span> <span class="o">|</span> <span class="k">MONTH</span> <span class="o">|</span> <span class="n">WEEK</span> <span class="o">|</span> <span class="n">DOY</span> <span class="o">|</span> <span class="n">DOW</span> <span class="o">|</span> <span class="k">DAY</span> <span class="o">|</span> <span class="n">HOUR</span> <span class="o">|</span> <span class="k">MINUTE</span> <span class="o">|</span> <span class="k">SECOND</span> <span class="o">|</span> <span class="n">EPOCH</span></code></pre></figure>
+  <span class="n">MILLENNIUM</span> <span class="o">|</span> <span class="n">CENTURY</span> <span class="o">|</span> <span class="n">DECADE</span> <span class="o">|</span> <span class="nb">YEAR</span> <span class="o">|</span> <span class="n">QUARTER</span> <span class="o">|</span> <span class="k">MONTH</span> <span class="o">|</span> <span class="n">WEEK</span> <span class="o">|</span> <span class="n">DOY</span> <span class="o">|</span> <span class="n">DOW</span> <span class="o">|</span> <span class="k">DAY</span> <span class="o">|</span> <span class="n">HOUR</span> <span class="o">|</span> <span class="k">MINUTE</span> <span class="o">|</span> <span class="k">SECOND</span> <span class="o">|</span> <span class="n">EPOCH</span></code></pre></figure>
 
 <p>Note:</p>
 
@@ -1309,7 +1309,7 @@ we also allow their plurals, YEARS, MONTHS, DAYS, HOURS, MINUTES and SECONDS.</l
 <p>Note:</p>
 
 <ul>
-  <li>Every <code class="highlighter-rouge">ROW</code> column type can have an optional [ NULL | NOT NULL ] suffix
+  <li>Every <code class="language-plaintext highlighter-rouge">ROW</code> column type can have an optional [ NULL | NOT NULL ] suffix
 to indicate if this column type is nullable, default is not nullable.</li>
 </ul>
 
@@ -1320,8 +1320,8 @@ to indicate if this column type is nullable, default is not nullable.</li>
 or binary strings encoded as
 <a href="https://en.wikipedia.org/wiki/Well-known_binary">well-known binary (WKB)</a>.</p>
 
-<p>Where you would use a literal, apply the <code class="highlighter-rouge">ST_GeomFromText</code> function,
-for example <code class="highlighter-rouge">ST_GeomFromText('POINT (30 10)')</code>.</p>
+<p>Where you would use a literal, apply the <code class="language-plaintext highlighter-rouge">ST_GeomFromText</code> function,
+for example <code class="language-plaintext highlighter-rouge">ST_GeomFromText('POINT (30 10)')</code>.</p>
 
 <div class="scroll-table-style"><table>
   <thead>
@@ -1469,7 +1469,7 @@ for example <code class="highlighter-rouge">ST_GeomFromText('POINT (30 10)')</co
   </tbody>
 </table></div>
 
-<p>Note that <code class="highlighter-rouge">::</code>,<code class="highlighter-rouge">&lt;=&gt;</code> is dialect-specific, but is shown in this table for
+<p>Note that <code class="language-plaintext highlighter-rouge">::</code>,<code class="language-plaintext highlighter-rouge">&lt;=&gt;</code> is dialect-specific, but is shown in this table for
 completeness.</p>
 
 <h3 id="comparison-operators">Comparison operators</h3>
@@ -1585,7 +1585,7 @@ completeness.</p>
     </tr>
     <tr>
       <td style="text-align: left">value comparison ANY (sub-query)</td>
-      <td style="text-align: left">Synonym for <code class="highlighter-rouge">SOME</code>
+      <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">SOME</code>
 </td>
     </tr>
     <tr>
@@ -2001,52 +2001,52 @@ completeness.</p>
     </tr>
     <tr>
       <td style="text-align: left">YEAR(date)</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(YEAR FROM date)</code>. Returns an integer.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(YEAR FROM date)</code>. Returns an integer.</td>
     </tr>
     <tr>
       <td style="text-align: left">QUARTER(date)</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(QUARTER FROM date)</code>. Returns an integer between 1 and 4.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(QUARTER FROM date)</code>. Returns an integer between 1 and 4.</td>
     </tr>
     <tr>
       <td style="text-align: left">MONTH(date)</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(MONTH FROM date)</code>. Returns an integer between 1 and 12.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(MONTH FROM date)</code>. Returns an integer between 1 and 12.</td>
     </tr>
     <tr>
       <td style="text-align: left">WEEK(date)</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(WEEK FROM date)</code>. Returns an integer between 1 and 53.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(WEEK FROM date)</code>. Returns an integer between 1 and 53.</td>
     </tr>
     <tr>
       <td style="text-align: left">DAYOFYEAR(date)</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(DOY FROM date)</code>. Returns an integer between 1 and 366.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(DOY FROM date)</code>. Returns an integer between 1 and 366.</td>
     </tr>
     <tr>
       <td style="text-align: left">DAYOFMONTH(date)</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(DAY FROM date)</code>. Returns an integer between 1 and 31.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(DAY FROM date)</code>. Returns an integer between 1 and 31.</td>
     </tr>
     <tr>
       <td style="text-align: left">DAYOFWEEK(date)</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(DOW FROM date)</code>. Returns an integer between 1 and 7.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(DOW FROM date)</code>. Returns an integer between 1 and 7.</td>
     </tr>
     <tr>
       <td style="text-align: left">HOUR(date)</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(HOUR FROM date)</code>. Returns an integer between 0 and 23.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(HOUR FROM date)</code>. Returns an integer between 0 and 23.</td>
     </tr>
     <tr>
       <td style="text-align: left">MINUTE(date)</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(MINUTE FROM date)</code>. Returns an integer between 0 and 59.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(MINUTE FROM date)</code>. Returns an integer between 0 and 59.</td>
     </tr>
     <tr>
       <td style="text-align: left">SECOND(date)</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(SECOND FROM date)</code>. Returns an integer between 0 and 59.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(SECOND FROM date)</code>. Returns an integer between 0 and 59.</td>
     </tr>
     <tr>
       <td style="text-align: left">TIMESTAMPADD(timeUnit, integer, datetime)</td>
-      <td style="text-align: left">Returns <em>datetime</em> with an interval of (signed) <em>integer</em> <em>timeUnit</em>s added. Equivalent to <code class="highlighter-rouge">datetime + INTERVAL 'integer' timeUnit</code>
+      <td style="text-align: left">Returns <em>datetime</em> with an interval of (signed) <em>integer</em> <em>timeUnit</em>s added. Equivalent to <code class="language-plaintext highlighter-rouge">datetime + INTERVAL 'integer' timeUnit</code>
 </td>
     </tr>
     <tr>
       <td style="text-align: left">TIMESTAMPDIFF(timeUnit, datetime, datetime2)</td>
-      <td style="text-align: left">Returns the (signed) number of <em>timeUnit</em> intervals between <em>datetime</em> and <em>datetime2</em>. Equivalent to <code class="highlighter-rouge">(datetime2 - datetime) timeUnit</code>
+      <td style="text-align: left">Returns the (signed) number of <em>timeUnit</em> intervals between <em>datetime</em> and <em>datetime2</em>. Equivalent to <code class="language-plaintext highlighter-rouge">(datetime2 - datetime) timeUnit</code>
 </td>
     </tr>
     <tr>
@@ -2056,8 +2056,8 @@ completeness.</p>
   </tbody>
 </table></div>
 
-<p>Calls to niladic functions such as <code class="highlighter-rouge">CURRENT_DATE</code> do not accept parentheses in
-standard SQL. Calls with parentheses, such as <code class="highlighter-rouge">CURRENT_DATE()</code> are accepted in certain
+<p>Calls to niladic functions such as <code class="language-plaintext highlighter-rouge">CURRENT_DATE</code> do not accept parentheses in
+standard SQL. Calls with parentheses, such as <code class="language-plaintext highlighter-rouge">CURRENT_DATE()</code> are accepted in certain
 <a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#allowNiladicParentheses--">conformance levels</a>.</p>
 
 <p>Not implemented:</p>
@@ -2187,24 +2187,24 @@ However, Calcite supports both implicit and explicit conversion of values from o
   <span class="o">|</span>   <span class="n">compoundIdentifier</span>
 
 <span class="n">sqlTypeName</span><span class="p">:</span>
-      <span class="n">char</span> <span class="p">[</span> <span class="k">precision</span> <span class="p">]</span> <span class="p">[</span> <span class="n">charSet</span> <span class="p">]</span>
-  <span class="o">|</span>   <span class="n">varchar</span> <span class="p">[</span> <span class="k">precision</span> <span class="p">]</span> <span class="p">[</span> <span class="n">charSet</span> <span class="p">]</span>
-  <span class="o">|</span>   <span class="n">DATE</span>
-  <span class="o">|</span>   <span class="n">time</span>
-  <span class="o">|</span>   <span class="k">timestamp</span>
+      <span class="nb">char</span> <span class="p">[</span> <span class="nb">precision</span> <span class="p">]</span> <span class="p">[</span> <span class="n">charSet</span> <span class="p">]</span>
+  <span class="o">|</span>   <span class="nb">varchar</span> <span class="p">[</span> <span class="nb">precision</span> <span class="p">]</span> <span class="p">[</span> <span class="n">charSet</span> <span class="p">]</span>
+  <span class="o">|</span>   <span class="nb">DATE</span>
+  <span class="o">|</span>   <span class="nb">time</span>
+  <span class="o">|</span>   <span class="nb">timestamp</span>
   <span class="o">|</span>   <span class="n">GEOMETRY</span>
-  <span class="o">|</span>   <span class="n">decimal</span> <span class="p">[</span> <span class="k">precision</span> <span class="p">[,</span> <span class="k">scale</span><span class="p">]</span> <span class="p">]</span>
-  <span class="o">|</span>   <span class="n">BOOLEAN</span>
-  <span class="o">|</span>   <span class="n">integer</span>
-  <span class="o">|</span>   <span class="n">BINARY</span> <span class="p">[</span> <span class="k">precision</span> <span class="p">]</span>
-  <span class="o">|</span>   <span class="n">varbinary</span> <span class="p">[</span> <span class="k">precision</span> <span class="p">]</span>
-  <span class="o">|</span>   <span class="n">TINYINT</span>
-  <span class="o">|</span>   <span class="n">SMALLINT</span>
-  <span class="o">|</span>   <span class="n">BIGINT</span>
-  <span class="o">|</span>   <span class="n">REAL</span>
-  <span class="o">|</span>   <span class="n">double</span>
-  <span class="o">|</span>   <span class="n">FLOAT</span>
-  <span class="o">|</span>   <span class="k">ANY</span> <span class="p">[</span> <span class="k">precision</span> <span class="p">[,</span> <span class="k">scale</span><span class="p">]</span> <span class="p">]</span>
+  <span class="o">|</span>   <span class="nb">decimal</span> <span class="p">[</span> <span class="nb">precision</span> <span class="p">[,</span> <span class="k">scale</span><span class="p">]</span> <span class="p">]</span>
+  <span class="o">|</span>   <span class="nb">BOOLEAN</span>
+  <span class="o">|</span>   <span class="nb">integer</span>
+  <span class="o">|</span>   <span class="nb">BINARY</span> <span class="p">[</span> <span class="nb">precision</span> <span class="p">]</span>
+  <span class="o">|</span>   <span class="nb">varbinary</span> <span class="p">[</span> <span class="nb">precision</span> <span class="p">]</span>
+  <span class="o">|</span>   <span class="nb">TINYINT</span>
+  <span class="o">|</span>   <span class="nb">SMALLINT</span>
+  <span class="o">|</span>   <span class="nb">BIGINT</span>
+  <span class="o">|</span>   <span class="nb">REAL</span>
+  <span class="o">|</span>   <span class="nb">double</span>
+  <span class="o">|</span>   <span class="nb">FLOAT</span>
+  <span class="o">|</span>   <span class="k">ANY</span> <span class="p">[</span> <span class="nb">precision</span> <span class="p">[,</span> <span class="k">scale</span><span class="p">]</span> <span class="p">]</span>
 
 <span class="n">collectionsTypeName</span><span class="p">:</span>
       <span class="n">ARRAY</span> <span class="o">|</span> <span class="n">MULTISET</span>
@@ -2215,36 +2215,36 @@ However, Calcite supports both implicit and explicit conversion of values from o
       <span class="p">[</span> <span class="p">,</span> <span class="n">fieldName2</span> <span class="n">fieldType2</span> <span class="p">[</span> <span class="k">NULL</span> <span class="o">|</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">]</span> <span class="p">]</span><span class="o">*</span>
       <span class="s1">')'</span>
 
-<span class="n">char</span><span class="p">:</span>
-      <span class="n">CHARACTER</span> <span class="o">|</span> <span class="n">CHAR</span>
+<span class="nb">char</span><span class="p">:</span>
+      <span class="nb">CHARACTER</span> <span class="o">|</span> <span class="nb">CHAR</span>
 
-<span class="n">varchar</span><span class="p">:</span>
-      <span class="n">char</span> <span class="n">VARYING</span> <span class="o">|</span> <span class="n">VARCHAR</span>
+<span class="nb">varchar</span><span class="p">:</span>
+      <span class="nb">char</span> <span class="nb">VARYING</span> <span class="o">|</span> <span class="nb">VARCHAR</span>
 
-<span class="n">decimal</span><span class="p">:</span>
-      <span class="n">DECIMAL</span> <span class="o">|</span> <span class="n">DEC</span> <span class="o">|</span> <span class="n">NUMERIC</span>
+<span class="nb">decimal</span><span class="p">:</span>
+      <span class="nb">DECIMAL</span> <span class="o">|</span> <span class="nb">DEC</span> <span class="o">|</span> <span class="nb">NUMERIC</span>
 
-<span class="n">integer</span><span class="p">:</span>
-      <span class="n">INTEGER</span> <span class="o">|</span> <span class="n">INT</span>
+<span class="nb">integer</span><span class="p">:</span>
+      <span class="nb">INTEGER</span> <span class="o">|</span> <span class="nb">INT</span>
 
-<span class="n">varbinary</span><span class="p">:</span>
-      <span class="n">BINARY</span> <span class="n">VARYING</span> <span class="o">|</span> <span class="n">VARBINARY</span>
+<span class="nb">varbinary</span><span class="p">:</span>
+      <span class="nb">BINARY</span> <span class="nb">VARYING</span> <span class="o">|</span> <span class="nb">VARBINARY</span>
 
-<span class="n">double</span><span class="p">:</span>
-      <span class="n">DOUBLE</span> <span class="p">[</span> <span class="k">PRECISION</span> <span class="p">]</span>
+<span class="nb">double</span><span class="p">:</span>
+      <span class="nb">DOUBLE</span> <span class="p">[</span> <span class="nb">PRECISION</span> <span class="p">]</span>
 
-<span class="n">time</span><span class="p">:</span>
-      <span class="n">TIME</span> <span class="p">[</span> <span class="k">precision</span> <span class="p">]</span> <span class="p">[</span> <span class="n">timeZone</span> <span class="p">]</span>
+<span class="nb">time</span><span class="p">:</span>
+      <span class="nb">TIME</span> <span class="p">[</span> <span class="nb">precision</span> <span class="p">]</span> <span class="p">[</span> <span class="n">timeZone</span> <span class="p">]</span>
 
-<span class="k">timestamp</span><span class="p">:</span>
-      <span class="k">TIMESTAMP</span> <span class="p">[</span> <span class="k">precision</span> <span class="p">]</span> <span class="p">[</span> <span class="n">timeZone</span> <span class="p">]</span>
+<span class="nb">timestamp</span><span class="p">:</span>
+      <span class="nb">TIMESTAMP</span> <span class="p">[</span> <span class="nb">precision</span> <span class="p">]</span> <span class="p">[</span> <span class="n">timeZone</span> <span class="p">]</span>
 
 <span class="n">charSet</span><span class="p">:</span>
-      <span class="n">CHARACTER</span> <span class="k">SET</span> <span class="n">charSetName</span>
+      <span class="nb">CHARACTER</span> <span class="k">SET</span> <span class="n">charSetName</span>
 
 <span class="n">timeZone</span><span class="p">:</span>
-      <span class="k">WITHOUT</span> <span class="n">TIME</span> <span class="k">ZONE</span>
-  <span class="o">|</span>   <span class="k">WITH</span> <span class="k">LOCAL</span> <span class="n">TIME</span> <span class="k">ZONE</span></code></pre></figure>
+      <span class="k">WITHOUT</span> <span class="nb">TIME</span> <span class="k">ZONE</span>
+  <span class="o">|</span>   <span class="k">WITH</span> <span class="k">LOCAL</span> <span class="nb">TIME</span> <span class="k">ZONE</span></code></pre></figure>
 
 <h4 id="implicit-type-conversion">Implicit Type Conversion</h4>
 
@@ -2554,30 +2554,30 @@ these details follow the table.</p>
 <h5 id="conversion-contexts-and-strategies">Conversion Contexts and Strategies</h5>
 
 <ul>
-  <li>Set operation (<code class="highlighter-rouge">UNION</code>, <code class="highlighter-rouge">EXCEPT</code>, <code class="highlighter-rouge">INTERSECT</code>): compare every branch
+  <li>Set operation (<code class="language-plaintext highlighter-rouge">UNION</code>, <code class="language-plaintext highlighter-rouge">EXCEPT</code>, <code class="language-plaintext highlighter-rouge">INTERSECT</code>): compare every branch
 row data type and find the common type of each fields pair;</li>
-  <li>Binary arithmetic expression (<code class="highlighter-rouge">+</code>, <code class="highlighter-rouge">-</code>, <code class="highlighter-rouge">&amp;</code>, <code class="highlighter-rouge">^</code>, <code class="highlighter-rouge">/</code>, <code class="highlighter-rouge">%</code>): promote
+  <li>Binary arithmetic expression (<code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">&amp;</code>, <code class="language-plaintext highlighter-rouge">^</code>, <code class="language-plaintext highlighter-rouge">/</code>, <code class="language-plaintext highlighter-rouge">%</code>): promote
 string operand to data type of the other numeric operand;</li>
-  <li>Binary comparison (<code class="highlighter-rouge">=</code>, <code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&lt;=</code>, <code class="highlighter-rouge">&lt;&gt;</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">&gt;=</code>):
-if operands are <code class="highlighter-rouge">STRING</code> and <code class="highlighter-rouge">TIMESTAMP</code>, promote to <code class="highlighter-rouge">TIMESTAMP</code>;
-make <code class="highlighter-rouge">1 = true</code> and <code class="highlighter-rouge">0 = false</code> always evaluate to <code class="highlighter-rouge">TRUE</code>;
+  <li>Binary comparison (<code class="language-plaintext highlighter-rouge">=</code>, <code class="language-plaintext highlighter-rouge">&lt;</code>, <code class="language-plaintext highlighter-rouge">&lt;=</code>, <code class="language-plaintext highlighter-rouge">&lt;&gt;</code>, <code class="language-plaintext highlighter-rouge">&gt;</code>, <code class="language-plaintext highlighter-rouge">&gt;=</code>):
+if operands are <code class="language-plaintext highlighter-rouge">STRING</code> and <code class="language-plaintext highlighter-rouge">TIMESTAMP</code>, promote to <code class="language-plaintext highlighter-rouge">TIMESTAMP</code>;
+make <code class="language-plaintext highlighter-rouge">1 = true</code> and <code class="language-plaintext highlighter-rouge">0 = false</code> always evaluate to <code class="language-plaintext highlighter-rouge">TRUE</code>;
 if there is numeric type operand, find common type for both operands.</li>
   <li>
-<code class="highlighter-rouge">IN</code> sub-query: compare type of LHS and RHS, and find the common type;
+<code class="language-plaintext highlighter-rouge">IN</code> sub-query: compare type of LHS and RHS, and find the common type;
 if it is struct type, find wider type for every field;</li>
   <li>
-<code class="highlighter-rouge">IN</code> expression list: compare every expression to find the common type;</li>
+<code class="language-plaintext highlighter-rouge">IN</code> expression list: compare every expression to find the common type;</li>
   <li>
-<code class="highlighter-rouge">CASE WHEN</code> expression or <code class="highlighter-rouge">COALESCE</code>: find the common wider type of the <code class="highlighter-rouge">THEN</code>
-and <code class="highlighter-rouge">ELSE</code> operands;</li>
-  <li>Character + <code class="highlighter-rouge">INTERVAL</code> or character - <code class="highlighter-rouge">INTERVAL</code>: promote character to
-<code class="highlighter-rouge">TIMESTAMP</code>;</li>
+<code class="language-plaintext highlighter-rouge">CASE WHEN</code> expression or <code class="language-plaintext highlighter-rouge">COALESCE</code>: find the common wider type of the <code class="language-plaintext highlighter-rouge">THEN</code>
+and <code class="language-plaintext highlighter-rouge">ELSE</code> operands;</li>
+  <li>Character + <code class="language-plaintext highlighter-rouge">INTERVAL</code> or character - <code class="language-plaintext highlighter-rouge">INTERVAL</code>: promote character to
+<code class="language-plaintext highlighter-rouge">TIMESTAMP</code>;</li>
   <li>Built-in function: look up the type families registered in the checker,
 find the family default type if checker rules allow it;</li>
   <li>User-defined function (UDF): coerce based on the declared argument types
-of the <code class="highlighter-rouge">eval()</code> method;</li>
+of the <code class="language-plaintext highlighter-rouge">eval()</code> method;</li>
   <li>
-<code class="highlighter-rouge">INSERT</code> and <code class="highlighter-rouge">UPDATE</code>: coerce a source field to counterpart target table
+<code class="language-plaintext highlighter-rouge">INSERT</code> and <code class="language-plaintext highlighter-rouge">UPDATE</code>: coerce a source field to counterpart target table
 field’s type if the two fields differ with type name or precision(scale).</li>
 </ul>
 
@@ -2586,30 +2586,30 @@ field’s type if the two fields differ with type name or precision(scale).</li>
 <p>Implicit type coercion of following cases are ignored:</p>
 
 <ul>
-  <li>One of the type is <code class="highlighter-rouge">ANY</code>;</li>
-  <li>Type coercion within <code class="highlighter-rouge">CHARACTER</code> types are always ignored,
-i.e. from <code class="highlighter-rouge">CHAR(20)</code> to <code class="highlighter-rouge">VARCHAR(30)</code>;</li>
+  <li>One of the type is <code class="language-plaintext highlighter-rouge">ANY</code>;</li>
+  <li>Type coercion within <code class="language-plaintext highlighter-rouge">CHARACTER</code> types are always ignored,
+i.e. from <code class="language-plaintext highlighter-rouge">CHAR(20)</code> to <code class="language-plaintext highlighter-rouge">VARCHAR(30)</code>;</li>
   <li>Type coercion from a numeric to another with higher precedence is ignored,
-i.e. from <code class="highlighter-rouge">INT</code> to <code class="highlighter-rouge">LONG</code>.</li>
+i.e. from <code class="language-plaintext highlighter-rouge">INT</code> to <code class="language-plaintext highlighter-rouge">LONG</code>.</li>
 </ul>
 
 <h5 id="strategies-for-finding-common-type">Strategies for Finding Common Type</h5>
 
 <ul>
   <li>If the operator has expected data types, just take them as the
-desired one. (e.g. the UDF would have <code class="highlighter-rouge">eval()</code> method which has
+desired one. (e.g. the UDF would have <code class="language-plaintext highlighter-rouge">eval()</code> method which has
 reflection argument types);</li>
   <li>If there is no expected data type but the data type families are
 registered, try to coerce the arguments to the family’s default data
-type, i.e. the String family will have a <code class="highlighter-rouge">VARCHAR</code> type;</li>
+type, i.e. the String family will have a <code class="language-plaintext highlighter-rouge">VARCHAR</code> type;</li>
   <li>If neither expected data type nor families are specified, try to
-find the tightest common type of the node types, i.e. <code class="highlighter-rouge">INTEGER</code> and
-<code class="highlighter-rouge">DOUBLE</code> will return <code class="highlighter-rouge">DOUBLE</code>, the numeric precision does not lose
+find the tightest common type of the node types, i.e. <code class="language-plaintext highlighter-rouge">INTEGER</code> and
+<code class="language-plaintext highlighter-rouge">DOUBLE</code> will return <code class="language-plaintext highlighter-rouge">DOUBLE</code>, the numeric precision does not lose
 for this case;</li>
   <li>If no tightest common type is found, try to find a wider type,
-i.e. <code class="highlighter-rouge">VARCHAR</code> and <code class="highlighter-rouge">INTEGER</code> will return <code class="highlighter-rouge">INTEGER</code>,
+i.e. <code class="language-plaintext highlighter-rouge">VARCHAR</code> and <code class="language-plaintext highlighter-rouge">INTEGER</code> will return <code class="language-plaintext highlighter-rouge">INTEGER</code>,
 we allow some precision loss when widening decimal to fractional,
-or promote to <code class="highlighter-rouge">VARCHAR</code> type.</li>
+or promote to <code class="language-plaintext highlighter-rouge">VARCHAR</code> type.</li>
 </ul>
 
 <h3 id="value-constructors">Value constructors</h3>
@@ -2872,10 +2872,10 @@ or promote to <code class="highlighter-rouge">VARCHAR</code> type.</li>
 <p>Where <em>period1</em> and <em>period2</em> are period expressions:</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">period</span><span class="p">:</span>
-      <span class="p">(</span><span class="n">datetime</span><span class="p">,</span> <span class="n">datetime</span><span class="p">)</span>
-  <span class="o">|</span>   <span class="p">(</span><span class="n">datetime</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span>
-  <span class="o">|</span>   <span class="n">PERIOD</span> <span class="p">(</span><span class="n">datetime</span><span class="p">,</span> <span class="n">datetime</span><span class="p">)</span>
-  <span class="o">|</span>   <span class="n">PERIOD</span> <span class="p">(</span><span class="n">datetime</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span></code></pre></figure>
+      <span class="p">(</span><span class="nb">datetime</span><span class="p">,</span> <span class="nb">datetime</span><span class="p">)</span>
+  <span class="o">|</span>   <span class="p">(</span><span class="nb">datetime</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span>
+  <span class="o">|</span>   <span class="n">PERIOD</span> <span class="p">(</span><span class="nb">datetime</span><span class="p">,</span> <span class="nb">datetime</span><span class="p">)</span>
+  <span class="o">|</span>   <span class="n">PERIOD</span> <span class="p">(</span><span class="nb">datetime</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span></code></pre></figure>
 
 <h3 id="jdbc-function-escape">JDBC function escape</h3>
 
@@ -3100,58 +3100,58 @@ or promote to <code class="highlighter-rouge">VARCHAR</code> type.</li>
   <tbody>
     <tr>
       <td style="text-align: left">{fn CURDATE()}</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">CURRENT_DATE</code>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">CURRENT_DATE</code>
 </td>
     </tr>
     <tr>
       <td style="text-align: left">{fn CURTIME()}</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">LOCALTIME</code>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">LOCALTIME</code>
 </td>
     </tr>
     <tr>
       <td style="text-align: left">{fn NOW()}</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">LOCALTIMESTAMP</code>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">LOCALTIMESTAMP</code>
 </td>
     </tr>
     <tr>
       <td style="text-align: left">{fn YEAR(date)}</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(YEAR FROM date)</code>. Returns an integer.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(YEAR FROM date)</code>. Returns an integer.</td>
     </tr>
     <tr>
       <td style="text-align: left">{fn QUARTER(date)}</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(QUARTER FROM date)</code>. Returns an integer between 1 and 4.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(QUARTER FROM date)</code>. Returns an integer between 1 and 4.</td>
     </tr>
     <tr>
       <td style="text-align: left">{fn MONTH(date)}</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(MONTH FROM date)</code>. Returns an integer between 1 and 12.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(MONTH FROM date)</code>. Returns an integer between 1 and 12.</td>
     </tr>
     <tr>
       <td style="text-align: left">{fn WEEK(date)}</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(WEEK FROM date)</code>. Returns an integer between 1 and 53.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(WEEK FROM date)</code>. Returns an integer between 1 and 53.</td>
     </tr>
     <tr>
       <td style="text-align: left">{fn DAYOFYEAR(date)}</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(DOY FROM date)</code>. Returns an integer between 1 and 366.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(DOY FROM date)</code>. Returns an integer between 1 and 366.</td>
     </tr>
     <tr>
       <td style="text-align: left">{fn DAYOFMONTH(date)}</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(DAY FROM date)</code>. Returns an integer between 1 and 31.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(DAY FROM date)</code>. Returns an integer between 1 and 31.</td>
     </tr>
     <tr>
       <td style="text-align: left">{fn DAYOFWEEK(date)}</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(DOW FROM date)</code>. Returns an integer between 1 and 7.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(DOW FROM date)</code>. Returns an integer between 1 and 7.</td>
     </tr>
     <tr>
       <td style="text-align: left">{fn HOUR(date)}</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(HOUR FROM date)</code>. Returns an integer between 0 and 23.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(HOUR FROM date)</code>. Returns an integer between 0 and 23.</td>
     </tr>
     <tr>
       <td style="text-align: left">{fn MINUTE(date)}</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(MINUTE FROM date)</code>. Returns an integer between 0 and 59.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(MINUTE FROM date)</code>. Returns an integer between 0 and 59.</td>
     </tr>
     <tr>
       <td style="text-align: left">{fn SECOND(date)}</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">EXTRACT(SECOND FROM date)</code>. Returns an integer between 0 and 59.</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(SECOND FROM date)</code>. Returns an integer between 0 and 59.</td>
     </tr>
     <tr>
       <td style="text-align: left">{fn TIMESTAMPADD(timeUnit, count, datetime)}</td>
@@ -3176,7 +3176,7 @@ or promote to <code class="highlighter-rouge">VARCHAR</code> type.</li>
   <tbody>
     <tr>
       <td style="text-align: left">{fn DATABASE()}</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">CURRENT_CATALOG</code>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">CURRENT_CATALOG</code>
 </td>
     </tr>
     <tr>
@@ -3185,7 +3185,7 @@ or promote to <code class="highlighter-rouge">VARCHAR</code> type.</li>
     </tr>
     <tr>
       <td style="text-align: left">{fn USER()}</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">CURRENT_USER</code>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">CURRENT_USER</code>
 </td>
     </tr>
   </tbody>
@@ -3223,21 +3223,21 @@ or promote to <code class="highlighter-rouge">VARCHAR</code> type.</li>
 <p>where <em>agg</em> is one of the operators in the following table, or a user-defined
 aggregate function.</p>
 
-<p>If <code class="highlighter-rouge">FILTER</code> is present, the aggregate function only considers rows for which
+<p>If <code class="language-plaintext highlighter-rouge">FILTER</code> is present, the aggregate function only considers rows for which
 <em>condition</em> evaluates to TRUE.</p>
 
-<p>If <code class="highlighter-rouge">DISTINCT</code> is present, duplicate argument values are eliminated before being
+<p>If <code class="language-plaintext highlighter-rouge">DISTINCT</code> is present, duplicate argument values are eliminated before being
 passed to the aggregate function.</p>
 
-<p>If <code class="highlighter-rouge">WITHIN DISTINCT</code> is present, argument values are made distinct within
+<p>If <code class="language-plaintext highlighter-rouge">WITHIN DISTINCT</code> is present, argument values are made distinct within
 each value of specified keys before being passed to the aggregate function.</p>
 
-<p>If <code class="highlighter-rouge">WITHIN GROUP</code> is present, the aggregate function sorts the input rows
-according to the <code class="highlighter-rouge">ORDER BY</code> clause inside <code class="highlighter-rouge">WITHIN GROUP</code> before aggregating
-values. <code class="highlighter-rouge">WITHIN GROUP</code> is only allowed for hypothetical set functions (<code class="highlighter-rouge">RANK</code>,
-<code class="highlighter-rouge">DENSE_RANK</code>, <code class="highlighter-rouge">PERCENT_RANK</code> and <code class="highlighter-rouge">CUME_DIST</code>), inverse distribution functions
-(<code class="highlighter-rouge">PERCENTILE_CONT</code> and <code class="highlighter-rouge">PERCENTILE_DISC</code>) and collection functions (<code class="highlighter-rouge">COLLECT</code>
-and <code class="highlighter-rouge">LISTAGG</code>).</p>
+<p>If <code class="language-plaintext highlighter-rouge">WITHIN GROUP</code> is present, the aggregate function sorts the input rows
+according to the <code class="language-plaintext highlighter-rouge">ORDER BY</code> clause inside <code class="language-plaintext highlighter-rouge">WITHIN GROUP</code> before aggregating
+values. <code class="language-plaintext highlighter-rouge">WITHIN GROUP</code> is only allowed for hypothetical set functions (<code class="language-plaintext highlighter-rouge">RANK</code>,
+<code class="language-plaintext highlighter-rouge">DENSE_RANK</code>, <code class="language-plaintext highlighter-rouge">PERCENT_RANK</code> and <code class="language-plaintext highlighter-rouge">CUME_DIST</code>), inverse distribution functions
+(<code class="language-plaintext highlighter-rouge">PERCENTILE_CONT</code> and <code class="language-plaintext highlighter-rouge">PERCENTILE_DISC</code>) and collection functions (<code class="language-plaintext highlighter-rouge">COLLECT</code>
+and <code class="language-plaintext highlighter-rouge">LISTAGG</code>).</p>
 
 <div class="scroll-table-style"><table>
   <thead>
@@ -3337,7 +3337,7 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
     </tr>
     <tr>
       <td style="text-align: left">STDDEV( [ ALL | DISTINCT ] numeric)</td>
-      <td style="text-align: left">Synonym for <code class="highlighter-rouge">STDDEV_SAMP</code>
+      <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">STDDEV_SAMP</code>
 </td>
     </tr>
     <tr>
@@ -3376,7 +3376,7 @@ and <code class="highlighter-rouge">LISTAGG</code>).</p>
 
 <h4 id="ordered-set-aggregate-functions">Ordered-Set Aggregate Functions</h4>
 
-<p>The syntax is as for <em>aggregateCall</em>, except that <code class="highlighter-rouge">WITHIN GROUP</code> is
+<p>The syntax is as for <em>aggregateCall</em>, except that <code class="language-plaintext highlighter-rouge">WITHIN GROUP</code> is
 required.</p>
 
 <p>In the following:</p>
@@ -3415,15 +3415,15 @@ represents a percentage</li>
       <span class="p">[</span> <span class="n">RESPECT</span> <span class="n">NULLS</span> <span class="o">|</span> <span class="k">IGNORE</span> <span class="n">NULLS</span> <span class="p">]</span>
       <span class="p">[</span> <span class="n">WITHIN</span> <span class="k">GROUP</span> <span class="s1">'('</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">orderItem</span> <span class="p">[,</span> <span class="n">orderItem</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="p">]</span>
       <span class="p">[</span> <span class="n">FILTER</span> <span class="s1">'('</span> <span class="k">WHERE</span> <span class="n">condition</span> <span class="s1">')'</span> <span class="p">]</span>
-      <span class="n">OVER</span> <span class="n">window</span>
+      <span class="n">OVER</span> <span class="k">window</span>
   <span class="o">|</span>   <span class="n">agg</span> <span class="s1">'('</span> <span class="s1">'*'</span> <span class="s1">')'</span>
       <span class="p">[</span> <span class="n">FILTER</span>  <span class="s1">'('</span> <span class="k">WHERE</span> <span class="n">condition</span> <span class="s1">')'</span> <span class="p">]</span>
-      <span class="n">OVER</span> <span class="n">window</span></code></pre></figure>
+      <span class="n">OVER</span> <span class="k">window</span></code></pre></figure>
 
 <p>where <em>agg</em> is one of the operators in the following table, or a user-defined
 aggregate function.</p>
 
-<p><code class="highlighter-rouge">DISTINCT</code>, <code class="highlighter-rouge">FILTER</code> and <code class="highlighter-rouge">WITHIN GROUP</code> are as described for aggregate
+<p><code class="language-plaintext highlighter-rouge">DISTINCT</code>, <code class="language-plaintext highlighter-rouge">FILTER</code> and <code class="language-plaintext highlighter-rouge">WITHIN GROUP</code> are as described for aggregate
 functions.</p>
 
 <div class="scroll-table-style"><table>
@@ -3505,9 +3505,9 @@ functions.</p>
 <p>Note:</p>
 
 <ul>
-  <li>You may specify null treatment (<code class="highlighter-rouge">IGNORE NULLS</code>, <code class="highlighter-rouge">RESPECT NULLS</code>) for
-<code class="highlighter-rouge">FIRST_VALUE</code>, <code class="highlighter-rouge">LAST_VALUE</code>, <code class="highlighter-rouge">NTH_VALUE</code>, <code class="highlighter-rouge">LEAD</code> and <code class="highlighter-rouge">LAG</code> functions. The
-syntax handled by the parser, but only <code class="highlighter-rouge">RESPECT NULLS</code> is implemented at
+  <li>You may specify null treatment (<code class="language-plaintext highlighter-rouge">IGNORE NULLS</code>, <code class="language-plaintext highlighter-rouge">RESPECT NULLS</code>) for
+<code class="language-plaintext highlighter-rouge">FIRST_VALUE</code>, <code class="language-plaintext highlighter-rouge">LAST_VALUE</code>, <code class="language-plaintext highlighter-rouge">NTH_VALUE</code>, <code class="language-plaintext highlighter-rouge">LEAD</code> and <code class="language-plaintext highlighter-rouge">LAG</code> functions. The
+syntax handled by the parser, but only <code class="language-plaintext highlighter-rouge">RESPECT NULLS</code> is implemented at
 runtime.</li>
 </ul>
 
@@ -3540,7 +3540,7 @@ runtime.</li>
     </tr>
     <tr>
       <td style="text-align: left">GROUPING_ID(expression [, expression ]*)</td>
-      <td style="text-align: left">Synonym for <code class="highlighter-rouge">GROUPING</code>
+      <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">GROUPING</code>
 </td>
     </tr>
   </tbody>
@@ -3565,7 +3565,7 @@ runtime.</li>
 
 <h3 id="table-functions">Table functions</h3>
 
-<p>Table functions occur in the <code class="highlighter-rouge">FROM</code> clause.</p>
+<p>Table functions occur in the <code class="language-plaintext highlighter-rouge">FROM</code> clause.</p>
 
 <h4 id="tumble">TUMBLE</h4>
 
@@ -3605,8 +3605,8 @@ sometimes is named as “fixed windowing”.</p>
     <span class="n">TIMECOL</span> <span class="o">=&gt;</span> <span class="k">DESCRIPTOR</span><span class="p">(</span><span class="n">rowtime</span><span class="p">),</span>
     <span class="k">SIZE</span> <span class="o">=&gt;</span> <span class="n">INTERVAL</span> <span class="s1">'1'</span> <span class="k">MINUTE</span><span class="p">));</span></code></pre></figure>
 
-<p>applies a tumbling window with a one minute range to rows from the <code class="highlighter-rouge">orders</code>
-table. <code class="highlighter-rouge">rowtime</code> is the watermarked column of the <code class="highlighter-rouge">orders</code> table that informs
+<p>applies a tumbling window with a one minute range to rows from the <code class="language-plaintext highlighter-rouge">orders</code>
+table. <code class="language-plaintext highlighter-rouge">rowtime</code> is the watermarked column of the <code class="language-plaintext highlighter-rouge">orders</code> table that informs
 whether data is complete.</p>
 
 <h4 id="hop">HOP</h4>
@@ -3647,8 +3647,8 @@ on a timestamp column. Windows assigned could have overlapping so hopping someti
     <span class="n">SLIDE</span> <span class="o">=&gt;</span> <span class="n">INTERVAL</span> <span class="s1">'2'</span> <span class="k">MINUTE</span><span class="p">,</span>
     <span class="k">SIZE</span> <span class="o">=&gt;</span> <span class="n">INTERVAL</span> <span class="s1">'5'</span> <span class="k">MINUTE</span><span class="p">));</span></code></pre></figure>
 
-<p>applies hopping with 5-minute interval size on rows from table <code class="highlighter-rouge">orders</code>
-and shifting every 2 minutes. <code class="highlighter-rouge">rowtime</code> is the watermarked column of table
+<p>applies hopping with 5-minute interval size on rows from table <code class="language-plaintext highlighter-rouge">orders</code>
+and shifting every 2 minutes. <code class="language-plaintext highlighter-rouge">rowtime</code> is the watermarked column of table
 orders that tells data completeness.</p>
 
 <h4 id="session">SESSION</h4>
@@ -3689,24 +3689,24 @@ of rows are less than <em>interval</em>. Session window is applied per <em>key</
     <span class="k">KEY</span> <span class="o">=&gt;</span> <span class="k">DESCRIPTOR</span><span class="p">(</span><span class="n">product</span><span class="p">),</span>
     <span class="k">SIZE</span> <span class="o">=&gt;</span> <span class="n">INTERVAL</span> <span class="s1">'20'</span> <span class="k">MINUTE</span><span class="p">));</span></code></pre></figure>
 
-<p>applies a session with 20-minute inactive gap on rows from table <code class="highlighter-rouge">orders</code>.
-<code class="highlighter-rouge">rowtime</code> is the watermarked column of table orders that tells data
+<p>applies a session with 20-minute inactive gap on rows from table <code class="language-plaintext highlighter-rouge">orders</code>.
+<code class="language-plaintext highlighter-rouge">rowtime</code> is the watermarked column of table orders that tells data
 completeness. Session is applied per product.</p>
 
-<p><strong>Note</strong>: The <code class="highlighter-rouge">Tumble</code>, <code class="highlighter-rouge">Hop</code> and <code class="highlighter-rouge">Session</code> window table functions assign
+<p><strong>Note</strong>: The <code class="language-plaintext highlighter-rouge">Tumble</code>, <code class="language-plaintext highlighter-rouge">Hop</code> and <code class="language-plaintext highlighter-rouge">Session</code> window table functions assign
 each row in the original table to a window. The output table has all
-the same columns as the original table plus two additional columns <code class="highlighter-rouge">window_start</code>
-and <code class="highlighter-rouge">window_end</code>, which represent the start and end of the window interval, respectively.</p>
+the same columns as the original table plus two additional columns <code class="language-plaintext highlighter-rouge">window_start</code>
+and <code class="language-plaintext highlighter-rouge">window_end</code>, which represent the start and end of the window interval, respectively.</p>
 
 <h3 id="grouped-window-functions">Grouped window functions</h3>
 <p><strong>warning</strong>: grouped window functions are deprecated.</p>
 
-<p>Grouped window functions occur in the <code class="highlighter-rouge">GROUP BY</code> clause and define a key value
+<p>Grouped window functions occur in the <code class="language-plaintext highlighter-rouge">GROUP BY</code> clause and define a key value
 that represents a window containing several rows.</p>
 
 <p>In some window functions, a row may belong to more than one window.
 For example, if a query is grouped using
-<code class="highlighter-rouge">HOP(t, INTERVAL '2' HOUR, INTERVAL '1' HOUR)</code>, a row with timestamp ‘10:15:00’
+<code class="language-plaintext highlighter-rouge">HOP(t, INTERVAL '2' HOUR, INTERVAL '1' HOUR)</code>, a row with timestamp ‘10:15:00’
  will occur in both the 10:00 - 11:00 and 11:00 - 12:00 totals.</p>
 
 <div class="scroll-table-style"><table>
@@ -3750,27 +3750,27 @@ by a grouped window function.</p>
   <tbody>
     <tr>
       <td style="text-align: left">HOP_END(expression, slide, size [, time ])</td>
-      <td style="text-align: left">Returns the value of <em>expression</em> at the end of the window defined by a <code class="highlighter-rouge">HOP</code> function call</td>
+      <td style="text-align: left">Returns the value of <em>expression</em> at the end of the window defined by a <code class="language-plaintext highlighter-rouge">HOP</code> function call</td>
     </tr>
     <tr>
       <td style="text-align: left">HOP_START(expression, slide, size [, time ])</td>
-      <td style="text-align: left">Returns the value of <em>expression</em> at the beginning of the window defined by a <code class="highlighter-rouge">HOP</code> function call</td>
+      <td style="text-align: left">Returns the value of <em>expression</em> at the beginning of the window defined by a <code class="language-plaintext highlighter-rouge">HOP</code> function call</td>
     </tr>
     <tr>
       <td style="text-align: left">SESSION_END(expression, interval [, time])</td>
-      <td style="text-align: left">Returns the value of <em>expression</em> at the end of the window defined by a <code class="highlighter-rouge">SESSION</code> function call</td>
+      <td style="text-align: left">Returns the value of <em>expression</em> at the end of the window defined by a <code class="language-plaintext highlighter-rouge">SESSION</code> function call</td>
     </tr>
     <tr>
       <td style="text-align: left">SESSION_START(expression, interval [, time])</td>
-      <td style="text-align: left">Returns the value of <em>expression</em> at the beginning of the window defined by a <code class="highlighter-rouge">SESSION</code> function call</td>
+      <td style="text-align: left">Returns the value of <em>expression</em> at the beginning of the window defined by a <code class="language-plaintext highlighter-rouge">SESSION</code> function call</td>
     </tr>
     <tr>
       <td style="text-align: left">TUMBLE_END(expression, interval [, time ])</td>
-      <td style="text-align: left">Returns the value of <em>expression</em> at the end of the window defined by a <code class="highlighter-rouge">TUMBLE</code> function call</td>
+      <td style="text-align: left">Returns the value of <em>expression</em> at the end of the window defined by a <code class="language-plaintext highlighter-rouge">TUMBLE</code> function call</td>
     </tr>
     <tr>
       <td style="text-align: left">TUMBLE_START(expression, interval [, time ])</td>
-      <td style="text-align: left">Returns the value of <em>expression</em> at the beginning of the window defined by a <code class="highlighter-rouge">TUMBLE</code> function call</td>
+      <td style="text-align: left">Returns the value of <em>expression</em> at the beginning of the window defined by a <code class="language-plaintext highlighter-rouge">TUMBLE</code> function call</td>
     </tr>
   </tbody>
 </table></div>
@@ -3826,7 +3826,7 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
     <tr>
       <td style="text-align: left">p</td>
       <td style="text-align: left">ST_AsText(geom)</td>
-      <td style="text-align: left">Synonym for <code class="highlighter-rouge">ST_AsWKT</code>
+      <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">ST_AsWKT</code>
 </td>
     </tr>
     <tr>
@@ -3934,7 +3934,7 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
     <tr>
       <td style="text-align: left">p</td>
       <td style="text-align: left">ST_MakePoint(x, y [, z ])</td>
-      <td style="text-align: left">Synonym for <code class="highlighter-rouge">ST_Point</code>
+      <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">ST_Point</code>
 </td>
     </tr>
     <tr>
@@ -4060,7 +4060,7 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
   <li>ST_NPoints(geom) Returns the number of points in <em>geom</em>
 </li>
   <li>ST_NumGeometries(geom) Returns the number of geometries in <em>geom</em> (1 if it is not a GEOMETRYCOLLECTION)</li>
-  <li>ST_NumInteriorRing(geom) Synonym for <code class="highlighter-rouge">ST_NumInteriorRings</code>
+  <li>ST_NumInteriorRing(geom) Synonym for <code class="language-plaintext highlighter-rouge">ST_NumInteriorRings</code>
 </li>
   <li>ST_NumInteriorRings(geom) Returns the number of interior rings of <em>geom</em>
 </li>
@@ -4240,7 +4240,7 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
   </tbody>
 </table></div>
 
-<p>See also: the <code class="highlighter-rouge">ST_Union</code> aggregate function.</p>
+<p>See also: the <code class="language-plaintext highlighter-rouge">ST_Union</code> aggregate function.</p>
 
 <p>Not implemented:</p>
 
@@ -4426,7 +4426,7 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
 
 <ul>
   <li>ST_Accum(geom) Accumulates <em>geom</em> into a GEOMETRYCOLLECTION (or MULTIPOINT, MULTILINESTRING or MULTIPOLYGON if possible)</li>
-  <li>ST_Collect(geom) Synonym for <code class="highlighter-rouge">ST_Accum</code>
+  <li>ST_Collect(geom) Synonym for <code class="language-plaintext highlighter-rouge">ST_Accum</code>
 </li>
   <li>ST_Union(geom) Computes the union of geometries</li>
 </ul>
@@ -4439,7 +4439,7 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
   <li>
 <em>jsonValue</em> is a character string containing a JSON value;</li>
   <li>
-<em>path</em> is a character string containing a JSON path expression; mode flag <code class="highlighter-rouge">strict</code> or <code class="highlighter-rouge">lax</code> should be specified in the beginning of <em>path</em>.</li>
+<em>path</em> is a character string containing a JSON path expression; mode flag <code class="language-plaintext highlighter-rouge">strict</code> or <code class="language-plaintext highlighter-rouge">lax</code> should be specified in the beginning of <em>path</em>.</li>
 </ul>
 
 <h4 id="query-functions">Query Functions</h4>
@@ -4472,17 +4472,17 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
 <p>Note:</p>
 
 <ul>
-  <li>The <code class="highlighter-rouge">ON ERROR</code> and <code class="highlighter-rouge">ON EMPTY</code> clauses define the fallback
+  <li>The <code class="language-plaintext highlighter-rouge">ON ERROR</code> and <code class="language-plaintext highlighter-rouge">ON EMPTY</code> clauses define the fallback
 behavior of the function when an error is thrown or a null value
 is about to be returned.</li>
-  <li>The <code class="highlighter-rouge">ARRAY WRAPPER</code> clause defines how to represent a JSON array result
-in <code class="highlighter-rouge">JSON_QUERY</code> function. The following examples compare the wrapper
+  <li>The <code class="language-plaintext highlighter-rouge">ARRAY WRAPPER</code> clause defines how to represent a JSON array result
+in <code class="language-plaintext highlighter-rouge">JSON_QUERY</code> function. The following examples compare the wrapper
 behaviors.</li>
 </ul>
 
 <p>Example Data:</p>
 
-<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="s2">"a"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[1,2]"</span><span class="p">,</span><span class="w"> </span><span class="s2">"b"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="s2">"c"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hi"</span><span class="p">}</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="nl">"a"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[1,2]"</span><span class="p">,</span><span class="w"> </span><span class="nl">"b"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="nl">"c"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hi"</span><span class="p">}</span></code></pre></figure>
 
 <p>Comparison:</p>
 
@@ -4572,15 +4572,15 @@ behaviors.</li>
 <p>Note:</p>
 
 <ul>
-  <li>The flag <code class="highlighter-rouge">FORMAT JSON</code> indicates the value is formatted as JSON
-character string. When <code class="highlighter-rouge">FORMAT JSON</code> is used, the value should be
+  <li>The flag <code class="language-plaintext highlighter-rouge">FORMAT JSON</code> indicates the value is formatted as JSON
+character string. When <code class="language-plaintext highlighter-rouge">FORMAT JSON</code> is used, the value should be
 de-parse from JSON character string to a SQL structured value.</li>
   <li>
-<code class="highlighter-rouge">ON NULL</code> clause defines how the JSON output represents null
-values. The default null behavior of <code class="highlighter-rouge">JSON_OBJECT</code> and
-<code class="highlighter-rouge">JSON_OBJECTAGG</code> is <code class="highlighter-rouge">NULL ON NULL</code>, and for <code class="highlighter-rouge">JSON_ARRAY</code> and
-<code class="highlighter-rouge">JSON_ARRAYAGG</code> it is <code class="highlighter-rouge">ABSENT ON NULL</code>.</li>
-  <li>If <code class="highlighter-rouge">ORDER BY</code> clause is provided, <code class="highlighter-rouge">JSON_ARRAYAGG</code> sorts the
+<code class="language-plaintext highlighter-rouge">ON NULL</code> clause defines how the JSON output represents null
+values. The default null behavior of <code class="language-plaintext highlighter-rouge">JSON_OBJECT</code> and
+<code class="language-plaintext highlighter-rouge">JSON_OBJECTAGG</code> is <code class="language-plaintext highlighter-rouge">NULL ON NULL</code>, and for <code class="language-plaintext highlighter-rouge">JSON_ARRAY</code> and
+<code class="language-plaintext highlighter-rouge">JSON_ARRAYAGG</code> it is <code class="language-plaintext highlighter-rouge">ABSENT ON NULL</code>.</li>
+  <li>If <code class="language-plaintext highlighter-rouge">ORDER BY</code> clause is provided, <code class="language-plaintext highlighter-rouge">JSON_ARRAYAGG</code> sorts the
 input rows into the specified order before performing aggregation.</li>
 </ul>
 
@@ -4670,19 +4670,19 @@ semantics.</p>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">expr1 &lt;=&gt; expr2</td>
-      <td style="text-align: left">Whether two values are equal, treating null values as the same, and it’s similar to <code class="highlighter-rouge">IS NOT DISTINCT FROM</code>
+      <td style="text-align: left">Whether two values are equal, treating null values as the same, and it’s similar to <code class="language-plaintext highlighter-rouge">IS NOT DISTINCT FROM</code>
 </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">ARRAY_CONCAT(array [, array ]*)</td>
-      <td style="text-align: left">Concatenates one or more arrays. If any input argument is <code class="highlighter-rouge">NULL</code> the function returns <code class="highlighter-rouge">NULL</code>
+      <td style="text-align: left">Concatenates one or more arrays. If any input argument is <code class="language-plaintext highlighter-rouge">NULL</code> the function returns <code class="language-plaintext highlighter-rouge">NULL</code>
 </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">ARRAY_LENGTH(array)</td>
-      <td style="text-align: left">Synonym for <code class="highlighter-rouge">CARDINALITY</code>
+      <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">CARDINALITY</code>
 </td>
     </tr>
     <tr>
@@ -4737,7 +4737,7 @@ semantics.</p>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">DATE(string)</td>
-      <td style="text-align: left">Equivalent to <code class="highlighter-rouge">CAST(string AS DATE)</code>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">CAST(string AS DATE)</code>
 </td>
     </tr>
     <tr>
@@ -4753,7 +4753,7 @@ semantics.</p>
     <tr>
       <td style="text-align: left">p</td>
       <td style="text-align: left">DIFFERENCE(string, string)</td>
-      <td style="text-align: left">Returns a measure of the similarity of two strings, namely the number of character positions that their <code class="highlighter-rouge">SOUNDEX</code> values have in common: 4 if the <code class="highlighter-rouge">SOUNDEX</code> values are same and 0 if the <code class="highlighter-rouge">SOUNDEX</code> values are totally different</td>
+      <td style="text-align: left">Returns a measure of the similarity of two strings, namely the number of character positions that their <code class="language-plaintext highlighter-rouge">SOUNDEX</code> values have in common: 4 if the <code class="language-plaintext highlighter-rouge">SOUNDEX</code> values are same and 0 if the <code class="language-plaintext highlighter-rouge">SOUNDEX</code> values are totally different</td>
     </tr>
     <tr>
       <td style="text-align: left">o</td>
@@ -4783,12 +4783,12 @@ semantics.</p>
     <tr>
       <td style="text-align: left">p</td>
       <td style="text-align: left">string1 ILIKE string2 [ ESCAPE string3 ]</td>
-      <td style="text-align: left">Whether <em>string1</em> matches pattern <em>string2</em>, ignoring case (similar to <code class="highlighter-rouge">LIKE</code>)</td>
+      <td style="text-align: left">Whether <em>string1</em> matches pattern <em>string2</em>, ignoring case (similar to <code class="language-plaintext highlighter-rouge">LIKE</code>)</td>
     </tr>
     <tr>
       <td style="text-align: left">p</td>
       <td style="text-align: left">string1 NOT ILIKE string2 [ ESCAPE string3 ]</td>
-      <td style="text-align: left">Whether <em>string1</em> does not match pattern <em>string2</em>, ignoring case (similar to <code class="highlighter-rouge">NOT LIKE</code>)</td>
+      <td style="text-align: left">Whether <em>string1</em> does not match pattern <em>string2</em>, ignoring case (similar to <code class="language-plaintext highlighter-rouge">NOT LIKE</code>)</td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
@@ -4897,12 +4897,12 @@ semantics.</p>
     <tr>
       <td style="text-align: left">h s</td>
       <td style="text-align: left">string1 RLIKE string2</td>
-      <td style="text-align: left">Whether <em>string1</em> matches regex pattern <em>string2</em> (similar to <code class="highlighter-rouge">LIKE</code>, but uses Java regex)</td>
+      <td style="text-align: left">Whether <em>string1</em> matches regex pattern <em>string2</em> (similar to <code class="language-plaintext highlighter-rouge">LIKE</code>, but uses Java regex)</td>
     </tr>
     <tr>
       <td style="text-align: left">h s</td>
       <td style="text-align: left">string1 NOT RLIKE string2</td>
-      <td style="text-align: left">Whether <em>string1</em> does not match regex pattern <em>string2</em> (similar to <code class="highlighter-rouge">NOT LIKE</code>, but uses Java regex)</td>
+      <td style="text-align: left">Whether <em>string1</em> does not match regex pattern <em>string2</em> (similar to <code class="language-plaintext highlighter-rouge">NOT LIKE</code>, but uses Java regex)</td>
     </tr>
     <tr>
       <td style="text-align: left">o</td>
@@ -5010,11 +5010,11 @@ semantics.</p>
 
 <ul>
   <li>
-<code class="highlighter-rouge">JSON_TYPE</code> / <code class="highlighter-rouge">JSON_DEPTH</code> / <code class="highlighter-rouge">JSON_PRETTY</code> / <code class="highlighter-rouge">JSON_STORAGE_SIZE</code> return null if the argument is null</li>
+<code class="language-plaintext highlighter-rouge">JSON_TYPE</code> / <code class="language-plaintext highlighter-rouge">JSON_DEPTH</code> / <code class="language-plaintext highlighter-rouge">JSON_PRETTY</code> / <code class="language-plaintext highlighter-rouge">JSON_STORAGE_SIZE</code> return null if the argument is null</li>
   <li>
-<code class="highlighter-rouge">JSON_LENGTH</code> / <code class="highlighter-rouge">JSON_KEYS</code> / <code class="highlighter-rouge">JSON_REMOVE</code> return null if the first argument is null</li>
+<code class="language-plaintext highlighter-rouge">JSON_LENGTH</code> / <code class="language-plaintext highlighter-rouge">JSON_KEYS</code> / <code class="language-plaintext highlighter-rouge">JSON_REMOVE</code> return null if the first argument is null</li>
   <li>
-<code class="highlighter-rouge">JSON_TYPE</code> generally returns an upper-case string flag indicating the type of the JSON input. Currently supported supported type flags are:
+<code class="language-plaintext highlighter-rouge">JSON_TYPE</code> generally returns an upper-case string flag indicating the type of the JSON input. Currently supported supported type flags are:
     <ul>
       <li>INTEGER</li>
       <li>STRING</li>
@@ -5029,7 +5029,7 @@ semantics.</p>
     </ul>
   </li>
   <li>
-<code class="highlighter-rouge">JSON_DEPTH</code> defines a JSON value’s depth as follows:
+<code class="language-plaintext highlighter-rouge">JSON_DEPTH</code> defines a JSON value’s depth as follows:
     <ul>
       <li>An empty array, empty object, or scalar value has depth 1;</li>
       <li>A non-empty array containing only elements of depth 1 or non-empty object containing only member values of depth 1 has depth 2;</li>
@@ -5037,7 +5037,7 @@ semantics.</p>
     </ul>
   </li>
   <li>
-<code class="highlighter-rouge">JSON_LENGTH</code> defines a JSON value’s length as follows:
+<code class="language-plaintext highlighter-rouge">JSON_LENGTH</code> defines a JSON value’s length as follows:
     <ul>
       <li>A scalar value has length 1;</li>
       <li>The length of array or object is the number of elements is contains.</li>
@@ -5069,43 +5069,43 @@ semantics.</p>
     <tr>
       <td style="text-align: left">p</td>
       <td style="text-align: left">BOOL_AND(condition)</td>
-      <td style="text-align: left">Synonym for <code class="highlighter-rouge">EVERY</code>
+      <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">EVERY</code>
 </td>
     </tr>
     <tr>
       <td style="text-align: left">p</td>
       <td style="text-align: left">BOOL_OR(condition)</td>
-      <td style="text-align: left">Synonym for <code class="highlighter-rouge">SOME</code>
+      <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">SOME</code>
 </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">COUNTIF(condition)</td>
-      <td style="text-align: left">Returns the number of rows for which <em>condition</em> is TRUE; equivalent to <code class="highlighter-rouge">COUNT(*) FILTER (WHERE condition)</code>
+      <td style="text-align: left">Returns the number of rows for which <em>condition</em> is TRUE; equivalent to <code class="language-plaintext highlighter-rouge">COUNT(*) FILTER (WHERE condition)</code>
 </td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">GROUP_CONCAT( [ ALL | DISTINCT ] value [, value ]* [ ORDER BY orderItem [, orderItem ]* ] [ SEPARATOR separator ] )</td>
-      <td style="text-align: left">MySQL-specific variant of <code class="highlighter-rouge">LISTAGG</code>
+      <td style="text-align: left">MySQL-specific variant of <code class="language-plaintext highlighter-rouge">LISTAGG</code>
 </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">LOGICAL_AND(condition)</td>
-      <td style="text-align: left">Synonym for <code class="highlighter-rouge">EVERY</code>
+      <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">EVERY</code>
 </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">LOGICAL_OR(condition)</td>
-      <td style="text-align: left">Synonym for <code class="highlighter-rouge">SOME</code>
+      <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">SOME</code>
 </td>
     </tr>
     <tr>
       <td style="text-align: left">b p</td>
       <td style="text-align: left">STRING_AGG( [ ALL | DISTINCT ] value [, separator] [ ORDER BY orderItem [, orderItem ]* ] )</td>
-      <td style="text-align: left">Synonym for <code class="highlighter-rouge">LISTAGG</code>
+      <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">LISTAGG</code>
 </td>
     </tr>
   </tbody>
@@ -5381,9 +5381,9 @@ varying from convenient to efficient.</p>
 <p>To implement a <em>scalar function</em>, there are 3 options:</p>
 
 <ul>
-  <li>Create a class with a public static <code class="highlighter-rouge">eval</code> method,
+  <li>Create a class with a public static <code class="language-plaintext highlighter-rouge">eval</code> method,
 and register the class;</li>
-  <li>Create a class with a public non-static <code class="highlighter-rouge">eval</code> method,
+  <li>Create a class with a public non-static <code class="language-plaintext highlighter-rouge">eval</code> method,
 and a public constructor with no arguments,
 and register the class;</li>
   <li>Create a class with one or more public static methods,
@@ -5393,14 +5393,14 @@ and register each class/method combination.</li>
 <p>To implement an <em>aggregate function</em>, there are 2 options:</p>
 
 <ul>
-  <li>Create a class with public static <code class="highlighter-rouge">init</code>, <code class="highlighter-rouge">add</code> and <code class="highlighter-rouge">result</code> methods,
+  <li>Create a class with public static <code class="language-plaintext highlighter-rouge">init</code>, <code class="language-plaintext highlighter-rouge">add</code> and <code class="language-plaintext highlighter-rouge">result</code> methods,
 and register the class;</li>
-  <li>Create a class with public non-static <code class="highlighter-rouge">init</code>, <code class="highlighter-rouge">add</code> and <code class="highlighter-rouge">result</code> methods,
+  <li>Create a class with public non-static <code class="language-plaintext highlighter-rouge">init</code>, <code class="language-plaintext highlighter-rouge">add</code> and <code class="language-plaintext highlighter-rouge">result</code> methods,
 and a  public constructor with no arguments,
 and register the class.</li>
 </ul>
 
-<p>Optionally, add a public <code class="highlighter-rouge">merge</code> method to the class; this allows Calcite to
+<p>Optionally, add a public <code class="language-plaintext highlighter-rouge">merge</code> method to the class; this allows Calcite to
 generate code that merges sub-totals.</p>
 
 <p>Optionally, make your class implement the
@@ -5411,12 +5411,12 @@ of aggregation, roll up from summary tables, and push it through joins.</p>
 <p>To implement a <em>table function</em>, there are 3 options:</p>
 
 <ul>
-  <li>Create a class with a static <code class="highlighter-rouge">eval</code> method that returns
+  <li>Create a class with a static <code class="language-plaintext highlighter-rouge">eval</code> method that returns
 <a href="/javadocAggregate/org/apache/calcite/schema/ScannableTable.html">ScannableTable</a>
 or
 <a href="/javadocAggregate/org/apache/calcite/schema/QueryableTable.html">QueryableTable</a>,
 and register the class;</li>
-  <li>Create a class with a non-static <code class="highlighter-rouge">eval</code> method that returns
+  <li>Create a class with a non-static <code class="language-plaintext highlighter-rouge">eval</code> method that returns
 <a href="/javadocAggregate/org/apache/calcite/schema/ScannableTable.html">ScannableTable</a>
 or
 <a href="/javadocAggregate/org/apache/calcite/schema/QueryableTable.html">QueryableTable</a>,
@@ -5431,10 +5431,10 @@ and register each class/method combination.</li>
 <p>To implement a <em>table macro</em>, there are 3 options:</p>
 
 <ul>
-  <li>Create a class with a static <code class="highlighter-rouge">eval</code> method that returns
+  <li>Create a class with a static <code class="language-plaintext highlighter-rouge">eval</code> method that returns
 <a href="/javadocAggregate/org/apache/calcite/schema/TranslatableTable.html">TranslatableTable</a>,
 and register the class;</li>
-  <li>Create a class with a non-static <code class="highlighter-rouge">eval</code> method that returns
+  <li>Create a class with a non-static <code class="language-plaintext highlighter-rouge">eval</code> method that returns
 <a href="/javadocAggregate/org/apache/calcite/schema/TranslatableTable.html">TranslatableTable</a>,
 and register the class;</li>
   <li>Create a class with one or more public static methods that return
@@ -5458,44 +5458,44 @@ and especially if you want to add more parameters over time.</p>
 and to define parameters which are optional (that is, have a default value
 that is used if they are not specified).</p>
 
-<p>Suppose you have a function <code class="highlighter-rouge">f</code>, declared as in the following pseudo syntax:</p>
+<p>Suppose you have a function <code class="language-plaintext highlighter-rouge">f</code>, declared as in the following pseudo syntax:</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">FUNCTION</span> <span class="n">f</span><span class="p">(</span>
-  <span class="n">INTEGER</span> <span class="n">a</span><span class="p">,</span>
-  <span class="n">INTEGER</span> <span class="n">b</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
-  <span class="n">INTEGER</span> <span class="k">c</span><span class="p">,</span>
-  <span class="n">INTEGER</span> <span class="n">d</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
-  <span class="n">INTEGER</span> <span class="n">e</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">)</span> <span class="k">RETURNS</span> <span class="n">INTEGER</span></code></pre></figure>
+  <span class="nb">INTEGER</span> <span class="n">a</span><span class="p">,</span>
+  <span class="nb">INTEGER</span> <span class="n">b</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="nb">INTEGER</span> <span class="k">c</span><span class="p">,</span>
+  <span class="nb">INTEGER</span> <span class="n">d</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="nb">INTEGER</span> <span class="n">e</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">)</span> <span class="k">RETURNS</span> <span class="nb">INTEGER</span></code></pre></figure>
 
-<p>All of the function’s parameters have names, and parameters <code class="highlighter-rouge">b</code>, <code class="highlighter-rouge">d</code> and <code class="highlighter-rouge">e</code>
-have a default value of <code class="highlighter-rouge">NULL</code> and are therefore optional.
-(In Calcite, <code class="highlighter-rouge">NULL</code> is the only allowable default value for optional parameters;
+<p>All of the function’s parameters have names, and parameters <code class="language-plaintext highlighter-rouge">b</code>, <code class="language-plaintext highlighter-rouge">d</code> and <code class="language-plaintext highlighter-rouge">e</code>
+have a default value of <code class="language-plaintext highlighter-rouge">NULL</code> and are therefore optional.
+(In Calcite, <code class="language-plaintext highlighter-rouge">NULL</code> is the only allowable default value for optional parameters;
 this may change
 <a href="https://issues.apache.org/jira/browse/CALCITE-947">in future</a>.)</p>
 
 <p>When calling a function with optional parameters,
-you can omit optional arguments at the end of the list, or use the <code class="highlighter-rouge">DEFAULT</code>
+you can omit optional arguments at the end of the list, or use the <code class="language-plaintext highlighter-rouge">DEFAULT</code>
 keyword for any optional arguments.
 Here are some examples:</p>
 
 <ul>
   <li>
-<code class="highlighter-rouge">f(1, 2, 3, 4, 5)</code> provides a value to each parameter, in order;</li>
+<code class="language-plaintext highlighter-rouge">f(1, 2, 3, 4, 5)</code> provides a value to each parameter, in order;</li>
   <li>
-<code class="highlighter-rouge">f(1, 2, 3, 4)</code> omits <code class="highlighter-rouge">e</code>, which gets its default value, <code class="highlighter-rouge">NULL</code>;</li>
+<code class="language-plaintext highlighter-rouge">f(1, 2, 3, 4)</code> omits <code class="language-plaintext highlighter-rouge">e</code>, which gets its default value, <code class="language-plaintext highlighter-rouge">NULL</code>;</li>
   <li>
-<code class="highlighter-rouge">f(1, DEFAULT, 3)</code> omits <code class="highlighter-rouge">d</code> and <code class="highlighter-rouge">e</code>,
-and specifies to use the default value of <code class="highlighter-rouge">b</code>;</li>
+<code class="language-plaintext highlighter-rouge">f(1, DEFAULT, 3)</code> omits <code class="language-plaintext highlighter-rouge">d</code> and <code class="language-plaintext highlighter-rouge">e</code>,
+and specifies to use the default value of <code class="language-plaintext highlighter-rouge">b</code>;</li>
   <li>
-<code class="highlighter-rouge">f(1, DEFAULT, 3, DEFAULT, DEFAULT)</code> has the same effect as the previous
+<code class="language-plaintext highlighter-rouge">f(1, DEFAULT, 3, DEFAULT, DEFAULT)</code> has the same effect as the previous
 example;</li>
   <li>
-<code class="highlighter-rouge">f(1, 2)</code> is not legal, because <code class="highlighter-rouge">c</code> is not optional;</li>
+<code class="language-plaintext highlighter-rouge">f(1, 2)</code> is not legal, because <code class="language-plaintext highlighter-rouge">c</code> is not optional;</li>
   <li>
-<code class="highlighter-rouge">f(1, 2, DEFAULT, 4)</code> is not legal, because <code class="highlighter-rouge">c</code> is not optional.</li>
+<code class="language-plaintext highlighter-rouge">f(1, 2, DEFAULT, 4)</code> is not legal, because <code class="language-plaintext highlighter-rouge">c</code> is not optional.</li>
 </ul>
 
-<p>You can specify arguments by name using the <code class="highlighter-rouge">=&gt;</code> syntax.
+<p>You can specify arguments by name using the <code class="language-plaintext highlighter-rouge">=&gt;</code> syntax.
 If one argument is named, they all must be.
 Arguments may be in any other, but must not specify any argument more than once,
 and you need to provide a value for every parameter which is not optional.
@@ -5503,10 +5503,10 @@ Here are some examples:</p>
 
 <ul>
   <li>
-<code class="highlighter-rouge">f(c =&gt; 3, d =&gt; 1, a =&gt; 0)</code> is equivalent to <code class="highlighter-rouge">f(0, NULL, 3, 1, NULL)</code>;</li>
+<code class="language-plaintext highlighter-rouge">f(c =&gt; 3, d =&gt; 1, a =&gt; 0)</code> is equivalent to <code class="language-plaintext highlighter-rouge">f(0, NULL, 3, 1, NULL)</code>;</li>
   <li>
-<code class="highlighter-rouge">f(c =&gt; 3, d =&gt; 1)</code> is not legal, because you have not specified a value for
-<code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">a</code> is not optional.</li>
+<code class="language-plaintext highlighter-rouge">f(c =&gt; 3, d =&gt; 1)</code> is not legal, because you have not specified a value for
+<code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">a</code> is not optional.</li>
 </ul>
 
 <h3 id="sql-hints">SQL Hints</h3>
@@ -5516,8 +5516,8 @@ the data unknown to the optimizer. Hints enable you to make decisions normally m
 
 <ul>
   <li>Planner enforcers: there’s no perfect planner, so it makes sense to implement hints to
-allow user better control the execution. For instance: “never merge this subquery with others” (<code class="highlighter-rouge">/*+ no_merge */</code>);
-“treat those tables as leading ones” (<code class="highlighter-rouge">/*+ leading */</code>) to affect join ordering, etc;</li>
+allow user better control the execution. For instance: “never merge this subquery with others” (<code class="language-plaintext highlighter-rouge">/*+ no_merge */</code>);
+“treat those tables as leading ones” (<code class="language-plaintext highlighter-rouge">/*+ leading */</code>) to affect join ordering, etc;</li>
   <li>Append meta data/statistics: some statistics like “table index for scan” or “skew info of some shuffle keys”
 are somehow dynamic for the query, it would be very convenient to config them with hints because
 our planning metadata from the planner is very often not very accurate;</li>
@@ -5532,7 +5532,7 @@ It would be very flexible to profile the resource with hints per query (not the 
 <p>Calcite supports hints in two locations:</p>
 
 <ul>
-  <li>Query Hint: right after the <code class="highlighter-rouge">SELECT</code> keyword;</li>
+  <li>Query Hint: right after the <code class="language-plaintext highlighter-rouge">SELECT</code> keyword;</li>
   <li>Table Hint: right after the referenced table name.</li>
 </ul>
 
@@ -5573,7 +5573,7 @@ It would be very flexible to profile the resource with hints per query (not the 
 <ul>
   <li>The parser support for the syntax above;</li>
   <li>
-<code class="highlighter-rouge">RelHint</code> to represent a hint item;</li>
+<code class="language-plaintext highlighter-rouge">RelHint</code> to represent a hint item;</li>
   <li>Mechanism to propagate the hints, during sql-to-rel conversion and planner planning.</li>
 </ul>
 
@@ -5581,7 +5581,7 @@ It would be very flexible to profile the resource with hints per query (not the 
 
 <h3 id="match_recognize">MATCH_RECOGNIZE</h3>
 
-<p><code class="highlighter-rouge">MATCH_RECOGNIZE</code> is a SQL extension for recognizing sequences of
+<p><code class="language-plaintext highlighter-rouge">MATCH_RECOGNIZE</code> is a SQL extension for recognizing sequences of
 events in complex event processing (CEP).</p>
 
 <p>It is experimental in Calcite, and yet not fully implemented.</p>
@@ -5590,7 +5590,7 @@ events in complex event processing (CEP).</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">matchRecognize</span><span class="p">:</span>
       <span class="n">MATCH_RECOGNIZE</span> <span class="s1">'('</span>
-      <span class="p">[</span> <span class="n">PARTITION</span> <span class="k">BY</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
+      <span class="p">[</span> <span class="k">PARTITION</span> <span class="k">BY</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
       <span class="p">[</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">orderItem</span> <span class="p">[,</span> <span class="n">orderItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
       <span class="p">[</span> <span class="n">MEASURES</span> <span class="n">measureColumn</span> <span class="p">[,</span> <span class="n">measureColumn</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
       <span class="p">[</span> <span class="n">ONE</span> <span class="k">ROW</span> <span class="n">PER</span> <span class="k">MATCH</span> <span class="o">|</span> <span class="k">ALL</span> <span class="k">ROWS</span> <span class="n">PER</span> <span class="k">MATCH</span> <span class="p">]</span>
@@ -5638,7 +5638,7 @@ events in complex event processing (CEP).</p>
   <span class="o">|</span>   <span class="s1">'+?'</span>
   <span class="o">|</span>   <span class="s1">'?'</span>
   <span class="o">|</span>   <span class="s1">'??'</span>
-  <span class="o">|</span>   <span class="s1">'{'</span> <span class="err">{</span> <span class="p">[</span> <span class="n">minRepeat</span> <span class="p">],</span> <span class="p">[</span> <span class="n">maxRepeat</span> <span class="p">]</span> <span class="err">}</span> <span class="s1">'}'</span> <span class="p">[</span><span class="s1">'?'</span><span class="p">]</span>
+  <span class="o">|</span>   <span class="s1">'{'</span> <span class="p">{</span> <span class="p">[</span> <span class="n">minRepeat</span> <span class="p">],</span> <span class="p">[</span> <span class="n">maxRepeat</span> <span class="p">]</span> <span class="p">}</span> <span class="s1">'}'</span> <span class="p">[</span><span class="s1">'?'</span><span class="p">]</span>
   <span class="o">|</span>   <span class="s1">'{'</span> <span class="n">repeat</span> <span class="s1">'}'</span>
 
 <span class="n">intervalLiteral</span><span class="p">:</span>
@@ -5650,8 +5650,8 @@ and <em>minRepeat</em> and <em>maxRepeat</em> are non-negative integers.</p>
 <h3 id="ddl-extensions">DDL Extensions</h3>
 
 <p>DDL extensions are only available in the calcite-server module.
-To enable, include <code class="highlighter-rouge">calcite-server.jar</code> in your class path, and add
-<code class="highlighter-rouge">parserFactory=org.apache.calcite.sql.parser.ddl.SqlDdlParserImpl#FACTORY</code>
+To enable, include <code class="language-plaintext highlighter-rouge">calcite-server.jar</code> in your class path, and add
+<code class="language-plaintext highlighter-rouge">parserFactory=org.apache.calcite.sql.parser.ddl.SqlDdlParserImpl#FACTORY</code>
 to the JDBC connect string (see connect string property
 <a href="/javadocAggregate/org/apache/calcite/config/CalciteConnectionProperty.html#PARSER_FACTORY">parserFactory</a>).</p>
 
@@ -5692,10 +5692,10 @@ to the JDBC connect string (see connect string property
 
 <span class="n">createTypeStatement</span><span class="p">:</span>
       <span class="k">CREATE</span> <span class="p">[</span> <span class="k">OR</span> <span class="k">REPLACE</span> <span class="p">]</span> <span class="k">TYPE</span> <span class="n">name</span> <span class="k">AS</span>
-      <span class="err">{</span>
+      <span class="p">{</span>
           <span class="n">baseType</span>
       <span class="o">|</span>   <span class="s1">'('</span> <span class="n">attributeDef</span> <span class="p">[,</span> <span class="n">attributeDef</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
-      <span class="err">}</span>
+      <span class="p">}</span>
 
 <span class="n">attributeDef</span><span class="p">:</span>
       <span class="n">attributeName</span> <span class="k">type</span>
@@ -5711,7 +5711,7 @@ to the JDBC connect string (see connect string property
 <span class="n">columnGenerator</span><span class="p">:</span>
       <span class="k">DEFAULT</span> <span class="n">expression</span>
   <span class="o">|</span>   <span class="p">[</span> <span class="k">GENERATED</span> <span class="n">ALWAYS</span> <span class="p">]</span> <span class="k">AS</span> <span class="s1">'('</span> <span class="n">expression</span> <span class="s1">')'</span>
-      <span class="err">{</span> <span class="n">VIRTUAL</span> <span class="o">|</span> <span class="n">STORED</span> <span class="err">}</span>
+      <span class="p">{</span> <span class="n">VIRTUAL</span> <span class="o">|</span> <span class="n">STORED</span> <span class="p">}</span>
 
 <span class="n">columnConstraint</span><span class="p">:</span>
       <span class="p">[</span> <span class="k">CONSTRAINT</span> <span class="n">name</span> <span class="p">]</span>
@@ -5719,11 +5719,11 @@ to the JDBC connect string (see connect string property
 
 <span class="n">tableConstraint</span><span class="p">:</span>
       <span class="p">[</span> <span class="k">CONSTRAINT</span> <span class="n">name</span> <span class="p">]</span>
-      <span class="err">{</span>
+      <span class="p">{</span>
           <span class="k">CHECK</span> <span class="s1">'('</span> <span class="n">expression</span> <span class="s1">')'</span>
       <span class="o">|</span>   <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="s1">'('</span> <span class="n">columnName</span> <span class="p">[,</span> <span class="n">columnName</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
       <span class="o">|</span>   <span class="k">UNIQUE</span> <span class="s1">'('</span> <span class="n">columnName</span> <span class="p">[,</span> <span class="n">columnName</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
-      <span class="err">}</span>
+      <span class="p">}</span>
 
 <span class="n">createViewStatement</span><span class="p">:</span>
       <span class="k">CREATE</span> <span class="p">[</span> <span class="k">OR</span> <span class="k">REPLACE</span> <span class="p">]</span> <span class="k">VIEW</span> <span class="n">name</span>
@@ -5741,7 +5741,7 @@ to the JDBC connect string (see connect string property
       <span class="p">[</span> <span class="k">USING</span>  <span class="n">usingFile</span> <span class="p">[,</span> <span class="n">usingFile</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
 
 <span class="n">usingFile</span><span class="p">:</span>
-      <span class="err">{</span> <span class="n">JAR</span> <span class="o">|</span> <span class="n">FILE</span> <span class="o">|</span> <span class="n">ARCHIVE</span> <span class="err">}</span> <span class="n">filePathLiteral</span>
+      <span class="p">{</span> <span class="n">JAR</span> <span class="o">|</span> <span class="n">FILE</span> <span class="o">|</span> <span class="n">ARCHIVE</span> <span class="p">}</span> <span class="n">filePathLiteral</span>
 
 <span class="n">dropSchemaStatement</span><span class="p">:</span>
       <span class="k">DROP</span> <span class="k">SCHEMA</span> <span class="p">[</span> <span class="n">IF</span> <span class="k">EXISTS</span> <span class="p">]</span> <span class="n">name</span>
@@ -5768,8 +5768,8 @@ to the JDBC connect string (see connect string property
 <em>tableElement</em>s, or you can omit the data type of any <em>tableElement</em>, in which
 case it just renames the underlying column.</p>
 
-<p>In <em>columnGenerator</em>, if you do not specify <code class="highlighter-rouge">VIRTUAL</code> or <code class="highlighter-rouge">STORED</code> for a
-generated column, <code class="highlighter-rouge">VIRTUAL</code> is the default.</p>
+<p>In <em>columnGenerator</em>, if you do not specify <code class="language-plaintext highlighter-rouge">VIRTUAL</code> or <code class="language-plaintext highlighter-rouge">STORED</code> for a
+generated column, <code class="language-plaintext highlighter-rouge">VIRTUAL</code> is the default.</p>
 
 <p>In <em>createFunctionStatement</em> and <em>usingFile</em>, <em>classNameLiteral</em>
 and <em>filePathLiteral</em> are character literals.</p>
@@ -5783,12 +5783,12 @@ field, table element, formal parameter, or function result. At run time,
 instances of the object type are created; that is, objects of that type are
 instantiated. Each object can hold different values.</p>
 
-<p>For example, we can declare types <code class="highlighter-rouge">address_typ</code> and <code class="highlighter-rouge">employee_typ</code>:</p>
+<p>For example, we can declare types <code class="language-plaintext highlighter-rouge">address_typ</code> and <code class="language-plaintext highlighter-rouge">employee_typ</code>:</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TYPE</span> <span class="n">address_typ</span> <span class="k">AS</span> <span class="k">OBJECT</span> <span class="p">(</span>
    <span class="n">street</span>          <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span>
    <span class="n">city</span>            <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
-   <span class="k">state</span>           <span class="n">CHAR</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+   <span class="k">state</span>           <span class="nb">CHAR</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
    <span class="n">postal_code</span>     <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">6</span><span class="p">));</span>
 
 <span class="k">CREATE</span> <span class="k">TYPE</span> <span class="n">employee_typ</span> <span class="k">AS</span> <span class="k">OBJECT</span> <span class="p">(</span>
@@ -5797,7 +5797,7 @@ instantiated. Each object can hold different values.</p>
   <span class="n">last_name</span>         <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">25</span><span class="p">),</span>
   <span class="n">email</span>             <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">25</span><span class="p">),</span>
   <span class="n">phone_number</span>      <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
-  <span class="n">hire_date</span>         <span class="n">DATE</span><span class="p">,</span>
+  <span class="n">hire_date</span>         <span class="nb">DATE</span><span class="p">,</span>
   <span class="n">job_id</span>            <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
   <span class="n">salary</span>            <span class="n">NUMBER</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
   <span class="n">commission_pct</span>    <span class="n">NUMBER</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
@@ -6125,7 +6125,11 @@ instantiated. Each object can hold different values.</p>
      under the terms of
      the <a href="https://www.apache.org/licenses/">
      Apache License v2</a>. Apache Calcite and its logo are
-     trademarks of the Apache Software Foundation.</p>
+     trademarks of the Apache Software Foundation.
+  </p>
+  <p>
+      <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a>
+  </p>
   </div>
 </footer>
 

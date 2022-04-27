@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Materialized Views</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v4.2.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -133,20 +133,20 @@ Currently, Calcite has two implementations of view-based query rewriting.</p>
 <h4 id="substitution-via-rules-transformation">Substitution via rules transformation</h4>
 
 <p>The first approach is based on view substitution.
-<code class="highlighter-rouge">SubstitutionVisitor</code> and its extension <code class="highlighter-rouge">MaterializedViewSubstitutionVisitor</code> aim to substitute part of the relational algebra tree with an equivalent expression which makes use of a materialized view. The scan over the materialized view and the materialized view definition plan are registered with the planner. Afterwards, transformation rules that try to unify expressions in the plan are triggered. Expressions do not need to be equivalent to be replaced: the visitor might add a residual predicate on top of the expression if needed.</p>
+<code class="language-plaintext highlighter-rouge">SubstitutionVisitor</code> and its extension <code class="language-plaintext highlighter-rouge">MaterializedViewSubstitutionVisitor</code> aim to substitute part of the relational algebra tree with an equivalent expression which makes use of a materialized view. The scan over the materialized view and the materialized view definition plan are registered with the planner. Afterwards, transformation rules that try to unify expressions in the plan are triggered. Expressions do not need to be equivalent to be replaced: the visitor might add a residual predicate on top of the expression if needed.</p>
 
-<p>The following example is taken from the documentation of <code class="highlighter-rouge">SubstitutionVisitor</code>:</p>
+<p>The following example is taken from the documentation of <code class="language-plaintext highlighter-rouge">SubstitutionVisitor</code>:</p>
 
 <ul>
-  <li>Query: <code class="highlighter-rouge">SELECT a, c FROM t WHERE x = 5 AND b = 4</code>
+  <li>Query: <code class="language-plaintext highlighter-rouge">SELECT a, c FROM t WHERE x = 5 AND b = 4</code>
 </li>
-  <li>Target (materialized view definition): <code class="highlighter-rouge">SELECT a, b, c FROM t WHERE x = 5</code>
+  <li>Target (materialized view definition): <code class="language-plaintext highlighter-rouge">SELECT a, b, c FROM t WHERE x = 5</code>
 </li>
-  <li>Result: <code class="highlighter-rouge">SELECT a, c FROM mv WHERE b = 4</code>
+  <li>Result: <code class="language-plaintext highlighter-rouge">SELECT a, c FROM mv WHERE b = 4</code>
 </li>
 </ul>
 
-<p>Note that <code class="highlighter-rouge">result</code> uses the materialized view table <code class="highlighter-rouge">mv</code> and a simplified condition <code class="highlighter-rouge">b = 4</code>.</p>
+<p>Note that <code class="language-plaintext highlighter-rouge">result</code> uses the materialized view table <code class="language-plaintext highlighter-rouge">mv</code> and a simplified condition <code class="language-plaintext highlighter-rouge">b = 4</code>.</p>
 
 <p>While this approach can accomplish a large number of rewritings, it has some limitations. Since the rule relies on transformation rules to create the equivalence between expressions in the query and the materialized view, it might need to enumerate exhaustively all possible equivalent rewritings for a given expression to find a materialized view substitution. However, this is not scalable in the presence of complex
 views, e.g., views with an arbitrary number of join operators.</p>
@@ -155,7 +155,7 @@ views, e.g., views with an arbitrary number of join operators.</p>
 
 <p>In turn, an alternative rule that attempts to match queries to views by extracting some structural information about the expression to replace has been proposed.</p>
 
-<p><code class="highlighter-rouge">MaterializedViewRule</code> builds on the ideas presented in [<a href="#ref-gl01">GL01</a>] and introduces some additional extensions.
+<p><code class="language-plaintext highlighter-rouge">MaterializedViewRule</code> builds on the ideas presented in [<a href="#ref-gl01">GL01</a>] and introduces some additional extensions.
 The rule can rewrite expressions containing arbitrary chains of Join, Filter, and Project operators.
 Additionally, the rule can rewrite expressions rooted at an Aggregate operator, rolling aggregations up if necessary. In turn, it can also produce rewritings using Union operators if the query can be partially answered from a view.</p>
 
@@ -163,24 +163,24 @@ Additionally, the rule can rewrite expressions rooted at an Aggregate operator, 
 
 <h5 id="rewriting-coverage">Rewriting coverage</h5>
 
-<p>Let us illustrate with some examples the coverage of the view rewriting algorithm implemented in <code class="highlighter-rouge">MaterializedViewRule</code>. The examples are based on the following database schema.</p>
+<p>Let us illustrate with some examples the coverage of the view rewriting algorithm implemented in <code class="language-plaintext highlighter-rouge">MaterializedViewRule</code>. The examples are based on the following database schema.</p>
 
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">depts</span><span class="p">(</span>
-  <span class="n">deptno</span> <span class="n">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-  <span class="n">deptname</span> <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+  <span class="n">deptno</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">deptname</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
   <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">deptno</span><span class="p">)</span>
 <span class="p">);</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">locations</span><span class="p">(</span>
-  <span class="n">locationid</span> <span class="n">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-  <span class="k">state</span> <span class="n">CHAR</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+  <span class="n">locationid</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="k">state</span> <span class="nb">CHAR</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
   <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">locationid</span><span class="p">)</span>
 <span class="p">);</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">emps</span><span class="p">(</span>
-  <span class="n">empid</span> <span class="n">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-  <span class="n">deptno</span> <span class="n">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-  <span class="n">locationid</span> <span class="n">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-  <span class="n">empname</span> <span class="n">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-  <span class="n">salary</span> <span class="n">DECIMAL</span> <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+  <span class="n">empid</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">deptno</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">locationid</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">empname</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">salary</span> <span class="nb">DECIMAL</span> <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
   <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">empid</span><span class="p">),</span>
   <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">deptno</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">depts</span><span class="p">(</span><span class="n">deptno</span><span class="p">),</span>
   <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">locationid</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">locations</span><span class="p">(</span><span class="n">locationid</span><span class="p">)</span>
@@ -731,7 +731,11 @@ Additionally, the rule can rewrite expressions rooted at an Aggregate operator, 
      under the terms of
      the <a href="https://www.apache.org/licenses/">
      Apache License v2</a>. Apache Calcite and its logo are
-     trademarks of the Apache Software Foundation.</p>
+     trademarks of the Apache Software Foundation.
+  </p>
+  <p>
+      <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a>
+  </p>
   </div>
 </footer>
 

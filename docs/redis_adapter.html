@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Redis adapter</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v3.7.3">
+  <meta name="generator" content="Jekyll v4.2.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -83,7 +83,7 @@
 <p>Calcite’s Redis adapter allows you to query data in Redis using SQL, combining it with data in other Calcite schemas.</p>
 
 <p>The Redis adapter allows querying of live data stored in Redis. Each Redis key-value pair is presented as a single row. Rows can be broken down into cells by using table definition files.
-Redis <code class="highlighter-rouge">string</code> ,<code class="highlighter-rouge">hash</code>, <code class="highlighter-rouge">sets</code>, <code class="highlighter-rouge">zsets</code>, <code class="highlighter-rouge">list</code> value types are supported;</p>
+Redis <code class="language-plaintext highlighter-rouge">string</code> ,<code class="language-plaintext highlighter-rouge">hash</code>, <code class="language-plaintext highlighter-rouge">sets</code>, <code class="language-plaintext highlighter-rouge">zsets</code>, <code class="language-plaintext highlighter-rouge">list</code> value types are supported;</p>
 
 <p>First, we need a <a href="/docs/model.html">model definition</a>.
 The model gives Calcite the necessary parameters to create an instance of the Redis adapter.</p>
@@ -91,79 +91,79 @@ The model gives Calcite the necessary parameters to create an instance of the Re
 <p>A basic example of a model file is given below:</p>
 
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"defaultSchema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foodmart"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"schemas"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"defaultSchema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foodmart"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"schemas"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foodmart"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.redis.RedisSchemaFactory"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"localhost"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">6379</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"database"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foodmart"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.redis.RedisSchemaFactory"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"localhost"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">6379</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"database"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"tables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="nl">"tables"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"json_01"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.redis.RedisTableFactory"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"dataFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"json"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"json_01"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.redis.RedisTableFactory"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"dataFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"json"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
               </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEPTNO"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEPTNO"</span><span class="w">
+                </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEPTNO"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEPTNO"</span><span class="w">
               </span><span class="p">},</span><span class="w">
               </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NAME"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NAME"</span><span class="w">
+                </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NAME"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NAME"</span><span class="w">
               </span><span class="p">}</span><span class="w">
             </span><span class="p">]</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"raw_01"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.redis.RedisTableFactory"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"dataFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"raw"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"raw_01"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.redis.RedisTableFactory"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"dataFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"raw"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
               </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="w">
+                </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="w">
               </span><span class="p">},</span><span class="w">
               </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="w">
+                </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city"</span><span class="w">
               </span><span class="p">},</span><span class="w">
               </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pop"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"int"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pop"</span><span class="w">
+                </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pop"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"int"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pop"</span><span class="w">
               </span><span class="p">}</span><span class="w">
             </span><span class="p">]</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"csv_01"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.redis.RedisTableFactory"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"dataFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"csv"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"keyDelimiter"</span><span class="p">:</span><span class="w"> </span><span class="s2">":"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"csv_01"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.redis.RedisTableFactory"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"dataFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"csv"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"keyDelimiter"</span><span class="p">:</span><span class="w"> </span><span class="s2">":"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
               </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EMPNO"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+                </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EMPNO"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
               </span><span class="p">},</span><span class="w">
               </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NAME"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span><span class="w">
-                </span><span class="s2">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NAME"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
               </span><span class="p">}</span><span class="w">
             </span><span class="p">]</span><span class="w">
           </span><span class="p">}</span><span class="w">
@@ -173,9 +173,9 @@ The model gives Calcite the necessary parameters to create an instance of the Re
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
-<p>This file is stored as <a href="https://github.com/apache/calcite/blob/master/redis/src/test/resources/redis-mix-model.json"><code class="highlighter-rouge">redis/src/test/resources/redis-mix-model.json</code></a>,
+<p>This file is stored as <a href="https://github.com/apache/calcite/blob/main/redis/src/test/resources/redis-mix-model.json"><code class="language-plaintext highlighter-rouge">redis/src/test/resources/redis-mix-model.json</code></a>,
 so you can connect to Redis via
-<a href="https://github.com/julianhyde/sqlline"><code class="highlighter-rouge">sqlline</code></a>
+<a href="https://github.com/julianhyde/sqlline"><code class="language-plaintext highlighter-rouge">sqlline</code></a>
 as follows:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">From the model above, you can see the schema information of the table. You need to start a Redis service before the query, When the <span class="nb">source </span>code build is executed, a redis service is started to load the following <span class="nb">test </span>data.<span class="sb">`</span>redis/src/test/resources/start.sh<span class="sb">`</span> is used to start this service.<span class="sb">`</span>redis/src/test/resources/stop.sh<span class="sb">`</span> is used to stop this service.
@@ -189,7 +189,7 @@ sqlline&gt; <span class="o">!</span>tables
 |           | foodmart    | json_01    | TABLE        |         |          |            |           |                           |                |
 |           | foodmart    | raw_01     | TABLE        |         |          |            |           |                           |                |
 +-----------+-------------+------------+--------------+---------+----------+------------+-----------+---------------------------+----------------+
-sqlline&gt; Select a.DEPTNO, b.NAME from <span class="s2">"csv_01"</span> a left join <span class="s2">"json_02"</span> b on a.DEPTNO<span class="o">=</span>b.DEPTNO<span class="p">;</span>
+sqlline&gt; Select a.DEPTNO, b.NAME from <span class="s2">"csv_01"</span> a left <span class="nb">join</span> <span class="s2">"json_02"</span> b on a.DEPTNO<span class="o">=</span>b.DEPTNO<span class="p">;</span>
 +--------+----------+
 | DEPTNO |   NAME   |
 +--------+----------+
@@ -197,21 +197,21 @@ sqlline&gt; Select a.DEPTNO, b.NAME from <span class="s2">"csv_01"</span> a left
 +--------+----------+
 1 row selected <span class="o">(</span>3.304 seconds<span class="o">)</span></code></pre></figure>
 
-<p>This query shows the result of the join query in a CSV format table <code class="highlighter-rouge">csv_01</code> and a JSON format table <code class="highlighter-rouge">json_02</code>.</p>
+<p>This query shows the result of the join query in a CSV format table <code class="language-plaintext highlighter-rouge">csv_01</code> and a JSON format table <code class="language-plaintext highlighter-rouge">json_02</code>.</p>
 
 <p>Here are a few details about the fields:</p>
 
-<p>The <code class="highlighter-rouge">keyDelimiter</code> is used to split the value, the default is a colon, and the split value is used to map the field column. This only works for the CSV format.</p>
+<p>The <code class="language-plaintext highlighter-rouge">keyDelimiter</code> is used to split the value, the default is a colon, and the split value is used to map the field column. This only works for the CSV format.</p>
 
-<p>The <code class="highlighter-rouge">format</code> key is used to specify the format of the data in Redis. Currently, it supports: <code class="highlighter-rouge">"csv"</code>, <code class="highlighter-rouge">"json"</code>, and <code class="highlighter-rouge">"raw"</code>. The <code class="highlighter-rouge">"raw"</code> format keeps the original Redis key and value intact and only one field key is used for the query. The details are not described below.</p>
+<p>The <code class="language-plaintext highlighter-rouge">format</code> key is used to specify the format of the data in Redis. Currently, it supports: <code class="language-plaintext highlighter-rouge">"csv"</code>, <code class="language-plaintext highlighter-rouge">"json"</code>, and <code class="language-plaintext highlighter-rouge">"raw"</code>. The <code class="language-plaintext highlighter-rouge">"raw"</code> format keeps the original Redis key and value intact and only one field key is used for the query. The details are not described below.</p>
 
-<p>The function of <code class="highlighter-rouge">mapping</code> is to map the columns of Redis to the underlying data. Since there is no concept of columns in Redis, the specific mapping method varies according to the format. For example, with <code class="highlighter-rouge">"csv"</code>, we know that the CSV data will be formed after being parsed. The corresponding column mapping uses the index (subscript) of the underlying array. In the example above, <code class="highlighter-rouge">EMPNO</code> is mapped to index 0, <code class="highlighter-rouge">NAME</code> is mapped to index 1 and so on.</p>
+<p>The function of <code class="language-plaintext highlighter-rouge">mapping</code> is to map the columns of Redis to the underlying data. Since there is no concept of columns in Redis, the specific mapping method varies according to the format. For example, with <code class="language-plaintext highlighter-rouge">"csv"</code>, we know that the CSV data will be formed after being parsed. The corresponding column mapping uses the index (subscript) of the underlying array. In the example above, <code class="language-plaintext highlighter-rouge">EMPNO</code> is mapped to index 0, <code class="language-plaintext highlighter-rouge">NAME</code> is mapped to index 1 and so on.</p>
 
 <p>Currently the Redis adapter supports three formats: raw, JSON, and CSV.</p>
 
 <h2 id="example-raw">Example: raw</h2>
 
-<p>The raw format maintains the original Redis key-value format with only one column <code class="highlighter-rouge">key</code>:</p>
+<p>The raw format maintains the original Redis key-value format with only one column <code class="language-plaintext highlighter-rouge">key</code>:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">127.0.0.1:6379&gt; LPUSH raw_02 <span class="s2">"book1"</span>
 sqlline&gt; <span class="k">select</span> <span class="k">*</span> from <span class="s2">"raw_02"</span><span class="p">;</span>
@@ -261,7 +261,7 @@ sqlline&gt; <span class="k">select</span> <span class="k">*</span> from <span cl
 
 <h2 id="example-csv">Example: CSV</h2>
 
-<p>The CSV format parses a Redis string value and combines the mapping in fields into multiple columns. The default separator is <code class="highlighter-rouge">:</code>.</p>
+<p>The CSV format parses a Redis string value and combines the mapping in fields into multiple columns. The default separator is <code class="language-plaintext highlighter-rouge">:</code>.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">127.0.0.1:6379&gt; LPUSH csv_02 <span class="s2">"10:Sales"</span></code></pre></figure>
 
@@ -608,7 +608,11 @@ More Redis features need to be further refined: for example HyperLogLog and Pub/
      under the terms of
      the <a href="https://www.apache.org/licenses/">
      Apache License v2</a>. Apache Calcite and its logo are
-     trademarks of the Apache Software Foundation.</p>
+     trademarks of the Apache Software Foundation.
+  </p>
+  <p>
+      <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a>
+  </p>
   </div>
 </footer>
 

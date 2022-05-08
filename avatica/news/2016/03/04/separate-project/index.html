@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>Release 1.18.0</title>
+  <title>Splitting Avatica from Calcite</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v4.2.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -135,26 +135,26 @@
       <div class="unit four-fifths">
         <article>
   <h2>
-    Release 1.18.0
-    <a href="/news/2021/05/18/release-1.18.0/" class="permalink" title="Permalink">∞</a>
+    Splitting Avatica from Calcite
+    <a href="/news/2016/03/04/separate-project/" class="permalink" title="Permalink">∞</a>
   </h2>
   <span class="post-category">
     <span class="label">
-      release
+      milestones
     </span>
   </span>
   <div class="post-meta">
     <span class="post-date">
-      18 May 2021
+      04 Mar 2016
     </span>
     
     
     
-    <a href="http://github.com/F21" class="post-author">
-      <img src="http://github.com/F21.png"
-           class="avatar" alt="francischuang avatar"
+    <a href="http://github.com/joshelser" class="post-author">
+      <img src="http://github.com/joshelser.png"
+           class="avatar" alt="elserj avatar"
            width="24" height="24">
-      francischuang
+      elserj
     </a>
   </div>
   <div class="post-content">
@@ -162,23 +162,15 @@
 
 -->
 
-<p>Apache Calcite Avatica 1.18.0 includes a few dependency updates, bug fixes and
-a breaking change. In addition, the Gradle wrapper has been removed from the source
-distribution in order to comply with ASF policy. See the list of <a href="/avatica/docs/history.html#v1-18-0">bug fixes and new features</a>
-for more information.</p>
+<p>This marks the separation of Avatica from its previous location as a sub-module
+of Apache Calcite’s Maven build.</p>
 
-<p><strong>Breaking change (<a href="https://issues.apache.org/jira/browse/CALCITE-4503">CALCITE-4503</a>)</strong>: Order of fields in records should follow that of the SQL types</p>
+<p>This separation is not to remove Avatica from
+the governance of the Apache Calcite project, but to allow for even more rapid
+releases from both the Avatica and Calcite projects. We can confidently make new
+releases of each without having to worry about the current state of development
+features in the other.</p>
 
-<p><code class="language-plaintext highlighter-rouge">Meta#deduce(List&lt;ColumnMetaData&gt; columns, Class resultClazz)</code> now only derives the order of the fields from the list of provided column metadata <code class="language-plaintext highlighter-rouge">columns</code> when generating a record from the given Java class <code class="language-plaintext highlighter-rouge">resultClazz</code>, instead of relying on the field order provided by <code class="language-plaintext highlighter-rouge">Object#getFields()</code>, which is a JVM-dependent feature.</p>
-
-<p>Before, the field names where not checked against the field names of the provided class. Now, if <code class="language-plaintext highlighter-rouge">resultClazz</code> is not null, the provided field names are expected to match existing fields in that class. If a column metadata has name <code class="language-plaintext highlighter-rouge">column</code>, and no public field in <code class="language-plaintext highlighter-rouge">resultClazz</code> with that name exists, the following exception is thrown:
-<code class="language-plaintext highlighter-rouge">java.lang.RuntimeException: java.lang.NoSuchFieldException: C</code>.</p>
-
-    
-      
-        <p>See the <a href="/avatica/docs/history.html#v1-18-0">release notes</a>;
-            <a href="/avatica/downloads/avatica.html#source-releases">download</a> the release.</p>
-      
     
   </div>
 </article>
@@ -217,7 +209,7 @@ for more information.</p>
         <a href="/avatica/news/2021/10/11/release-1.19.0/">avatica 1.19.0</a>
       </li>
       
-      <li class="current">
+      <li class="">
         <a href="/avatica/news/2021/05/18/release-1.18.0/">avatica 1.18.0</a>
       </li>
       
@@ -229,7 +221,7 @@ for more information.</p>
           <a href="/avatica/news/2017/03/31/new-avatica-repository/">New Avatica Repository</a>
         </li>
           
-        <li class="">
+        <li class="current">
           <a href="/avatica/news/2016/03/04/separate-project/">Splitting Avatica from Calcite</a>
         </li>
           

@@ -211,7 +211,7 @@ form.</p>
       <span class="o">|</span>   <span class="n">query</span> <span class="k">INTERSECT</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span> <span class="n">query</span>
       <span class="p">}</span>
       <span class="p">[</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">orderItem</span> <span class="p">[,</span> <span class="n">orderItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
-      <span class="p">[</span> <span class="k">LIMIT</span> <span class="p">[</span> <span class="k">start</span><span class="p">,</span> <span class="p">]</span> <span class="p">{</span> <span class="k">count</span> <span class="o">|</span> <span class="k">ALL</span> <span class="p">}</span> <span class="p">]</span>
+      <span class="p">[</span> <span class="k">LIMIT</span> <span class="p">{</span> <span class="p">[</span> <span class="k">start</span><span class="p">,</span> <span class="p">]</span> <span class="k">count</span> <span class="o">|</span> <span class="k">ALL</span> <span class="p">}</span> <span class="p">]</span>
       <span class="p">[</span> <span class="k">OFFSET</span> <span class="k">start</span> <span class="p">{</span> <span class="k">ROW</span> <span class="o">|</span> <span class="k">ROWS</span> <span class="p">}</span> <span class="p">]</span>
       <span class="p">[</span> <span class="k">FETCH</span> <span class="p">{</span> <span class="k">FIRST</span> <span class="o">|</span> <span class="k">NEXT</span> <span class="p">}</span> <span class="p">[</span> <span class="k">count</span> <span class="p">]</span> <span class="p">{</span> <span class="k">ROW</span> <span class="o">|</span> <span class="k">ROWS</span> <span class="p">}</span> <span class="k">ONLY</span> <span class="p">]</span>
 
@@ -228,7 +228,7 @@ form.</p>
           <span class="p">{</span> <span class="o">*</span> <span class="o">|</span> <span class="n">projectItem</span> <span class="p">[,</span> <span class="n">projectItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">}</span>
       <span class="k">FROM</span> <span class="n">tableExpression</span>
       <span class="p">[</span> <span class="k">WHERE</span> <span class="n">booleanExpression</span> <span class="p">]</span>
-      <span class="p">[</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="p">{</span> <span class="n">groupItem</span> <span class="p">[,</span> <span class="n">groupItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">}</span> <span class="p">]</span>
+      <span class="p">[</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span> <span class="p">{</span> <span class="n">groupItem</span> <span class="p">[,</span> <span class="n">groupItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">}</span> <span class="p">]</span>
       <span class="p">[</span> <span class="k">HAVING</span> <span class="n">booleanExpression</span> <span class="p">]</span>
       <span class="p">[</span> <span class="k">WINDOW</span> <span class="n">windowName</span> <span class="k">AS</span> <span class="n">windowSpec</span> <span class="p">[,</span> <span class="n">windowName</span> <span class="k">AS</span> <span class="n">windowSpec</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
 
@@ -394,6 +394,11 @@ function).</p>
 <p>An IN, EXISTS, UNIQUE or scalar sub-query may be correlated; that is, it
 may refer to tables in the FROM clause of an enclosing query.</p>
 
+<p>GROUP BY DISTINCT removes duplicate grouping sets (for example,
+“GROUP BY DISTINCT GROUPING SETS ((a), (a, b), (a))” is equivalent to
+“GROUP BY GROUPING SETS ((a), (a, b))”);
+GROUP BY ALL is equivalent to GROUP BY.</p>
+
 <p><em>selectWithoutFrom</em> is equivalent to VALUES,
 but is not standard SQL and is only allowed in certain
 <a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#isFromRequired--">conformance levels</a>.</p>
@@ -408,6 +413,9 @@ but is not standard SQL and is only allowed in certain
 <p>“LIMIT start, count” is equivalent to “LIMIT count OFFSET start”
 but is only allowed in certain
 <a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#isLimitStartCountAllowed--">conformance levels</a>.</p>
+
+<p>“OFFSET start” may occur before “LIMIT count” in certain
+<a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#isOffsetLimitAllowed--">conformance levels</a>.</p>
 
 <h2 id="keywords">Keywords</h2>
 
@@ -3567,12 +3575,52 @@ runtime.</li>
 
 <p>Table functions occur in the <code class="language-plaintext highlighter-rouge">FROM</code> clause.</p>
 
+<p>Table functions may have generic table parameters (i.e., no row type is
+declared when the table function is created), and the row type of the result
+ might depend on the row type(s) of the input tables.
+Besides, input tables are classified by three characteristics.
+The first characteristic is semantics. Input tables have either row semantics
+or set semantics, as follows:</p>
+<ul>
+  <li>Row semantics means that the result of the table function depends on a
+row-by-row basis.</li>
+  <li>Set semantics means that the outcome of the function depends on how the
+data is partitioned.</li>
+</ul>
+
+<p>The second characteristic, which applies only to input tables with
+set semantics, is whether the table function can generate a result row
+even if the input table is empty.</p>
+<ul>
+  <li>If the table function can generate a result row on empty input,
+the table is said to be “keep when empty”.</li>
+  <li>The alternative is called “prune when empty”, meaning that
+the result would be pruned out if the input table is empty.</li>
+</ul>
+
+<p>The third characteristic is whether the input table supports
+pass-through columns or not. Pass-through columns is a mechanism
+enabling the table function to copy every column of an input row
+into columns of an output row.</p>
+
+<p>The input tables with set semantics may be partitioned on one or more columns.
+The input tables with set semantics may be ordered on one or more columns.</p>
+
+<p>Note:</p>
+<ul>
+  <li>The input tables with row semantics may not be partitioned or ordered.</li>
+  <li>A polymorphic table function may have multiple input tables. However,
+at most one input table could have row semantics.</li>
+</ul>
+
 <h4 id="tumble">TUMBLE</h4>
 
 <p>In streaming queries, TUMBLE assigns a window for each row of a relation based
 on a timestamp column. An assigned window is specified by its beginning and
 ending. All assigned windows have the same length, and that’s why tumbling
-sometimes is named as “fixed windowing”.</p>
+sometimes is named as “fixed windowing”.
+The first parameter of the TUMBLE table function is a generic table parameter.
+The input table has row semantics and supports pass-through columns.</p>
 
 <div class="scroll-table-style"><table>
   <thead>
@@ -3612,7 +3660,9 @@ whether data is complete.</p>
 <h4 id="hop">HOP</h4>
 
 <p>In streaming queries, HOP assigns windows that cover rows within the interval of <em>size</em> and shifting every <em>slide</em> based
-on a timestamp column. Windows assigned could have overlapping so hopping sometime is named as “sliding windowing”.</p>
+on a timestamp column. Windows assigned could have overlapping so hopping sometime is named as “sliding windowing”.
+The first parameter of the HOP table function is a generic table parameter.
+The input table has row semantics and supports pass-through columns.</p>
 
 <div class="scroll-table-style"><table>
   <thead>
@@ -3654,7 +3704,11 @@ orders that tells data completeness.</p>
 <h4 id="session">SESSION</h4>
 
 <p>In streaming queries, SESSION assigns windows that cover rows based on <em>datetime</em>. Within a session window, distances
-of rows are less than <em>interval</em>. Session window is applied per <em>key</em>.</p>
+of rows are less than <em>interval</em>. Session window is applied per <em>key</em>.
+The first parameter of the SESSION table function is a generic table parameter.
+The input table has set semantics and supports pass-through columns.
+Besides, the SESSION table function would not generate a result row
+if the input table is empty.</p>
 
 <div class="scroll-table-style"><table>
   <thead>
@@ -3675,18 +3729,16 @@ of rows are less than <em>interval</em>. Session window is applied per <em>key</
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="k">TABLE</span><span class="p">(</span>
   <span class="k">SESSION</span><span class="p">(</span>
-    <span class="k">TABLE</span> <span class="n">orders</span><span class="p">,</span>
+    <span class="k">TABLE</span> <span class="n">orders</span> <span class="k">PARTITION</span> <span class="k">BY</span> <span class="n">product</span><span class="p">,</span>
     <span class="k">DESCRIPTOR</span><span class="p">(</span><span class="n">rowtime</span><span class="p">),</span>
-    <span class="k">DESCRIPTOR</span><span class="p">(</span><span class="n">product</span><span class="p">),</span>
     <span class="n">INTERVAL</span> <span class="s1">'20'</span> <span class="k">MINUTE</span><span class="p">));</span>
 
 <span class="c1">-- or with the named params</span>
 <span class="c1">-- note: the DATA param must be the first</span>
 <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="k">TABLE</span><span class="p">(</span>
   <span class="k">SESSION</span><span class="p">(</span>
-    <span class="k">DATA</span> <span class="o">=&gt;</span> <span class="k">TABLE</span> <span class="n">orders</span><span class="p">,</span>
+    <span class="k">DATA</span> <span class="o">=&gt;</span> <span class="k">TABLE</span> <span class="n">orders</span> <span class="k">PARTITION</span> <span class="k">BY</span> <span class="n">product</span><span class="p">,</span>
     <span class="n">TIMECOL</span> <span class="o">=&gt;</span> <span class="k">DESCRIPTOR</span><span class="p">(</span><span class="n">rowtime</span><span class="p">),</span>
-    <span class="k">KEY</span> <span class="o">=&gt;</span> <span class="k">DESCRIPTOR</span><span class="p">(</span><span class="n">product</span><span class="p">),</span>
     <span class="k">SIZE</span> <span class="o">=&gt;</span> <span class="n">INTERVAL</span> <span class="s1">'20'</span> <span class="k">MINUTE</span><span class="p">));</span></code></pre></figure>
 
 <p>applies a session with 20-minute inactive gap on rows from table <code class="language-plaintext highlighter-rouge">orders</code>.

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8">
-  <title>Release 1.7.0</title>
+  <title>Release 1.31.0</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="generator" content="Jekyll v4.2.2">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
@@ -112,8 +112,8 @@
       <div class="unit four-fifths">
         <article>
   <h2>
-    Release 1.7.0
-    <a href="/news/2016/03/22/release-1.7.0/" class="permalink" title="Permalink">∞</a>
+    Release 1.31.0
+    <a href="/news/2022/08/02/release-1.31.0/" class="permalink" title="Permalink">∞</a>
   </h2>
   <span class="post-category">
     <span class="label">
@@ -122,14 +122,14 @@
   </span>
   <div class="post-meta">
     <span class="post-date">
-      22 Mar 2016
+      02 Aug 2022
     </span>
     
     
     
-    <a href="http://people.apache.org/~jhyde" class="post-author">
-      <img src="https://github.com/julianhyde.png" class="avatar" alt="jhyde avatar" width="24" height="24">
-      jhyde
+    <a href="https://github.com/asereda-gs" class="post-author">
+      <img src="https://github.com/asereda-gs.png" class="avatar" alt="sereda avatar" width="24" height="24">
+      sereda
     </a>
   </div>
   <div class="post-content">
@@ -137,45 +137,32 @@
 
 -->
 
-<p>Apache Calcite 1.7.0 is the first release since
-<a href="/avatica/news/2016/03/03/separate-project/">Avatica became an independent project</a>.
-Calcite now depends on <a href="/avatica/">Avatica</a> in the
-same way as it does other libraries, via a Maven dependency. To see
-Avatica-related changes, see the
-<a href="/avatica/docs/history.html#v1-7-1">release notes for Avatica 1.7.1</a>.</p>
+<p>The <a href="">Apache Calcite PMC</a>
+is pleased to announce
+<a href="/docs/history.html#v1-31-0">Apache Calcite release 1.31.0</a>.</p>
 
-<p>We have <a href="https://issues.apache.org/jira/browse/CALCITE-1080">added</a>
-an <a href="/docs/cassandra.html">adapter</a> for
-<a href="https://cassandra.apache.org/">Apache Cassandra</a>.
-You can map a Cassandra keyspace into Calcite as a schema, Cassandra
-CQL tables as tables, and execute SQL queries on them, which Calcite
-converts into <a href="https://cassandra.apache.org/doc/cql/CQL.html">CQL</a>.
-Cassandra can define and maintain materialized views but the adapter
-goes further: it can transparently rewrite a query to use a
-materialized view even if the view is not mentioned in the query.</p>
+<p>This release comes four months after <a href="#v1-30-0">1.30.0</a>,
+contains contributions from 28 contributors, and resolves 81 issues.</p>
 
-<p>This release adds an
-<a href="https://issues.apache.org/jira/browse/CALCITE-1066">Oracle-compatibility mode</a>.
-If you add <code class="language-plaintext highlighter-rouge">fun=oracle</code> to your JDBC connect string, you get all of
-the standard operators and functions plus Oracle-specific functions
-<code class="language-plaintext highlighter-rouge">DECODE</code>, <code class="language-plaintext highlighter-rouge">NVL</code>, <code class="language-plaintext highlighter-rouge">LTRIM</code>, <code class="language-plaintext highlighter-rouge">RTRIM</code>, <code class="language-plaintext highlighter-rouge">GREATEST</code> and <code class="language-plaintext highlighter-rouge">LEAST</code>. We look
-forward to adding more functions, and compatibility modes for other
-databases, in future releases.</p>
+<p>Among others, it is worth highlighting the following improvements:</p>
 
-<p>We’ve replaced our use of JUL (<code class="language-plaintext highlighter-rouge">java.util.logging</code>)
-with <a href="https://slf4j.org/">SLF4J</a>. SLF4J provides an API which Calcite can use
-independent of the logging implementation. This ultimately provides additional
-flexibility to users, allowing them to configure Calcite’s logging within their
-own chosen logging framework. This work was done in
-[<a href="https://issues.apache.org/jira/browse/CALCITE-669">CALCITE-669</a>].</p>
+<ul>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4865">CALCITE-4865</a>]
+ Allow table functions to be polymorphic</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5107">CALCITE-5107</a>]
+ Support SQL hint for <code class="language-plaintext highlighter-rouge">Filter</code>, <code class="language-plaintext highlighter-rouge">SetOp</code>, <code class="language-plaintext highlighter-rouge">Sort</code>, <code class="language-plaintext highlighter-rouge">Window</code>, <code class="language-plaintext highlighter-rouge">Values</code>
+</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-35">CALCITE-35</a>]
+ Support parsing parenthesized joins</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3890">CALCITE-3890</a>]
+ Derive <code class="language-plaintext highlighter-rouge">IS NOT NULL</code> filter for the inputs of inner join</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5085">CALCITE-5085</a>]
+ Firebolt dialect implementation</li>
+</ul>
 
-<p>For users experienced with configuring JUL in Calcite previously, there are some
-differences as some the JUL logging levels do not exist in SLF4J: <code class="language-plaintext highlighter-rouge">FINE</code>,
-<code class="language-plaintext highlighter-rouge">FINER</code>, and <code class="language-plaintext highlighter-rouge">FINEST</code>, specifically. To deal with this, <code class="language-plaintext highlighter-rouge">FINE</code> was mapped
-to SLF4J’s <code class="language-plaintext highlighter-rouge">DEBUG</code> level, while <code class="language-plaintext highlighter-rouge">FINER</code> and <code class="language-plaintext highlighter-rouge">FINEST</code> were mapped to SLF4J’s <code class="language-plaintext highlighter-rouge">TRACE</code>.</p>
 
     
-    <p>See the <a href="/docs/history.html#v1-7-0">release notes</a>;
+    <p>See the <a href="/docs/history.html#v1-31-0">release notes</a>;
       <a href="/downloads#source-releases">download</a> the release.</p>
     
   </div>
@@ -196,7 +183,7 @@ to SLF4J’s <code class="language-plaintext highlighter-rouge">DEBUG</code> lev
     <h4>Recent Releases</h4>
     <ul>
       
-      <li class="">
+      <li class="current">
         <a href="/news/2022/08/02/release-1.31.0/">1.31.0</a>
       </li>
       

@@ -83,6 +83,121 @@
 Downloads are available on the
 <a href="/downloads/">downloads page</a>.</p>
 
+<h2 id="v1-32-0">
+<a href="https://github.com/apache/calcite/releases/tag/calcite-1.32.0">1.32.0</a> / 2022-09-12</h2>
+
+<p>This release comes 1 month after <a href="#v1-31-0">1.31.0</a>,
+contains contributions from 15 contributors, and resolves x issues.</p>
+
+<p>Contributors to this release:
+Alessandro Solimando,
+Ali Mansour,
+Andrei Sereda,
+Benchao Li,
+Bertil Chapuis,
+Chunwei Lei,
+Dmitry Sysolyatin,
+Jiajun Bernoulli,
+Jing Zhang,
+Julian Hyde (release manager),
+Mou Wu,
+Ruben Quesada Lopez,
+Stamatis Zampetakis,
+Zhengqiang Duan.</p>
+
+<p id="breaking-1-32-0">Compatibility: This release is tested on Linux, macOS, Microsoft Windows;
+using JDK/OpenJDK versions 8 to 18;
+Guava versions 19.0 to 31.1-jre;
+other software versions as specified in gradle.properties.</p>
+
+<h4 id="new-features-1-32-0">New features</h4>
+
+<ul>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5262">CALCITE-5262</a>]
+Add many spatial functions, including support for WKB (well-known binary) and
+GeoJSON</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5241">CALCITE-5241</a>]
+Implement <code class="language-plaintext highlighter-rouge">CHAR</code> function for MySQL and Spark, also JDBC <code class="language-plaintext highlighter-rouge">{fn CHAR(n)}</code>
+</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5251">CALCITE-5251</a>]
+Support SQL hint for <code class="language-plaintext highlighter-rouge">Snapshot</code>
+</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4802">CALCITE-4802</a>]
+Support <code class="language-plaintext highlighter-rouge">IF(condition, then, else)</code> statements in Babel parser</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4999">CALCITE-4999</a>]
+<code class="language-plaintext highlighter-rouge">ARRAY</code>, <code class="language-plaintext highlighter-rouge">MULTISET</code> functions should return a collection of scalars if a
+sub-query returns 1 column</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5126">CALCITE-5126</a>]
+Implicit column alias for single-column <code class="language-plaintext highlighter-rouge">UNNEST</code> should work with any
+single-column <code class="language-plaintext highlighter-rouge">UNNEST</code>’s input</li>
+</ul>
+
+<h4 id="dependency-1-32-0">Dependency version upgrade</h4>
+
+<ul>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5278">CALCITE-5278</a>]
+Upgrade Janino from 3.1.6 to 3.1.8</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5232">CALCITE-5232</a>]
+Upgrade protobuf-java from 3.17.1 to 3.21.5</li>
+</ul>
+
+<h4 id="fixes-1-32-0">Bug-fixes, API changes and minor enhancements</h4>
+
+<ul>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5270">CALCITE-5270</a>]
+JDBC adapter should not generate <code class="language-plaintext highlighter-rouge">FILTER (WHERE ...)</code> in Firebolt dialect</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5277">CALCITE-5277</a>]
+Increase <code class="language-plaintext highlighter-rouge">BINDABLE_CACHE</code> hit rate by making the order of
+<code class="language-plaintext highlighter-rouge">EnumerableRelImplementor.stashedParameters</code> deterministic</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5263">CALCITE-5263</a>]
+Improve <code class="language-plaintext highlighter-rouge">XmlFunctions</code> by using an XML <code class="language-plaintext highlighter-rouge">DocumentBuilder</code>
+</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4294">CALCITE-4294</a>]
+Use JTS and proj4j rather than ESRI as the underlying library for geospatial
+(<code class="language-plaintext highlighter-rouge">ST_</code>) functions</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5247">CALCITE-5247</a>]
+<code class="language-plaintext highlighter-rouge">FilterJoinRule</code> cannot simplify left join to inner join for
+<code class="language-plaintext highlighter-rouge">WHERE RHS.C1 IS NOT NULL OR RHS.C2 IS NOT NULL</code>
+</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5243">CALCITE-5243</a>]
+<code class="language-plaintext highlighter-rouge">SELECT NULL AS C</code> causes
+<code class="language-plaintext highlighter-rouge">NoSuchMethodException: java.sql.ResultSet.getVoid(int)</code>
+</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5201">CALCITE-5201</a>]
+Improve <code class="language-plaintext highlighter-rouge">SemiJoinRule</code> to match <code class="language-plaintext highlighter-rouge">Join</code>’s right input which is unique for join
+keys</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4223">CALCITE-4223</a>]
+Metadata handlers for <code class="language-plaintext highlighter-rouge">TableScan</code> should see whether the <code class="language-plaintext highlighter-rouge">RelOptTable</code>
+implements the handler</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5178">CALCITE-5178</a>]
+Single column with <code class="language-plaintext highlighter-rouge">ROW</code> type generates wrong plan</li>
+</ul>
+
+<h4 id="build-1-32-0">Build and test suite</h4>
+
+<ul>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5274">CALCITE-5274</a>]
+In <code class="language-plaintext highlighter-rouge">DiffRepository</code>, use a more secure <code class="language-plaintext highlighter-rouge">DocumentBuilderFactory</code> instance</li>
+  <li>Add tests for correlated CTEs</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5192">CALCITE-5192</a>]
+<code class="language-plaintext highlighter-rouge">CodeGenerationBenchmark</code> throws <code class="language-plaintext highlighter-rouge">IllegalStateException</code>
+</li>
+</ul>
+
+<h4 id="site-1-32-0">Web site and documentation</h4>
+
+<ul>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5275">CALCITE-5275</a>]
+Release notes for Calcite 1.32.0</li>
+  <li>Cosmetic changes to release notes</li>
+  <li>Remove redundant ‘the’ in javadoc</li>
+  <li>Change sereda’s role from Committer to PMC</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5092">CALCITE-5092</a>]
+Update site/README.md about how to release the site</li>
+  <li>Fix 1.31.0 release date to 2022-08-22 (was 2022-08-22)</li>
+  <li>Fix checkstyle violation for Calcite 1.31 release note</li>
+</ul>
+
 <h2 id="v1-31-0">
 <a href="https://github.com/apache/calcite/releases/tag/calcite-1.31.0">1.31.0</a> / 2022-08-02</h2>
 
@@ -111,7 +226,7 @@ Andrei Sereda (release manager),
 Benchao Li,
 Chunwei Lei,
 Daniel Henneberger,
-dssysolyatin,
+Dmitry Sysolyatin,
 Francis Chuang,
 godfreyhe,
 hannerwang,
@@ -124,7 +239,7 @@ Michael Mior,
 NobiGo,
 onTheQT,
 Roman Kondakov,
-Ruben Q L,
+Ruben Quesada Lopez,
 Sergey Nuyanzin,
 Stamatis Zampetakis,
 Viliam Durina,

@@ -720,6 +720,7 @@
           <li><a href="#using-docker-1" id="markdown-toc-using-docker-1">Using docker</a></li>
         </ul>
       </li>
+      <li><a href="#close-out-issues-in-jira-and-mark-the-version-as-released" id="markdown-toc-close-out-issues-in-jira-and-mark-the-version-as-released">Close out issues in JIRA and mark the version as released</a></li>
       <li><a href="#announce-the-release" id="markdown-toc-announce-the-release">Announce the release</a></li>
     </ul>
   </li>
@@ -939,6 +940,14 @@ git push origin vX.Y.Z</code></pre></figure>
 <p>This assumes that a rc release was tagged and pushed to the git repository.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker compose run promote-release</code></pre></figure>
+
+<h3 id="close-out-issues-in-jira-and-mark-the-version-as-released">Close out issues in JIRA and mark the version as released</h3>
+<p>In JIRA, search for <a href="https://issues.apache.org/jira/issues/?jql=project%20%3D%20CALCITE%20AND%20status%20%3D%20Resolved%20AND%20resolution%20%3D%20Fixed%20AND%20fixVersion%20in%20(1.5.0%2C%20avatica-go-5.2.0)">all issues resolved in this release</a>,
+and do a bulk update changing their status to “Closed”, with a change comment “Resolved in release X.Y.Z (YYYY-MM-DD)”
+(fill in release number and date appropriately). Uncheck “Send mail for this update”.</p>
+
+<p>Finally, go to the <a href="https://issues.apache.org/jira/projects/CALCITE?selectedItem=com.atlassian.jira.jira-projects-plugin%3Arelease-page&amp;status=released-unreleased">releases page in JIRA</a>,
+click the 3 dots next to the release, select the release date and release it.</p>
 
 <h3 id="announce-the-release">Announce the release</h3>
 <p>After 24 hours, announce the release by sending an announcement to the <a href="https://mail-archives.apache.org/mod_mbox/calcite-dev/">dev list</a>

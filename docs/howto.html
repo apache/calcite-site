@@ -84,7 +84,8 @@ adapters.</p>
 <ul id="markdown-toc">
   <li><a href="#building-from-a-source-distribution" id="markdown-toc-building-from-a-source-distribution">Building from a source distribution</a></li>
   <li><a href="#building-from-git" id="markdown-toc-building-from-git">Building from Git</a></li>
-  <li><a href="#gradle-vs-gradle-wrapper" id="markdown-toc-gradle-vs-gradle-wrapper">Gradle vs Gradle wrapper</a></li>
+  <li><a href="#gradle-vs-the-gradle-wrapper" id="markdown-toc-gradle-vs-the-gradle-wrapper">Gradle vs the Gradle Wrapper</a></li>
+  <li><a href="#upgrade-gradle-and-the-gradle-wrapper" id="markdown-toc-upgrade-gradle-and-the-gradle-wrapper">Upgrade Gradle and the Gradle Wrapper</a></li>
   <li><a href="#running-tests" id="markdown-toc-running-tests">Running tests</a></li>
   <li>
 <a href="#running-integration-tests" id="markdown-toc-running-integration-tests">Running integration tests</a>    <ul>
@@ -145,7 +146,7 @@ adapters.</p>
 <h2 id="building-from-a-source-distribution">Building from a source distribution</h2>
 
 <p>Prerequisite is Java (JDK 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 or 18)
-and Gradle (version 7.3) on your path.</p>
+and Gradle (version 7.4.2) on your path.</p>
 
 <p>Unpack the source distribution <code class="language-plaintext highlighter-rouge">.tar.gz</code> file,
 <code class="language-plaintext highlighter-rouge">cd</code> to the root directory of the unpacked source,
@@ -185,18 +186,44 @@ then you can call <code class="language-plaintext highlighter-rouge">./gradlew g
 <p><a href="#running-tests">Running tests</a> describes how to run more or fewer
 tests.</p>
 
-<h2 id="gradle-vs-gradle-wrapper">Gradle vs Gradle wrapper</h2>
+<h2 id="gradle-vs-the-gradle-wrapper">Gradle vs the Gradle Wrapper</h2>
 
-<p>Calcite uses Gradle wrapper to make a consistent build environment.
+<p>Calcite uses the Gradle Wrapper to make a consistent build environment.
 In the typical case you don’t need to install Gradle manually, and
-<code class="language-plaintext highlighter-rouge">./gradlew</code> would download the proper version for you and verify the expected checksum.</p>
+<code class="language-plaintext highlighter-rouge">./gradlew</code> downloads the proper version for you and verify the expected checksum.</p>
 
-<p>You can install Gradle manually, however please note that there might
-be impedance mismatch between different versions.</p>
+<p>If you like, you can install Gradle manually, but be aware that is might
+cause a version mismatch.</p>
 
 <p>For more information about Gradle, check the following links:
 <a href="https://docs.gradle.org/current/userguide/what_is_gradle.html#five_things">Gradle five things</a>;
 <a href="https://docs.gradle.org/current/userguide/intro_multi_project_builds.html">Gradle multi-project builds</a>.</p>
+
+<h2 id="upgrade-gradle-and-the-gradle-wrapper">Upgrade Gradle and the Gradle Wrapper</h2>
+
+<p>Gradle’s <a href="https://docs.gradle.org/current/userguide/upgrading_version_7.html">documentation</a>
+provides detailed information about how to upgrade Gradle. Here is a list of steps:</p>
+
+<ol>
+  <li>Run <code class="language-plaintext highlighter-rouge">./gradlew help --warning-mode=all</code> to find out whether you are
+using any deprecated features.</li>
+  <li>Fix the deprecations and repeat the previous step to confirm they are
+fixed. This is a step where Gradle doc could be very helpful since it
+contains info about deprecations and how to cope with them.</li>
+  <li>Run <code class="language-plaintext highlighter-rouge">./gradlew wrapper --gradle-version &lt;new_gradle_version&gt;</code> to upgrade
+Gradle. If necessary it will also upgrade the Gradle Wrapper.
+This step also updates <code class="language-plaintext highlighter-rouge">gradle/wrapper/gradle-wrapper.properties</code>,
+including the checksum.</li>
+  <li>Step 3 will have removed the header from
+<code class="language-plaintext highlighter-rouge">gradle/wrapper/gradle-wrapper.properties</code>,
+so now run <code class="language-plaintext highlighter-rouge">./gradlew autostyleApply</code> to add it back.</li>
+  <li>Check the updated Gradle version and checksum in
+<code class="language-plaintext highlighter-rouge">gradle/wrapper/gradle-wrapper.properties</code> against the official
+<a href="https://gradle.org/release-checksums/">Gradle release checksums</a>.</li>
+  <li>Try to build the project and run tests; debug any errors using the
+<a href="https://docs.gradle.org/current/userguide/troubleshooting.html#troubleshooting">Troubleshooting Guide</a>.</li>
+  <li>Update the Gradle version in this howto.</li>
+</ol>
 
 <h2 id="running-tests">Running tests</h2>
 

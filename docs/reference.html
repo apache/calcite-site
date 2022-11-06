@@ -5029,6 +5029,7 @@ connect string parameter.</p>
   <li>‘b’ for Google BigQuery (‘fun=bigquery’ in the connect string),</li>
   <li>‘h’ for Apache Hive (‘fun=hive’ in the connect string),</li>
   <li>‘m’ for MySQL (‘fun=mysql’ in the connect string),</li>
+  <li>‘q’ for Microsoft SQL Server (‘fun=mssql’ in the connect string),</li>
   <li>‘o’ for Oracle (‘fun=oracle’ in the connect string),</li>
   <li>‘p’ for PostgreSQL (‘fun=postgresql’ in the connect string),</li>
   <li>’s’ for Apache Spark (‘fun=spark’ in the connect string).</li>
@@ -5132,9 +5133,33 @@ semantics.</p>
 </td>
     </tr>
     <tr>
+      <td style="text-align: left">p q</td>
+      <td style="text-align: left">DATEADD(timeUnit, integer, datetime)</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">TIMESTAMPADD(timeUnit, integer, datetime)</code>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p q</td>
+      <td style="text-align: left">DATEDIFF(timeUnit, datetime, datetime2)</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">TIMESTAMPDIFF(timeUnit, datetime, datetime2)</code>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">q</td>
+      <td style="text-align: left">DATEPART(timeUnit, datetime)</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(timeUnit FROM  datetime)</code>
+</td>
+    </tr>
+    <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">DATE_FROM_UNIX_DATE(integer)</td>
       <td style="text-align: left">Returns the DATE that is <em>integer</em> days after 1970-01-01</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">DATE_PART(timeUnit, datetime)</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(timeUnit FROM  datetime)</code>
+</td>
     </tr>
     <tr>
       <td style="text-align: left">o</td>
@@ -5400,6 +5425,11 @@ semantics.</p>
 <p>Note:</p>
 
 <ul>
+  <li>Calcite has no Redshift library, so the Postgres library
+is used instead. The functions <code class="language-plaintext highlighter-rouge">DATEADD</code>, <code class="language-plaintext highlighter-rouge">DATEDIFF</code> are
+implemented in Redshift and not Postgres but nevertheless
+appear in Calcite’s Postgres library</li>
+  <li>Functions <code class="language-plaintext highlighter-rouge">DATEADD</code>, <code class="language-plaintext highlighter-rouge">DATEDIFF</code>, <code class="language-plaintext highlighter-rouge">DATE_PART</code> require the Babel parser</li>
   <li>
 <code class="language-plaintext highlighter-rouge">JSON_TYPE</code> / <code class="language-plaintext highlighter-rouge">JSON_DEPTH</code> / <code class="language-plaintext highlighter-rouge">JSON_PRETTY</code> / <code class="language-plaintext highlighter-rouge">JSON_STORAGE_SIZE</code> return null if the argument is null</li>
   <li>

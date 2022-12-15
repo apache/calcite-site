@@ -93,7 +93,6 @@ and other forms of query optimization.</p>
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
   <li><a href="#enabling-spatial-support" id="markdown-toc-enabling-spatial-support">Enabling spatial support</a></li>
   <li><a href="#query-rewrites" id="markdown-toc-query-rewrites">Query rewrites</a></li>
-  <li><a href="#limitations" id="markdown-toc-limitations">Limitations</a></li>
   <li><a href="#acknowledgements" id="markdown-toc-acknowledgements">Acknowledgements</a></li>
 </ul>
 
@@ -228,15 +227,6 @@ test for whether the point is in the circle’s bounding square.
 These rewrites are worth performing because they are much quicker to apply,
 and often allow range scans on the Hilbert index.
 But for safety, Calcite applies the original predicate, to remove false positives.</p>
-
-<h2 id="limitations">Limitations</h2>
-
-<p>Some spatial functions rely on Proj4J to transform the projection of spatial objects.
-Proj4J is released under the Apache License 2.0, however, it also uses the EPSG dataset,
-which has restricting <a href="https://epsg.org/terms-of-use.html">terms of use</a>.
-As a result, Proj4J is not suitable for inclusion in Apache Calcite
-and these functions will throw <code class="language-plaintext highlighter-rouge">ClassNotFoundException</code>s.
-Users can still use these functions by including Proj4J in their classpath.</p>
 
 <h2 id="acknowledgements">Acknowledgements</h2>
 

@@ -864,6 +864,31 @@ necessary when using HTTPS.</p>
   <dd>
     <p><em>Required</em>: Only if <code class="language-plaintext highlighter-rouge">truststore</code> was provided.</p>
   </dd>
+  <dt><strong><a name="fetch_size" href="#fetch_size">fetch_size</a></strong></dt>
+  <dd>
+    <p><em>Description</em>: The number of rows to fetch. If
+  <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/Statement.html#setFetchSize-int-">
+  Statement:setFetchSize</a> is set, that value overrides fetch_size.</p>
+  </dd>
+  <dd>
+    <p><em>Default</em>: <code class="language-plaintext highlighter-rouge">100</code>.</p>
+  </dd>
+  <dd>
+    <p><em>Required</em>: No.</p>
+  </dd>
+  <dt><strong><a name="transparent_reconnection" href="#transparent_reconnection">transparent_reconnection</a></strong></dt>
+  <dd>
+    <p><em>Description</em>: The Java client versions between 1.5.0 and 1.20.0 transparently re-created
+the Connection object on the client side if it expired from the server cache. This behaviour broke
+JDBC compliance and could cause data loss for transactional write workloads, and has been removed
+in 1.21.0. Setting this property to <code class="language-plaintext highlighter-rouge">true</code> restores the 1.20.0 behaviour.</p>
+  </dd>
+  <dd>
+    <p><em>Default</em>: <code class="language-plaintext highlighter-rouge">false</code>.</p>
+  </dd>
+  <dd>
+    <p><em>Required</em>: No.</p>
+  </dd>
 </dl>
 
           

@@ -706,6 +706,109 @@
 Downloads are available on the
 <a href="/avatica/downloads/avatica.html">downloads page</a>.</p>
 
+<h2 id="v1-23-0"><a href="https://github.com/apache/calcite-avatica/releases/tag/rel/avatica-1.23.0">1.23.0</a> / 2023-01-19</h2>
+
+<p>Apache Calcite Avatica 1.23.0 is …</p>
+
+<p>Compatibility: This release is tested
+on Linux, macOS, Microsoft Windows;
+using Oracle JDK 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18;
+using IBM Java 8;
+Guava versions 14.0.1 to 31.1-jre;
+other software versions as specified in <code class="language-plaintext highlighter-rouge">gradle.properties</code>.</p>
+
+<p>Contributors to this release:
+Aleksey Stavrov,
+Francis Chuang,
+Greg Hart,
+Hongbin Ma,
+Istvan Toth,
+Jiajun Bernoulli,
+Julian Hyde (Release Manager),
+Kevin Minder,
+Oliver Lee,
+Richard Antal,
+Sergey Nuyanzin,
+Stamatis Zampetakis,
+Zhe Hu,
+zoudan</p>
+
+<p>Features and bug fixes</p>
+
+<ul>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5443">CALCITE-5443</a>]
+After <code class="language-plaintext highlighter-rouge">Statement.getMoreResults()</code> has returned false,
+<code class="language-plaintext highlighter-rouge">Statement.getUpdateCount()</code> should return -1</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3557">CALCITE-3557</a>]
+<code class="language-plaintext highlighter-rouge">ResultSet.getObject</code> throws <code class="language-plaintext highlighter-rouge">ClassCastException</code> when applied to an <code class="language-plaintext highlighter-rouge">ARRAY</code>
+or <code class="language-plaintext highlighter-rouge">MULTISET</code> value inside a <code class="language-plaintext highlighter-rouge">MULTISET</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5120">CALCITE-5120</a>]
+<code class="language-plaintext highlighter-rouge">UnregisteredDriver.connect</code> should throw <code class="language-plaintext highlighter-rouge">SQLException</code>, not
+<code class="language-plaintext highlighter-rouge">NullPointerException</code>, if URL is null</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-2989">CALCITE-2989</a>]
+Use ISO calendar when converting between <code class="language-plaintext highlighter-rouge">java.sql</code> types and UNIX timestamps</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-2322">CALCITE-2322</a>]
+Support fetch size in connection url and JDBC statement</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5415">CALCITE-5415</a>]
+In <code class="language-plaintext highlighter-rouge">ByteString</code>, add <code class="language-plaintext highlighter-rouge">startsWith</code> and <code class="language-plaintext highlighter-rouge">endsWith</code> methods</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5374">CALCITE-5374</a>]
+Upgrade jackson from 2.10.0 to 2.14.1</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5379">CALCITE-5379</a>]
+Upgrade protobuf to 3.21.9</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5373">CALCITE-5373</a>]
+Upgrade bouncycastle to 1.70</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5369">CALCITE-5369</a>]
+In Avatica <code class="language-plaintext highlighter-rouge">DateTimeUtils</code>, add support for <code class="language-plaintext highlighter-rouge">FLOOR</code> and <code class="language-plaintext highlighter-rouge">CEIL</code> to <code class="language-plaintext highlighter-rouge">ISOYEAR</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5358">CALCITE-5358</a>]
+Add in <code class="language-plaintext highlighter-rouge">HTTP_BAD_REQUEST</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5372">CALCITE-5372</a>]
+Upgrade vlsi-release-plugins to 1.84</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5329">CALCITE-5329</a>]
+Upgrade Checkstyle version from 6.18 to 10.3.2</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5327">CALCITE-5327</a>]
+Make SSL key-store type configurable</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5295">CALCITE-5295</a>]
+Read the values of plugins (such as connect string properties) from
+<code class="language-plaintext highlighter-rouge">ThreadLocal</code> fields</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-3078">CALCITE-3078</a>]
+Move public <code class="language-plaintext highlighter-rouge">lastDay</code> method from Calcite to Avatica</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5257">CALCITE-5257</a>]
+<code class="language-plaintext highlighter-rouge">NVARCHAR</code> is treated as ‘UNKNOWN TYPE’ when searching Oracle</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-4900">CALCITE-4900</a>]
+<code class="language-plaintext highlighter-rouge">NullPointerException</code> when send ExecuteRequest via protobuf with no
+parameters</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5338">CALCITE-5338</a>]
+In <code class="language-plaintext highlighter-rouge">DateTimeUtils</code>, deprecate <code class="language-plaintext highlighter-rouge">floorMod</code> and <code class="language-plaintext highlighter-rouge">floorDiv</code>, and use equivalents
+in <code class="language-plaintext highlighter-rouge">java.lang.Math</code></li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-1639">CALCITE-1639</a>]
+<code class="language-plaintext highlighter-rouge">TIMESTAMPADD(MONTH, ...)</code> should return last day of month if the day
+overflows</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5232">CALCITE-5232</a>]
+Upgrade protobuf-java from 3.17.1 to 3.21.5</li>
+</ul>
+
+<p>Build and tests</p>
+
+<ul>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5458">CALCITE-5458</a>]
+Label and link pull requests with JIRA issues automatically</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5453">CALCITE-5453</a>]
+Add tests for fetch size configuration via connection URL and statement</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5344">CALCITE-5344</a>]
+Migrate Travis CI configuration to Github Actions</li>
+</ul>
+
+<p>Web site and documentation</p>
+
+<ul>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5353">CALCITE-5353</a>]
+Document new procedure for requesting JIRA accounts and becoming a contributor</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5065">CALCITE-5065</a>]
+Update phoenixdb information on website</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-5438">CALCITE-5438</a>]
+Document <code class="language-plaintext highlighter-rouge">transparent_reconnection</code> property</li>
+</ul>
+
 <h2 id="v1-22-0"><a href="https://github.com/apache/calcite-avatica/releases/tag/rel/avatica-1.22.0">1.22.0</a> / 2022-07-28</h2>
 
 <p>Apache Calcite Avatica 1.22.0 is a maintenance release to resolve <code class="language-plaintext highlighter-rouge">CVE-2022-36364</code>: Apache Calcite Avatica JDBC driver
@@ -2166,7 +2269,7 @@ for information about previous Avatica releases.</p>
       <img src="/avatica/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
   </div>
   <div id="copyright">
-  <p>The contents of this website are &copy;&nbsp;2022
+  <p>The contents of this website are &copy;&nbsp;2023
      <a href="https://www.apache.org/">Apache Software Foundation</a>
      under the terms of
      the <a href="https://www.apache.org/licenses/LICENSE-2.0.html">

@@ -231,6 +231,7 @@ form.</p>
       <span class="p">[</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span> <span class="p">{</span> <span class="n">groupItem</span> <span class="p">[,</span> <span class="n">groupItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">}</span> <span class="p">]</span>
       <span class="p">[</span> <span class="k">HAVING</span> <span class="n">booleanExpression</span> <span class="p">]</span>
       <span class="p">[</span> <span class="k">WINDOW</span> <span class="n">windowName</span> <span class="k">AS</span> <span class="n">windowSpec</span> <span class="p">[,</span> <span class="n">windowName</span> <span class="k">AS</span> <span class="n">windowSpec</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
+      <span class="p">[</span> <span class="n">QUALIFY</span> <span class="n">booleanExpression</span> <span class="p">]</span>
 
 <span class="n">selectWithoutFrom</span><span class="p">:</span>
       <span class="k">SELECT</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span>
@@ -329,7 +330,7 @@ form.</p>
   <span class="o">|</span>   <span class="s1">'('</span> <span class="k">column</span> <span class="p">[,</span> <span class="k">column</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="p">[</span> <span class="k">AS</span> <span class="s1">'('</span> <span class="n">literal</span> <span class="p">[,</span> <span class="n">literal</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="p">]</span>
 
 <span class="k">values</span><span class="p">:</span>
-      <span class="k">VALUES</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span>
+      <span class="p">{</span> <span class="k">VALUES</span> <span class="o">|</span> <span class="n">VALUE</span> <span class="p">}</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span>
 
 <span class="n">groupItem</span><span class="p">:</span>
       <span class="n">expression</span>
@@ -416,6 +417,10 @@ but is only allowed in certain
 
 <p>“OFFSET start” may occur before “LIMIT count” in certain
 <a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#isOffsetLimitAllowed--">conformance levels</a>.</p>
+
+<p>VALUE is equivalent to VALUES,
+but is not standard SQL and is only allowed in certain
+<a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#isValueAllowed--">conformance levels</a>.</p>
 
 <h2 id="keywords">Keywords</h2>
 
@@ -554,8 +559,10 @@ CURSOR_NAME,
 DATA,
 DATABASE,
 <strong>DATE</strong>,
+<strong>DATETIME</strong>,
 DATETIME_INTERVAL_CODE,
 DATETIME_INTERVAL_PRECISION,
+DATE_TRUNC,
 <strong>DAY</strong>,
 DAYS,
 <strong>DEALLOCATE</strong>,
@@ -638,6 +645,7 @@ FOUND,
 FRAC_SECOND,
 <strong>FRAME_ROW</strong>,
 <strong>FREE</strong>,
+<strong>FRIDAY</strong>,
 <strong>FROM</strong>,
 <strong>FULL</strong>,
 <strong>FUNCTION</strong>,
@@ -757,6 +765,7 @@ MINVALUE,
 <strong>MOD</strong>,
 <strong>MODIFIES</strong>,
 <strong>MODULE</strong>,
+<strong>MONDAY</strong>,
 <strong>MONTH</strong>,
 MONTHS,
 MORE,
@@ -853,7 +862,9 @@ PRIOR,
 PRIVILEGES,
 <strong>PROCEDURE</strong>,
 PUBLIC,
+<strong>QUALIFY</strong>,
 QUARTER,
+QUARTERS,
 <strong>RANGE</strong>,
 <strong>RANK</strong>,
 READ,
@@ -903,6 +914,7 @@ ROUTINE_SCHEMA,
 ROW_COUNT,
 <strong>ROW_NUMBER</strong>,
 <strong>RUNNING</strong>,
+<strong>SATURDAY</strong>,
 <strong>SAVEPOINT</strong>,
 SCALAR,
 SCALE,
@@ -1015,6 +1027,7 @@ SUBSTITUTE,
 <strong>SUBSTRING_REGEX</strong>,
 <strong>SUCCEEDS</strong>,
 <strong>SUM</strong>,
+<strong>SUNDAY</strong>,
 <strong>SYMMETRIC</strong>,
 <strong>SYSTEM</strong>,
 <strong>SYSTEM_TIME</strong>,
@@ -1024,13 +1037,18 @@ SUBSTITUTE,
 TABLE_NAME,
 TEMPORARY,
 <strong>THEN</strong>,
+<strong>THURSDAY</strong>,
 TIES,
 <strong>TIME</strong>,
 <strong>TIMESTAMP</strong>,
 TIMESTAMPADD,
 TIMESTAMPDIFF,
+TIMESTAMP_DIFF,
+TIMESTAMP_TRUNC,
 <strong>TIMEZONE_HOUR</strong>,
 <strong>TIMEZONE_MINUTE</strong>,
+TIME_DIFF,
+TIME_TRUNC,
 <strong>TINYINT</strong>,
 <strong>TO</strong>,
 TOP_LEVEL_COUNT,
@@ -1053,6 +1071,7 @@ TRIGGER_SCHEMA,
 <strong>TRIM_ARRAY</strong>,
 <strong>TRUE</strong>,
 <strong>TRUNCATE</strong>,
+<strong>TUESDAY</strong>,
 TUMBLE,
 TYPE,
 <strong>UESCAPE</strong>,
@@ -1090,7 +1109,9 @@ UTF8,
 VERSION,
 <strong>VERSIONING</strong>,
 VIEW,
+<strong>WEDNESDAY</strong>,
 WEEK,
+WEEKS,
 <strong>WHEN</strong>,
 <strong>WHENEVER</strong>,
 <strong>WHERE</strong>,
@@ -1189,7 +1210,7 @@ name will have been converted to upper case also.</p>
     <tr>
       <td style="text-align: left">CHAR(n), CHARACTER(n)</td>
       <td style="text-align: left">Fixed-width character string</td>
-      <td style="text-align: left">‘Hello’, ‘’ (empty string), _latin1’Hello’, n’Hello’, _UTF16’Hello’, ‘Hello’ ‘there’ (literal split into multiple parts)</td>
+      <td style="text-align: left">‘Hello’, ‘’ (empty string), _latin1’Hello’, n’Hello’, _UTF16’Hello’, ‘Hello’ ‘there’ (literal split into multiple parts), e’Hello\nthere’ (literal containing C-style escapes)</td>
     </tr>
     <tr>
       <td style="text-align: left">VARCHAR(n), CHARACTER VARYING(n)</td>
@@ -1260,9 +1281,9 @@ it will rely on the supplied time zone to provide correct semantics.</li>
   <li>GEOMETRY is allowed only in certain
 <a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#allowGeometry--">conformance levels</a>.</li>
   <li>Interval literals may only use time units
-YEAR, MONTH, DAY, HOUR, MINUTE and SECOND. In certain
+YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE and SECOND. In certain
 <a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#allowPluralTimeUnits--">conformance levels</a>,
-we also allow their plurals, YEARS, MONTHS, DAYS, HOURS, MINUTES and SECONDS.</li>
+we also allow their plurals, YEARS, QUARTERS, MONTHS, WEEKS, DAYS, HOURS, MINUTES and SECONDS.</li>
 </ul>
 
 <h3 id="non-scalar-types">Non-scalar types</h3>
@@ -1500,7 +1521,7 @@ completeness.</p>
     </tr>
     <tr>
       <td style="text-align: left">value1 != value2</td>
-      <td style="text-align: left">Not equal (only available at some conformance levels)</td>
+      <td style="text-align: left">Not equal (only in certain <a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#isBangEqualAllowed--">conformance levels</a>)</td>
     </tr>
     <tr>
       <td style="text-align: left">value1 &gt; value2</td>
@@ -2281,6 +2302,8 @@ these details follow the table.</p>
       <th style="text-align: left">TIMESTAMP</th>
       <th style="text-align: left">CHAR or VARCHAR</th>
       <th style="text-align: left">BINARY or VARBINARY</th>
+      <th style="text-align: left">GEOMETRY</th>
+      <th style="text-align: left">ARRAY</th>
     </tr>
   </thead>
   <tbody>
@@ -2301,6 +2324,8 @@ these details follow the table.</p>
       <td style="text-align: left">i</td>
       <td style="text-align: left">i</td>
       <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
     </tr>
     <tr>
       <td style="text-align: left">BOOLEAN</td>
@@ -2318,6 +2343,8 @@ these details follow the table.</p>
       <td style="text-align: left">x</td>
       <td style="text-align: left">x</td>
       <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
       <td style="text-align: left">x</td>
     </tr>
     <tr>
@@ -2337,6 +2364,8 @@ these details follow the table.</p>
       <td style="text-align: left">e</td>
       <td style="text-align: left">i</td>
       <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
     </tr>
     <tr>
       <td style="text-align: left">SMALLINT</td>
@@ -2354,6 +2383,8 @@ these details follow the table.</p>
       <td style="text-align: left">x</td>
       <td style="text-align: left">e</td>
       <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
       <td style="text-align: left">x</td>
     </tr>
     <tr>
@@ -2373,6 +2404,8 @@ these details follow the table.</p>
       <td style="text-align: left">e</td>
       <td style="text-align: left">i</td>
       <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
     </tr>
     <tr>
       <td style="text-align: left">BIGINT</td>
@@ -2390,6 +2423,8 @@ these details follow the table.</p>
       <td style="text-align: left">x</td>
       <td style="text-align: left">e</td>
       <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
       <td style="text-align: left">x</td>
     </tr>
     <tr>
@@ -2409,6 +2444,8 @@ these details follow the table.</p>
       <td style="text-align: left">e</td>
       <td style="text-align: left">i</td>
       <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
     </tr>
     <tr>
       <td style="text-align: left">FLOAT/REAL</td>
@@ -2426,6 +2463,8 @@ these details follow the table.</p>
       <td style="text-align: left">x</td>
       <td style="text-align: left">e</td>
       <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
       <td style="text-align: left">x</td>
     </tr>
     <tr>
@@ -2445,6 +2484,8 @@ these details follow the table.</p>
       <td style="text-align: left">e</td>
       <td style="text-align: left">i</td>
       <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
     </tr>
     <tr>
       <td style="text-align: left">INTERVAL</td>
@@ -2462,6 +2503,8 @@ these details follow the table.</p>
       <td style="text-align: left">x</td>
       <td style="text-align: left">x</td>
       <td style="text-align: left">e</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
       <td style="text-align: left">x</td>
     </tr>
     <tr>
@@ -2481,6 +2524,8 @@ these details follow the table.</p>
       <td style="text-align: left">i</td>
       <td style="text-align: left">i</td>
       <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
     </tr>
     <tr>
       <td style="text-align: left">TIME</td>
@@ -2498,6 +2543,8 @@ these details follow the table.</p>
       <td style="text-align: left">i</td>
       <td style="text-align: left">e</td>
       <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
       <td style="text-align: left">x</td>
     </tr>
     <tr>
@@ -2517,11 +2564,15 @@ these details follow the table.</p>
       <td style="text-align: left">i</td>
       <td style="text-align: left">i</td>
       <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
     </tr>
     <tr>
       <td style="text-align: left">CHAR or VARCHAR</td>
       <td style="text-align: left">x</td>
       <td style="text-align: left">e</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
       <td style="text-align: left">i</td>
       <td style="text-align: left">i</td>
       <td style="text-align: left">i</td>
@@ -2552,6 +2603,48 @@ these details follow the table.</p>
       <td style="text-align: left">e</td>
       <td style="text-align: left">e</td>
       <td style="text-align: left">i</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">GEOMETRY</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">i</td>
+      <td style="text-align: left">x</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ARRAY</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
       <td style="text-align: left">i</td>
     </tr>
   </tbody>
@@ -3256,6 +3349,14 @@ and <code class="language-plaintext highlighter-rouge">LISTAGG</code>).</p>
     <tr>
       <td style="text-align: left">ANY_VALUE( [ ALL | DISTINCT ] value)</td>
       <td style="text-align: left">Returns one of the values of <em>value</em> across all input values; this is NOT specified in the SQL standard</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ARG_MAX(value, comp)</td>
+      <td style="text-align: left">Returns <em>value</em> for the maximum value of <em>comp</em> in the group</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ARG_MIN(value, comp)</td>
+      <td style="text-align: left">Returns <em>value</em> for the minimum value of <em>comp</em> in the group</td>
     </tr>
     <tr>
       <td style="text-align: left">APPROX_COUNT_DISTINCT(value [, value ]*)</td>
@@ -4432,6 +4533,11 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
     </tr>
     <tr>
       <td style="text-align: left">p</td>
+      <td style="text-align: left">ST_CoveredBy(geom1, geom2)</td>
+      <td style="text-align: left">Returns whether no point in <em>geom1</em> is outside <em>geom2</em>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
       <td style="text-align: left">ST_Covers(geom1, geom2)</td>
       <td style="text-align: left">Returns whether no point in <em>geom2</em> is outside <em>geom1</em>
 </td>
@@ -4651,27 +4757,76 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
 
 <h4 id="geometry-measurement-functions-2d">Geometry measurement functions (2D)</h4>
 
-<p>Not implemented:</p>
+<p>The following functions measure geometries.</p>
 
-<ul>
-  <li>ST_Area(geom) Returns the area of <em>geom</em> (which may be a GEOMETRYCOLLECTION)</li>
-  <li>ST_ClosestCoordinate(geom, point) Returns the coordinate(s) of <em>geom</em> closest to <em>point</em>
-</li>
-  <li>ST_ClosestPoint(geom1, geom2) Returns the point of <em>geom1</em> closest to <em>geom2</em>
-</li>
-  <li>ST_FurthestCoordinate(geom, point) Returns the coordinate(s) of <em>geom</em> that are furthest from <em>point</em>
-</li>
-  <li>ST_Length(lineString) Returns the length of <em>lineString</em>
-</li>
-  <li>ST_LocateAlong(geom, segmentLengthFraction, offsetDistance) Returns a MULTIPOINT containing points along the line segments of <em>geom</em> at <em>segmentLengthFraction</em> and <em>offsetDistance</em>
-</li>
-  <li>ST_LongestLine(geom1, geom2) Returns the 2-dimensional longest line-string between the points of <em>geom1</em> and <em>geom2</em>
-</li>
-  <li>ST_MaxDistance(geom1, geom2) Computes the maximum distance between <em>geom1</em> and <em>geom2</em>
-</li>
-  <li>ST_Perimeter(polygon) Returns the length of the perimeter of <em>polygon</em> (which may be a MULTIPOLYGON)</li>
-  <li>ST_ProjectPoint(point, lineString) Projects <em>point</em> onto a <em>lineString</em> (which may be a MULTILINESTRING)</li>
-</ul>
+<div class="scroll-table-style"><table>
+  <thead>
+    <tr>
+      <th style="text-align: left">C</th>
+      <th style="text-align: left">Operator syntax</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">o</td>
+      <td style="text-align: left">ST_Area(geom)</td>
+      <td style="text-align: left">Returns the area of <em>geom</em> (which may be a GEOMETRYCOLLECTION)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_ClosestCoordinate(point, geom)</td>
+      <td style="text-align: left">Returns the coordinate(s) of <em>geom</em> closest to <em>point</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_ClosestPoint(geom1, geom2)</td>
+      <td style="text-align: left">Returns the point of <em>geom1</em> closest to <em>geom2</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_FurthestCoordinate(geom, point)</td>
+      <td style="text-align: left">Returns the coordinate(s) of <em>geom</em> that are furthest from <em>point</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_Length(geom)</td>
+      <td style="text-align: left">Returns the length of <em>geom</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_LocateAlong(geom, segmentLengthFraction, offsetDistance)</td>
+      <td style="text-align: left">Returns a MULTIPOINT containing points along the line segments of <em>geom</em> at <em>segmentLengthFraction</em> and <em>offsetDistance</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_LongestLine(geom1, geom2)</td>
+      <td style="text-align: left">Returns the 2-dimensional longest line-string between the points of <em>geom1</em> and <em>geom2</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_MaxDistance(geom1, geom2)</td>
+      <td style="text-align: left">Computes the maximum distance between <em>geom1</em> and <em>geom2</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_Perimeter(polygon)</td>
+      <td style="text-align: left">Returns the length of the perimeter of <em>polygon</em> (which may be a MULTIPOLYGON)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_ProjectPoint(point, lineString)</td>
+      <td style="text-align: left">Projects <em>point</em> onto a <em>lineString</em> (which may be a MULTILINESTRING)</td>
+    </tr>
+  </tbody>
+</table></div>
 
 <h4 id="geometry-measurement-functions-3d">Geometry measurement functions (3D)</h4>
 
@@ -5032,6 +5187,7 @@ connect string parameter.</p>
 <p>The ‘C’ (compatibility) column contains value:</p>
 <ul>
   <li>‘b’ for Google BigQuery (‘fun=bigquery’ in the connect string),</li>
+  <li>‘c’ for Apache Calcite (‘fun=calcite’ in the connect string),</li>
   <li>‘h’ for Apache Hive (‘fun=hive’ in the connect string),</li>
   <li>‘m’ for MySQL (‘fun=mysql’ in the connect string),</li>
   <li>‘q’ for Microsoft SQL Server (‘fun=mssql’ in the connect string),</li>
@@ -5042,6 +5198,19 @@ connect string parameter.</p>
 
 <p>One operator name may correspond to multiple SQL dialects, but with different
 semantics.</p>
+
+<p>BigQuery’s type system uses confusingly different names for types and functions:</p>
+<ul>
+  <li>BigQuery’s <code class="language-plaintext highlighter-rouge">DATETIME</code> type represents a local date time, and corresponds to
+Calcite’s <code class="language-plaintext highlighter-rouge">TIMESTAMP</code> type;</li>
+  <li>BigQuery’s <code class="language-plaintext highlighter-rouge">TIMESTAMP</code> type represents an instant, and corresponds to
+Calcite’s <code class="language-plaintext highlighter-rouge">TIMESTAMP WITH LOCAL TIME ZONE</code> type;</li>
+  <li>The <em>timestampLtz</em> parameter, for instance in <code class="language-plaintext highlighter-rouge">DATE(timestampLtz)</code>, has
+Calcite type <code class="language-plaintext highlighter-rouge">TIMESTAMP WITH LOCAL TIME ZONE</code>;</li>
+  <li>The <code class="language-plaintext highlighter-rouge">TIMESTAMP(string)</code> function, designed to be compatible the BigQuery
+function, return a Calcite <code class="language-plaintext highlighter-rouge">TIMESTAMP WITH LOCAL TIME ZONE</code>;</li>
+  <li>Similarly, <code class="language-plaintext highlighter-rouge">DATETIME(string)</code> returns a Calcite <code class="language-plaintext highlighter-rouge">TIMESTAMP</code>.</li>
+</ul>
 
 <div class="scroll-table-style"><table>
   <thead>
@@ -5094,7 +5263,7 @@ semantics.</p>
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">o</td>
+      <td style="text-align: left">b o</td>
       <td style="text-align: left">COSH(numeric)</td>
       <td style="text-align: left">Returns the hyperbolic cosine of <em>numeric</em>
 </td>
@@ -5105,7 +5274,7 @@ semantics.</p>
       <td style="text-align: left">Concatenates two strings</td>
     </tr>
     <tr>
-      <td style="text-align: left">m p</td>
+      <td style="text-align: left">b m p</td>
       <td style="text-align: left">CONCAT(string [, string ]*)</td>
       <td style="text-align: left">Concatenates two or more strings</td>
     </tr>
@@ -5122,7 +5291,7 @@ semantics.</p>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
-      <td style="text-align: left">CURRENT_DATETIME([timezone])</td>
+      <td style="text-align: left">CURRENT_DATETIME([ timeZone ])</td>
       <td style="text-align: left">Returns the current time as a TIMESTAMP from <em>timezone</em>
 </td>
     </tr>
@@ -5133,9 +5302,31 @@ semantics.</p>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
+      <td style="text-align: left">DATE(timestamp)</td>
+      <td style="text-align: left">Extracts the DATE from a <em>timestamp</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">DATE(timestampLtz)</td>
+      <td style="text-align: left">Extracts the DATE from <em>timestampLtz</em> (an instant; BigQuery’s TIMESTAMP type), assuming UTC</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">DATE(timestampLtz, timeZone)</td>
+      <td style="text-align: left">Extracts the DATE from <em>timestampLtz</em> (an instant; BigQuery’s TIMESTAMP type) in <em>timeZone</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
       <td style="text-align: left">DATE(string)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">CAST(string AS DATE)</code>
 </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">DATE(year, month, day)</td>
+      <td style="text-align: left">Returns a DATE value for <em>year</em>, <em>month</em>, and <em>day</em> (all of type INTEGER)</td>
     </tr>
     <tr>
       <td style="text-align: left">p q</td>
@@ -5157,6 +5348,27 @@ semantics.</p>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
+      <td style="text-align: left">DATETIME(date, time)</td>
+      <td style="text-align: left">Converts <em>date</em> and <em>time</em> to a TIMESTAMP</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">DATETIME(date)</td>
+      <td style="text-align: left">Converts <em>date</em> to a TIMESTAMP value (at midnight)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">DATETIME(date, timeZone)</td>
+      <td style="text-align: left">Converts <em>date</em> to a TIMESTAMP value (at midnight), in <em>timeZone</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">DATETIME(year, month, day, hour, minute, second)</td>
+      <td style="text-align: left">Creates a TIMESTAMP for <em>year</em>, <em>month</em>, <em>day</em>, <em>hour</em>, <em>minute</em>, <em>second</em> (all of type INTEGER)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
       <td style="text-align: left">DATE_FROM_UNIX_DATE(integer)</td>
       <td style="text-align: left">Returns the DATE that is <em>integer</em> days after 1970-01-01</td>
     </tr>
@@ -5167,6 +5379,17 @@ semantics.</p>
 </td>
     </tr>
     <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">DATE_SUB(date, interval)</td>
+      <td style="text-align: left">Returns the DATE value that occurs <em>interval</em> before <em>date</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">DATE_TRUNC(date, timeUnit)</td>
+      <td style="text-align: left">Truncates <em>date</em> to the granularity of <em>timeUnit</em>, rounding to the beginning of the unit</td>
+    </tr>
+    <tr>
       <td style="text-align: left">o</td>
       <td style="text-align: left">DECODE(value, value1, result1 [, valueN, resultN ]* [, default ])</td>
       <td style="text-align: left">Compares <em>value</em> to each <em>valueN</em> value one by one; if <em>value</em> is equal to a <em>valueN</em>, returns the corresponding <em>resultN</em>, else returns <em>default</em>, or NULL if <em>default</em> is not specified</td>
@@ -5175,6 +5398,12 @@ semantics.</p>
       <td style="text-align: left">p</td>
       <td style="text-align: left">DIFFERENCE(string, string)</td>
       <td style="text-align: left">Returns a measure of the similarity of two strings, namely the number of character positions that their <code class="language-plaintext highlighter-rouge">SOUNDEX</code> values have in common: 4 if the <code class="language-plaintext highlighter-rouge">SOUNDEX</code> values are same and 0 if the <code class="language-plaintext highlighter-rouge">SOUNDEX</code> values are totally different</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">ENDS_WITH(string1, string2)</td>
+      <td style="text-align: left">Returns whether <em>string2</em> is a suffix of <em>string1</em>
+</td>
     </tr>
     <tr>
       <td style="text-align: left">o</td>
@@ -5192,7 +5421,7 @@ semantics.</p>
       <td style="text-align: left">Returns the text of the first text node which is a child of the element or elements matched by the XPath expression.</td>
     </tr>
     <tr>
-      <td style="text-align: left">o</td>
+      <td style="text-align: left">b o</td>
       <td style="text-align: left">GREATEST(expr [, expr ]*)</td>
       <td style="text-align: left">Returns the greatest of the expressions</td>
     </tr>
@@ -5200,6 +5429,12 @@ semantics.</p>
       <td style="text-align: left">b h s</td>
       <td style="text-align: left">IF(condition, value1, value2)</td>
       <td style="text-align: left">Returns <em>value1</em> if <em>condition</em> is TRUE, <em>value2</em> otherwise</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">IFNULL(value1, value2)</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">NVL(value1, value2)</code>
+</td>
     </tr>
     <tr>
       <td style="text-align: left">p</td>
@@ -5237,6 +5472,12 @@ semantics.</p>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
+      <td style="text-align: left">JSON_INSERT(jsonValue, path, val[, path, val]*)</td>
+      <td style="text-align: left">Returns a JSON document insert a data of <em>jsonValue</em>, <em>path</em>, <em>val</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
       <td style="text-align: left">JSON_KEYS(jsonValue [, path ])</td>
       <td style="text-align: left">Returns a string indicating the keys of a JSON <em>jsonValue</em>
 </td>
@@ -5248,19 +5489,43 @@ semantics.</p>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
+      <td style="text-align: left">JSON_REPLACE(jsonValue, path, val[, path, val]*)</td>
+      <td style="text-align: left">Returns a JSON document replace a data of <em>jsonValue</em>, <em>path</em>, <em>val</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
+      <td style="text-align: left">JSON_SET(jsonValue, path, val[, path, val]*)</td>
+      <td style="text-align: left">Returns a JSON document set a data of <em>jsonValue</em>, <em>path</em>, <em>val</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
       <td style="text-align: left">JSON_STORAGE_SIZE(jsonValue)</td>
       <td style="text-align: left">Returns the number of bytes used to store the binary representation of <em>jsonValue</em>
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">o</td>
+      <td style="text-align: left">b o</td>
       <td style="text-align: left">LEAST(expr [, expr ]* )</td>
       <td style="text-align: left">Returns the least of the expressions</td>
     </tr>
     <tr>
-      <td style="text-align: left">m p</td>
+      <td style="text-align: left">b m p</td>
       <td style="text-align: left">LEFT(string, length)</td>
       <td style="text-align: left">Returns the leftmost <em>length</em> characters from the <em>string</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">LENGTH(string)</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">CHAR_LENGTH(string)</code>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b o</td>
+      <td style="text-align: left">LPAD(string, length[, pattern ])</td>
+      <td style="text-align: left">Returns a string or bytes value that consists of <em>string</em> prepended to <em>length</em> with <em>pattern</em>
 </td>
     </tr>
     <tr>
@@ -5269,17 +5534,17 @@ semantics.</p>
       <td style="text-align: left">Converts the <em>string</em> to base-64 encoded form and returns a encoded string</td>
     </tr>
     <tr>
-      <td style="text-align: left">m</td>
+      <td style="text-align: left">b m</td>
       <td style="text-align: left">FROM_BASE64(string)</td>
       <td style="text-align: left">Returns the decoded result of a base-64 <em>string</em> as a string</td>
     </tr>
     <tr>
-      <td style="text-align: left">o</td>
+      <td style="text-align: left">b o</td>
       <td style="text-align: left">LTRIM(string)</td>
       <td style="text-align: left">Returns <em>string</em> with all blanks removed from the start</td>
     </tr>
     <tr>
-      <td style="text-align: left">m p</td>
+      <td style="text-align: left">b m p</td>
       <td style="text-align: left">MD5(string)</td>
       <td style="text-align: left">Calculates an MD5 128-bit checksum of <em>string</em> and returns it as a hex string</td>
     </tr>
@@ -5295,22 +5560,28 @@ semantics.</p>
 </td>
     </tr>
     <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">POW(numeric1, numeric2)</td>
+      <td style="text-align: left">Returns <em>numeric1</em> raised to the power <em>numeric2</em>
+</td>
+    </tr>
+    <tr>
       <td style="text-align: left">m o</td>
       <td style="text-align: left">REGEXP_REPLACE(string, regexp, rep, [, pos [, occurrence [, matchType]]])</td>
       <td style="text-align: left">Replaces all substrings of <em>string</em> that match <em>regexp</em> with <em>rep</em> at the starting <em>pos</em> in expr (if omitted, the default is 1), <em>occurrence</em> means which occurrence of a match to search for (if omitted, the default is 1), <em>matchType</em> specifies how to perform matching</td>
     </tr>
     <tr>
-      <td style="text-align: left">m p</td>
+      <td style="text-align: left">b m p</td>
       <td style="text-align: left">REPEAT(string, integer)</td>
       <td style="text-align: left">Returns a string consisting of <em>string</em> repeated of <em>integer</em> times; returns an empty string if <em>integer</em> is less than 1</td>
     </tr>
     <tr>
-      <td style="text-align: left">m</td>
+      <td style="text-align: left">b m</td>
       <td style="text-align: left">REVERSE(string)</td>
       <td style="text-align: left">Returns <em>string</em> with the order of the characters reversed</td>
     </tr>
     <tr>
-      <td style="text-align: left">m p</td>
+      <td style="text-align: left">b m p</td>
       <td style="text-align: left">RIGHT(string, length)</td>
       <td style="text-align: left">Returns the rightmost <em>length</em> characters from the <em>string</em>
 </td>
@@ -5326,23 +5597,29 @@ semantics.</p>
       <td style="text-align: left">Whether <em>string1</em> does not match regex pattern <em>string2</em> (similar to <code class="language-plaintext highlighter-rouge">NOT LIKE</code>, but uses Java regex)</td>
     </tr>
     <tr>
-      <td style="text-align: left">o</td>
+      <td style="text-align: left">b o</td>
+      <td style="text-align: left">RPAD(string, length[, pattern ])</td>
+      <td style="text-align: left">Returns a string or bytes value that consists of <em>string</em> appended to <em>length</em> with <em>pattern</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b o</td>
       <td style="text-align: left">RTRIM(string)</td>
       <td style="text-align: left">Returns <em>string</em> with all blanks removed from the end</td>
     </tr>
     <tr>
-      <td style="text-align: left">m p</td>
+      <td style="text-align: left">b m p</td>
       <td style="text-align: left">SHA1(string)</td>
       <td style="text-align: left">Calculates a SHA-1 hash value of <em>string</em> and returns it as a hex string</td>
     </tr>
     <tr>
-      <td style="text-align: left">o</td>
+      <td style="text-align: left">b o</td>
       <td style="text-align: left">SINH(numeric)</td>
       <td style="text-align: left">Returns the hyperbolic sine of <em>numeric</em>
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">m o p</td>
+      <td style="text-align: left">b m o p</td>
       <td style="text-align: left">SOUNDEX(string)</td>
       <td style="text-align: left">Returns the phonetic representation of <em>string</em>; throws if <em>string</em> is encoded with multi-byte encoding such as UTF-8</td>
     </tr>
@@ -5352,9 +5629,10 @@ semantics.</p>
       <td style="text-align: left">Returns a string of <em>integer</em> spaces; returns an empty string if <em>integer</em> is less than 1</td>
     </tr>
     <tr>
-      <td style="text-align: left">b m o p</td>
-      <td style="text-align: left">SUBSTR(string, position [, substringLength ])</td>
-      <td style="text-align: left">Returns a portion of <em>string</em>, beginning at character <em>position</em>, <em>substringLength</em> characters long. SUBSTR calculates lengths using characters as defined by the input character set</td>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">STARTS_WITH(string1, string2)</td>
+      <td style="text-align: left">Returns whether <em>string2</em> is a prefix of <em>string1</em>
+</td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
@@ -5362,9 +5640,81 @@ semantics.</p>
       <td style="text-align: left">Returns 0 if both of the strings are same and returns -1 when the first argument is smaller than the second and 1 when the second one is smaller than the first one</td>
     </tr>
     <tr>
-      <td style="text-align: left">o</td>
+      <td style="text-align: left">b m o p</td>
+      <td style="text-align: left">SUBSTR(string, position [, substringLength ])</td>
+      <td style="text-align: left">Returns a portion of <em>string</em>, beginning at character <em>position</em>, <em>substringLength</em> characters long. SUBSTR calculates lengths using characters as defined by the input character set</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b o</td>
       <td style="text-align: left">TANH(numeric)</td>
       <td style="text-align: left">Returns the hyperbolic tangent of <em>numeric</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIME(hour, minute, second)</td>
+      <td style="text-align: left">Returns a TIME value <em>hour</em>, <em>minute</em>, <em>second</em> (all of type INTEGER)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIME(timestamp)</td>
+      <td style="text-align: left">Extracts the TIME from <em>timestamp</em> (a local time; BigQuery’s DATETIME type)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIME(instant)</td>
+      <td style="text-align: left">Extracts the TIME from <em>timestampLtz</em> (an instant; BigQuery’s TIMESTAMP type), assuming UTC</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIME(instant, timeZone)</td>
+      <td style="text-align: left">Extracts the time from <em>timestampLtz</em> (an instant; BigQuery’s TIMESTAMP type), in <em>timeZone</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIMESTAMP(string)</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">CAST(string AS TIMESTAMP WITH LOCAL TIME ZONE)</code>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIMESTAMP(string, timeZone)</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">CAST(string AS TIMESTAMP WITH LOCAL TIME ZONE)</code>, converted to <em>timeZone</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIMESTAMP(date)</td>
+      <td style="text-align: left">Converts <em>date</em> to a TIMESTAMP WITH LOCAL TIME ZONE value (at midnight)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIMESTAMP(date, timeZone)</td>
+      <td style="text-align: left">Converts <em>date</em> to a TIMESTAMP WITH LOCAL TIME ZONE value (at midnight), in <em>timeZone</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIMESTAMP(timestamp)</td>
+      <td style="text-align: left">Converts <em>timestamp</em> to a TIMESTAMP WITH LOCAL TIME ZONE, assuming a UTC</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIMESTAMP(timestamp, timeZone)</td>
+      <td style="text-align: left">Converts <em>timestamp</em> to a TIMESTAMP WITH LOCAL TIME ZONE, in <em>timeZone</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIMESTAMP_ADD(timestamp, interval)</td>
+      <td style="text-align: left">Returns the TIMESTAMP value that occurs <em>interval</em> after <em>timestamp</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIMESTAMP_DIFF(timestamp, timestamp2, timeUnit)</td>
+      <td style="text-align: left">Returns the whole number of <em>timeUnit</em> between <em>timestamp</em> and <em>timestamp2</em>. Equivalent to <code class="language-plaintext highlighter-rouge">TIMESTAMPDIFF(timeUnit, timestamp2, timestamp)</code> and <code class="language-plaintext highlighter-rouge">(timestamp - timestamp2) timeUnit</code>
 </td>
     </tr>
     <tr>
@@ -5383,6 +5733,39 @@ semantics.</p>
       <td style="text-align: left">Returns the TIMESTAMP that is <em>integer</em> seconds after 1970-01-01 00:00:00</td>
     </tr>
     <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIMESTAMP_SUB(timestamp, interval)</td>
+      <td style="text-align: left">Returns the TIMESTAMP value that is <em>interval</em> before <em>timestamp</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIMESTAMP_TRUNC(timestamp, timeUnit)</td>
+      <td style="text-align: left">Truncates <em>timestamp</em> to the granularity of <em>timeUnit</em>, rounding to the beginning of the unit</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIME_ADD(time, interval)</td>
+      <td style="text-align: left">Adds <em>interval</em> to <em>time</em>, independent of any time zone</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIME_DIFF(time, time2, timeUnit)</td>
+      <td style="text-align: left">Returns the whole number of <em>timeUnit</em> between <em>time</em> and <em>time2</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIME_SUB(time, interval)</td>
+      <td style="text-align: left">Returns the TIME value that is <em>interval</em> before <em>time</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TIME_TRUNC(time, timeUnit)</td>
+      <td style="text-align: left">Truncates <em>time</em> to the granularity of <em>timeUnit</em>, rounding to the beginning of the unit</td>
+    </tr>
+    <tr>
       <td style="text-align: left">o p</td>
       <td style="text-align: left">TO_DATE(string, format)</td>
       <td style="text-align: left">Converts <em>string</em> to a date using the format <em>format</em>
@@ -5395,9 +5778,14 @@ semantics.</p>
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">o p</td>
+      <td style="text-align: left">b o p</td>
       <td style="text-align: left">TRANSLATE(expr, fromString, toString)</td>
       <td style="text-align: left">Returns <em>expr</em> with all occurrences of each character in <em>fromString</em> replaced by its corresponding character in <em>toString</em>. Characters in <em>expr</em> that are not in <em>fromString</em> are not replaced</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TRUNC(numeric1 [, numeric2 ])</td>
+      <td style="text-align: left">Truncates <em>numeric1</em> to optionally <em>numeric2</em> (if not specified 0) places right to the decimal point</td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
@@ -5483,6 +5871,11 @@ appear in Calcite’s Postgres library</li>
   </thead>
   <tbody>
     <tr>
+      <td style="text-align: left">c</td>
+      <td style="text-align: left">AGGREGATE(m)</td>
+      <td style="text-align: left">Computes measure <em>m</em> in the context of the current GROUP BY key</td>
+    </tr>
+    <tr>
       <td style="text-align: left">b p</td>
       <td style="text-align: left">ARRAY_AGG( [ ALL | DISTINCT ] value [ RESPECT NULLS | IGNORE NULLS ] [ ORDER BY orderItem [, orderItem ]* ] )</td>
       <td style="text-align: left">Gathers values into arrays</td>
@@ -5526,6 +5919,18 @@ appear in Calcite’s Postgres library</li>
       <td style="text-align: left">b</td>
       <td style="text-align: left">LOGICAL_OR(condition)</td>
       <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">SOME</code>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">MAX_BY(value, comp)</td>
+      <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">ARG_MAX</code>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">MIN_BY(value, comp)</td>
+      <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">ARG_MIN</code>
 </td>
     </tr>
     <tr>
@@ -5635,6 +6040,33 @@ appear in Calcite’s Postgres library</li>
   </tbody>
 </table></div>
 
+<h5 id="json_insert-example">JSON_INSERT example</h5>
+
+<p>SQL</p>
+
+<pre><code class="language-SQL">SELECT JSON_INSERT(v, '$.a', 10, '$.c', '[1]') AS c1,
+  JSON_INSERT(v, '$', 10, '$.c', '[1]') AS c2
+FROM (VALUES ('{"a": [10, true]}')) AS t(v)
+LIMIT 10;
+</code></pre>
+
+<p>Result</p>
+
+<div class="scroll-table-style"><table>
+  <thead>
+    <tr>
+      <th>c1</th>
+      <th>c2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{“a”:1 , “b”:[2] , “c”:”[1]”}</td>
+      <td>{“a”:1 , “b”:[2] , “c”:”[1]”}</td>
+    </tr>
+  </tbody>
+</table></div>
+
 <h5 id="json_keys-example">JSON_KEYS example</h5>
 
 <p>SQL</p>
@@ -5689,6 +6121,62 @@ appear in Calcite’s Postgres library</li>
   <tbody>
     <tr>
       <td style="text-align: center">[“a”, “d”]</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<h5 id="json_replace-example">JSON_REPLACE example</h5>
+
+<p>SQL</p>
+
+<pre><code class="language-SQL">SELECT
+JSON_REPLACE(v, '$.a', 10, '$.c', '[1]') AS c1,
+JSON_REPLACE(v, '$', 10, '$.c', '[1]') AS c2
+FROM (VALUES ('{\"a\": 1,\"b\":[2]}')) AS t(v)
+limit 10;
+</code></pre>
+
+<p>Result</p>
+
+<div class="scroll-table-style"><table>
+  <thead>
+    <tr>
+      <th>c1</th>
+      <th>c2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{“a”:1 , “b”:[2] , “c”:”[1]”}</td>
+      <td>{“a”:1 , “b”:[2] , “c”:”[1]”}”)</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<h5 id="json_set-example">JSON_SET example</h5>
+
+<p>SQL</p>
+
+<pre><code class="language-SQL">SELECT
+JSON_SET(v, '$.a', 10, '$.c', '[1]') AS c1,
+JSON_SET(v, '$', 10, '$.c', '[1]') AS c2
+FROM (VALUES ('{\"a\": 1,\"b\":[2]}')) AS t(v)
+limit 10;
+</code></pre>
+
+<p>Result</p>
+
+<div class="scroll-table-style"><table>
+  <thead>
+    <tr>
+      <th>c1</th>
+      <th>c2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{“a”:10, “b”:[2]}</td>
+      <td>10</td>
     </tr>
   </tbody>
 </table></div>
@@ -5789,14 +6277,6 @@ appear in Calcite’s Postgres library</li>
     </tr>
   </tbody>
 </table></div>
-
-<p>Not implemented:</p>
-
-<ul>
-  <li>JSON_INSERT</li>
-  <li>JSON_SET</li>
-  <li>JSON_REPLACE</li>
-</ul>
 
 <h2 id="user-defined-functions">User-defined functions</h2>
 

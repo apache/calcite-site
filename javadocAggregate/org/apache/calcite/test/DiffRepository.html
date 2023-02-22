@@ -72,13 +72,13 @@ loadScripts(document, 'script');</script>
 <div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">org.apache.calcite.test</a></div>
 <h1 title="Class DiffRepository" class="title">Class DiffRepository</h1>
 </div>
-<div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
+<div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
 <div class="inheritance">org.apache.calcite.test.DiffRepository</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">DiffRepository</span>
-<span class="extends-implements">extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">A collection of resources used by tests.
 
  <p>Loads files containing test input and output into memory. If there are
@@ -128,20 +128,15 @@ loadScripts(document, 'script');</script>
  </code></pre></blockquote>
 
  <p>If any of the test cases fails, a log file is generated, called
- <code>target/surefire/com/acme/test/MyTest.xml</code>, containing the actual
+ <code>build/resources/test/com/acme/test/MyTest_actual.xml</code>, containing the actual
  output.</p>
-
- <p>(Maven sometimes removes this file; if it is not present, run maven with
- an extra <code>-X</code> flag.
- See <a href="http://jira.codehaus.org/browse/SUREFIRE-846">[SUREFIRE-846]</a>
- for details.)</p>
 
  <p>The log
  file is otherwise identical to the reference log, so once the log file has
  been verified, it can simply be copied over to become the new reference
  log:</p>
 
- <blockquote><code>cp target/surefire/com/acme/test/MyTest.xml
+ <blockquote><code>cp build/resources/test/com/acme/test/MyTest_actual.xml
  src/test/resources/com/acme/test/MyTest.xml</code></blockquote>
 
  <p>If a resource or test case does not exist, <code>DiffRepository</code>
@@ -149,9 +144,9 @@ loadScripts(document, 'script');</script>
  very easy to create new tests and test cases.</p>
 
  <p>The <a href="#lookup(java.lang.Class)"><code>lookup(java.lang.Class&lt;?&gt;)</code></a> method ensures that all test cases share the same
- instance of the repository. This is important more than one one test case
- fails. The shared instance ensures that the generated
- <code>target/surefire/com/acme/test/MyTest.xml</code>
+ instance of the repository. This is important more than one test case fails.
+ The shared instance ensures that the generated
+ <code>build/resources/test/com/acme/test/MyTest_actual.xml</code>
  file contains the actual for <em>both</em> test cases.</div>
 </section>
 <section class="summary">
@@ -185,51 +180,54 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#amend(java.lang.String,java.lang.String)" class="member-name-link">amend</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;expected,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;actual)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#amend(java.lang.String,java.lang.String)" class="member-name-link">amend</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;expected,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;actual)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#assertEquals(java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">assertEquals</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tag,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;expected,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;actual)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#assertEquals(java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">assertEquals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tag,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;expected,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;actual)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="DiffRepository.html" title="class in org.apache.calcite.test">DiffRepository</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#castNonNull(org.apache.calcite.test.DiffRepository)" class="member-name-link">castNonNull</a><wbr>(@Nullable <a href="DiffRepository.html" title="class in org.apache.calcite.test">DiffRepository</a>&nbsp;diffRepos)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns the diff repository, checking that it is not null.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#expand(java.lang.String,java.lang.String)" class="member-name-link">expand</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tag,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#checkActualAndReferenceFiles()" class="member-name-link">checkActualAndReferenceFiles</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#expand(java.lang.String,java.lang.String)" class="member-name-link">expand</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tag,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Expands a string containing one or more variables.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="DiffRepository.html" title="class in org.apache.calcite.test">DiffRepository</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#lookup(java.lang.Class)" class="member-name-link">lookup</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;clazz)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="DiffRepository.html" title="class in org.apache.calcite.test">DiffRepository</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#lookup(java.lang.Class)" class="member-name-link">lookup</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;clazz)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Finds the repository instance for a given class, with no base
  repository or filter.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="DiffRepository.html" title="class in org.apache.calcite.test">DiffRepository</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#lookup(java.lang.Class,org.apache.calcite.test.DiffRepository,org.apache.calcite.test.DiffRepository.Filter,int)" class="member-name-link">lookup</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;clazz,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="DiffRepository.html" title="class in org.apache.calcite.test">DiffRepository</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#lookup(java.lang.Class,org.apache.calcite.test.DiffRepository,org.apache.calcite.test.DiffRepository.Filter,int)" class="member-name-link">lookup</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;clazz,
  <a href="DiffRepository.html" title="class in org.apache.calcite.test">DiffRepository</a>&nbsp;baseRepository,
  <a href="DiffRepository.Filter.html" title="interface in org.apache.calcite.test">DiffRepository.Filter</a>&nbsp;filter,
  int&nbsp;indent)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Finds the repository instance for a given class.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(java.lang.String,java.lang.String)" class="member-name-link">set</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourceName,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;value)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(java.lang.String,java.lang.String)" class="member-name-link">set</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourceName,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;value)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the value of a given resource of the current test case.</div>
 </div>
 </div>
 </div>
 </div>
 <div class="inherited-list">
-<h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
-<code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
+<h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
+<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 </section>
 </li>
 </ul>
@@ -242,20 +240,26 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="checkActualAndReferenceFiles()">
+<h3>checkActualAndReferenceFiles</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">checkActualAndReferenceFiles</span>()</div>
+</section>
+</li>
+<li>
 <section class="detail" id="castNonNull(org.apache.calcite.test.DiffRepository)">
 <h3>castNonNull</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="DiffRepository.html" title="class in org.apache.calcite.test">DiffRepository</a></span>&nbsp;<span class="element-name">castNonNull</span><wbr><span class="parameters">(@Nullable <a href="DiffRepository.html" title="class in org.apache.calcite.test">DiffRepository</a>&nbsp;diffRepos)</span></div>
 <div class="block">Returns the diff repository, checking that it is not null.
 
- <p>If it is null, throws <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link"><code>IllegalArgumentException</code></a> with a message
+ <p>If it is null, throws <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link"><code>IllegalArgumentException</code></a> with a message
  informing people that they need to change their test configuration.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="expand(java.lang.String,java.lang.String)">
 <h3>expand</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">expand</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tag,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">expand</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tag,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;text)</span></div>
 <div class="block">Expands a string containing one or more variables. (Currently only works
  if there is one variable.)</div>
 </section>
@@ -263,8 +267,8 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="set(java.lang.String,java.lang.String)">
 <h3>set</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourceName,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;value)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;resourceName,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;value)</span></div>
 <div class="block">Sets the value of a given resource of the current test case.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -276,22 +280,22 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="amend(java.lang.String,java.lang.String)">
 <h3>amend</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">amend</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;expected,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;actual)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">amend</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;expected,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;actual)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="assertEquals(java.lang.String,java.lang.String,java.lang.String)">
 <h3>assertEquals</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">assertEquals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tag,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;expected,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;actual)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">assertEquals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tag,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;expected,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;actual)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="lookup(java.lang.Class)">
 <h3>lookup</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="DiffRepository.html" title="class in org.apache.calcite.test">DiffRepository</a></span>&nbsp;<span class="element-name">lookup</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;clazz)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="DiffRepository.html" title="class in org.apache.calcite.test">DiffRepository</a></span>&nbsp;<span class="element-name">lookup</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;clazz)</span></div>
 <div class="block">Finds the repository instance for a given class, with no base
  repository or filter.</div>
 <dl class="notes">
@@ -305,7 +309,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="lookup(java.lang.Class,org.apache.calcite.test.DiffRepository,org.apache.calcite.test.DiffRepository.Filter,int)">
 <h3>lookup</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="DiffRepository.html" title="class in org.apache.calcite.test">DiffRepository</a></span>&nbsp;<span class="element-name">lookup</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;clazz,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="DiffRepository.html" title="class in org.apache.calcite.test">DiffRepository</a></span>&nbsp;<span class="element-name">lookup</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;?&gt;&nbsp;clazz,
  <a href="DiffRepository.html" title="class in org.apache.calcite.test">DiffRepository</a>&nbsp;baseRepository,
  <a href="DiffRepository.Filter.html" title="interface in org.apache.calcite.test">DiffRepository.Filter</a>&nbsp;filter,
  int&nbsp;indent)</span></div>
@@ -347,7 +351,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2022 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2023 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

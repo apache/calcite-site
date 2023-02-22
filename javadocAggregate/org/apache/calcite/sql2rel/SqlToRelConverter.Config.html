@@ -105,7 +105,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="SqlToRelConverter.Config.html" title="interface in org.apache.calcite.sql2rel">SqlToRelConverter.Config</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#addRelBuilderConfigTransform(java.util.function.UnaryOperator)" class="member-name-link">addRelBuilderConfigTransform</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="../tools/RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a>&gt;&nbsp;transform)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#addRelBuilderConfigTransform(java.util.function.UnaryOperator)" class="member-name-link">addRelBuilderConfigTransform</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="../tools/RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a>&gt;&nbsp;transform)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Adds a transform to <a href="#getRelBuilderConfigTransform()"><code>getRelBuilderConfigTransform()</code></a>.</div>
 </div>
@@ -121,7 +121,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the <code>inSubQueryThreshold</code> option,
  default <a href="SqlToRelConverter.html#DEFAULT_IN_SUB_QUERY_THRESHOLD"><code>SqlToRelConverter.DEFAULT_IN_SUB_QUERY_THRESHOLD</code></a>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="../tools/RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a>&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="../tools/RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getRelBuilderConfigTransform()" class="member-name-link">getRelBuilderConfigTransform</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Returns a function that takes a <a href="../tools/RelBuilder.Config.html" title="interface in org.apache.calcite.tools"><code>RelBuilder.Config</code></a> and returns
@@ -204,7 +204,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Sets <a href="#getInSubQueryThreshold()"><code>getInSubQueryThreshold()</code></a>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="SqlToRelConverter.Config.html" title="interface in org.apache.calcite.sql2rel">SqlToRelConverter.Config</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withRelBuilderConfigTransform(java.util.function.UnaryOperator)" class="member-name-link">withRelBuilderConfigTransform</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="../tools/RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a>&gt;&nbsp;transform)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withRelBuilderConfigTransform(java.util.function.UnaryOperator)" class="member-name-link">withRelBuilderConfigTransform</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="../tools/RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a>&gt;&nbsp;transform)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Sets <a href="#getRelBuilderConfigTransform()"><code>getRelBuilderConfigTransform()</code></a>.</div>
 </div>
@@ -309,15 +309,21 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="annotations">@Default
 </span><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isExpand</span>()</div>
 <div class="block">Returns the <code>expand</code> option. Controls whether to expand
- sub-queries. If false, each sub-query becomes a
- <a href="../rex/RexSubQuery.html" title="class in org.apache.calcite.rex"><code>RexSubQuery</code></a>.</div>
+ sub-queries. If false (the default), each sub-query becomes a
+ <a href="../rex/RexSubQuery.html" title="class in org.apache.calcite.rex"><code>RexSubQuery</code></a>.
+
+ <p>Setting <code>expand</code> to true is deprecated. Expansion still works,
+ but there will be less development effort in that area.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="withExpand(boolean)">
 <h3>withExpand</h3>
 <div class="member-signature"><span class="return-type"><a href="SqlToRelConverter.Config.html" title="interface in org.apache.calcite.sql2rel">SqlToRelConverter.Config</a></span>&nbsp;<span class="element-name">withExpand</span><wbr><span class="parameters">(boolean&nbsp;expand)</span></div>
-<div class="block">Sets <a href="#isExpand()"><code>isExpand()</code></a>.</div>
+<div class="block">Sets <a href="#isExpand()"><code>isExpand()</code></a>.
+
+ <p>Expansion is deprecated. We recommend that you do not call this
+ method, and use the default value of <a href="#isExpand()"><code>isExpand()</code></a>, false.</div>
 </section>
 </li>
 <li>
@@ -331,7 +337,7 @@ loadScripts(document, 'script');</script>
  or greater will instead be converted to use a join against an inline
  table (<a href="../rel/logical/LogicalValues.html" title="class in org.apache.calcite.rel.logical"><code>LogicalValues</code></a>) rather than
  a predicate. A threshold of 0 forces usage of an inline table in all
- cases; a threshold of <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Integer.html#MAX_VALUE" title="class or interface in java.lang" class="external-link"><code>Integer.MAX_VALUE</code></a> forces usage of OR in all
+ cases; a threshold of <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html#MAX_VALUE" title="class or interface in java.lang" class="external-link"><code>Integer.MAX_VALUE</code></a> forces usage of OR in all
  cases.</div>
 </section>
 </li>
@@ -379,7 +385,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getRelBuilderConfigTransform()">
 <h3>getRelBuilderConfigTransform</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="../tools/RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a>&gt;</span>&nbsp;<span class="element-name">getRelBuilderConfigTransform</span>()</div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="../tools/RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a>&gt;</span>&nbsp;<span class="element-name">getRelBuilderConfigTransform</span>()</div>
 <div class="block">Returns a function that takes a <a href="../tools/RelBuilder.Config.html" title="interface in org.apache.calcite.tools"><code>RelBuilder.Config</code></a> and returns
  another. Default is the identity function.</div>
 </section>
@@ -387,7 +393,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="withRelBuilderConfigTransform(java.util.function.UnaryOperator)">
 <h3>withRelBuilderConfigTransform</h3>
-<div class="member-signature"><span class="return-type"><a href="SqlToRelConverter.Config.html" title="interface in org.apache.calcite.sql2rel">SqlToRelConverter.Config</a></span>&nbsp;<span class="element-name">withRelBuilderConfigTransform</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="../tools/RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a>&gt;&nbsp;transform)</span></div>
+<div class="member-signature"><span class="return-type"><a href="SqlToRelConverter.Config.html" title="interface in org.apache.calcite.sql2rel">SqlToRelConverter.Config</a></span>&nbsp;<span class="element-name">withRelBuilderConfigTransform</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="../tools/RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a>&gt;&nbsp;transform)</span></div>
 <div class="block">Sets <a href="#getRelBuilderConfigTransform()"><code>getRelBuilderConfigTransform()</code></a>.</div>
 <dl class="notes">
 <dt>See Also:</dt>
@@ -402,7 +408,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="addRelBuilderConfigTransform(java.util.function.UnaryOperator)">
 <h3>addRelBuilderConfigTransform</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SqlToRelConverter.Config.html" title="interface in org.apache.calcite.sql2rel">SqlToRelConverter.Config</a></span>&nbsp;<span class="element-name">addRelBuilderConfigTransform</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="../tools/RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a>&gt;&nbsp;transform)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SqlToRelConverter.Config.html" title="interface in org.apache.calcite.sql2rel">SqlToRelConverter.Config</a></span>&nbsp;<span class="element-name">addRelBuilderConfigTransform</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="../tools/RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a>&gt;&nbsp;transform)</span></div>
 <div class="block">Adds a transform to <a href="#getRelBuilderConfigTransform()"><code>getRelBuilderConfigTransform()</code></a>.</div>
 </section>
 </li>
@@ -446,7 +452,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2022 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2023 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

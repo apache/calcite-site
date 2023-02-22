@@ -142,7 +142,7 @@ sqlline&gt; <span class="o">!</span>connect jdbc:calcite:model<span class="o">=<
 +-----------+-------------+------------+--------------+---------+----------+------------+-----------+---------------------------+----------------+</code></pre></figure>
 
 <p>(JDBC experts, note: sqlline’s <code>!tables</code> command is just executing
-<a href="https://docs.oracle.com/javase/7/docs/api/java/sql/DatabaseMetaData.html#getTables(java.lang.String,%20java.lang.String,%20java.lang.String,%20java.lang.String%5B%5D)"><code>DatabaseMetaData.getTables()</code></a>
+<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/sql/DatabaseMetaData.html#getTables(java.lang.String,%20java.lang.String,%20java.lang.String,%20java.lang.String%5B%5D)"><code>DatabaseMetaData.getTables()</code></a>
 behind the scenes.
 It has other commands to query JDBC metadata, such as <code>!columns</code> and <code>!describe</code>.)</p>
 
@@ -594,7 +594,7 @@ but we have created a distinctive sub-type that will cause rules to fire.</p>
       <span class="k">return</span> <span class="k">new</span> <span class="nf">CsvProjectTableScanRule</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
     <span class="o">}</span>
   <span class="o">}</span>
-<span class="o">}</span> </code></pre></figure>
+<span class="o">}</span></code></pre></figure>
 
 <p>The default instance of the rule resides in the <code class="language-plaintext highlighter-rouge">CsvRules</code> holder class:</p>
 
@@ -680,9 +680,7 @@ the Mondrian OLAP engine, because it is Mondrian’s main test data
 set. To load the data set, follow <a href="https://mondrian.pentaho.com/documentation/installation.php#2_Set_up_test_data">Mondrian’s
 installation instructions</a>.)</p>
 
-<p><b>Current limitations</b>: The JDBC adapter currently only pushes
-down table scan operations; all other processing (filtering, joins,
-aggregations and so forth) occurs within Calcite. Our goal is to push
+<p>The JDBC adapter will push
 down as much processing as possible to the source system, translating
 syntax, data types and built-in functions as we go. If a Calcite query
 is based on tables from a single JDBC database, in principle the whole

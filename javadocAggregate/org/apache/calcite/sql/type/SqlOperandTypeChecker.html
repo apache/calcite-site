@@ -79,7 +79,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <dl class="notes">
 <dt>All Known Implementing Classes:</dt>
-<dd><code><a href="AssignableOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">AssignableOperandTypeChecker</a></code>, <code><a href="ComparableOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">ComparableOperandTypeChecker</a></code>, <code><a href="CompositeOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">CompositeOperandTypeChecker</a></code>, <code><a href="CompositeSingleOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">CompositeSingleOperandTypeChecker</a></code>, <code><a href="ExplicitOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">ExplicitOperandTypeChecker</a></code>, <code><a href="FamilyOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">FamilyOperandTypeChecker</a></code>, <code><a href="LiteralOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">LiteralOperandTypeChecker</a></code>, <code><a href="MultisetOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">MultisetOperandTypeChecker</a></code>, <code><a href="OperandMetadataImpl.html" title="class in org.apache.calcite.sql.type">OperandMetadataImpl</a></code>, <code><a href="SameOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">SameOperandTypeChecker</a></code>, <code><a href="SameOperandTypeExceptLastOperandChecker.html" title="class in org.apache.calcite.sql.type">SameOperandTypeExceptLastOperandChecker</a></code>, <code><a href="SetopOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">SetopOperandTypeChecker</a></code>, <code><a href="../SqlWindowTableFunction.AbstractOperandMetadata.html" title="class in org.apache.calcite.sql">SqlWindowTableFunction.AbstractOperandMetadata</a></code></dd>
+<dd><code><a href="AssignableOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">AssignableOperandTypeChecker</a></code>, <code><a href="ComparableOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">ComparableOperandTypeChecker</a></code>, <code><a href="CompositeOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">CompositeOperandTypeChecker</a></code>, <code><a href="CompositeSingleOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">CompositeSingleOperandTypeChecker</a></code>, <code><a href="ExplicitOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">ExplicitOperandTypeChecker</a></code>, <code><a href="FamilyOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">FamilyOperandTypeChecker</a></code>, <code><a href="IntervalOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">IntervalOperandTypeChecker</a></code>, <code><a href="LiteralOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">LiteralOperandTypeChecker</a></code>, <code><a href="MultisetOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">MultisetOperandTypeChecker</a></code>, <code><a href="OperandMetadataImpl.html" title="class in org.apache.calcite.sql.type">OperandMetadataImpl</a></code>, <code><a href="SameOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">SameOperandTypeChecker</a></code>, <code><a href="SameOperandTypeExceptLastOperandChecker.html" title="class in org.apache.calcite.sql.type">SameOperandTypeExceptLastOperandChecker</a></code>, <code><a href="SetopOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">SetopOperandTypeChecker</a></code>, <code><a href="../SqlWindowTableFunction.AbstractOperandMetadata.html" title="class in org.apache.calcite.sql">SqlWindowTableFunction.AbstractOperandMetadata</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">SqlOperandTypeChecker</span></div>
@@ -126,43 +126,58 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#checkOperandTypes(org.apache.calcite.sql.SqlCallBinding,boolean)" class="member-name-link">checkOperandTypes</a><wbr>(<a href="../SqlCallBinding.html" title="class in org.apache.calcite.sql">SqlCallBinding</a>&nbsp;callBinding,
- boolean&nbsp;throwOnFailure)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Checks the types of all operands to an operator call.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getAllowedSignatures(org.apache.calcite.sql.SqlOperator,java.lang.String)" class="member-name-link">getAllowedSignatures</a><wbr>(<a href="../SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>&nbsp;op,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;opName)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Returns a string describing the allowed formal signatures of a call, e.g.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="SqlOperandTypeChecker.Consistency.html" title="enum in org.apache.calcite.sql.type">SqlOperandTypeChecker.Consistency</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getConsistency()" class="member-name-link">getConsistency</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Returns the strategy for making the arguments have consistency types.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../SqlOperandCountRange.html" title="interface in org.apache.calcite.sql">SqlOperandCountRange</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getOperandCountRange()" class="member-name-link">getOperandCountRange</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Returns the range of operand counts allowed in a call.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#isFixedParameters()" class="member-name-link">isFixedParameters</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#and(org.apache.calcite.sql.type.SqlOperandTypeChecker)" class="member-name-link">and</a><wbr>(<a href="SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a>&nbsp;checker)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Returns whether the list of parameters is fixed-length.</div>
+<div class="block">Composes this with another checker using AND.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#isOptional(int)" class="member-name-link">isOptional</a><wbr>(int&nbsp;i)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#checkOperandTypes(org.apache.calcite.sql.SqlCallBinding,boolean)" class="member-name-link">checkOperandTypes</a><wbr>(<a href="../SqlCallBinding.html" title="class in org.apache.calcite.sql">SqlCallBinding</a>&nbsp;callBinding,
+ boolean&nbsp;throwOnFailure)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Checks the types of all operands to an operator call.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getAllowedSignatures(org.apache.calcite.sql.SqlOperator,java.lang.String)" class="member-name-link">getAllowedSignatures</a><wbr>(<a href="../SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>&nbsp;op,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;opName)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns a string describing the allowed formal signatures of a call, e.g.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="SqlOperandTypeChecker.Consistency.html" title="enum in org.apache.calcite.sql.type">SqlOperandTypeChecker.Consistency</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getConsistency()" class="member-name-link">getConsistency</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Returns the strategy for making the arguments have consistency types.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../SqlOperandCountRange.html" title="interface in org.apache.calcite.sql">SqlOperandCountRange</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getOperandCountRange()" class="member-name-link">getOperandCountRange</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns the range of operand counts allowed in a call.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#isFixedParameters()" class="member-name-link">isFixedParameters</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Returns whether the list of parameters is fixed-length.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#isOptional(int)" class="member-name-link">isOptional</a><wbr>(int&nbsp;i)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Returns whether the <code>i</code>th operand is optional.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#or(org.apache.calcite.sql.type.SqlOperandTypeChecker)" class="member-name-link">or</a><wbr>(<a href="SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a>&nbsp;checker)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Composes this with another checker using OR.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default @Nullable <a href="SqlOperandTypeInference.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeInference</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#typeInference()" class="member-name-link">typeInference</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Converts this type checker to a type inference; returns null if not
  possible.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="CompositeOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">CompositeOperandTypeChecker</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#withGenerator(java.util.function.BiFunction)" class="member-name-link">withGenerator</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/BiFunction.html" title="class or interface in java.util.function" class="external-link">BiFunction</a>&lt;<a href="../SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;signatureGenerator)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Returns a copy of this checker with the given signature generator.</div>
 </div>
 </div>
 </div>
@@ -204,8 +219,8 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getAllowedSignatures(org.apache.calcite.sql.SqlOperator,java.lang.String)">
 <h3>getAllowedSignatures</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getAllowedSignatures</span><wbr><span class="parameters">(<a href="../SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>&nbsp;op,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;opName)</span></div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getAllowedSignatures</span><wbr><span class="parameters">(<a href="../SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>&nbsp;op,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;opName)</span></div>
 <div class="block">Returns a string describing the allowed formal signatures of a call, e.g.
  "SUBSTR(VARCHAR, INTEGER, INTEGER)".</div>
 <dl class="notes">
@@ -220,14 +235,21 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getConsistency()">
 <h3>getConsistency</h3>
-<div class="member-signature"><span class="return-type"><a href="SqlOperandTypeChecker.Consistency.html" title="enum in org.apache.calcite.sql.type">SqlOperandTypeChecker.Consistency</a></span>&nbsp;<span class="element-name">getConsistency</span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SqlOperandTypeChecker.Consistency.html" title="enum in org.apache.calcite.sql.type">SqlOperandTypeChecker.Consistency</a></span>&nbsp;<span class="element-name">getConsistency</span>()</div>
 <div class="block">Returns the strategy for making the arguments have consistency types.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="withGenerator(java.util.function.BiFunction)">
+<h3>withGenerator</h3>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CompositeOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">CompositeOperandTypeChecker</a></span>&nbsp;<span class="element-name">withGenerator</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/BiFunction.html" title="class or interface in java.util.function" class="external-link">BiFunction</a>&lt;<a href="../SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;signatureGenerator)</span></div>
+<div class="block">Returns a copy of this checker with the given signature generator.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="isOptional(int)">
 <h3>isOptional</h3>
-<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">isOptional</span><wbr><span class="parameters">(int&nbsp;i)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isOptional</span><wbr><span class="parameters">(int&nbsp;i)</span></div>
 <div class="block">Returns whether the <code>i</code>th operand is optional.</div>
 </section>
 </li>
@@ -250,6 +272,20 @@ loadScripts(document, 'script');</script>
  possible.</div>
 </section>
 </li>
+<li>
+<section class="detail" id="and(org.apache.calcite.sql.type.SqlOperandTypeChecker)">
+<h3>and</h3>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a></span>&nbsp;<span class="element-name">and</span><wbr><span class="parameters">(<a href="SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a>&nbsp;checker)</span></div>
+<div class="block">Composes this with another checker using AND.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="or(org.apache.calcite.sql.type.SqlOperandTypeChecker)">
+<h3>or</h3>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a></span>&nbsp;<span class="element-name">or</span><wbr><span class="parameters">(<a href="SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a>&nbsp;checker)</span></div>
+<div class="block">Composes this with another checker using OR.</div>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -259,7 +295,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2022 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2023 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

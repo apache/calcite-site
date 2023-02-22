@@ -75,7 +75,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Known Implementing Classes:</dt>
-<dd><code><a href="DelegatingTypeSystem.html" title="class in org.apache.calcite.rel.type">DelegatingTypeSystem</a></code>, <code><a href="RelDataTypeSystemImpl.html" title="class in org.apache.calcite.rel.type">RelDataTypeSystemImpl</a></code></dd>
+<dd><code><a href="DelegatingTypeSystem.html" title="class in org.apache.calcite.rel.type">DelegatingTypeSystem</a></code>, <code><a href="RelDataTypeSystemImpl.html" title="class in org.apache.calcite.rel.type">RelDataTypeSystemImpl</a></code>, <code><a href="../../test/SqlOperatorTest.CustomTimeFrameTypeSystem.html" title="class in org.apache.calcite.test">SqlOperatorTest.CustomTimeFrameTypeSystem</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">RelDataTypeSystem</span></div>
@@ -179,71 +179,76 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the return type of a call to the <code>SUM</code> aggregate function,
  inferred from its argument type.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getDefaultPrecision(org.apache.calcite.sql.type.SqlTypeName)" class="member-name-link">getDefaultPrecision</a><wbr>(<a href="../../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="TimeFrameSet.html" title="class in org.apache.calcite.rel.type">TimeFrameSet</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#deriveTimeFrameSet(org.apache.calcite.rel.type.TimeFrameSet)" class="member-name-link">deriveTimeFrameSet</a><wbr>(<a href="TimeFrameSet.html" title="class in org.apache.calcite.rel.type">TimeFrameSet</a>&nbsp;frameSet)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Returns a list of supported time frames.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getDefaultPrecision(org.apache.calcite.sql.type.SqlTypeName)" class="member-name-link">getDefaultPrecision</a><wbr>(<a href="../../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Returns default precision for this type if supported, otherwise -1 if
  precision is either unsupported or must be specified explicitly.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getLiteral(org.apache.calcite.sql.type.SqlTypeName,boolean)" class="member-name-link">getLiteral</a><wbr>(<a href="../../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getLiteral(org.apache.calcite.sql.type.SqlTypeName,boolean)" class="member-name-link">getLiteral</a><wbr>(<a href="../../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName,
  boolean&nbsp;isPrefix)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Returns the LITERAL string for the type, either PREFIX/SUFFIX.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getMaxNumericPrecision()" class="member-name-link">getMaxNumericPrecision</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getMaxNumericPrecision()" class="member-name-link">getMaxNumericPrecision</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Returns the maximum precision of a NUMERIC or DECIMAL type.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getMaxNumericScale()" class="member-name-link">getMaxNumericScale</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getMaxNumericScale()" class="member-name-link">getMaxNumericScale</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Returns the maximum scale of a NUMERIC or DECIMAL type.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getMaxPrecision(org.apache.calcite.sql.type.SqlTypeName)" class="member-name-link">getMaxPrecision</a><wbr>(<a href="../../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getMaxPrecision(org.apache.calcite.sql.type.SqlTypeName)" class="member-name-link">getMaxPrecision</a><wbr>(<a href="../../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Returns the maximum precision (or length) allowed for this type, or -1 if
  precision/length are not applicable for this type.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getMaxScale(org.apache.calcite.sql.type.SqlTypeName)" class="member-name-link">getMaxScale</a><wbr>(<a href="../../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getMaxScale(org.apache.calcite.sql.type.SqlTypeName)" class="member-name-link">getMaxScale</a><wbr>(<a href="../../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Returns the maximum scale of a given type.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getNumTypeRadix(org.apache.calcite.sql.type.SqlTypeName)" class="member-name-link">getNumTypeRadix</a><wbr>(<a href="../../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getNumTypeRadix(org.apache.calcite.sql.type.SqlTypeName)" class="member-name-link">getNumTypeRadix</a><wbr>(<a href="../../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Returns the numeric type radix, typically 2 or 10.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#isAutoincrement(org.apache.calcite.sql.type.SqlTypeName)" class="member-name-link">isAutoincrement</a><wbr>(<a href="../../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#isAutoincrement(org.apache.calcite.sql.type.SqlTypeName)" class="member-name-link">isAutoincrement</a><wbr>(<a href="../../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Returns whether the type can be auto increment.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#isCaseSensitive(org.apache.calcite.sql.type.SqlTypeName)" class="member-name-link">isCaseSensitive</a><wbr>(<a href="../../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#isCaseSensitive(org.apache.calcite.sql.type.SqlTypeName)" class="member-name-link">isCaseSensitive</a><wbr>(<a href="../../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Returns whether the type is case sensitive.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#isSchemaCaseSensitive()" class="member-name-link">isSchemaCaseSensitive</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#isSchemaCaseSensitive()" class="member-name-link">isSchemaCaseSensitive</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Whether two record types are considered distinct if their field names
  are the same but in different cases.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#shouldConvertRaggedUnionTypesToVarying()" class="member-name-link">shouldConvertRaggedUnionTypesToVarying</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#shouldConvertRaggedUnionTypesToVarying()" class="member-name-link">shouldConvertRaggedUnionTypesToVarying</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Whether the least restrictive type of a number of CHAR types of different
  lengths should be a VARCHAR type.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#shouldUseDoubleMultiplication(org.apache.calcite.rel.type.RelDataTypeFactory,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">shouldUseDoubleMultiplication</a><wbr>(<a href="RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#shouldUseDoubleMultiplication(org.apache.calcite.rel.type.RelDataTypeFactory,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">shouldUseDoubleMultiplication</a><wbr>(<a href="RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory,
  <a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type1,
  <a href="RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type2)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Returns whether a decimal multiplication should be implemented by casting
  arguments to double values.</div>
 </div>
@@ -324,7 +329,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getLiteral(org.apache.calcite.sql.type.SqlTypeName,boolean)">
 <h3>getLiteral</h3>
-<div class="member-signature"><span class="return-type">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getLiteral</span><wbr><span class="parameters">(<a href="../../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName,
+<div class="member-signature"><span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getLiteral</span><wbr><span class="parameters">(<a href="../../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName,
  boolean&nbsp;isPrefix)</span></div>
 <div class="block">Returns the LITERAL string for the type, either PREFIX/SUFFIX.</div>
 </section>
@@ -599,6 +604,27 @@ loadScripts(document, 'script');</script>
 </dl>
 </section>
 </li>
+<li>
+<section class="detail" id="deriveTimeFrameSet(org.apache.calcite.rel.type.TimeFrameSet)">
+<h3>deriveTimeFrameSet</h3>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="TimeFrameSet.html" title="class in org.apache.calcite.rel.type">TimeFrameSet</a></span>&nbsp;<span class="element-name">deriveTimeFrameSet</span><wbr><span class="parameters">(<a href="TimeFrameSet.html" title="class in org.apache.calcite.rel.type">TimeFrameSet</a>&nbsp;frameSet)</span></div>
+<div class="block">Returns a list of supported time frames.
+
+ <p>The validator calls this method with <a href="TimeFrames.html#CORE"><code>TimeFrames.CORE</code></a> as an
+ argument, and the default implementation of this method returns its input,
+ and therefore <a href="TimeFrames.html#CORE"><code>CORE</code></a> is the default time frame set.
+
+ <p>If you wish to use a custom time frame set, create an instance of
+ <code>RelDataTypeSystem</code> that overrides this method. Your method should
+ call <a href="TimeFrameSet.html#builder()"><code>TimeFrameSet.builder()</code></a>, will probably add all or most of the
+ time frames in the <code>frameSet</code> argument, and then call
+ <a href="TimeFrameSet.Builder.html#build()"><code>TimeFrameSet.Builder.build()</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>frameSet</code> - Set of built-in time frames</dd>
+</dl>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -608,7 +634,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2022 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2023 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

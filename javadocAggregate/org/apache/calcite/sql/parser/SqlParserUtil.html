@@ -72,13 +72,13 @@ loadScripts(document, 'script');</script>
 <div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">org.apache.calcite.sql.parser</a></div>
 <h1 title="Class SqlParserUtil" class="title">Class SqlParserUtil</h1>
 </div>
-<div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
+<div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
 <div class="inheritance">org.apache.calcite.sql.parser.SqlParserUtil</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">SqlParserUtil</span>
-<span class="extends-implements">extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">Utility methods relating to parsing SQL.</div>
 </section>
 <section class="summary">
@@ -93,13 +93,18 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Class</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static class&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="SqlParserUtil.ParsedCollation.html" class="type-name-link" title="class in org.apache.calcite.sql.parser">SqlParserUtil.ParsedCollation</a></code></div>
+<div class="col-second even-row-color"><code><a href="SqlParserUtil.MalformedUnicodeEscape.html" class="type-name-link" title="class in org.apache.calcite.sql.parser">SqlParserUtil.MalformedUnicodeEscape</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">The components of a collation definition, per the SQL standard.</div>
+<div class="block">Thrown by <a href="#replaceEscapedChars(java.lang.String)"><code>replaceEscapedChars(String)</code></a>.</div>
 </div>
 <div class="col-first odd-row-color"><code>static class&nbsp;</code></div>
-<div class="col-second odd-row-color"><code><a href="SqlParserUtil.ToTreeListItem.html" class="type-name-link" title="class in org.apache.calcite.sql.parser">SqlParserUtil.ToTreeListItem</a></code></div>
+<div class="col-second odd-row-color"><code><a href="SqlParserUtil.ParsedCollation.html" class="type-name-link" title="class in org.apache.calcite.sql.parser">SqlParserUtil.ParsedCollation</a></code></div>
 <div class="col-last odd-row-color">
+<div class="block">The components of a collation definition, per the SQL standard.</div>
+</div>
+<div class="col-first even-row-color"><code>static class&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="SqlParserUtil.ToTreeListItem.html" class="type-name-link" title="class in org.apache.calcite.sql.parser">SqlParserUtil.ToTreeListItem</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Class that holds a <a href="../SqlOperator.html" title="class in org.apache.calcite.sql"><code>SqlOperator</code></a> and a <a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser"><code>SqlParserPos</code></a>.</div>
 </div>
 </div>
@@ -116,8 +121,8 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#addCarets(java.lang.String,int,int,int,int)" class="member-name-link">addCarets</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#addCarets(java.lang.String,int,int,int,int)" class="member-name-link">addCarets</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
  int&nbsp;line,
  int&nbsp;col,
  int&nbsp;endLine,
@@ -126,46 +131,46 @@ loadScripts(document, 'script');</script>
 <div class="block">Converts a string to a string with one or two carets in it.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#allowsIdentifier(java.lang.String%5B%5D,int%5B%5D%5B%5D)" class="member-name-link">allowsIdentifier</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;tokenImage,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#allowsIdentifier(java.lang.String%5B%5D,int%5B%5D%5B%5D)" class="member-name-link">allowsIdentifier</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;tokenImage,
  int[][]&nbsp;expectedTokenSequences)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns whether the reported ParseException tokenImage
  allows SQL identifier.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkDateFormat(java.lang.String)" class="member-name-link">checkDateFormat</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;pattern)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkDateFormat(java.lang.String)" class="member-name-link">checkDateFormat</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;pattern)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Checks if the date/time format is valid, throws if not.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static char</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkUnicodeEscapeChar(java.lang.String)" class="member-name-link">checkUnicodeEscapeChar</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkUnicodeEscapeChar(java.lang.String)" class="member-name-link">checkUnicodeEscapeChar</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Checks a UESCAPE string for validity, and returns the escape character if
  no exception is thrown.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="StringAndPos.html" title="class in org.apache.calcite.sql.parser">StringAndPos</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#findPos(java.lang.String)" class="member-name-link">findPos</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#findPos(java.lang.String)" class="member-name-link">findPos</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
 <div class="block"><span class="deprecated-label">Deprecated.</span></div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getCharacterSet(java.lang.String)" class="member-name-link">getCharacterSet</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getCharacterSet(java.lang.String)" class="member-name-link">getCharacterSet</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns the character-set prefix of a SQL string literal; returns null if
  there is none.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getTokenVal(java.lang.String)" class="member-name-link">getTokenVal</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;token)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getTokenVal(java.lang.String)" class="member-name-link">getTokenVal</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;token)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#indexToLineCol(java.lang.String,int)" class="member-name-link">indexToLineCol</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#indexToLineCol(java.lang.String,int)" class="member-name-link">indexToLineCol</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
  int&nbsp;i)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns the (1-based) line and column corresponding to a particular
  (0-based) offset in a string.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static long</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#intervalToMillis(java.lang.String,org.apache.calcite.sql.SqlIntervalQualifier)" class="member-name-link">intervalToMillis</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;literal,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#intervalToMillis(java.lang.String,org.apache.calcite.sql.SqlIntervalQualifier)" class="member-name-link">intervalToMillis</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;literal,
  <a href="../SqlIntervalQualifier.html" title="class in org.apache.calcite.sql">SqlIntervalQualifier</a>&nbsp;intervalQualifier)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static long</code></div>
@@ -174,7 +179,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Converts the interval value into a millisecond representation.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static long</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#intervalToMonths(java.lang.String,org.apache.calcite.sql.SqlIntervalQualifier)" class="member-name-link">intervalToMonths</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;literal,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#intervalToMonths(java.lang.String,org.apache.calcite.sql.SqlIntervalQualifier)" class="member-name-link">intervalToMonths</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;literal,
  <a href="../SqlIntervalQualifier.html" title="class in org.apache.calcite.sql">SqlIntervalQualifier</a>&nbsp;intervalQualifier)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static long</code></div>
@@ -182,8 +187,18 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Converts the interval value into a months representation.</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#isHexDigit(char)" class="member-name-link">isHexDigit</a><wbr>(char&nbsp;ch)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Returns true if the specified character is a base-16 digit.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#isOctalDigit(char)" class="member-name-link">isOctalDigit</a><wbr>(char&nbsp;ch)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Returns true if the specific character is a base-8 digit.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#lineColToIndex(java.lang.String,int,int)" class="member-name-link">lineColToIndex</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#lineColToIndex(java.lang.String,int,int)" class="member-name-link">lineColToIndex</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
  int&nbsp;line,
  int&nbsp;column)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
@@ -191,105 +206,128 @@ loadScripts(document, 'script');</script>
  line and column (1-based).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nextLine(java.lang.String,int)" class="member-name-link">nextLine</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nextLine(java.lang.String,int)" class="member-name-link">nextLine</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
  int&nbsp;j)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static byte[]</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#parseBinaryString(java.lang.String)" class="member-name-link">parseBinaryString</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseArrayLiteral(java.lang.String)" class="member-name-link">parseArrayLiteral</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Parses string to array literal
+ using <code>SqlParserImpl</code> parser.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static byte[]</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#parseBinaryString(java.lang.String)" class="member-name-link">parseBinaryString</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
 <div class="block"><span class="deprecated-label">Deprecated.</span></div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="SqlParserUtil.ParsedCollation.html" title="class in org.apache.calcite.sql.parser">SqlParserUtil.ParsedCollation</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseCollation(java.lang.String)" class="member-name-link">parseCollation</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;in)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="SqlParserUtil.ParsedCollation.html" title="class in org.apache.calcite.sql.parser">SqlParserUtil.ParsedCollation</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseCollation(java.lang.String)" class="member-name-link">parseCollation</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;in)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Extracts the values from a collation name.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="https://docs.oracle.com/javase/9/docs/api/java/sql/Date.html" title="class or interface in java.sql" class="external-link">Date</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#parseDate(java.lang.String)" class="member-name-link">parseDate</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseCString(java.lang.String)" class="member-name-link">parseCString</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Converts the contents of a SQL quoted character literal with C-style
+ escapes into the corresponding Java string representation.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Date.html" title="class or interface in java.sql" class="external-link">Date</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#parseDate(java.lang.String)" class="member-name-link">parseDate</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
 <div class="block"><span class="deprecated-label">Deprecated.</span>
 <div class="deprecation-comment">this method is not localized for Farrago standards</div>
 </div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../SqlDateLiteral.html" title="class in org.apache.calcite.sql">SqlDateLiteral</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseDateLiteral(java.lang.String,org.apache.calcite.sql.parser.SqlParserPos)" class="member-name-link">parseDateLiteral</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseDateLiteral(java.lang.String,org.apache.calcite.sql.parser.SqlParserPos)" class="member-name-link">parseDateLiteral</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
  <a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/javase/9/docs/api/java/math/BigDecimal.html" title="class or interface in java.math" class="external-link">BigDecimal</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseDecimal(java.lang.String)" class="member-name-link">parseDecimal</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/math/BigDecimal.html" title="class or interface in java.math" class="external-link">BigDecimal</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseDecimal(java.lang.String)" class="member-name-link">parseDecimal</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/javase/9/docs/api/java/math/BigDecimal.html" title="class or interface in java.math" class="external-link">BigDecimal</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseInteger(java.lang.String)" class="member-name-link">parseInteger</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/math/BigDecimal.html" title="class or interface in java.math" class="external-link">BigDecimal</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseInteger(java.lang.String)" class="member-name-link">parseInteger</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../SqlIntervalLiteral.html" title="class in org.apache.calcite.sql">SqlIntervalLiteral</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseIntervalLiteral(org.apache.calcite.sql.parser.SqlParserPos,int,java.lang.String,org.apache.calcite.sql.SqlIntervalQualifier)" class="member-name-link">parseIntervalLiteral</a><wbr>(<a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
  int&nbsp;sign,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
  <a href="../SqlIntervalQualifier.html" title="class in org.apache.calcite.sql">SqlIntervalQualifier</a>&nbsp;intervalQualifier)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parsePositiveInt(java.lang.String)" class="member-name-link">parsePositiveInt</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;value)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parsePositiveInt(java.lang.String)" class="member-name-link">parsePositiveInt</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;value)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Parses a positive int.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseString(java.lang.String)" class="member-name-link">parseString</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseString(java.lang.String)" class="member-name-link">parseString</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Converts the contents of an sql quoted string literal into the
  corresponding Java string representation (removing leading and trailing
  quotes and unescaping internal doubled quotes).</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="https://docs.oracle.com/javase/9/docs/api/java/sql/Time.html" title="class or interface in java.sql" class="external-link">Time</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#parseTime(java.lang.String)" class="member-name-link">parseTime</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Time.html" title="class or interface in java.sql" class="external-link">Time</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#parseTime(java.lang.String)" class="member-name-link">parseTime</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
 <div class="block"><span class="deprecated-label">Deprecated.</span>
 <div class="deprecation-comment">Does not parse SQL:99 milliseconds</div>
 </div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../SqlTimeLiteral.html" title="class in org.apache.calcite.sql">SqlTimeLiteral</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseTimeLiteral(java.lang.String,org.apache.calcite.sql.parser.SqlParserPos)" class="member-name-link">parseTimeLiteral</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseTimeLiteral(java.lang.String,org.apache.calcite.sql.parser.SqlParserPos)" class="member-name-link">parseTimeLiteral</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
  <a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="https://docs.oracle.com/javase/9/docs/api/java/sql/Timestamp.html" title="class or interface in java.sql" class="external-link">Timestamp</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#parseTimestamp(java.lang.String)" class="member-name-link">parseTimestamp</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Timestamp.html" title="class or interface in java.sql" class="external-link">Timestamp</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#parseTimestamp(java.lang.String)" class="member-name-link">parseTimestamp</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
 <div class="block"><span class="deprecated-label">Deprecated.</span>
 <div class="deprecation-comment">this method is not localized for Farrago standards</div>
 </div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../SqlTimestampLiteral.html" title="class in org.apache.calcite.sql">SqlTimestampLiteral</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseTimestampLiteral(java.lang.String,org.apache.calcite.sql.parser.SqlParserPos)" class="member-name-link">parseTimestampLiteral</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseTimestampLiteral(java.lang.String,org.apache.calcite.sql.parser.SqlParserPos)" class="member-name-link">parseTimestampLiteral</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
  <a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../SqlTimestampLiteral.html" title="class in org.apache.calcite.sql">SqlTimestampLiteral</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#parseTimestampWithLocalTimeZoneLiteral(java.lang.String,org.apache.calcite.sql.parser.SqlParserPos)" class="member-name-link">parseTimestampWithLocalTimeZoneLiteral</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+ <a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#replaceEscapedChars(java.lang.String)" class="member-name-link">replaceEscapedChars</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;input)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Converts the contents of a character literal  with escapes like those used
+ in the C programming language to the corresponding Java string
+ representation.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#replaceSublist(java.util.List,int,int,T)" class="member-name-link">replaceSublist</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&nbsp;list,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#replaceSublist(java.util.List,int,int,T)" class="member-name-link">replaceSublist</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&nbsp;list,
  int&nbsp;start,
  int&nbsp;end,
  T&nbsp;o)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Replaces a range of elements in a list with a single element.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#rightTrim(java.lang.String,char)" class="member-name-link">rightTrim</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#rightTrim(java.lang.String,char)" class="member-name-link">rightTrim</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
  char&nbsp;c)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
 <div class="block"><span class="deprecated-label">Deprecated.</span></div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#strip(java.lang.String,java.lang.String,java.lang.String,java.lang.String,org.apache.calcite.avatica.util.Casing)" class="member-name-link">strip</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
- @Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;startQuote,
- @Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;endQuote,
- @Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;escape,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#strip(java.lang.String,java.lang.String,java.lang.String,java.lang.String,org.apache.calcite.avatica.util.Casing)" class="member-name-link">strip</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;startQuote,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;endQuote,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;escape,
  org.apache.calcite.avatica.util.Casing&nbsp;casing)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Converts a quoted identifier, unquoted identifier, or quoted string to a
  string of its contents.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#stripQuotes(java.lang.String,java.lang.String,java.lang.String,java.lang.String,org.apache.calcite.avatica.util.Casing)" class="member-name-link">stripQuotes</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;startQuote,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;endQuote,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;escape,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#stripQuotes(java.lang.String,java.lang.String,java.lang.String,java.lang.String,org.apache.calcite.avatica.util.Casing)" class="member-name-link">stripQuotes</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;startQuote,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;endQuote,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;escape,
  org.apache.calcite.avatica.util.Casing&nbsp;casing)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Unquotes a quoted string, using different quotes for beginning and end.</div>
@@ -300,25 +338,25 @@ loadScripts(document, 'script');</script>
 <div class="block">Converts "ROW (1, 2)" to "(1, 2)"
  and "3" to "(3)".</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toCase(java.lang.String,org.apache.calcite.avatica.util.Casing)" class="member-name-link">toCase</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toCase(java.lang.String,org.apache.calcite.avatica.util.Casing)" class="member-name-link">toCase</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
  org.apache.calcite.avatica.util.Casing&nbsp;casing)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Converts an identifier to a particular casing.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toNodeArray(java.util.List)" class="member-name-link">toNodeArray</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;list)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toNodeArray(java.util.List)" class="member-name-link">toNodeArray</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;list)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>[]</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toNodeArray(org.apache.calcite.sql.SqlNodeList)" class="member-name-link">toNodeArray</a><wbr>(<a href="../SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;list)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#toStringArray(java.util.List)" class="member-name-link">toStringArray</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;list)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#toStringArray(java.util.List)" class="member-name-link">toStringArray</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;list)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
 <div class="block"><span class="deprecated-label">Deprecated.</span></div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toTree(java.util.List)" class="member-name-link">toTree</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;list)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toTree(java.util.List)" class="member-name-link">toTree</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;list)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Converts a list of {expression, operator, expression, ...} into a tree,
  taking operator precedence and associativity into account.</div>
@@ -332,9 +370,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Converts a list of {expression, operator, expression, ...} into a tree,
  taking operator precedence and associativity into account.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#trim(java.lang.String,java.lang.String)" class="member-name-link">trim</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;chars)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#trim(java.lang.String,java.lang.String)" class="member-name-link">trim</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;chars)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Trims a string for given characters from left and right.</div>
 </div>
@@ -342,8 +380,8 @@ loadScripts(document, 'script');</script>
 </div>
 </div>
 <div class="inherited-list">
-<h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
-<code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
+<h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
+<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 </section>
 </li>
 </ul>
@@ -358,7 +396,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getCharacterSet(java.lang.String)">
 <h3>getCharacterSet</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getCharacterSet</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getCharacterSet</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
 <div class="block">Returns the character-set prefix of a SQL string literal; returns null if
  there is none.</div>
 </section>
@@ -366,29 +404,82 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="parseString(java.lang.String)">
 <h3>parseString</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">parseString</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">parseString</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
 <div class="block">Converts the contents of an sql quoted string literal into the
  corresponding Java string representation (removing leading and trailing
  quotes and unescaping internal doubled quotes).</div>
 </section>
 </li>
 <li>
+<section class="detail" id="parseCString(java.lang.String)">
+<h3>parseCString</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">parseCString</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span>
+                           throws <span class="exceptions"><a href="SqlParserUtil.MalformedUnicodeEscape.html" title="class in org.apache.calcite.sql.parser">SqlParserUtil.MalformedUnicodeEscape</a></span></div>
+<div class="block">Converts the contents of a SQL quoted character literal with C-style
+ escapes into the corresponding Java string representation.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="SqlParserUtil.MalformedUnicodeEscape.html" title="class in org.apache.calcite.sql.parser">SqlParserUtil.MalformedUnicodeEscape</a></code> - if input contains invalid unicode escapes</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="replaceEscapedChars(java.lang.String)">
+<h3>replaceEscapedChars</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">replaceEscapedChars</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;input)</span>
+                                  throws <span class="exceptions"><a href="SqlParserUtil.MalformedUnicodeEscape.html" title="class in org.apache.calcite.sql.parser">SqlParserUtil.MalformedUnicodeEscape</a></span></div>
+<div class="block">Converts the contents of a character literal  with escapes like those used
+ in the C programming language to the corresponding Java string
+ representation.
+
+ <p>If the literal "<code>E'a\tc'</code>" occurs in the SQL source text, then
+ this method will be invoked with the string "<code>a\tc</code>" (4 characters)
+ and will return a Java string with the three characters 'a', TAB, 'b'.
+
+ <p>The format is the same as the Postgres; see
+ <a href="https://www.postgresql.org/docs/14/sql-syntax-lexical.html#SQL-SYNTAX-CONSTANTS">
+ Postgres 4.1.2.2. String Constants With C-Style Escapes</a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>input</code> - String that contains C-style escapes</dd>
+<dt>Returns:</dt>
+<dd>String with escapes converted into Java characters</dd>
+<dt>Throws:</dt>
+<dd><code><a href="SqlParserUtil.MalformedUnicodeEscape.html" title="class in org.apache.calcite.sql.parser">SqlParserUtil.MalformedUnicodeEscape</a></code> - if input contains invalid unicode escapes</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="parseDecimal(java.lang.String)">
 <h3>parseDecimal</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/math/BigDecimal.html" title="class or interface in java.math" class="external-link">BigDecimal</a></span>&nbsp;<span class="element-name">parseDecimal</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/math/BigDecimal.html" title="class or interface in java.math" class="external-link">BigDecimal</a></span>&nbsp;<span class="element-name">parseDecimal</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="parseInteger(java.lang.String)">
 <h3>parseInteger</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/math/BigDecimal.html" title="class or interface in java.math" class="external-link">BigDecimal</a></span>&nbsp;<span class="element-name">parseInteger</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/math/BigDecimal.html" title="class or interface in java.math" class="external-link">BigDecimal</a></span>&nbsp;<span class="element-name">parseInteger</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="isOctalDigit(char)">
+<h3>isOctalDigit</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isOctalDigit</span><wbr><span class="parameters">(char&nbsp;ch)</span></div>
+<div class="block">Returns true if the specific character is a base-8 digit.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="isHexDigit(char)">
+<h3>isHexDigit</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isHexDigit</span><wbr><span class="parameters">(char&nbsp;ch)</span></div>
+<div class="block">Returns true if the specified character is a base-16 digit.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="parseDate(java.lang.String)">
 <h3>parseDate</h3>
-<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
-</span><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/sql/Date.html" title="class or interface in java.sql" class="external-link">Date</a></span>&nbsp;<span class="element-name">parseDate</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Date.html" title="class or interface in java.sql" class="external-link">Date</a></span>&nbsp;<span class="element-name">parseDate</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated.</span>
 <div class="deprecation-comment">this method is not localized for Farrago standards</div>
 </div>
@@ -397,8 +488,8 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="parseTime(java.lang.String)">
 <h3>parseTime</h3>
-<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
-</span><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/sql/Time.html" title="class or interface in java.sql" class="external-link">Time</a></span>&nbsp;<span class="element-name">parseTime</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Time.html" title="class or interface in java.sql" class="external-link">Time</a></span>&nbsp;<span class="element-name">parseTime</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated.</span>
 <div class="deprecation-comment">Does not parse SQL:99 milliseconds</div>
 </div>
@@ -407,8 +498,8 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="parseTimestamp(java.lang.String)">
 <h3>parseTimestamp</h3>
-<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
-</span><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/sql/Timestamp.html" title="class or interface in java.sql" class="external-link">Timestamp</a></span>&nbsp;<span class="element-name">parseTimestamp</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.sql/java/sql/Timestamp.html" title="class or interface in java.sql" class="external-link">Timestamp</a></span>&nbsp;<span class="element-name">parseTimestamp</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated.</span>
 <div class="deprecation-comment">this method is not localized for Farrago standards</div>
 </div>
@@ -417,21 +508,28 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="parseDateLiteral(java.lang.String,org.apache.calcite.sql.parser.SqlParserPos)">
 <h3>parseDateLiteral</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../SqlDateLiteral.html" title="class in org.apache.calcite.sql">SqlDateLiteral</a></span>&nbsp;<span class="element-name">parseDateLiteral</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../SqlDateLiteral.html" title="class in org.apache.calcite.sql">SqlDateLiteral</a></span>&nbsp;<span class="element-name">parseDateLiteral</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
  <a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="parseTimeLiteral(java.lang.String,org.apache.calcite.sql.parser.SqlParserPos)">
 <h3>parseTimeLiteral</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../SqlTimeLiteral.html" title="class in org.apache.calcite.sql">SqlTimeLiteral</a></span>&nbsp;<span class="element-name">parseTimeLiteral</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../SqlTimeLiteral.html" title="class in org.apache.calcite.sql">SqlTimeLiteral</a></span>&nbsp;<span class="element-name">parseTimeLiteral</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
  <a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="parseTimestampLiteral(java.lang.String,org.apache.calcite.sql.parser.SqlParserPos)">
 <h3>parseTimestampLiteral</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../SqlTimestampLiteral.html" title="class in org.apache.calcite.sql">SqlTimestampLiteral</a></span>&nbsp;<span class="element-name">parseTimestampLiteral</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../SqlTimestampLiteral.html" title="class in org.apache.calcite.sql">SqlTimestampLiteral</a></span>&nbsp;<span class="element-name">parseTimestampLiteral</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+ <a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="parseTimestampWithLocalTimeZoneLiteral(java.lang.String,org.apache.calcite.sql.parser.SqlParserPos)">
+<h3>parseTimestampWithLocalTimeZoneLiteral</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../SqlTimestampLiteral.html" title="class in org.apache.calcite.sql">SqlTimestampLiteral</a></span>&nbsp;<span class="element-name">parseTimestampWithLocalTimeZoneLiteral</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
  <a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</span></div>
 </section>
 </li>
@@ -440,18 +538,37 @@ loadScripts(document, 'script');</script>
 <h3>parseIntervalLiteral</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../SqlIntervalLiteral.html" title="class in org.apache.calcite.sql">SqlIntervalLiteral</a></span>&nbsp;<span class="element-name">parseIntervalLiteral</span><wbr><span class="parameters">(<a href="SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
  int&nbsp;sign,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
  <a href="../SqlIntervalQualifier.html" title="class in org.apache.calcite.sql">SqlIntervalQualifier</a>&nbsp;intervalQualifier)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="parseArrayLiteral(java.lang.String)">
+<h3>parseArrayLiteral</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></span>&nbsp;<span class="element-name">parseArrayLiteral</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span>
+                                 throws <span class="exceptions"><a href="SqlParseException.html" title="class in org.apache.calcite.sql.parser">SqlParseException</a></span></div>
+<div class="block">Parses string to array literal
+ using <code>SqlParserImpl</code> parser.
+ String format description can be found at the
+ <a href="https://www.postgresql.org/docs/current/arrays.html#ARRAYS-INPUT">link</a></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>s</code> - a string to parse</dd>
+<dt>Returns:</dt>
+<dd>a array value</dd>
+<dt>Throws:</dt>
+<dd><code><a href="SqlParseException.html" title="class in org.apache.calcite.sql.parser">SqlParseException</a></code> - if there is a parse error</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="checkDateFormat(java.lang.String)">
 <h3>checkDateFormat</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">checkDateFormat</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;pattern)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">checkDateFormat</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;pattern)</span></div>
 <div class="block">Checks if the date/time format is valid, throws if not.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>pattern</code> - <a href="https://docs.oracle.com/javase/9/docs/api/java/text/SimpleDateFormat.html" title="class or interface in java.text" class="external-link"><code>SimpleDateFormat</code></a>  pattern</dd>
+<dd><code>pattern</code> - <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/text/SimpleDateFormat.html" title="class or interface in java.text" class="external-link"><code>SimpleDateFormat</code></a>  pattern</dd>
 </dl>
 </section>
 </li>
@@ -472,7 +589,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="intervalToMillis(java.lang.String,org.apache.calcite.sql.SqlIntervalQualifier)">
 <h3>intervalToMillis</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">intervalToMillis</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;literal,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">intervalToMillis</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;literal,
  <a href="../SqlIntervalQualifier.html" title="class in org.apache.calcite.sql">SqlIntervalQualifier</a>&nbsp;intervalQualifier)</span></div>
 </section>
 </li>
@@ -493,22 +610,22 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="intervalToMonths(java.lang.String,org.apache.calcite.sql.SqlIntervalQualifier)">
 <h3>intervalToMonths</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">intervalToMonths</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;literal,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">intervalToMonths</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;literal,
  <a href="../SqlIntervalQualifier.html" title="class in org.apache.calcite.sql">SqlIntervalQualifier</a>&nbsp;intervalQualifier)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="parsePositiveInt(java.lang.String)">
 <h3>parsePositiveInt</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">parsePositiveInt</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;value)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">parsePositiveInt</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;value)</span></div>
 <div class="block">Parses a positive int. All characters have to be digits.</div>
 <dl class="notes">
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></code> - if invalid number or leading '-'</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NumberFormatException.html" title="class or interface in java.lang" class="external-link">NumberFormatException</a></code> - if invalid number or leading '-'</dd>
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list">
-<li><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Integer.html#parseInt(java.lang.String)" title="class or interface in java.lang" class="external-link"><code>Integer.parseInt(String)</code></a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html#parseInt(java.lang.String)" title="class or interface in java.lang" class="external-link"><code>Integer.parseInt(String)</code></a></li>
 </ul>
 </dd>
 </dl>
@@ -517,8 +634,8 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="parseBinaryString(java.lang.String)">
 <h3>parseBinaryString</h3>
-<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
-</span><span class="modifiers">public static</span>&nbsp;<span class="return-type">byte[]</span>&nbsp;<span class="element-name">parseBinaryString</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public static</span>&nbsp;<span class="return-type">byte[]</span>&nbsp;<span class="element-name">parseBinaryString</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 <div class="block">Parses a Binary string. SQL:99 defines a binary string as a hexstring
  with EVEN nbr of hex digits.</div>
@@ -527,10 +644,10 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="strip(java.lang.String,java.lang.String,java.lang.String,java.lang.String,org.apache.calcite.avatica.util.Casing)">
 <h3>strip</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">strip</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
- @Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;startQuote,
- @Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;endQuote,
- @Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;escape,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">strip</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;startQuote,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;endQuote,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;escape,
  org.apache.calcite.avatica.util.Casing&nbsp;casing)</span></div>
 <div class="block">Converts a quoted identifier, unquoted identifier, or quoted string to a
  string of its contents.
@@ -544,10 +661,10 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="stripQuotes(java.lang.String,java.lang.String,java.lang.String,java.lang.String,org.apache.calcite.avatica.util.Casing)">
 <h3>stripQuotes</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">stripQuotes</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;startQuote,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;endQuote,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;escape,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">stripQuotes</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;startQuote,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;endQuote,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;escape,
  org.apache.calcite.avatica.util.Casing&nbsp;casing)</span></div>
 <div class="block">Unquotes a quoted string, using different quotes for beginning and end.</div>
 </section>
@@ -555,7 +672,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="toCase(java.lang.String,org.apache.calcite.avatica.util.Casing)">
 <h3>toCase</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toCase</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toCase</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
  org.apache.calcite.avatica.util.Casing&nbsp;casing)</span></div>
 <div class="block">Converts an identifier to a particular casing.</div>
 </section>
@@ -563,8 +680,8 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="trim(java.lang.String,java.lang.String)">
 <h3>trim</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">trim</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;chars)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">trim</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;chars)</span></div>
 <div class="block">Trims a string for given characters from left and right. E.g.
  <code>trim("aBaac123AabC","abBcC")</code> returns <code>"123A"</code>.</div>
 </section>
@@ -572,15 +689,15 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="findPos(java.lang.String)">
 <h3>findPos</h3>
-<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
-</span><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="StringAndPos.html" title="class in org.apache.calcite.sql.parser">StringAndPos</a></span>&nbsp;<span class="element-name">findPos</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql)</span></div>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="StringAndPos.html" title="class in org.apache.calcite.sql.parser">StringAndPos</a></span>&nbsp;<span class="element-name">findPos</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql)</span></div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="indexToLineCol(java.lang.String,int)">
 <h3>indexToLineCol</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name">indexToLineCol</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int[]</span>&nbsp;<span class="element-name">indexToLineCol</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
  int&nbsp;i)</span></div>
 <div class="block">Returns the (1-based) line and column corresponding to a particular
  (0-based) offset in a string.
@@ -591,14 +708,14 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="nextLine(java.lang.String,int)">
 <h3>nextLine</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">nextLine</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">nextLine</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
  int&nbsp;j)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="lineColToIndex(java.lang.String,int,int)">
 <h3>lineColToIndex</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">lineColToIndex</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">lineColToIndex</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
  int&nbsp;line,
  int&nbsp;column)</span></div>
 <div class="block">Finds the position (0-based) in a string which corresponds to a given
@@ -610,7 +727,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="addCarets(java.lang.String,int,int,int,int)">
 <h3>addCarets</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">addCarets</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">addCarets</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;sql,
  int&nbsp;line,
  int&nbsp;col,
  int&nbsp;endLine,
@@ -623,13 +740,13 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getTokenVal(java.lang.String)">
 <h3>getTokenVal</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getTokenVal</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;token)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getTokenVal</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;token)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="parseCollation(java.lang.String)">
 <h3>parseCollation</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="SqlParserUtil.ParsedCollation.html" title="class in org.apache.calcite.sql.parser">SqlParserUtil.ParsedCollation</a></span>&nbsp;<span class="element-name">parseCollation</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;in)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="SqlParserUtil.ParsedCollation.html" title="class in org.apache.calcite.sql.parser">SqlParserUtil.ParsedCollation</a></span>&nbsp;<span class="element-name">parseCollation</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;in)</span></div>
 <div class="block">Extracts the values from a collation name.
 
  <p>Collation names are on the form <i>charset$locale$strength</i>.</div>
@@ -644,15 +761,15 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="toStringArray(java.util.List)">
 <h3>toStringArray</h3>
-<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
-</span><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]</span>&nbsp;<span class="element-name">toStringArray</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;list)</span></div>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]</span>&nbsp;<span class="element-name">toStringArray</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;list)</span></div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="toNodeArray(java.util.List)">
 <h3>toNodeArray</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>[]</span>&nbsp;<span class="element-name">toNodeArray</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;list)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>[]</span>&nbsp;<span class="element-name">toNodeArray</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;list)</span></div>
 </section>
 </li>
 <li>
@@ -672,8 +789,8 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="rightTrim(java.lang.String,char)">
 <h3>rightTrim</h3>
-<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
-</span><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">rightTrim</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">rightTrim</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s,
  char&nbsp;c)</span></div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
@@ -681,7 +798,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="replaceSublist(java.util.List,int,int,T)">
 <h3 id="replaceSublist(java.util.List,int,int,java.lang.Object)">replaceSublist</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">replaceSublist</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&nbsp;list,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">replaceSublist</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&nbsp;list,
  int&nbsp;start,
  int&nbsp;end,
  T&nbsp;o)</span></div>
@@ -693,7 +810,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="toTree(java.util.List)">
 <h3>toTree</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></span>&nbsp;<span class="element-name">toTree</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;list)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></span>&nbsp;<span class="element-name">toTree</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;list)</span></div>
 <div class="block">Converts a list of {expression, operator, expression, ...} into a tree,
  taking operator precedence and associativity into account.</div>
 </section>
@@ -727,7 +844,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="checkUnicodeEscapeChar(java.lang.String)">
 <h3>checkUnicodeEscapeChar</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">char</span>&nbsp;<span class="element-name">checkUnicodeEscapeChar</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">char</span>&nbsp;<span class="element-name">checkUnicodeEscapeChar</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
 <div class="block">Checks a UESCAPE string for validity, and returns the escape character if
  no exception is thrown.</div>
 <dl class="notes">
@@ -741,7 +858,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="allowsIdentifier(java.lang.String[],int[][])">
 <h3>allowsIdentifier</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">allowsIdentifier</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;tokenImage,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">allowsIdentifier</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;tokenImage,
  int[][]&nbsp;expectedTokenSequences)</span></div>
 <div class="block">Returns whether the reported ParseException tokenImage
  allows SQL identifier.</div>
@@ -763,7 +880,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2022 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2023 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

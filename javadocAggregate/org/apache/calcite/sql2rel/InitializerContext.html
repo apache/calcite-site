@@ -104,9 +104,9 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#parseExpression(org.apache.calcite.sql.parser.SqlParser.Config,java.lang.String)" class="member-name-link">parseExpression</a><wbr>(<a href="../sql/parser/SqlParser.Config.html" title="interface in org.apache.calcite.sql.parser">SqlParser.Config</a>&nbsp;config,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;expr)</code></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;expr)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Parse a column computation expression for a table.</div>
+<div class="block">Parses a column computation expression for a table.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#validateExpression(org.apache.calcite.rel.type.RelDataType,org.apache.calcite.sql.SqlNode)" class="member-name-link">validateExpression</a><wbr>(<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
@@ -138,16 +138,18 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="parseExpression(org.apache.calcite.sql.parser.SqlParser.Config,java.lang.String)">
 <h3>parseExpression</h3>
 <div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></span>&nbsp;<span class="element-name">parseExpression</span><wbr><span class="parameters">(<a href="../sql/parser/SqlParser.Config.html" title="interface in org.apache.calcite.sql.parser">SqlParser.Config</a>&nbsp;config,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;expr)</span></div>
-<div class="block">Parse a column computation expression for a table. Usually this expression is declared
- in the create table statement, i.e.
- <pre>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;expr)</span></div>
+<div class="block">Parses a column computation expression for a table.
+
+ <p>Usually this expression is declared in the <code>CREATE TABLE</code>
+ statement, e.g.
+
+ <blockquote><pre><code>
    create table t(
      a int not null,
      b varchar(5) as (my_udf(a)) virtual,
-     c int not null as (a + 1)
-   );
- </pre>
+     c int not null as (a + 1));
+ </code></pre></blockquote>
 
  <p>You can use the string format expression "my_udf(a)" and "a + 1"
  as the initializer expression of column b and c.
@@ -208,7 +210,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2022 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2023 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

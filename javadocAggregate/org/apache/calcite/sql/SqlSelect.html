@@ -72,7 +72,7 @@ loadScripts(document, 'script');</script>
 <div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">org.apache.calcite.sql</a></div>
 <h1 title="Class SqlSelect" class="title">Class SqlSelect</h1>
 </div>
-<div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
+<div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
 <div class="inheritance"><a href="SqlNode.html" title="class in org.apache.calcite.sql">org.apache.calcite.sql.SqlNode</a>
 <div class="inheritance"><a href="SqlCall.html" title="class in org.apache.calcite.sql">org.apache.calcite.sql.SqlCall</a>
 <div class="inheritance">org.apache.calcite.sql.SqlSelect</div>
@@ -82,7 +82,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Cloneable.html" title="class or interface in java.lang" class="external-link">Cloneable</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Cloneable.html" title="class or interface in java.lang" class="external-link">Cloneable</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SqlSelect</span>
@@ -109,8 +109,11 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color"><code><a href="#HAVING_OPERAND" class="member-name-link">HAVING_OPERAND</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>static final int</code></div>
-<div class="col-second even-row-color"><code><a href="#WHERE_OPERAND" class="member-name-link">WHERE_OPERAND</a></code></div>
+<div class="col-second even-row-color"><code><a href="#QUALIFY_OPERAND" class="member-name-link">QUALIFY_OPERAND</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>static final int</code></div>
+<div class="col-second odd-row-color"><code><a href="#WHERE_OPERAND" class="member-name-link">WHERE_OPERAND</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
 </div>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-org.apache.calcite.sql.SqlNode">Fields inherited from class&nbsp;org.apache.calcite.sql.<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></h3>
@@ -137,7 +140,23 @@ loadScripts(document, 'script');</script>
  @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset,
  @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch,
  @Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;hints)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+</div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNodeList)" class="member-name-link">SqlSelect</a><wbr>(<a href="parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ @Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;keywordList,
+ <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;selectList,
+ @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;from,
+ @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;where,
+ @Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;groupBy,
+ @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;having,
+ @Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;windowDecls,
+ @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;qualify,
+ @Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;orderBy,
+ @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset,
+ @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch,
+ @Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;hints)</code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -179,7 +198,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOffset()" class="member-name-link">getOffset</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOperandList()" class="member-name-link">getOperandList</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the list of operands.</div>
@@ -190,56 +209,62 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final @Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrderList()" class="member-name-link">getOrderList</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSelectList()" class="member-name-link">getSelectList</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getQualify()" class="member-name-link">getQualify</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWhere()" class="member-name-link">getWhere</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSelectList()" class="member-name-link">getSelectList</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWindowList()" class="member-name-link">getWindowList</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWhere()" class="member-name-link">getWhere</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasHints()" class="member-name-link">hasHints</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWindowList()" class="member-name-link">getWindowList</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasOrderBy()" class="member-name-link">hasOrderBy</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasHints()" class="member-name-link">hasHints</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasWhere()" class="member-name-link">hasWhere</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasOrderBy()" class="member-name-link">hasOrderBy</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isDistinct()" class="member-name-link">isDistinct</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasWhere()" class="member-name-link">hasWhere</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isKeywordPresent(org.apache.calcite.sql.SqlSelectKeyword)" class="member-name-link">isKeywordPresent</a><wbr>(<a href="SqlSelectKeyword.html" title="enum in org.apache.calcite.sql">SqlSelectKeyword</a>&nbsp;targetKeyWord)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isDistinct()" class="member-name-link">isDistinct</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setFetch(org.apache.calcite.sql.SqlNode)" class="member-name-link">setFetch</a><wbr>(@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setFrom(org.apache.calcite.sql.SqlNode)" class="member-name-link">setFrom</a><wbr>(@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;from)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setGroupBy(org.apache.calcite.sql.SqlNodeList)" class="member-name-link">setGroupBy</a><wbr>(@Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;groupBy)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isKeywordPresent(org.apache.calcite.sql.SqlSelectKeyword)" class="member-name-link">isKeywordPresent</a><wbr>(<a href="SqlSelectKeyword.html" title="enum in org.apache.calcite.sql">SqlSelectKeyword</a>&nbsp;targetKeyWord)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setHaving(org.apache.calcite.sql.SqlNode)" class="member-name-link">setHaving</a><wbr>(@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;having)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setFetch(org.apache.calcite.sql.SqlNode)" class="member-name-link">setFetch</a><wbr>(@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setHints(org.apache.calcite.sql.SqlNodeList)" class="member-name-link">setHints</a><wbr>(@Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;hints)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setFrom(org.apache.calcite.sql.SqlNode)" class="member-name-link">setFrom</a><wbr>(@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;from)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOffset(org.apache.calcite.sql.SqlNode)" class="member-name-link">setOffset</a><wbr>(@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setGroupBy(org.apache.calcite.sql.SqlNodeList)" class="member-name-link">setGroupBy</a><wbr>(@Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;groupBy)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOperand(int,org.apache.calcite.sql.SqlNode)" class="member-name-link">setOperand</a><wbr>(int&nbsp;i,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setHaving(org.apache.calcite.sql.SqlNode)" class="member-name-link">setHaving</a><wbr>(@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;having)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setHints(org.apache.calcite.sql.SqlNodeList)" class="member-name-link">setHints</a><wbr>(@Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;hints)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOffset(org.apache.calcite.sql.SqlNode)" class="member-name-link">setOffset</a><wbr>(@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOperand(int,org.apache.calcite.sql.SqlNode)" class="member-name-link">setOperand</a><wbr>(int&nbsp;i,
  @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;operand)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Changes the value of an operand.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOrderBy(org.apache.calcite.sql.SqlNodeList)" class="member-name-link">setOrderBy</a><wbr>(@Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;orderBy)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOrderBy(org.apache.calcite.sql.SqlNodeList)" class="member-name-link">setOrderBy</a><wbr>(@Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;orderBy)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setQualify(org.apache.calcite.sql.SqlNode)" class="member-name-link">setQualify</a><wbr>(@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;qualify)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSelectList(org.apache.calcite.sql.SqlNodeList)" class="member-name-link">setSelectList</a><wbr>(<a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;selectList)</code></div>
@@ -270,8 +295,8 @@ loadScripts(document, 'script');</script>
 <h3 id="methods-inherited-from-class-org.apache.calcite.sql.SqlNode">Methods inherited from class&nbsp;org.apache.calcite.sql.<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></h3>
 <code><a href="SqlNode.html#clone()">clone</a>, <a href="SqlNode.html#clone(E)">clone</a>, <a href="SqlNode.html#cloneArray(org.apache.calcite.sql.SqlNode%5B%5D)">cloneArray</a>, <a href="SqlNode.html#equalDeep(org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode,org.apache.calcite.util.Litmus)">equalDeep</a>, <a href="SqlNode.html#equalDeep(java.util.List,java.util.List,org.apache.calcite.util.Litmus)">equalDeep</a>, <a href="SqlNode.html#equalsDeep(org.apache.calcite.sql.SqlNode,boolean)">equalsDeep</a>, <a href="SqlNode.html#getParserPosition()">getParserPosition</a>, <a href="SqlNode.html#isA(java.util.Set)">isA</a>, <a href="SqlNode.html#toList()">toList</a>, <a href="SqlNode.html#toList(org.apache.calcite.sql.parser.SqlParserPos)">toList</a>, <a href="SqlNode.html#toSqlString(org.apache.calcite.sql.SqlDialect)">toSqlString</a>, <a href="SqlNode.html#toSqlString(org.apache.calcite.sql.SqlDialect,boolean)">toSqlString</a>, <a href="SqlNode.html#toSqlString(java.util.function.UnaryOperator)">toSqlString</a>, <a href="SqlNode.html#toString()">toString</a>, <a href="SqlNode.html#unparseWithParentheses(org.apache.calcite.sql.SqlWriter,int,int,boolean)">unparseWithParentheses</a>, <a href="SqlNode.html#validateExpr(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope)">validateExpr</a></code></div>
 <div class="inherited-list">
-<h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
-<code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
+<h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
+<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 </section>
 </li>
 </ul>
@@ -325,6 +350,20 @@ loadScripts(document, 'script');</script>
 </dl>
 </section>
 </li>
+<li>
+<section class="detail" id="QUALIFY_OPERAND">
+<h3>QUALIFY_OPERAND</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">QUALIFY_OPERAND</span></div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="../../../../constant-values.html#org.apache.calcite.sql.SqlSelect.QUALIFY_OPERAND">Constant Field Values</a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -334,9 +373,28 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNodeList)">
+<section class="detail" id="&lt;init&gt;(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNodeList)">
 <h3>SqlSelect</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SqlSelect</span><wbr><span class="parameters">(<a href="parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ @Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;keywordList,
+ <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;selectList,
+ @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;from,
+ @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;where,
+ @Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;groupBy,
+ @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;having,
+ @Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;windowDecls,
+ @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;qualify,
+ @Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;orderBy,
+ @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset,
+ @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch,
+ @Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;hints)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNodeList)">
+<h3>SqlSelect</h3>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public</span>&nbsp;<span class="element-name">SqlSelect</span><wbr><span class="parameters">(<a href="parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
  @Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;keywordList,
  <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;selectList,
  @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;from,
@@ -348,6 +406,8 @@ loadScripts(document, 'script');</script>
  @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset,
  @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch,
  @Nullable <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;hints)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
+<div class="block">deprecated, without <code>qualify</code>.</div>
 </section>
 </li>
 </ul>
@@ -392,7 +452,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getOperandList()">
 <h3>getOperandList</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;</span>&nbsp;<span class="element-name">getOperandList</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;</span>&nbsp;<span class="element-name">getOperandList</span>()</div>
 <div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="SqlCall.html#getOperandList()">SqlCall</a></code></span></div>
 <div class="block">Returns the list of operands. The set and order of operands is call-specific.
  <p>Note: the proper type would be <code>List&lt;@Nullable SqlNode&gt;</code>, however,
@@ -503,6 +563,19 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getWindowList()">
 <h3>getWindowList</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a></span>&nbsp;<span class="element-name">getWindowList</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getQualify()">
+<h3>getQualify</h3>
+<div class="member-signature"><span class="annotations">@Pure
+</span><span class="modifiers">public final</span>&nbsp;<span class="return-type">@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></span>&nbsp;<span class="element-name">getQualify</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="setQualify(org.apache.calcite.sql.SqlNode)">
+<h3>setQualify</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setQualify</span><wbr><span class="parameters">(@Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;qualify)</span></div>
 </section>
 </li>
 <li>
@@ -644,7 +717,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2022 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2023 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

@@ -68,13 +68,13 @@ loadScripts(document, 'script');</script>
 <div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">org.apache.calcite.sql.type</a></div>
 <h1 title="Class SqlTypeTransforms" class="title">Class SqlTypeTransforms</h1>
 </div>
-<div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
+<div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
 <div class="inheritance">org.apache.calcite.sql.type.SqlTypeTransforms</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">SqlTypeTransforms</span>
-<span class="extends-implements">extends <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">SqlTypeTransforms defines a number of reusable instances of
  <a href="SqlTypeTransform.html" title="interface in org.apache.calcite.sql.type"><code>SqlTypeTransform</code></a>.
 
@@ -101,35 +101,47 @@ loadScripts(document, 'script');</script>
  transformed into the same type with nulls allowed.</div>
 </div>
 <div class="col-first odd-row-color"><code>static final <a href="SqlTypeTransform.html" title="interface in org.apache.calcite.sql.type">SqlTypeTransform</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#LEAST_NULLABLE" class="member-name-link">LEAST_NULLABLE</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#FROM_MEASURE" class="member-name-link">FROM_MEASURE</a></code></div>
 <div class="col-last odd-row-color">
+<div class="block">Parameter type-inference transform that transforms <code>MEASURE&lt;T&gt;</code> to
+ <code>T</code> for some type T.</div>
+</div>
+<div class="col-first even-row-color"><code>static final <a href="SqlTypeTransform.html" title="interface in org.apache.calcite.sql.type">SqlTypeTransform</a></code></div>
+<div class="col-second even-row-color"><code><a href="#LEAST_NULLABLE" class="member-name-link">LEAST_NULLABLE</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Type-inference strategy whereby the result is NOT NULL if any of
  the arguments is NOT NULL; otherwise the type is unchanged.</div>
 </div>
-<div class="col-first even-row-color"><code>static final <a href="SqlTypeTransform.html" title="interface in org.apache.calcite.sql.type">SqlTypeTransform</a></code></div>
-<div class="col-second even-row-color"><code><a href="#ONLY_COLUMN" class="member-name-link">ONLY_COLUMN</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code>static final <a href="SqlTypeTransform.html" title="interface in org.apache.calcite.sql.type">SqlTypeTransform</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#ONLY_COLUMN" class="member-name-link">ONLY_COLUMN</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Parameter type-inference transform strategy where a derived type must be
  a struct type with precisely one field and the returned type is the type
  of that field.</div>
 </div>
-<div class="col-first odd-row-color"><code>static final <a href="SqlTypeTransform.html" title="interface in org.apache.calcite.sql.type">SqlTypeTransform</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#TO_ARRAY" class="member-name-link">TO_ARRAY</a></code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code>static final <a href="SqlTypeTransform.html" title="interface in org.apache.calcite.sql.type">SqlTypeTransform</a></code></div>
+<div class="col-second even-row-color"><code><a href="#TO_ARRAY" class="member-name-link">TO_ARRAY</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Parameter type-inference transform strategy that wraps a given type
  in a array.</div>
 </div>
-<div class="col-first even-row-color"><code>static final <a href="SqlTypeTransform.html" title="interface in org.apache.calcite.sql.type">SqlTypeTransform</a></code></div>
-<div class="col-second even-row-color"><code><a href="#TO_ARRAY_QUERY" class="member-name-link">TO_ARRAY_QUERY</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code>static final <a href="SqlTypeTransform.html" title="interface in org.apache.calcite.sql.type">SqlTypeTransform</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#TO_ARRAY_QUERY" class="member-name-link">TO_ARRAY_QUERY</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Parameter type-inference transform strategy that wraps a given type in an array or
  wraps a field of the given type in an array if the given type is struct with one field.</div>
 </div>
-<div class="col-first odd-row-color"><code>static final <a href="SqlTypeTransform.html" title="interface in org.apache.calcite.sql.type">SqlTypeTransform</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#TO_MAP" class="member-name-link">TO_MAP</a></code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code>static final <a href="SqlTypeTransform.html" title="interface in org.apache.calcite.sql.type">SqlTypeTransform</a></code></div>
+<div class="col-second even-row-color"><code><a href="#TO_MAP" class="member-name-link">TO_MAP</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Parameter type-inference transform strategy that converts a two-field
  record type to a MAP type.</div>
+</div>
+<div class="col-first odd-row-color"><code>static final <a href="SqlTypeTransform.html" title="interface in org.apache.calcite.sql.type">SqlTypeTransform</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#TO_MEASURE" class="member-name-link">TO_MEASURE</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">Parameter type-inference transform that transforms <code>T</code> to
+ <code>MEASURE&lt;T&gt;</code> for some type T.</div>
 </div>
 <div class="col-first even-row-color"><code>static final <a href="SqlTypeTransform.html" title="interface in org.apache.calcite.sql.type">SqlTypeTransform</a></code></div>
 <div class="col-second even-row-color"><code><a href="#TO_MULTISET" class="member-name-link">TO_MULTISET</a></code></div>
@@ -196,8 +208,8 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div class="inherited-list">
-<h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
-<code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
+<h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
+<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 </section>
 </li>
 </ul>
@@ -319,6 +331,22 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="TO_MEASURE">
+<h3>TO_MEASURE</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="SqlTypeTransform.html" title="interface in org.apache.calcite.sql.type">SqlTypeTransform</a></span>&nbsp;<span class="element-name">TO_MEASURE</span></div>
+<div class="block">Parameter type-inference transform that transforms <code>T</code> to
+ <code>MEASURE&lt;T&gt;</code> for some type T.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="FROM_MEASURE">
+<h3>FROM_MEASURE</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="SqlTypeTransform.html" title="interface in org.apache.calcite.sql.type">SqlTypeTransform</a></span>&nbsp;<span class="element-name">FROM_MEASURE</span></div>
+<div class="block">Parameter type-inference transform that transforms <code>MEASURE&lt;T&gt;</code> to
+ <code>T</code> for some type T. Inverse of <a href="#TO_MEASURE"><code>TO_MEASURE</code></a>.</div>
+</section>
+</li>
+<li>
 <section class="detail" id="TO_ARRAY_QUERY">
 <h3>TO_ARRAY_QUERY</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="SqlTypeTransform.html" title="interface in org.apache.calcite.sql.type">SqlTypeTransform</a></span>&nbsp;<span class="element-name">TO_ARRAY_QUERY</span></div>
@@ -375,7 +403,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2022 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2023 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

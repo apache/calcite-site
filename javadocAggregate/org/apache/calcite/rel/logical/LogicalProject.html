@@ -72,7 +72,7 @@ loadScripts(document, 'script');</script>
 <div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">org.apache.calcite.rel.logical</a></div>
 <h1 title="Class LogicalProject" class="title">Class LogicalProject</h1>
 </div>
-<div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
+<div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
 <div class="inheritance"><a href="../AbstractRelNode.html" title="class in org.apache.calcite.rel">org.apache.calcite.rel.AbstractRelNode</a>
 <div class="inheritance"><a href="../SingleRel.html" title="class in org.apache.calcite.rel">org.apache.calcite.rel.SingleRel</a>
 <div class="inheritance"><a href="../core/Project.html" title="class in org.apache.calcite.rel.core">org.apache.calcite.rel.core.Project</a>
@@ -84,7 +84,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Cloneable.html" title="class or interface in java.lang" class="external-link">Cloneable</a></code>, <code><a href="../../plan/RelOptNode.html" title="interface in org.apache.calcite.plan">RelOptNode</a></code>, <code><a href="../hint/Hintable.html" title="interface in org.apache.calcite.rel.hint">Hintable</a></code>, <code><a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Cloneable.html" title="class or interface in java.lang" class="external-link">Cloneable</a></code>, <code><a href="../../plan/RelOptNode.html" title="interface in org.apache.calcite.plan">RelOptNode</a></code>, <code><a href="../hint/Hintable.html" title="interface in org.apache.calcite.rel.hint">Hintable</a></code>, <code><a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">LogicalProject</span>
@@ -112,7 +112,7 @@ loadScripts(document, 'script');</script>
 <h2>Field Summary</h2>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-org.apache.calcite.rel.core.Project">Fields inherited from class&nbsp;org.apache.calcite.rel.core.<a href="../core/Project.html" title="class in org.apache.calcite.rel.core">Project</a></h3>
-<code><a href="../core/Project.html#exps">exps</a>, <a href="../core/Project.html#hints">hints</a></code></div>
+<code><a href="../core/Project.html#exps">exps</a>, <a href="../core/Project.html#hints">hints</a>, <a href="../core/Project.html#variablesSet">variablesSet</a></code></div>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-org.apache.calcite.rel.SingleRel">Fields inherited from class&nbsp;org.apache.calcite.rel.<a href="../SingleRel.html" title="class in org.apache.calcite.rel">SingleRel</a></h3>
 <code><a href="../SingleRel.html#input">input</a></code></div>
@@ -131,40 +131,50 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,java.util.List,org.apache.calcite.rel.RelNode,java.util.List,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">LogicalProject</a><wbr>(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
  <a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hints,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hints,
  <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
  <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType)</code></div>
 <div class="col-last even-row-color">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+</div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,java.util.List,org.apache.calcite.rel.RelNode,java.util.List,org.apache.calcite.rel.type.RelDataType,java.util.Set)" class="member-name-link">LogicalProject</a><wbr>(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
+ <a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hints,
+ <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+ <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../core/CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>&gt;&nbsp;variablesSet)</code></div>
+<div class="col-last odd-row-color">
 <div class="block">Creates a LogicalProject.</div>
 </div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,java.util.List,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">LogicalProject</a><wbr>(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,java.util.List,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">LogicalProject</a><wbr>(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
  <a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
  <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
  <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType)</code></div>
-<div class="col-last odd-row-color">
+<div class="col-last even-row-color">
 <div class="block"><span class="deprecated-label">Deprecated.</span></div>
 </div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,java.util.List,org.apache.calcite.rel.type.RelDataType,int)" class="member-name-link">LogicalProject</a><wbr>(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,java.util.List,org.apache.calcite.rel.type.RelDataType,int)" class="member-name-link">LogicalProject</a><wbr>(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
  <a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
  <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
  <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
  int&nbsp;flags)</code></div>
-<div class="col-last even-row-color">
-<div class="block"><span class="deprecated-label">Deprecated.</span></div>
-</div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.rel.RelNode,java.util.List,java.util.List,int)" class="member-name-link">LogicalProject</a><wbr>(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
- <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
- @Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends @Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;fieldNames,
- int&nbsp;flags)</code></div>
 <div class="col-last odd-row-color">
 <div class="block"><span class="deprecated-label">Deprecated.</span></div>
 </div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.rel.RelInput)" class="member-name-link">LogicalProject</a><wbr>(<a href="../RelInput.html" title="interface in org.apache.calcite.rel">RelInput</a>&nbsp;input)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.rel.RelNode,java.util.List,java.util.List,int)" class="member-name-link">LogicalProject</a><wbr>(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
+ <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;fieldNames,
+ int&nbsp;flags)</code></div>
 <div class="col-last even-row-color">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+</div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.rel.RelInput)" class="member-name-link">LogicalProject</a><wbr>(<a href="../RelInput.html" title="interface in org.apache.calcite.rel">RelInput</a>&nbsp;input)</code></div>
+<div class="col-last odd-row-color">
 <div class="block">Creates a LogicalProject by parsing serialized output.</div>
 </div>
 </div>
@@ -175,7 +185,7 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button><button id="method-summary-table-tab6" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab6', 3)" class="table-tab">Deprecated Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel">
 <div class="summary-table three-column-summary" aria-labelledby="method-summary-table-tab0">
 <div class="table-header col-first">Modifier and Type</div>
@@ -189,29 +199,51 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#copy(org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,java.util.List,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">copy</a><wbr>(<a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
  <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
  <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Copies a project.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#create(org.apache.calcite.rel.RelNode,java.util.List,java.util.List,java.util.List)" class="member-name-link">create</a><wbr>(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hints,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
- @Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends @Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;fieldNames)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Creates a LogicalProject.</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#create(org.apache.calcite.rel.RelNode,java.util.List,java.util.List,java.util.List)" class="member-name-link">create</a><wbr>(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hints,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;fieldNames)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span>
+<div class="deprecation-comment">Use <a href="#create(org.apache.calcite.rel.RelNode,java.util.List,java.util.List,java.util.List,java.util.Set)"><code>create(RelNode, List, List, List, Set)</code></a> instead</div>
+</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#create(org.apache.calcite.rel.RelNode,java.util.List,java.util.List,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">create</a><wbr>(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hints,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#create(org.apache.calcite.rel.RelNode,java.util.List,java.util.List,java.util.List,java.util.Set)" class="member-name-link">create</a><wbr>(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hints,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;fieldNames,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../core/CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>&gt;&nbsp;variablesSet)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Creates a LogicalProject.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#create(org.apache.calcite.rel.RelNode,java.util.List,java.util.List,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">create</a><wbr>(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hints,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
  <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span>
+<div class="deprecation-comment">Use <a href="#create(org.apache.calcite.rel.RelNode,java.util.List,java.util.List,org.apache.calcite.rel.type.RelDataType,java.util.Set)"><code>create(RelNode, List, List, RelDataType, Set)</code></a> instead</div>
+</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#create(org.apache.calcite.rel.RelNode,java.util.List,java.util.List,org.apache.calcite.rel.type.RelDataType,java.util.Set)" class="member-name-link">create</a><wbr>(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hints,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+ <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../core/CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>&gt;&nbsp;variablesSet)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Creates a LogicalProject, specifying row type rather than field names.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#deepEquals(java.lang.Object)" class="member-name-link">deepEquals</a><wbr>(@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;obj)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#deepEquals(java.lang.Object)" class="member-name-link">deepEquals</a><wbr>(@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;obj)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Equality check for RelNode digest.</div>
 </div>
@@ -221,7 +253,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Compute hash code for RelNode digest.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#withHints(java.util.List)" class="member-name-link">withHints</a><wbr>(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hintList)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#withHints(java.util.List)" class="member-name-link">withHints</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hintList)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a new relational expression with the specified hints <code>hintList</code>.</div>
 </div>
@@ -230,16 +262,16 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-org.apache.calcite.rel.core.Project">Methods inherited from class&nbsp;org.apache.calcite.rel.core.<a href="../core/Project.html" title="class in org.apache.calcite.rel.core">Project</a></h3>
-<code><a href="../core/Project.html#accept(org.apache.calcite.rex.RexShuttle)">accept</a>, <a href="../core/Project.html#computeSelfCost(org.apache.calcite.plan.RelOptPlanner,org.apache.calcite.rel.metadata.RelMetadataQuery)">computeSelfCost</a>, <a href="../core/Project.html#containsOver()">containsOver</a>, <a href="../core/Project.html#copy(org.apache.calcite.plan.RelTraitSet,java.util.List)">copy</a>, <a href="../core/Project.html#copy(org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,java.util.List,org.apache.calcite.rel.type.RelDataType,int)">copy</a>, <a href="../core/Project.html#deepEquals0(java.lang.Object)">deepEquals0</a>, <a href="../core/Project.html#deepHashCode0()">deepHashCode0</a>, <a href="../core/Project.html#explainTerms(org.apache.calcite.rel.RelWriter)">explainTerms</a>, <a href="../core/Project.html#getFlags()">getFlags</a>, <a href="../core/Project.html#getHints()">getHints</a>, <a href="../core/Project.html#getMapping()">getMapping</a>, <a href="../core/Project.html#getMapping(int,java.util.List)">getMapping</a>, <a href="../core/Project.html#getNamedProjects()">getNamedProjects</a>, <a href="../core/Project.html#getPartialMapping(int,java.util.List)">getPartialMapping</a>, <a href="../core/Project.html#getPermutation()">getPermutation</a>, <a href="../core/Project.html#getPermutation(int,java.util.List)">getPermutation</a>, <a href="../core/Project.html#getProjects()">getProjects</a>, <a href="../core/Project.html#isBoxed()">isBoxed</a>, <a href="../core/Project.html#isMapping()">isMapping</a>, <a href="../core/Project.html#isValid(org.apache.calcite.util.Litmus,org.apache.calcite.rel.RelNode.Context)">isValid</a></code></div>
+<code><a href="../core/Project.html#accept(org.apache.calcite.rex.RexShuttle)">accept</a>, <a href="../core/Project.html#computeSelfCost(org.apache.calcite.plan.RelOptPlanner,org.apache.calcite.rel.metadata.RelMetadataQuery)">computeSelfCost</a>, <a href="../core/Project.html#containsOver()">containsOver</a>, <a href="../core/Project.html#copy(org.apache.calcite.plan.RelTraitSet,java.util.List)">copy</a>, <a href="../core/Project.html#copy(org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,java.util.List,org.apache.calcite.rel.type.RelDataType,int)">copy</a>, <a href="../core/Project.html#deepEquals0(java.lang.Object)">deepEquals0</a>, <a href="../core/Project.html#deepHashCode0()">deepHashCode0</a>, <a href="../core/Project.html#explainTerms(org.apache.calcite.rel.RelWriter)">explainTerms</a>, <a href="../core/Project.html#getFlags()">getFlags</a>, <a href="../core/Project.html#getHints()">getHints</a>, <a href="../core/Project.html#getMapping()">getMapping</a>, <a href="../core/Project.html#getMapping(int,java.util.List)">getMapping</a>, <a href="../core/Project.html#getNamedProjects()">getNamedProjects</a>, <a href="../core/Project.html#getPartialMapping(int,java.util.List)">getPartialMapping</a>, <a href="../core/Project.html#getPermutation()">getPermutation</a>, <a href="../core/Project.html#getPermutation(int,java.util.List)">getPermutation</a>, <a href="../core/Project.html#getProjects()">getProjects</a>, <a href="../core/Project.html#getVariablesSet()">getVariablesSet</a>, <a href="../core/Project.html#isBoxed()">isBoxed</a>, <a href="../core/Project.html#isMapping()">isMapping</a>, <a href="../core/Project.html#isValid(org.apache.calcite.util.Litmus,org.apache.calcite.rel.RelNode.Context)">isValid</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-org.apache.calcite.rel.SingleRel">Methods inherited from class&nbsp;org.apache.calcite.rel.<a href="../SingleRel.html" title="class in org.apache.calcite.rel">SingleRel</a></h3>
 <code><a href="../SingleRel.html#childrenAccept(org.apache.calcite.rel.RelVisitor)">childrenAccept</a>, <a href="../SingleRel.html#deriveRowType()">deriveRowType</a>, <a href="../SingleRel.html#estimateRowCount(org.apache.calcite.rel.metadata.RelMetadataQuery)">estimateRowCount</a>, <a href="../SingleRel.html#getInput()">getInput</a>, <a href="../SingleRel.html#getInputs()">getInputs</a>, <a href="../SingleRel.html#replaceInput(int,org.apache.calcite.rel.RelNode)">replaceInput</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-org.apache.calcite.rel.AbstractRelNode">Methods inherited from class&nbsp;org.apache.calcite.rel.<a href="../AbstractRelNode.html" title="class in org.apache.calcite.rel">AbstractRelNode</a></h3>
-<code><a href="../AbstractRelNode.html#collectVariablesSet(java.util.Set)">collectVariablesSet</a>, <a href="../AbstractRelNode.html#collectVariablesUsed(java.util.Set)">collectVariablesUsed</a>, <a href="../AbstractRelNode.html#equals(java.lang.Object)">equals</a>, <a href="../AbstractRelNode.html#explain(org.apache.calcite.rel.RelWriter)">explain</a>, <a href="../AbstractRelNode.html#getCluster()">getCluster</a>, <a href="../AbstractRelNode.html#getConvention()">getConvention</a>, <a href="../AbstractRelNode.html#getCorrelVariable()">getCorrelVariable</a>, <a href="../AbstractRelNode.html#getDescription()">getDescription</a>, <a href="../AbstractRelNode.html#getDigest()">getDigest</a>, <a href="../AbstractRelNode.html#getExpectedInputRowType(int)">getExpectedInputRowType</a>, <a href="../AbstractRelNode.html#getId()">getId</a>, <a href="../AbstractRelNode.html#getInput(int)">getInput</a>, <a href="../AbstractRelNode.html#getRelDigest()">getRelDigest</a>, <a href="../AbstractRelNode.html#getRelTypeName()">getRelTypeName</a>, <a href="../AbstractRelNode.html#getRowType()">getRowType</a>, <a href="../AbstractRelNode.html#getTable()">getTable</a>, <a href="../AbstractRelNode.html#getTraitSet()">getTraitSet</a>, <a href="../AbstractRelNode.html#getVariablesSet()">getVariablesSet</a>, <a href="../AbstractRelNode.html#hashCode()">hashCode</a>, <a href="../AbstractRelNode.html#isEnforcer()">isEnforcer</a>, <a href="../AbstractRelNode.html#metadata(java.lang.Class,org.apache.calcite.rel.metadata.RelMetadataQuery)">metadata</a>, <a href="../AbstractRelNode.html#onRegister(org.apache.calcite.plan.RelOptPlanner)">onRegister</a>, <a href="../AbstractRelNode.html#recomputeDigest()">recomputeDigest</a>, <a href="../AbstractRelNode.html#register(org.apache.calcite.plan.RelOptPlanner)">register</a>, <a href="../AbstractRelNode.html#sole(java.util.List)">sole</a>, <a href="../AbstractRelNode.html#toString()">toString</a></code></div>
+<code><a href="../AbstractRelNode.html#collectVariablesSet(java.util.Set)">collectVariablesSet</a>, <a href="../AbstractRelNode.html#collectVariablesUsed(java.util.Set)">collectVariablesUsed</a>, <a href="../AbstractRelNode.html#equals(java.lang.Object)">equals</a>, <a href="../AbstractRelNode.html#explain(org.apache.calcite.rel.RelWriter)">explain</a>, <a href="../AbstractRelNode.html#getCluster()">getCluster</a>, <a href="../AbstractRelNode.html#getConvention()">getConvention</a>, <a href="../AbstractRelNode.html#getCorrelVariable()">getCorrelVariable</a>, <a href="../AbstractRelNode.html#getDescription()">getDescription</a>, <a href="../AbstractRelNode.html#getDigest()">getDigest</a>, <a href="../AbstractRelNode.html#getExpectedInputRowType(int)">getExpectedInputRowType</a>, <a href="../AbstractRelNode.html#getId()">getId</a>, <a href="../AbstractRelNode.html#getInput(int)">getInput</a>, <a href="../AbstractRelNode.html#getRelDigest()">getRelDigest</a>, <a href="../AbstractRelNode.html#getRelTypeName()">getRelTypeName</a>, <a href="../AbstractRelNode.html#getRowType()">getRowType</a>, <a href="../AbstractRelNode.html#getTable()">getTable</a>, <a href="../AbstractRelNode.html#getTraitSet()">getTraitSet</a>, <a href="../AbstractRelNode.html#hashCode()">hashCode</a>, <a href="../AbstractRelNode.html#isEnforcer()">isEnforcer</a>, <a href="../AbstractRelNode.html#metadata(java.lang.Class,org.apache.calcite.rel.metadata.RelMetadataQuery)">metadata</a>, <a href="../AbstractRelNode.html#onRegister(org.apache.calcite.plan.RelOptPlanner)">onRegister</a>, <a href="../AbstractRelNode.html#recomputeDigest()">recomputeDigest</a>, <a href="../AbstractRelNode.html#register(org.apache.calcite.plan.RelOptPlanner)">register</a>, <a href="../AbstractRelNode.html#sole(java.util.List)">sole</a>, <a href="../AbstractRelNode.html#toString()">toString</a></code></div>
 <div class="inherited-list">
-<h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
-<code><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
+<h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
+<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-org.apache.calcite.rel.hint.Hintable">Methods inherited from interface&nbsp;org.apache.calcite.rel.hint.<a href="../hint/Hintable.html" title="interface in org.apache.calcite.rel.hint">Hintable</a></h3>
 <code><a href="../hint/Hintable.html#attachHints(java.util.List)">attachHints</a></code></div>
@@ -258,14 +290,15 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,java.util.List,org.apache.calcite.rel.RelNode,java.util.List,org.apache.calcite.rel.type.RelDataType)">
+<section class="detail" id="&lt;init&gt;(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,java.util.List,org.apache.calcite.rel.RelNode,java.util.List,org.apache.calcite.rel.type.RelDataType,java.util.Set)">
 <h3>LogicalProject</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">LogicalProject</span><wbr><span class="parameters">(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
  <a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hints,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hints,
  <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
- <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+ <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../core/CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>&gt;&nbsp;variablesSet)</span></div>
 <div class="block">Creates a LogicalProject.
 
  <p>Use <a href="#create(org.apache.calcite.rel.RelNode,java.util.List,java.util.List,java.util.List)"><code>create(org.apache.calcite.rel.RelNode, java.util.List&lt;org.apache.calcite.rel.hint.RelHint&gt;, java.util.List&lt;? extends org.apache.calcite.rex.RexNode&gt;, java.util.List&lt;? extends java.lang.String&gt;)</code></a> unless you know what you're doing.</div>
@@ -277,17 +310,32 @@ loadScripts(document, 'script');</script>
 <dd><code>input</code> - Input relational expression</dd>
 <dd><code>projects</code> - List of expressions for the input columns</dd>
 <dd><code>rowType</code> - Output row type</dd>
+<dd><code>variablesSet</code> - Correlation variables set by this relational expression
+                     to be used by nested expressions</dd>
 </dl>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,java.util.List,org.apache.calcite.rel.RelNode,java.util.List,org.apache.calcite.rel.type.RelDataType)">
+<h3>LogicalProject</h3>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public</span>&nbsp;<span class="element-name">LogicalProject</span><wbr><span class="parameters">(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
+ <a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hints,
+ <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+ <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,java.util.List,org.apache.calcite.rel.type.RelDataType)">
 <h3>LogicalProject</h3>
-<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
 </span><span class="modifiers">public</span>&nbsp;<span class="element-name">LogicalProject</span><wbr><span class="parameters">(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
  <a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
  <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
  <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType)</span></div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
@@ -295,11 +343,11 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,java.util.List,org.apache.calcite.rel.type.RelDataType,int)">
 <h3>LogicalProject</h3>
-<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
 </span><span class="modifiers">public</span>&nbsp;<span class="element-name">LogicalProject</span><wbr><span class="parameters">(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
  <a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
  <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
  <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
  int&nbsp;flags)</span></div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
@@ -308,11 +356,11 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(org.apache.calcite.plan.RelOptCluster,org.apache.calcite.rel.RelNode,java.util.List,java.util.List,int)">
 <h3>LogicalProject</h3>
-<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
 </span><span class="modifiers">public</span>&nbsp;<span class="element-name">LogicalProject</span><wbr><span class="parameters">(<a href="../../plan/RelOptCluster.html" title="class in org.apache.calcite.plan">RelOptCluster</a>&nbsp;cluster,
  <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
- @Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends @Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;fieldNames,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;fieldNames,
  int&nbsp;flags)</span></div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
@@ -335,20 +383,50 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="create(org.apache.calcite.rel.RelNode,java.util.List,java.util.List,java.util.List)">
 <h3>create</h3>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a></span>&nbsp;<span class="element-name">create</span><wbr><span class="parameters">(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hints,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;fieldNames)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span>
+<div class="deprecation-comment">Use <a href="#create(org.apache.calcite.rel.RelNode,java.util.List,java.util.List,java.util.List,java.util.Set)"><code>create(RelNode, List, List, List, Set)</code></a> instead</div>
+</div>
+<div class="block">Creates a LogicalProject.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="create(org.apache.calcite.rel.RelNode,java.util.List,java.util.List,java.util.List,java.util.Set)">
+<h3>create</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a></span>&nbsp;<span class="element-name">create</span><wbr><span class="parameters">(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hints,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
- @Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends @Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;fieldNames)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hints,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;fieldNames,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../core/CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>&gt;&nbsp;variablesSet)</span></div>
 <div class="block">Creates a LogicalProject.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="create(org.apache.calcite.rel.RelNode,java.util.List,java.util.List,org.apache.calcite.rel.type.RelDataType)">
 <h3>create</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a></span>&nbsp;<span class="element-name">create</span><wbr><span class="parameters">(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hints,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a></span>&nbsp;<span class="element-name">create</span><wbr><span class="parameters">(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hints,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
  <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span>
+<div class="deprecation-comment">Use <a href="#create(org.apache.calcite.rel.RelNode,java.util.List,java.util.List,org.apache.calcite.rel.type.RelDataType,java.util.Set)"><code>create(RelNode, List, List, RelDataType, Set)</code></a> instead</div>
+</div>
+<div class="block">Creates a LogicalProject, specifying row type rather than field names.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="create(org.apache.calcite.rel.RelNode,java.util.List,java.util.List,org.apache.calcite.rel.type.RelDataType,java.util.Set)">
+<h3>create</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a></span>&nbsp;<span class="element-name">create</span><wbr><span class="parameters">(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hints,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+ <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../core/CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>&gt;&nbsp;variablesSet)</span></div>
 <div class="block">Creates a LogicalProject, specifying row type rather than field names.</div>
 </section>
 </li>
@@ -357,7 +435,7 @@ loadScripts(document, 'script');</script>
 <h3>copy</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="LogicalProject.html" title="class in org.apache.calcite.rel.logical">LogicalProject</a></span>&nbsp;<span class="element-name">copy</span><wbr><span class="parameters">(<a href="../../plan/RelTraitSet.html" title="class in org.apache.calcite.plan">RelTraitSet</a>&nbsp;traitSet,
  <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;input,
- <a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;projects,
  <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType)</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="../core/Project.html#copy(org.apache.calcite.plan.RelTraitSet,org.apache.calcite.rel.RelNode,java.util.List,org.apache.calcite.rel.type.RelDataType)">Project</a></code></span></div>
 <div class="block">Copies a project.</div>
@@ -404,7 +482,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="withHints(java.util.List)">
 <h3>withHints</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></span>&nbsp;<span class="element-name">withHints</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/javase/9/docs/api/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hintList)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></span>&nbsp;<span class="element-name">withHints</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;&nbsp;hintList)</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../hint/Hintable.html#withHints(java.util.List)">Hintable</a></code></span></div>
 <div class="block">Returns a new relational expression with the specified hints <code>hintList</code>.
 
@@ -424,7 +502,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="deepEquals(java.lang.Object)">
 <h3>deepEquals</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">deepEquals</span><wbr><span class="parameters">(@Nullable <a href="https://docs.oracle.com/javase/9/docs/api/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;obj)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">deepEquals</span><wbr><span class="parameters">(@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;obj)</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="../AbstractRelNode.html#deepEquals(java.lang.Object)">AbstractRelNode</a></code></span></div>
 <div class="block">Equality check for RelNode digest.
 
@@ -479,7 +557,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2022 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2023 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

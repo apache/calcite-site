@@ -79,7 +79,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <dl class="notes">
 <dt>All Known Implementing Classes:</dt>
-<dd><code><a href="ComparableOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">ComparableOperandTypeChecker</a></code>, <code><a href="CompositeSingleOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">CompositeSingleOperandTypeChecker</a></code>, <code><a href="FamilyOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">FamilyOperandTypeChecker</a></code>, <code><a href="LiteralOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">LiteralOperandTypeChecker</a></code>, <code><a href="OperandMetadataImpl.html" title="class in org.apache.calcite.sql.type">OperandMetadataImpl</a></code>, <code><a href="SameOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">SameOperandTypeChecker</a></code>, <code><a href="SameOperandTypeExceptLastOperandChecker.html" title="class in org.apache.calcite.sql.type">SameOperandTypeExceptLastOperandChecker</a></code></dd>
+<dd><code><a href="ComparableOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">ComparableOperandTypeChecker</a></code>, <code><a href="CompositeSingleOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">CompositeSingleOperandTypeChecker</a></code>, <code><a href="FamilyOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">FamilyOperandTypeChecker</a></code>, <code><a href="IntervalOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">IntervalOperandTypeChecker</a></code>, <code><a href="LiteralOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">LiteralOperandTypeChecker</a></code>, <code><a href="OperandMetadataImpl.html" title="class in org.apache.calcite.sql.type">OperandMetadataImpl</a></code>, <code><a href="SameOperandTypeChecker.html" title="class in org.apache.calcite.sql.type">SameOperandTypeChecker</a></code>, <code><a href="SameOperandTypeExceptLastOperandChecker.html" title="class in org.apache.calcite.sql.type">SameOperandTypeExceptLastOperandChecker</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">SqlSingleOperandTypeChecker</span><span class="extends-implements">
@@ -106,12 +106,23 @@ extends <a href="SqlOperandTypeChecker.html" title="interface in org.apache.calc
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab3" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab3', 3)" class="table-tab">Abstract Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab3" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab3', 3)" class="table-tab">Abstract Methods</button><button id="method-summary-table-tab5" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab5', 3)" class="table-tab">Default Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel">
 <div class="summary-table three-column-summary" aria-labelledby="method-summary-table-tab0">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="SqlSingleOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlSingleOperandTypeChecker</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#and(org.apache.calcite.sql.type.SqlSingleOperandTypeChecker)" class="member-name-link">and</a><wbr>(<a href="SqlSingleOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlSingleOperandTypeChecker</a>&nbsp;checker)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Composes this with another single-operand checker using AND.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#checkOperandTypes(org.apache.calcite.sql.SqlCallBinding,boolean)" class="member-name-link">checkOperandTypes</a><wbr>(<a href="../SqlCallBinding.html" title="class in org.apache.calcite.sql">SqlCallBinding</a>&nbsp;callBinding,
+ boolean&nbsp;throwOnFailure)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Checks the types of all operands to an operator call.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#checkSingleOperandType(org.apache.calcite.sql.SqlCallBinding,org.apache.calcite.sql.SqlNode,int,boolean)" class="member-name-link">checkSingleOperandType</a><wbr>(<a href="../SqlCallBinding.html" title="class in org.apache.calcite.sql">SqlCallBinding</a>&nbsp;callBinding,
  <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;operand,
@@ -121,12 +132,22 @@ extends <a href="SqlOperandTypeChecker.html" title="interface in org.apache.calc
 <div class="block">Checks the type of a single operand against a particular ordinal position
  within a formal operator signature.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="../SqlOperandCountRange.html" title="interface in org.apache.calcite.sql">SqlOperandCountRange</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getOperandCountRange()" class="member-name-link">getOperandCountRange</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Returns the range of operand counts allowed in a call.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="SqlSingleOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlSingleOperandTypeChecker</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#or(org.apache.calcite.sql.type.SqlSingleOperandTypeChecker)" class="member-name-link">or</a><wbr>(<a href="SqlSingleOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlSingleOperandTypeChecker</a>&nbsp;checker)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Composes this with another single-operand checker using OR.</div>
+</div>
 </div>
 </div>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-org.apache.calcite.sql.type.SqlOperandTypeChecker">Methods inherited from interface&nbsp;org.apache.calcite.sql.type.<a href="SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a></h3>
-<code><a href="SqlOperandTypeChecker.html#checkOperandTypes(org.apache.calcite.sql.SqlCallBinding,boolean)">checkOperandTypes</a>, <a href="SqlOperandTypeChecker.html#getAllowedSignatures(org.apache.calcite.sql.SqlOperator,java.lang.String)">getAllowedSignatures</a>, <a href="SqlOperandTypeChecker.html#getConsistency()">getConsistency</a>, <a href="SqlOperandTypeChecker.html#getOperandCountRange()">getOperandCountRange</a>, <a href="SqlOperandTypeChecker.html#isFixedParameters()">isFixedParameters</a>, <a href="SqlOperandTypeChecker.html#isOptional(int)">isOptional</a>, <a href="SqlOperandTypeChecker.html#typeInference()">typeInference</a></code></div>
+<code><a href="SqlOperandTypeChecker.html#and(org.apache.calcite.sql.type.SqlOperandTypeChecker)">and</a>, <a href="SqlOperandTypeChecker.html#getAllowedSignatures(org.apache.calcite.sql.SqlOperator,java.lang.String)">getAllowedSignatures</a>, <a href="SqlOperandTypeChecker.html#getConsistency()">getConsistency</a>, <a href="SqlOperandTypeChecker.html#isFixedParameters()">isFixedParameters</a>, <a href="SqlOperandTypeChecker.html#isOptional(int)">isOptional</a>, <a href="SqlOperandTypeChecker.html#or(org.apache.calcite.sql.type.SqlOperandTypeChecker)">or</a>, <a href="SqlOperandTypeChecker.html#typeInference()">typeInference</a>, <a href="SqlOperandTypeChecker.html#withGenerator(java.util.function.BiFunction)">withGenerator</a></code></div>
 </section>
 </li>
 </ul>
@@ -182,6 +203,51 @@ extends <a href="SqlOperandTypeChecker.html" title="interface in org.apache.calc
 </dl>
 </section>
 </li>
+<li>
+<section class="detail" id="checkOperandTypes(org.apache.calcite.sql.SqlCallBinding,boolean)">
+<h3>checkOperandTypes</h3>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">checkOperandTypes</span><wbr><span class="parameters">(<a href="../SqlCallBinding.html" title="class in org.apache.calcite.sql">SqlCallBinding</a>&nbsp;callBinding,
+ boolean&nbsp;throwOnFailure)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="SqlOperandTypeChecker.html#checkOperandTypes(org.apache.calcite.sql.SqlCallBinding,boolean)">SqlOperandTypeChecker</a></code></span></div>
+<div class="block">Checks the types of all operands to an operator call.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="SqlOperandTypeChecker.html#checkOperandTypes(org.apache.calcite.sql.SqlCallBinding,boolean)">checkOperandTypes</a></code>&nbsp;in interface&nbsp;<code><a href="SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>callBinding</code> - description of the call to be checked</dd>
+<dd><code>throwOnFailure</code> - whether to throw an exception if check fails
+                       (otherwise returns false in that case)</dd>
+<dt>Returns:</dt>
+<dd>whether check succeeded</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getOperandCountRange()">
+<h3>getOperandCountRange</h3>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="../SqlOperandCountRange.html" title="interface in org.apache.calcite.sql">SqlOperandCountRange</a></span>&nbsp;<span class="element-name">getOperandCountRange</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="SqlOperandTypeChecker.html#getOperandCountRange()">SqlOperandTypeChecker</a></code></span></div>
+<div class="block">Returns the range of operand counts allowed in a call.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="SqlOperandTypeChecker.html#getOperandCountRange()">getOperandCountRange</a></code>&nbsp;in interface&nbsp;<code><a href="SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="and(org.apache.calcite.sql.type.SqlSingleOperandTypeChecker)">
+<h3>and</h3>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SqlSingleOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlSingleOperandTypeChecker</a></span>&nbsp;<span class="element-name">and</span><wbr><span class="parameters">(<a href="SqlSingleOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlSingleOperandTypeChecker</a>&nbsp;checker)</span></div>
+<div class="block">Composes this with another single-operand checker using AND.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="or(org.apache.calcite.sql.type.SqlSingleOperandTypeChecker)">
+<h3>or</h3>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SqlSingleOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlSingleOperandTypeChecker</a></span>&nbsp;<span class="element-name">or</span><wbr><span class="parameters">(<a href="SqlSingleOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlSingleOperandTypeChecker</a>&nbsp;checker)</span></div>
+<div class="block">Composes this with another single-operand checker using OR.</div>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -191,7 +257,7 @@ extends <a href="SqlOperandTypeChecker.html" title="interface in org.apache.calc
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2022 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2023 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

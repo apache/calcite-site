@@ -560,8 +560,10 @@ DATA,
 DATABASE,
 <strong>DATE</strong>,
 <strong>DATETIME</strong>,
+DATETIME_DIFF,
 DATETIME_INTERVAL_CODE,
 DATETIME_INTERVAL_PRECISION,
+DATE_DIFF,
 DATE_TRUNC,
 <strong>DAY</strong>,
 DAYS,
@@ -5369,6 +5371,24 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
     </tr>
     <tr>
       <td style="text-align: left">b</td>
+      <td style="text-align: left">DATETIME_ADD(timestamp, interval)</td>
+      <td style="text-align: left">Returns the TIMESTAMP value that occurs <em>interval</em> after <em>timestamp</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">DATETIME_DIFF(timestamp, timestamp2, timeUnit)</td>
+      <td style="text-align: left">Returns the whole number of <em>timeUnit</em> between <em>timestamp</em> and <em>timestamp2</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">DATETIME_SUB(timestamp, interval)</td>
+      <td style="text-align: left">Returns the TIMESTAMP that occurs <em>interval</em> before <em>timestamp</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
       <td style="text-align: left">DATE_FROM_UNIX_DATE(integer)</td>
       <td style="text-align: left">Returns the DATE that is <em>integer</em> days after 1970-01-01</td>
     </tr>
@@ -5376,6 +5396,18 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">p</td>
       <td style="text-align: left">DATE_PART(timeUnit, datetime)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(timeUnit FROM  datetime)</code>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">DATE_ADD(date, interval)</td>
+      <td style="text-align: left">Returns the DATE value that occurs <em>interval</em> after <em>date</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">DATE_DIFF(date, date2, timeUnit)</td>
+      <td style="text-align: left">Returns the whole number of <em>timeUnit</em> between <em>date</em> and <em>date2</em>
 </td>
     </tr>
     <tr>
@@ -5419,6 +5451,30 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">m</td>
       <td style="text-align: left">EXTRACTVALUE(xml, xpathExpr))</td>
       <td style="text-align: left">Returns the text of the first text node which is a child of the element or elements matched by the XPath expression.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">FORMAT_DATE(string, date)</td>
+      <td style="text-align: left">Formats <em>date</em> according to the specified format <em>string</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">FORMAT_DATETIME(string, timestamp)</td>
+      <td style="text-align: left">Formats <em>timestamp</em> according to the specified format <em>string</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">FORMAT_TIME(string, time)</td>
+      <td style="text-align: left">Formats <em>time</em> according to the specified format <em>string</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">FORMAT_TIMESTAMP(string timestamp)</td>
+      <td style="text-align: left">Formats <em>timestamp</em> according to the specified format <em>string</em>
+</td>
     </tr>
     <tr>
       <td style="text-align: left">b o</td>

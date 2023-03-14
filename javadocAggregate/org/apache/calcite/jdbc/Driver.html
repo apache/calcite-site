@@ -114,6 +114,9 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color"><code>static final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color"><code><a href="#CONNECT_STRING_PREFIX" class="member-name-link">CONNECT_STRING_PREFIX</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>protected final @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="CalcitePrepare.html" title="interface in org.apache.calcite.jdbc">CalcitePrepare</a>&gt;</code></div>
+<div class="col-second odd-row-color"><code><a href="#prepareFactory" class="member-name-link">prepareFactory</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
 </div>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-org.apache.calcite.avatica.UnregisteredDriver">Fields inherited from class&nbsp;org.apache.calcite.avatica.UnregisteredDriver</h3>
@@ -125,11 +128,22 @@ loadScripts(document, 'script');</script>
 <section class="constructor-summary" id="constructor-summary">
 <h2>Constructor Summary</h2>
 <div class="caption"><span>Constructors</span></div>
-<div class="summary-table two-column-summary">
-<div class="table-header col-first">Constructor</div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier</div>
+<div class="table-header col-second">Constructor</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>&nbsp;</code></div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">Driver</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a Driver.</div>
+</div>
+<div class="col-first odd-row-color"><code>protected </code></div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.util.function.Supplier)" class="member-name-link">Driver</a><wbr>(@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="CalcitePrepare.html" title="interface in org.apache.calcite.jdbc">CalcitePrepare</a>&gt;&nbsp;prepareFactory)</code></div>
+<div class="col-last odd-row-color">
+<div class="block">Creates a Driver with a factory for <code>CalcitePrepare</code> objects;
+ if the factory is null, the driver will call
+ <a href="#createPrepareFactory()"><code>createPrepareFactory()</code></a>.</div>
+</div>
 </div>
 </section>
 </li>
@@ -138,7 +152,7 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button><button id="method-summary-table-tab6" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab6', 3)" class="table-tab">Deprecated Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel">
 <div class="summary-table three-column-summary" aria-labelledby="method-summary-table-tab0">
 <div class="table-header col-first">Modifier and Type</div>
@@ -153,18 +167,32 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>org.apache.calcite.avatica.Meta</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#createMeta(org.apache.calcite.avatica.AvaticaConnection)" class="member-name-link">createMeta</a><wbr>(org.apache.calcite.avatica.AvaticaConnection&nbsp;connection)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../linq4j/function/Function0.html" title="interface in org.apache.calcite.linq4j.function">Function0</a>&lt;<a href="CalcitePrepare.html" title="interface in org.apache.calcite.jdbc">CalcitePrepare</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#createPrepareFactory()" class="member-name-link">createPrepareFactory</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;org.apache.calcite.avatica.ConnectionProperty&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getConnectionProperties()" class="member-name-link">getConnectionProperties</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getConnectStringPrefix()" class="member-name-link">getConnectStringPrefix</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="CalcitePrepare.html" title="interface in org.apache.calcite.jdbc">CalcitePrepare</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#createPrepare()" class="member-name-link">createPrepare</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a <a href="CalcitePrepare.html" title="interface in org.apache.calcite.jdbc"><code>CalcitePrepare</code></a> to be used to prepare a statement for
+ execution.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code>protected <a href="../linq4j/function/Function0.html" title="interface in org.apache.calcite.linq4j.function">Function0</a>&lt;<a href="CalcitePrepare.html" title="interface in org.apache.calcite.jdbc">CalcitePrepare</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#createPrepareFactory()" class="member-name-link">createPrepareFactory</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;org.apache.calcite.avatica.ConnectionProperty&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getConnectionProperties()" class="member-name-link">getConnectionProperties</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFactoryClassName(org.apache.calcite.avatica.UnregisteredDriver.JdbcVersion)" class="member-name-link">getFactoryClassName</a><wbr>(org.apache.calcite.avatica.UnregisteredDriver.JdbcVersion&nbsp;jdbcVersion)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getConnectStringPrefix()" class="member-name-link">getConnectStringPrefix</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFactoryClassName(org.apache.calcite.avatica.UnregisteredDriver.JdbcVersion)" class="member-name-link">getFactoryClassName</a><wbr>(org.apache.calcite.avatica.UnregisteredDriver.JdbcVersion&nbsp;jdbcVersion)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Driver.html" title="class in org.apache.calcite.jdbc">Driver</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#withPrepareFactory(java.util.function.Supplier)" class="member-name-link">withPrepareFactory</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="CalcitePrepare.html" title="interface in org.apache.calcite.jdbc">CalcitePrepare</a>&gt;&nbsp;prepareFactory)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a copy of this Driver with a new factory for creating
+ <a href="CalcitePrepare.html" title="interface in org.apache.calcite.jdbc"><code>CalcitePrepare</code></a>.</div>
+</div>
 </div>
 </div>
 </div>
@@ -199,6 +227,12 @@ loadScripts(document, 'script');</script>
 </dl>
 </section>
 </li>
+<li>
+<section class="detail" id="prepareFactory">
+<h3>prepareFactory</h3>
+<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type">@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="CalcitePrepare.html" title="interface in org.apache.calcite.jdbc">CalcitePrepare</a>&gt;</span>&nbsp;<span class="element-name">prepareFactory</span></div>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -211,6 +245,16 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>Driver</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Driver</span>()</div>
+<div class="block">Creates a Driver.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(java.util.function.Supplier)">
+<h3>Driver</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">Driver</span><wbr><span class="parameters">(@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="CalcitePrepare.html" title="interface in org.apache.calcite.jdbc">CalcitePrepare</a>&gt;&nbsp;prepareFactory)</span></div>
+<div class="block">Creates a Driver with a factory for <code>CalcitePrepare</code> objects;
+ if the factory is null, the driver will call
+ <a href="#createPrepareFactory()"><code>createPrepareFactory()</code></a>.</div>
 </section>
 </li>
 </ul>
@@ -222,9 +266,46 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="withPrepareFactory(java.util.function.Supplier)">
+<h3>withPrepareFactory</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Driver.html" title="class in org.apache.calcite.jdbc">Driver</a></span>&nbsp;<span class="element-name">withPrepareFactory</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="CalcitePrepare.html" title="interface in org.apache.calcite.jdbc">CalcitePrepare</a>&gt;&nbsp;prepareFactory)</span></div>
+<div class="block">Creates a copy of this Driver with a new factory for creating
+ <a href="CalcitePrepare.html" title="interface in org.apache.calcite.jdbc"><code>CalcitePrepare</code></a>.
+
+ <p>Allows users of the Driver to change the factory without subclassing
+ the Driver. But subclasses of the driver should override this method to
+ create an instance of their subclass.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>prepareFactory</code> - Supplier of a <code>CalcitePrepare</code></dd>
+<dt>Returns:</dt>
+<dd>Driver with the provided prepareFactory</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="createPrepare()">
+<h3>createPrepare</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="CalcitePrepare.html" title="interface in org.apache.calcite.jdbc">CalcitePrepare</a></span>&nbsp;<span class="element-name">createPrepare</span>()</div>
+<div class="block">Creates a <a href="CalcitePrepare.html" title="interface in org.apache.calcite.jdbc"><code>CalcitePrepare</code></a> to be used to prepare a statement for
+ execution.
+
+ <p>If you wish to use a custom prepare, either override this method or
+ call <a href="#withPrepareFactory(java.util.function.Supplier)"><code>withPrepareFactory(Supplier)</code></a>.</div>
+</section>
+</li>
+<li>
 <section class="detail" id="createPrepareFactory()">
 <h3>createPrepareFactory</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="../linq4j/function/Function0.html" title="interface in org.apache.calcite.linq4j.function">Function0</a>&lt;<a href="CalcitePrepare.html" title="interface in org.apache.calcite.jdbc">CalcitePrepare</a>&gt;</span>&nbsp;<span class="element-name">createPrepareFactory</span>()</div>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="../linq4j/function/Function0.html" title="interface in org.apache.calcite.linq4j.function">Function0</a>&lt;<a href="CalcitePrepare.html" title="interface in org.apache.calcite.jdbc">CalcitePrepare</a>&gt;</span>&nbsp;<span class="element-name">createPrepareFactory</span>()</div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
+<div class="block">Returns a factory with which to create a <a href="CalcitePrepare.html" title="interface in org.apache.calcite.jdbc"><code>CalcitePrepare</code></a>.
+
+ <p>Now deprecated; if you wish to use a custom prepare, overrides of this
+ method will still work, but we prefer that you call
+ <a href="#withPrepareFactory(java.util.function.Supplier)"><code>withPrepareFactory(Supplier)</code></a>
+ or override <a href="#createPrepare()"><code>createPrepare()</code></a>.</div>
 </section>
 </li>
 <li>

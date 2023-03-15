@@ -955,6 +955,10 @@ installed in your machine.</li>
 Log into <a href="https://repository.apache.org/#stagingRepositories">Nexus UI</a> to see the actual error. In case of
 <code class="language-plaintext highlighter-rouge">Failed: Signature Validation. No public key: Key with id: ... was not able to be located</code>, make sure you have uploaded
 your key to the keyservers used by Nexus, see above.</li>
+  <li>
+<a href="https://issues.apache.org/jira/browse/CALCITE-5573">[CALCITE-5573]</a> Gradle prepareVote fails when signing artifact</li>
+  <li>
+<a href="https://github.com/vlsi/vlsi-release-plugins/issues/64">[VLSI-RELEASE-PLUGINS-64]</a> Execution failed for task ‘:releaseRepository due to missing nexus.txt</li>
 </ul>
 
 <h4 id="checking-the-artifacts">Checking the artifacts</h4>
@@ -964,7 +968,7 @@ your key to the keyservers used by Nexus, see above.</li>
     <ul>
       <li><code class="language-plaintext highlighter-rouge">apache-calcite-X.Y.Z-src.tar.gz</code></li>
       <li><code class="language-plaintext highlighter-rouge">apache-calcite-X.Y.Z-src.tar.gz.asc</code></li>
-      <li><code class="language-plaintext highlighter-rouge">apache-calcite-X.Y.Z-src.tar.gz.sha256</code></li>
+      <li><code class="language-plaintext highlighter-rouge">apache-calcite-X.Y.Z-src.tar.gz.sha512</code></li>
     </ul>
   </li>
   <li>Note that the file names start <code class="language-plaintext highlighter-rouge">apache-calcite-</code>.</li>
@@ -1096,6 +1100,11 @@ Remember that UTC date changes at 4 pm Pacific time.</p>
 <span class="c"># Publish the release to ASF servers</span>
 ./gradlew publishDist <span class="nt">-Prc</span><span class="o">=</span>0 <span class="nt">-Pasf</span> <span class="nt">-Pasf</span>.git.pushRepositoryProvider<span class="o">=</span>GITBOX</code></pre></figure>
 
+<p>If for whatever reason the <code class="language-plaintext highlighter-rouge">publishDist</code> task fails
+(e.g. <a href="https://github.com/vlsi/vlsi-release-plugins/issues/64">failed to release nexus repository</a>,
+it is still possible to perform the publishing tasks manually. Ask for help in the dev list if
+you are not sure what needs to be done.</p>
+
 <p>Svnpubsub will publish to the
 <a href="https://dist.apache.org/repos/dist/release/calcite">release repo</a> and propagate to the
 <a href="https://www.apache.org/dyn/closer.cgi/calcite">mirrors</a> almost immediately.
@@ -1113,15 +1122,17 @@ svn ci</code></pre></figure>
 <p>You should receive an email from the <a href="https://reporter.apache.org/">Apache Reporter Service</a>.
 Make sure to add the version number and date of the latest release at the site linked to in the email.</p>
 
-<p>Update the site with the release note, the release announcement, and the javadoc of the new version.
-Add a release announcement by copying
-<a href="https://github.com/apache/calcite/blob/main/site/_posts/2016-10-12-release-1.10.0.md">site/_posts/2016-10-12-release-1.10.0.md</a>.
-Generate the javadoc, and <a href="http://localhost:4000/news/">preview</a> the site by following the
-instructions in <a href="https://github.com/apache/calcite/blob/main/site/README.md">site/README.md</a>. Ensure the announcement,
-javadoc, and release note appear correctly and then publish the site following the instructions
-in the same file. Rebase the <code class="language-plaintext highlighter-rouge">site</code> branch with <code class="language-plaintext highlighter-rouge">main</code> (e.g., <code class="language-plaintext highlighter-rouge">git checkout site &amp;&amp; git rebase main</code>);
-at this point there shouldn’t be any commits in <code class="language-plaintext highlighter-rouge">site</code> that are not in <code class="language-plaintext highlighter-rouge">main</code>, so the rebase is
-essentially a noop.</p>
+<p>The release notes and the javadoc of the new version will be automatically deployed to the website
+once the release commits/tags reach the ASF remote and the respective
+<a href="https://github.com/apache/calcite/blob/main/.github/workflows/">Gitub workflows</a> are triggered.</p>
+
+<p>Add a release announcement by copying
+<a href="https://github.com/apache/calcite/blob/main/site/_posts/2016-10-12-release-1.10.0.md">site/_posts/2016-10-12-release-1.10.0.md</a>,
+and adapt the release date in <code class="language-plaintext highlighter-rouge">history.md</code> if necessary. Preview the changes locally, by following the
+instructions in <a href="https://github.com/apache/calcite/blob/main/site/README.md">site/README.md</a>, and then commit and push
+the changes to the <code class="language-plaintext highlighter-rouge">main</code> branch.</p>
+
+<p>Ensure that all changes to the website (news, release notes, javadoc) are correctly displayed.</p>
 
 <p>In JIRA, search for
 <a href="https://issues.apache.org/jira/issues/?jql=project%20%3D%20CALCITE%20and%20fixVersion%20%3D%201.5.0%20and%20status%20%3D%20Resolved%20and%20resolution%20%3D%20Fixed">all issues resolved in this release</a>,
@@ -1135,18 +1146,18 @@ a new version (e.g., X.Y+1.Z) for the next release. In order to make the <a href
 reflect state of the next release, change the fixVersion in the <a href="https://issues.apache.org/jira/issues/?filter=12346388">JIRA filter powering the dashboard</a>
 and save the changes.</p>
 
-<p>After 24 hours, announce the release by sending an email to
-<a href="https://mail-archives.apache.org/mod_mbox/www-announce/">announce@apache.org</a> using an <code class="language-plaintext highlighter-rouge">@apache.org</code>
-address. You can use
-<a href="https://mail-archives.apache.org/mod_mbox/www-announce/201906.mbox/%3CCA%2BEpF8tcJcZ41rVuwJODJmyRy-qAxZUQm9OxKsoDi07c2SKs_A%40mail.gmail.com%3E">the 1.20.0 announcement</a>
-as a template. Be sure to include a brief description of the project.</p>
-
 <p>Increase the <code class="language-plaintext highlighter-rouge">calcite.version</code> value in <code class="language-plaintext highlighter-rouge">/gradle.properties</code>, commit and push
 the change with the message “Prepare for next development iteration”
 (see <a href="https://github.com/apache/calcite/commit/ed1470a3ea53a78c667354a5ec066425364eca73">ed1470a</a> as a reference)</p>
 
 <p>Re-open the <code class="language-plaintext highlighter-rouge">main</code> branch. Send an email to <a href="mailto:dev@calcite.apache.org">dev@calcite.apache.org</a> notifying
 that <code class="language-plaintext highlighter-rouge">main</code> code freeze is over and commits can resume.</p>
+
+<p>Announce the release by sending an email to
+<a href="https://mail-archives.apache.org/mod_mbox/www-announce/">announce@apache.org</a> using an <code class="language-plaintext highlighter-rouge">@apache.org</code>
+address. You can use
+<a href="https://mail-archives.apache.org/mod_mbox/www-announce/201906.mbox/%3CCA%2BEpF8tcJcZ41rVuwJODJmyRy-qAxZUQm9OxKsoDi07c2SKs_A%40mail.gmail.com%3E">the 1.20.0 announcement</a>
+as a template. Be sure to include a brief description of the project.</p>
 
 <h2 id="publish-the-web-site">Publishing the web site</h2>
 

@@ -92,7 +92,8 @@ This page describes the structure of those files.</p>
 <figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
   </span><span class="err">version:</span><span class="w"> </span><span class="err">'</span><span class="mf">1.0</span><span class="err">'</span><span class="p">,</span><span class="w">
   </span><span class="err">defaultSchema:</span><span class="w"> </span><span class="err">'mongo'</span><span class="p">,</span><span class="w">
-  </span><span class="err">schemas:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">Schema...</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="err">schemas:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">Schema...</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="err">types:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">Type...</span><span class="w"> </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span></code></pre></figure>
 
 <h4 id="yaml">YAML</h4>
@@ -100,7 +101,9 @@ This page describes the structure of those files.</p>
 <figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="na">version</span><span class="pi">:</span> <span class="m">1.0</span>
 <span class="na">defaultSchema</span><span class="pi">:</span> <span class="s">mongo</span>
 <span class="na">schemas</span><span class="pi">:</span>
-<span class="pi">-</span> <span class="pi">[</span><span class="nv">Schema...</span><span class="pi">]</span></code></pre></figure>
+<span class="pi">-</span> <span class="pi">[</span><span class="nv">Schema...</span><span class="pi">]</span>
+<span class="na">types</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="pi">[</span><span class="nv">Type...</span><span class="pi">]</span></code></pre></figure>
 
 <p><code class="language-plaintext highlighter-rouge">version</code> (required string) must have value <code class="language-plaintext highlighter-rouge">1.0</code>.</p>
 
@@ -109,6 +112,8 @@ the name (case-sensitive) of a schema defined in this model, and will
 become the default schema for connections to Calcite that use this model.</p>
 
 <p><code class="language-plaintext highlighter-rouge">schemas</code> (optional list of <a href="#schema">Schema</a> elements).</p>
+
+<p><code class="language-plaintext highlighter-rouge">types</code> (optional list of <a href="#type">Type</a> elements shared by all schemas).</p>
 
 <h3 id="schema">Schema</h3>
 
@@ -549,7 +554,7 @@ if found, creates an aggregate function.</p>
 
 <h3 id="type">Type</h3>
 
-<p>Occurs within <code class="language-plaintext highlighter-rouge">root.schemas.types</code>.</p>
+<p>Occurs within <code class="language-plaintext highlighter-rouge">root.types</code> and <code class="language-plaintext highlighter-rouge">root.schemas.types</code>.</p>
 
 <h4 id="json-13">JSON</h4>
 

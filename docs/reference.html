@@ -563,9 +563,12 @@ DATABASE,
 DATETIME_DIFF,
 DATETIME_INTERVAL_CODE,
 DATETIME_INTERVAL_PRECISION,
+DATETIME_TRUNC,
 DATE_DIFF,
 DATE_TRUNC,
 <strong>DAY</strong>,
+DAYOFWEEK,
+DAYOFYEAR,
 DAYS,
 <strong>DEALLOCATE</strong>,
 <strong>DEC</strong>,
@@ -813,6 +816,7 @@ OPTIONS,
 <strong>OR</strong>,
 <strong>ORDER</strong>,
 ORDERING,
+<strong>ORDINAL</strong>,
 ORDINALITY,
 OTHERS,
 <strong>OUT</strong>,
@@ -840,8 +844,8 @@ PATH,
 <strong>PATTERN</strong>,
 <strong>PER</strong>,
 <strong>PERCENT</strong>,
-<strong>PERCENTILE_CONT</strong>,
-<strong>PERCENTILE_DISC</strong>,
+PERCENTILE_CONT,
+PERCENTILE_DISC,
 <strong>PERCENT_RANK</strong>,
 <strong>PERIOD</strong>,
 <strong>PERMUTE</strong>,
@@ -916,6 +920,9 @@ ROUTINE_SCHEMA,
 ROW_COUNT,
 <strong>ROW_NUMBER</strong>,
 <strong>RUNNING</strong>,
+<strong>SAFE_CAST</strong>,
+<strong>SAFE_OFFSET</strong>,
+<strong>SAFE_ORDINAL</strong>,
 <strong>SATURDAY</strong>,
 <strong>SAVEPOINT</strong>,
 SCALAR,
@@ -1073,6 +1080,7 @@ TRIGGER_SCHEMA,
 <strong>TRIM_ARRAY</strong>,
 <strong>TRUE</strong>,
 <strong>TRUNCATE</strong>,
+<strong>TRY_CAST</strong>,
 <strong>TUESDAY</strong>,
 TUMBLE,
 TYPE,
@@ -1592,11 +1600,11 @@ completeness.</p>
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">value IN (value [, value]*)</td>
+      <td style="text-align: left">value IN (value [, value ]*)</td>
       <td style="text-align: left">Whether <em>value</em> is equal to a value in a list</td>
     </tr>
     <tr>
-      <td style="text-align: left">value NOT IN (value [, value]*)</td>
+      <td style="text-align: left">value NOT IN (value [, value ]*)</td>
       <td style="text-align: left">Whether <em>value</em> is not equal to every value in a list</td>
     </tr>
     <tr>
@@ -1610,18 +1618,18 @@ completeness.</p>
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">value comparison SOME (sub-query)</td>
-      <td style="text-align: left">Whether <em>value</em> <em>comparison</em> at least one row returned by <em>sub-query</em>
+      <td style="text-align: left">value comparison SOME (sub-query or collection)</td>
+      <td style="text-align: left">Whether <em>value</em> <em>comparison</em> at least one row returned by <em>sub-query</em> or <em>collection</em>
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">value comparison ANY (sub-query)</td>
+      <td style="text-align: left">value comparison ANY (sub-query or collection)</td>
       <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">SOME</code>
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">value comparison ALL (sub-query)</td>
-      <td style="text-align: left">Whether <em>value</em> <em>comparison</em> every row returned by <em>sub-query</em>
+      <td style="text-align: left">value comparison ALL (sub-query or collection)</td>
+      <td style="text-align: left">Whether <em>value</em> <em>comparison</em> every row returned by <em>sub-query</em> or <em>collection</em>
 </td>
     </tr>
     <tr>
@@ -1895,13 +1903,13 @@ completeness.</p>
       <td style="text-align: left">Returns a character string converted to lower case</td>
     </tr>
     <tr>
-      <td style="text-align: left">POSITION(string1 IN string2)</td>
-      <td style="text-align: left">Returns the position of the first occurrence of <em>string1</em> in <em>string2</em>
+      <td style="text-align: left">POSITION(substring IN string)</td>
+      <td style="text-align: left">Returns the position of the first occurrence of <em>substring</em> in <em>string</em>
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">POSITION(string1 IN string2 FROM integer)</td>
-      <td style="text-align: left">Returns the position of the first occurrence of <em>string1</em> in <em>string2</em> starting at a given point (not standard SQL)</td>
+      <td style="text-align: left">POSITION(substring IN string FROM integer)</td>
+      <td style="text-align: left">Returns the position of the first occurrence of <em>substring</em> in <em>string</em> starting at a given point (not standard SQL)</td>
     </tr>
     <tr>
       <td style="text-align: left">TRIM( { BOTH | LEADING | TRAILING } string1 FROM string2)</td>
@@ -2201,7 +2209,22 @@ However, Calcite supports both implicit and explicit conversion of values from o
   <tbody>
     <tr>
       <td style="text-align: left">CAST(value AS type)</td>
-      <td style="text-align: left">Converts a value to a given type.</td>
+      <td style="text-align: left">Converts a value to a given type</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CONVERT(string, charSet1, charSet2)</td>
+      <td style="text-align: left">Converts <em>string</em> from <em>charSet1</em> to <em>charSet2</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CONVERT(value USING transcodingName)</td>
+      <td style="text-align: left">Alter <em>value</em> from one base character set to <em>transcodingName</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">TRANSLATE(value USING transcodingName)</td>
+      <td style="text-align: left">Alter <em>value</em> from one base character set to <em>transcodingName</em>
+</td>
     </tr>
   </tbody>
 </table></div>
@@ -2333,13 +2356,13 @@ these details follow the table.</p>
       <td style="text-align: left">BOOLEAN</td>
       <td style="text-align: left">x</td>
       <td style="text-align: left">i</td>
-      <td style="text-align: left">e</td>
-      <td style="text-align: left">e</td>
-      <td style="text-align: left">e</td>
-      <td style="text-align: left">e</td>
-      <td style="text-align: left">e</td>
-      <td style="text-align: left">e</td>
-      <td style="text-align: left">e</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
+      <td style="text-align: left">x</td>
       <td style="text-align: left">x</td>
       <td style="text-align: left">x</td>
       <td style="text-align: left">x</td>
@@ -4107,6 +4130,12 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
       <td style="text-align: left">Converts WKB → POLYGON</td>
     </tr>
     <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">ST_ReducePrecision(geom, gridSize)</td>
+      <td style="text-align: left">Reduces the precision of a <em>geom</em> to the provided <em>gridSize</em>
+</td>
+    </tr>
+    <tr>
       <td style="text-align: left">h</td>
       <td style="text-align: left">ST_ToMultiPoint(geom)</td>
       <td style="text-align: left">Converts the coordinates of <em>geom</em> (which may be a GEOMETRYCOLLECTION) into a MULTIPOINT</td>
@@ -4631,8 +4660,14 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">o</td>
-      <td style="text-align: left">ST_Buffer(geom, distance [, quadSegs | style ])</td>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">ST_Buffer(geom, distance [, quadSegs, endCapStyle ])</td>
+      <td style="text-align: left">Computes a buffer around <em>geom</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">ST_Buffer(geom, distance [, bufferStyle ])</td>
       <td style="text-align: left">Computes a buffer around <em>geom</em>
 </td>
     </tr>
@@ -4656,6 +4691,12 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
       <td style="text-align: left">o</td>
       <td style="text-align: left">ST_Intersection(geom1, geom2)</td>
       <td style="text-align: left">Computes the intersection of <em>geom1</em> and <em>geom2</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">ST_OffsetCurve(geom, distance, bufferStyle)</td>
+      <td style="text-align: left">Computes an offset line for <em>linestring</em>
 </td>
     </tr>
     <tr>
@@ -4718,35 +4759,99 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
 
 <p>The following functions modify 2D geometries.</p>
 
+<div class="scroll-table-style"><table>
+  <thead>
+    <tr>
+      <th style="text-align: left">C</th>
+      <th style="text-align: left">Operator syntax</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">ST_AddPoint(linestring, point [, index])</td>
+      <td style="text-align: left">Adds <em>point</em> to <em>linestring</em> at a given <em>index</em> (or at the end if <em>index</em> is not specified)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_Densify(geom, tolerance)</td>
+      <td style="text-align: left">Densifies a <em>geom</em> by inserting extra vertices along the line segments</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_FlipCoordinates(geom)</td>
+      <td style="text-align: left">Flips the X and Y coordinates of the <em>geom</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_Holes(geom)</td>
+      <td style="text-align: left">Returns the holes in the <em>geom</em> (which may be a GEOMETRYCOLLECTION)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_Normalize(geom)</td>
+      <td style="text-align: left">Converts the <em>geom</em> to normal form</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">ST_RemoveRepeatedPoints(geom [, tolerance])</td>
+      <td style="text-align: left">Removes duplicated coordinates from the <em>geom</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_RemoveHoles(geom)</td>
+      <td style="text-align: left">Removes the holes of the <em>geom</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">ST_RemovePoint(linestring, index)</td>
+      <td style="text-align: left">Remove <em>point</em> at given <em>index</em> in <em>linestring</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_Reverse(geom)</td>
+      <td style="text-align: left">Reverses the order of the coordinates of the <em>geom</em>
+</td>
+    </tr>
+  </tbody>
+</table></div>
+
 <p>Not implemented:</p>
 
 <ul>
-  <li>ST_AddPoint(geom, point [, tolerance ]) Adds <em>point</em> to <em>geom</em> with a given <em>tolerance</em> (default 0)</li>
   <li>ST_CollectionExtract(geom, dimension) Filters <em>geom</em>, returning a multi-geometry of those members with a given <em>dimension</em> (1 = point, 2 = line-string, 3 = polygon)</li>
-  <li>ST_Densify(geom, tolerance) Inserts extra vertices every <em>tolerance</em> along the line segments of <em>geom</em>
-</li>
-  <li>ST_FlipCoordinates(geom) Flips the X and Y coordinates of <em>geom</em>
-</li>
-  <li>ST_Holes(geom) Returns the holes in <em>geom</em> (which may be a GEOMETRYCOLLECTION)</li>
-  <li>ST_Normalize(geom) Converts <em>geom</em> to normal form</li>
-  <li>ST_RemoveDuplicatedCoordinates(geom) Removes duplicated coordinates from <em>geom</em>
-</li>
-  <li>ST_RemoveHoles(geom) Removes a <em>geom</em>’s holes</li>
-  <li>ST_RemovePoints(geom, poly) Removes all coordinates of <em>geom</em> located within <em>poly</em>; null if all coordinates are removed</li>
-  <li>ST_RemoveRepeatedPoints(geom, tolerance) Removes from <em>geom</em> all repeated points (or points within <em>tolerance</em> of another point)</li>
-  <li>ST_Reverse(geom) Reverses the vertex order of <em>geom</em>
-</li>
 </ul>
 
 <h4 id="geometry-editing-functions-3d">Geometry editing functions (3D)</h4>
 
 <p>The following functions modify 3D geometries.</p>
 
+<div class="scroll-table-style"><table>
+  <thead>
+    <tr>
+      <th style="text-align: left">C</th>
+      <th style="text-align: left">Operator syntax</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_AddZ(geom, zToAdd)</td>
+      <td style="text-align: left">Adds <em>zToAdd</em> to the z-coordinate of <em>geom</em>
+</td>
+    </tr>
+  </tbody>
+</table></div>
+
 <p>Not implemented:</p>
 
 <ul>
-  <li>ST_AddZ(geom, zToAdd) Adds <em>zToAdd</em> to the z-coordinate of <em>geom</em>
-</li>
   <li>ST_Interpolate3DLine(geom) Returns <em>geom</em> with an interpolation of z values, or null if it is not a line-string or MULTILINESTRING</li>
   <li>ST_MultiplyZ(geom, zFactor) Returns <em>geom</em> with its z-values multiplied by <em>zFactor</em>
 </li>
@@ -4890,6 +4995,12 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
       <td style="text-align: left">ST_Snap(geom1, geom2, tolerance)</td>
       <td style="text-align: left">Snaps <em>geom1</em> and <em>geom2</em> together</td>
     </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">ST_Split(geom, blade)</td>
+      <td style="text-align: left">Splits <em>geom</em> by <em>blade</em>
+</td>
+    </tr>
   </tbody>
 </table></div>
 
@@ -4902,7 +5013,6 @@ implements the OpenGIS Simple Features Implementation Specification for SQL,
   <li>ST_MakeValid(geom [, preserveGeomDim [, preserveDuplicateCoord [, preserveCoordDim]]]) Makes <em>geom</em> valid</li>
   <li>ST_RingSideBuffer(geom, distance, bufferCount [, endCapStyle [, doDifference]]) Computes a ring buffer on one side</li>
   <li>ST_SideBuffer(geom, distance [, bufferStyle ]) Compute a single buffer on one side</li>
-  <li>ST_Split(geom1, geom2 [, tolerance]) Splits <em>geom1</em> by <em>geom2</em> using <em>tolerance</em> (default 1E-6) to determine where the point splits the line</li>
 </ul>
 
 <h4 id="geometry-projection-functions">Geometry projection functions</h4>
@@ -4950,7 +5060,7 @@ users must include the EPSG dataset in their dependencies.</p>
 
 <ul>
   <li>ST_TriangleAspect(geom) Returns the aspect of a triangle</li>
-  <li>ST_TriangleContouring(query [, z1, z2, z3 ][, varArgs]*) Splits triangles into smaller triangles according to classes</li>
+  <li>ST_TriangleContouring(query [, z1, z2, z3 ][, varArgs ]*) Splits triangles into smaller triangles according to classes</li>
   <li>ST_TriangleDirection(geom) Computes the direction of steepest ascent of a triangle and returns it as a line-string</li>
   <li>ST_TriangleSlope(geom) Computes the slope of a triangle as a percentage</li>
   <li>ST_Voronoi(geom [, outDimension [, envelopePolygon ]]) Creates a Voronoi diagram</li>
@@ -4958,25 +5068,65 @@ users must include the EPSG dataset in their dependencies.</p>
 
 <h4 id="triangulation-functions">Triangulation functions</h4>
 
+<div class="scroll-table-style"><table>
+  <thead>
+    <tr>
+      <th style="text-align: left">C</th>
+      <th style="text-align: left">Operator syntax</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_ConstrainedDelaunay(geom [, flag])</td>
+      <td style="text-align: left">Computes a constrained Delaunay triangulation based on <em>geom</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_Delaunay(geom [, flag])</td>
+      <td style="text-align: left">Computes a Delaunay triangulation based on points in <em>geom</em>
+</td>
+    </tr>
+  </tbody>
+</table></div>
+
 <p>Not implemented:</p>
 
 <ul>
-  <li>ST_ConstrainedDelaunay(geom [, flag [, quality ]]) Computes a constrained Delaunay triangulation based on <em>geom</em>
-</li>
-  <li>ST_Delaunay(geom [, flag [, quality ]]) Computes a Delaunay triangulation based on points</li>
   <li>ST_Tessellate(polygon) Tessellates <em>polygon</em> (may be MULTIPOLYGON) with adaptive triangles</li>
 </ul>
 
 <h4 id="geometry-aggregate-functions">Geometry aggregate functions</h4>
 
-<p>Not implemented:</p>
-
-<ul>
-  <li>ST_Accum(geom) Accumulates <em>geom</em> into a GEOMETRYCOLLECTION (or MULTIPOINT, MULTILINESTRING or MULTIPOLYGON if possible)</li>
-  <li>ST_Collect(geom) Synonym for <code class="language-plaintext highlighter-rouge">ST_Accum</code>
-</li>
-  <li>ST_Union(geom) Computes the union of geometries</li>
-</ul>
+<div class="scroll-table-style"><table>
+  <thead>
+    <tr>
+      <th style="text-align: left">C</th>
+      <th style="text-align: left">Operator syntax</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_Accum(geom)</td>
+      <td style="text-align: left">Accumulates <em>geom</em> into an array</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_Collect(geom)</td>
+      <td style="text-align: left">Collects <em>geom</em> into a GeometryCollection</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">h</td>
+      <td style="text-align: left">ST_Union(geom)</td>
+      <td style="text-align: left">Computes the union of the geometries in <em>geom</em>
+</td>
+    </tr>
+  </tbody>
+</table></div>
 
 <h3 id="json-functions">JSON Functions</h3>
 
@@ -5188,6 +5338,7 @@ connect string parameter.</p>
 
 <p>The ‘C’ (compatibility) column contains value:</p>
 <ul>
+  <li>‘*’ for all libraries,</li>
   <li>‘b’ for Google BigQuery (‘fun=bigquery’ in the connect string),</li>
   <li>‘c’ for Apache Calcite (‘fun=calcite’ in the connect string),</li>
   <li>‘h’ for Apache Hive (‘fun=hive’ in the connect string),</li>
@@ -5236,9 +5387,59 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
 </td>
     </tr>
     <tr>
+      <td style="text-align: left">*</td>
+      <td style="text-align: left">ACOSH(numeric)</td>
+      <td style="text-align: left">Returns the inverse hyperbolic cosine of <em>numeric</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">ARRAY(expr [, expr ]*)</td>
+      <td style="text-align: left">Construct an array in Apache Spark</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">ARRAY_APPEND(array, element)</td>
+      <td style="text-align: left">Appends an <em>element</em> to the end of the <em>array</em> and returns the result. Type of <em>element</em> should be similar to type of the elements of the <em>array</em>. If the <em>array</em> is null, the function will return null. If an <em>element</em> that is null, the null <em>element</em> will be added to the end of the <em>array</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">ARRAY_COMPACT(array)</td>
+      <td style="text-align: left">Removes null values from the <em>array</em>
+</td>
+    </tr>
+    <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">ARRAY_CONCAT(array [, array ]*)</td>
       <td style="text-align: left">Concatenates one or more arrays. If any input argument is <code class="language-plaintext highlighter-rouge">NULL</code> the function returns <code class="language-plaintext highlighter-rouge">NULL</code>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">ARRAY_CONTAINS(array, element)</td>
+      <td style="text-align: left">Returns true if the <em>array</em> contains the <em>element</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">ARRAY_DISTINCT(array)</td>
+      <td style="text-align: left">Removes duplicate values from the <em>array</em> that keeps ordering of elements</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">ARRAY_EXCEPT(array1, array2)</td>
+      <td style="text-align: left">Returns an array of the elements in <em>array1</em> but not in <em>array2</em>, without duplicates</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">ARRAY_INTERSECT(array1, array2)</td>
+      <td style="text-align: left">Returns an array of the elements in the intersection of <em>array1</em> and <em>array2</em>, without duplicates</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">ARRAY_JOIN(array, delimiter [, nullText ])</td>
+      <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">ARRAY_TO_STRING</code>
 </td>
     </tr>
     <tr>
@@ -5248,10 +5449,104 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
 </td>
     </tr>
     <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">ARRAY_MAX(array)</td>
+      <td style="text-align: left">Returns the maximum value in the <em>array</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">ARRAY_MIN(array)</td>
+      <td style="text-align: left">Returns the minimum value in the <em>array</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">ARRAY_POSITION(array, element)</td>
+      <td style="text-align: left">Returns the (1-based) index of the first <em>element</em> of the <em>array</em> as long</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">ARRAY_REMOVE(array, element)</td>
+      <td style="text-align: left">Remove all elements that equal to <em>element</em> from the <em>array</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">ARRAY_PREPEND(array, element)</td>
+      <td style="text-align: left">Appends an <em>element</em> to the beginning of the <em>array</em> and returns the result. Type of <em>element</em> should be similar to type of the elements of the <em>array</em>. If the <em>array</em> is null, the function will return null. If an <em>element</em> that is null, the null <em>element</em> will be added to the beginning of the <em>array</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">ARRAY_REPEAT(element, count)</td>
+      <td style="text-align: left">Returns the array containing element count times.</td>
+    </tr>
+    <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">ARRAY_REVERSE(array)</td>
       <td style="text-align: left">Reverses elements of <em>array</em>
 </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">ARRAY_SIZE(array)</td>
+      <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">CARDINALITY</code>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">ARRAY_TO_STRING(array, delimiter [, nullText ])</td>
+      <td style="text-align: left">Returns a concatenation of the elements in <em>array</em> as a STRING and take <em>delimiter</em> as the delimiter. If the <em>nullText</em> parameter is used, the function replaces any <code class="language-plaintext highlighter-rouge">NULL</code> values in the array with the value of <em>nullText</em>. If the <em>nullText</em> parameter is not used, the function omits the <code class="language-plaintext highlighter-rouge">NULL</code> value and its preceding delimiter</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">ARRAY_UNION(array1, array2)</td>
+      <td style="text-align: left">Returns an array of the elements in the union of <em>array1</em> and <em>array2</em>, without duplicates</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">ARRAYS_OVERLAP(array1, array2)</td>
+      <td style="text-align: left">Returns true if <em>array1 contains at least a non-null element present also in *array2</em>. If the arrays have no common element and they are both non-empty and either of them contains a null element null is returned, false otherwise</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">ARRAYS_ZIP(array [, array ]*)</td>
+      <td style="text-align: left">Returns a merged <em>array</em> of structs in which the N-th struct contains all N-th values of input arrays</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">SORT_ARRAY(array [, ascendingOrder])</td>
+      <td style="text-align: left">Sorts the <em>array</em> in ascending or descending order according to the natural ordering of the array elements. The default order is ascending if <em>ascendingOrder</em> is not specified. Null elements will be placed at the beginning of the returned array in ascending order or at the end of the returned array in descending order</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">*</td>
+      <td style="text-align: left">ASINH(numeric)</td>
+      <td style="text-align: left">Returns the inverse hyperbolic sine of <em>numeric</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">*</td>
+      <td style="text-align: left">ATANH(numeric)</td>
+      <td style="text-align: left">Returns the inverse hyperbolic tangent of <em>numeric</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">BIT_LENGTH(binary)</td>
+      <td style="text-align: left">Returns the bit length of <em>binary</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">BIT_LENGTH(string)</td>
+      <td style="text-align: left">Returns the bit length of <em>string</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">CEIL(value)</td>
+      <td style="text-align: left">Similar to standard <code class="language-plaintext highlighter-rouge">CEIL(value)</code> except if <em>value</em> is an integer type, the return type is a double</td>
     </tr>
     <tr>
       <td style="text-align: left">m s</td>
@@ -5259,36 +5554,73 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Returns the character whose ASCII code is <em>integer</em> % 256, or null if <em>integer</em> &lt; 0</td>
     </tr>
     <tr>
-      <td style="text-align: left">o p</td>
+      <td style="text-align: left">b o p</td>
       <td style="text-align: left">CHR(integer)</td>
       <td style="text-align: left">Returns the character whose UTF-8 code is <em>integer</em>
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">b o</td>
-      <td style="text-align: left">COSH(numeric)</td>
-      <td style="text-align: left">Returns the hyperbolic cosine of <em>numeric</em>
-</td>
-    </tr>
-    <tr>
       <td style="text-align: left">o</td>
       <td style="text-align: left">CONCAT(string, string)</td>
-      <td style="text-align: left">Concatenates two strings</td>
+      <td style="text-align: left">Concatenates two strings, returns null only when both string arguments are null, otherwise treats null as empty string</td>
     </tr>
     <tr>
-      <td style="text-align: left">b m p</td>
+      <td style="text-align: left">b m</td>
       <td style="text-align: left">CONCAT(string [, string ]*)</td>
-      <td style="text-align: left">Concatenates two or more strings</td>
+      <td style="text-align: left">Concatenates one or more strings, returns null if any of the arguments is null</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p q</td>
+      <td style="text-align: left">CONCAT(string [, string ]*)</td>
+      <td style="text-align: left">Concatenates one or more strings, null is treated as empty string</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m p</td>
+      <td style="text-align: left">CONCAT_WS(separator, str1 [, string ]*)</td>
+      <td style="text-align: left">Concatenates one or more strings, returns null only when separator is null, otherwise treats null arguments as empty strings</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">q</td>
+      <td style="text-align: left">CONCAT_WS(separator, str1, str2 [, string ]*)</td>
+      <td style="text-align: left">Concatenates two or more strings, requires at least 3 arguments (up to 254), treats null arguments as empty strings</td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">COMPRESS(string)</td>
-      <td style="text-align: left">Compresses a string using zlib compression and returns the result as a binary string.</td>
+      <td style="text-align: left">Compresses a string using zlib compression and returns the result as a binary string</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">q</td>
+      <td style="text-align: left">CONVERT(type, expression [ , style ])</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">CAST(expression AS type)</code>; ignores the <em>style</em> operand</td>
     </tr>
     <tr>
       <td style="text-align: left">p</td>
       <td style="text-align: left">CONVERT_TIMEZONE(tz1, tz2, datetime)</td>
       <td style="text-align: left">Converts the timezone of <em>datetime</em> from <em>tz1</em> to <em>tz2</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">*</td>
+      <td style="text-align: left">COSH(numeric)</td>
+      <td style="text-align: left">Returns the hyperbolic cosine of <em>numeric</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">*</td>
+      <td style="text-align: left">COTH(numeric)</td>
+      <td style="text-align: left">Returns the hyperbolic cotangent of <em>numeric</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">*</td>
+      <td style="text-align: left">CSC(numeric)</td>
+      <td style="text-align: left">Returns the cosecant of <em>numeric</em> in radians</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">*</td>
+      <td style="text-align: left">CSCH(numeric)</td>
+      <td style="text-align: left">Returns the hyperbolic cosecant of <em>numeric</em>
 </td>
     </tr>
     <tr>
@@ -5389,6 +5721,11 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
     </tr>
     <tr>
       <td style="text-align: left">b</td>
+      <td style="text-align: left">DATETIME_TRUNC(timestamp, timeUnit)</td>
+      <td style="text-align: left">Truncates <em>timestamp</em> to the granularity of <em>timeUnit</em>, rounding to the beginning of the unit</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
       <td style="text-align: left">DATE_FROM_UNIX_DATE(integer)</td>
       <td style="text-align: left">Returns the DATE that is <em>integer</em> days after 1970-01-01</td>
     </tr>
@@ -5440,7 +5777,7 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
     <tr>
       <td style="text-align: left">o</td>
       <td style="text-align: left">EXTRACT(xml, xpath, [, namespaces ])</td>
-      <td style="text-align: left">Returns the xml fragment of the element or elements matched by the XPath expression. The optional namespace value that specifies a default mapping or namespace mapping for prefixes, which is used when evaluating the XPath expression</td>
+      <td style="text-align: left">Returns the XML fragment of the element or elements matched by the XPath expression. The optional namespace value that specifies a default mapping or namespace mapping for prefixes, which is used when evaluating the XPath expression</td>
     </tr>
     <tr>
       <td style="text-align: left">o</td>
@@ -5451,6 +5788,11 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">m</td>
       <td style="text-align: left">EXTRACTVALUE(xml, xpathExpr))</td>
       <td style="text-align: left">Returns the text of the first text node which is a child of the element or elements matched by the XPath expression.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">FLOOR(value)</td>
+      <td style="text-align: left">Similar to standard <code class="language-plaintext highlighter-rouge">FLOOR(value)</code> except if <em>value</em> is an integer type, the return type is a double</td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
@@ -5493,6 +5835,18 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
 </td>
     </tr>
     <tr>
+      <td style="text-align: left">b o</td>
+      <td style="text-align: left">INSTR(string, substring [, from [, occurrence ] ])</td>
+      <td style="text-align: left">Returns the position of <em>substring</em> in <em>string</em>, searching starting at <em>from</em> (default 1), and until locating the nth <em>occurrence</em> (default 1) of <em>substring</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
+      <td style="text-align: left">INSTR(string, substring)</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">POSITION(substring IN string)</code>
+</td>
+    </tr>
+    <tr>
       <td style="text-align: left">p</td>
       <td style="text-align: left">string1 ILIKE string2 [ ESCAPE string3 ]</td>
       <td style="text-align: left">Whether <em>string1</em> matches pattern <em>string2</em>, ignoring case (similar to <code class="language-plaintext highlighter-rouge">LIKE</code>)</td>
@@ -5528,7 +5882,7 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
     </tr>
     <tr>
       <td style="text-align: left">m</td>
-      <td style="text-align: left">JSON_INSERT(jsonValue, path, val[, path, val]*)</td>
+      <td style="text-align: left">JSON_INSERT(jsonValue, path, val [, path, val ]*)</td>
       <td style="text-align: left">Returns a JSON document insert a data of <em>jsonValue</em>, <em>path</em>, <em>val</em>
 </td>
     </tr>
@@ -5540,18 +5894,18 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
     </tr>
     <tr>
       <td style="text-align: left">m</td>
-      <td style="text-align: left">JSON_REMOVE(jsonValue, path[, path])</td>
+      <td style="text-align: left">JSON_REMOVE(jsonValue, path [, path ])</td>
       <td style="text-align: left">Removes data from <em>jsonValue</em> using a series of <em>path</em> expressions and returns the result</td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
-      <td style="text-align: left">JSON_REPLACE(jsonValue, path, val[, path, val]*)</td>
+      <td style="text-align: left">JSON_REPLACE(jsonValue, path, val [, path, val ]*)</td>
       <td style="text-align: left">Returns a JSON document replace a data of <em>jsonValue</em>, <em>path</em>, <em>val</em>
 </td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
-      <td style="text-align: left">JSON_SET(jsonValue, path, val[, path, val]*)</td>
+      <td style="text-align: left">JSON_SET(jsonValue, path, val [, path, val ]*)</td>
       <td style="text-align: left">Returns a JSON document set a data of <em>jsonValue</em>, <em>path</em>, <em>val</em>
 </td>
     </tr>
@@ -5579,10 +5933,25 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
 </td>
     </tr>
     <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">LOG(numeric1 [, numeric2 ])</td>
+      <td style="text-align: left">Returns the logarithm of <em>numeric1</em> to base <em>numeric2</em>, or base e if <em>numeric2</em> is not present</td>
+    </tr>
+    <tr>
       <td style="text-align: left">b o</td>
-      <td style="text-align: left">LPAD(string, length[, pattern ])</td>
+      <td style="text-align: left">LPAD(string, length [, pattern ])</td>
       <td style="text-align: left">Returns a string or bytes value that consists of <em>string</em> prepended to <em>length</em> with <em>pattern</em>
 </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TO_BASE32(string)</td>
+      <td style="text-align: left">Converts the <em>string</em> to base-32 encoded form and returns an encoded string</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">FROM_BASE32(string)</td>
+      <td style="text-align: left">Returns the decoded result of a base-32 <em>string</em> as a string</td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
@@ -5595,9 +5964,54 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Returns the decoded result of a base-64 <em>string</em> as a string</td>
     </tr>
     <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">TO_HEX(binary)</td>
+      <td style="text-align: left">Converts <em>binary</em> into a hexadecimal varchar</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">FROM_HEX(varchar)</td>
+      <td style="text-align: left">Converts a hexadecimal-encoded <em>varchar</em> into bytes</td>
+    </tr>
+    <tr>
       <td style="text-align: left">b o</td>
       <td style="text-align: left">LTRIM(string)</td>
       <td style="text-align: left">Returns <em>string</em> with all blanks removed from the start</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">MAP_CONCAT(map [, map]*)</td>
+      <td style="text-align: left">Concatenates one or more maps. If any input argument is <code class="language-plaintext highlighter-rouge">NULL</code> the function returns <code class="language-plaintext highlighter-rouge">NULL</code>. Note that calcite is using the LAST_WIN strategy</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">MAP_ENTRIES(map)</td>
+      <td style="text-align: left">Returns the entries of the <em>map</em> as an array, the order of the entries is not defined</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">MAP_KEYS(map)</td>
+      <td style="text-align: left">Returns the keys of the <em>map</em> as an array, the order of the entries is not defined</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">MAP_VALUES(map)</td>
+      <td style="text-align: left">Returns the values of the <em>map</em> as an array, the order of the entries is not defined</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">MAP_FROM_ARRAYS(array1, array2)</td>
+      <td style="text-align: left">Returns a map created from an <em>array1</em> and <em>array2</em>. Note that the lengths of two arrays should be the same and calcite is using the LAST_WIN strategy</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">MAP_FROM_ENTRIES(arrayOfRows)</td>
+      <td style="text-align: left">Returns a map created from an arrays of row with two fields. Note that the number of fields in a row must be 2. Note that calcite is using the LAST_WIN strategy</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">STR_TO_MAP(string [, stringDelimiter [, keyValueDelimiter]])</td>
+      <td style="text-align: left">Returns a map after splitting the <em>string</em> into key/value pairs using delimiters. Default delimiters are ‘,’ for <em>stringDelimiter</em> and ‘:’ for <em>keyValueDelimiter</em>. Note that calcite is using the LAST_WIN strategy</td>
     </tr>
     <tr>
       <td style="text-align: left">b m p</td>
@@ -5617,13 +6031,44 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
     </tr>
     <tr>
       <td style="text-align: left">b</td>
+      <td style="text-align: left">OFFSET(index)</td>
+      <td style="text-align: left">When indexing an array, wrapping <em>index</em> in <code class="language-plaintext highlighter-rouge">OFFSET</code> returns the value at the 0-based <em>index</em>; throws error if <em>index</em> is out of bounds</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">ORDINAL(index)</td>
+      <td style="text-align: left">Similar to <code class="language-plaintext highlighter-rouge">OFFSET</code> except <em>index</em> begins at 1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">PARSE_DATE(format, string)</td>
+      <td style="text-align: left">Uses format specified by <em>format</em> to convert <em>string</em> representation of date to a DATE value</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">PARSE_DATETIME(format, string)</td>
+      <td style="text-align: left">Uses format specified by <em>format</em> to convert <em>string</em> representation of datetime to a TIMESTAMP value</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">PARSE_TIME(format, string)</td>
+      <td style="text-align: left">Uses format specified by <em>format</em> to convert <em>string</em> representation of time to a TIME value</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">PARSE_TIMESTAMP(format, string[, timeZone])</td>
+      <td style="text-align: left">Uses format specified by <em>format</em> to convert <em>string</em> representation of timestamp to a TIMESTAMP WITH LOCAL TIME ZONE value in <em>timeZone</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
       <td style="text-align: left">POW(numeric1, numeric2)</td>
       <td style="text-align: left">Returns <em>numeric1</em> raised to the power <em>numeric2</em>
 </td>
     </tr>
     <tr>
       <td style="text-align: left">m o</td>
-      <td style="text-align: left">REGEXP_REPLACE(string, regexp, rep, [, pos [, occurrence [, matchType]]])</td>
+      <td style="text-align: left">REGEXP_REPLACE(string, regexp, rep [, pos [, occurrence [, matchType]]])</td>
       <td style="text-align: left">Replaces all substrings of <em>string</em> that match <em>regexp</em> with <em>rep</em> at the starting <em>pos</em> in expr (if omitted, the default is 1), <em>occurrence</em> means which occurrence of a match to search for (if omitted, the default is 1), <em>matchType</em> specifies how to perform matching</td>
     </tr>
     <tr>
@@ -5664,12 +6109,48 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Returns <em>string</em> with all blanks removed from the end</td>
     </tr>
     <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">SAFE_CAST(value AS type)</td>
+      <td style="text-align: left">Converts <em>value</em> to <em>type</em>, returning NULL if conversion fails</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">SAFE_OFFSET(index)</td>
+      <td style="text-align: left">Similar to <code class="language-plaintext highlighter-rouge">OFFSET</code> except null is returned if <em>index</em> is out of bounds</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">SAFE_ORDINAL(index)</td>
+      <td style="text-align: left">Similar to <code class="language-plaintext highlighter-rouge">OFFSET</code> except <em>index</em> begins at 1 and null is returned if <em>index</em> is out of bounds</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">*</td>
+      <td style="text-align: left">SEC(numeric)</td>
+      <td style="text-align: left">Returns the secant of <em>numeric</em> in radians</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">*</td>
+      <td style="text-align: left">SECH(numeric)</td>
+      <td style="text-align: left">Returns the hyperbolic secant of <em>numeric</em>
+</td>
+    </tr>
+    <tr>
       <td style="text-align: left">b m p</td>
       <td style="text-align: left">SHA1(string)</td>
       <td style="text-align: left">Calculates a SHA-1 hash value of <em>string</em> and returns it as a hex string</td>
     </tr>
     <tr>
-      <td style="text-align: left">b o</td>
+      <td style="text-align: left">b p</td>
+      <td style="text-align: left">SHA256(string)</td>
+      <td style="text-align: left">Calculates a SHA-256 hash value of <em>string</em> and returns it as a hex string</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b p</td>
+      <td style="text-align: left">SHA512(string)</td>
+      <td style="text-align: left">Calculates a SHA-512 hash value of <em>string</em> and returns it as a hex string</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">*</td>
       <td style="text-align: left">SINH(numeric)</td>
       <td style="text-align: left">Returns the hyperbolic sine of <em>numeric</em>
 </td>
@@ -5686,6 +6167,11 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
     </tr>
     <tr>
       <td style="text-align: left">b</td>
+      <td style="text-align: left">SPLIT(string [, delimiter ])</td>
+      <td style="text-align: left">Returns the string array of <em>string</em> split at <em>delimiter</em> (if omitted, default is comma)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
       <td style="text-align: left">STARTS_WITH(string1, string2)</td>
       <td style="text-align: left">Returns whether <em>string2</em> is a prefix of <em>string1</em>
 </td>
@@ -5696,12 +6182,18 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Returns 0 if both of the strings are same and returns -1 when the first argument is smaller than the second and 1 when the second one is smaller than the first one</td>
     </tr>
     <tr>
+      <td style="text-align: left">b p</td>
+      <td style="text-align: left">STRPOS(string, substring)</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">POSITION(substring IN string)</code>
+</td>
+    </tr>
+    <tr>
       <td style="text-align: left">b m o p</td>
       <td style="text-align: left">SUBSTR(string, position [, substringLength ])</td>
       <td style="text-align: left">Returns a portion of <em>string</em>, beginning at character <em>position</em>, <em>substringLength</em> characters long. SUBSTR calculates lengths using characters as defined by the input character set</td>
     </tr>
     <tr>
-      <td style="text-align: left">b o</td>
+      <td style="text-align: left">*</td>
       <td style="text-align: left">TANH(numeric)</td>
       <td style="text-align: left">Returns the hyperbolic tangent of <em>numeric</em>
 </td>
@@ -5822,6 +6314,12 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Truncates <em>time</em> to the granularity of <em>timeUnit</em>, rounding to the beginning of the unit</td>
     </tr>
     <tr>
+      <td style="text-align: left">m o p</td>
+      <td style="text-align: left">TO_CHAR(timestamp, format)</td>
+      <td style="text-align: left">Converts <em>timestamp</em> to a string using the format <em>format</em>
+</td>
+    </tr>
+    <tr>
       <td style="text-align: left">o p</td>
       <td style="text-align: left">TO_DATE(string, format)</td>
       <td style="text-align: left">Converts <em>string</em> to a date using the format <em>format</em>
@@ -5842,6 +6340,11 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">b</td>
       <td style="text-align: left">TRUNC(numeric1 [, numeric2 ])</td>
       <td style="text-align: left">Truncates <em>numeric1</em> to optionally <em>numeric2</em> (if not specified 0) places right to the decimal point</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">q</td>
+      <td style="text-align: left">TRY_CAST(value AS type)</td>
+      <td style="text-align: left">Converts <em>value</em> to <em>type</em>, returning NULL if conversion fails</td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
@@ -5987,6 +6490,18 @@ appear in Calcite’s Postgres library</li>
       <td style="text-align: left">s</td>
       <td style="text-align: left">MIN_BY(value, comp)</td>
       <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">ARG_MIN</code>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">PERCENTILE_CONT(value, fraction [ RESPECT NULLS | IGNORE NULLS ] ) OVER windowSpec</td>
+      <td style="text-align: left">Synonym for standard <code class="language-plaintext highlighter-rouge">PERCENTILE_CONT</code> where <code class="language-plaintext highlighter-rouge">PERCENTILE_CONT(value, fraction) OVER (ORDER BY value)</code> is equivalent to standard <code class="language-plaintext highlighter-rouge">PERCENTILE_CONT(fraction) WITHIN GROUP (ORDER BY value)</code>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b</td>
+      <td style="text-align: left">PERCENTILE_DISC(value, fraction [ RESPECT NULLS | IGNORE NULLS ] ) OVER windowSpec</td>
+      <td style="text-align: left">Synonym for standard <code class="language-plaintext highlighter-rouge">PERCENTILE_DISC</code> where <code class="language-plaintext highlighter-rouge">PERCENTILE_DISC(value, fraction) OVER (ORDER BY value)</code> is equivalent to standard <code class="language-plaintext highlighter-rouge">PERCENTILE_DISC(fraction) WITHIN GROUP (ORDER BY value)</code>
 </td>
     </tr>
     <tr>

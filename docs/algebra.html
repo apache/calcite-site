@@ -339,6 +339,10 @@ A SQL recursive query, e.g. this one that generates the sequence 1, 2, 3, …10:
       LogicalFilter(condition=[&lt;($0, 10)])
         LogicalTableScan(table=[[aux]])</code></pre></figure>
 
+<p>Note that there is no support for recursive queries in the SQL layer yet
+(<a href="https://issues.apache.org/jira/browse/CALCITE-129">CALCITE-129</a>);
+the <code class="language-plaintext highlighter-rouge">WITH RECURSIVE</code> query above is only for illustrative purposes.</p>
+
 <h3 id="api-summary">API summary</h3>
 
 <h4 id="relational-operators">Relational operators</h4>
@@ -926,16 +930,21 @@ returns the <code class="language-plaintext highlighter-rouge">RelNode</code> th
       <td style="text-align: left">Creates a call to the <code class="language-plaintext highlighter-rouge">COUNT(*)</code> aggregate function</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">sum([ distinct, alias, ] expr)</code></td>
-      <td style="text-align: left">Creates a call to the <code class="language-plaintext highlighter-rouge">SUM</code> aggregate function</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">literalAgg(value)</code></td>
+      <td style="text-align: left">Creates a call to an aggregate function that always evaluates to <em>value</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">max([ alias, ] expr)</code></td>
+      <td style="text-align: left">Creates a call to the <code class="language-plaintext highlighter-rouge">MAX</code> aggregate function</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">min([ alias, ] expr)</code></td>
       <td style="text-align: left">Creates a call to the <code class="language-plaintext highlighter-rouge">MIN</code> aggregate function</td>
     </tr>
     <tr>
-      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">max([ alias, ] expr)</code></td>
-      <td style="text-align: left">Creates a call to the <code class="language-plaintext highlighter-rouge">MAX</code> aggregate function</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">sum([ distinct, alias, ] expr)</code></td>
+      <td style="text-align: left">Creates a call to the <code class="language-plaintext highlighter-rouge">SUM</code> aggregate function</td>
     </tr>
   </tbody>
 </table></div>

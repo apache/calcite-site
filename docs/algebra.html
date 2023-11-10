@@ -339,10 +339,6 @@ A SQL recursive query, e.g. this one that generates the sequence 1, 2, 3, …10:
       LogicalFilter(condition=[&lt;($0, 10)])
         LogicalTableScan(table=[[aux]])</code></pre></figure>
 
-<p>Note that there is no support for recursive queries in the SQL layer yet
-(<a href="https://issues.apache.org/jira/browse/CALCITE-129">CALCITE-129</a>);
-the <code class="language-plaintext highlighter-rouge">WITH RECURSIVE</code> query above is only for illustrative purposes.</p>
-
 <h3 id="api-summary">API summary</h3>
 
 <h4 id="relational-operators">Relational operators</h4>
@@ -489,6 +485,10 @@ return the <code class="language-plaintext highlighter-rouge">RelBuilder</code>.
     <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">repeatUnion(tableName, all [, n])</code></td>
       <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/RepeatUnion.html">RepeatUnion</a> associated to a <a href="/javadocAggregate/org/apache/calcite/schema/TransientTable.html">TransientTable</a> of the two most recent relational expressions, with <code class="language-plaintext highlighter-rouge">n</code> maximum number of iterations (default -1, i.e. no limit).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">sample(bernoulli, rate [, repeatableSeed])</code></td>
+      <td style="text-align: left">Creates a <a href="/javadocAggregate/org/apache/calcite/rel/core/Sample.html">sample</a> of at given sampling rate.</td>
     </tr>
     <tr>
       <td style="text-align: left"><code class="language-plaintext highlighter-rouge">snapshot(period)</code></td>

@@ -201,7 +201,7 @@ form.</p>
 
 <span class="n">query</span><span class="p">:</span>
       <span class="k">values</span>
-  <span class="o">|</span>   <span class="k">WITH</span> <span class="p">[</span> <span class="k">RECURSIVE</span> <span class="p">]</span> <span class="n">withItem</span> <span class="p">[</span> <span class="p">,</span> <span class="n">withItem</span> <span class="p">]</span><span class="o">*</span> <span class="n">query</span>
+  <span class="o">|</span>   <span class="k">WITH</span> <span class="n">withItem</span> <span class="p">[</span> <span class="p">,</span> <span class="n">withItem</span> <span class="p">]</span><span class="o">*</span> <span class="n">query</span>
   <span class="o">|</span>   <span class="p">{</span>
           <span class="k">select</span>
       <span class="o">|</span>   <span class="n">selectWithoutFrom</span>
@@ -211,7 +211,7 @@ form.</p>
       <span class="o">|</span>   <span class="n">query</span> <span class="k">INTERSECT</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span> <span class="n">query</span>
       <span class="p">}</span>
       <span class="p">[</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">orderItem</span> <span class="p">[,</span> <span class="n">orderItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
-      <span class="p">[</span> <span class="k">LIMIT</span> <span class="p">[</span> <span class="k">start</span><span class="p">,</span> <span class="p">]</span> <span class="p">{</span> <span class="k">count</span> <span class="o">|</span> <span class="k">ALL</span> <span class="p">}</span> <span class="p">]</span>
+      <span class="p">[</span> <span class="k">LIMIT</span> <span class="p">{</span> <span class="p">[</span> <span class="k">start</span><span class="p">,</span> <span class="p">]</span> <span class="k">count</span> <span class="o">|</span> <span class="k">ALL</span> <span class="p">}</span> <span class="p">]</span>
       <span class="p">[</span> <span class="k">OFFSET</span> <span class="k">start</span> <span class="p">{</span> <span class="k">ROW</span> <span class="o">|</span> <span class="k">ROWS</span> <span class="p">}</span> <span class="p">]</span>
       <span class="p">[</span> <span class="k">FETCH</span> <span class="p">{</span> <span class="k">FIRST</span> <span class="o">|</span> <span class="k">NEXT</span> <span class="p">}</span> <span class="p">[</span> <span class="k">count</span> <span class="p">]</span> <span class="p">{</span> <span class="k">ROW</span> <span class="o">|</span> <span class="k">ROWS</span> <span class="p">}</span> <span class="k">ONLY</span> <span class="p">]</span>
 
@@ -530,7 +530,6 @@ CONSTRAINT_NAME,
 CONSTRAINT_SCHEMA,
 CONSTRUCTOR,
 <strong>CONTAINS</strong>,
-CONTAINS_SUBSTR,
 CONTINUE,
 <strong>CONVERT</strong>,
 <strong>CORR</strong>,
@@ -717,7 +716,6 @@ JSON,
 <strong>JSON_OBJECT</strong>,
 <strong>JSON_OBJECTAGG</strong>,
 <strong>JSON_QUERY</strong>,
-<strong>JSON_SCOPE</strong>,
 <strong>JSON_VALUE</strong>,
 K,
 KEY,
@@ -846,8 +844,8 @@ PATH,
 <strong>PATTERN</strong>,
 <strong>PER</strong>,
 <strong>PERCENT</strong>,
-<strong>PERCENTILE_CONT</strong>,
-<strong>PERCENTILE_DISC</strong>,
+PERCENTILE_CONT,
+PERCENTILE_DISC,
 <strong>PERCENT_RANK</strong>,
 <strong>PERIOD</strong>,
 <strong>PERMUTE</strong>,
@@ -1202,27 +1200,22 @@ name will have been converted to upper case also.</p>
     <tr>
       <td style="text-align: left">DECIMAL(p, s)</td>
       <td style="text-align: left">Fixed point</td>
-      <td style="text-align: left">Example: 123.45 and DECIMAL ‘123.45’ are identical values, and have type DECIMAL(5, 2)</td>
+      <td style="text-align: left">Example: 123.45 is a DECIMAL(5, 2) value.</td>
     </tr>
     <tr>
-      <td style="text-align: left">NUMERIC(p, s)</td>
+      <td style="text-align: left">NUMERIC</td>
       <td style="text-align: left">Fixed point</td>
-      <td style="text-align: left">A synonym for DECIMAL</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td style="text-align: left">REAL</td>
+      <td style="text-align: left">REAL, FLOAT</td>
       <td style="text-align: left">4 byte floating point</td>
-      <td style="text-align: left">6 decimal digits precision; examples: CAST(1.2 AS REAL), CAST(‘Infinity’ AS REAL)</td>
+      <td style="text-align: left">6 decimal digits precision</td>
     </tr>
     <tr>
       <td style="text-align: left">DOUBLE</td>
       <td style="text-align: left">8 byte floating point</td>
-      <td style="text-align: left">15 decimal digits precision; examples: 1.4E2, CAST(‘-Infinity’ AS DOUBLE), CAST(‘NaN’ AS DOUBLE)</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">FLOAT</td>
-      <td style="text-align: left">8 byte floating point</td>
-      <td style="text-align: left">A synonym for DOUBLE</td>
+      <td style="text-align: left">15 decimal digits precision</td>
     </tr>
     <tr>
       <td style="text-align: left">CHAR(n), CHARACTER(n)</td>
@@ -1327,12 +1320,12 @@ we also allow their plurals, YEARS, QUARTERS, MONTHS, WEEKS, DAYS, HOURS, MINUTE
     <tr>
       <td style="text-align: left">ROW</td>
       <td style="text-align: left">Row with 1 or more columns</td>
-      <td style="text-align: left">Example: row(f0 int null, f1 varchar)</td>
+      <td style="text-align: left">Example: Row(f0 int null, f1 varchar)</td>
     </tr>
     <tr>
       <td style="text-align: left">MAP</td>
       <td style="text-align: left">Collection of keys mapped to values</td>
-      <td style="text-align: left">Example: (int, varchar) map</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
       <td style="text-align: left">MULTISET</td>
@@ -2216,7 +2209,7 @@ However, Calcite supports both implicit and explicit conversion of values from o
   <tbody>
     <tr>
       <td style="text-align: left">CAST(value AS type)</td>
-      <td style="text-align: left">Converts a value to a given type. Casts between integer types truncate towards 0</td>
+      <td style="text-align: left">Converts a value to a given type</td>
     </tr>
     <tr>
       <td style="text-align: left">CONVERT(string, charSet1, charSet2)</td>
@@ -5440,11 +5433,6 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
     </tr>
     <tr>
       <td style="text-align: left">s</td>
-      <td style="text-align: left">ARRAY_INSERT(array, pos, element)</td>
-      <td style="text-align: left">Places <em>element</em> into index <em>pos</em> of <em>array</em>. Array index start at 1, or start from the end if index is negative. Index above array size appends the array, or prepends the array if index is negative, with <code class="language-plaintext highlighter-rouge">NULL</code> elements.</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAY_INTERSECT(array1, array2)</td>
       <td style="text-align: left">Returns an array of the elements in the intersection of <em>array1</em> and <em>array2</em>, without duplicates</td>
     </tr>
@@ -5509,8 +5497,7 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">ARRAY_TO_STRING(array, delimiter [, nullText ])</td>
-      <td style="text-align: left">Returns a concatenation of the elements in <em>array</em> as a STRING and take <em>delimiter</em> as the delimiter. If the <em>nullText</em> parameter is used, the function replaces any <code class="language-plaintext highlighter-rouge">NULL</code> values in the array with the value of <em>nullText</em>. If the <em>nullText</em> parameter is not used, the function omits the <code class="language-plaintext highlighter-rouge">NULL</code> value and its preceding delimiter. Returns <code class="language-plaintext highlighter-rouge">NULL</code> if any argument is <code class="language-plaintext highlighter-rouge">NULL</code>
-</td>
+      <td style="text-align: left">Returns a concatenation of the elements in <em>array</em> as a STRING and take <em>delimiter</em> as the delimiter. If the <em>nullText</em> parameter is used, the function replaces any <code class="language-plaintext highlighter-rouge">NULL</code> values in the array with the value of <em>nullText</em>. If the <em>nullText</em> parameter is not used, the function omits the <code class="language-plaintext highlighter-rouge">NULL</code> value and its preceding delimiter</td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
@@ -5557,11 +5544,6 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">s</td>
-      <td style="text-align: left">BIT_GET(value, position)</td>
-      <td style="text-align: left">Returns the bit (0 or 1) value at the specified <em>position</em> of numeric <em>value</em>. The positions are numbered from right to left, starting at zero. The <em>position</em> argument cannot be negative</td>
-    </tr>
-    <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">CEIL(value)</td>
       <td style="text-align: left">Similar to standard <code class="language-plaintext highlighter-rouge">CEIL(value)</code> except if <em>value</em> is an integer type, the return type is a double</td>
@@ -5576,16 +5558,6 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">CHR(integer)</td>
       <td style="text-align: left">Returns the character whose UTF-8 code is <em>integer</em>
 </td>
-    </tr>
-    <tr>
-      <td style="text-align: left">b</td>
-      <td style="text-align: left">CODE_POINTS_TO_BYTES(integers)</td>
-      <td style="text-align: left">Converts <em>integers</em>, an array of integers between 0 and 255 inclusive, into bytes; throws error if any element is out of range</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">b</td>
-      <td style="text-align: left">CODE_POINTS_TO_STRING(integers)</td>
-      <td style="text-align: left">Converts <em>integers</em>, an array of integers between 0 and 0xD7FF or between 0xE000 and 0x10FFFF inclusive, into string; throws error if any element is out of range</td>
     </tr>
     <tr>
       <td style="text-align: left">o</td>
@@ -5616,11 +5588,6 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">m</td>
       <td style="text-align: left">COMPRESS(string)</td>
       <td style="text-align: left">Compresses a string using zlib compression and returns the result as a binary string</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">b</td>
-      <td style="text-align: left">CONTAINS_SUBSTR(expression, string [ , json_scope =&gt; json_scope_value ])</td>
-      <td style="text-align: left">Returns whether <em>string</em> exists as a substring in <em>expression</em>. Optional <em>json_scope</em> argument specifies what scope to search if <em>expression</em> is in JSON format. Returns NULL if a NULL exists in <em>expression</em> that does not result in a match</td>
     </tr>
     <tr>
       <td style="text-align: left">q</td>
@@ -5823,16 +5790,6 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Returns the text of the first text node which is a child of the element or elements matched by the XPath expression.</td>
     </tr>
     <tr>
-      <td style="text-align: left">h s</td>
-      <td style="text-align: left">FACTORIAL(integer)</td>
-      <td style="text-align: left">Returns the factorial of <em>integer</em>, the range of <em>integer</em> is [0, 20]. Otherwise, returns NULL</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">h s</td>
-      <td style="text-align: left">FIND_IN_SET(matchStr, textStr)</td>
-      <td style="text-align: left">Returns the index (1-based) of the given <em>matchStr</em> in the comma-delimited <em>textStr</em>. Returns 0, if the given <em>matchStr</em> is not found or if the <em>matchStr</em> contains a comma. For example, FIND_IN_SET(‘bc’, ‘a,bc,def’) returns 2</td>
-    </tr>
-    <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">FLOOR(value)</td>
       <td style="text-align: left">Similar to standard <code class="language-plaintext highlighter-rouge">FLOOR(value)</code> except if <em>value</em> is an integer type, the return type is a double</td>
@@ -5850,16 +5807,6 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">h s</td>
-      <td style="text-align: left">FORMAT_NUMBER(value, decimalVal)</td>
-      <td style="text-align: left">Formats the number <em>value</em> like ‘#,###,###.##’, rounded to decimal places <em>decimalVal</em>. If <em>decimalVal</em> is 0, the result has no decimal point or fractional part</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">h s</td>
-      <td style="text-align: left">FORMAT_NUMBER(value, format)</td>
-      <td style="text-align: left">Formats the number <em>value</em> to MySQL’s FORMAT <em>format</em>, like ‘#,###,###.##0.00’</td>
-    </tr>
-    <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">FORMAT_TIME(string, time)</td>
       <td style="text-align: left">Formats <em>time</em> according to the specified format <em>string</em>
@@ -5869,12 +5816,6 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">b</td>
       <td style="text-align: left">FORMAT_TIMESTAMP(string timestamp)</td>
       <td style="text-align: left">Formats <em>timestamp</em> according to the specified format <em>string</em>
-</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">s</td>
-      <td style="text-align: left">GETBIT(value, position)</td>
-      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">BIT_GET(value, position)</code>
 </td>
     </tr>
     <tr>
@@ -5894,16 +5835,6 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">p</td>
-      <td style="text-align: left">string1 ILIKE string2 [ ESCAPE string3 ]</td>
-      <td style="text-align: left">Whether <em>string1</em> matches pattern <em>string2</em>, ignoring case (similar to <code class="language-plaintext highlighter-rouge">LIKE</code>)</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">p</td>
-      <td style="text-align: left">string1 NOT ILIKE string2 [ ESCAPE string3 ]</td>
-      <td style="text-align: left">Whether <em>string1</em> does not match pattern <em>string2</em>, ignoring case (similar to <code class="language-plaintext highlighter-rouge">NOT LIKE</code>)</td>
-    </tr>
-    <tr>
       <td style="text-align: left">b o</td>
       <td style="text-align: left">INSTR(string, substring [, from [, occurrence ] ])</td>
       <td style="text-align: left">Returns the position of <em>substring</em> in <em>string</em>, searching starting at <em>from</em> (default 1), and until locating the nth <em>occurrence</em> (default 1) of <em>substring</em>
@@ -5916,14 +5847,14 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">b</td>
-      <td style="text-align: left">IS_INF(value)</td>
-      <td style="text-align: left">Returns whether <em>value</em> is infinite</td>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">string1 ILIKE string2 [ ESCAPE string3 ]</td>
+      <td style="text-align: left">Whether <em>string1</em> matches pattern <em>string2</em>, ignoring case (similar to <code class="language-plaintext highlighter-rouge">LIKE</code>)</td>
     </tr>
     <tr>
-      <td style="text-align: left">b</td>
-      <td style="text-align: left">IS_NAN(value)</td>
-      <td style="text-align: left">Returns whether <em>value</em> is NaN</td>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">string1 NOT ILIKE string2 [ ESCAPE string3 ]</td>
+      <td style="text-align: left">Whether <em>string1</em> does not match pattern <em>string2</em>, ignoring case (similar to <code class="language-plaintext highlighter-rouge">NOT LIKE</code>)</td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
@@ -6002,12 +5933,6 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">h s</td>
-      <td style="text-align: left">LEVENSHTEIN(string1, string2)</td>
-      <td style="text-align: left">Returns the Levenshtein distance between <em>string1</em> and <em>string2</em>
-</td>
-    </tr>
-    <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">LOG(numeric1 [, numeric2 ])</td>
       <td style="text-align: left">Returns the logarithm of <em>numeric1</em> to base <em>numeric2</em>, or base e if <em>numeric2</em> is not present</td>
@@ -6052,16 +5977,6 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">b o</td>
       <td style="text-align: left">LTRIM(string)</td>
       <td style="text-align: left">Returns <em>string</em> with all blanks removed from the start</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">s</td>
-      <td style="text-align: left">MAP()</td>
-      <td style="text-align: left">Returns an empty map</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">s</td>
-      <td style="text-align: left">MAP(key, value [, key, value]*)</td>
-      <td style="text-align: left">Returns a map with the given <em>key</em>/<em>value</em> pairs</td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
@@ -6146,46 +6061,15 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">h s</td>
-      <td style="text-align: left">PARSE_URL(urlString, partToExtract [, keyToExtract] )</td>
-      <td style="text-align: left">Returns the specified <em>partToExtract</em> from the <em>urlString</em>. Valid values for <em>partToExtract</em> include HOST, PATH, QUERY, REF, PROTOCOL, AUTHORITY, FILE, and USERINFO. <em>keyToExtract</em> specifies which query to extract</td>
-    </tr>
-    <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">POW(numeric1, numeric2)</td>
       <td style="text-align: left">Returns <em>numeric1</em> raised to the power <em>numeric2</em>
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">b</td>
-      <td style="text-align: left">REGEXP_CONTAINS(string, regexp)</td>
-      <td style="text-align: left">Returns whether <em>string</em> is a partial match for the <em>regexp</em>
-</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">b</td>
-      <td style="text-align: left">REGEXP_EXTRACT(string, regexp [, position [, occurrence]])</td>
-      <td style="text-align: left">Returns the substring in <em>string</em> that matches the <em>regexp</em>, starting search at <em>position</em> (default 1), and until locating the nth <em>occurrence</em> (default 1). Returns NULL if there is no match</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">b</td>
-      <td style="text-align: left">REGEXP_EXTRACT_ALL(string, regexp)</td>
-      <td style="text-align: left">Returns an array of all substrings in <em>string</em> that matches the <em>regexp</em>. Returns an empty array if there is no match</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">b</td>
-      <td style="text-align: left">REGEXP_INSTR(string, regexp [, position [, occurrence [, occurrence_position]]])</td>
-      <td style="text-align: left">Returns the lowest 1-based position of the substring in <em>string</em> that matches the <em>regexp</em>, starting search at <em>position</em> (default 1), and until locating the nth <em>occurrence</em> (default 1). Setting occurrence_position (default 0) to 1 returns the end position of substring + 1. Returns 0 if there is no match</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">b m o</td>
+      <td style="text-align: left">m o</td>
       <td style="text-align: left">REGEXP_REPLACE(string, regexp, rep [, pos [, occurrence [, matchType]]])</td>
-      <td style="text-align: left">Replaces all substrings of <em>string</em> that match <em>regexp</em> with <em>rep</em> at the starting <em>pos</em> in expr (if omitted, the default is 1), <em>occurrence</em> specifies which occurrence of a match to search for (if omitted, the default is 1), <em>matchType</em> specifies how to perform matching</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">b</td>
-      <td style="text-align: left">REGEXP_SUBSTR(string, regexp [, position [, occurrence]])</td>
-      <td style="text-align: left">Synonym for REGEXP_EXTRACT</td>
+      <td style="text-align: left">Replaces all substrings of <em>string</em> that match <em>regexp</em> with <em>rep</em> at the starting <em>pos</em> in expr (if omitted, the default is 1), <em>occurrence</em> means which occurrence of a match to search for (if omitted, the default is 1), <em>matchType</em> specifies how to perform matching</td>
     </tr>
     <tr>
       <td style="text-align: left">b m p</td>
@@ -6226,11 +6110,6 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
     </tr>
     <tr>
       <td style="text-align: left">b</td>
-      <td style="text-align: left">SAFE_ADD(numeric1, numeric2)</td>
-      <td style="text-align: left">Returns <em>numeric1</em> + <em>numeric2</em>, or NULL on overflow</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">b</td>
       <td style="text-align: left">SAFE_CAST(value AS type)</td>
       <td style="text-align: left">Converts <em>value</em> to <em>type</em>, returning NULL if conversion fails</td>
     </tr>
@@ -6258,11 +6137,6 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">b</td>
       <td style="text-align: left">SAFE_ORDINAL(index)</td>
       <td style="text-align: left">Similar to <code class="language-plaintext highlighter-rouge">OFFSET</code> except <em>index</em> begins at 1 and null is returned if <em>index</em> is out of bounds</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">b</td>
-      <td style="text-align: left">SAFE_SUBTRACT(numeric1, numeric2)</td>
-      <td style="text-align: left">Returns <em>numeric1</em> - <em>numeric2</em>, or NULL on overflow</td>
     </tr>
     <tr>
       <td style="text-align: left">*</td>
@@ -6300,11 +6174,6 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">b m o p</td>
       <td style="text-align: left">SOUNDEX(string)</td>
       <td style="text-align: left">Returns the phonetic representation of <em>string</em>; throws if <em>string</em> is encoded with multi-byte encoding such as UTF-8</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">s</td>
-      <td style="text-align: left">SOUNDEX(string)</td>
-      <td style="text-align: left">Returns the phonetic representation of <em>string</em>; return original <em>string</em> if <em>string</em> is encoded with multi-byte encoding such as UTF-8</td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
@@ -6466,11 +6335,6 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">b</td>
-      <td style="text-align: left">TO_CODE_POINTS(string)</td>
-      <td style="text-align: left">Converts <em>string</em> to an array of integers that represent code points or extended ASCII character values</td>
-    </tr>
-    <tr>
       <td style="text-align: left">o p</td>
       <td style="text-align: left">TO_DATE(string, format)</td>
       <td style="text-align: left">Converts <em>string</em> to a date using the format <em>format</em>
@@ -6516,16 +6380,6 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">b</td>
       <td style="text-align: left">UNIX_DATE(date)</td>
       <td style="text-align: left">Returns the number of days since 1970-01-01</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">s</td>
-      <td style="text-align: left">URL_DECODE(string)</td>
-      <td style="text-align: left">Decodes a <em>string</em> in ‘application/x-www-form-urlencoded’ format using a specific encoding scheme, returns original <em>string</em> when decoded error</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">s</td>
-      <td style="text-align: left">URL_ENCODE(string)</td>
-      <td style="text-align: left">Translates a <em>string</em> into ‘application/x-www-form-urlencoded’ format using a specific encoding scheme</td>
     </tr>
     <tr>
       <td style="text-align: left">o</td>
@@ -7297,7 +7151,6 @@ to the JDBC connect string (see connect string property
       <span class="n">createSchemaStatement</span>
   <span class="o">|</span>   <span class="n">createForeignSchemaStatement</span>
   <span class="o">|</span>   <span class="n">createTableStatement</span>
-  <span class="o">|</span>   <span class="n">createTableLikeStatement</span>
   <span class="o">|</span>   <span class="n">createViewStatement</span>
   <span class="o">|</span>   <span class="n">createMaterializedViewStatement</span>
   <span class="o">|</span>   <span class="n">createTypeStatement</span>
@@ -7328,13 +7181,6 @@ to the JDBC connect string (see connect string property
       <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="p">[</span> <span class="n">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> <span class="p">]</span> <span class="n">name</span>
       <span class="p">[</span> <span class="s1">'('</span> <span class="n">tableElement</span> <span class="p">[,</span> <span class="n">tableElement</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="p">]</span>
       <span class="p">[</span> <span class="k">AS</span> <span class="n">query</span> <span class="p">]</span>
-
-<span class="n">createTableLikeStatement</span><span class="p">:</span>
-      <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="p">[</span> <span class="n">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> <span class="p">]</span> <span class="n">name</span> <span class="k">LIKE</span> <span class="n">sourceTable</span>
-      <span class="p">[</span> <span class="n">likeOption</span> <span class="p">[,</span> <span class="n">likeOption</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
-
-<span class="n">likeOption</span><span class="p">:</span>
-      <span class="p">{</span> <span class="k">INCLUDING</span> <span class="o">|</span> <span class="k">EXCLUDING</span> <span class="p">}</span> <span class="p">{</span> <span class="k">DEFAULTS</span> <span class="o">|</span> <span class="k">GENERATED</span> <span class="o">|</span> <span class="k">ALL</span> <span class="p">}</span>
 
 <span class="n">createTypeStatement</span><span class="p">:</span>
       <span class="k">CREATE</span> <span class="p">[</span> <span class="k">OR</span> <span class="k">REPLACE</span> <span class="p">]</span> <span class="k">TYPE</span> <span class="n">name</span> <span class="k">AS</span>
@@ -7431,30 +7277,30 @@ instantiated. Each object can hold different values.</p>
 
 <p>For example, we can declare types <code class="language-plaintext highlighter-rouge">address_typ</code> and <code class="language-plaintext highlighter-rouge">employee_typ</code>:</p>
 
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TYPE</span> <span class="n">address_typ</span> <span class="k">AS</span> <span class="p">(</span>
-   <span class="n">street</span>          <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span>
-   <span class="n">city</span>            <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TYPE</span> <span class="n">address_typ</span> <span class="k">AS</span> <span class="k">OBJECT</span> <span class="p">(</span>
+   <span class="n">street</span>          <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span>
+   <span class="n">city</span>            <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
    <span class="k">state</span>           <span class="nb">CHAR</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
-   <span class="n">postal_code</span>     <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">6</span><span class="p">));</span>
+   <span class="n">postal_code</span>     <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">6</span><span class="p">));</span>
 
-<span class="k">CREATE</span> <span class="k">TYPE</span> <span class="n">employee_typ</span> <span class="k">AS</span> <span class="p">(</span>
-  <span class="n">employee_id</span>       <span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span>
-  <span class="n">first_name</span>        <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
-  <span class="n">last_name</span>         <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">25</span><span class="p">),</span>
-  <span class="n">email</span>             <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">25</span><span class="p">),</span>
-  <span class="n">phone_number</span>      <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+<span class="k">CREATE</span> <span class="k">TYPE</span> <span class="n">employee_typ</span> <span class="k">AS</span> <span class="k">OBJECT</span> <span class="p">(</span>
+  <span class="n">employee_id</span>       <span class="n">NUMBER</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span>
+  <span class="n">first_name</span>        <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+  <span class="n">last_name</span>         <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">25</span><span class="p">),</span>
+  <span class="n">email</span>             <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">25</span><span class="p">),</span>
+  <span class="n">phone_number</span>      <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
   <span class="n">hire_date</span>         <span class="nb">DATE</span><span class="p">,</span>
-  <span class="n">job_id</span>            <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
-  <span class="n">salary</span>            <span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
-  <span class="n">commission_pct</span>    <span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
-  <span class="n">manager_id</span>        <span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span>
-  <span class="n">department_id</span>     <span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+  <span class="n">job_id</span>            <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+  <span class="n">salary</span>            <span class="n">NUMBER</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+  <span class="n">commission_pct</span>    <span class="n">NUMBER</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+  <span class="n">manager_id</span>        <span class="n">NUMBER</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span>
+  <span class="n">department_id</span>     <span class="n">NUMBER</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
   <span class="n">address</span>           <span class="n">address_typ</span><span class="p">);</span></code></pre></figure>
 
 <p>Using these types, you can instantiate objects as follows:</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">employee_typ</span><span class="p">(</span><span class="mi">315</span><span class="p">,</span> <span class="s1">'Francis'</span><span class="p">,</span> <span class="s1">'Logan'</span><span class="p">,</span> <span class="s1">'FLOGAN'</span><span class="p">,</span>
-    <span class="s1">'555.777.2222'</span><span class="p">,</span> <span class="nb">DATE</span> <span class="s1">'2004-05-01'</span><span class="p">,</span> <span class="s1">'SA_MAN'</span><span class="p">,</span> <span class="mi">11000</span><span class="p">,</span> <span class="p">.</span><span class="mi">15</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span>
+    <span class="s1">'555.777.2222'</span><span class="p">,</span> <span class="s1">'01-MAY-04'</span><span class="p">,</span> <span class="s1">'SA_MAN'</span><span class="p">,</span> <span class="mi">11000</span><span class="p">,</span> <span class="p">.</span><span class="mi">15</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span>
      <span class="n">address_typ</span><span class="p">(</span><span class="s1">'376 Mission'</span><span class="p">,</span> <span class="s1">'San Francisco'</span><span class="p">,</span> <span class="s1">'CA'</span><span class="p">,</span> <span class="s1">'94222'</span><span class="p">))</span></code></pre></figure>
 
 

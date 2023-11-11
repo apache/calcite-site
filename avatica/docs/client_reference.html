@@ -864,6 +864,20 @@ necessary when using HTTPS.</p>
   <dd>
     <p><em>Required</em>: Only if <code class="language-plaintext highlighter-rouge">truststore</code> was provided.</p>
   </dd>
+  <dt><strong><a name="keystore_type" href="#keystore_type">keystore_type</a></strong></dt>
+  <dd>
+    <p><em>Description</em>: The format of the truststore file specified by 
+<a href="#truststore">truststore</a>. This needs to be specified if non JKS format keystores are
+used (i.e. BCFKS). This setting applies both to keystore and truststore files.
+For formats not included in the default JVM the corresponding security provider must be installed
+and configured into the JVM, or added to the application classpath and configured.</p>
+  </dd>
+  <dd>
+    <p><em>Default</em>: <code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </dd>
+  <dd>
+    <p><em>Required</em>: No.</p>
+  </dd>
   <dt><strong><a name="fetch_size" href="#fetch_size">fetch_size</a></strong></dt>
   <dd>
     <p><em>Description</em>: The number of rows to fetch. If
@@ -885,6 +899,72 @@ in 1.21.0. Setting this property to <code class="language-plaintext highlighter-
   </dd>
   <dd>
     <p><em>Default</em>: <code class="language-plaintext highlighter-rouge">false</code>.</p>
+  </dd>
+  <dd>
+    <p><em>Required</em>: No.</p>
+  </dd>
+  <dt><strong><a name="use_client_side_lb" href="#use_client_side_lb">use_client_side_lb</a></strong></dt>
+  <dd>
+    <p><em>Description</em>: Enables the client side load-balancing.</p>
+  </dd>
+  <dd>
+    <p><em>Default</em>: <code class="language-plaintext highlighter-rouge">false</code>.</p>
+  </dd>
+  <dd>
+    <p><em>Required</em>: No.</p>
+  </dd>
+  <dt><strong><a name="lb_urls" href="#lb_urls">lb_urls</a></strong></dt>
+  <dd>
+    <p><em>Description</em>: List of URLs in a comma separated format, for example “URL1,URL2…URLn”, to be used by the client side
+load balancer. Depending on the load balancing strategy, load balancer selects one of the URLs from the list.</p>
+  </dd>
+  <dd>
+    <p><em>Default</em>: <code class="language-plaintext highlighter-rouge">null</code>.</p>
+  </dd>
+  <dd>
+    <p><em>Required</em>: No.</p>
+  </dd>
+  <dt><strong><a name="lb_strategy" href="#lb_strategy">lb_strategy</a></strong></dt>
+  <dd>
+    <p><em>Description</em>: The load balancing strategy to be used by the client side load balancer. It must be a fully qualified
+Java class name which implements <code class="language-plaintext highlighter-rouge">org.apache.calcite.avatica.ha.LBStrategy</code>. Three implementations are provided
+<code class="language-plaintext highlighter-rouge">org.apache.calcite.avatica.ha.RandomSelectLBStrategy</code>, <code class="language-plaintext highlighter-rouge">org.apache.calcite.avatica.ha.RoundRobinLBStrategy</code> and
+<code class="language-plaintext highlighter-rouge">org.apache.calcite.avatica.ha.ShuffledRoundRobinLBStrategy</code></p>
+  </dd>
+  <dd>
+    <p><em>Default</em>: <code class="language-plaintext highlighter-rouge">org.apache.calcite.avatica.ha.ShuffledRoundRobinLBStrategy</code>.</p>
+  </dd>
+  <dd>
+    <p><em>Required</em>: No.</p>
+  </dd>
+  <dt><strong><a name="lb_connection_failover_retries" href="#lb_connection_failover_retries">lb_connection_failover_retries</a></strong></dt>
+  <dd>
+    <p><em>Description</em>: Number of times that the load balancer tries to retry the connection with another URL (fail-over).
+When the connection fails, load balancer retries the connection with another URL, chosen by the load balancing strategy.</p>
+  </dd>
+  <dd>
+    <p><em>Default</em>: <code class="language-plaintext highlighter-rouge">3</code>.</p>
+  </dd>
+  <dd>
+    <p><em>Required</em>: No.</p>
+  </dd>
+  <dt><strong><a name="lb_connection_failover_sleep_time" href="#lb_connection_failover_sleep_time">lb_connection_failover_sleep_time</a></strong></dt>
+  <dd>
+    <p><em>Description</em>: The amount of time in milliseconds that the load balancer sleeps before attempting the next connection
+failover retry.</p>
+  </dd>
+  <dd>
+    <p><em>Default</em>: <code class="language-plaintext highlighter-rouge">1000</code>.</p>
+  </dd>
+  <dd>
+    <p><em>Required</em>: No.</p>
+  </dd>
+  <dt><strong><a name="http_connection_timeout" href="#http_connection_timeout">http_connection_timeout</a></strong></dt>
+  <dd>
+    <p><em>Description</em>: Timeout in milliseconds for the connection between the Avatica HTTP client and server.</p>
+  </dd>
+  <dd>
+    <p><em>Default</em>: <code class="language-plaintext highlighter-rouge">180000</code> (3 minutes).</p>
   </dd>
   <dd>
     <p><em>Required</em>: No.</p>

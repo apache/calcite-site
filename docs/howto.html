@@ -808,16 +808,20 @@ For instance, you could update <code class="language-plaintext highlighter-rouge
 <span class="py">asfGitSourceUsername</span><span class="p">=</span>
 <span class="py">asfGitSourcePassword</span><span class="p">=</span></code></pre></figure>
 
-<p>Note: Both <code class="language-plaintext highlighter-rouge">asfNexusUsername</code> and <code class="language-plaintext highlighter-rouge">asfSvnUsername</code> are your apache id with <code class="language-plaintext highlighter-rouge">asfNexusPassword</code> and
-<code class="language-plaintext highlighter-rouge">asfSvnPassword</code> are corresponding password.</p>
+<p>Note:</p>
+<ul>
+  <li>Both <code class="language-plaintext highlighter-rouge">asfNexusUsername</code> and <code class="language-plaintext highlighter-rouge">asfSvnUsername</code> are your apache id with <code class="language-plaintext highlighter-rouge">asfNexusPassword</code> and
+<code class="language-plaintext highlighter-rouge">asfSvnPassword</code> are corresponding password.</li>
+  <li>Git source account can be configured to either Gitbox (the default) or Github. For Gitbox, <code class="language-plaintext highlighter-rouge">asfGitSourceUsername</code>
+is your apache id, and <code class="language-plaintext highlighter-rouge">asfGitSourcePassword</code> is the corresponding password. For Github, <code class="language-plaintext highlighter-rouge">asfGitSourceUsername</code>
+is your GitHub id while <code class="language-plaintext highlighter-rouge">asfGitSourcePassword</code> is not your GitHub password, you need to generate it in
+https://github.com/settings/tokens choosing <code class="language-plaintext highlighter-rouge">Personal access tokens</code>.</li>
+</ul>
 
 <p>When
 <a href="https://github.com/vlsi/asflike-release-environment">asflike-release-environment</a>
 is used, the credentials are taken from
 <code class="language-plaintext highlighter-rouge">asfTest...</code> (e.g. <code class="language-plaintext highlighter-rouge">asfTestNexusUsername=test</code>)</p>
-
-<p>Note: <code class="language-plaintext highlighter-rouge">asfGitSourceUsername</code> is your GitHub id while <code class="language-plaintext highlighter-rouge">asfGitSourcePassword</code> is not your GitHub password.
-You need to generate it in https://github.com/settings/tokens choosing <code class="language-plaintext highlighter-rouge">Personal access tokens</code>.</p>
 
 <p>Note: if you want to use <code class="language-plaintext highlighter-rouge">gpg-agent</code>, you need to pass some more properties:</p>
 
@@ -942,6 +946,7 @@ git clean <span class="nt">-xn</span>
 ./gradlew prepareVote <span class="nt">-Prc</span><span class="o">=</span>0
 
 <span class="c"># Push release candidate to ASF servers</span>
+<span class="c"># If you prefer to use Github account, change pushRepositoryProvider to GITHUB</span>
 ./gradlew prepareVote <span class="nt">-Prc</span><span class="o">=</span>0 <span class="nt">-Pasf</span> <span class="nt">-Pasf</span>.git.pushRepositoryProvider<span class="o">=</span>GITBOX</code></pre></figure>
 
 <h4 id="troubleshooting">Troubleshooting</h4>
@@ -1079,11 +1084,6 @@ thread to discuss.
 
 Julian</code></pre></figure>
 
-<p>Use the <a href="https://s.apache.org">Apache URL shortener</a> to generate
-shortened URLs for the vote proposal and result emails. Examples:
-<a href="https://s.apache.org/calcite-1.2-vote">s.apache.org/calcite-1.2-vote</a> and
-<a href="https://s.apache.org/calcite-1.2-result">s.apache.org/calcite-1.2-result</a>.</p>
-
 <h2 id="publishing-a-release">Publishing a release</h2>
 
 <p>After a successful release vote, we need to push the release
@@ -1098,12 +1098,22 @@ Remember that UTC date changes at 4 pm Pacific time.</p>
 ./gradlew publishDist <span class="nt">-Prc</span><span class="o">=</span>0
 
 <span class="c"># Publish the release to ASF servers</span>
+<span class="c"># If you prefer to use Github account, change pushRepositoryProvider to GITHUB</span>
 ./gradlew publishDist <span class="nt">-Prc</span><span class="o">=</span>0 <span class="nt">-Pasf</span> <span class="nt">-Pasf</span>.git.pushRepositoryProvider<span class="o">=</span>GITBOX</code></pre></figure>
 
 <p>If for whatever reason the <code class="language-plaintext highlighter-rouge">publishDist</code> task fails
 (e.g. <a href="https://github.com/vlsi/vlsi-release-plugins/issues/64">failed to release nexus repository</a>,
 it is still possible to perform the publishing tasks manually. Ask for help in the dev list if
 you are not sure what needs to be done.</p>
+
+<p>If the <code class="language-plaintext highlighter-rouge">releaseRepository</code> task prints something like:</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">&gt; Task :releaseRepository
+Initialized stagingRepositoryId orgapachecalcite-1219 for repository nexus
+GET request failed. 404: Not Found, body: [errors:[[id:*, msg:No such repository: orgapachecalcite-1219]]]
+Requested operation was executed successfully in attempt 83 (maximum allowed 601)</code></pre></figure>
+
+<p>it’s most likely that the repository has been successfully released, you can check it in <a href="https://repository.apache.org/">ASF Nexus</a>.</p>
 
 <p>Svnpubsub will publish to the
 <a href="https://dist.apache.org/repos/dist/release/calcite">release repo</a> and propagate to the
@@ -1130,7 +1140,9 @@ once the release commits/tags reach the ASF remote and the respective
 <a href="https://github.com/apache/calcite/blob/main/site/_posts/2016-10-12-release-1.10.0.md">site/_posts/2016-10-12-release-1.10.0.md</a>,
 and adapt the release date in <code class="language-plaintext highlighter-rouge">history.md</code> if necessary. Preview the changes locally, by following the
 instructions in <a href="https://github.com/apache/calcite/blob/main/site/README.md">site/README.md</a>, and then commit and push
-the changes to the <code class="language-plaintext highlighter-rouge">main</code> branch.</p>
+the changes to the <code class="language-plaintext highlighter-rouge">main</code> branch. Please note that due to <a href="https://issues.apache.org/jira/browse/CALCITE-5584">CALCITE-5584</a>,
+the commit should be pushed to Github as the last commit, do not chain it with “Prepare for next development iteration”
+commit.</p>
 
 <p>Ensure that all changes to the website (news, release notes, javadoc) are correctly displayed.</p>
 

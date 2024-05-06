@@ -145,11 +145,11 @@ a MySQL “scott” database:</p>
 </span><span class="p">}</span></code></pre></figure>
 
 <p><code class="language-plaintext highlighter-rouge">sqlFilePath</code> is a list of DDL files, you can generate table
-definitions by executing `mysqldump -d -u<username> -p<password> -h</password></username></p>
-<hostname> <dbname>` in command-line.
+definitions by executing <code class="language-plaintext highlighter-rouge">mysqldump</code> in command-line:</p>
 
-The file content of `/path/scott.sql` is as follows:
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">mysqldump <span class="nt">-d</span> <span class="nt">-u</span>&lt;username&gt; <span class="nt">-p</span>&lt;password&gt; <span class="nt">-h</span> &lt;<span class="nb">hostname</span><span class="o">&gt;</span> &lt;dbname&gt;</code></pre></figure>
 
+<p>The file content of <code class="language-plaintext highlighter-rouge">/path/scott.sql</code> is as follows:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">CREATE TABLE <span class="sb">`</span>DEPT<span class="sb">`</span><span class="o">(</span>
     <span class="sb">`</span>DEPTNO<span class="sb">`</span> TINYINT NOT NULL,
@@ -184,19 +184,15 @@ CREATE TABLE <span class="sb">`</span>EMP<span class="sb">`</span><span class="o
     KEY <span class="sb">`</span>AGE_KEY<span class="sb">`</span> <span class="o">(</span><span class="sb">`</span>AGE<span class="sb">`</span><span class="o">)</span>
 <span class="o">)</span> <span class="nv">ENGINE</span><span class="o">=</span>InnoDB DEFAULT <span class="nv">CHARSET</span><span class="o">=</span>utf8mb4<span class="p">;</span></code></pre></figure>
 
+<p>ibdDataFileBasePath is the parent file path of <code class="language-plaintext highlighter-rouge">.ibd</code> files.</p>
 
-ibdDataFileBasePath is the parent file path of `.ibd` files.
-
-Assuming the model file is stored as `model.json`, you can connect to
+<p>Assuming the model file is stored as <code class="language-plaintext highlighter-rouge">model.json</code>, you can connect to
 InnoDB data file to perform query via
-[sqlline](https://github.com/julianhyde/sqlline) as follows:
-
+<a href="https://github.com/julianhyde/sqlline">sqlline</a> as follows:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="o">!</span>connect jdbc:calcite:model<span class="o">=</span>model.json admin admin</code></pre></figure>
 
-
-We can query all employees by writing standard SQL:
-
+<p>We can query all employees by writing standard SQL:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select </span>empno, ename, job, age, mgr from <span class="s2">"EMP"</span><span class="p">;</span>
 +-------+--------+-----------+-----+------+
@@ -218,16 +214,14 @@ We can query all employees by writing standard SQL:
 | 7934  | MILLER | CLERK     | 32  | 7782 |
 +-------+--------+-----------+-----+------+</code></pre></figure>
 
-
-While executing this query, the InnoDB adapter scans the InnoDB data
-file `EMP.ibd` using primary key, also known as clustering B+ tree
+<p>While executing this query, the InnoDB adapter scans the InnoDB data
+file <code class="language-plaintext highlighter-rouge">EMP.ibd</code> using primary key, also known as clustering B+ tree
 index in MySQL, and is able to push down projection to underlying
 storage engine. Projection can reduce the size of data fetched from
-the storage engine.
+the storage engine.</p>
 
-We can look up one employee by filtering. The InnoDB adapter retrieves
-all indexes through DDL file provided in `model.json`.
-
+<p>We can look up one employee by filtering. The InnoDB adapter retrieves
+all indexes through DDL file provided in <code class="language-plaintext highlighter-rouge">model.json</code>.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select </span>empno, ename, job, age, mgr from <span class="s2">"EMP"</span> where empno <span class="o">=</span> 7782<span class="p">;</span>
 +-------+-------+---------+-----+------+
@@ -236,26 +230,22 @@ all indexes through DDL file provided in `model.json`.
 | 7782  | CLARK | MANAGER | 32  | 7839 |
 +-------+-------+---------+-----+------+</code></pre></figure>
 
-
-The InnoDB adapter recognizes that `empno` is the primary key and
+<p>The InnoDB adapter recognizes that <code class="language-plaintext highlighter-rouge">empno</code> is the primary key and
 performs a point-lookup by using the clustering index instead of a
-full table scan.
+full table scan.</p>
 
-We can also do range queries on the primary key:
-
+<p>We can also do range queries on the primary key:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select </span>empno, ename, job, age, mgr from <span class="s2">"EMP"</span> where empno <span class="o">&gt;</span> 7782 and empno &lt; 7900<span class="p">;</span></code></pre></figure>
 
-
-Note that such query with acceptable range is usually efficient in
+<p>Note that such query with acceptable range is usually efficient in
 MySQL with InnoDB storage engine, because for clustering B+ tree
 index, records close in index are close in data file, which is good
-for scanning.
+for scanning.</p>
 
-We can look up employee by secondary key. For example, in the
-following query, the filtering condition is a field `ename` of type
-`VARCHAR`.
-
+<p>We can look up employee by secondary key. For example, in the
+following query, the filtering condition is a field <code class="language-plaintext highlighter-rouge">ename</code> of type
+<code class="language-plaintext highlighter-rouge">VARCHAR</code>.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select </span>empno, ename, job, age, mgr from <span class="s2">"EMP"</span> where ename <span class="o">=</span> <span class="s1">'smith'</span><span class="p">;</span>
 +-------+-------+-------+-----+------+
@@ -264,15 +254,13 @@ following query, the filtering condition is a field `ename` of type
 | 7369  | SMITH | CLERK | 30  | 7902 |
 +-------+-------+-------+-----+------+</code></pre></figure>
 
-
-The InnoDB adapter works well on almost all the commonly used data
+<p>The InnoDB adapter works well on almost all the commonly used data
 types in MySQL, for more information on supported data types, please
 refer to
-[innodb-java-reader](https://github.com/alibaba/innodb-java-reader#3-features).
+<a href="https://github.com/alibaba/innodb-java-reader#3-features">innodb-java-reader</a>.</p>
 
-We can query by composite key. For example, given secondary index of
-`DEPTNO_MGR_KEY`.
-
+<p>We can query by composite key. For example, given secondary index of
+<code class="language-plaintext highlighter-rouge">DEPTNO_MGR_KEY</code>.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select </span>empno, ename, job, age, mgr from <span class="s2">"EMP"</span> where deptno <span class="o">=</span> 20 and mgr <span class="o">=</span> 7566<span class="p">;</span>
 +-------+-------+---------+-----+------+
@@ -282,31 +270,27 @@ We can query by composite key. For example, given secondary index of
 | 7902  | FORD  | ANALYST | 28  | 7566 |
 +-------+-------+---------+-----+------+</code></pre></figure>
 
+<p>The InnoDB adapter leverages the matched key <code class="language-plaintext highlighter-rouge">DEPTNO_MGR_KEY</code> to push
+down filtering condition of <code class="language-plaintext highlighter-rouge">deptno = 20 and mgr = 7566</code>.</p>
 
-The InnoDB adapter leverages the matched key `DEPTNO_MGR_KEY` to push
-down filtering condition of `deptno = 20 and mgr = 7566`.
-
-In some cases, only part of the conditions can be pushed down since
+<p>In some cases, only part of the conditions can be pushed down since
 there is a limitation in the underlying storage engine API; other
 conditions remain in the rest of the plan. Given the following SQL,
-only `deptno = 20` is pushed down.
-
+only <code class="language-plaintext highlighter-rouge">deptno = 20</code> is pushed down.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">select </span>empno, ename, job, age, mgr from <span class="s2">"EMP"</span> where deptno <span class="o">=</span> 20 and upsert_time <span class="o">&gt;</span> <span class="s1">'2018-01-01 00:00:00'</span><span class="p">;</span></code></pre></figure>
 
-
-`innodb-java-reader` only supports range queries with lower and upper
-bound using an index, not fully `Index Condition Pushdown (ICP)`. The
+<p><code class="language-plaintext highlighter-rouge">innodb-java-reader</code> only supports range queries with lower and upper
+bound using an index, not fully <code class="language-plaintext highlighter-rouge">Index Condition Pushdown (ICP)</code>. The
 storage engine returns a range of rows and Calcite evaluates the rest
-of `WHERE` condition from the rows fetched.
+of <code class="language-plaintext highlighter-rouge">WHERE</code> condition from the rows fetched.</p>
 
-For the following SQL, there are multiple indexes satisfying the
-left-prefix index rule: the possible indexes are `DEPTNO_JOB_KEY`,
-`DEPTNO_SAL_COMM_KEY` and `DEPTNO_MGR_KEY`. The InnoDB adapter chooses
-one of them according to the ordinal defined in DDL; only the `deptno
-= 20` condition is pushed down, leaving the rest of `WHERE` condition
-handled by Calcite's built-in execution engine.
-
+<p>For the following SQL, there are multiple indexes satisfying the
+left-prefix index rule: the possible indexes are <code class="language-plaintext highlighter-rouge">DEPTNO_JOB_KEY</code>,
+<code class="language-plaintext highlighter-rouge">DEPTNO_SAL_COMM_KEY</code> and <code class="language-plaintext highlighter-rouge">DEPTNO_MGR_KEY</code>. The InnoDB adapter chooses
+one of them according to the ordinal defined in DDL; only the <code class="language-plaintext highlighter-rouge">deptno
+= 20</code> condition is pushed down, leaving the rest of <code class="language-plaintext highlighter-rouge">WHERE</code> condition
+handled by Calcite’s built-in execution engine.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select </span>empno, deptno, sal from <span class="s2">"EMP"</span> where deptno <span class="o">=</span> 20 and sal <span class="o">&gt;</span> 2000<span class="p">;</span>
 +-------+--------+---------+
@@ -317,34 +301,28 @@ handled by Calcite's built-in execution engine.
 | 7566  | 20     | 2975.00 |
 +-------+--------+---------+</code></pre></figure>
 
-
-Accessing rows through secondary key requires scanning by secondary
+<p>Accessing rows through secondary key requires scanning by secondary
 index and retrieving records back to clustering index in InnoDB, for a
-"big" scan, that would introduce many random I/O operations, so
+“big” scan, that would introduce many random I/O operations, so
 performance is usually not good enough. Note that the query above can
-be more performant by using `EPTNO_SAL_COMM_KEY` index, because
+be more performant by using <code class="language-plaintext highlighter-rouge">EPTNO_SAL_COMM_KEY</code> index, because
 covering index does not need to retrieve back to clustering index. We
-can force using `DEPTNO_SAL_COMM_KEY` index by hint as follows.
-
+can force using <code class="language-plaintext highlighter-rouge">DEPTNO_SAL_COMM_KEY</code> index by hint as follows.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select </span>empno, deptno, sal from <span class="s2">"EMP"</span>/<span class="k">*</span>+ index<span class="o">(</span>DEPTNO_SAL_COMM_KEY<span class="o">)</span> <span class="k">*</span>/ where deptno <span class="o">=</span> 20 and sal <span class="o">&gt;</span> 2000<span class="p">;</span></code></pre></figure>
 
-
-Hint can be configured in `SqlToRelConverter`, to enable hint, you
-should register `index` HintStrategy on `TableScan` in
-`SqlToRelConverter.ConfigBuilder`. Index hint takes effect on the base
-`TableScan` relational node, if there are conditions matching the
+<p>Hint can be configured in <code class="language-plaintext highlighter-rouge">SqlToRelConverter</code>, to enable hint, you
+should register <code class="language-plaintext highlighter-rouge">index</code> HintStrategy on <code class="language-plaintext highlighter-rouge">TableScan</code> in
+<code class="language-plaintext highlighter-rouge">SqlToRelConverter.ConfigBuilder</code>. Index hint takes effect on the base
+<code class="language-plaintext highlighter-rouge">TableScan</code> relational node, if there are conditions matching the
 index, index condition can be pushed down as well. For the following SQL,
 although none of the indexes can be used, but by leveraging covering
 index, the performance is better than full table scan, we can force to
-use `DEPTNO_MGR_KEY` to scan in secondary index.
-
+use <code class="language-plaintext highlighter-rouge">DEPTNO_MGR_KEY</code> to scan in secondary index.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select </span>empno,mgr from <span class="s2">"EMP"</span>/<span class="k">*</span>+ index<span class="o">(</span>DEPTNO_MGR_KEY<span class="o">)</span> <span class="k">*</span>/ where mgr <span class="o">=</span> 7839<span class="p">;</span></code></pre></figure>
 
-
-Ordering can be pushed down if it matches the natural collation of the index used.
-
+<p>Ordering can be pushed down if it matches the natural collation of the index used.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">sqlline&gt; <span class="k">select </span>deptno,ename,hiredate from <span class="s2">"EMP"</span> where hiredate &lt; <span class="s1">'2020-01-01'</span> order by hiredate desc<span class="p">;</span>
 +--------+--------+------------+
@@ -366,21 +344,19 @@ Ordering can be pushed down if it matches the natural collation of the index use
 | 20     | SMITH  | 1980-12-17 |
 +--------+--------+------------+</code></pre></figure>
 
+<h2 id="about-time-zone">About time zone</h2>
 
-## About time zone
-
-MySQL converts `TIMESTAMP` values from the current time zone to UTC
+<p>MySQL converts <code class="language-plaintext highlighter-rouge">TIMESTAMP</code> values from the current time zone to UTC
 for storage, and back from UTC to the current time zone for
-retrieval. So in this adapter, MySQL's `TIMESTAMP` is mapped to
-Calcite's `TIMESTAMP WITH LOCAL TIME ZONE`. The per-session time zone
-setting can be configured in Calcite connection config `timeZone`,
-which tells the MySQL server which time zone the `TIMESTAMP` value was
+retrieval. So in this adapter, MySQL’s <code class="language-plaintext highlighter-rouge">TIMESTAMP</code> is mapped to
+Calcite’s <code class="language-plaintext highlighter-rouge">TIMESTAMP WITH LOCAL TIME ZONE</code>. The per-session time zone
+setting can be configured in Calcite connection config <code class="language-plaintext highlighter-rouge">timeZone</code>,
+which tells the MySQL server which time zone the <code class="language-plaintext highlighter-rouge">TIMESTAMP</code> value was
 in. Currently the InnoDB adapter cannot pass the property to the
-underlying storage engine, but you can specify `timeZone` in
-`model.json` like below. Note that you only need to specify the
-property if `timeZone` is set in connection config and it is different
-from system default time zone where the InnoDB adapter runs.
-
+underlying storage engine, but you can specify <code class="language-plaintext highlighter-rouge">timeZone</code> in
+<code class="language-plaintext highlighter-rouge">model.json</code> like below. Note that you only need to specify the
+property if <code class="language-plaintext highlighter-rouge">timeZone</code> is set in connection config and it is different
+from system default time zone where the InnoDB adapter runs.</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="o">{</span>
   <span class="s2">"version"</span>: <span class="s2">"1.0"</span>,
@@ -399,36 +375,37 @@ from system default time zone where the InnoDB adapter runs.
   <span class="o">]</span>
 <span class="o">}</span></code></pre></figure>
 
+<h2 id="limitations">Limitations</h2>
 
-## Limitations
+<p><code class="language-plaintext highlighter-rouge">innodb-java-reader</code> has some prerequisites for <code class="language-plaintext highlighter-rouge">.ibd</code> files.</p>
 
-`innodb-java-reader` has some prerequisites for `.ibd` files.
+<ul>
+  <li>The <code class="language-plaintext highlighter-rouge">COMPACT</code> and <code class="language-plaintext highlighter-rouge">DYNAMIC</code> row formats are supported. <code class="language-plaintext highlighter-rouge">COMPRESSED</code>,
+<code class="language-plaintext highlighter-rouge">REDUNDANT</code> and <code class="language-plaintext highlighter-rouge">FIXED</code> are not supported.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">innodb_file_per_table</code> should set to <code class="language-plaintext highlighter-rouge">ON</code>, <code class="language-plaintext highlighter-rouge">innodb_file_per_table</code>
+is enabled by default in MySQL 5.6 and higher.</li>
+  <li>Page size should set to <code class="language-plaintext highlighter-rouge">16K</code> which is also the default value.</li>
+</ul>
 
-* The `COMPACT` and `DYNAMIC` row formats are supported. `COMPRESSED`,
-  `REDUNDANT` and `FIXED` are not supported.
-* `innodb_file_per_table` should set to `ON`, `innodb_file_per_table`
-  is enabled by default in MySQL 5.6 and higher.
-* Page size should set to `16K` which is also the default value.
+<p>For more information, please refer to
+<a href="https://github.com/alibaba/innodb-java-reader#2-prerequisites">prerequisites</a>.</p>
 
-For more information, please refer to
-[prerequisites](https://github.com/alibaba/innodb-java-reader#2-prerequisites).
-
-In terms of data consistency, you can think of the adapter as a simple
+<p>In terms of data consistency, you can think of the adapter as a simple
 MySQL server, with the ability to query directly through InnoDB data
 file, dump data by offloading from MySQL. If pages are not flushed
 from InnoDB Buffer Pool to disk, then the result may be inconsistent
-(the LSN in `.ibd` file might smaller than in-memory pages). InnoDB
+(the LSN in <code class="language-plaintext highlighter-rouge">.ibd</code> file might smaller than in-memory pages). InnoDB
 leverages write ahead log in terms of performance, so there is no
 command available to flush all dirty pages. Only internal mechanism
 manages when and where to persist pages to disk, like Page Cleaner
-thread, adaptive flushing, etc.
+thread, adaptive flushing, etc.</p>
 
-Currently the InnoDB adapter is not aware of row count and cardinality
-of a `.ibd` data file, so it relies on simple rules to perform
+<p>Currently the InnoDB adapter is not aware of row count and cardinality
+of a <code class="language-plaintext highlighter-rouge">.ibd</code> data file, so it relies on simple rules to perform
 optimization. If, in future, the underlying storage engine can provide
 such metrics and metadata, this could be integrated into Calcite by
-leveraging cost based optimization.
-</dbname></hostname>
+leveraging cost based optimization.</p>
 
           
 

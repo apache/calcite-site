@@ -174,55 +174,66 @@ loadScripts(document, 'script');</script>
  <a href="../sql2rel/SqlToRelConverter.html#config()"><code>SqlToRelConverter.config()</code></a> by default sets this to true).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#simplify()" class="member-name-link">simplify</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#removeRedundantDistinct()" class="member-name-link">removeRedundantDistinct</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Whether to simplify expressions; default true.</div>
+<div class="block">Whether to remove the distinct that in aggregate if we know that the input is
+ already unique; default false.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#simplifyLimit()" class="member-name-link">simplifyLimit</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#simplify()" class="member-name-link">simplify</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Whether to simplify LIMIT 0 to an empty relation; default true.</div>
+<div class="block">Whether to simplify expressions; default true.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#simplifyValues()" class="member-name-link">simplifyValues</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#simplifyLimit()" class="member-name-link">simplifyLimit</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Whether to simplify LIMIT 0 to an empty relation; default true.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#simplifyValues()" class="member-name-link">simplifyValues</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Whether to simplify <code>Union(Values, Values)</code> or
  <code>Union(Project(Values))</code> to <code>Values</code>; default true.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withAggregateUnique(boolean)" class="member-name-link">withAggregateUnique</a><wbr>(boolean&nbsp;aggregateUnique)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withAggregateUnique(boolean)" class="member-name-link">withAggregateUnique</a><wbr>(boolean&nbsp;aggregateUnique)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Sets <a href="#aggregateUnique()"><code>aggregateUnique()</code></a>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withBloat(int)" class="member-name-link">withBloat</a><wbr>(int&nbsp;bloat)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withBloat(int)" class="member-name-link">withBloat</a><wbr>(int&nbsp;bloat)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Sets <a href="#bloat()"><code>bloat()</code></a>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withConvertCorrelateToJoin(boolean)" class="member-name-link">withConvertCorrelateToJoin</a><wbr>(boolean&nbsp;convertCorrelateToJoin)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withConvertCorrelateToJoin(boolean)" class="member-name-link">withConvertCorrelateToJoin</a><wbr>(boolean&nbsp;convertCorrelateToJoin)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Sets <a href="#convertCorrelateToJoin()"><code>convertCorrelateToJoin()</code></a>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withDedupAggregateCalls(boolean)" class="member-name-link">withDedupAggregateCalls</a><wbr>(boolean&nbsp;dedupAggregateCalls)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withDedupAggregateCalls(boolean)" class="member-name-link">withDedupAggregateCalls</a><wbr>(boolean&nbsp;dedupAggregateCalls)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Sets <a href="#dedupAggregateCalls()"><code>dedupAggregateCalls()</code></a>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withPreventEmptyFieldList(boolean)" class="member-name-link">withPreventEmptyFieldList</a><wbr>(boolean&nbsp;preventEmptyFieldList)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withPreventEmptyFieldList(boolean)" class="member-name-link">withPreventEmptyFieldList</a><wbr>(boolean&nbsp;preventEmptyFieldList)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Sets <a href="#preventEmptyFieldList()"><code>preventEmptyFieldList()</code></a>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withPruneInputOfAggregate(boolean)" class="member-name-link">withPruneInputOfAggregate</a><wbr>(boolean&nbsp;pruneInputOfAggregate)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withPruneInputOfAggregate(boolean)" class="member-name-link">withPruneInputOfAggregate</a><wbr>(boolean&nbsp;pruneInputOfAggregate)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Sets <a href="#pruneInputOfAggregate()"><code>pruneInputOfAggregate()</code></a>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withPushJoinCondition(boolean)" class="member-name-link">withPushJoinCondition</a><wbr>(boolean&nbsp;pushJoinCondition)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withPushJoinCondition(boolean)" class="member-name-link">withPushJoinCondition</a><wbr>(boolean&nbsp;pushJoinCondition)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Sets <a href="#pushJoinCondition()"><code>pushJoinCondition()</code></a>.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withRemoveRedundantDistinct(boolean)" class="member-name-link">withRemoveRedundantDistinct</a><wbr>(boolean&nbsp;removeRedundantDistinct)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Sets <a href="#removeRedundantDistinct()"><code>removeRedundantDistinct()</code></a>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withSimplify(boolean)" class="member-name-link">withSimplify</a><wbr>(boolean&nbsp;simplify)</code></div>
@@ -459,6 +470,22 @@ loadScripts(document, 'script');</script>
 <div class="block">Sets <a href="#convertCorrelateToJoin()"><code>convertCorrelateToJoin()</code></a>.</div>
 </section>
 </li>
+<li>
+<section class="detail" id="removeRedundantDistinct()">
+<h3>removeRedundantDistinct</h3>
+<div class="member-signature"><span class="annotations">@Default
+</span><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">removeRedundantDistinct</span>()</div>
+<div class="block">Whether to remove the distinct that in aggregate if we know that the input is
+ already unique; default false.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="withRemoveRedundantDistinct(boolean)">
+<h3>withRemoveRedundantDistinct</h3>
+<div class="member-signature"><span class="return-type"><a href="RelBuilder.Config.html" title="interface in org.apache.calcite.tools">RelBuilder.Config</a></span>&nbsp;<span class="element-name">withRemoveRedundantDistinct</span><wbr><span class="parameters">(boolean&nbsp;removeRedundantDistinct)</span></div>
+<div class="block">Sets <a href="#removeRedundantDistinct()"><code>removeRedundantDistinct()</code></a>.</div>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -468,7 +495,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2023 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2024 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

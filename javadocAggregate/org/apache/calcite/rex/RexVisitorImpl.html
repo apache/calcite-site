@@ -101,7 +101,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <dl class="notes">
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="../rel/rules/ReduceExpressionsRule.ReducibleExprLocator.html" title="class in org.apache.calcite.rel.rules">ReduceExpressionsRule.ReducibleExprLocator</a></code>, <code><a href="../plan/RelOptUtil.InputFinder.html" title="class in org.apache.calcite.plan">RelOptUtil.InputFinder</a></code>, <code><a href="RexChecker.html" title="class in org.apache.calcite.rex">RexChecker</a></code>, <code><a href="RexUtil.FieldAccessFinder.html" title="class in org.apache.calcite.rex">RexUtil.FieldAccessFinder</a></code>, <code><a href="RexUtil.RexFinder.html" title="class in org.apache.calcite.rex">RexUtil.RexFinder</a></code>, <code><a href="RexUtil.SubQueryFinder.html" title="class in org.apache.calcite.rex">RexUtil.SubQueryFinder</a></code></dd>
+<dd><code><a href="../rel/rules/ReduceExpressionsRule.ReducibleExprLocator.html" title="class in org.apache.calcite.rel.rules">ReduceExpressionsRule.ReducibleExprLocator</a></code>, <code><a href="../plan/RelOptUtil.InputFinder.html" title="class in org.apache.calcite.plan">RelOptUtil.InputFinder</a></code>, <code><a href="RexChecker.html" title="class in org.apache.calcite.rex">RexChecker</a></code>, <code><a href="RexUtil.FieldAccessFinder.html" title="class in org.apache.calcite.rex">RexUtil.FieldAccessFinder</a></code>, <code><a href="RexUtil.RexFinder.html" title="class in org.apache.calcite.rex">RexUtil.RexFinder</a></code>, <code><a href="RexUtil.SubQueryCollector.html" title="class in org.apache.calcite.rex">RexUtil.SubQueryCollector</a></code>, <code><a href="RexUtil.SubQueryFinder.html" title="class in org.apache.calcite.rex">RexUtil.SubQueryFinder</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">RexVisitorImpl&lt;@Nullable R&gt;</span>
@@ -181,6 +181,12 @@ implements <a href="RexVisitor.html" title="interface in org.apache.calcite.rex"
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RexVisitorImpl.html" title="type parameter in RexVisitorImpl">R</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visitInputRef(org.apache.calcite.rex.RexInputRef)" class="member-name-link">visitInputRef</a><wbr>(<a href="RexInputRef.html" title="class in org.apache.calcite.rex">RexInputRef</a>&nbsp;inputRef)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RexVisitorImpl.html" title="type parameter in RexVisitorImpl">R</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visitLambda(org.apache.calcite.rex.RexLambda)" class="member-name-link">visitLambda</a><wbr>(<a href="RexLambda.html" title="class in org.apache.calcite.rex">RexLambda</a>&nbsp;lambda)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RexVisitorImpl.html" title="type parameter in RexVisitorImpl">R</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visitLambdaRef(org.apache.calcite.rex.RexLambdaRef)" class="member-name-link">visitLambdaRef</a><wbr>(<a href="RexLambdaRef.html" title="class in org.apache.calcite.rex">RexLambdaRef</a>&nbsp;lambdaRef)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RexVisitorImpl.html" title="type parameter in RexVisitorImpl">R</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visitLiteral(org.apache.calcite.rex.RexLiteral)" class="member-name-link">visitLiteral</a><wbr>(<a href="RexLiteral.html" title="class in org.apache.calcite.rex">RexLiteral</a>&nbsp;literal)</code></div>
@@ -372,6 +378,26 @@ implements <a href="RexVisitor.html" title="interface in org.apache.calcite.rex"
 </section>
 </li>
 <li>
+<section class="detail" id="visitLambda(org.apache.calcite.rex.RexLambda)">
+<h3>visitLambda</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="RexVisitorImpl.html" title="type parameter in RexVisitorImpl">R</a></span>&nbsp;<span class="element-name">visitLambda</span><wbr><span class="parameters">(<a href="RexLambda.html" title="class in org.apache.calcite.rex">RexLambda</a>&nbsp;lambda)</span></div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="RexVisitor.html#visitLambda(org.apache.calcite.rex.RexLambda)">visitLambda</a></code>&nbsp;in interface&nbsp;<code><a href="RexVisitor.html" title="interface in org.apache.calcite.rex">RexVisitor</a>&lt;<a href="RexVisitorImpl.html" title="type parameter in RexVisitorImpl">R</a>&gt;</code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="visitLambdaRef(org.apache.calcite.rex.RexLambdaRef)">
+<h3>visitLambdaRef</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="RexVisitorImpl.html" title="type parameter in RexVisitorImpl">R</a></span>&nbsp;<span class="element-name">visitLambdaRef</span><wbr><span class="parameters">(<a href="RexLambdaRef.html" title="class in org.apache.calcite.rex">RexLambdaRef</a>&nbsp;lambdaRef)</span></div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="RexVisitor.html#visitLambdaRef(org.apache.calcite.rex.RexLambdaRef)">visitLambdaRef</a></code>&nbsp;in interface&nbsp;<code><a href="RexVisitor.html" title="interface in org.apache.calcite.rex">RexVisitor</a>&lt;<a href="RexVisitorImpl.html" title="type parameter in RexVisitorImpl">R</a>&gt;</code></dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="visitArrayAnd(org.apache.calcite.rex.RexVisitor,java.util.List)">
 <h3>visitArrayAnd</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">visitArrayAnd</span><wbr><span class="parameters">(<a href="RexVisitor.html" title="interface in org.apache.calcite.rex">RexVisitor</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;&nbsp;visitor,
@@ -422,7 +448,7 @@ implements <a href="RexVisitor.html" title="interface in org.apache.calcite.rex"
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2023 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2024 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

@@ -275,9 +275,15 @@ implements <a href="MetadataHandler.html" title="interface in org.apache.calcite
 <div class="block">Infers predicates for a Union.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../plan/RelOptPredicateList.html" title="class in org.apache.calcite.plan">RelOptPredicateList</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPredicates(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.metadata.RelMetadataQuery)" class="member-name-link">getPredicates</a><wbr>(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPredicates(org.apache.calcite.rel.core.Values,org.apache.calcite.rel.metadata.RelMetadataQuery)" class="member-name-link">getPredicates</a><wbr>(<a href="../core/Values.html" title="class in org.apache.calcite.rel.core">Values</a>&nbsp;values,
  <a href="RelMetadataQuery.html" title="class in org.apache.calcite.rel.metadata">RelMetadataQuery</a>&nbsp;mq)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Infers predicates for a Values.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../plan/RelOptPredicateList.html" title="class in org.apache.calcite.plan">RelOptPredicateList</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPredicates(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.metadata.RelMetadataQuery)" class="member-name-link">getPredicates</a><wbr>(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
+ <a href="RelMetadataQuery.html" title="class in org.apache.calcite.rel.metadata">RelMetadataQuery</a>&nbsp;mq)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Catch-all implementation for
  <a href="BuiltInMetadata.Predicates.html#getPredicates()"><code>BuiltInMetadata.Predicates.getPredicates()</code></a>,
  invoked using reflection.</div>
@@ -486,6 +492,17 @@ implements <a href="MetadataHandler.html" title="interface in org.apache.calcite
 </section>
 </li>
 <li>
+<section class="detail" id="getPredicates(org.apache.calcite.rel.core.Values,org.apache.calcite.rel.metadata.RelMetadataQuery)">
+<h3>getPredicates</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../plan/RelOptPredicateList.html" title="class in org.apache.calcite.plan">RelOptPredicateList</a></span>&nbsp;<span class="element-name">getPredicates</span><wbr><span class="parameters">(<a href="../core/Values.html" title="class in org.apache.calcite.rel.core">Values</a>&nbsp;values,
+ <a href="RelMetadataQuery.html" title="class in org.apache.calcite.rel.metadata">RelMetadataQuery</a>&nbsp;mq)</span></div>
+<div class="block">Infers predicates for a Values.
+
+ <p>The predicates on <code>T (x, y, z)</code> with rows
+ <code>(1, 2, null), (1, 2, null), (5, 2, null)</code> are <code>'y = 2'</code> and <code>'z is null'</code>.</div>
+</section>
+</li>
+<li>
 <section class="detail" id="getPredicates(org.apache.calcite.plan.volcano.RelSubset,org.apache.calcite.rel.metadata.RelMetadataQuery)">
 <h3>getPredicates</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../plan/RelOptPredicateList.html" title="class in org.apache.calcite.plan">RelOptPredicateList</a></span>&nbsp;<span class="element-name">getPredicates</span><wbr><span class="parameters">(<a href="../../plan/volcano/RelSubset.html" title="class in org.apache.calcite.plan.volcano">RelSubset</a>&nbsp;r,
@@ -512,7 +529,7 @@ implements <a href="MetadataHandler.html" title="interface in org.apache.calcite
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2023 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2024 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

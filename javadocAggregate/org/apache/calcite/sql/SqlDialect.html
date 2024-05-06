@@ -412,11 +412,24 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Whether a sub-query in the FROM clause must have an alias.</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>protected static <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#rewriteMaxMin(org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">rewriteMaxMin</a><wbr>(<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;aggCall,
+ <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;relDataType)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Helper for rewrites of MAX/MIN.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rewriteMaxMinExpr(org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">rewriteMaxMinExpr</a><wbr>(<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;aggCall,
+ <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;relDataType)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Rewrites MAX(x)/MIN(x) as BOOL_OR(x)/BOOL_AND(x) for certain
+ database variants (Postgres and Redshift, currently).</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rewriteSingleValueExpr(org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">rewriteSingleValueExpr</a><wbr>(<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;aggCall,
  <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;relDataType)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Rewrite SINGLE_VALUE into expression based on database variants
+<div class="block">Rewrites SINGLE_VALUE into expression based on database variants
  E.g.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
@@ -497,92 +510,97 @@ loadScripts(document, 'script');</script>
 </div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#supportsWindowFunctions()" class="member-name-link">supportsWindowFunctions</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#supportsTimestampPrecision()" class="member-name-link">supportsTimestampPrecision</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns whether this dialect supports TIMESTAMP with precision.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#supportsWindowFunctions()" class="member-name-link">supportsWindowFunctions</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns whether this dialect supports window functions (OVER clause).</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseCall(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,int,int)" class="member-name-link">unparseCall</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseCall(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,int,int)" class="member-name-link">unparseCall</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
  <a href="SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
  int&nbsp;leftPrec,
  int&nbsp;rightPrec)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseDateTimeLiteral(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlAbstractDateTimeLiteral,int,int)" class="member-name-link">unparseDateTimeLiteral</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseDateTimeLiteral(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlAbstractDateTimeLiteral,int,int)" class="member-name-link">unparseDateTimeLiteral</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
  <a href="SqlAbstractDateTimeLiteral.html" title="class in org.apache.calcite.sql">SqlAbstractDateTimeLiteral</a>&nbsp;literal,
  int&nbsp;leftPrec,
  int&nbsp;rightPrec)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>protected static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unparseFetchUsingAnsi(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)" class="member-name-link">unparseFetchUsingAnsi</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
- @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset,
- @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Unparses offset/fetch using ANSI standard "OFFSET offset ROWS FETCH NEXT
- fetch ROWS ONLY" syntax.</div>
-</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>protected static void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unparseFetchUsingLimit(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)" class="member-name-link">unparseFetchUsingLimit</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unparseFetchUsingAnsi(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)" class="member-name-link">unparseFetchUsingAnsi</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
  @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset,
  @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Unparses offset/fetch using "LIMIT fetch OFFSET offset" syntax.</div>
+<div class="block">Unparses offset/fetch using ANSI standard "OFFSET offset ROWS FETCH NEXT
+ fetch ROWS ONLY" syntax.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>protected static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unparseLimit(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode)" class="member-name-link">unparseLimit</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
- @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>protected static void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unparseOffset(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode)" class="member-name-link">unparseOffset</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
- @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseOffsetFetch(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)" class="member-name-link">unparseOffsetFetch</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unparseFetchUsingLimit(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)" class="member-name-link">unparseFetchUsingLimit</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
  @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset,
  @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Unparses offset/fetch using "LIMIT fetch OFFSET offset" syntax.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>protected static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unparseLimit(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode)" class="member-name-link">unparseLimit</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+ @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>protected static void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unparseOffset(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode)" class="member-name-link">unparseOffset</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+ @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseOffsetFetch(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)" class="member-name-link">unparseOffsetFetch</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+ @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset,
+ @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Converts an offset and fetch into SQL.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseSqlDatetimeArithmetic(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.SqlKind,int,int)" class="member-name-link">unparseSqlDatetimeArithmetic</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseSqlDatetimeArithmetic(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.SqlKind,int,int)" class="member-name-link">unparseSqlDatetimeArithmetic</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
  <a href="SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
  <a href="SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&nbsp;sqlKind,
  int&nbsp;leftPrec,
  int&nbsp;rightPrec)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseSqlIntervalLiteral(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlIntervalLiteral,int,int)" class="member-name-link">unparseSqlIntervalLiteral</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseSqlIntervalLiteral(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlIntervalLiteral,int,int)" class="member-name-link">unparseSqlIntervalLiteral</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
  <a href="SqlIntervalLiteral.html" title="class in org.apache.calcite.sql">SqlIntervalLiteral</a>&nbsp;literal,
  int&nbsp;leftPrec,
  int&nbsp;rightPrec)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Converts an interval literal to a SQL string.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseSqlIntervalQualifier(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlIntervalQualifier,org.apache.calcite.rel.type.RelDataTypeSystem)" class="member-name-link">unparseSqlIntervalQualifier</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseSqlIntervalQualifier(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlIntervalQualifier,org.apache.calcite.rel.type.RelDataTypeSystem)" class="member-name-link">unparseSqlIntervalQualifier</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
  <a href="SqlIntervalQualifier.html" title="class in org.apache.calcite.sql">SqlIntervalQualifier</a>&nbsp;qualifier,
  <a href="../rel/type/RelDataTypeSystem.html" title="interface in org.apache.calcite.rel.type">RelDataTypeSystem</a>&nbsp;typeSystem)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Converts an interval qualifier to a SQL string.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseTableScanHints(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNodeList,int,int)" class="member-name-link">unparseTableScanHints</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseTableScanHints(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNodeList,int,int)" class="member-name-link">unparseTableScanHints</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
  <a href="SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;hints,
  int&nbsp;leftPrec,
  int&nbsp;rightPrec)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Converts table scan hints.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseTopN(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)" class="member-name-link">unparseTopN</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseTopN(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)" class="member-name-link">unparseTopN</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
  @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset,
  @Nullable <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Converts a fetch into a "SELECT TOP(fetch)".</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unquoteStringLiteral(java.lang.String)" class="member-name-link">unquoteStringLiteral</a><wbr>(@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;val)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unquoteStringLiteral(java.lang.String)" class="member-name-link">unquoteStringLiteral</a><wbr>(@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;val)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Converts a string literal back into a string.</div>
 </div>
 </div>
@@ -1088,6 +1106,13 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="supportsTimestampPrecision()">
+<h3>supportsTimestampPrecision</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">supportsTimestampPrecision</span>()</div>
+<div class="block">Returns whether this dialect supports TIMESTAMP with precision.</div>
+</section>
+</li>
+<li>
 <section class="detail" id="supportsAggregateFunctionFilter()">
 <h3>supportsAggregateFunctionFilter</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">supportsAggregateFunctionFilter</span>()</div>
@@ -1143,8 +1168,35 @@ loadScripts(document, 'script');</script>
 <h3>rewriteSingleValueExpr</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></span>&nbsp;<span class="element-name">rewriteSingleValueExpr</span><wbr><span class="parameters">(<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;aggCall,
  <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;relDataType)</span></div>
-<div class="block">Rewrite SINGLE_VALUE into expression based on database variants
+<div class="block">Rewrites SINGLE_VALUE into expression based on database variants
  E.g. HSQLDB, MYSQL, ORACLE, etc.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="rewriteMaxMinExpr(org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.type.RelDataType)">
+<h3>rewriteMaxMinExpr</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></span>&nbsp;<span class="element-name">rewriteMaxMinExpr</span><wbr><span class="parameters">(<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;aggCall,
+ <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;relDataType)</span></div>
+<div class="block">Rewrites MAX(x)/MIN(x) as BOOL_OR(x)/BOOL_AND(x) for certain
+ database variants (Postgres and Redshift, currently).</div>
+<dl class="notes">
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list-long">
+<li><a href="#rewriteMaxMin(org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.type.RelDataType)"><code>rewriteMaxMin(SqlNode, RelDataType)</code></a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="rewriteMaxMin(org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.type.RelDataType)">
+<h3>rewriteMaxMin</h3>
+<div class="member-signature"><span class="modifiers">protected static</span>&nbsp;<span class="return-type"><a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></span>&nbsp;<span class="element-name">rewriteMaxMin</span><wbr><span class="parameters">(<a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;aggCall,
+ <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;relDataType)</span></div>
+<div class="block">Helper for rewrites of MAX/MIN.
+ Some dialects (e.g. Postgres and Redshift), rewrite as
+ BOOL_OR/BOOL_AND if the return type is BOOLEAN.</div>
 </section>
 </li>
 <li>
@@ -1502,7 +1554,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2023 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2024 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

@@ -190,6 +190,13 @@ extends <a href="Metadata.html" title="interface in org.apache.calcite.rel.metad
  represented as an <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util"><code>ImmutableBitSet</code></a>, where
  each bit position represents a 0-based output column ordinal.
 
+ <p>Note that a unique key plus other columns is still unique.
+ Therefore, all columns are unique in a table with a unique key
+ consisting of the empty set, as is the case for zero-row and
+ single-row tables. The converse is not true: a table with all
+ columns unique does necessary have the empty set as a key -
+ that is never true with multi-row tables.
+
  <p>Nulls can be ignored if the relational expression has filtered out
  null values.</div>
 <dl class="notes">
@@ -198,7 +205,8 @@ extends <a href="Metadata.html" title="interface in org.apache.calcite.rel.metad
                     whether the keys are unique</dd>
 <dt>Returns:</dt>
 <dd>set of keys, or null if this information cannot be determined
- (whereas empty set indicates definitely no keys at all)</dd>
+ (whereas empty set indicates definitely no keys at all, and a set
+ containing the empty set implies every column is unique)</dd>
 </dl>
 </section>
 </li>
@@ -211,7 +219,7 @@ extends <a href="Metadata.html" title="interface in org.apache.calcite.rel.metad
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2023 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2024 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

@@ -95,11 +95,12 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../../schema/Schema.html" title="interface in org.apache.calcite.schema">Schema</a></code></dd>
+<dd><code><a href="../../schema/Schema.html" title="interface in org.apache.calcite.schema">Schema</a></code>, <code><a href="../../schema/Wrapper.html" title="interface in org.apache.calcite.schema">Wrapper</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">JdbcCatalogSchema</span>
-<span class="extends-implements">extends <a href="../../schema/impl/AbstractSchema.html" title="class in org.apache.calcite.schema.impl">AbstractSchema</a></span></div>
+<span class="extends-implements">extends <a href="../../schema/impl/AbstractSchema.html" title="class in org.apache.calcite.schema.impl">AbstractSchema</a>
+implements <a href="../../schema/Wrapper.html" title="interface in org.apache.calcite.schema">Wrapper</a></span></div>
 <div class="block">Schema based upon a JDBC catalog (database).
 
  <p>This schema does not directly contain tables, but contains a sub-schema
@@ -197,6 +198,12 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a map of sub-schemas in this schema by name.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;@Nullable T</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unwrap(java.lang.Class)" class="member-name-link">unwrap</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;clazz)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Finds an instance of an interface implemented by this object,
+ or returns null if this object does not support that interface.</div>
+</div>
 </div>
 </div>
 </div>
@@ -206,6 +213,9 @@ loadScripts(document, 'script');</script>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-org.apache.calcite.schema.Wrapper">Methods inherited from interface&nbsp;org.apache.calcite.schema.<a href="../../schema/Wrapper.html" title="interface in org.apache.calcite.schema">Wrapper</a></h3>
+<code><a href="../../schema/Wrapper.html#maybeUnwrap(java.lang.Class)">maybeUnwrap</a>, <a href="../../schema/Wrapper.html#unwrapOrThrow(java.lang.Class)">unwrapOrThrow</a></code></div>
 </section>
 </li>
 </ul>
@@ -301,6 +311,19 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the data source.</div>
 </section>
 </li>
+<li>
+<section class="detail" id="unwrap(java.lang.Class)">
+<h3>unwrap</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">@Nullable T</span>&nbsp;<span class="element-name">unwrap</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;clazz)</span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../../schema/Wrapper.html#unwrap(java.lang.Class)">Wrapper</a></code></span></div>
+<div class="block">Finds an instance of an interface implemented by this object,
+ or returns null if this object does not support that interface.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../../schema/Wrapper.html#unwrap(java.lang.Class)">unwrap</a></code>&nbsp;in interface&nbsp;<code><a href="../../schema/Wrapper.html" title="interface in org.apache.calcite.schema">Wrapper</a></code></dd>
+</dl>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -310,7 +333,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2023 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2024 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

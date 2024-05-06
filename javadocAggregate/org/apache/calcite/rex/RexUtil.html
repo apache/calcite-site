@@ -130,8 +130,14 @@ loadScripts(document, 'script');</script>
  in a tree.</div>
 </div>
 <div class="col-first even-row-color"><code>static class&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="RexUtil.SubQueryFinder.html" class="type-name-link" title="class in org.apache.calcite.rex">RexUtil.SubQueryFinder</a></code></div>
+<div class="col-second even-row-color"><code><a href="RexUtil.SubQueryCollector.html" class="type-name-link" title="class in org.apache.calcite.rex">RexUtil.SubQueryCollector</a></code></div>
 <div class="col-last even-row-color">
+<div class="block">Visitor that collects all the top level SubQueries <a href="RexSubQuery.html" title="class in org.apache.calcite.rex"><code>RexSubQuery</code></a>
+  in a projection list of a given <a href="../rel/core/Project.html" title="class in org.apache.calcite.rel.core"><code>Project</code></a>.</div>
+</div>
+<div class="col-first odd-row-color"><code>static class&nbsp;</code></div>
+<div class="col-second odd-row-color"><code><a href="RexUtil.SubQueryFinder.html" class="type-name-link" title="class in org.apache.calcite.rex">RexUtil.SubQueryFinder</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Visitor that throws <a href="../util/Util.FoundOne.html" title="class in org.apache.calcite.util"><code>Util.FoundOne</code></a> if
  applied to an expression that contains a <a href="RexSubQuery.html" title="class in org.apache.calcite.rex"><code>RexSubQuery</code></a>.</div>
 </div>
@@ -1726,7 +1732,8 @@ loadScripts(document, 'script');</script>
 <dd><code>source</code> - source type</dd>
 <dd><code>target</code> - target type</dd>
 <dt>Returns:</dt>
-<dd>true iff the conversion is a loss-less cast</dd>
+<dd>'true' when the conversion can certainly be determined to be loss-less cast,
+         but may return 'false' for some lossless casts.</dd>
 </dl>
 </section>
 </li>
@@ -2263,7 +2270,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2023 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2024 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

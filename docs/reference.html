@@ -1255,6 +1255,16 @@ name will have been converted to upper case also.</p>
       <td style="text-align: left">Example: TIME ‘20:17:40’</td>
     </tr>
     <tr>
+      <td style="text-align: left">TIME WITH LOCAL TIME ZONE</td>
+      <td style="text-align: left">Time of day with local time zone</td>
+      <td style="text-align: left">Example: TIME WITH LOCAL TIME ZONE ‘20:17:40’</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">TIME WITH TIME ZONE</td>
+      <td style="text-align: left">Time of day with time zone</td>
+      <td style="text-align: left">Example: TIME ‘20:17:40 GMT+08’</td>
+    </tr>
+    <tr>
       <td style="text-align: left">TIMESTAMP [ WITHOUT TIME ZONE ]</td>
       <td style="text-align: left">Date and time</td>
       <td style="text-align: left">Example: TIMESTAMP ‘1969-07-20 20:17:40’</td>
@@ -1262,12 +1272,12 @@ name will have been converted to upper case also.</p>
     <tr>
       <td style="text-align: left">TIMESTAMP WITH LOCAL TIME ZONE</td>
       <td style="text-align: left">Date and time with local time zone</td>
-      <td style="text-align: left">Example: TIMESTAMP ‘1969-07-20 20:17:40 America/Los Angeles’</td>
+      <td style="text-align: left">Example: TIMESTAMP WITH LOCAL TIME ZONE ‘1969-07-20 20:17:40’</td>
     </tr>
     <tr>
       <td style="text-align: left">TIMESTAMP WITH TIME ZONE</td>
       <td style="text-align: left">Date and time with time zone</td>
-      <td style="text-align: left">Example: TIMESTAMP ‘1969-07-20 20:17:40 America/Los Angeles’</td>
+      <td style="text-align: left">Example: TIMESTAMP WITH TIME ZONE ‘1969-07-20 20:17:40 America/Los Angeles’</td>
     </tr>
     <tr>
       <td style="text-align: left">INTERVAL timeUnit [ TO timeUnit ]</td>
@@ -1348,6 +1358,11 @@ we also allow their plurals, YEARS, QUARTERS, MONTHS, WEEKS, DAYS, HOURS, MINUTE
       <td style="text-align: left">CURSOR</td>
       <td style="text-align: left">Cursor over the result of executing a query</td>
       <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">FUNCTION</td>
+      <td style="text-align: left">A function definition that is not bound to an identifier, it is not fully supported in CAST or DDL</td>
+      <td style="text-align: left">Example FUNCTION(INTEGER, VARCHAR(30)) -&gt; INTEGER</td>
     </tr>
   </tbody>
 </table></div>
@@ -1854,8 +1869,8 @@ completeness.</p>
       <td style="text-align: left">Converts <em>numeric</em> from degrees to radians</td>
     </tr>
     <tr>
-      <td style="text-align: left">ROUND(numeric1 [, numeric2])</td>
-      <td style="text-align: left">Rounds <em>numeric1</em> to optionally <em>numeric2</em> (if not specified 0) places right to the decimal point</td>
+      <td style="text-align: left">ROUND(numeric1 [, integer2])</td>
+      <td style="text-align: left">Rounds <em>numeric1</em> to optionally <em>integer2</em> (if not specified 0) places right to the decimal point</td>
     </tr>
     <tr>
       <td style="text-align: left">SIGN(numeric)</td>
@@ -1873,8 +1888,8 @@ completeness.</p>
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">TRUNCATE(numeric1 [, numeric2])</td>
-      <td style="text-align: left">Truncates <em>numeric1</em> to optionally <em>numeric2</em> (if not specified 0) places right to the decimal point</td>
+      <td style="text-align: left">TRUNCATE(numeric1 [, integer2])</td>
+      <td style="text-align: left">Truncates <em>numeric1</em> to optionally <em>integer2</em> (if not specified 0) places right to the decimal point</td>
     </tr>
   </tbody>
 </table></div>
@@ -2235,6 +2250,11 @@ However, Calcite supports both implicit and explicit conversion of values from o
     </tr>
   </tbody>
 </table></div>
+
+<p>Converting a string to a <strong>BINARY</strong> or <strong>VARBINARY</strong> type produces the
+list of bytes of the string’s encoding in the strings’ charset.  A
+runtime error is produced if the string’s characters cannot be
+represented using its charset.</p>
 
 <p>Supported data types syntax:</p>
 
@@ -2790,6 +2810,34 @@ or promote to <code class="language-plaintext highlighter-rouge">VARCHAR</code> 
   </tbody>
 </table></div>
 
+<h3 id="value-constructors-by-query">Value constructors by query</h3>
+
+<div class="scroll-table-style"><table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Operator syntax</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">ARRAY (sub-query)</td>
+      <td style="text-align: left">Creates an array from the result of a sub-query. Example: <code class="language-plaintext highlighter-rouge">ARRAY(SELECT empno FROM emp ORDER BY empno)</code>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MAP (sub-query)</td>
+      <td style="text-align: left">Creates a map from the result of a key-value pair sub-query. Example: <code class="language-plaintext highlighter-rouge">MAP(SELECT empno, deptno FROM emp)</code>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MULTISET (sub-query)</td>
+      <td style="text-align: left">Creates a multiset from the result of a sub-query. Example: <code class="language-plaintext highlighter-rouge">MULTISET(SELECT empno FROM emp)</code>
+</td>
+    </tr>
+  </tbody>
+</table></div>
+
 <h3 id="collection-functions">Collection functions</h3>
 
 <div class="scroll-table-style"><table>
@@ -3113,8 +3161,8 @@ or promote to <code class="language-plaintext highlighter-rouge">VARCHAR</code> 
       <td style="text-align: left">Returns a random double using <em>numeric</em> as the seed value</td>
     </tr>
     <tr>
-      <td style="text-align: left">{fn ROUND(numeric1, numeric2)}</td>
-      <td style="text-align: left">Rounds <em>numeric1</em> to <em>numeric2</em> places right to the decimal point</td>
+      <td style="text-align: left">{fn ROUND(numeric1, integer2)}</td>
+      <td style="text-align: left">Rounds <em>numeric1</em> to <em>integer2</em> places right to the decimal point</td>
     </tr>
     <tr>
       <td style="text-align: left">{fn SIGN(numeric)}</td>
@@ -3137,8 +3185,8 @@ or promote to <code class="language-plaintext highlighter-rouge">VARCHAR</code> 
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">{fn TRUNCATE(numeric1, numeric2)}</td>
-      <td style="text-align: left">Truncates <em>numeric1</em> to <em>numeric2</em> places right to the decimal point</td>
+      <td style="text-align: left">{fn TRUNCATE(numeric1, integer2)}</td>
+      <td style="text-align: left">Truncates <em>numeric1</em> to <em>integer2</em> places right to the decimal point</td>
     </tr>
   </tbody>
 </table></div>
@@ -5348,6 +5396,7 @@ connect string parameter.</p>
   <li>‘*’ for all libraries,</li>
   <li>‘b’ for Google BigQuery (‘fun=bigquery’ in the connect string),</li>
   <li>‘c’ for Apache Calcite (‘fun=calcite’ in the connect string),</li>
+  <li>‘f’ for Snowflake (‘fun=snowflake’ in the connect string),</li>
   <li>‘h’ for Apache Hive (‘fun=hive’ in the connect string),</li>
   <li>‘m’ for MySQL (‘fun=mysql’ in the connect string),</li>
   <li>‘q’ for Microsoft SQL Server (‘fun=mssql’ in the connect string),</li>
@@ -5370,6 +5419,12 @@ Calcite type <code class="language-plaintext highlighter-rouge">TIMESTAMP WITH L
   <li>The <code class="language-plaintext highlighter-rouge">TIMESTAMP(string)</code> function, designed to be compatible the BigQuery
 function, return a Calcite <code class="language-plaintext highlighter-rouge">TIMESTAMP WITH LOCAL TIME ZONE</code>;</li>
   <li>Similarly, <code class="language-plaintext highlighter-rouge">DATETIME(string)</code> returns a Calcite <code class="language-plaintext highlighter-rouge">TIMESTAMP</code>.</li>
+</ul>
+
+<p>In the following:</p>
+<ul>
+  <li>
+<em>func</em> is a lambda argument.</li>
 </ul>
 
 <div class="scroll-table-style"><table>
@@ -5401,8 +5456,8 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
     </tr>
     <tr>
       <td style="text-align: left">s</td>
-      <td style="text-align: left">ARRAY(expr [, expr ]*)</td>
-      <td style="text-align: left">Construct an array in Apache Spark</td>
+      <td style="text-align: left">ARRAY([expr [, expr ]*])</td>
+      <td style="text-align: left">Construct an array in Apache Spark. The function allows users to use <code class="language-plaintext highlighter-rouge">ARRAY()</code> to create an empty array</td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
@@ -5542,6 +5597,18 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">*</td>
       <td style="text-align: left">ATANH(numeric)</td>
       <td style="text-align: left">Returns the inverse hyperbolic tangent of <em>numeric</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">f</td>
+      <td style="text-align: left">BITAND_AGG(value)</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">BIT_AND(value)</code>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">f</td>
+      <td style="text-align: left">BITOR_AGG(value)</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">BIT_OR(value)</code>
 </td>
     </tr>
     <tr>
@@ -5758,7 +5825,7 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Truncates <em>timestamp</em> to the granularity of <em>timeUnit</em>, rounding to the beginning of the unit</td>
     </tr>
     <tr>
-      <td style="text-align: left">b</td>
+      <td style="text-align: left">b s</td>
       <td style="text-align: left">DATE_FROM_UNIX_DATE(integer)</td>
       <td style="text-align: left">Returns the DATE that is <em>integer</em> days after 1970-01-01</td>
     </tr>
@@ -5792,7 +5859,7 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Truncates <em>date</em> to the granularity of <em>timeUnit</em>, rounding to the beginning of the unit</td>
     </tr>
     <tr>
-      <td style="text-align: left">o</td>
+      <td style="text-align: left">o s</td>
       <td style="text-align: left">DECODE(value, value1, result1 [, valueN, resultN ]* [, default ])</td>
       <td style="text-align: left">Compares <em>value</em> to each <em>valueN</em> value one by one; if <em>value</em> is equal to a <em>valueN</em>, returns the corresponding <em>resultN</em>, else returns <em>default</em>, or NULL if <em>default</em> is not specified</td>
     </tr>
@@ -5802,20 +5869,32 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Returns a measure of the similarity of two strings, namely the number of character positions that their <code class="language-plaintext highlighter-rouge">SOUNDEX</code> values have in common: 4 if the <code class="language-plaintext highlighter-rouge">SOUNDEX</code> values are same and 0 if the <code class="language-plaintext highlighter-rouge">SOUNDEX</code> values are totally different</td>
     </tr>
     <tr>
-      <td style="text-align: left">b</td>
-      <td style="text-align: left">ENDS_WITH(string1, string2)</td>
+      <td style="text-align: left">f s</td>
+      <td style="text-align: left">ENDSWITH(string1, string2)</td>
       <td style="text-align: left">Returns whether <em>string2</em> is a suffix of <em>string1</em>
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">o</td>
-      <td style="text-align: left">EXTRACT(xml, xpath, [, namespaces ])</td>
-      <td style="text-align: left">Returns the XML fragment of the element or elements matched by the XPath expression. The optional namespace value that specifies a default mapping or namespace mapping for prefixes, which is used when evaluating the XPath expression</td>
+      <td style="text-align: left">b p</td>
+      <td style="text-align: left">ENDS_WITH(string1, string2)</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">ENDSWITH(string1, string2)</code>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">EXISTS(array, func)</td>
+      <td style="text-align: left">Returns whether a predicate <em>func</em> holds for one or more elements in the <em>array</em>
+</td>
     </tr>
     <tr>
       <td style="text-align: left">o</td>
       <td style="text-align: left">EXISTSNODE(xml, xpath, [, namespaces ])</td>
       <td style="text-align: left">Determines whether traversal of a XML document using a specified xpath results in any nodes. Returns 0 if no nodes remain after applying the XPath traversal on the document fragment of the element or elements matched by the XPath expression. Returns 1 if any nodes remain. The optional namespace value that specifies a default mapping or namespace mapping for prefixes, which is used when evaluating the XPath expression.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">o</td>
+      <td style="text-align: left">EXTRACT(xml, xpath, [, namespaces ])</td>
+      <td style="text-align: left">Returns the XML fragment of the element or elements matched by the XPath expression. The optional namespace value that specifies a default mapping or namespace mapping for prefixes, which is used when evaluating the XPath expression</td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
@@ -5878,7 +5957,7 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">b o</td>
+      <td style="text-align: left">b o s</td>
       <td style="text-align: left">GREATEST(expr [, expr ]*)</td>
       <td style="text-align: left">Returns the greatest of the expressions</td>
     </tr>
@@ -5888,7 +5967,7 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Returns <em>value1</em> if <em>condition</em> is TRUE, <em>value2</em> otherwise</td>
     </tr>
     <tr>
-      <td style="text-align: left">b</td>
+      <td style="text-align: left">b s</td>
       <td style="text-align: left">IFNULL(value1, value2)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">NVL(value1, value2)</code>
 </td>
@@ -5985,18 +6064,24 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">b o</td>
+      <td style="text-align: left">b o s</td>
       <td style="text-align: left">LEAST(expr [, expr ]* )</td>
       <td style="text-align: left">Returns the least of the expressions</td>
     </tr>
     <tr>
-      <td style="text-align: left">b m p</td>
+      <td style="text-align: left">b m p s</td>
       <td style="text-align: left">LEFT(string, length)</td>
       <td style="text-align: left">Returns the leftmost <em>length</em> characters from the <em>string</em>
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">b</td>
+      <td style="text-align: left">f s</td>
+      <td style="text-align: left">LEN(string)</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">CHAR_LENGTH(string)</code>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b f s</td>
       <td style="text-align: left">LENGTH(string)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">CHAR_LENGTH(string)</code>
 </td>
@@ -6013,7 +6098,13 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Returns the logarithm of <em>numeric1</em> to base <em>numeric2</em>, or base e if <em>numeric2</em> is not present</td>
     </tr>
     <tr>
-      <td style="text-align: left">b o</td>
+      <td style="text-align: left">m s</td>
+      <td style="text-align: left">LOG2(numeric)</td>
+      <td style="text-align: left">Returns the base 2 logarithm of <em>numeric</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b o s</td>
       <td style="text-align: left">LPAD(string, length [, pattern ])</td>
       <td style="text-align: left">Returns a string or bytes value that consists of <em>string</em> prepended to <em>length</em> with <em>pattern</em>
 </td>
@@ -6049,7 +6140,7 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Converts a hexadecimal-encoded <em>varchar</em> into bytes</td>
     </tr>
     <tr>
-      <td style="text-align: left">b o</td>
+      <td style="text-align: left">b o s</td>
       <td style="text-align: left">LTRIM(string)</td>
       <td style="text-align: left">Returns <em>string</em> with all blanks removed from the start</td>
     </tr>
@@ -6067,6 +6158,12 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">s</td>
       <td style="text-align: left">MAP_CONCAT(map [, map]*)</td>
       <td style="text-align: left">Concatenates one or more maps. If any input argument is <code class="language-plaintext highlighter-rouge">NULL</code> the function returns <code class="language-plaintext highlighter-rouge">NULL</code>. Note that calcite is using the LAST_WIN strategy</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">MAP_CONTAINS_KEY(map, key)</td>
+      <td style="text-align: left">Returns whether <em>map</em> contains <em>key</em>
+</td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
@@ -6099,7 +6196,7 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Returns a map after splitting the <em>string</em> into key/value pairs using delimiters. Default delimiters are ‘,’ for <em>stringDelimiter</em> and ‘:’ for <em>keyValueDelimiter</em>. Note that calcite is using the LAST_WIN strategy</td>
     </tr>
     <tr>
-      <td style="text-align: left">b m p</td>
+      <td style="text-align: left">b m p s</td>
       <td style="text-align: left">MD5(string)</td>
       <td style="text-align: left">Calculates an MD5 128-bit checksum of <em>string</em> and returns it as a hex string</td>
     </tr>
@@ -6109,7 +6206,7 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Returns the name, in the connection’s locale, of the month in <em>datetime</em>; for example, it returns ‘二月’ for both DATE ‘2020-02-10’ and TIMESTAMP ‘2020-02-10 10:10:10’</td>
     </tr>
     <tr>
-      <td style="text-align: left">o</td>
+      <td style="text-align: left">o s</td>
       <td style="text-align: left">NVL(value1, value2)</td>
       <td style="text-align: left">Returns <em>value1</em> if <em>value1</em> is not null, otherwise <em>value2</em>
 </td>
@@ -6151,9 +6248,20 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Returns the specified <em>partToExtract</em> from the <em>urlString</em>. Valid values for <em>partToExtract</em> include HOST, PATH, QUERY, REF, PROTOCOL, AUTHORITY, FILE, and USERINFO. <em>keyToExtract</em> specifies which query to extract</td>
     </tr>
     <tr>
-      <td style="text-align: left">b</td>
+      <td style="text-align: left">b s</td>
       <td style="text-align: left">POW(numeric1, numeric2)</td>
       <td style="text-align: left">Returns <em>numeric1</em> raised to the power <em>numeric2</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">RANDOM()</td>
+      <td style="text-align: left">Generates a random double between 0 and 1 inclusive</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">REGEXP(string, regexp)</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">string1 RLIKE string2</code>
 </td>
     </tr>
     <tr>
@@ -6178,6 +6286,11 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Returns the lowest 1-based position of the substring in <em>string</em> that matches the <em>regexp</em>, starting search at <em>position</em> (default 1), and until locating the nth <em>occurrence</em> (default 1). Setting occurrence_position (default 0) to 1 returns the end position of substring + 1. Returns 0 if there is no match</td>
     </tr>
     <tr>
+      <td style="text-align: left">m o p s</td>
+      <td style="text-align: left">REGEXP_LIKE(string, regexp [, flags])</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">string1 RLIKE string2</code> with an optional parameter for search flags. Supported flags are: &lt;ul&gt;&lt;li&gt;i: case-insensitive matching&lt;/li&gt;&lt;li&gt;c: case-sensitive matching&lt;/li&gt;&lt;li&gt;n: newline-sensitive matching&lt;/li&gt;&lt;li&gt;s: non-newline-sensitive matching&lt;/li&gt;&lt;li&gt;m: multi-line&lt;/li&gt;&lt;/ul&gt;</td>
+    </tr>
+    <tr>
       <td style="text-align: left">b m o</td>
       <td style="text-align: left">REGEXP_REPLACE(string, regexp, rep [, pos [, occurrence [, matchType]]])</td>
       <td style="text-align: left">Replaces all substrings of <em>string</em> that match <em>regexp</em> with <em>rep</em> at the starting <em>pos</em> in expr (if omitted, the default is 1), <em>occurrence</em> specifies which occurrence of a match to search for (if omitted, the default is 1), <em>matchType</em> specifies how to perform matching</td>
@@ -6188,7 +6301,7 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Synonym for REGEXP_EXTRACT</td>
     </tr>
     <tr>
-      <td style="text-align: left">b m p</td>
+      <td style="text-align: left">b m p s</td>
       <td style="text-align: left">REPEAT(string, integer)</td>
       <td style="text-align: left">Returns a string consisting of <em>string</em> repeated of <em>integer</em> times; returns an empty string if <em>integer</em> is less than 1</td>
     </tr>
@@ -6198,7 +6311,7 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Returns <em>string</em> with the order of the characters reversed</td>
     </tr>
     <tr>
-      <td style="text-align: left">b m p</td>
+      <td style="text-align: left">b m p s</td>
       <td style="text-align: left">RIGHT(string, length)</td>
       <td style="text-align: left">Returns the rightmost <em>length</em> characters from the <em>string</em>
 </td>
@@ -6214,20 +6327,20 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Whether <em>string1</em> does not match regex pattern <em>string2</em> (similar to <code class="language-plaintext highlighter-rouge">NOT LIKE</code>, but uses Java regex)</td>
     </tr>
     <tr>
-      <td style="text-align: left">b o</td>
+      <td style="text-align: left">b o s</td>
       <td style="text-align: left">RPAD(string, length[, pattern ])</td>
       <td style="text-align: left">Returns a string or bytes value that consists of <em>string</em> appended to <em>length</em> with <em>pattern</em>
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">b o</td>
+      <td style="text-align: left">b o s</td>
       <td style="text-align: left">RTRIM(string)</td>
       <td style="text-align: left">Returns <em>string</em> with all blanks removed from the end</td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">SAFE_ADD(numeric1, numeric2)</td>
-      <td style="text-align: left">Returns <em>numeric1</em> + <em>numeric2</em>, or NULL on overflow</td>
+      <td style="text-align: left">Returns <em>numeric1</em> + <em>numeric2</em>, or NULL on overflow.  Arguments are implicitly cast to one of the types BIGINT, DOUBLE, or DECIMAL</td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
@@ -6237,17 +6350,17 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">SAFE_DIVIDE(numeric1, numeric2)</td>
-      <td style="text-align: left">Returns <em>numeric1</em> / <em>numeric2</em>, or NULL on overflow or if <em>numeric2</em> is zero</td>
+      <td style="text-align: left">Returns <em>numeric1</em> / <em>numeric2</em>, or NULL on overflow or if <em>numeric2</em> is zero.  Arguments implicitly are cast to one of the types BIGINT, DOUBLE, or DECIMAL</td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">SAFE_MULTIPLY(numeric1, numeric2)</td>
-      <td style="text-align: left">Returns <em>numeric1</em> * <em>numeric2</em>, or NULL on overflow</td>
+      <td style="text-align: left">Returns <em>numeric1</em> * <em>numeric2</em>, or NULL on overflow.  Arguments are implicitly cast to one of the types BIGINT, DOUBLE, or DECIMAL</td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">SAFE_NEGATE(numeric)</td>
-      <td style="text-align: left">Returns <em>numeric</em> * -1, or NULL on overflow</td>
+      <td style="text-align: left">Returns <em>numeric</em> * -1, or NULL on overflow.  Arguments are implicitly cast to one of the types BIGINT, DOUBLE, or DECIMAL</td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
@@ -6262,7 +6375,7 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">SAFE_SUBTRACT(numeric1, numeric2)</td>
-      <td style="text-align: left">Returns <em>numeric1</em> - <em>numeric2</em>, or NULL on overflow</td>
+      <td style="text-align: left">Returns <em>numeric1</em> - <em>numeric2</em>, or NULL on overflow.  Arguments are implicitly cast to one of the types BIGINT, DOUBLE, or DECIMAL</td>
     </tr>
     <tr>
       <td style="text-align: left">*</td>
@@ -6276,7 +6389,7 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">b m p</td>
+      <td style="text-align: left">b m p s</td>
       <td style="text-align: left">SHA1(string)</td>
       <td style="text-align: left">Calculates a SHA-1 hash value of <em>string</em> and returns it as a hex string</td>
     </tr>
@@ -6307,19 +6420,25 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Returns the phonetic representation of <em>string</em>; return original <em>string</em> if <em>string</em> is encoded with multi-byte encoding such as UTF-8</td>
     </tr>
     <tr>
-      <td style="text-align: left">m</td>
+      <td style="text-align: left">m s</td>
       <td style="text-align: left">SPACE(integer)</td>
       <td style="text-align: left">Returns a string of <em>integer</em> spaces; returns an empty string if <em>integer</em> is less than 1</td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">SPLIT(string [, delimiter ])</td>
-      <td style="text-align: left">Returns the string array of <em>string</em> split at <em>delimiter</em> (if omitted, default is comma)</td>
+      <td style="text-align: left">Returns the string array of <em>string</em> split at <em>delimiter</em> (if omitted, default is comma).  If the <em>string</em> is empty it returns an empty array, otherwise, if the <em>delimiter</em> is empty, it returns an array containing the original <em>string</em>.</td>
     </tr>
     <tr>
-      <td style="text-align: left">b</td>
-      <td style="text-align: left">STARTS_WITH(string1, string2)</td>
+      <td style="text-align: left">f s</td>
+      <td style="text-align: left">STARTSWITH(string1, string2)</td>
       <td style="text-align: left">Returns whether <em>string2</em> is a prefix of <em>string1</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b p</td>
+      <td style="text-align: left">STARTS_WITH(string1, string2)</td>
+      <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">STARTSWITH(string1, string2)</code>
 </td>
     </tr>
     <tr>
@@ -6412,17 +6531,17 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">b</td>
+      <td style="text-align: left">b s</td>
       <td style="text-align: left">TIMESTAMP_MICROS(integer)</td>
       <td style="text-align: left">Returns the TIMESTAMP that is <em>integer</em> microseconds after 1970-01-01 00:00:00</td>
     </tr>
     <tr>
-      <td style="text-align: left">b</td>
+      <td style="text-align: left">b s</td>
       <td style="text-align: left">TIMESTAMP_MILLIS(integer)</td>
       <td style="text-align: left">Returns the TIMESTAMP that is <em>integer</em> milliseconds after 1970-01-01 00:00:00</td>
     </tr>
     <tr>
-      <td style="text-align: left">b</td>
+      <td style="text-align: left">b s</td>
       <td style="text-align: left">TIMESTAMP_SECONDS(integer)</td>
       <td style="text-align: left">Returns the TIMESTAMP that is <em>integer</em> seconds after 1970-01-01 00:00:00</td>
     </tr>
@@ -6483,14 +6602,14 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">b o p</td>
+      <td style="text-align: left">b o p s</td>
       <td style="text-align: left">TRANSLATE(expr, fromString, toString)</td>
       <td style="text-align: left">Returns <em>expr</em> with all occurrences of each character in <em>fromString</em> replaced by its corresponding character in <em>toString</em>. Characters in <em>expr</em> that are not in <em>fromString</em> are not replaced</td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
-      <td style="text-align: left">TRUNC(numeric1 [, numeric2 ])</td>
-      <td style="text-align: left">Truncates <em>numeric1</em> to optionally <em>numeric2</em> (if not specified 0) places right to the decimal point</td>
+      <td style="text-align: left">TRUNC(numeric1 [, integer2 ])</td>
+      <td style="text-align: left">Truncates <em>numeric1</em> to optionally <em>integer2</em> (if not specified 0) places right to the decimal point</td>
     </tr>
     <tr>
       <td style="text-align: left">q</td>
@@ -6498,22 +6617,22 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Converts <em>value</em> to <em>type</em>, returning NULL if conversion fails</td>
     </tr>
     <tr>
-      <td style="text-align: left">b</td>
+      <td style="text-align: left">b s</td>
       <td style="text-align: left">UNIX_MICROS(timestamp)</td>
       <td style="text-align: left">Returns the number of microseconds since 1970-01-01 00:00:00</td>
     </tr>
     <tr>
-      <td style="text-align: left">b</td>
+      <td style="text-align: left">b s</td>
       <td style="text-align: left">UNIX_MILLIS(timestamp)</td>
       <td style="text-align: left">Returns the number of milliseconds since 1970-01-01 00:00:00</td>
     </tr>
     <tr>
-      <td style="text-align: left">b</td>
+      <td style="text-align: left">b s</td>
       <td style="text-align: left">UNIX_SECONDS(timestamp)</td>
       <td style="text-align: left">Returns the number of seconds since 1970-01-01 00:00:00</td>
     </tr>
     <tr>
-      <td style="text-align: left">b</td>
+      <td style="text-align: left">b s</td>
       <td style="text-align: left">UNIX_DATE(date)</td>
       <td style="text-align: left">Returns the number of days since 1970-01-01</td>
     </tr>
@@ -6606,13 +6725,13 @@ appear in Calcite’s Postgres library</li>
       <td style="text-align: left">Concatenates arrays into arrays</td>
     </tr>
     <tr>
-      <td style="text-align: left">p</td>
+      <td style="text-align: left">p s</td>
       <td style="text-align: left">BOOL_AND(condition)</td>
       <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">EVERY</code>
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">p</td>
+      <td style="text-align: left">p s</td>
       <td style="text-align: left">BOOL_OR(condition)</td>
       <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">SOME</code>
 </td>
@@ -7009,6 +7128,25 @@ limit 10;
     </tr>
   </tbody>
 </table></div>
+
+<h3 id="higher-order-functions">Higher-order Functions</h3>
+
+<p>A higher-order function takes one or more lambda expressions as arguments.</p>
+
+<p>Lambda Expression Syntax:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">lambdaExpression</span><span class="p">:</span>
+      <span class="k">parameters</span> <span class="s1">'-&gt;'</span> <span class="n">expression</span>
+
+<span class="k">parameters</span><span class="p">:</span>
+      <span class="s1">'('</span> <span class="p">[</span> <span class="n">identifier</span> <span class="p">[,</span> <span class="n">identifier</span> <span class="p">]</span> <span class="p">]</span> <span class="s1">')'</span>
+  <span class="o">|</span>   <span class="n">identifier</span></code></pre></figure>
+
+<p>Higher-order functions are not included in the SQL standard, so all the functions will be listed in the
+<a href="/docs/reference.html#dialect-specific-operators">Dialect-specific OperatorsPermalink</a>
+as well.</p>
+
+<p>Examples of functions with a lambda argument are <em>EXISTS</em>.</p>
 
 <h2 id="user-defined-functions">User-defined functions</h2>
 
@@ -7408,7 +7546,11 @@ to the JDBC connect string (see connect string property
       <span class="k">DROP</span> <span class="k">TYPE</span> <span class="p">[</span> <span class="n">IF</span> <span class="k">EXISTS</span> <span class="p">]</span> <span class="n">name</span>
 
 <span class="n">dropFunctionStatement</span><span class="p">:</span>
-      <span class="k">DROP</span> <span class="k">FUNCTION</span> <span class="p">[</span> <span class="n">IF</span> <span class="k">EXISTS</span> <span class="p">]</span> <span class="n">name</span></code></pre></figure>
+      <span class="k">DROP</span> <span class="k">FUNCTION</span> <span class="p">[</span> <span class="n">IF</span> <span class="k">EXISTS</span> <span class="p">]</span> <span class="n">name</span>
+
+<span class="n">truncateTableStatement</span><span class="p">:</span>
+      <span class="k">TRUNCATE</span> <span class="k">TABLE</span> <span class="n">name</span>
+      <span class="p">[</span> <span class="k">CONTINUE</span> <span class="k">IDENTITY</span> <span class="o">|</span> <span class="k">RESTART</span> <span class="k">IDENTITY</span> <span class="p">]</span></code></pre></figure>
 
 <p>In <em>createTableStatement</em>, if you specify <em>AS query</em>, you may omit the list of
 <em>tableElement</em>s, or you can omit the data type of any <em>tableElement</em>, in which

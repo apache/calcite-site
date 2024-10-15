@@ -819,8 +819,8 @@ For instance, you could update <code class="language-plaintext highlighter-rouge
 <ul>
   <li>Both <code class="language-plaintext highlighter-rouge">asfNexusUsername</code> and <code class="language-plaintext highlighter-rouge">asfSvnUsername</code> are your apache id with <code class="language-plaintext highlighter-rouge">asfNexusPassword</code> and
 <code class="language-plaintext highlighter-rouge">asfSvnPassword</code> are corresponding password.</li>
-  <li>Git source account can be configured to either Gitbox (the default) or Github. For Gitbox, <code class="language-plaintext highlighter-rouge">asfGitSourceUsername</code>
-is your apache id, and <code class="language-plaintext highlighter-rouge">asfGitSourcePassword</code> is the corresponding password. For Github, <code class="language-plaintext highlighter-rouge">asfGitSourceUsername</code>
+  <li>Git source account can be configured to either Gitbox (the default) or GitHub. For Gitbox, <code class="language-plaintext highlighter-rouge">asfGitSourceUsername</code>
+is your apache id, and <code class="language-plaintext highlighter-rouge">asfGitSourcePassword</code> is the corresponding password. For GitHub, <code class="language-plaintext highlighter-rouge">asfGitSourceUsername</code>
 is your GitHub id while <code class="language-plaintext highlighter-rouge">asfGitSourcePassword</code> is not your GitHub password, you need to generate it in
 https://github.com/settings/tokens choosing <code class="language-plaintext highlighter-rouge">Personal access tokens</code>.</li>
 </ul>
@@ -980,7 +980,7 @@ git clean <span class="nt">-xn</span>
 ./gradlew prepareVote <span class="nt">-Prc</span><span class="o">=</span>0
 
 <span class="c"># Push release candidate to ASF servers</span>
-<span class="c"># If you prefer to use Github account, change pushRepositoryProvider to GITHUB</span>
+<span class="c"># If you prefer to use GitHub account, change pushRepositoryProvider to GITHUB</span>
 ./gradlew prepareVote <span class="nt">-Prc</span><span class="o">=</span>0 <span class="nt">-Pasf</span> <span class="nt">-Pasf</span>.git.pushRepositoryProvider<span class="o">=</span>GITBOX</code></pre></figure>
 
 <h4 id="troubleshooting">Troubleshooting</h4>
@@ -1111,7 +1111,7 @@ No 0s or -1s.
 Therefore, I am delighted to announce that the proposal to release
 Apache Calcite X.Y.Z has passed.
 
-Thanks everyone. We’ll now roll the release out to the mirrors.
+Thanks everyone. We’ll now publish and announce the release.
 
 There was some feedback during voting. I shall open a separate
 thread to discuss.
@@ -1132,7 +1132,7 @@ Remember that UTC date changes at 4 pm Pacific time.</p>
 ./gradlew publishDist <span class="nt">-Prc</span><span class="o">=</span>0
 
 <span class="c"># Publish the release to ASF servers</span>
-<span class="c"># If you prefer to use Github account, change pushRepositoryProvider to GITHUB</span>
+<span class="c"># If you prefer to use GitHub account, change pushRepositoryProvider to GITHUB</span>
 ./gradlew publishDist <span class="nt">-Prc</span><span class="o">=</span>0 <span class="nt">-Pasf</span> <span class="nt">-Pasf</span>.git.pushRepositoryProvider<span class="o">=</span>GITBOX</code></pre></figure>
 
 <p>If for whatever reason the <code class="language-plaintext highlighter-rouge">publishDist</code> task fails
@@ -1168,15 +1168,15 @@ Make sure to add the version number and date of the latest release at the site l
 
 <p>The release notes and the javadoc of the new version will be automatically deployed to the website
 once the release commits/tags reach the ASF remote and the respective
-<a href="https://github.com/apache/calcite/blob/main/.github/workflows/">Gitub workflows</a> are triggered.</p>
+<a href="https://github.com/apache/calcite/blob/main/.github/workflows/">GitHub workflows</a> are triggered.</p>
 
 <p>Add a release announcement by copying
 <a href="https://github.com/apache/calcite/blob/main/site/_posts/2016-10-12-release-1.10.0.md">site/_posts/2016-10-12-release-1.10.0.md</a>,
 and adapt the release date in <code class="language-plaintext highlighter-rouge">history.md</code> if necessary. Preview the changes locally, by following the
 instructions in <a href="https://github.com/apache/calcite/blob/main/site/README.md">site/README.md</a>, and then commit and push
 the changes to the <code class="language-plaintext highlighter-rouge">main</code> branch. Please note that due to <a href="https://issues.apache.org/jira/browse/CALCITE-5584">CALCITE-5584</a>,
-the commit should be pushed to Github as the last commit, do not chain it with “Prepare for next development iteration”
-commit.</p>
+the commit should be pushed to GitHub as the last commit; do not chain it with
+the “Prepare for next development iteration” commit.</p>
 
 <p>Ensure that all changes to the website (news, release notes, javadoc) are correctly displayed.</p>
 

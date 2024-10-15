@@ -140,9 +140,16 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color"><code>final com.google.common.collect.ImmutableList&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
 <div class="col-second odd-row-color"><code><a href="#operands" class="member-name-link">operands</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>final <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
-<div class="col-second even-row-color"><code><a href="#type" class="member-name-link">type</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>final <a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a></code></div>
+<div class="col-second even-row-color"><code><a href="#pos" class="member-name-link">pos</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">In the calls which can produce runtime errors we carry
+ the source position, so the backend can produce runtime error messages
+ pointing to the original source position.</div>
+</div>
+<div class="col-first odd-row-color"><code>final <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#type" class="member-name-link">type</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
 </div>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-org.apache.calcite.rex.RexNode">Fields inherited from class&nbsp;org.apache.calcite.rex.<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></h3>
@@ -163,6 +170,12 @@ loadScripts(document, 'script');</script>
  <a href="../sql/SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>&nbsp;operator,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;operands)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>protected </code></div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.sql.SqlOperator,java.util.List)" class="member-name-link">RexCall</a><wbr>(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type,
+ <a href="../sql/SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>&nbsp;operator,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;operands)</code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -219,33 +232,36 @@ P&gt;&nbsp;R</code></div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../sql/SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOperator()" class="member-name-link">getOperator</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getType()" class="member-name-link">getType</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParserPosition()" class="member-name-link">getParserPosition</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"></div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isAlwaysFalse()" class="member-name-link">isAlwaysFalse</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getType()" class="member-name-link">getType</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isAlwaysFalse()" class="member-name-link">isAlwaysFalse</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns whether this expression always returns false.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isAlwaysTrue()" class="member-name-link">isAlwaysTrue</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isAlwaysTrue()" class="member-name-link">isAlwaysTrue</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns whether this expression always returns true.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#nodeCount()" class="member-name-link">nodeCount</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#nodeCount()" class="member-name-link">nodeCount</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the number of nodes in this expression.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#operandCount()" class="member-name-link">operandCount</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#operandCount()" class="member-name-link">operandCount</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -266,6 +282,17 @@ P&gt;&nbsp;R</code></div>
 <section class="field-details" id="field-detail">
 <h2>Field Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="pos">
+<h3>pos</h3>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a></span>&nbsp;<span class="element-name">pos</span></div>
+<div class="block">In the calls which can produce runtime errors we carry
+ the source position, so the backend can produce runtime error messages
+ pointing to the original source position.
+ For calls that are can never generate runtime failures, this field may
+ be ZERO.  Note that some optimizations may "lost" position information.</div>
+</section>
+</li>
 <li>
 <section class="detail" id="op">
 <h3>op</h3>
@@ -305,6 +332,15 @@ P&gt;&nbsp;R</code></div>
 <section class="constructor-details" id="constructor-detail">
 <h2>Constructor Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="&lt;init&gt;(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.sql.SqlOperator,java.util.List)">
+<h3>RexCall</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">RexCall</span><wbr><span class="parameters">(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type,
+ <a href="../sql/SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>&nbsp;operator,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;operands)</span></div>
+</section>
+</li>
 <li>
 <section class="detail" id="&lt;init&gt;(org.apache.calcite.rel.type.RelDataType,org.apache.calcite.sql.SqlOperator,java.util.List)">
 <h3>RexCall</h3>
@@ -346,6 +382,12 @@ P&gt;&nbsp;R</code></div>
 <section class="detail" id="computeDigest(boolean)">
 <h3>computeDigest</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">computeDigest</span><wbr><span class="parameters">(boolean&nbsp;withType)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="getParserPosition()">
+<h3>getParserPosition</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a></span>&nbsp;<span class="element-name">getParserPosition</span>()</div>
 </section>
 </li>
 <li>

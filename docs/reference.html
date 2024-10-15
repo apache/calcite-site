@@ -243,12 +243,13 @@ form.</p>
 
 <span class="n">tableExpression</span><span class="p">:</span>
       <span class="n">tableReference</span> <span class="p">[,</span> <span class="n">tableReference</span> <span class="p">]</span><span class="o">*</span>
-  <span class="o">|</span>   <span class="n">tableExpression</span> <span class="p">[</span> <span class="k">NATURAL</span> <span class="p">]</span> <span class="p">[</span> <span class="p">{</span> <span class="k">LEFT</span> <span class="o">|</span> <span class="k">RIGHT</span> <span class="o">|</span> <span class="k">FULL</span> <span class="p">}</span> <span class="p">[</span> <span class="k">OUTER</span> <span class="p">]</span> <span class="p">]</span> <span class="k">JOIN</span> <span class="n">tableExpression</span> <span class="p">[</span> <span class="n">joinCondition</span> <span class="p">]</span>
+  <span class="o">|</span>   <span class="n">tableExpression</span> <span class="p">[</span> <span class="k">NATURAL</span> <span class="p">]</span> <span class="p">[</span> <span class="p">{</span> <span class="k">LEFT</span> <span class="o">|</span> <span class="k">RIGHT</span> <span class="o">|</span> <span class="k">FULL</span> <span class="p">}</span> <span class="p">[</span> <span class="k">OUTER</span> <span class="p">]</span> <span class="p">]</span> <span class="p">[</span> <span class="n">ASOF</span> <span class="p">]</span> <span class="k">JOIN</span> <span class="n">tableExpression</span> <span class="p">[</span> <span class="n">joinCondition</span> <span class="p">]</span>
   <span class="o">|</span>   <span class="n">tableExpression</span> <span class="k">CROSS</span> <span class="k">JOIN</span> <span class="n">tableExpression</span>
   <span class="o">|</span>   <span class="n">tableExpression</span> <span class="p">[</span> <span class="k">CROSS</span> <span class="o">|</span> <span class="k">OUTER</span> <span class="p">]</span> <span class="n">APPLY</span> <span class="n">tableExpression</span>
 
 <span class="n">joinCondition</span><span class="p">:</span>
       <span class="k">ON</span> <span class="n">booleanExpression</span>
+  <span class="o">|</span>   <span class="n">MATCH_CONDITION</span> <span class="n">booleanExpression</span> <span class="k">ON</span> <span class="n">booleanExpression</span>
   <span class="o">|</span>   <span class="k">USING</span> <span class="s1">'('</span> <span class="k">column</span> <span class="p">[,</span> <span class="k">column</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
 
 <span class="n">tableReference</span><span class="p">:</span>
@@ -350,10 +351,16 @@ form.</p>
       <span class="p">[</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">orderItem</span> <span class="p">[,</span> <span class="n">orderItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
       <span class="p">[</span> <span class="k">PARTITION</span> <span class="k">BY</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
       <span class="p">[</span>
-          <span class="k">RANGE</span> <span class="n">numericOrIntervalExpression</span> <span class="p">{</span> <span class="k">PRECEDING</span> <span class="o">|</span> <span class="k">FOLLOWING</span> <span class="p">}</span>
-      <span class="o">|</span>   <span class="k">ROWS</span> <span class="n">numericExpression</span> <span class="p">{</span> <span class="k">PRECEDING</span> <span class="o">|</span> <span class="k">FOLLOWING</span> <span class="p">}</span>
+          <span class="k">RANGE</span> <span class="n">numericOrIntervalExpression</span> <span class="p">{</span> <span class="k">PRECEDING</span> <span class="o">|</span> <span class="k">FOLLOWING</span> <span class="p">[</span><span class="n">exclude</span><span class="p">]}</span>
+      <span class="o">|</span>   <span class="k">ROWS</span> <span class="n">numericExpression</span> <span class="p">{</span> <span class="k">PRECEDING</span> <span class="o">|</span> <span class="k">FOLLOWING</span> <span class="p">[</span><span class="n">exclude</span><span class="p">]</span> <span class="p">}</span>
       <span class="p">]</span>
-      <span class="s1">')'</span></code></pre></figure>
+      <span class="s1">')'</span>
+
+<span class="n">exclude</span><span class="p">:</span>
+      <span class="n">EXCLUDE</span> <span class="k">NO</span> <span class="n">OTHERS</span>
+  <span class="o">|</span>   <span class="n">EXCLUDE</span> <span class="k">CURRENT</span> <span class="k">ROW</span>
+  <span class="o">|</span>   <span class="n">EXCLUDE</span> <span class="k">GROUP</span>
+  <span class="o">|</span>   <span class="n">EXCLUDE</span> <span class="n">TIES</span></code></pre></figure>
 
 <p>In <em>insert</em>, if the INSERT or UPSERT statement does not specify a
 list of target columns, the query must have the same number of
@@ -422,6 +429,28 @@ but is only allowed in certain
 but is not standard SQL and is only allowed in certain
 <a href="/javadocAggregate/org/apache/calcite/sql/validate/SqlConformance.html#isValueAllowed--">conformance levels</a>.</p>
 
+<p>An “ASOF JOIN” operation combines rows from two tables based on
+comparable timestamp values.  For each row in the left table, the join
+finds at most a single row in the right table that has the “closest”
+timestamp value. The matched row on the right side is the closest
+match whose timestamp column is compared using one of the operations
+&lt;, ≤, &gt;, or ≥, as specified by the comparison operator in
+the <code class="language-plaintext highlighter-rouge">MATCH_CONDITION</code> clause.  The comparison is performed using SQL
+semantics, which returns ‘false’ when comparing NULL values with any
+other values.  Thus a ‘NULL’ timestamp in the left table will not
+match any timestamps in the right table.</p>
+
+<p>ASOF JOIN statements can also be LEFT ASOF JOIN.  In this case, when there
+is no match for a row in the left table, the columns from the right table
+are null-padded.</p>
+
+<p>There are no RIGHT ASOF joins.</p>
+
+<p>SELECT *
+FROM left_table [ LEFT ] ASOF JOIN right_table
+MATCH_CONDITION ( left_table.timecol &amp;leq; right_table.timecol )
+ON left_table.col = right_table.col</p>
+
 <h2 id="keywords">Keywords</h2>
 
 <p>The following is a list of SQL keywords.
@@ -452,6 +481,7 @@ ARRAY_CONCAT_AGG,
 <strong>AS</strong>,
 ASC,
 <strong>ASENSITIVE</strong>,
+<strong>ASOF</strong>,
 ASSERTION,
 ASSIGNMENT,
 <strong>ASYMMETRIC</strong>,
@@ -750,10 +780,12 @@ MAP,
 <strong>MATCH</strong>,
 MATCHED,
 <strong>MATCHES</strong>,
+<strong>MATCH_CONDITION</strong>,
 <strong>MATCH_NUMBER</strong>,
 <strong>MATCH_RECOGNIZE</strong>,
 <strong>MAX</strong>,
 MAXVALUE,
+<strong>MEASURE</strong>,
 <strong>MEASURES</strong>,
 <strong>MEMBER</strong>,
 <strong>MERGE</strong>,
@@ -1320,7 +1352,7 @@ we also allow their plurals, YEARS, QUARTERS, MONTHS, WEEKS, DAYS, HOURS, MINUTE
     <tr>
       <th style="text-align: left">Type</th>
       <th style="text-align: left">Description</th>
-      <th style="text-align: left">Example literals</th>
+      <th style="text-align: left">Example type</th>
     </tr>
   </thead>
   <tbody>
@@ -1342,7 +1374,7 @@ we also allow their plurals, YEARS, QUARTERS, MONTHS, WEEKS, DAYS, HOURS, MINUTE
     <tr>
       <td style="text-align: left">MAP</td>
       <td style="text-align: left">Collection of keys mapped to values</td>
-      <td style="text-align: left">Example: (int, varchar) map</td>
+      <td style="text-align: left">Example: map &lt; int, varchar &gt;</td>
     </tr>
     <tr>
       <td style="text-align: left">MULTISET</td>
@@ -1935,21 +1967,21 @@ completeness.</p>
     </tr>
     <tr>
       <td style="text-align: left">TRIM( { BOTH | LEADING | TRAILING } string1 FROM string2)</td>
-      <td style="text-align: left">Removes the longest string containing only the characters in <em>string1</em> from the start/end/both ends of <em>string1</em>
+      <td style="text-align: left">Removes the longest string containing only the characters in <em>string1</em> from the start/end/both ends of <em>string2</em>
 </td>
     </tr>
     <tr>
       <td style="text-align: left">OVERLAY(string1 PLACING string2 FROM integer [ FOR integer2 ])</td>
-      <td style="text-align: left">Replaces a substring of <em>string1</em> with <em>string2</em>
+      <td style="text-align: left">Replaces a substring of <em>string1</em> with <em>string2</em>, starting at the specified position <em>integer</em> in <em>string1</em> and optionally for a specified length <em>integer2</em>
 </td>
     </tr>
     <tr>
       <td style="text-align: left">SUBSTRING(string FROM integer)</td>
-      <td style="text-align: left">Returns a substring of a character string starting at a given point</td>
+      <td style="text-align: left">Returns a substring of a character string starting at a given point. If starting point is less than 1, the returned expression will begin at the first character that is specified in expression</td>
     </tr>
     <tr>
       <td style="text-align: left">SUBSTRING(string FROM integer FOR integer)</td>
-      <td style="text-align: left">Returns a substring of a character string starting at a given point with a given length</td>
+      <td style="text-align: left">Returns a substring of a character string starting at a given point with a given length. If start point is less than 1 in this case, the number of characters that are returned is the largest value of either the start + length - 1 or 0</td>
     </tr>
     <tr>
       <td style="text-align: left">INITCAP(string)</td>
@@ -1994,7 +2026,7 @@ completeness.</p>
     </tr>
     <tr>
       <td style="text-align: left">OVERLAY(binary1 PLACING binary2 FROM integer [ FOR integer2 ])</td>
-      <td style="text-align: left">Replaces a substring of <em>binary1</em> with <em>binary2</em>
+      <td style="text-align: left">Replaces a substring of <em>binary1</em> with <em>binary2</em>, starting at the specified position <em>integer</em> in <em>binary1</em> and optionally for a specified length <em>integer2</em>
 </td>
     </tr>
     <tr>
@@ -2265,7 +2297,11 @@ represented using its charset.</p>
 <span class="n">typeName</span><span class="p">:</span>
       <span class="n">sqlTypeName</span>
   <span class="o">|</span>   <span class="n">rowTypeName</span>
+  <span class="o">|</span>   <span class="n">mapTypeName</span>
   <span class="o">|</span>   <span class="n">compoundIdentifier</span>
+
+<span class="n">mapTypeName</span><span class="p">:</span>
+  <span class="k">MAP</span> <span class="s1">'&lt;'</span> <span class="k">type</span> <span class="s1">','</span> <span class="k">type</span> <span class="s1">'&gt;'</span>
 
 <span class="n">sqlTypeName</span><span class="p">:</span>
       <span class="nb">char</span> <span class="p">[</span> <span class="nb">precision</span> <span class="p">]</span> <span class="p">[</span> <span class="n">charSet</span> <span class="p">]</span>
@@ -3601,14 +3637,20 @@ represents a percentage</li>
       <span class="n">agg</span> <span class="s1">'('</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span> <span class="n">value</span> <span class="p">[,</span> <span class="n">value</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
       <span class="p">[</span> <span class="n">RESPECT</span> <span class="n">NULLS</span> <span class="o">|</span> <span class="k">IGNORE</span> <span class="n">NULLS</span> <span class="p">]</span>
       <span class="p">[</span> <span class="n">WITHIN</span> <span class="k">GROUP</span> <span class="s1">'('</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">orderItem</span> <span class="p">[,</span> <span class="n">orderItem</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="p">]</span>
-      <span class="p">[</span> <span class="n">FILTER</span> <span class="s1">'('</span> <span class="k">WHERE</span> <span class="n">condition</span> <span class="s1">')'</span> <span class="p">]</span>
       <span class="n">OVER</span> <span class="k">window</span>
   <span class="o">|</span>   <span class="n">agg</span> <span class="s1">'('</span> <span class="s1">'*'</span> <span class="s1">')'</span>
-      <span class="p">[</span> <span class="n">FILTER</span>  <span class="s1">'('</span> <span class="k">WHERE</span> <span class="n">condition</span> <span class="s1">')'</span> <span class="p">]</span>
       <span class="n">OVER</span> <span class="k">window</span></code></pre></figure>
 
 <p>where <em>agg</em> is one of the operators in the following table, or a user-defined
 aggregate function.</p>
+
+<p>The <em>exclude</em> clause can be one of:</p>
+<ul>
+  <li>EXCLUDE NO OTHER: Does not exclude any row from the frame. This is the default.</li>
+  <li>EXCLUDE CURRENT ROW: Exclude the current row from the frame.</li>
+  <li>EXCLUDE GROUP: Exclude the current row and its ordering peers from the frame.</li>
+  <li>EXCLUDE TIES: Exclude all the ordering peers of the current row, but not the current row itself.</li>
+</ul>
 
 <p><code class="language-plaintext highlighter-rouge">DISTINCT</code>, <code class="language-plaintext highlighter-rouge">FILTER</code> and <code class="language-plaintext highlighter-rouge">WITHIN GROUP</code> are as described for aggregate
 functions.</p>
@@ -5381,6 +5423,12 @@ input rows into the specified order before performing aggregation.</li>
   </tbody>
 </table></div>
 
+<p>Note:</p>
+
+<ul>
+  <li>If the <em>jsonValue</em> is <code class="language-plaintext highlighter-rouge">NULL</code>, the function will return <code class="language-plaintext highlighter-rouge">NULL</code>.</li>
+</ul>
+
 <h3 id="dialect-specific-operators">Dialect-specific Operators</h3>
 
 <p>The following operators are not in the SQL standard, and are not enabled in
@@ -5402,6 +5450,7 @@ connect string parameter.</p>
   <li>‘q’ for Microsoft SQL Server (‘fun=mssql’ in the connect string),</li>
   <li>‘o’ for Oracle (‘fun=oracle’ in the connect string),</li>
   <li>‘p’ for PostgreSQL (‘fun=postgresql’ in the connect string),</li>
+  <li>‘r’ for Amazon RedShift (‘fun=redshift’ in the connect string),</li>
   <li>’s’ for Apache Spark (‘fun=spark’ in the connect string).</li>
 </ul>
 
@@ -5433,6 +5482,7 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <th style="text-align: left">C</th>
       <th style="text-align: left">Operator syntax</th>
       <th style="text-align: left">Description</th>
+      <th> </th>
     </tr>
   </thead>
   <tbody>
@@ -5441,1215 +5491,1606 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">expr :: type</td>
       <td style="text-align: left">Casts <em>expr</em> to <em>type</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">expr1 &lt;=&gt; expr2</td>
       <td style="text-align: left">Whether two values are equal, treating null values as the same, and it’s similar to <code class="language-plaintext highlighter-rouge">IS NOT DISTINCT FROM</code>
 </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">ACOSD(numeric)</td>
+      <td style="text-align: left">Returns the inverse cosine of <em>numeric</em> in degrees as a double. Returns NaN if <em>numeric</em> is NaN. Fails if <em>numeric</em> is less than -1.0 or greater than 1.0.</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">*</td>
       <td style="text-align: left">ACOSH(numeric)</td>
       <td style="text-align: left">Returns the inverse hyperbolic cosine of <em>numeric</em>
 </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">o s</td>
+      <td style="text-align: left">ADD_MONTHS(date, numMonths)</td>
+      <td style="text-align: left">Returns the date that is <em>numMonths</em> after <em>date</em>
+</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAY([expr [, expr ]*])</td>
       <td style="text-align: left">Construct an array in Apache Spark. The function allows users to use <code class="language-plaintext highlighter-rouge">ARRAY()</code> to create an empty array</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAY_APPEND(array, element)</td>
       <td style="text-align: left">Appends an <em>element</em> to the end of the <em>array</em> and returns the result. Type of <em>element</em> should be similar to type of the elements of the <em>array</em>. If the <em>array</em> is null, the function will return null. If an <em>element</em> that is null, the null <em>element</em> will be added to the end of the <em>array</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAY_COMPACT(array)</td>
       <td style="text-align: left">Removes null values from the <em>array</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">ARRAY_CONCAT(array [, array ]*)</td>
       <td style="text-align: left">Concatenates one or more arrays. If any input argument is <code class="language-plaintext highlighter-rouge">NULL</code> the function returns <code class="language-plaintext highlighter-rouge">NULL</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAY_CONTAINS(array, element)</td>
       <td style="text-align: left">Returns true if the <em>array</em> contains the <em>element</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAY_DISTINCT(array)</td>
       <td style="text-align: left">Removes duplicate values from the <em>array</em> that keeps ordering of elements</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAY_EXCEPT(array1, array2)</td>
       <td style="text-align: left">Returns an array of the elements in <em>array1</em> but not in <em>array2</em>, without duplicates</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAY_INSERT(array, pos, element)</td>
       <td style="text-align: left">Places <em>element</em> into index <em>pos</em> of <em>array</em>. Array index start at 1, or start from the end if index is negative. Index above array size appends the array, or prepends the array if index is negative, with <code class="language-plaintext highlighter-rouge">NULL</code> elements.</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAY_INTERSECT(array1, array2)</td>
       <td style="text-align: left">Returns an array of the elements in the intersection of <em>array1</em> and <em>array2</em>, without duplicates</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAY_JOIN(array, delimiter [, nullText ])</td>
       <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">ARRAY_TO_STRING</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">ARRAY_LENGTH(array)</td>
       <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">CARDINALITY</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAY_MAX(array)</td>
       <td style="text-align: left">Returns the maximum value in the <em>array</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAY_MIN(array)</td>
       <td style="text-align: left">Returns the minimum value in the <em>array</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAY_POSITION(array, element)</td>
       <td style="text-align: left">Returns the (1-based) index of the first <em>element</em> of the <em>array</em> as long</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAY_REMOVE(array, element)</td>
       <td style="text-align: left">Remove all elements that equal to <em>element</em> from the <em>array</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAY_PREPEND(array, element)</td>
       <td style="text-align: left">Appends an <em>element</em> to the beginning of the <em>array</em> and returns the result. Type of <em>element</em> should be similar to type of the elements of the <em>array</em>. If the <em>array</em> is null, the function will return null. If an <em>element</em> that is null, the null <em>element</em> will be added to the beginning of the <em>array</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAY_REPEAT(element, count)</td>
       <td style="text-align: left">Returns the array containing element count times.</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">ARRAY_REVERSE(array)</td>
       <td style="text-align: left">Reverses elements of <em>array</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAY_SIZE(array)</td>
       <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">CARDINALITY</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">ARRAY_TO_STRING(array, delimiter [, nullText ])</td>
       <td style="text-align: left">Returns a concatenation of the elements in <em>array</em> as a STRING and take <em>delimiter</em> as the delimiter. If the <em>nullText</em> parameter is used, the function replaces any <code class="language-plaintext highlighter-rouge">NULL</code> values in the array with the value of <em>nullText</em>. If the <em>nullText</em> parameter is not used, the function omits the <code class="language-plaintext highlighter-rouge">NULL</code> value and its preceding delimiter. Returns <code class="language-plaintext highlighter-rouge">NULL</code> if any argument is <code class="language-plaintext highlighter-rouge">NULL</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAY_UNION(array1, array2)</td>
       <td style="text-align: left">Returns an array of the elements in the union of <em>array1</em> and <em>array2</em>, without duplicates</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAYS_OVERLAP(array1, array2)</td>
       <td style="text-align: left">Returns true if <em>array1 contains at least a non-null element present also in *array2</em>. If the arrays have no common element and they are both non-empty and either of them contains a null element null is returned, false otherwise</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">ARRAYS_ZIP(array [, array ]*)</td>
       <td style="text-align: left">Returns a merged <em>array</em> of structs in which the N-th struct contains all N-th values of input arrays</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">SORT_ARRAY(array [, ascendingOrder])</td>
       <td style="text-align: left">Sorts the <em>array</em> in ascending or descending order according to the natural ordering of the array elements. The default order is ascending if <em>ascendingOrder</em> is not specified. Null elements will be placed at the beginning of the returned array in ascending order or at the end of the returned array in descending order</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">ASIND(numeric)</td>
+      <td style="text-align: left">Returns the inverse sine of <em>numeric</em> in degrees as a double. Returns NaN if <em>numeric</em> is NaN. Fails if <em>numeric</em> is less than -1.0 or greater than 1.0.</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">*</td>
       <td style="text-align: left">ASINH(numeric)</td>
       <td style="text-align: left">Returns the inverse hyperbolic sine of <em>numeric</em>
 </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">ATAND(numeric)</td>
+      <td style="text-align: left">Returns the inverse tangent of <em>numeric</em> in degrees as a double. Returns NaN if <em>numeric</em> is NaN.</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">*</td>
       <td style="text-align: left">ATANH(numeric)</td>
       <td style="text-align: left">Returns the inverse hyperbolic tangent of <em>numeric</em>
 </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">*</td>
+      <td style="text-align: left">BITAND(value1, value2)</td>
+      <td style="text-align: left">Returns the bitwise AND of <em>value1</em> and <em>value2</em>. <em>value1</em> and <em>value2</em> must both be integer or binary values. Binary values must be of the same length.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">*</td>
+      <td style="text-align: left">BITOR(value1, value2)</td>
+      <td style="text-align: left">Returns the bitwise OR of <em>value1</em> and <em>value2</em>. <em>value1</em> and <em>value2</em> must both be integer or binary values. Binary values must be of the same length.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">*</td>
+      <td style="text-align: left">BITXOR(value1, value2)</td>
+      <td style="text-align: left">Returns the bitwise XOR of <em>value1</em> and <em>value2</em>. <em>value1</em> and <em>value2</em> must both be integer or binary values. Binary values must be of the same length.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">*</td>
+      <td style="text-align: left">BITNOT(value)</td>
+      <td style="text-align: left">Returns the bitwise NOT of <em>value</em>. <em>value</em> must be either an integer type or a binary value.</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">f</td>
       <td style="text-align: left">BITAND_AGG(value)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">BIT_AND(value)</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">f</td>
       <td style="text-align: left">BITOR_AGG(value)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">BIT_OR(value)</code>
 </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">*</td>
+      <td style="text-align: left">BITCOUNT(value)</td>
+      <td style="text-align: left">Returns the bitwise COUNT of <em>value</em> or NULL if <em>value</em> is NULL. <em>value</em> must be and integer or binary value.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b s</td>
+      <td style="text-align: left">BIT_COUNT(integer)</td>
+      <td style="text-align: left">Returns the bitwise COUNT of <em>integer</em> or NULL if <em>integer</em> is NULL</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m</td>
+      <td style="text-align: left">BIT_COUNT(numeric)</td>
+      <td style="text-align: left">Returns the bitwise COUNT of the integer portion of <em>numeric</em> or NULL if <em>numeric</em> is NULL</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b m s</td>
+      <td style="text-align: left">BIT_COUNT(binary)</td>
+      <td style="text-align: left">Returns the bitwise COUNT of <em>binary</em> or NULL if <em>binary</em> is NULL</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">BIT_LENGTH(binary)</td>
       <td style="text-align: left">Returns the bit length of <em>binary</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">BIT_LENGTH(string)</td>
       <td style="text-align: left">Returns the bit length of <em>string</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">BIT_GET(value, position)</td>
       <td style="text-align: left">Returns the bit (0 or 1) value at the specified <em>position</em> of numeric <em>value</em>. The positions are numbered from right to left, starting at zero. The <em>position</em> argument cannot be negative</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">CEIL(value)</td>
       <td style="text-align: left">Similar to standard <code class="language-plaintext highlighter-rouge">CEIL(value)</code> except if <em>value</em> is an integer type, the return type is a double</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">m s</td>
       <td style="text-align: left">CHAR(integer)</td>
       <td style="text-align: left">Returns the character whose ASCII code is <em>integer</em> % 256, or null if <em>integer</em> &lt; 0</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">b o p</td>
+      <td style="text-align: left">b o p r</td>
       <td style="text-align: left">CHR(integer)</td>
       <td style="text-align: left">Returns the character whose UTF-8 code is <em>integer</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">CODE_POINTS_TO_BYTES(integers)</td>
       <td style="text-align: left">Converts <em>integers</em>, an array of integers between 0 and 255 inclusive, into bytes; throws error if any element is out of range</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">CODE_POINTS_TO_STRING(integers)</td>
       <td style="text-align: left">Converts <em>integers</em>, an array of integers between 0 and 0xD7FF or between 0xE000 and 0x10FFFF inclusive, into string; throws error if any element is out of range</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">o</td>
+      <td style="text-align: left">o r</td>
       <td style="text-align: left">CONCAT(string, string)</td>
       <td style="text-align: left">Concatenates two strings, returns null only when both string arguments are null, otherwise treats null as empty string</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b m</td>
       <td style="text-align: left">CONCAT(string [, string ]*)</td>
       <td style="text-align: left">Concatenates one or more strings, returns null if any of the arguments is null</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">p q</td>
       <td style="text-align: left">CONCAT(string [, string ]*)</td>
       <td style="text-align: left">Concatenates one or more strings, null is treated as empty string</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">m p</td>
+      <td style="text-align: left">m</td>
       <td style="text-align: left">CONCAT_WS(separator, str1 [, string ]*)</td>
       <td style="text-align: left">Concatenates one or more strings, returns null only when separator is null, otherwise treats null arguments as empty strings</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">CONCAT_WS(separator, any [, any ]*)</td>
+      <td style="text-align: left">Concatenates all but the first argument, returns null only when separator is null, otherwise treats null arguments as empty strings</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">q</td>
       <td style="text-align: left">CONCAT_WS(separator, str1, str2 [, string ]*)</td>
       <td style="text-align: left">Concatenates two or more strings, requires at least 3 arguments (up to 254), treats null arguments as empty strings</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">CONCAT_WS(separator [, string</td>
+      <td style="text-align: left">array(string)]*)</td>
+      <td>Concatenates one or more strings or arrays. Besides the separator, other arguments can include strings or string arrays. returns null only when separator is null, treats other null arguments as empty strings</td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">COMPRESS(string)</td>
       <td style="text-align: left">Compresses a string using zlib compression and returns the result as a binary string</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">CONTAINS_SUBSTR(expression, string [ , json_scope =&gt; json_scope_value ])</td>
       <td style="text-align: left">Returns whether <em>string</em> exists as a substring in <em>expression</em>. Optional <em>json_scope</em> argument specifies what scope to search if <em>expression</em> is in JSON format. Returns NULL if a NULL exists in <em>expression</em> that does not result in a match</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">q</td>
       <td style="text-align: left">CONVERT(type, expression [ , style ])</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">CAST(expression AS type)</code>; ignores the <em>style</em> operand</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">p</td>
+      <td style="text-align: left">p r</td>
       <td style="text-align: left">CONVERT_TIMEZONE(tz1, tz2, datetime)</td>
       <td style="text-align: left">Converts the timezone of <em>datetime</em> from <em>tz1</em> to <em>tz2</em>
 </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">COSD(numeric)</td>
+      <td style="text-align: left">Returns the cosine of <em>numeric</em> in degrees as a double. Returns NaN if <em>numeric</em> is NaN. Fails if <em>numeric</em> is greater than the maximum double value.</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">*</td>
       <td style="text-align: left">COSH(numeric)</td>
       <td style="text-align: left">Returns the hyperbolic cosine of <em>numeric</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">*</td>
       <td style="text-align: left">COTH(numeric)</td>
       <td style="text-align: left">Returns the hyperbolic cotangent of <em>numeric</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">*</td>
       <td style="text-align: left">CSC(numeric)</td>
       <td style="text-align: left">Returns the cosecant of <em>numeric</em> in radians</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">*</td>
       <td style="text-align: left">CSCH(numeric)</td>
       <td style="text-align: left">Returns the hyperbolic cosecant of <em>numeric</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">CURRENT_DATETIME([ timeZone ])</td>
       <td style="text-align: left">Returns the current time as a TIMESTAMP from <em>timezone</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">DAYNAME(datetime)</td>
       <td style="text-align: left">Returns the name, in the connection’s locale, of the weekday in <em>datetime</em>; for example, it returns ‘星期日’ for both DATE ‘2020-02-10’ and TIMESTAMP ‘2020-02-10 10:10:10’</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">DATE(timestamp)</td>
       <td style="text-align: left">Extracts the DATE from a <em>timestamp</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">DATE(timestampLtz)</td>
       <td style="text-align: left">Extracts the DATE from <em>timestampLtz</em> (an instant; BigQuery’s TIMESTAMP type), assuming UTC</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">DATE(timestampLtz, timeZone)</td>
       <td style="text-align: left">Extracts the DATE from <em>timestampLtz</em> (an instant; BigQuery’s TIMESTAMP type) in <em>timeZone</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">DATE(string)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">CAST(string AS DATE)</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">DATE(year, month, day)</td>
       <td style="text-align: left">Returns a DATE value for <em>year</em>, <em>month</em>, and <em>day</em> (all of type INTEGER)</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">p q</td>
+      <td style="text-align: left">p q r</td>
       <td style="text-align: left">DATEADD(timeUnit, integer, datetime)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">TIMESTAMPADD(timeUnit, integer, datetime)</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">p q</td>
+      <td style="text-align: left">p q r</td>
       <td style="text-align: left">DATEDIFF(timeUnit, datetime, datetime2)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">TIMESTAMPDIFF(timeUnit, datetime, datetime2)</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">q</td>
       <td style="text-align: left">DATEPART(timeUnit, datetime)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(timeUnit FROM  datetime)</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">DATETIME(date, time)</td>
       <td style="text-align: left">Converts <em>date</em> and <em>time</em> to a TIMESTAMP</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">DATETIME(date)</td>
       <td style="text-align: left">Converts <em>date</em> to a TIMESTAMP value (at midnight)</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">DATETIME(date, timeZone)</td>
       <td style="text-align: left">Converts <em>date</em> to a TIMESTAMP value (at midnight), in <em>timeZone</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">DATETIME(year, month, day, hour, minute, second)</td>
       <td style="text-align: left">Creates a TIMESTAMP for <em>year</em>, <em>month</em>, <em>day</em>, <em>hour</em>, <em>minute</em>, <em>second</em> (all of type INTEGER)</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">DATETIME_ADD(timestamp, interval)</td>
       <td style="text-align: left">Returns the TIMESTAMP value that occurs <em>interval</em> after <em>timestamp</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">DATETIME_DIFF(timestamp, timestamp2, timeUnit)</td>
       <td style="text-align: left">Returns the whole number of <em>timeUnit</em> between <em>timestamp</em> and <em>timestamp2</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">DATETIME_SUB(timestamp, interval)</td>
       <td style="text-align: left">Returns the TIMESTAMP that occurs <em>interval</em> before <em>timestamp</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">DATETIME_TRUNC(timestamp, timeUnit)</td>
       <td style="text-align: left">Truncates <em>timestamp</em> to the granularity of <em>timeUnit</em>, rounding to the beginning of the unit</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b s</td>
       <td style="text-align: left">DATE_FROM_UNIX_DATE(integer)</td>
       <td style="text-align: left">Returns the DATE that is <em>integer</em> days after 1970-01-01</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">p</td>
+      <td style="text-align: left">p r</td>
       <td style="text-align: left">DATE_PART(timeUnit, datetime)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">EXTRACT(timeUnit FROM  datetime)</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">DATE_ADD(date, interval)</td>
       <td style="text-align: left">Returns the DATE value that occurs <em>interval</em> after <em>date</em>
 </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">DATE_ADD(date, numDays)</td>
+      <td style="text-align: left">Returns the DATE that is <em>numDays</em> after <em>date</em>
+</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">DATE_DIFF(date, date2, timeUnit)</td>
       <td style="text-align: left">Returns the whole number of <em>timeUnit</em> between <em>date</em> and <em>date2</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">DATE_SUB(date, interval)</td>
       <td style="text-align: left">Returns the DATE value that occurs <em>interval</em> before <em>date</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">DATE_TRUNC(date, timeUnit)</td>
       <td style="text-align: left">Truncates <em>date</em> to the granularity of <em>timeUnit</em>, rounding to the beginning of the unit</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">o s</td>
+      <td style="text-align: left">o r s</td>
       <td style="text-align: left">DECODE(value, value1, result1 [, valueN, resultN ]* [, default ])</td>
       <td style="text-align: left">Compares <em>value</em> to each <em>valueN</em> value one by one; if <em>value</em> is equal to a <em>valueN</em>, returns the corresponding <em>resultN</em>, else returns <em>default</em>, or NULL if <em>default</em> is not specified</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">p</td>
+      <td style="text-align: left">p r</td>
       <td style="text-align: left">DIFFERENCE(string, string)</td>
       <td style="text-align: left">Returns a measure of the similarity of two strings, namely the number of character positions that their <code class="language-plaintext highlighter-rouge">SOUNDEX</code> values have in common: 4 if the <code class="language-plaintext highlighter-rouge">SOUNDEX</code> values are same and 0 if the <code class="language-plaintext highlighter-rouge">SOUNDEX</code> values are totally different</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">f s</td>
       <td style="text-align: left">ENDSWITH(string1, string2)</td>
       <td style="text-align: left">Returns whether <em>string2</em> is a suffix of <em>string1</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">b p</td>
+      <td style="text-align: left">b</td>
       <td style="text-align: left">ENDS_WITH(string1, string2)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">ENDSWITH(string1, string2)</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">EXISTS(array, func)</td>
       <td style="text-align: left">Returns whether a predicate <em>func</em> holds for one or more elements in the <em>array</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">o</td>
       <td style="text-align: left">EXISTSNODE(xml, xpath, [, namespaces ])</td>
       <td style="text-align: left">Determines whether traversal of a XML document using a specified xpath results in any nodes. Returns 0 if no nodes remain after applying the XPath traversal on the document fragment of the element or elements matched by the XPath expression. Returns 1 if any nodes remain. The optional namespace value that specifies a default mapping or namespace mapping for prefixes, which is used when evaluating the XPath expression.</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">o</td>
       <td style="text-align: left">EXTRACT(xml, xpath, [, namespaces ])</td>
       <td style="text-align: left">Returns the XML fragment of the element or elements matched by the XPath expression. The optional namespace value that specifies a default mapping or namespace mapping for prefixes, which is used when evaluating the XPath expression</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">EXTRACTVALUE(xml, xpathExpr))</td>
       <td style="text-align: left">Returns the text of the first text node which is a child of the element or elements matched by the XPath expression.</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">h s</td>
       <td style="text-align: left">FACTORIAL(integer)</td>
       <td style="text-align: left">Returns the factorial of <em>integer</em>, the range of <em>integer</em> is [0, 20]. Otherwise, returns NULL</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">h s</td>
       <td style="text-align: left">FIND_IN_SET(matchStr, textStr)</td>
       <td style="text-align: left">Returns the index (1-based) of the given <em>matchStr</em> in the comma-delimited <em>textStr</em>. Returns 0, if the given <em>matchStr</em> is not found or if the <em>matchStr</em> contains a comma. For example, FIND_IN_SET(‘bc’, ‘a,bc,def’) returns 2</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">FLOOR(value)</td>
       <td style="text-align: left">Similar to standard <code class="language-plaintext highlighter-rouge">FLOOR(value)</code> except if <em>value</em> is an integer type, the return type is a double</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">FORMAT_DATE(string, date)</td>
       <td style="text-align: left">Formats <em>date</em> according to the specified format <em>string</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">FORMAT_DATETIME(string, timestamp)</td>
       <td style="text-align: left">Formats <em>timestamp</em> according to the specified format <em>string</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">h s</td>
       <td style="text-align: left">FORMAT_NUMBER(value, decimalVal)</td>
       <td style="text-align: left">Formats the number <em>value</em> like ‘#,###,###.##’, rounded to decimal places <em>decimalVal</em>. If <em>decimalVal</em> is 0, the result has no decimal point or fractional part</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">h s</td>
       <td style="text-align: left">FORMAT_NUMBER(value, format)</td>
       <td style="text-align: left">Formats the number <em>value</em> to MySQL’s FORMAT <em>format</em>, like ‘#,###,###.##0.00’</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">FORMAT_TIME(string, time)</td>
       <td style="text-align: left">Formats <em>time</em> according to the specified format <em>string</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">FORMAT_TIMESTAMP(string timestamp)</td>
       <td style="text-align: left">Formats <em>timestamp</em> according to the specified format <em>string</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">GETBIT(value, position)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">BIT_GET(value, position)</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">b o s</td>
+      <td style="text-align: left">b o p r s</td>
       <td style="text-align: left">GREATEST(expr [, expr ]*)</td>
       <td style="text-align: left">Returns the greatest of the expressions</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b h s</td>
       <td style="text-align: left">IF(condition, value1, value2)</td>
       <td style="text-align: left">Returns <em>value1</em> if <em>condition</em> is TRUE, <em>value2</em> otherwise</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b s</td>
       <td style="text-align: left">IFNULL(value1, value2)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">NVL(value1, value2)</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">p</td>
       <td style="text-align: left">string1 ILIKE string2 [ ESCAPE string3 ]</td>
       <td style="text-align: left">Whether <em>string1</em> matches pattern <em>string2</em>, ignoring case (similar to <code class="language-plaintext highlighter-rouge">LIKE</code>)</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">p</td>
       <td style="text-align: left">string1 NOT ILIKE string2 [ ESCAPE string3 ]</td>
       <td style="text-align: left">Whether <em>string1</em> does not match pattern <em>string2</em>, ignoring case (similar to <code class="language-plaintext highlighter-rouge">NOT LIKE</code>)</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b o</td>
       <td style="text-align: left">INSTR(string, substring [, from [, occurrence ] ])</td>
       <td style="text-align: left">Returns the position of <em>substring</em> in <em>string</em>, searching starting at <em>from</em> (default 1), and until locating the nth <em>occurrence</em> (default 1) of <em>substring</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">m</td>
+      <td style="text-align: left">b m o</td>
       <td style="text-align: left">INSTR(string, substring)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">POSITION(substring IN string)</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">IS_INF(value)</td>
       <td style="text-align: left">Returns whether <em>value</em> is infinite</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">IS_NAN(value)</td>
       <td style="text-align: left">Returns whether <em>value</em> is NaN</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">JSON_TYPE(jsonValue)</td>
       <td style="text-align: left">Returns a string value indicating the type of <em>jsonValue</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">JSON_DEPTH(jsonValue)</td>
       <td style="text-align: left">Returns an integer value indicating the depth of <em>jsonValue</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">JSON_PRETTY(jsonValue)</td>
       <td style="text-align: left">Returns a pretty-printing of <em>jsonValue</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">JSON_LENGTH(jsonValue [, path ])</td>
       <td style="text-align: left">Returns a integer indicating the length of <em>jsonValue</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">JSON_INSERT(jsonValue, path, val [, path, val ]*)</td>
       <td style="text-align: left">Returns a JSON document insert a data of <em>jsonValue</em>, <em>path</em>, <em>val</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">JSON_KEYS(jsonValue [, path ])</td>
       <td style="text-align: left">Returns a string indicating the keys of a JSON <em>jsonValue</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">JSON_REMOVE(jsonValue, path [, path ])</td>
       <td style="text-align: left">Removes data from <em>jsonValue</em> using a series of <em>path</em> expressions and returns the result</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">JSON_REPLACE(jsonValue, path, val [, path, val ]*)</td>
       <td style="text-align: left">Returns a JSON document replace a data of <em>jsonValue</em>, <em>path</em>, <em>val</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">JSON_SET(jsonValue, path, val [, path, val ]*)</td>
       <td style="text-align: left">Returns a JSON document set a data of <em>jsonValue</em>, <em>path</em>, <em>val</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">JSON_STORAGE_SIZE(jsonValue)</td>
       <td style="text-align: left">Returns the number of bytes used to store the binary representation of <em>jsonValue</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">b o s</td>
+      <td style="text-align: left">b o p r s</td>
       <td style="text-align: left">LEAST(expr [, expr ]* )</td>
       <td style="text-align: left">Returns the least of the expressions</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">b m p s</td>
+      <td style="text-align: left">b m p r s</td>
       <td style="text-align: left">LEFT(string, length)</td>
       <td style="text-align: left">Returns the leftmost <em>length</em> characters from the <em>string</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">f s</td>
+      <td style="text-align: left">f r s</td>
       <td style="text-align: left">LEN(string)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">CHAR_LENGTH(string)</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">b f s</td>
+      <td style="text-align: left">b f h p r s</td>
       <td style="text-align: left">LENGTH(string)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">CHAR_LENGTH(string)</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">h s</td>
       <td style="text-align: left">LEVENSHTEIN(string1, string2)</td>
       <td style="text-align: left">Returns the Levenshtein distance between <em>string1</em> and <em>string2</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
-      <td style="text-align: left">LOG(numeric1 [, numeric2 ])</td>
-      <td style="text-align: left">Returns the logarithm of <em>numeric1</em> to base <em>numeric2</em>, or base e if <em>numeric2</em> is not present</td>
+      <td style="text-align: left">LOG(numeric1 [, base ])</td>
+      <td style="text-align: left">Returns the logarithm of <em>numeric1</em> to base <em>base</em>, or base e if <em>base</em> is not present, or error if <em>numeric1</em> is 0 or negative</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">m s</td>
+      <td style="text-align: left">LOG([, base ], numeric1)</td>
+      <td style="text-align: left">Returns the logarithm of <em>numeric1</em> to base <em>base</em>, or base e if <em>base</em> is not present, or null if <em>numeric1</em> is 0 or negative</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">LOG([, base ], numeric1 )</td>
+      <td style="text-align: left">Returns the logarithm of <em>numeric1</em> to base <em>base</em>, or base 10 if <em>numeric1</em> is not present, or error if <em>numeric1</em> is 0 or negative</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">m s</td>
       <td style="text-align: left">LOG2(numeric)</td>
       <td style="text-align: left">Returns the base 2 logarithm of <em>numeric</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">b o s</td>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">LOG1P(numeric)</td>
+      <td style="text-align: left">Returns the natural logarithm of 1 plus <em>numeric</em>
+</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b o p r s</td>
       <td style="text-align: left">LPAD(string, length [, pattern ])</td>
       <td style="text-align: left">Returns a string or bytes value that consists of <em>string</em> prepended to <em>length</em> with <em>pattern</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TO_BASE32(string)</td>
       <td style="text-align: left">Converts the <em>string</em> to base-32 encoded form and returns an encoded string</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">FROM_BASE32(string)</td>
       <td style="text-align: left">Returns the decoded result of a base-32 <em>string</em> as a string</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">TO_BASE64(string)</td>
       <td style="text-align: left">Converts the <em>string</em> to base-64 encoded form and returns a encoded string</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b m</td>
       <td style="text-align: left">FROM_BASE64(string)</td>
       <td style="text-align: left">Returns the decoded result of a base-64 <em>string</em> as a string</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TO_HEX(binary)</td>
       <td style="text-align: left">Converts <em>binary</em> into a hexadecimal varchar</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">FROM_HEX(varchar)</td>
       <td style="text-align: left">Converts a hexadecimal-encoded <em>varchar</em> into bytes</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">b o s</td>
+      <td style="text-align: left">b o p r s</td>
       <td style="text-align: left">LTRIM(string)</td>
       <td style="text-align: left">Returns <em>string</em> with all blanks removed from the start</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">MAP()</td>
       <td style="text-align: left">Returns an empty map</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">MAP(key, value [, key, value]*)</td>
       <td style="text-align: left">Returns a map with the given <em>key</em>/<em>value</em> pairs</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">MAP_CONCAT(map [, map]*)</td>
       <td style="text-align: left">Concatenates one or more maps. If any input argument is <code class="language-plaintext highlighter-rouge">NULL</code> the function returns <code class="language-plaintext highlighter-rouge">NULL</code>. Note that calcite is using the LAST_WIN strategy</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">MAP_CONTAINS_KEY(map, key)</td>
       <td style="text-align: left">Returns whether <em>map</em> contains <em>key</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">MAP_ENTRIES(map)</td>
       <td style="text-align: left">Returns the entries of the <em>map</em> as an array, the order of the entries is not defined</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">MAP_KEYS(map)</td>
       <td style="text-align: left">Returns the keys of the <em>map</em> as an array, the order of the entries is not defined</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">MAP_VALUES(map)</td>
       <td style="text-align: left">Returns the values of the <em>map</em> as an array, the order of the entries is not defined</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">MAP_FROM_ARRAYS(array1, array2)</td>
       <td style="text-align: left">Returns a map created from an <em>array1</em> and <em>array2</em>. Note that the lengths of two arrays should be the same and calcite is using the LAST_WIN strategy</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">MAP_FROM_ENTRIES(arrayOfRows)</td>
       <td style="text-align: left">Returns a map created from an arrays of row with two fields. Note that the number of fields in a row must be 2. Note that calcite is using the LAST_WIN strategy</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">STR_TO_MAP(string [, stringDelimiter [, keyValueDelimiter]])</td>
       <td style="text-align: left">Returns a map after splitting the <em>string</em> into key/value pairs using delimiters. Default delimiters are ‘,’ for <em>stringDelimiter</em> and ‘:’ for <em>keyValueDelimiter</em>. Note that calcite is using the LAST_WIN strategy</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">b m p s</td>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">SUBSTRING_INDEX(string, delim, count)</td>
+      <td style="text-align: left">Returns the substring from <em>string</em> before <em>count</em> occurrences of the delimiter <em>delim</em>. If <em>count</em> is positive, everything to the left of the final delimiter (counting from the left) is returned. If <em>count</em> is negative, everything to the right of the final delimiter (counting from the right) is returned. The function substring_index performs a case-sensitive match when searching for <em>delim</em>.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b m p r s</td>
       <td style="text-align: left">MD5(string)</td>
       <td style="text-align: left">Calculates an MD5 128-bit checksum of <em>string</em> and returns it as a hex string</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">MONTHNAME(date)</td>
       <td style="text-align: left">Returns the name, in the connection’s locale, of the month in <em>datetime</em>; for example, it returns ‘二月’ for both DATE ‘2020-02-10’ and TIMESTAMP ‘2020-02-10 10:10:10’</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">o s</td>
+      <td style="text-align: left">o r s</td>
       <td style="text-align: left">NVL(value1, value2)</td>
       <td style="text-align: left">Returns <em>value1</em> if <em>value1</em> is not null, otherwise <em>value2</em>
 </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">o r s</td>
+      <td style="text-align: left">NVL2(value1, value2, value3)</td>
+      <td style="text-align: left">Returns <em>value2</em> if <em>value1</em> is not null, otherwise <em>value3</em>
+</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">OFFSET(index)</td>
       <td style="text-align: left">When indexing an array, wrapping <em>index</em> in <code class="language-plaintext highlighter-rouge">OFFSET</code> returns the value at the 0-based <em>index</em>; throws error if <em>index</em> is out of bounds</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">ORDINAL(index)</td>
       <td style="text-align: left">Similar to <code class="language-plaintext highlighter-rouge">OFFSET</code> except <em>index</em> begins at 1</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">PARSE_DATE(format, string)</td>
       <td style="text-align: left">Uses format specified by <em>format</em> to convert <em>string</em> representation of date to a DATE value</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">PARSE_DATETIME(format, string)</td>
       <td style="text-align: left">Uses format specified by <em>format</em> to convert <em>string</em> representation of datetime to a TIMESTAMP value</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">PARSE_TIME(format, string)</td>
       <td style="text-align: left">Uses format specified by <em>format</em> to convert <em>string</em> representation of time to a TIME value</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">PARSE_TIMESTAMP(format, string[, timeZone])</td>
       <td style="text-align: left">Uses format specified by <em>format</em> to convert <em>string</em> representation of timestamp to a TIMESTAMP WITH LOCAL TIME ZONE value in <em>timeZone</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">h s</td>
       <td style="text-align: left">PARSE_URL(urlString, partToExtract [, keyToExtract] )</td>
       <td style="text-align: left">Returns the specified <em>partToExtract</em> from the <em>urlString</em>. Valid values for <em>partToExtract</em> include HOST, PATH, QUERY, REF, PROTOCOL, AUTHORITY, FILE, and USERINFO. <em>keyToExtract</em> specifies which query to extract</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b s</td>
       <td style="text-align: left">POW(numeric1, numeric2)</td>
       <td style="text-align: left">Returns <em>numeric1</em> raised to the power <em>numeric2</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">p</td>
+      <td style="text-align: left">b c h q m o f s p r</td>
+      <td style="text-align: left">POWER(numeric1, numeric2)</td>
+      <td style="text-align: left">Returns <em>numeric1</em> raised to the power of <em>numeric2</em>
+</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p r</td>
       <td style="text-align: left">RANDOM()</td>
       <td style="text-align: left">Generates a random double between 0 and 1 inclusive</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">REGEXP(string, regexp)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">string1 RLIKE string2</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">REGEXP_CONTAINS(string, regexp)</td>
       <td style="text-align: left">Returns whether <em>string</em> is a partial match for the <em>regexp</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">REGEXP_EXTRACT(string, regexp [, position [, occurrence]])</td>
       <td style="text-align: left">Returns the substring in <em>string</em> that matches the <em>regexp</em>, starting search at <em>position</em> (default 1), and until locating the nth <em>occurrence</em> (default 1). Returns NULL if there is no match</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">REGEXP_EXTRACT_ALL(string, regexp)</td>
       <td style="text-align: left">Returns an array of all substrings in <em>string</em> that matches the <em>regexp</em>. Returns an empty array if there is no match</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">REGEXP_INSTR(string, regexp [, position [, occurrence [, occurrence_position]]])</td>
       <td style="text-align: left">Returns the lowest 1-based position of the substring in <em>string</em> that matches the <em>regexp</em>, starting search at <em>position</em> (default 1), and until locating the nth <em>occurrence</em> (default 1). Setting occurrence_position (default 0) to 1 returns the end position of substring + 1. Returns 0 if there is no match</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">m o p s</td>
+      <td style="text-align: left">m o p r s</td>
       <td style="text-align: left">REGEXP_LIKE(string, regexp [, flags])</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">string1 RLIKE string2</code> with an optional parameter for search flags. Supported flags are: &lt;ul&gt;&lt;li&gt;i: case-insensitive matching&lt;/li&gt;&lt;li&gt;c: case-sensitive matching&lt;/li&gt;&lt;li&gt;n: newline-sensitive matching&lt;/li&gt;&lt;li&gt;s: non-newline-sensitive matching&lt;/li&gt;&lt;li&gt;m: multi-line&lt;/li&gt;&lt;/ul&gt;</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">b m o</td>
+      <td style="text-align: left">r</td>
+      <td style="text-align: left">REGEXP_REPLACE(string, regexp)</td>
+      <td style="text-align: left">Replaces all substrings of <em>string</em> that match <em>regexp</em> with the empty string</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b m o r</td>
       <td style="text-align: left">REGEXP_REPLACE(string, regexp, rep [, pos [, occurrence [, matchType]]])</td>
       <td style="text-align: left">Replaces all substrings of <em>string</em> that match <em>regexp</em> with <em>rep</em> at the starting <em>pos</em> in expr (if omitted, the default is 1), <em>occurrence</em> specifies which occurrence of a match to search for (if omitted, the default is 1), <em>matchType</em> specifies how to perform matching</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">REGEXP_REPLACE(string, regexp, rep [, matchType])</td>
+      <td style="text-align: left">Replaces substrings of <em>string</em> that match <em>regexp</em> with <em>rep</em> at the starting <em>pos</em> in expr, <em>matchType</em> specifies how to perform matching and whether to only replace first match or all</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">REGEXP_SUBSTR(string, regexp [, position [, occurrence]])</td>
       <td style="text-align: left">Synonym for REGEXP_EXTRACT</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">b m p s</td>
+      <td style="text-align: left">b m p r s</td>
       <td style="text-align: left">REPEAT(string, integer)</td>
       <td style="text-align: left">Returns a string consisting of <em>string</em> repeated of <em>integer</em> times; returns an empty string if <em>integer</em> is less than 1</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b m</td>
       <td style="text-align: left">REVERSE(string)</td>
       <td style="text-align: left">Returns <em>string</em> with the order of the characters reversed</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">b m p s</td>
+      <td style="text-align: left">s</td>
+      <td style="text-align: left">REVERSE(string</td>
+      <td style="text-align: left">array)</td>
+      <td>Returns <em>string</em> with the characters in reverse order or array with elements in reverse order</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">b m p r s</td>
       <td style="text-align: left">RIGHT(string, length)</td>
       <td style="text-align: left">Returns the rightmost <em>length</em> characters from the <em>string</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">h s</td>
+      <td style="text-align: left">h m s</td>
       <td style="text-align: left">string1 RLIKE string2</td>
       <td style="text-align: left">Whether <em>string1</em> matches regex pattern <em>string2</em> (similar to <code class="language-plaintext highlighter-rouge">LIKE</code>, but uses Java regex)</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">h s</td>
+      <td style="text-align: left">h m s</td>
       <td style="text-align: left">string1 NOT RLIKE string2</td>
       <td style="text-align: left">Whether <em>string1</em> does not match regex pattern <em>string2</em> (similar to <code class="language-plaintext highlighter-rouge">NOT LIKE</code>, but uses Java regex)</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">b o s</td>
+      <td style="text-align: left">b o p r s</td>
       <td style="text-align: left">RPAD(string, length[, pattern ])</td>
       <td style="text-align: left">Returns a string or bytes value that consists of <em>string</em> appended to <em>length</em> with <em>pattern</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">b o s</td>
+      <td style="text-align: left">b o p r s</td>
       <td style="text-align: left">RTRIM(string)</td>
       <td style="text-align: left">Returns <em>string</em> with all blanks removed from the end</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">SAFE_ADD(numeric1, numeric2)</td>
       <td style="text-align: left">Returns <em>numeric1</em> + <em>numeric2</em>, or NULL on overflow.  Arguments are implicitly cast to one of the types BIGINT, DOUBLE, or DECIMAL</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">SAFE_CAST(value AS type)</td>
       <td style="text-align: left">Converts <em>value</em> to <em>type</em>, returning NULL if conversion fails</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">SAFE_DIVIDE(numeric1, numeric2)</td>
       <td style="text-align: left">Returns <em>numeric1</em> / <em>numeric2</em>, or NULL on overflow or if <em>numeric2</em> is zero.  Arguments implicitly are cast to one of the types BIGINT, DOUBLE, or DECIMAL</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">SAFE_MULTIPLY(numeric1, numeric2)</td>
       <td style="text-align: left">Returns <em>numeric1</em> * <em>numeric2</em>, or NULL on overflow.  Arguments are implicitly cast to one of the types BIGINT, DOUBLE, or DECIMAL</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">SAFE_NEGATE(numeric)</td>
       <td style="text-align: left">Returns <em>numeric</em> * -1, or NULL on overflow.  Arguments are implicitly cast to one of the types BIGINT, DOUBLE, or DECIMAL</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">SAFE_OFFSET(index)</td>
       <td style="text-align: left">Similar to <code class="language-plaintext highlighter-rouge">OFFSET</code> except null is returned if <em>index</em> is out of bounds</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">SAFE_ORDINAL(index)</td>
       <td style="text-align: left">Similar to <code class="language-plaintext highlighter-rouge">OFFSET</code> except <em>index</em> begins at 1 and null is returned if <em>index</em> is out of bounds</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">SAFE_SUBTRACT(numeric1, numeric2)</td>
       <td style="text-align: left">Returns <em>numeric1</em> - <em>numeric2</em>, or NULL on overflow.  Arguments are implicitly cast to one of the types BIGINT, DOUBLE, or DECIMAL</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">*</td>
       <td style="text-align: left">SEC(numeric)</td>
       <td style="text-align: left">Returns the secant of <em>numeric</em> in radians</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">*</td>
       <td style="text-align: left">SECH(numeric)</td>
       <td style="text-align: left">Returns the hyperbolic secant of <em>numeric</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">b m p s</td>
+      <td style="text-align: left">b m p r s</td>
       <td style="text-align: left">SHA1(string)</td>
       <td style="text-align: left">Calculates a SHA-1 hash value of <em>string</em> and returns it as a hex string</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b p</td>
       <td style="text-align: left">SHA256(string)</td>
       <td style="text-align: left">Calculates a SHA-256 hash value of <em>string</em> and returns it as a hex string</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b p</td>
       <td style="text-align: left">SHA512(string)</td>
       <td style="text-align: left">Calculates a SHA-512 hash value of <em>string</em> and returns it as a hex string</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">SIND(numeric)</td>
+      <td style="text-align: left">Returns the sine of <em>numeric</em> in degrees as a double. Returns NaN if <em>numeric</em> is NaN. Fails if <em>numeric</em> is greater than the maximum double value.</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">*</td>
       <td style="text-align: left">SINH(numeric)</td>
       <td style="text-align: left">Returns the hyperbolic sine of <em>numeric</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">b m o p</td>
+      <td style="text-align: left">b m o p r</td>
       <td style="text-align: left">SOUNDEX(string)</td>
       <td style="text-align: left">Returns the phonetic representation of <em>string</em>; throws if <em>string</em> is encoded with multi-byte encoding such as UTF-8</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">SOUNDEX(string)</td>
       <td style="text-align: left">Returns the phonetic representation of <em>string</em>; return original <em>string</em> if <em>string</em> is encoded with multi-byte encoding such as UTF-8</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">m s</td>
       <td style="text-align: left">SPACE(integer)</td>
       <td style="text-align: left">Returns a string of <em>integer</em> spaces; returns an empty string if <em>integer</em> is less than 1</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">SPLIT(string [, delimiter ])</td>
       <td style="text-align: left">Returns the string array of <em>string</em> split at <em>delimiter</em> (if omitted, default is comma).  If the <em>string</em> is empty it returns an empty array, otherwise, if the <em>delimiter</em> is empty, it returns an array containing the original <em>string</em>.</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">f s</td>
       <td style="text-align: left">STARTSWITH(string1, string2)</td>
       <td style="text-align: left">Returns whether <em>string2</em> is a prefix of <em>string1</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b p</td>
       <td style="text-align: left">STARTS_WITH(string1, string2)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">STARTSWITH(string1, string2)</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">m</td>
       <td style="text-align: left">STRCMP(string, string)</td>
       <td style="text-align: left">Returns 0 if both of the strings are same and returns -1 when the first argument is smaller than the second and 1 when the second one is smaller than the first one</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">b p</td>
+      <td style="text-align: left">b r p</td>
       <td style="text-align: left">STRPOS(string, substring)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">POSITION(substring IN string)</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">b m o p</td>
+      <td style="text-align: left">b m o p r</td>
       <td style="text-align: left">SUBSTR(string, position [, substringLength ])</td>
       <td style="text-align: left">Returns a portion of <em>string</em>, beginning at character <em>position</em>, <em>substringLength</em> characters long. SUBSTR calculates lengths using characters as defined by the input character set</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">TAND(numeric)</td>
+      <td style="text-align: left">Returns the tangent of <em>numeric</em> in degrees as a double. Returns NaN if <em>numeric</em> is NaN. Fails if *numeric is greater than the maximum double value.</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">*</td>
       <td style="text-align: left">TANH(numeric)</td>
       <td style="text-align: left">Returns the hyperbolic tangent of <em>numeric</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TIME(hour, minute, second)</td>
       <td style="text-align: left">Returns a TIME value <em>hour</em>, <em>minute</em>, <em>second</em> (all of type INTEGER)</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TIME(timestamp)</td>
       <td style="text-align: left">Extracts the TIME from <em>timestamp</em> (a local time; BigQuery’s DATETIME type)</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TIME(instant)</td>
       <td style="text-align: left">Extracts the TIME from <em>timestampLtz</em> (an instant; BigQuery’s TIMESTAMP type), assuming UTC</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TIME(instant, timeZone)</td>
       <td style="text-align: left">Extracts the time from <em>timestampLtz</em> (an instant; BigQuery’s TIMESTAMP type), in <em>timeZone</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TIMESTAMP(string)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">CAST(string AS TIMESTAMP WITH LOCAL TIME ZONE)</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TIMESTAMP(string, timeZone)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">CAST(string AS TIMESTAMP WITH LOCAL TIME ZONE)</code>, converted to <em>timeZone</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TIMESTAMP(date)</td>
       <td style="text-align: left">Converts <em>date</em> to a TIMESTAMP WITH LOCAL TIME ZONE value (at midnight)</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TIMESTAMP(date, timeZone)</td>
       <td style="text-align: left">Converts <em>date</em> to a TIMESTAMP WITH LOCAL TIME ZONE value (at midnight), in <em>timeZone</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TIMESTAMP(timestamp)</td>
       <td style="text-align: left">Converts <em>timestamp</em> to a TIMESTAMP WITH LOCAL TIME ZONE, assuming a UTC</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TIMESTAMP(timestamp, timeZone)</td>
       <td style="text-align: left">Converts <em>timestamp</em> to a TIMESTAMP WITH LOCAL TIME ZONE, in <em>timeZone</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TIMESTAMP_ADD(timestamp, interval)</td>
       <td style="text-align: left">Returns the TIMESTAMP value that occurs <em>interval</em> after <em>timestamp</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TIMESTAMP_DIFF(timestamp, timestamp2, timeUnit)</td>
       <td style="text-align: left">Returns the whole number of <em>timeUnit</em> between <em>timestamp</em> and <em>timestamp2</em>. Equivalent to <code class="language-plaintext highlighter-rouge">TIMESTAMPDIFF(timeUnit, timestamp2, timestamp)</code> and <code class="language-plaintext highlighter-rouge">(timestamp - timestamp2) timeUnit</code>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b s</td>
       <td style="text-align: left">TIMESTAMP_MICROS(integer)</td>
       <td style="text-align: left">Returns the TIMESTAMP that is <em>integer</em> microseconds after 1970-01-01 00:00:00</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b s</td>
       <td style="text-align: left">TIMESTAMP_MILLIS(integer)</td>
       <td style="text-align: left">Returns the TIMESTAMP that is <em>integer</em> milliseconds after 1970-01-01 00:00:00</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b s</td>
       <td style="text-align: left">TIMESTAMP_SECONDS(integer)</td>
       <td style="text-align: left">Returns the TIMESTAMP that is <em>integer</em> seconds after 1970-01-01 00:00:00</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TIMESTAMP_SUB(timestamp, interval)</td>
       <td style="text-align: left">Returns the TIMESTAMP value that is <em>interval</em> before <em>timestamp</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TIMESTAMP_TRUNC(timestamp, timeUnit)</td>
       <td style="text-align: left">Truncates <em>timestamp</em> to the granularity of <em>timeUnit</em>, rounding to the beginning of the unit</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TIME_ADD(time, interval)</td>
       <td style="text-align: left">Adds <em>interval</em> to <em>time</em>, independent of any time zone</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TIME_DIFF(time, time2, timeUnit)</td>
       <td style="text-align: left">Returns the whole number of <em>timeUnit</em> between <em>time</em> and <em>time2</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TIME_SUB(time, interval)</td>
       <td style="text-align: left">Returns the TIME value that is <em>interval</em> before <em>time</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TIME_TRUNC(time, timeUnit)</td>
       <td style="text-align: left">Truncates <em>time</em> to the granularity of <em>timeUnit</em>, rounding to the beginning of the unit</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">m o p</td>
+      <td style="text-align: left">m o p r</td>
       <td style="text-align: left">TO_CHAR(timestamp, format)</td>
       <td style="text-align: left">Converts <em>timestamp</em> to a string using the format <em>format</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TO_CODE_POINTS(string)</td>
       <td style="text-align: left">Converts <em>string</em> to an array of integers that represent code points or extended ASCII character values</td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">o p</td>
+      <td style="text-align: left">o p r</td>
       <td style="text-align: left">TO_DATE(string, format)</td>
       <td style="text-align: left">Converts <em>string</em> to a date using the format <em>format</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">o p</td>
+      <td style="text-align: left">o p r</td>
       <td style="text-align: left">TO_TIMESTAMP(string, format)</td>
       <td style="text-align: left">Converts <em>string</em> to a timestamp using the format <em>format</em>
 </td>
+      <td> </td>
     </tr>
     <tr>
-      <td style="text-align: left">b o p s</td>
+      <td style="text-align: left">b o p r s</td>
       <td style="text-align: left">TRANSLATE(expr, fromString, toString)</td>
       <td style="text-align: left">Returns <em>expr</em> with all occurrences of each character in <em>fromString</em> replaced by its corresponding character in <em>toString</em>. Characters in <em>expr</em> that are not in <em>fromString</em> are not replaced</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b</td>
       <td style="text-align: left">TRUNC(numeric1 [, integer2 ])</td>
       <td style="text-align: left">Truncates <em>numeric1</em> to optionally <em>integer2</em> (if not specified 0) places right to the decimal point</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">q</td>
       <td style="text-align: left">TRY_CAST(value AS type)</td>
       <td style="text-align: left">Converts <em>value</em> to <em>type</em>, returning NULL if conversion fails</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b s</td>
       <td style="text-align: left">UNIX_MICROS(timestamp)</td>
       <td style="text-align: left">Returns the number of microseconds since 1970-01-01 00:00:00</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b s</td>
       <td style="text-align: left">UNIX_MILLIS(timestamp)</td>
       <td style="text-align: left">Returns the number of milliseconds since 1970-01-01 00:00:00</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b s</td>
       <td style="text-align: left">UNIX_SECONDS(timestamp)</td>
       <td style="text-align: left">Returns the number of seconds since 1970-01-01 00:00:00</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">b s</td>
       <td style="text-align: left">UNIX_DATE(date)</td>
       <td style="text-align: left">Returns the number of days since 1970-01-01</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">URL_DECODE(string)</td>
       <td style="text-align: left">Decodes a <em>string</em> in ‘application/x-www-form-urlencoded’ format using a specific encoding scheme, returns original <em>string</em> when decoded error</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">s</td>
       <td style="text-align: left">URL_ENCODE(string)</td>
       <td style="text-align: left">Translates a <em>string</em> into ‘application/x-www-form-urlencoded’ format using a specific encoding scheme</td>
+      <td> </td>
     </tr>
     <tr>
       <td style="text-align: left">o</td>
       <td style="text-align: left">XMLTRANSFORM(xml, xslt)</td>
       <td style="text-align: left">Applies XSLT transform <em>xslt</em> to XML string <em>xml</em> and returns the result</td>
+      <td> </td>
     </tr>
   </tbody>
 </table></div>
@@ -6725,14 +7166,26 @@ appear in Calcite’s Postgres library</li>
       <td style="text-align: left">Concatenates arrays into arrays</td>
     </tr>
     <tr>
-      <td style="text-align: left">p s</td>
+      <td style="text-align: left">p r s</td>
       <td style="text-align: left">BOOL_AND(condition)</td>
       <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">EVERY</code>
 </td>
     </tr>
     <tr>
-      <td style="text-align: left">p s</td>
+      <td style="text-align: left">p r s</td>
       <td style="text-align: left">BOOL_OR(condition)</td>
+      <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">SOME</code>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">f</td>
+      <td style="text-align: left">BOOLAND_AGG(condition)</td>
+      <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">EVERY</code>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">f</td>
+      <td style="text-align: left">BOOLOR_AGG(condition)</td>
       <td style="text-align: left">Synonym for <code class="language-plaintext highlighter-rouge">SOME</code>
 </td>
     </tr>

@@ -125,17 +125,25 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">
 <div class="block">Anti-join (also known as Anti-semi-join).</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="#FULL" class="member-name-link">FULL</a></code></div>
+<div class="col-first odd-row-color"><code><a href="#ASOF" class="member-name-link">ASOF</a></code></div>
 <div class="col-last odd-row-color">
+<div class="block">An ASOF JOIN operation combines rows from two tables based on comparable timestamp values.</div>
+</div>
+<div class="col-first even-row-color"><code><a href="#FULL" class="member-name-link">FULL</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Full-outer join.</div>
 </div>
-<div class="col-first even-row-color"><code><a href="#INNER" class="member-name-link">INNER</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code><a href="#INNER" class="member-name-link">INNER</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Inner join.</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="#LEFT" class="member-name-link">LEFT</a></code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code><a href="#LEFT" class="member-name-link">LEFT</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Left-outer join.</div>
+</div>
+<div class="col-first odd-row-color"><code><a href="#LEFT_ASOF" class="member-name-link">LEFT_ASOF</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">The left version of an ASOF join, where each row from the left table is part of the output.</div>
 </div>
 <div class="col-first even-row-color"><code><a href="#RIGHT" class="member-name-link">RIGHT</a></code></div>
 <div class="col-last even-row-color">
@@ -333,6 +341,31 @@ the order they are declared.</div>
  WHERE NOT EXISTS (SELECT 1 FROM DEPT
      WHERE DEPT.DEPTNO = EMP.DEPTNO)</pre>
  </blockquote></div>
+</section>
+</li>
+<li>
+<section class="detail" id="ASOF">
+<h3>ASOF</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a></span>&nbsp;<span class="element-name">ASOF</span></div>
+<div class="block">An ASOF JOIN operation combines rows from two tables based on comparable timestamp values.
+ For each row in the left table, the join finds at most one row in the right table that has the
+ "closest" timestamp value. The matched row on the right side is the closest match,
+ which could less than or equal or greater than or equal in the timestamp column,
+ as specified by the comparison operator.
+
+ <p>Example:
+ <blockquote><pre>
+ FROM left_table ASOF JOIN right_table
+   MATCH_CONDITION ( left_table.timecol &le; right_table.timecol )
+   ON left_table.col = right_table.col</pre>
+ </blockquote></div>
+</section>
+</li>
+<li>
+<section class="detail" id="LEFT_ASOF">
+<h3>LEFT_ASOF</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a></span>&nbsp;<span class="element-name">LEFT_ASOF</span></div>
+<div class="block">The left version of an ASOF join, where each row from the left table is part of the output.</div>
 </section>
 </li>
 </ul>

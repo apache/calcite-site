@@ -233,7 +233,8 @@ loadScripts(document, 'script');</script>
  <a href="../rel/core/AggregateCall.html" title="class in org.apache.calcite.rel.core"><code>AggregateCall</code></a>, applying a mapping.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#aggregateCall(org.apache.calcite.sql.SqlAggFunction,boolean,boolean,boolean,org.apache.calcite.rex.RexNode,com.google.common.collect.ImmutableList,com.google.common.collect.ImmutableList,java.lang.String,com.google.common.collect.ImmutableList,com.google.common.collect.ImmutableList)" class="member-name-link">aggregateCall</a><wbr>(<a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#aggregateCall(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.sql.SqlAggFunction,boolean,boolean,boolean,org.apache.calcite.rex.RexNode,com.google.common.collect.ImmutableList,com.google.common.collect.ImmutableList,java.lang.String,com.google.common.collect.ImmutableList,com.google.common.collect.ImmutableList)" class="member-name-link">aggregateCall</a><wbr>(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
  boolean&nbsp;distinct,
  boolean&nbsp;approximate,
  boolean&nbsp;ignoreNulls,
@@ -246,98 +247,148 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a call to an aggregate function with all applicable operands.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#aggregateCall(org.apache.calcite.sql.SqlAggFunction,boolean,boolean,org.apache.calcite.rex.RexNode,java.lang.String,java.lang.Iterable)" class="member-name-link">aggregateCall</a><wbr>(<a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
- boolean&nbsp;distinct,
- boolean&nbsp;approximate,
- <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;filter,
- @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;operands)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
-<div class="block"><span class="deprecated-label">Deprecated.</span></div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#aggregateCall(org.apache.calcite.sql.SqlAggFunction,boolean,boolean,org.apache.calcite.rex.RexNode,java.lang.String,org.apache.calcite.rex.RexNode...)" class="member-name-link">aggregateCall</a><wbr>(<a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
- boolean&nbsp;distinct,
- boolean&nbsp;approximate,
- <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;filter,
- @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
- <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;operands)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
-<div class="block"><span class="deprecated-label">Deprecated.</span></div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#aggregateCall(org.apache.calcite.sql.SqlAggFunction,boolean,org.apache.calcite.rex.RexNode,java.lang.String,java.lang.Iterable)" class="member-name-link">aggregateCall</a><wbr>(<a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
- boolean&nbsp;distinct,
- <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;filter,
- @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;operands)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
-<div class="block"><span class="deprecated-label">Deprecated.</span></div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#aggregateCall(org.apache.calcite.sql.SqlAggFunction,boolean,org.apache.calcite.rex.RexNode,java.lang.String,org.apache.calcite.rex.RexNode...)" class="member-name-link">aggregateCall</a><wbr>(<a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
- boolean&nbsp;distinct,
- <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;filter,
- @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
- <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;operands)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
-<div class="block"><span class="deprecated-label">Deprecated.</span></div>
-</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#aggregateCall(org.apache.calcite.sql.SqlAggFunction,java.lang.Iterable)" class="member-name-link">aggregateCall</a><wbr>(<a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#aggregateCall(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.sql.SqlAggFunction,java.lang.Iterable)" class="member-name-link">aggregateCall</a><wbr>(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;operands)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a call to an aggregate function.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#aggregateCall(org.apache.calcite.sql.SqlAggFunction,org.apache.calcite.rex.RexNode...)" class="member-name-link">aggregateCall</a><wbr>(<a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#aggregateCall(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.sql.SqlAggFunction,org.apache.calcite.rex.RexNode...)" class="member-name-link">aggregateCall</a><wbr>(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
  <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;operands)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a call to an aggregate function.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#alias(org.apache.calcite.rex.RexNode,java.lang.String)" class="member-name-link">alias</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;expr,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#aggregateCall(org.apache.calcite.sql.SqlAggFunction,boolean,boolean,boolean,org.apache.calcite.rex.RexNode,com.google.common.collect.ImmutableList,com.google.common.collect.ImmutableList,java.lang.String,com.google.common.collect.ImmutableList,com.google.common.collect.ImmutableList)" class="member-name-link">aggregateCall</a><wbr>(<a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
+ boolean&nbsp;distinct,
+ boolean&nbsp;approximate,
+ boolean&nbsp;ignoreNulls,
+ @Nullable <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;filter,
+ @Nullable com.google.common.collect.ImmutableList&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;distinctKeys,
+ com.google.common.collect.ImmutableList&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;orderKeys,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
+ com.google.common.collect.ImmutableList&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;preOperands,
+ com.google.common.collect.ImmutableList&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;operands)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns an expression wrapped in an alias.</div>
+<div class="block">Creates a call to an aggregate function with all applicable operands.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#all(org.apache.calcite.rex.RexNode,org.apache.calcite.sql.SqlOperator,java.util.function.Function)" class="member-name-link">all</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node,
- <a href="../sql/SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>&nbsp;op,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a>,<wbr><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&gt;&nbsp;f)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#aggregateCall(org.apache.calcite.sql.SqlAggFunction,boolean,boolean,org.apache.calcite.rex.RexNode,java.lang.String,java.lang.Iterable)" class="member-name-link">aggregateCall</a><wbr>(<a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
+ boolean&nbsp;distinct,
+ boolean&nbsp;approximate,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;filter,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;operands)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#aggregateCall(org.apache.calcite.sql.SqlAggFunction,boolean,boolean,org.apache.calcite.rex.RexNode,java.lang.String,org.apache.calcite.rex.RexNode...)" class="member-name-link">aggregateCall</a><wbr>(<a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
+ boolean&nbsp;distinct,
+ boolean&nbsp;approximate,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;filter,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;operands)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#aggregateCall(org.apache.calcite.sql.SqlAggFunction,boolean,org.apache.calcite.rex.RexNode,java.lang.String,java.lang.Iterable)" class="member-name-link">aggregateCall</a><wbr>(<a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
+ boolean&nbsp;distinct,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;filter,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;operands)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#aggregateCall(org.apache.calcite.sql.SqlAggFunction,boolean,org.apache.calcite.rex.RexNode,java.lang.String,org.apache.calcite.rex.RexNode...)" class="member-name-link">aggregateCall</a><wbr>(<a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
+ boolean&nbsp;distinct,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;filter,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;operands)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#aggregateCall(org.apache.calcite.sql.SqlAggFunction,java.lang.Iterable)" class="member-name-link">aggregateCall</a><wbr>(<a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;operands)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Creates an ALL predicate.</div>
+<div class="block">Creates a call to an aggregate function.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#and(java.lang.Iterable)" class="member-name-link">and</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;operands)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#aggregateCall(org.apache.calcite.sql.SqlAggFunction,org.apache.calcite.rex.RexNode...)" class="member-name-link">aggregateCall</a><wbr>(<a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;operands)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Creates an AND.</div>
+<div class="block">Creates a call to an aggregate function.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#and(org.apache.calcite.rex.RexNode...)" class="member-name-link">and</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;operands)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#aggregateRex(org.apache.calcite.tools.RelBuilder.GroupKey,boolean,java.lang.Iterable)" class="member-name-link">aggregateRex</a><wbr>(<a href="RelBuilder.GroupKey.html" title="interface in org.apache.calcite.tools">RelBuilder.GroupKey</a>&nbsp;groupKey,
+ boolean&nbsp;projectKey,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nodes)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Creates an AND.</div>
+<div class="block">Creates an <a href="../rel/core/Aggregate.html" title="class in org.apache.calcite.rel.core"><code>Aggregate</code></a> with a set of hybrid expressions represented
+ as <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex"><code>RexNode</code></a>, optionally projecting the <code>groupKey</code> columns.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#antiJoin(java.lang.Iterable)" class="member-name-link">antiJoin</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;conditions)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#aggregateRex(org.apache.calcite.tools.RelBuilder.GroupKey,org.apache.calcite.rex.RexNode...)" class="member-name-link">aggregateRex</a><wbr>(<a href="RelBuilder.GroupKey.html" title="interface in org.apache.calcite.tools">RelBuilder.GroupKey</a>&nbsp;groupKey,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;nodes)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Creates an anti-join.</div>
+<div class="block">Creates an <a href="../rel/core/Aggregate.html" title="class in org.apache.calcite.rel.core"><code>Aggregate</code></a> with a set of hybrid expressions represented
+ as <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex"><code>RexNode</code></a>.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#alias(org.apache.calcite.rex.RexNode,java.lang.String)" class="member-name-link">alias</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;expr,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns an expression wrapped in an alias.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#all(org.apache.calcite.rex.RexNode,org.apache.calcite.sql.SqlOperator,java.util.function.Function)" class="member-name-link">all</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node,
+ <a href="../sql/SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>&nbsp;op,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a>,<wbr><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&gt;&nbsp;f)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates an ALL predicate.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#and(java.lang.Iterable)" class="member-name-link">and</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;operands)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates an AND.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#and(org.apache.calcite.rex.RexNode...)" class="member-name-link">and</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;operands)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates an AND.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#antiJoin(org.apache.calcite.rex.RexNode...)" class="member-name-link">antiJoin</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;conditions)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#antiJoin(java.lang.Iterable)" class="member-name-link">antiJoin</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;conditions)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates an anti-join.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexSubQuery.html" title="class in org.apache.calcite.rex">RexSubQuery</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#arrayQuery(java.util.function.Function)" class="member-name-link">arrayQuery</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a>,<wbr><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&gt;&nbsp;f)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#antiJoin(org.apache.calcite.rex.RexNode...)" class="member-name-link">antiJoin</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;conditions)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates an anti-join.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexSubQuery.html" title="class in org.apache.calcite.rex">RexSubQuery</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#arrayQuery(java.util.function.Function)" class="member-name-link">arrayQuery</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a>,<wbr><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&gt;&nbsp;f)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates an ARRAY sub-query.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#as(java.lang.String)" class="member-name-link">as</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#as(java.lang.String)" class="member-name-link">as</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Assigns a table alias to the top entry on the stack.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#asofJoin(org.apache.calcite.rel.core.JoinRelType,org.apache.calcite.rex.RexNode,org.apache.calcite.rex.RexNode)" class="member-name-link">asofJoin</a><wbr>(<a href="../rel/core/JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a>&nbsp;joinType,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;matchCondition)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a <a href="../rel/logical/LogicalAsofJoin.html" title="class in org.apache.calcite.rel.logical"><code>LogicalAsofJoin</code></a> with the specified conditions.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#avg(boolean,java.lang.String,org.apache.calcite.rex.RexNode)" class="member-name-link">avg</a><wbr>(boolean&nbsp;distinct,
@@ -349,6 +400,21 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#avg(org.apache.calcite.rex.RexNode)" class="member-name-link">avg</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;operand)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a call to the <code>AVG</code> aggregate function.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#avg(org.apache.calcite.sql.parser.SqlParserPos,boolean,java.lang.String,org.apache.calcite.rex.RexNode)" class="member-name-link">avg</a><wbr>(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ boolean&nbsp;distinct,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;operand)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a call to the <code>AVG</code> aggregate function,
+ optionally distinct and with an alias.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#avg(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rex.RexNode)" class="member-name-link">avg</a><wbr>(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;operand)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a call to the <code>AVG</code> aggregate function.</div>
 </div>
@@ -399,174 +465,208 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates an expression that casts an expression to a type with a given
  name, precision and scale.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#clear()" class="member-name-link">clear</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#cast(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rex.RexNode,org.apache.calcite.sql.type.SqlTypeName)" class="member-name-link">cast</a><wbr>(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;expr,
+ <a href="../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates an expression that casts an expression to a given type.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#cast(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rex.RexNode,org.apache.calcite.sql.type.SqlTypeName,int)" class="member-name-link">cast</a><wbr>(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;expr,
+ <a href="../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName,
+ int&nbsp;precision)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates an expression that casts an expression to a type with a given name
+ and precision or length.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#cast(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rex.RexNode,org.apache.calcite.sql.type.SqlTypeName,int,int)" class="member-name-link">cast</a><wbr>(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;expr,
+ <a href="../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName,
+ int&nbsp;precision,
+ int&nbsp;scale)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates an expression that casts an expression to a type with a given
+ name, precision and scale.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#clear()" class="member-name-link">clear</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Clears the stack.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#convert(org.apache.calcite.rel.type.RelDataType,boolean)" class="member-name-link">convert</a><wbr>(<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;castRowType,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#convert(org.apache.calcite.rel.type.RelDataType,boolean)" class="member-name-link">convert</a><wbr>(<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;castRowType,
  boolean&nbsp;rename)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a projection that converts the current relational expression's
  output to a desired row type.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#correlate(org.apache.calcite.rel.core.JoinRelType,org.apache.calcite.rel.core.CorrelationId,java.lang.Iterable)" class="member-name-link">correlate</a><wbr>(<a href="../rel/core/JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a>&nbsp;joinType,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#correlate(org.apache.calcite.rel.core.JoinRelType,org.apache.calcite.rel.core.CorrelationId,java.lang.Iterable)" class="member-name-link">correlate</a><wbr>(<a href="../rel/core/JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a>&nbsp;joinType,
  <a href="../rel/core/CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>&nbsp;correlationId,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;requiredFields)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a <a href="../rel/core/Correlate.html" title="class in org.apache.calcite.rel.core"><code>Correlate</code></a>
  with a <a href="../rel/core/CorrelationId.html" title="class in org.apache.calcite.rel.core"><code>CorrelationId</code></a> and a list of fields that are used by correlation.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#correlate(org.apache.calcite.rel.core.JoinRelType,org.apache.calcite.rel.core.CorrelationId,org.apache.calcite.rex.RexNode...)" class="member-name-link">correlate</a><wbr>(<a href="../rel/core/JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a>&nbsp;joinType,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#correlate(org.apache.calcite.rel.core.JoinRelType,org.apache.calcite.rel.core.CorrelationId,org.apache.calcite.rex.RexNode...)" class="member-name-link">correlate</a><wbr>(<a href="../rel/core/JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a>&nbsp;joinType,
  <a href="../rel/core/CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>&nbsp;correlationId,
  <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;requiredFields)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a <a href="../rel/core/Correlate.html" title="class in org.apache.calcite.rel.core"><code>Correlate</code></a>
  with a <a href="../rel/core/CorrelationId.html" title="class in org.apache.calcite.rel.core"><code>CorrelationId</code></a> and an array of fields that are used by correlation.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#count(boolean,java.lang.String,java.lang.Iterable)" class="member-name-link">count</a><wbr>(boolean&nbsp;distinct,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#count(boolean,java.lang.String,java.lang.Iterable)" class="member-name-link">count</a><wbr>(boolean&nbsp;distinct,
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;operands)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a call to the <code>COUNT</code> aggregate function,
  optionally distinct and with an alias.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#count(boolean,java.lang.String,org.apache.calcite.rex.RexNode...)" class="member-name-link">count</a><wbr>(boolean&nbsp;distinct,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#count(boolean,java.lang.String,org.apache.calcite.rex.RexNode...)" class="member-name-link">count</a><wbr>(boolean&nbsp;distinct,
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
  <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;operands)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a call to the <code>COUNT</code> aggregate function,
  optionally distinct and with an alias.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#count(java.lang.Iterable)" class="member-name-link">count</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;operands)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a call to the <code>COUNT</code> aggregate function.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#count(java.lang.Iterable)" class="member-name-link">count</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;operands)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#count(org.apache.calcite.rex.RexNode...)" class="member-name-link">count</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;operands)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a call to the <code>COUNT</code> aggregate function.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#count(org.apache.calcite.rex.RexNode...)" class="member-name-link">count</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;operands)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#countStar(java.lang.String)" class="member-name-link">countStar</a><wbr>(@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Creates a call to the <code>COUNT</code> aggregate function.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#countStar(java.lang.String)" class="member-name-link">countStar</a><wbr>(@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a call to the <code>COUNT(*)</code> aggregate function.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#create(org.apache.calcite.tools.FrameworkConfig)" class="member-name-link">create</a><wbr>(<a href="FrameworkConfig.html" title="interface in org.apache.calcite.tools">FrameworkConfig</a>&nbsp;config)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#create(org.apache.calcite.tools.FrameworkConfig)" class="member-name-link">create</a><wbr>(<a href="FrameworkConfig.html" title="interface in org.apache.calcite.tools">FrameworkConfig</a>&nbsp;config)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Creates a RelBuilder.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexWindowBound.html" title="class in org.apache.calcite.rex">RexWindowBound</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#currentRow()" class="member-name-link">currentRow</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexWindowBound.html" title="class in org.apache.calcite.rex">RexWindowBound</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#currentRow()" class="member-name-link">currentRow</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a <code>CURRENT ROW</code> window bound,
  for use in methods such as <a href="RelBuilder.OverCall.html#rowsFrom(org.apache.calcite.rex.RexWindowBound)"><code>RelBuilder.OverCall.rowsFrom(RexWindowBound)</code></a>
  and <a href="RelBuilder.OverCall.html#rangeBetween(org.apache.calcite.rex.RexWindowBound,org.apache.calcite.rex.RexWindowBound)"><code>RelBuilder.OverCall.rangeBetween(RexWindowBound, RexWindowBound)</code></a>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#cursor(int,int)" class="member-name-link">cursor</a><wbr>(int&nbsp;inputCount,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#cursor(int,int)" class="member-name-link">cursor</a><wbr>(int&nbsp;inputCount,
  int&nbsp;ordinal)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a RexCall to the <code>CURSOR</code> function by ordinal.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#desc(org.apache.calcite.rex.RexNode)" class="member-name-link">desc</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#desc(org.apache.calcite.rex.RexNode)" class="member-name-link">desc</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Converts a sort expression to descending.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#distinct()" class="member-name-link">distinct</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#distinct()" class="member-name-link">distinct</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates an <a href="../rel/core/Aggregate.html" title="class in org.apache.calcite.rel.core"><code>Aggregate</code></a> that makes the
  relational expression distinct on all fields.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#dot(org.apache.calcite.rex.RexNode,int)" class="member-name-link">dot</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#dot(org.apache.calcite.rex.RexNode,int)" class="member-name-link">dot</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node,
  int&nbsp;fieldOrdinal)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates an access to a field by ordinal.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#dot(org.apache.calcite.rex.RexNode,java.lang.String)" class="member-name-link">dot</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#dot(org.apache.calcite.rex.RexNode,java.lang.String)" class="member-name-link">dot</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fieldName)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates an access to a field by name.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#empty()" class="member-name-link">empty</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#empty()" class="member-name-link">empty</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a relational expression that reads from an input and throws
  all of the rows away.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(org.apache.calcite.rex.RexNode,org.apache.calcite.rex.RexNode)" class="member-name-link">equals</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;operand0,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(org.apache.calcite.rex.RexNode,org.apache.calcite.rex.RexNode)" class="member-name-link">equals</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;operand0,
  <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;operand1)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates an <code>=</code>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#exchange(org.apache.calcite.rel.RelDistribution)" class="member-name-link">exchange</a><wbr>(<a href="../rel/RelDistribution.html" title="interface in org.apache.calcite.rel">RelDistribution</a>&nbsp;distribution)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#exchange(org.apache.calcite.rel.RelDistribution)" class="member-name-link">exchange</a><wbr>(<a href="../rel/RelDistribution.html" title="interface in org.apache.calcite.rel">RelDistribution</a>&nbsp;distribution)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates an Exchange by distribution.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexSubQuery.html" title="class in org.apache.calcite.rex">RexSubQuery</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#exists(java.util.function.Function)" class="member-name-link">exists</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a>,<wbr><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&gt;&nbsp;f)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexSubQuery.html" title="class in org.apache.calcite.rex">RexSubQuery</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#exists(java.util.function.Function)" class="member-name-link">exists</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a>,<wbr><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&gt;&nbsp;f)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates an EXISTS predicate.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexInputRef.html" title="class in org.apache.calcite.rex">RexInputRef</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#field(int)" class="member-name-link">field</a><wbr>(int&nbsp;fieldOrdinal)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexInputRef.html" title="class in org.apache.calcite.rex">RexInputRef</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#field(int)" class="member-name-link">field</a><wbr>(int&nbsp;fieldOrdinal)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a reference to an input field by ordinal.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexInputRef.html" title="class in org.apache.calcite.rex">RexInputRef</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#field(int,int,int)" class="member-name-link">field</a><wbr>(int&nbsp;inputCount,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexInputRef.html" title="class in org.apache.calcite.rex">RexInputRef</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#field(int,int,int)" class="member-name-link">field</a><wbr>(int&nbsp;inputCount,
  int&nbsp;inputOrdinal,
  int&nbsp;fieldOrdinal)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a reference to a field of a given input relational expression
  by ordinal.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexInputRef.html" title="class in org.apache.calcite.rex">RexInputRef</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#field(int,int,java.lang.String)" class="member-name-link">field</a><wbr>(int&nbsp;inputCount,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexInputRef.html" title="class in org.apache.calcite.rex">RexInputRef</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#field(int,int,java.lang.String)" class="member-name-link">field</a><wbr>(int&nbsp;inputCount,
  int&nbsp;inputOrdinal,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fieldName)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a reference to a field of given input relational expression
  by name.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#field(int,java.lang.String,java.lang.String)" class="member-name-link">field</a><wbr>(int&nbsp;inputCount,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#field(int,java.lang.String,java.lang.String)" class="member-name-link">field</a><wbr>(int&nbsp;inputCount,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fieldName)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a reference to a field which originated in a relation with the
  given alias.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexInputRef.html" title="class in org.apache.calcite.rex">RexInputRef</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#field(java.lang.String)" class="member-name-link">field</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fieldName)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexInputRef.html" title="class in org.apache.calcite.rex">RexInputRef</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#field(java.lang.String)" class="member-name-link">field</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fieldName)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a reference to a field by name.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#field(java.lang.String,java.lang.String)" class="member-name-link">field</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#field(java.lang.String,java.lang.String)" class="member-name-link">field</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fieldName)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a reference to a field of the current record which originated
  in a relation with a given alias.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#field(org.apache.calcite.rex.RexNode,int)" class="member-name-link">field</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;e,
+ int&nbsp;ordinal)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns a reference to a given field (by ordinal)
+ of a record-valued expression.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#field(org.apache.calcite.rex.RexNode,java.lang.String)" class="member-name-link">field</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;e,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns a reference to a given field of a record-valued expression.</div>
+<div class="block">Returns a reference to a given field (by name, case-insensitive)
+ of a record-valued expression.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>com.google.common.collect.ImmutableList&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#fields()" class="member-name-link">fields</a>()</code></div>
@@ -1301,6 +1401,21 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a call to the <code>SUM</code> aggregate function.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sum(org.apache.calcite.sql.parser.SqlParserPos,boolean,java.lang.String,org.apache.calcite.rex.RexNode)" class="member-name-link">sum</a><wbr>(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ boolean&nbsp;distinct,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;operand)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a call to the <code>SUM</code> aggregate function,
+ optionally distinct and with an alias.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#sum(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rex.RexNode)" class="member-name-link">sum</a><wbr>(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;operand)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a call to the <code>SUM</code> aggregate function.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -1797,7 +1912,17 @@ loadScripts(document, 'script');</script>
 <h3>field</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="element-name">field</span><wbr><span class="parameters">(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;e,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
-<div class="block">Returns a reference to a given field of a record-valued expression.</div>
+<div class="block">Returns a reference to a given field (by name, case-insensitive)
+ of a record-valued expression.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="field(org.apache.calcite.rex.RexNode,int)">
+<h3>field</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="element-name">field</span><wbr><span class="parameters">(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;e,
+ int&nbsp;ordinal)</span></div>
+<div class="block">Returns a reference to a given field (by ordinal)
+ of a record-valued expression.</div>
 </section>
 </li>
 <li>
@@ -2340,6 +2465,15 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="cast(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rex.RexNode,org.apache.calcite.sql.type.SqlTypeName)">
+<h3>cast</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="element-name">cast</span><wbr><span class="parameters">(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;expr,
+ <a href="../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName)</span></div>
+<div class="block">Creates an expression that casts an expression to a given type.</div>
+</section>
+</li>
+<li>
 <section class="detail" id="cast(org.apache.calcite.rex.RexNode,org.apache.calcite.sql.type.SqlTypeName,int)">
 <h3>cast</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="element-name">cast</span><wbr><span class="parameters">(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;expr,
@@ -2350,9 +2484,32 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="cast(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rex.RexNode,org.apache.calcite.sql.type.SqlTypeName,int)">
+<h3>cast</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="element-name">cast</span><wbr><span class="parameters">(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;expr,
+ <a href="../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName,
+ int&nbsp;precision)</span></div>
+<div class="block">Creates an expression that casts an expression to a type with a given name
+ and precision or length.</div>
+</section>
+</li>
+<li>
 <section class="detail" id="cast(org.apache.calcite.rex.RexNode,org.apache.calcite.sql.type.SqlTypeName,int,int)">
 <h3>cast</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="element-name">cast</span><wbr><span class="parameters">(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;expr,
+ <a href="../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName,
+ int&nbsp;precision,
+ int&nbsp;scale)</span></div>
+<div class="block">Creates an expression that casts an expression to a type with a given
+ name, precision and scale.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="cast(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rex.RexNode,org.apache.calcite.sql.type.SqlTypeName,int,int)">
+<h3>cast</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="element-name">cast</span><wbr><span class="parameters">(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;expr,
  <a href="../sql/type/SqlTypeName.html" title="enum in org.apache.calcite.sql.type">SqlTypeName</a>&nbsp;typeName,
  int&nbsp;precision,
  int&nbsp;scale)</span></div>
@@ -2623,6 +2780,38 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="aggregateCall(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.sql.SqlAggFunction,java.lang.Iterable)">
+<h3>aggregateCall</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="element-name">aggregateCall</span><wbr><span class="parameters">(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;operands)</span></div>
+<div class="block">Creates a call to an aggregate function.
+
+ <p>To add other operands, apply
+ <a href="RelBuilder.AggCall.html#distinct()"><code>RelBuilder.AggCall.distinct()</code></a>,
+ <a href="RelBuilder.AggCall.html#approximate(boolean)"><code>RelBuilder.AggCall.approximate(boolean)</code></a>,
+ <a href="#filter(org.apache.calcite.rex.RexNode...)"><code>filter(RexNode...)</code></a>,
+ <a href="RelBuilder.AggCall.html#sort(java.lang.Iterable)"><code>RelBuilder.AggCall.sort(java.lang.Iterable&lt;org.apache.calcite.rex.RexNode&gt;)</code></a>,
+ <a href="RelBuilder.AggCall.html#as(java.lang.String)"><code>RelBuilder.AggCall.as(java.lang.String)</code></a> to the result.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="aggregateCall(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.sql.SqlAggFunction,org.apache.calcite.rex.RexNode...)">
+<h3>aggregateCall</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="element-name">aggregateCall</span><wbr><span class="parameters">(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;operands)</span></div>
+<div class="block">Creates a call to an aggregate function.
+
+ <p>To add other operands, apply
+ <a href="RelBuilder.AggCall.html#distinct()"><code>RelBuilder.AggCall.distinct()</code></a>,
+ <a href="RelBuilder.AggCall.html#approximate(boolean)"><code>RelBuilder.AggCall.approximate(boolean)</code></a>,
+ <a href="#filter(org.apache.calcite.rex.RexNode...)"><code>filter(RexNode...)</code></a>,
+ <a href="RelBuilder.AggCall.html#sort(java.lang.Iterable)"><code>RelBuilder.AggCall.sort(java.lang.Iterable&lt;org.apache.calcite.rex.RexNode&gt;)</code></a>,
+ <a href="RelBuilder.AggCall.html#as(java.lang.String)"><code>RelBuilder.AggCall.as(java.lang.String)</code></a> to the result.</div>
+</section>
+</li>
+<li>
 <section class="detail" id="aggregateCall(org.apache.calcite.sql.SqlAggFunction,org.apache.calcite.rex.RexNode...)">
 <h3>aggregateCall</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="element-name">aggregateCall</span><wbr><span class="parameters">(<a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
@@ -2658,6 +2847,23 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="aggregateCall(org.apache.calcite.sql.SqlAggFunction,boolean,boolean,boolean,org.apache.calcite.rex.RexNode,com.google.common.collect.ImmutableList,com.google.common.collect.ImmutableList,java.lang.String,com.google.common.collect.ImmutableList,com.google.common.collect.ImmutableList)">
 <h3>aggregateCall</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="element-name">aggregateCall</span><wbr><span class="parameters">(<a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
+ boolean&nbsp;distinct,
+ boolean&nbsp;approximate,
+ boolean&nbsp;ignoreNulls,
+ @Nullable <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;filter,
+ @Nullable com.google.common.collect.ImmutableList&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;distinctKeys,
+ com.google.common.collect.ImmutableList&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;orderKeys,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
+ com.google.common.collect.ImmutableList&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;preOperands,
+ com.google.common.collect.ImmutableList&lt;<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;operands)</span></div>
+<div class="block">Creates a call to an aggregate function with all applicable operands.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="aggregateCall(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.sql.SqlAggFunction,boolean,boolean,boolean,org.apache.calcite.rex.RexNode,com.google.common.collect.ImmutableList,com.google.common.collect.ImmutableList,java.lang.String,com.google.common.collect.ImmutableList,com.google.common.collect.ImmutableList)">
+<h3>aggregateCall</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="element-name">aggregateCall</span><wbr><span class="parameters">(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a>&nbsp;aggFunction,
  boolean&nbsp;distinct,
  boolean&nbsp;approximate,
  boolean&nbsp;ignoreNulls,
@@ -2719,9 +2925,28 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="sum(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rex.RexNode)">
+<h3>sum</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="element-name">sum</span><wbr><span class="parameters">(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;operand)</span></div>
+<div class="block">Creates a call to the <code>SUM</code> aggregate function.</div>
+</section>
+</li>
+<li>
 <section class="detail" id="sum(boolean,java.lang.String,org.apache.calcite.rex.RexNode)">
 <h3>sum</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="element-name">sum</span><wbr><span class="parameters">(boolean&nbsp;distinct,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;operand)</span></div>
+<div class="block">Creates a call to the <code>SUM</code> aggregate function,
+ optionally distinct and with an alias.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="sum(org.apache.calcite.sql.parser.SqlParserPos,boolean,java.lang.String,org.apache.calcite.rex.RexNode)">
+<h3>sum</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="element-name">sum</span><wbr><span class="parameters">(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ boolean&nbsp;distinct,
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
  <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;operand)</span></div>
 <div class="block">Creates a call to the <code>SUM</code> aggregate function,
@@ -2736,9 +2961,28 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="avg(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rex.RexNode)">
+<h3>avg</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="element-name">avg</span><wbr><span class="parameters">(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;operand)</span></div>
+<div class="block">Creates a call to the <code>AVG</code> aggregate function.</div>
+</section>
+</li>
+<li>
 <section class="detail" id="avg(boolean,java.lang.String,org.apache.calcite.rex.RexNode)">
 <h3>avg</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="element-name">avg</span><wbr><span class="parameters">(boolean&nbsp;distinct,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;operand)</span></div>
+<div class="block">Creates a call to the <code>AVG</code> aggregate function,
+ optionally distinct and with an alias.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="avg(org.apache.calcite.sql.parser.SqlParserPos,boolean,java.lang.String,org.apache.calcite.rex.RexNode)">
+<h3>avg</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="RelBuilder.AggCall.html" title="interface in org.apache.calcite.tools">RelBuilder.AggCall</a></span>&nbsp;<span class="element-name">avg</span><wbr><span class="parameters">(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ boolean&nbsp;distinct,
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
  <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;operand)</span></div>
 <div class="block">Creates a call to the <code>AVG</code> aggregate function,
@@ -3256,6 +3500,25 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="aggregateRex(org.apache.calcite.tools.RelBuilder.GroupKey,org.apache.calcite.rex.RexNode...)">
+<h3>aggregateRex</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></span>&nbsp;<span class="element-name">aggregateRex</span><wbr><span class="parameters">(<a href="RelBuilder.GroupKey.html" title="interface in org.apache.calcite.tools">RelBuilder.GroupKey</a>&nbsp;groupKey,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>...&nbsp;nodes)</span></div>
+<div class="block">Creates an <a href="../rel/core/Aggregate.html" title="class in org.apache.calcite.rel.core"><code>Aggregate</code></a> with a set of hybrid expressions represented
+ as <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex"><code>RexNode</code></a>.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="aggregateRex(org.apache.calcite.tools.RelBuilder.GroupKey,boolean,java.lang.Iterable)">
+<h3>aggregateRex</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></span>&nbsp;<span class="element-name">aggregateRex</span><wbr><span class="parameters">(<a href="RelBuilder.GroupKey.html" title="interface in org.apache.calcite.tools">RelBuilder.GroupKey</a>&nbsp;groupKey,
+ boolean&nbsp;projectKey,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nodes)</span></div>
+<div class="block">Creates an <a href="../rel/core/Aggregate.html" title="class in org.apache.calcite.rel.core"><code>Aggregate</code></a> with a set of hybrid expressions represented
+ as <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex"><code>RexNode</code></a>, optionally projecting the <code>groupKey</code> columns.</div>
+</section>
+</li>
+<li>
 <section class="detail" id="union(boolean)">
 <h3>union</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></span>&nbsp;<span class="element-name">union</span><wbr><span class="parameters">(boolean&nbsp;all)</span></div>
@@ -3401,6 +3664,15 @@ loadScripts(document, 'script');</script>
 <dd><code>all</code> - Whether duplicates are considered</dd>
 <dd><code>iterationLimit</code> - Maximum number of iterations; negative value means no limit</dd>
 </dl>
+</section>
+</li>
+<li>
+<section class="detail" id="asofJoin(org.apache.calcite.rel.core.JoinRelType,org.apache.calcite.rex.RexNode,org.apache.calcite.rex.RexNode)">
+<h3>asofJoin</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a></span>&nbsp;<span class="element-name">asofJoin</span><wbr><span class="parameters">(<a href="../rel/core/JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a>&nbsp;joinType,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition,
+ <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;matchCondition)</span></div>
+<div class="block">Creates a <a href="../rel/logical/LogicalAsofJoin.html" title="class in org.apache.calcite.rel.logical"><code>LogicalAsofJoin</code></a> with the specified conditions.</div>
 </section>
 </li>
 <li>

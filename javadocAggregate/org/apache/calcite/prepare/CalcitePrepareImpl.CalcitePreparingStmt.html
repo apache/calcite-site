@@ -107,7 +107,7 @@ loadScripts(document, 'script');</script>
 implements <a href="../plan/RelOptTable.ViewExpander.html" title="interface in org.apache.calcite.plan">RelOptTable.ViewExpander</a></span></div>
 <div class="block">Holds state for the process of preparing a SQL statement.
 
- <p>Overload this class and <a href="#createSqlValidator(org.apache.calcite.prepare.Prepare.CatalogReader)"><code>createSqlValidator(org.apache.calcite.prepare.Prepare.CatalogReader)</code></a> to provide desired
+ <p>Overload this class and <a href="#createSqlValidator(org.apache.calcite.prepare.Prepare.CatalogReader,java.util.function.UnaryOperator)"><code>createSqlValidator(org.apache.calcite.prepare.Prepare.CatalogReader, java.util.function.UnaryOperator&lt;org.apache.calcite.sql.validate.SqlValidator.Config&gt;)</code></a> to provide desired
  SqlValidator and custom validation logic.</div>
 </section>
 <section class="summary">
@@ -196,7 +196,8 @@ implements <a href="../plan/RelOptTable.ViewExpander.html" title="interface in o
  <a href="../sql/SqlExplainLevel.html" title="enum in org.apache.calcite.sql">SqlExplainLevel</a>&nbsp;detailLevel)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../sql/validate/SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#createSqlValidator(org.apache.calcite.prepare.Prepare.CatalogReader)" class="member-name-link">createSqlValidator</a><wbr>(<a href="Prepare.CatalogReader.html" title="interface in org.apache.calcite.prepare">Prepare.CatalogReader</a>&nbsp;catalogReader)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#createSqlValidator(org.apache.calcite.prepare.Prepare.CatalogReader,java.util.function.UnaryOperator)" class="member-name-link">createSqlValidator</a><wbr>(<a href="Prepare.CatalogReader.html" title="interface in org.apache.calcite.prepare">Prepare.CatalogReader</a>&nbsp;catalogReader,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="../sql/validate/SqlValidator.Config.html" title="interface in org.apache.calcite.sql.validate">SqlValidator.Config</a>&gt;&nbsp;configTransform)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelate(org.apache.calcite.sql2rel.SqlToRelConverter,org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.RelNode)" class="member-name-link">decorrelate</a><wbr>(<a href="../sql2rel/SqlToRelConverter.html" title="class in org.apache.calcite.sql2rel">SqlToRelConverter</a>&nbsp;sqlToRelConverter,
@@ -326,7 +327,7 @@ implements <a href="../plan/RelOptTable.ViewExpander.html" title="interface in o
  <a href="../sql2rel/SqlRexConvertletTable.html" title="interface in org.apache.calcite.sql2rel">SqlRexConvertletTable</a>&nbsp;convertletTable)</span></div>
 <div class="block">Constructor.
 
- <p>Overload this constructor and <a href="#createSqlValidator(org.apache.calcite.prepare.Prepare.CatalogReader)"><code>createSqlValidator(org.apache.calcite.prepare.Prepare.CatalogReader)</code></a> to provide
+ <p>Overload this constructor and <a href="#createSqlValidator(org.apache.calcite.prepare.Prepare.CatalogReader,java.util.function.UnaryOperator)"><code>createSqlValidator(org.apache.calcite.prepare.Prepare.CatalogReader, java.util.function.UnaryOperator&lt;org.apache.calcite.sql.validate.SqlValidator.Config&gt;)</code></a> to provide
  desired SqlValidator and custom validation logic.</div>
 </section>
 </li>
@@ -423,9 +424,10 @@ implements <a href="../plan/RelOptTable.ViewExpander.html" title="interface in o
 </section>
 </li>
 <li>
-<section class="detail" id="createSqlValidator(org.apache.calcite.prepare.Prepare.CatalogReader)">
+<section class="detail" id="createSqlValidator(org.apache.calcite.prepare.Prepare.CatalogReader,java.util.function.UnaryOperator)">
 <h3>createSqlValidator</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="../sql/validate/SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a></span>&nbsp;<span class="element-name">createSqlValidator</span><wbr><span class="parameters">(<a href="Prepare.CatalogReader.html" title="interface in org.apache.calcite.prepare">Prepare.CatalogReader</a>&nbsp;catalogReader)</span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="../sql/validate/SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a></span>&nbsp;<span class="element-name">createSqlValidator</span><wbr><span class="parameters">(<a href="Prepare.CatalogReader.html" title="interface in org.apache.calcite.prepare">Prepare.CatalogReader</a>&nbsp;catalogReader,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="../sql/validate/SqlValidator.Config.html" title="interface in org.apache.calcite.sql.validate">SqlValidator.Config</a>&gt;&nbsp;configTransform)</span></div>
 </section>
 </li>
 <li>

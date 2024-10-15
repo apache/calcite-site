@@ -302,9 +302,10 @@ implements <a href="SqlValidatorWithHints.html" title="interface in org.apache.c
  statement to be updated.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#createTargetRowType(org.apache.calcite.sql.validate.SqlValidatorTable,org.apache.calcite.sql.SqlNodeList,boolean)" class="member-name-link">createTargetRowType</a><wbr>(<a href="SqlValidatorTable.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorTable</a>&nbsp;table,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#createTargetRowType(org.apache.calcite.sql.validate.SqlValidatorTable,org.apache.calcite.sql.SqlNodeList,boolean,org.apache.calcite.sql.SqlIdentifier)" class="member-name-link">createTargetRowType</a><wbr>(<a href="SqlValidatorTable.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorTable</a>&nbsp;table,
  @Nullable <a href="../SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;targetColumnList,
- boolean&nbsp;append)</code></div>
+ boolean&nbsp;append,
+ @Nullable <a href="../SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;targetTableAlias)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Derives a row-type for INSERT and UPDATE operations.</div>
 </div>
@@ -441,468 +442,471 @@ implements <a href="SqlValidatorWithHints.html" title="interface in org.apache.c
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a scope match recognize clause.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="SqlValidatorNamespace.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorNamespace</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNamespace(org.apache.calcite.sql.SqlNode)" class="member-name-link">getNamespace</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMeasureScope(org.apache.calcite.sql.SqlSelect)" class="member-name-link">getMeasureScope</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="SqlValidatorNamespace.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorNamespace</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNamespace(org.apache.calcite.sql.SqlNode)" class="member-name-link">getNamespace</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Finds the namespace corresponding to a given node.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SqlOperatorTable.html" title="interface in org.apache.calcite.sql">SqlOperatorTable</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOperatorTable()" class="member-name-link">getOperatorTable</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SqlOperatorTable.html" title="interface in org.apache.calcite.sql">SqlOperatorTable</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOperatorTable()" class="member-name-link">getOperatorTable</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the operator table used by this validator.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrderScope(org.apache.calcite.sql.SqlSelect)" class="member-name-link">getOrderScope</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOrderScope(org.apache.calcite.sql.SqlSelect)" class="member-name-link">getOrderScope</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the scope that expressions in the SELECT and HAVING clause of
  this query should use.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOriginal(org.apache.calcite.sql.SqlNode)" class="member-name-link">getOriginal</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;expr)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOverScope(org.apache.calcite.sql.SqlNode)" class="member-name-link">getOverScope</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOriginal(org.apache.calcite.sql.SqlNode)" class="member-name-link">getOriginal</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;expr)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOverScope(org.apache.calcite.sql.SqlNode)" class="member-name-link">getOverScope</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the scope of an OVER or VALUES node.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParameterRowType(org.apache.calcite.sql.SqlNode)" class="member-name-link">getParameterRowType</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;sqlQuery)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParameterRowType(org.apache.calcite.sql.SqlNode)" class="member-name-link">getParameterRowType</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;sqlQuery)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a record type that contains the name and type of each parameter.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParentCursor(java.lang.String)" class="member-name-link">getParentCursor</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;columnListParamName)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParentCursor(java.lang.String)" class="member-name-link">getParentCursor</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;columnListParamName)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Retrieves the name of the parent cursor referenced by a column list
  parameter.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="SelectScope.html" title="class in org.apache.calcite.sql.validate">SelectScope</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRawSelectScope(org.apache.calcite.sql.SqlSelect)" class="member-name-link">getRawSelectScope</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="SelectScope.html" title="class in org.apache.calcite.sql.validate">SelectScope</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRawSelectScope(org.apache.calcite.sql.SqlSelect)" class="member-name-link">getRawSelectScope</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the scope for resolving the SELECT, GROUP BY and HAVING clauses.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSelectScope(org.apache.calcite.sql.SqlSelect)" class="member-name-link">getSelectScope</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSelectScope(org.apache.calcite.sql.SqlSelect)" class="member-name-link">getSelectScope</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the appropriate scope for validating a particular clause of a
  SELECT statement.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected @Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSelfJoinExprForUpdate(org.apache.calcite.sql.SqlNode,java.lang.String)" class="member-name-link">getSelfJoinExprForUpdate</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;table,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected @Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSelfJoinExprForUpdate(org.apache.calcite.sql.SqlNode,java.lang.String)" class="member-name-link">getSelfJoinExprForUpdate</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;table,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Allows a subclass to provide information about how to convert an UPDATE
  into a MERGE via self-join.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/TimeFrameSet.html" title="class in org.apache.calcite.rel.type">TimeFrameSet</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTimeFrameSet()" class="member-name-link">getTimeFrameSet</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/TimeFrameSet.html" title="class in org.apache.calcite.rel.type">TimeFrameSet</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTimeFrameSet()" class="member-name-link">getTimeFrameSet</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the set of allowed time frames.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="implicit/TypeCoercion.html" title="interface in org.apache.calcite.sql.validate.implicit">TypeCoercion</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTypeCoercion()" class="member-name-link">getTypeCoercion</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="implicit/TypeCoercion.html" title="interface in org.apache.calcite.sql.validate.implicit">TypeCoercion</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTypeCoercion()" class="member-name-link">getTypeCoercion</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Get the type coercion instance.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTypeFactory()" class="member-name-link">getTypeFactory</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTypeFactory()" class="member-name-link">getTypeFactory</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the type factory used by this validator.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getUnknownType()" class="member-name-link">getUnknownType</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getUnknownType()" class="member-name-link">getUnknownType</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns an object representing the "unknown" type.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getValidatedNodeType(org.apache.calcite.sql.SqlNode)" class="member-name-link">getValidatedNodeType</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getValidatedNodeType(org.apache.calcite.sql.SqlNode)" class="member-name-link">getValidatedNodeType</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the type assigned to a node by validation.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getValidatedNodeTypeIfKnown(org.apache.calcite.sql.SqlNode)" class="member-name-link">getValidatedNodeTypeIfKnown</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getValidatedNodeTypeIfKnown(org.apache.calcite.sql.SqlNode)" class="member-name-link">getValidatedNodeTypeIfKnown</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the type assigned to a node by validation, or null if unknown.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getValidatedOperandTypes(org.apache.calcite.sql.SqlCall)" class="member-name-link">getValidatedOperandTypes</a><wbr>(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getValidatedOperandTypes(org.apache.calcite.sql.SqlCall)" class="member-name-link">getValidatedOperandTypes</a><wbr>(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the types of a call's operands.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>org.apache.calcite.sql.validate.SqlValidatorImpl.ValidationErrorFunction</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getValidationErrorFunction()" class="member-name-link">getValidationErrorFunction</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWhereScope(org.apache.calcite.sql.SqlSelect)" class="member-name-link">getWhereScope</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>org.apache.calcite.sql.validate.SqlValidatorImpl.ValidationErrorFunction</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getValidationErrorFunction()" class="member-name-link">getValidationErrorFunction</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWhereScope(org.apache.calcite.sql.SqlSelect)" class="member-name-link">getWhereScope</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the scope that expressions in the WHERE and GROUP BY clause of
  this query should use.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../SqlWindow.html" title="class in org.apache.calcite.sql">SqlWindow</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWindowByName(org.apache.calcite.sql.SqlIdentifier,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">getWindowByName</a><wbr>(<a href="../SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;id,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../SqlWindow.html" title="class in org.apache.calcite.sql">SqlWindow</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWindowByName(org.apache.calcite.sql.SqlIdentifier,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">getWindowByName</a><wbr>(<a href="../SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;id,
  <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWithScope(org.apache.calcite.sql.SqlNode)" class="member-name-link">getWithScope</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;withItem)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../runtime/CalciteException.html" title="class in org.apache.calcite.runtime">CalciteException</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#handleUnresolvedFunction(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.SqlOperator,java.util.List,java.util.List)" class="member-name-link">handleUnresolvedFunction</a><wbr>(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWithScope(org.apache.calcite.sql.SqlNode)" class="member-name-link">getWithScope</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;withItem)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../runtime/CalciteException.html" title="class in org.apache.calcite.runtime">CalciteException</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#handleUnresolvedFunction(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.SqlOperator,java.util.List,java.util.List)" class="member-name-link">handleUnresolvedFunction</a><wbr>(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
  <a href="../SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>&nbsp;unresolvedFunction,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;argTypes,
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;argNames)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Handles a call to a function which cannot be resolved.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#inferUnknownTypes(org.apache.calcite.rel.type.RelDataType,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlNode)" class="member-name-link">inferUnknownTypes</a><wbr>(<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;inferredType,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#inferUnknownTypes(org.apache.calcite.rel.type.RelDataType,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlNode)" class="member-name-link">inferUnknownTypes</a><wbr>(<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;inferredType,
  <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
  <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#isAggregate(org.apache.calcite.sql.SqlNode)" class="member-name-link">isAggregate</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;selectNode)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#isAggregate(org.apache.calcite.sql.SqlNode)" class="member-name-link">isAggregate</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;selectNode)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
 <div class="block"><span class="deprecated-label">Deprecated.</span></div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isAggregate(org.apache.calcite.sql.SqlSelect)" class="member-name-link">isAggregate</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isAggregate(org.apache.calcite.sql.SqlSelect)" class="member-name-link">isAggregate</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns whether a SELECT statement is an aggregation.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isNestedAggregateWindow(org.apache.calcite.sql.SqlNode)" class="member-name-link">isNestedAggregateWindow</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isOverAggregateWindow(org.apache.calcite.sql.SqlNode)" class="member-name-link">isOverAggregateWindow</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isNestedAggregateWindow(org.apache.calcite.sql.SqlNode)" class="member-name-link">isNestedAggregateWindow</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isSystemField(org.apache.calcite.rel.type.RelDataTypeField)" class="member-name-link">isSystemField</a><wbr>(<a href="../../rel/type/RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a>&nbsp;field)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isOverAggregateWindow(org.apache.calcite.sql.SqlNode)" class="member-name-link">isOverAggregateWindow</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isSystemField(org.apache.calcite.rel.type.RelDataTypeField)" class="member-name-link">isSystemField</a><wbr>(<a href="../../rel/type/RelDataTypeField.html" title="interface in org.apache.calcite.rel.type">RelDataTypeField</a>&nbsp;field)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns whether a field is a system field.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="SqlMoniker.html" title="interface in org.apache.calcite.sql.validate">SqlMoniker</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#lookupHints(org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.parser.SqlParserPos)" class="member-name-link">lookupHints</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;topNode,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="SqlMoniker.html" title="interface in org.apache.calcite.sql.validate">SqlMoniker</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#lookupHints(org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.parser.SqlParserPos)" class="member-name-link">lookupHints</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;topNode,
  <a href="../parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Looks up completion hints for a syntactically correct SQL statement that
  has been parsed into an expression tree.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#lookupNameCompletionHints(org.apache.calcite.sql.validate.SqlValidatorScope,java.util.List,org.apache.calcite.sql.parser.SqlParserPos,java.util.Collection)" class="member-name-link">lookupNameCompletionHints</a><wbr>(<a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#lookupNameCompletionHints(org.apache.calcite.sql.validate.SqlValidatorScope,java.util.List,org.apache.calcite.sql.parser.SqlParserPos,java.util.Collection)" class="member-name-link">lookupNameCompletionHints</a><wbr>(<a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;names,
  <a href="../parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="SqlMoniker.html" title="interface in org.apache.calcite.sql.validate">SqlMoniker</a>&gt;&nbsp;hintList)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Populates a list of all the valid alternatives for an identifier.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="SqlMoniker.html" title="interface in org.apache.calcite.sql.validate">SqlMoniker</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#lookupQualifiedName(org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.parser.SqlParserPos)" class="member-name-link">lookupQualifiedName</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;topNode,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="SqlMoniker.html" title="interface in org.apache.calcite.sql.validate">SqlMoniker</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#lookupQualifiedName(org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.parser.SqlParserPos)" class="member-name-link">lookupQualifiedName</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;topNode,
  <a href="../parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Looks up the fully qualified name for a <a href="../SqlIdentifier.html" title="class in org.apache.calcite.sql"><code>SqlIdentifier</code></a> at a given
  Parser Position in a parsed expression tree Note: call this only after
  <a href="SqlValidator.html#validate(org.apache.calcite.sql.SqlNode)"><code>SqlValidator.validate(org.apache.calcite.sql.SqlNode)</code></a> has been called.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#makeNullaryCall(org.apache.calcite.sql.SqlIdentifier)" class="member-name-link">makeNullaryCall</a><wbr>(<a href="../SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;id)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#makeNullaryCall(org.apache.calcite.sql.SqlIdentifier)" class="member-name-link">makeNullaryCall</a><wbr>(<a href="../SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;id)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">If an identifier is a legitimate call to a function that has no
  arguments and requires no parentheses (for example "CURRENT_USER"),
  returns a call to that function, otherwise returns null.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../runtime/CalciteContextException.html" title="class in org.apache.calcite.runtime">CalciteContextException</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#newValidationError(org.apache.calcite.sql.SqlNode,org.apache.calcite.runtime.Resources.ExInst)" class="member-name-link">newValidationError</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../runtime/CalciteContextException.html" title="class in org.apache.calcite.runtime">CalciteContextException</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#newValidationError(org.apache.calcite.sql.SqlNode,org.apache.calcite.runtime.Resources.ExInst)" class="member-name-link">newValidationError</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
  org.apache.calcite.runtime.Resources.ExInst&lt;<a href="SqlValidatorException.html" title="class in org.apache.calcite.sql.validate">SqlValidatorException</a>&gt;&nbsp;e)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Adds "line x, column y" context to a validator exception.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected @PolyNull <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#performUnconditionalRewrites(org.apache.calcite.sql.SqlNode,boolean)" class="member-name-link">performUnconditionalRewrites</a><wbr>(@PolyNull <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected @PolyNull <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#performUnconditionalRewrites(org.apache.calcite.sql.SqlNode,boolean)" class="member-name-link">performUnconditionalRewrites</a><wbr>(@PolyNull <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
  boolean&nbsp;underFrom)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Performs expression rewrites which are always used unconditionally.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#popFunctionCall()" class="member-name-link">popFunctionCall</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#popFunctionCall()" class="member-name-link">popFunctionCall</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Removes the topmost entry from the function call stack.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#pushFunctionCall()" class="member-name-link">pushFunctionCall</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#pushFunctionCall()" class="member-name-link">pushFunctionCall</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Pushes a new instance of a function call on to a function call stack.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#registerNamespace(org.apache.calcite.sql.validate.SqlValidatorScope,java.lang.String,org.apache.calcite.sql.validate.SqlValidatorNamespace,boolean)" class="member-name-link">registerNamespace</a><wbr>(@Nullable <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;usingScope,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#registerNamespace(org.apache.calcite.sql.validate.SqlValidatorScope,java.lang.String,org.apache.calcite.sql.validate.SqlValidatorNamespace,boolean)" class="member-name-link">registerNamespace</a><wbr>(@Nullable <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;usingScope,
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
  <a href="SqlValidatorNamespace.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorNamespace</a>&nbsp;ns,
  boolean&nbsp;forceNullable)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Registers a new namespace, and adds it as a child of its parent scope.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#registerQuery(org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode,java.lang.String,boolean)" class="member-name-link">registerQuery</a><wbr>(<a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;parentScope,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#registerQuery(org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode,java.lang.String,boolean)" class="member-name-link">registerQuery</a><wbr>(<a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;parentScope,
  @Nullable <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;usingScope,
  <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
  <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;enclosingNode,
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
  boolean&nbsp;forceNullable)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Registers a query in a parent scope.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeValidatedNodeType(org.apache.calcite.sql.SqlNode)" class="member-name-link">removeValidatedNodeType</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeValidatedNodeType(org.apache.calcite.sql.SqlNode)" class="member-name-link">removeValidatedNodeType</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Removes a node from the set of validated nodes.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SqlLiteral.html" title="class in org.apache.calcite.sql">SqlLiteral</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#resolveLiteral(org.apache.calcite.sql.SqlLiteral)" class="member-name-link">resolveLiteral</a><wbr>(<a href="../SqlLiteral.html" title="class in org.apache.calcite.sql">SqlLiteral</a>&nbsp;literal)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SqlLiteral.html" title="class in org.apache.calcite.sql">SqlLiteral</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#resolveLiteral(org.apache.calcite.sql.SqlLiteral)" class="member-name-link">resolveLiteral</a><wbr>(<a href="../SqlLiteral.html" title="class in org.apache.calcite.sql">SqlLiteral</a>&nbsp;literal)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Resolves a literal.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SqlWindow.html" title="class in org.apache.calcite.sql">SqlWindow</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#resolveWindow(org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">resolveWindow</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;windowOrRef,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SqlWindow.html" title="class in org.apache.calcite.sql">SqlWindow</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#resolveWindow(org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">resolveWindow</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;windowOrRef,
  <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Converts a window specification or window name into a fully-resolved
  window specification.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOriginal(org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)" class="member-name-link">setOriginal</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;expr,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOriginal(org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)" class="member-name-link">setOriginal</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;expr,
  <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;original)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setValidatedNodeType(org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">setValidatedNodeType</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setValidatedNodeType(org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">setValidatedNodeType</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
  <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Saves the type of a <a href="../SqlNode.html" title="class in org.apache.calcite.sql"><code>SqlNode</code></a>, now that it has been validated.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#shouldAllowIntermediateOrderBy()" class="member-name-link">shouldAllowIntermediateOrderBy</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#shouldAllowOverRelation()" class="member-name-link">shouldAllowOverRelation</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#shouldAllowIntermediateOrderBy()" class="member-name-link">shouldAllowIntermediateOrderBy</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#transform(java.util.function.UnaryOperator)" class="member-name-link">transform</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="SqlValidator.Config.html" title="interface in org.apache.calcite.sql.validate">SqlValidator.Config</a>&gt;&nbsp;transform)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#shouldAllowOverRelation()" class="member-name-link">shouldAllowOverRelation</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#transform(java.util.function.UnaryOperator)" class="member-name-link">transform</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="SqlValidator.Config.html" title="interface in org.apache.calcite.sql.validate">SqlValidator.Config</a>&gt;&nbsp;transform)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns this SqlValidator, with the same state, applying
  a transform to the config.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#usingNames(org.apache.calcite.sql.SqlJoin)" class="member-name-link">usingNames</a><wbr>(<a href="../SqlJoin.html" title="class in org.apache.calcite.sql">SqlJoin</a>&nbsp;join)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#usingNames(org.apache.calcite.sql.SqlJoin)" class="member-name-link">usingNames</a><wbr>(<a href="../SqlJoin.html" title="class in org.apache.calcite.sql">SqlJoin</a>&nbsp;join)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the set of field names in the join condition specified by USING
  or implicitly by NATURAL, de-duplicated and in order.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validate(org.apache.calcite.sql.SqlNode)" class="member-name-link">validate</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;topNode)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validate(org.apache.calcite.sql.SqlNode)" class="member-name-link">validate</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;topNode)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates an expression tree.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateAggregateParams(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateAggregateParams</a><wbr>(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;aggCall,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateAggregateParams(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateAggregateParams</a><wbr>(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;aggCall,
  @Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;filter,
  @Nullable <a href="../SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;distinctList,
  @Nullable <a href="../SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;orderList,
  <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates parameters for aggregate function.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateCall(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateCall</a><wbr>(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateCall(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateCall</a><wbr>(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
  <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates a call to an operator.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateDataType(org.apache.calcite.sql.SqlDataTypeSpec)" class="member-name-link">validateDataType</a><wbr>(<a href="../SqlDataTypeSpec.html" title="class in org.apache.calcite.sql">SqlDataTypeSpec</a>&nbsp;dataType)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateDataType(org.apache.calcite.sql.SqlDataTypeSpec)" class="member-name-link">validateDataType</a><wbr>(<a href="../SqlDataTypeSpec.html" title="class in org.apache.calcite.sql">SqlDataTypeSpec</a>&nbsp;dataType)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates a data type expression.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateDelete(org.apache.calcite.sql.SqlDelete)" class="member-name-link">validateDelete</a><wbr>(<a href="../SqlDelete.html" title="class in org.apache.calcite.sql">SqlDelete</a>&nbsp;call)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateDelete(org.apache.calcite.sql.SqlDelete)" class="member-name-link">validateDelete</a><wbr>(<a href="../SqlDelete.html" title="class in org.apache.calcite.sql">SqlDelete</a>&nbsp;call)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates a DELETE statement.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateDynamicParam(org.apache.calcite.sql.SqlDynamicParam)" class="member-name-link">validateDynamicParam</a><wbr>(<a href="../SqlDynamicParam.html" title="class in org.apache.calcite.sql">SqlDynamicParam</a>&nbsp;dynamicParam)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateDynamicParam(org.apache.calcite.sql.SqlDynamicParam)" class="member-name-link">validateDynamicParam</a><wbr>(<a href="../SqlDynamicParam.html" title="class in org.apache.calcite.sql">SqlDynamicParam</a>&nbsp;dynamicParam)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates a dynamic parameter.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateFeature(org.apache.calcite.runtime.Feature,org.apache.calcite.sql.parser.SqlParserPos)" class="member-name-link">validateFeature</a><wbr>(<a href="../../runtime/Feature.html" title="class in org.apache.calcite.runtime">Feature</a>&nbsp;feature,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateFeature(org.apache.calcite.runtime.Feature,org.apache.calcite.sql.parser.SqlParserPos)" class="member-name-link">validateFeature</a><wbr>(<a href="../../runtime/Feature.html" title="class in org.apache.calcite.runtime">Feature</a>&nbsp;feature,
  <a href="../parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;context)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates that a particular feature is enabled.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateFrom(org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateFrom</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateFrom(org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateFrom</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
  <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;targetRowType,
  <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates the FROM clause of a query, or (recursively) a child node of
  the FROM clause: AS, OVER, JOIN, VALUES, or sub-query.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateGroupClause(org.apache.calcite.sql.SqlSelect)" class="member-name-link">validateGroupClause</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateGroupClause(org.apache.calcite.sql.SqlSelect)" class="member-name-link">validateGroupClause</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates the GROUP BY clause of a SELECT statement.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateHavingClause(org.apache.calcite.sql.SqlSelect)" class="member-name-link">validateHavingClause</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateIdentifier(org.apache.calcite.sql.SqlIdentifier,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateIdentifier</a><wbr>(<a href="../SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;id,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateHavingClause(org.apache.calcite.sql.SqlSelect)" class="member-name-link">validateHavingClause</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateIdentifier(org.apache.calcite.sql.SqlIdentifier,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateIdentifier</a><wbr>(<a href="../SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;id,
  <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Resolves an identifier to a fully-qualified name.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateInsert(org.apache.calcite.sql.SqlInsert)" class="member-name-link">validateInsert</a><wbr>(<a href="../SqlInsert.html" title="class in org.apache.calcite.sql">SqlInsert</a>&nbsp;insert)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateInsert(org.apache.calcite.sql.SqlInsert)" class="member-name-link">validateInsert</a><wbr>(<a href="../SqlInsert.html" title="class in org.apache.calcite.sql">SqlInsert</a>&nbsp;insert)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates an INSERT statement.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateIntervalQualifier(org.apache.calcite.sql.SqlIntervalQualifier)" class="member-name-link">validateIntervalQualifier</a><wbr>(<a href="../SqlIntervalQualifier.html" title="class in org.apache.calcite.sql">SqlIntervalQualifier</a>&nbsp;qualifier)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateIntervalQualifier(org.apache.calcite.sql.SqlIntervalQualifier)" class="member-name-link">validateIntervalQualifier</a><wbr>(<a href="../SqlIntervalQualifier.html" title="class in org.apache.calcite.sql">SqlIntervalQualifier</a>&nbsp;qualifier)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates a <a href="../SqlIntervalQualifier.html" title="class in org.apache.calcite.sql"><code>SqlIntervalQualifier</code></a>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateJoin(org.apache.calcite.sql.SqlJoin,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateJoin</a><wbr>(<a href="../SqlJoin.html" title="class in org.apache.calcite.sql">SqlJoin</a>&nbsp;join,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateJoin(org.apache.calcite.sql.SqlJoin,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateJoin</a><wbr>(<a href="../SqlJoin.html" title="class in org.apache.calcite.sql">SqlJoin</a>&nbsp;join,
  <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateLambda(org.apache.calcite.sql.SqlLambda)" class="member-name-link">validateLambda</a><wbr>(<a href="../SqlLambda.html" title="class in org.apache.calcite.sql">SqlLambda</a>&nbsp;lambdaExpr)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateLambda(org.apache.calcite.sql.SqlLambda)" class="member-name-link">validateLambda</a><wbr>(<a href="../SqlLambda.html" title="class in org.apache.calcite.sql">SqlLambda</a>&nbsp;lambdaExpr)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates a lambda expression.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateLiteral(org.apache.calcite.sql.SqlLiteral)" class="member-name-link">validateLiteral</a><wbr>(<a href="../SqlLiteral.html" title="class in org.apache.calcite.sql">SqlLiteral</a>&nbsp;literal)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateLiteral(org.apache.calcite.sql.SqlLiteral)" class="member-name-link">validateLiteral</a><wbr>(<a href="../SqlLiteral.html" title="class in org.apache.calcite.sql">SqlLiteral</a>&nbsp;literal)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates a literal.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateMatchRecognize(org.apache.calcite.sql.SqlCall)" class="member-name-link">validateMatchRecognize</a><wbr>(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateMatchRecognize(org.apache.calcite.sql.SqlCall)" class="member-name-link">validateMatchRecognize</a><wbr>(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates a MATCH_RECOGNIZE clause.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateMerge(org.apache.calcite.sql.SqlMerge)" class="member-name-link">validateMerge</a><wbr>(<a href="../SqlMerge.html" title="class in org.apache.calcite.sql">SqlMerge</a>&nbsp;call)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateMerge(org.apache.calcite.sql.SqlMerge)" class="member-name-link">validateMerge</a><wbr>(<a href="../SqlMerge.html" title="class in org.apache.calcite.sql">SqlMerge</a>&nbsp;call)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates a MERGE statement.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateModality(org.apache.calcite.sql.SqlSelect,org.apache.calcite.sql.validate.SqlModality,boolean)" class="member-name-link">validateModality</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateModality(org.apache.calcite.sql.SqlSelect,org.apache.calcite.sql.validate.SqlModality,boolean)" class="member-name-link">validateModality</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select,
  <a href="SqlModality.html" title="enum in org.apache.calcite.sql.validate">SqlModality</a>&nbsp;modality,
  boolean&nbsp;fail)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates that a query is capable of producing a return of given modality
  (relational or streaming).</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateNamespace(org.apache.calcite.sql.validate.SqlValidatorNamespace,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">validateNamespace</a><wbr>(<a href="SqlValidatorNamespace.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorNamespace</a>&nbsp;namespace,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateNamespace(org.apache.calcite.sql.validate.SqlValidatorNamespace,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">validateNamespace</a><wbr>(<a href="SqlValidatorNamespace.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorNamespace</a>&nbsp;namespace,
  <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;targetRowType)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates a namespace.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateOrderList(org.apache.calcite.sql.SqlSelect)" class="member-name-link">validateOrderList</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateOrderList(org.apache.calcite.sql.SqlSelect)" class="member-name-link">validateOrderList</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates the ORDER BY clause of a SELECT statement.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateOver(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateOver</a><wbr>(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateOver(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateOver</a><wbr>(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
  <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateParameterizedExpression(org.apache.calcite.sql.SqlNode,java.util.Map)" class="member-name-link">validateParameterizedExpression</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;topNode,
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateParameterizedExpression(org.apache.calcite.sql.SqlNode,java.util.Map)" class="member-name-link">validateParameterizedExpression</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;topNode,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;nameToTypeMap)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates an expression tree.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validatePivot(org.apache.calcite.sql.SqlPivot)" class="member-name-link">validatePivot</a><wbr>(<a href="../SqlPivot.html" title="class in org.apache.calcite.sql">SqlPivot</a>&nbsp;pivot)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateQualifyClause(org.apache.calcite.sql.SqlSelect)" class="member-name-link">validateQualifyClause</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validatePivot(org.apache.calcite.sql.SqlPivot)" class="member-name-link">validatePivot</a><wbr>(<a href="../SqlPivot.html" title="class in org.apache.calcite.sql">SqlPivot</a>&nbsp;pivot)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateQuery(org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">validateQuery</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateQualifyClause(org.apache.calcite.sql.SqlSelect)" class="member-name-link">validateQualifyClause</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateQuery(org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">validateQuery</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
  <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
  <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;targetRowType)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Checks that a query is valid.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateSelect(org.apache.calcite.sql.SqlSelect,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">validateSelect</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateSelect(org.apache.calcite.sql.SqlSelect,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">validateSelect</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select,
  <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;targetRowType)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates a SELECT statement.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateSelectList(org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlSelect,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">validateSelectList</a><wbr>(<a href="../SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;selectItems,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateSelectList(org.apache.calcite.sql.SqlNodeList,org.apache.calcite.sql.SqlSelect,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">validateSelectList</a><wbr>(<a href="../SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;selectItems,
  <a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select,
  <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;targetRowType)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateSequenceValue(org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlIdentifier)" class="member-name-link">validateSequenceValue</a><wbr>(<a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
- <a href="../SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;id)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateTableFunction(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">validateTableFunction</a><wbr>(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;node,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateSequenceValue(org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlIdentifier)" class="member-name-link">validateSequenceValue</a><wbr>(<a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
+ <a href="../SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;id)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateTableFunction(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">validateTableFunction</a><wbr>(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;node,
  <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
  <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;targetRowType)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/TimeFrame.html" title="interface in org.apache.calcite.rel.type">TimeFrame</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateTimeFrame(org.apache.calcite.sql.SqlIntervalQualifier)" class="member-name-link">validateTimeFrame</a><wbr>(<a href="../SqlIntervalQualifier.html" title="class in org.apache.calcite.sql">SqlIntervalQualifier</a>&nbsp;qualifier)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/TimeFrame.html" title="interface in org.apache.calcite.rel.type">TimeFrame</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateTimeFrame(org.apache.calcite.sql.SqlIntervalQualifier)" class="member-name-link">validateTimeFrame</a><wbr>(<a href="../SqlIntervalQualifier.html" title="class in org.apache.calcite.sql">SqlIntervalQualifier</a>&nbsp;qualifier)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates a time frame.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateUnnest(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">validateUnnest</a><wbr>(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateUnnest(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">validateUnnest</a><wbr>(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
  <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
  <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;targetRowType)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateUnpivot(org.apache.calcite.sql.SqlUnpivot)" class="member-name-link">validateUnpivot</a><wbr>(<a href="../SqlUnpivot.html" title="class in org.apache.calcite.sql">SqlUnpivot</a>&nbsp;unpivot)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateUpdate(org.apache.calcite.sql.SqlUpdate)" class="member-name-link">validateUpdate</a><wbr>(<a href="../SqlUpdate.html" title="class in org.apache.calcite.sql">SqlUpdate</a>&nbsp;call)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateUnpivot(org.apache.calcite.sql.SqlUnpivot)" class="member-name-link">validateUnpivot</a><wbr>(<a href="../SqlUnpivot.html" title="class in org.apache.calcite.sql">SqlUnpivot</a>&nbsp;unpivot)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateUpdate(org.apache.calcite.sql.SqlUpdate)" class="member-name-link">validateUpdate</a><wbr>(<a href="../SqlUpdate.html" title="class in org.apache.calcite.sql">SqlUpdate</a>&nbsp;call)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates an UPDATE statement.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateValues(org.apache.calcite.sql.SqlCall,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateValues</a><wbr>(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;node,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateValues(org.apache.calcite.sql.SqlCall,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateValues</a><wbr>(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;node,
  <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;targetRowType,
  <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates a VALUES clause.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateWhereClause(org.apache.calcite.sql.SqlSelect)" class="member-name-link">validateWhereClause</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateWhereOrOn(org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlNode,java.lang.String)" class="member-name-link">validateWhereOrOn</a><wbr>(<a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateWhereClause(org.apache.calcite.sql.SqlSelect)" class="member-name-link">validateWhereClause</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateWhereOrOn(org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlNode,java.lang.String)" class="member-name-link">validateWhereOrOn</a><wbr>(<a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
  <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;condition,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;clause)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateWindow(org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall)" class="member-name-link">validateWindow</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;windowOrId,
- <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
- @Nullable <a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Validates the right-hand side of an OVER expression.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateWindowClause(org.apache.calcite.sql.SqlSelect)" class="member-name-link">validateWindowClause</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateWith(org.apache.calcite.sql.SqlWith,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateWith</a><wbr>(<a href="../SqlWith.html" title="class in org.apache.calcite.sql">SqlWith</a>&nbsp;with,
- <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateWithItem(org.apache.calcite.sql.SqlWithItem)" class="member-name-link">validateWithItem</a><wbr>(<a href="../SqlWithItem.html" title="class in org.apache.calcite.sql">SqlWithItem</a>&nbsp;withItem)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateWindow(org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall)" class="member-name-link">validateWindow</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;windowOrId,
+ <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
+ @Nullable <a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Validates the right-hand side of an OVER expression.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateWindowClause(org.apache.calcite.sql.SqlSelect)" class="member-name-link">validateWindowClause</a><wbr>(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateWith(org.apache.calcite.sql.SqlWith,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateWith</a><wbr>(<a href="../SqlWith.html" title="class in org.apache.calcite.sql">SqlWith</a>&nbsp;with,
+ <a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateWithItem(org.apache.calcite.sql.SqlWithItem)" class="member-name-link">validateWithItem</a><wbr>(<a href="../SqlWithItem.html" title="class in org.apache.calcite.sql">SqlWithItem</a>&nbsp;withItem)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -1455,6 +1459,16 @@ implements <a href="SqlValidatorWithHints.html" title="interface in org.apache.c
 <dd><code>select</code> - SELECT statement</dd>
 <dt>Returns:</dt>
 <dd>naming scope for SELECT statement</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getMeasureScope(org.apache.calcite.sql.SqlSelect)">
+<h3>getMeasureScope</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a></span>&nbsp;<span class="element-name">getMeasureScope</span><wbr><span class="parameters">(<a href="../SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select)</span></div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="SqlValidator.html#getMeasureScope(org.apache.calcite.sql.SqlSelect)">getMeasureScope</a></code>&nbsp;in interface&nbsp;<code><a href="SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a></code></dd>
 </dl>
 </section>
 </li>
@@ -2406,11 +2420,12 @@ implements <a href="SqlValidatorWithHints.html" title="interface in org.apache.c
 </section>
 </li>
 <li>
-<section class="detail" id="createTargetRowType(org.apache.calcite.sql.validate.SqlValidatorTable,org.apache.calcite.sql.SqlNodeList,boolean)">
+<section class="detail" id="createTargetRowType(org.apache.calcite.sql.validate.SqlValidatorTable,org.apache.calcite.sql.SqlNodeList,boolean,org.apache.calcite.sql.SqlIdentifier)">
 <h3>createTargetRowType</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></span>&nbsp;<span class="element-name">createTargetRowType</span><wbr><span class="parameters">(<a href="SqlValidatorTable.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorTable</a>&nbsp;table,
  @Nullable <a href="../SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;targetColumnList,
- boolean&nbsp;append)</span></div>
+ boolean&nbsp;append,
+ @Nullable <a href="../SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;targetTableAlias)</span></div>
 <div class="block">Derives a row-type for INSERT and UPDATE operations.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -2418,6 +2433,7 @@ implements <a href="SqlValidatorWithHints.html" title="interface in org.apache.c
 <dd><code>targetColumnList</code> - List of target columns, or null if not specified</dd>
 <dd><code>append</code> - Whether to append fields to those in <code>
                          baseRowType</code></dd>
+<dd><code>targetTableAlias</code> - Target table alias, or null if not specified</dd>
 <dt>Returns:</dt>
 <dd>Rowtype</dd>
 </dl>

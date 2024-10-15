@@ -498,8 +498,12 @@ implements <a href="MetadataHandler.html" title="interface in org.apache.calcite
  <a href="RelMetadataQuery.html" title="class in org.apache.calcite.rel.metadata">RelMetadataQuery</a>&nbsp;mq)</span></div>
 <div class="block">Infers predicates for a Values.
 
- <p>The predicates on <code>T (x, y, z)</code> with rows
- <code>(1, 2, null), (1, 2, null), (5, 2, null)</code> are <code>'y = 2'</code> and <code>'z is null'</code>.</div>
+ <p>The predicates on <code>T (w, x, y, z)</code> with rows
+ <code>(1, 2, 3, null), (1, 2, null, null), (5, 2, 3, null)</code> are
+ <code>'SEARCH($0, Sarg[1, 5])'</code>,
+ <code>'=($1, 2)'</code>,
+ <code>'SEARCH($2, Sarg[3; NULL AS TRUE])'</code> and
+ <code>'[IS NULL($3)'</code>.</div>
 </section>
 </li>
 <li>

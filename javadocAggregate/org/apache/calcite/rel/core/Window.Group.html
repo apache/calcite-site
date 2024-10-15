@@ -100,8 +100,8 @@ loadScripts(document, 'script');</script>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
 <div class="block">Group of windowed aggregate calls that have the same window specification.
 
- <p>The specification is defined by an upper and lower bound, and
- also has zero or more partitioning columns.
+ <p>The specification is defined by an upper and lower bound, exclusion clause,
+ and also has zero or more partitioning columns.
 
  <p>A window is either logical or physical. A physical window is measured
  in terms of row count. A logical window is measured in terms of rows
@@ -137,21 +137,24 @@ loadScripts(document, 'script');</script>
  objects, each of which is a call to a
  <a href="../../sql/SqlAggFunction.html" title="class in org.apache.calcite.sql"><code>SqlAggFunction</code></a>.</div>
 </div>
-<div class="col-first odd-row-color"><code>final boolean</code></div>
-<div class="col-second odd-row-color"><code><a href="#isRows" class="member-name-link">isRows</a></code></div>
+<div class="col-first odd-row-color"><code>final <a href="../../rex/RexWindowExclusion.html" title="enum in org.apache.calcite.rex">RexWindowExclusion</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#exclude" class="member-name-link">exclude</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>final <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></code></div>
-<div class="col-second even-row-color"><code><a href="#keys" class="member-name-link">keys</a></code></div>
+<div class="col-first even-row-color"><code>final boolean</code></div>
+<div class="col-second even-row-color"><code><a href="#isRows" class="member-name-link">isRows</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>final <a href="../../rex/RexWindowBound.html" title="class in org.apache.calcite.rex">RexWindowBound</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#lowerBound" class="member-name-link">lowerBound</a></code></div>
+<div class="col-first odd-row-color"><code>final <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#keys" class="member-name-link">keys</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>final <a href="../RelCollation.html" title="interface in org.apache.calcite.rel">RelCollation</a></code></div>
-<div class="col-second even-row-color"><code><a href="#orderKeys" class="member-name-link">orderKeys</a></code></div>
+<div class="col-first even-row-color"><code>final <a href="../../rex/RexWindowBound.html" title="class in org.apache.calcite.rex">RexWindowBound</a></code></div>
+<div class="col-second even-row-color"><code><a href="#lowerBound" class="member-name-link">lowerBound</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>final <a href="../../rex/RexWindowBound.html" title="class in org.apache.calcite.rex">RexWindowBound</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#upperBound" class="member-name-link">upperBound</a></code></div>
+<div class="col-first odd-row-color"><code>final <a href="../RelCollation.html" title="interface in org.apache.calcite.rel">RelCollation</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#orderKeys" class="member-name-link">orderKeys</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>final <a href="../../rex/RexWindowBound.html" title="class in org.apache.calcite.rex">RexWindowBound</a></code></div>
+<div class="col-second even-row-color"><code><a href="#upperBound" class="member-name-link">upperBound</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -163,10 +166,11 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.util.ImmutableBitSet,boolean,org.apache.calcite.rex.RexWindowBound,org.apache.calcite.rex.RexWindowBound,org.apache.calcite.rel.RelCollation,java.util.List)" class="member-name-link">Group</a><wbr>(<a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&nbsp;keys,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.util.ImmutableBitSet,boolean,org.apache.calcite.rex.RexWindowBound,org.apache.calcite.rex.RexWindowBound,org.apache.calcite.rex.RexWindowExclusion,org.apache.calcite.rel.RelCollation,java.util.List)" class="member-name-link">Group</a><wbr>(<a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&nbsp;keys,
  boolean&nbsp;isRows,
  <a href="../../rex/RexWindowBound.html" title="class in org.apache.calcite.rex">RexWindowBound</a>&nbsp;lowerBound,
  <a href="../../rex/RexWindowBound.html" title="class in org.apache.calcite.rex">RexWindowBound</a>&nbsp;upperBound,
+ <a href="../../rex/RexWindowExclusion.html" title="enum in org.apache.calcite.rex">RexWindowExclusion</a>&nbsp;exclude,
  <a href="../RelCollation.html" title="interface in org.apache.calcite.rel">RelCollation</a>&nbsp;orderKeys,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Window.RexWinAggCall.html" title="class in org.apache.calcite.rel.core">Window.RexWinAggCall</a>&gt;&nbsp;aggCalls)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
@@ -249,6 +253,12 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="exclude">
+<h3>exclude</h3>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="../../rex/RexWindowExclusion.html" title="enum in org.apache.calcite.rex">RexWindowExclusion</a></span>&nbsp;<span class="element-name">exclude</span></div>
+</section>
+</li>
+<li>
 <section class="detail" id="orderKeys">
 <h3>orderKeys</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="../RelCollation.html" title="interface in org.apache.calcite.rel">RelCollation</a></span>&nbsp;<span class="element-name">orderKeys</span></div>
@@ -272,12 +282,13 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(org.apache.calcite.util.ImmutableBitSet,boolean,org.apache.calcite.rex.RexWindowBound,org.apache.calcite.rex.RexWindowBound,org.apache.calcite.rel.RelCollation,java.util.List)">
+<section class="detail" id="&lt;init&gt;(org.apache.calcite.util.ImmutableBitSet,boolean,org.apache.calcite.rex.RexWindowBound,org.apache.calcite.rex.RexWindowBound,org.apache.calcite.rex.RexWindowExclusion,org.apache.calcite.rel.RelCollation,java.util.List)">
 <h3>Group</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Group</span><wbr><span class="parameters">(<a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&nbsp;keys,
  boolean&nbsp;isRows,
  <a href="../../rex/RexWindowBound.html" title="class in org.apache.calcite.rex">RexWindowBound</a>&nbsp;lowerBound,
  <a href="../../rex/RexWindowBound.html" title="class in org.apache.calcite.rex">RexWindowBound</a>&nbsp;upperBound,
+ <a href="../../rex/RexWindowExclusion.html" title="enum in org.apache.calcite.rex">RexWindowExclusion</a>&nbsp;exclude,
  <a href="../RelCollation.html" title="interface in org.apache.calcite.rel">RelCollation</a>&nbsp;orderKeys,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Window.RexWinAggCall.html" title="class in org.apache.calcite.rel.core">Window.RexWinAggCall</a>&gt;&nbsp;aggCalls)</span></div>
 </section>

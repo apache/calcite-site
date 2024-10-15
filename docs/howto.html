@@ -155,15 +155,15 @@ adapters.</p>
 
 <h2 id="building-from-a-source-distribution">Building from a source distribution</h2>
 
-<p>Prerequisite is Java (JDK 8, 11, 17, 21 or 22)
+<p>Prerequisite is Java (JDK 8, 11, 17, 21 or 23)
 and Gradle (version 8.7) on your path.</p>
 
 <p>Unpack the source distribution <code class="language-plaintext highlighter-rouge">.tar.gz</code> file,
 <code class="language-plaintext highlighter-rouge">cd</code> to the root directory of the unpacked source,
 then build using Gradle:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz apache-calcite-1.37.0-src.tar.gz
-<span class="nv">$ </span><span class="nb">cd </span>apache-calcite-1.37.0-src
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">tar </span>xvfz apache-calcite-1.38.0-src.tar.gz
+<span class="nv">$ </span><span class="nb">cd </span>apache-calcite-1.38.0-src
 <span class="nv">$ </span>gradle build</code></pre></figure>
 
 <p><a href="#running-tests">Running tests</a> describes how to run more or fewer
@@ -173,7 +173,7 @@ tests  (but you should use the <code class="language-plaintext highlighter-rouge
 <h2 id="building-from-git">Building from Git</h2>
 
 <p>Prerequisites are git
-and Java (JDK 8, 11, 17, 21 or 22) on your path.</p>
+and Java (JDK 8, 11, 17, 21 or 23) on your path.</p>
 
 <p>Create a local copy of the GitHub repository,
 <code class="language-plaintext highlighter-rouge">cd</code> to its root directory,
@@ -864,7 +864,8 @@ git clean <span class="nt">-xn</span>
   <li>Send an email to <a href="mailto:dev@calcite.apache.org">dev@calcite.apache.org</a> notifying that RC build process
 is starting and therefore <code class="language-plaintext highlighter-rouge">main</code> branch is in code freeze until further notice.</li>
   <li>Set up signing keys as described above.</li>
-  <li>Make sure you are using JDK 8 (not 9 or 10).</li>
+  <li>Make sure you are using JDK 8. (Compiling with JDK 21 causes
+[<a href="https://issues.apache.org/jira/browse/CALCITE-6616">CALCITE-6616</a>].)</li>
   <li>Check that <code class="language-plaintext highlighter-rouge">README</code> and <code class="language-plaintext highlighter-rouge">site/_docs/howto.md</code> have the correct version number.</li>
   <li>Check that <code class="language-plaintext highlighter-rouge">site/_docs/howto.md</code> has the correct Gradle version.</li>
   <li>Check that <code class="language-plaintext highlighter-rouge">NOTICE</code> has the current copyright year.</li>
@@ -932,6 +933,31 @@ git log --abbrev-commit --pretty=format:'%f' $range | awk -F- '$1 == "CALCITE" {
 <p>The release candidate process does not add commits,
 so there’s no harm if it fails. It might leave <code class="language-plaintext highlighter-rouge">-rc</code> tag behind
 which can be removed if required.</p>
+
+<p>Define your credentials in your <code class="language-plaintext highlighter-rouge">~/.gradle/gradle.properties</code> file.
+Replace <code class="language-plaintext highlighter-rouge">jhyde</code>, <code class="language-plaintext highlighter-rouge">julianhyde</code> and <code class="language-plaintext highlighter-rouge">xxx</code> as appropriate, and be sure to
+make the file private (permission 600).</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>useGpgCmd=true
+signing.gnupg.executable=gpg
+signing.gnupg.useLegacyGpg=false
+signing.gnupg.keyName=0xXXXXXXXX
+signing.gnupg.passphrase=xxx
+
+asfSvnUsername=jhyde
+asfSvnPassword=xxx
+asfGitSourceUsername=julianhyde
+asfGitSourcePassword=xxx
+asfNexusUsername=jhyde
+asfNexusPassword=xxx
+asfCommitterId=jhyde
+
+asfTestSvnPassword=test
+asfTestSvnUsername=test
+asfTestGitSourceUsername=test
+asfTestGitSourcePassword=test
+asfTestNexusUsername=test
+asfTestNexusPassword=test
+</code></pre></div></div>
 
 <p>If you wish, you can perform a dry-run release with a help of
 <a href="https://github.com/vlsi/asflike-release-environment">asflike-release-environment</a>;

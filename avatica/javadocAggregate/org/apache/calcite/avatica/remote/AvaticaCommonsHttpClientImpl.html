@@ -149,6 +149,14 @@ implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttp
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#client">client</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>protected long</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#connectTimeout">connectTimeout</a></span></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected org.apache.hc.client5.http.protocol.HttpClientContext</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#context">context</a></span></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>protected org.apache.hc.client5.http.auth.UsernamePasswordCredentials</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#credentials">credentials</a></span></code>&nbsp;</td>
 </tr>
@@ -157,18 +165,22 @@ implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttp
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#credentialsProvider">credentialsProvider</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>protected org.apache.hc.core5.http.HttpHost</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#httpHost">httpHost</a></span></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>protected org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#pool">pool</a></span></code>&nbsp;</td>
 </tr>
-<tr class="altColor">
-<td class="colFirst"><code>protected org.apache.hc.core5.http.config.Registry&lt;org.apache.hc.client5.http.socket.ConnectionSocketFactory&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#socketFactoryRegistry">socketFactoryRegistry</a></span></code>&nbsp;</td>
-</tr>
 <tr class="rowColor">
+<td class="colFirst"><code>protected long</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#responseTimeout">responseTimeout</a></span></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>protected <a href="https://docs.oracle.com/javase/8/docs/api/java/net/URI.html?is-external=true" title="class or interface in java.net">URI</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#uri">uri</a></span></code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>protected <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#userToken">userToken</a></span></code>&nbsp;</td>
 </tr>
@@ -187,7 +199,12 @@ implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttp
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#AvaticaCommonsHttpClientImpl-java.net.URL-">AvaticaCommonsHttpClientImpl</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a>&nbsp;url)</code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#AvaticaCommonsHttpClientImpl-java.net.URI-">AvaticaCommonsHttpClientImpl</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/net/URI.html?is-external=true" title="class or interface in java.net">URI</a>&nbsp;uri)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#AvaticaCommonsHttpClientImpl-java.net.URL-">AvaticaCommonsHttpClientImpl</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a>&nbsp;url)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+</td>
 </tr>
 </table>
 </li>
@@ -269,6 +286,15 @@ implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttp
 <pre>protected final&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/net/URI.html?is-external=true" title="class or interface in java.net">URI</a> uri</pre>
 </li>
 </ul>
+<a name="httpHost">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>httpHost</h4>
+<pre>protected&nbsp;org.apache.hc.core5.http.HttpHost httpHost</pre>
+</li>
+</ul>
 <a name="authCache">
 <!--   -->
 </a>
@@ -285,15 +311,6 @@ implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttp
 <li class="blockList">
 <h4>client</h4>
 <pre>protected&nbsp;org.apache.hc.client5.http.impl.classic.CloseableHttpClient client</pre>
-</li>
-</ul>
-<a name="socketFactoryRegistry">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>socketFactoryRegistry</h4>
-<pre>protected&nbsp;org.apache.hc.core5.http.config.Registry&lt;org.apache.hc.client5.http.socket.ConnectionSocketFactory&gt; socketFactoryRegistry</pre>
 </li>
 </ul>
 <a name="pool">
@@ -335,10 +352,37 @@ implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttp
 <a name="userToken">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>userToken</h4>
 <pre>protected&nbsp;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a> userToken</pre>
+</li>
+</ul>
+<a name="context">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>context</h4>
+<pre>protected&nbsp;org.apache.hc.client5.http.protocol.HttpClientContext context</pre>
+</li>
+</ul>
+<a name="connectTimeout">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>connectTimeout</h4>
+<pre>protected&nbsp;long connectTimeout</pre>
+</li>
+</ul>
+<a name="responseTimeout">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>responseTimeout</h4>
+<pre>protected&nbsp;long responseTimeout</pre>
 </li>
 </ul>
 </li>
@@ -352,10 +396,21 @@ implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttp
 <a name="AvaticaCommonsHttpClientImpl-java.net.URL-">
 <!--   -->
 </a>
+<ul class="blockList">
+<li class="blockList">
+<h4>AvaticaCommonsHttpClientImpl</h4>
+<pre><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang">@Deprecated</a>
+public&nbsp;AvaticaCommonsHttpClientImpl(<a href="https://docs.oracle.com/javase/8/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a>&nbsp;url)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+</li>
+</ul>
+<a name="AvaticaCommonsHttpClientImpl-java.net.URI-">
+<!--   -->
+</a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>AvaticaCommonsHttpClientImpl</h4>
-<pre>public&nbsp;AvaticaCommonsHttpClientImpl(<a href="https://docs.oracle.com/javase/8/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a>&nbsp;url)</pre>
+<pre>public&nbsp;AvaticaCommonsHttpClientImpl(<a href="https://docs.oracle.com/javase/8/docs/api/java/net/URI.html?is-external=true" title="class or interface in java.net">URI</a>&nbsp;uri)</pre>
 </li>
 </ul>
 </li>
@@ -523,6 +578,6 @@ implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttp
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small>Copyright &copy; 2012-2024 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
 </body>
 </html>

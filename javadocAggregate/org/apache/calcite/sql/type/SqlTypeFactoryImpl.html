@@ -232,10 +232,17 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates a SQL type that represents the "unknown" type.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#leastRestrictive(java.util.List,org.apache.calcite.sql.type.SqlTypeMappingRule)" class="member-name-link">leastRestrictive</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;types,
- <a href="SqlTypeMappingRule.html" title="interface in org.apache.calcite.sql.type">SqlTypeMappingRule</a>&nbsp;mappingRule)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#enforceTypeWithNullability(org.apache.calcite.rel.type.RelDataType,boolean)" class="member-name-link">enforceTypeWithNullability</a><wbr>(<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type,
+ boolean&nbsp;nullable)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates a type that is the same as another type but with possibly
+ different nullability.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#leastRestrictive(java.util.List,org.apache.calcite.sql.type.SqlTypeMappingRule)" class="member-name-link">leastRestrictive</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;types,
+ <a href="SqlTypeMappingRule.html" title="interface in org.apache.calcite.sql.type">SqlTypeMappingRule</a>&nbsp;mappingRule)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the most general of a set of types (that is, one type to which
  they can all be cast), or null if conversion is not possible.</div>
 </div>
@@ -498,7 +505,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates a type that is the same as another type but with possibly
  different nullability. The output type may be identical to the input
  type. For type systems without a concept of nullability, the return value
- is always the same as the input.</div>
+ is always the same as the input. This function never returns a nullable
+ record type; when applied to a record type, it recursively makes all fields
+ nullable and the record itself is non-nullable.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../../rel/type/RelDataTypeFactory.html#createTypeWithNullability(org.apache.calcite.rel.type.RelDataType,boolean)">createTypeWithNullability</a></code>&nbsp;in interface&nbsp;<code><a href="../../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a></code></dd>
@@ -506,8 +515,32 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="../../rel/type/RelDataTypeFactoryImpl.html#createTypeWithNullability(org.apache.calcite.rel.type.RelDataType,boolean)">createTypeWithNullability</a></code>&nbsp;in class&nbsp;<code><a href="../../rel/type/RelDataTypeFactoryImpl.html" title="class in org.apache.calcite.rel.type">RelDataTypeFactoryImpl</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>type</code> - input type</dd>
-<dd><code>nullable</code> - true to request a nullable type; false to request a NOT
-                 NULL type</dd>
+<dd><code>nullable</code> - true to request a nullable type; false to request a NOT NULL type.</dd>
+<dt>Returns:</dt>
+<dd>output type, same as input type except with specified nullability (see description
+ for record types).</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="enforceTypeWithNullability(org.apache.calcite.rel.type.RelDataType,boolean)">
+<h3>enforceTypeWithNullability</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></span>&nbsp;<span class="element-name">enforceTypeWithNullability</span><wbr><span class="parameters">(<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type,
+ boolean&nbsp;nullable)</span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../../rel/type/RelDataTypeFactory.html#enforceTypeWithNullability(org.apache.calcite.rel.type.RelDataType,boolean)">RelDataTypeFactory</a></code></span></div>
+<div class="block">Creates a type that is the same as another type but with possibly
+ different nullability. The output type may be identical to the input
+ type. For type systems without a concept of nullability, the return value
+ is always the same as the input. This differs from <a href="../../rel/type/RelDataTypeFactory.html#createTypeWithNullability(org.apache.calcite.rel.type.RelDataType,boolean)"><code>RelDataTypeFactory.createTypeWithNullability(RelDataType, boolean)</code></a> in the handling of record
+ types.  This function returns a nullable struct.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../../rel/type/RelDataTypeFactory.html#enforceTypeWithNullability(org.apache.calcite.rel.type.RelDataType,boolean)">enforceTypeWithNullability</a></code>&nbsp;in interface&nbsp;<code><a href="../../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a></code></dd>
+<dt>Overrides:</dt>
+<dd><code><a href="../../rel/type/RelDataTypeFactoryImpl.html#enforceTypeWithNullability(org.apache.calcite.rel.type.RelDataType,boolean)">enforceTypeWithNullability</a></code>&nbsp;in class&nbsp;<code><a href="../../rel/type/RelDataTypeFactoryImpl.html" title="class in org.apache.calcite.rel.type">RelDataTypeFactoryImpl</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>type</code> - input type</dd>
+<dd><code>nullable</code> - true to request a nullable type; false to request a NOT NULL type.</dd>
 <dt>Returns:</dt>
 <dd>output type, same as input type except with specified nullability</dd>
 </dl>

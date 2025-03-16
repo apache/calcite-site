@@ -269,9 +269,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns a default <a href="SqlToRelConverter.Config.html" title="interface in org.apache.calcite.sql2rel"><code>SqlToRelConverter.Config</code></a>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#convertAgg(org.apache.calcite.sql2rel.SqlToRelConverter.Blackboard,org.apache.calcite.sql.SqlSelect,java.util.List)" class="member-name-link">convertAgg</a><wbr>(<a href="SqlToRelConverter.Blackboard.html" title="class in org.apache.calcite.sql2rel">SqlToRelConverter.Blackboard</a>&nbsp;bb,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#convertAgg(org.apache.calcite.sql2rel.SqlToRelConverter.Blackboard,org.apache.calcite.sql.SqlSelect,java.util.List,java.util.List)" class="member-name-link">convertAgg</a><wbr>(<a href="SqlToRelConverter.Blackboard.html" title="class in org.apache.calcite.sql2rel">SqlToRelConverter.Blackboard</a>&nbsp;bb,
  <a href="../sql/SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;orderExprList)</code></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;orderExprList,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;extraList)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Converts the SELECT, GROUP BY and HAVING clauses of an aggregate query.</div>
 </div>
@@ -1150,15 +1151,16 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="convertAgg(org.apache.calcite.sql2rel.SqlToRelConverter.Blackboard,org.apache.calcite.sql.SqlSelect,java.util.List)">
+<section class="detail" id="convertAgg(org.apache.calcite.sql2rel.SqlToRelConverter.Blackboard,org.apache.calcite.sql.SqlSelect,java.util.List,java.util.List)">
 <h3>convertAgg</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">convertAgg</span><wbr><span class="parameters">(<a href="SqlToRelConverter.Blackboard.html" title="class in org.apache.calcite.sql2rel">SqlToRelConverter.Blackboard</a>&nbsp;bb,
  <a href="../sql/SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a>&nbsp;select,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;orderExprList)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;orderExprList,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;&nbsp;extraList)</span></div>
 <div class="block">Converts the SELECT, GROUP BY and HAVING clauses of an aggregate query.
 
  <p>This method extracts SELECT, GROUP BY and HAVING clauses, and creates
- an <code>AggConverter</code>, then delegates to <code>createAggImpl(org.apache.calcite.sql2rel.SqlToRelConverter.Blackboard, org.apache.calcite.sql2rel.AggConverter, org.apache.calcite.sql.SqlNodeList, org.apache.calcite.sql.SqlNodeList, org.apache.calcite.sql.SqlNode, java.util.List&lt;org.apache.calcite.sql.SqlNode&gt;)</code>.
+ an <code>AggConverter</code>, then delegates to <code>createAggImpl(org.apache.calcite.sql2rel.SqlToRelConverter.Blackboard, org.apache.calcite.sql2rel.AggConverter, java.util.List&lt;org.apache.calcite.sql.SqlNode&gt;, java.util.List&lt;org.apache.calcite.sql.SqlNode&gt;, org.apache.calcite.sql.SqlNode, java.util.List&lt;org.apache.calcite.sql.SqlNode&gt;, java.util.List&lt;org.apache.calcite.sql.SqlNode&gt;)</code>.
  Derived class may override this method to change any of those clauses or
  specify a different <code>AggConverter</code>.</div>
 <dl class="notes">
@@ -1166,6 +1168,7 @@ loadScripts(document, 'script');</script>
 <dd><code>bb</code> - Scope within which to resolve identifiers</dd>
 <dd><code>select</code> - Query</dd>
 <dd><code>orderExprList</code> - Additional expressions needed to implement ORDER BY</dd>
+<dd><code>extraList</code> - Additional expressions needed to implement QUALIFY</dd>
 </dl>
 </section>
 </li>

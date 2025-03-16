@@ -122,10 +122,11 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color"><code>final @Nullable <a href="../SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#extendList" class="member-name-link">extendList</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>protected <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></code></div>
-<div class="col-second even-row-color"><code><a href="#mustFilterFields" class="member-name-link">mustFilterFields</a></code></div>
+<div class="col-first even-row-color"><code>protected <a href="FilterRequirement.html" title="class in org.apache.calcite.sql.validate">FilterRequirement</a></code></div>
+<div class="col-second even-row-color"><code><a href="#filterRequirement" class="member-name-link">filterRequirement</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Ordinals of fields that must be filtered.</div>
+<div class="block">Information about what fields need to be filtered and what bypass fields
+ can defuse the errors if they are filtered on as an alternative.</div>
 </div>
 <div class="col-first odd-row-color"><code>protected @Nullable <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#rowType" class="member-name-link">rowType</a></code></div>
@@ -169,24 +170,26 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the parse tree node that at is at the root of this namespace and
  includes all decorations.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getId()" class="member-name-link">getId</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../util/Pair.html" title="class in org.apache.calcite.util">Pair</a>&lt;<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>,<wbr><a href="SqlMonotonicity.html" title="enum in org.apache.calcite.sql.validate">SqlMonotonicity</a>&gt;&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMonotonicExprs()" class="member-name-link">getMonotonicExprs</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="FilterRequirement.html" title="class in org.apache.calcite.sql.validate">FilterRequirement</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFilterRequirement()" class="member-name-link">getFilterRequirement</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns a <code>FilterRequirement</code> object describing the "must-filter"
+ fields of this namespace (fields that must be filtered in a query) and
+ "bypass" fields that can remove the requirement that fields are
+ filtered.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getId()" class="member-name-link">getId</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../util/Pair.html" title="class in org.apache.calcite.util">Pair</a>&lt;<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>,<wbr><a href="SqlMonotonicity.html" title="enum in org.apache.calcite.sql.validate">SqlMonotonicity</a>&gt;&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMonotonicExprs()" class="member-name-link">getMonotonicExprs</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a list of expressions which are monotonic in this namespace.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlMonotonicity.html" title="enum in org.apache.calcite.sql.validate">SqlMonotonicity</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMonotonicity(java.lang.String)" class="member-name-link">getMonotonicity</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;columnName)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns whether and how a given column is sorted.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMustFilterFields()" class="member-name-link">getMustFilterFields</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlMonotonicity.html" title="enum in org.apache.calcite.sql.validate">SqlMonotonicity</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMonotonicity(java.lang.String)" class="member-name-link">getMonotonicity</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;columnName)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the ordinals (in the row type) of the "must-filter" fields,
- fields that that must be filtered in a query.</div>
+<div class="block">Returns whether and how a given column is sorted.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNode()" class="member-name-link">getNode</a>()</code></div>
@@ -326,11 +329,13 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="mustFilterFields">
-<h3>mustFilterFields</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></span>&nbsp;<span class="element-name">mustFilterFields</span></div>
-<div class="block">Ordinals of fields that must be filtered. Initially the empty set, but
- should typically be re-assigned on validate.</div>
+<section class="detail" id="filterRequirement">
+<h3>filterRequirement</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="FilterRequirement.html" title="class in org.apache.calcite.sql.validate">FilterRequirement</a></span>&nbsp;<span class="element-name">filterRequirement</span></div>
+<div class="block">Information about what fields need to be filtered and what bypass fields
+ can defuse the errors if they are filtered on as an alternative.
+ Initialized as an empty object, but typically re-assigned during
+ validation.</div>
 </section>
 </li>
 <li>
@@ -609,15 +614,17 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getMustFilterFields()">
-<h3>getMustFilterFields</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></span>&nbsp;<span class="element-name">getMustFilterFields</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="SqlValidatorNamespace.html#getMustFilterFields()">SqlValidatorNamespace</a></code></span></div>
-<div class="block">Returns the ordinals (in the row type) of the "must-filter" fields,
- fields that that must be filtered in a query.</div>
+<section class="detail" id="getFilterRequirement()">
+<h3>getFilterRequirement</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="FilterRequirement.html" title="class in org.apache.calcite.sql.validate">FilterRequirement</a></span>&nbsp;<span class="element-name">getFilterRequirement</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="SqlValidatorNamespace.html#getFilterRequirement()">SqlValidatorNamespace</a></code></span></div>
+<div class="block">Returns a <code>FilterRequirement</code> object describing the "must-filter"
+ fields of this namespace (fields that must be filtered in a query) and
+ "bypass" fields that can remove the requirement that fields are
+ filtered.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="SqlValidatorNamespace.html#getMustFilterFields()">getMustFilterFields</a></code>&nbsp;in interface&nbsp;<code><a href="SqlValidatorNamespace.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorNamespace</a></code></dd>
+<dd><code><a href="SqlValidatorNamespace.html#getFilterRequirement()">getFilterRequirement</a></code>&nbsp;in interface&nbsp;<code><a href="SqlValidatorNamespace.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorNamespace</a></code></dd>
 </dl>
 </section>
 </li>

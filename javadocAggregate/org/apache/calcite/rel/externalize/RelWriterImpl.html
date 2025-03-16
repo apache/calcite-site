@@ -119,15 +119,18 @@ implements <a href="../RelWriter.html" title="interface in org.apache.calcite.re
 <div class="col-first even-row-color"><code>protected final <a href="../../sql/SqlExplainLevel.html" title="enum in org.apache.calcite.sql">SqlExplainLevel</a></code></div>
 <div class="col-second even-row-color"><code><a href="#detailLevel" class="member-name-link">detailLevel</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintWriter.html" title="class or interface in java.io" class="external-link">PrintWriter</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#pw" class="member-name-link">pw</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>protected final org.apache.calcite.avatica.util.Spacer</code></div>
-<div class="col-second even-row-color"><code><a href="#spacer" class="member-name-link">spacer</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>protected final boolean</code></div>
-<div class="col-second odd-row-color"><code><a href="#withIdPrefix" class="member-name-link">withIdPrefix</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#expand" class="member-name-link">expand</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintWriter.html" title="class or interface in java.io" class="external-link">PrintWriter</a></code></div>
+<div class="col-second even-row-color"><code><a href="#pw" class="member-name-link">pw</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>protected final org.apache.calcite.avatica.util.Spacer</code></div>
+<div class="col-second odd-row-color"><code><a href="#spacer" class="member-name-link">spacer</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>protected final boolean</code></div>
+<div class="col-second even-row-color"><code><a href="#withIdPrefix" class="member-name-link">withIdPrefix</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -145,6 +148,11 @@ implements <a href="../RelWriter.html" title="interface in org.apache.calcite.re
  <a href="../../sql/SqlExplainLevel.html" title="enum in org.apache.calcite.sql">SqlExplainLevel</a>&nbsp;detailLevel,
  boolean&nbsp;withIdPrefix)</code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.io.PrintWriter,org.apache.calcite.sql.SqlExplainLevel,boolean,boolean)" class="member-name-link">RelWriterImpl</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintWriter.html" title="class or interface in java.io" class="external-link">PrintWriter</a>&nbsp;pw,
+ <a href="../../sql/SqlExplainLevel.html" title="enum in org.apache.calcite.sql">SqlExplainLevel</a>&nbsp;detailLevel,
+ boolean&nbsp;withIdPrefix,
+ boolean&nbsp;expand)</code></div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -164,30 +172,35 @@ implements <a href="../RelWriter.html" title="interface in org.apache.calcite.re
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Writes the completed explanation.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#explain(org.apache.calcite.rel.RelNode,java.util.List)" class="member-name-link">explain</a><wbr>(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../util/Pair.html" title="class in org.apache.calcite.util">Pair</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&gt;&nbsp;valueList)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#expand()" class="member-name-link">expand</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns whether the writer needs to expand node's detail information when printing plan.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#explain(org.apache.calcite.rel.RelNode,java.util.List)" class="member-name-link">explain</a><wbr>(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../util/Pair.html" title="class in org.apache.calcite.util">Pair</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&gt;&nbsp;valueList)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Prints an explanation of a node, with a list of (term, value) pairs.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#explain_(org.apache.calcite.rel.RelNode,java.util.List)" class="member-name-link">explain_</a><wbr>(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#explain_(org.apache.calcite.rel.RelNode,java.util.List)" class="member-name-link">explain_</a><wbr>(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../util/Pair.html" title="class in org.apache.calcite.util">Pair</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&gt;&nbsp;values)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../sql/SqlExplainLevel.html" title="enum in org.apache.calcite.sql">SqlExplainLevel</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getDetailLevel()" class="member-name-link">getDetailLevel</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../sql/SqlExplainLevel.html" title="enum in org.apache.calcite.sql">SqlExplainLevel</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getDetailLevel()" class="member-name-link">getDetailLevel</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns detail level at which plan should be generated.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../RelWriter.html" title="interface in org.apache.calcite.rel">RelWriter</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#item(java.lang.String,java.lang.Object)" class="member-name-link">item</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;term,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../RelWriter.html" title="interface in org.apache.calcite.rel">RelWriter</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#item(java.lang.String,java.lang.Object)" class="member-name-link">item</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;term,
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;value)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Adds an attribute to the explanation of the current node.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#simple()" class="member-name-link">simple</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#simple()" class="member-name-link">simple</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Converts the collected terms and values to a string.</div>
 </div>
 </div>
@@ -229,6 +242,12 @@ implements <a href="../RelWriter.html" title="interface in org.apache.calcite.re
 </section>
 </li>
 <li>
+<section class="detail" id="expand">
+<h3>expand</h3>
+<div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">expand</span></div>
+</section>
+</li>
+<li>
 <section class="detail" id="spacer">
 <h3>spacer</h3>
 <div class="member-signature"><span class="modifiers">protected final</span>&nbsp;<span class="return-type">org.apache.calcite.avatica.util.Spacer</span>&nbsp;<span class="element-name">spacer</span></div>
@@ -254,6 +273,15 @@ implements <a href="../RelWriter.html" title="interface in org.apache.calcite.re
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">RelWriterImpl</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintWriter.html" title="class or interface in java.io" class="external-link">PrintWriter</a>&nbsp;pw,
  <a href="../../sql/SqlExplainLevel.html" title="enum in org.apache.calcite.sql">SqlExplainLevel</a>&nbsp;detailLevel,
  boolean&nbsp;withIdPrefix)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(java.io.PrintWriter,org.apache.calcite.sql.SqlExplainLevel,boolean,boolean)">
+<h3>RelWriterImpl</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">RelWriterImpl</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/PrintWriter.html" title="class or interface in java.io" class="external-link">PrintWriter</a>&nbsp;pw,
+ <a href="../../sql/SqlExplainLevel.html" title="enum in org.apache.calcite.sql">SqlExplainLevel</a>&nbsp;detailLevel,
+ boolean&nbsp;withIdPrefix,
+ boolean&nbsp;expand)</span></div>
 </section>
 </li>
 </ul>
@@ -339,6 +367,20 @@ implements <a href="../RelWriter.html" title="interface in org.apache.calcite.re
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">simple</span>()</div>
 <div class="block">Converts the collected terms and values to a string. Does not write to
  the parent writer.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="expand()">
+<h3>expand</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">expand</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../RelWriter.html#expand()">RelWriter</a></code></span></div>
+<div class="block">Returns whether the writer needs to expand node's detail information when printing plan.
+ For example, LogicalSort(sort0=[$0], dir0=[ASC]) will be expanded to
+ LogicalSort(sort0=[$0], dir0=[ASC-nulls-last]).</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../RelWriter.html#expand()">expand</a></code>&nbsp;in interface&nbsp;<code><a href="../RelWriter.html" title="interface in org.apache.calcite.rel">RelWriter</a></code></dd>
+</dl>
 </section>
 </li>
 </ul>

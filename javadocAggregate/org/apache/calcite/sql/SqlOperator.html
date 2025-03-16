@@ -93,7 +93,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="SqlAsofJoin.SqlAsofJoinOperator.html" title="class in org.apache.calcite.sql">SqlAsofJoin.SqlAsofJoinOperator</a></code>, <code><a href="SqlBinaryOperator.html" title="class in org.apache.calcite.sql">SqlBinaryOperator</a></code>, <code><a href="fun/SqlCaseOperator.html" title="class in org.apache.calcite.sql.fun">SqlCaseOperator</a></code>, <code><a href="SqlDescriptorOperator.html" title="class in org.apache.calcite.sql">SqlDescriptorOperator</a></code>, <code><a href="SqlFunction.html" title="class in org.apache.calcite.sql">SqlFunction</a></code>, <code><a href="SqlJoin.SqlJoinOperator.html" title="class in org.apache.calcite.sql">SqlJoin.SqlJoinOperator</a></code>, <code><a href="SqlMatchRecognize.SqlMatchRecognizeOperator.html" title="class in org.apache.calcite.sql">SqlMatchRecognize.SqlMatchRecognizeOperator</a></code>, <code><a href="SqlPostfixOperator.html" title="class in org.apache.calcite.sql">SqlPostfixOperator</a></code>, <code><a href="SqlPrefixOperator.html" title="class in org.apache.calcite.sql">SqlPrefixOperator</a></code>, <code><a href="SqlSelectOperator.html" title="class in org.apache.calcite.sql">SqlSelectOperator</a></code>, <code><a href="SqlSnapshot.SqlSnapshotOperator.html" title="class in org.apache.calcite.sql">SqlSnapshot.SqlSnapshotOperator</a></code>, <code><a href="SqlSpecialOperator.html" title="class in org.apache.calcite.sql">SqlSpecialOperator</a></code></dd>
+<dd><code><a href="SqlAsofJoin.SqlAsofJoinOperator.html" title="class in org.apache.calcite.sql">SqlAsofJoin.SqlAsofJoinOperator</a></code>, <code><a href="fun/SqlBasicOperator.html" title="class in org.apache.calcite.sql.fun">SqlBasicOperator</a></code>, <code><a href="SqlBinaryOperator.html" title="class in org.apache.calcite.sql">SqlBinaryOperator</a></code>, <code><a href="fun/SqlCaseOperator.html" title="class in org.apache.calcite.sql.fun">SqlCaseOperator</a></code>, <code><a href="SqlDescriptorOperator.html" title="class in org.apache.calcite.sql">SqlDescriptorOperator</a></code>, <code><a href="SqlFunction.html" title="class in org.apache.calcite.sql">SqlFunction</a></code>, <code><a href="SqlJoin.SqlJoinOperator.html" title="class in org.apache.calcite.sql">SqlJoin.SqlJoinOperator</a></code>, <code><a href="SqlMatchRecognize.SqlMatchRecognizeOperator.html" title="class in org.apache.calcite.sql">SqlMatchRecognize.SqlMatchRecognizeOperator</a></code>, <code><a href="SqlPostfixOperator.html" title="class in org.apache.calcite.sql">SqlPostfixOperator</a></code>, <code><a href="SqlPrefixOperator.html" title="class in org.apache.calcite.sql">SqlPrefixOperator</a></code>, <code><a href="SqlSelectOperator.html" title="class in org.apache.calcite.sql">SqlSelectOperator</a></code>, <code><a href="SqlSnapshot.SqlSnapshotOperator.html" title="class in org.apache.calcite.sql">SqlSnapshot.SqlSnapshotOperator</a></code>, <code><a href="SqlSpecialOperator.html" title="class in org.apache.calcite.sql">SqlSpecialOperator</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">SqlOperator</span>
@@ -176,6 +176,18 @@ loadScripts(document, 'script');</script>
  @Nullable <a href="type/SqlOperandTypeInference.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeInference</a>&nbsp;operandTypeInference,
  @Nullable <a href="type/SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a>&nbsp;operandTypeChecker)</code></div>
 <div class="col-last odd-row-color">
+<div class="block">Creates an operator.</div>
+</div>
+<div class="col-first even-row-color"><code>protected </code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,org.apache.calcite.sql.SqlKind,int,int,org.apache.calcite.sql.type.SqlReturnTypeInference,org.apache.calcite.sql.type.SqlOperandTypeInference,org.apache.calcite.sql.type.SqlOperandTypeChecker,org.apache.calcite.sql.fun.SqlCallFactory)" class="member-name-link">SqlOperator</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
+ <a href="SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&nbsp;kind,
+ int&nbsp;leftPrecedence,
+ int&nbsp;rightPrecedence,
+ @Nullable <a href="type/SqlReturnTypeInference.html" title="interface in org.apache.calcite.sql.type">SqlReturnTypeInference</a>&nbsp;returnTypeInference,
+ @Nullable <a href="type/SqlOperandTypeInference.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeInference</a>&nbsp;operandTypeInference,
+ @Nullable <a href="type/SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a>&nbsp;operandTypeChecker,
+ <a href="fun/SqlCallFactory.html" title="interface in org.apache.calcite.sql.fun">SqlCallFactory</a>&nbsp;callFactory)</code></div>
+<div class="col-last even-row-color">
 <div class="block">Creates an operator.</div>
 </div>
 </div>
@@ -377,164 +389,167 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a template describing how the operator signature is to be built.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="../plan/Strong.Policy.html" title="enum in org.apache.calcite.plan">Strong.Policy</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getStrongPolicyInference()" class="member-name-link">getStrongPolicyInference</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="fun/SqlCallFactory.html" title="interface in org.apache.calcite.sql.fun">SqlCallFactory</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSqlCallFactory()" class="member-name-link">getSqlCallFactory</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="../plan/Strong.Policy.html" title="enum in org.apache.calcite.plan">Strong.Policy</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getStrongPolicyInference()" class="member-name-link">getStrongPolicyInference</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the <a href="../plan/Strong.Policy.html" title="enum in org.apache.calcite.plan"><code>Strong.Policy</code></a> strategy for this operator, or null if
  there is no particular strategy, in which case this policy will be deducted
  from the operator's <a href="SqlKind.html" title="enum in org.apache.calcite.sql"><code>SqlKind</code></a>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="SqlSyntax.html" title="enum in org.apache.calcite.sql">SqlSyntax</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getSyntax()" class="member-name-link">getSyntax</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="SqlSyntax.html" title="enum in org.apache.calcite.sql">SqlSyntax</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getSyntax()" class="member-name-link">getSyntax</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Returns the syntactic type of this operator, never null.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#inferReturnType(org.apache.calcite.rel.type.RelDataTypeFactory,java.util.List)" class="member-name-link">inferReturnType</a><wbr>(<a href="../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#inferReturnType(org.apache.calcite.rel.type.RelDataTypeFactory,java.util.List)" class="member-name-link">inferReturnType</a><wbr>(<a href="../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;operandTypes)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Infers the type of a call to this operator with a given set of operand
  types.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#inferReturnType(org.apache.calcite.sql.SqlOperatorBinding)" class="member-name-link">inferReturnType</a><wbr>(<a href="SqlOperatorBinding.html" title="class in org.apache.calcite.sql">SqlOperatorBinding</a>&nbsp;opBinding)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#inferReturnType(org.apache.calcite.sql.SqlOperatorBinding)" class="member-name-link">inferReturnType</a><wbr>(<a href="SqlOperatorBinding.html" title="class in org.apache.calcite.sql">SqlOperatorBinding</a>&nbsp;opBinding)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Infers the return type of an invocation of this operator; only called
  after the number and types of operands have already been validated.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isAggregator()" class="member-name-link">isAggregator</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isAggregator()" class="member-name-link">isAggregator</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns whether this operator is an aggregate function.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isDeterministic()" class="member-name-link">isDeterministic</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isDeterministic()" class="member-name-link">isDeterministic</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns whether a call to this operator is guaranteed to always return
  the same result given the same operands; true is assumed by default.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isDynamicFunction()" class="member-name-link">isDynamicFunction</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isDynamicFunction()" class="member-name-link">isDynamicFunction</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns whether it is unsafe to cache query plans referencing this
  operator; false is assumed by default.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isGroup()" class="member-name-link">isGroup</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isGroup()" class="member-name-link">isGroup</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns whether this is a group function.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isGroupAuxiliary()" class="member-name-link">isGroupAuxiliary</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isGroupAuxiliary()" class="member-name-link">isGroupAuxiliary</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns whether this is an group auxiliary function.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isName(java.lang.String,boolean)" class="member-name-link">isName</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;testName,
- boolean&nbsp;caseSensitive)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isSymmetrical()" class="member-name-link">isSymmetrical</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isName(java.lang.String,boolean)" class="member-name-link">isName</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;testName,
+ boolean&nbsp;caseSensitive)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isSymmetrical()" class="member-name-link">isSymmetrical</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns whether a call to this operator is not sensitive to the operands input order.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>protected static int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#leftPrec(int,boolean)" class="member-name-link">leftPrec</a><wbr>(int&nbsp;prec,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>protected static int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#leftPrec(int,boolean)" class="member-name-link">leftPrec</a><wbr>(int&nbsp;prec,
  boolean&nbsp;leftAssoc)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#not()" class="member-name-link">not</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#not()" class="member-name-link">not</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the operator that is the logical inverse of this operator.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#preValidateCall(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall)" class="member-name-link">preValidateCall</a><wbr>(<a href="validate/SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#preValidateCall(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall)" class="member-name-link">preValidateCall</a><wbr>(<a href="validate/SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
  <a href="validate/SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
  <a href="SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Receives notification that validation of a call to this operator is
  beginning.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#requiresDecimalExpansion()" class="member-name-link">requiresDecimalExpansion</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#requiresDecimalExpansion()" class="member-name-link">requiresDecimalExpansion</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Method to check if call requires expansion when it has decimal operands.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#requiresOrder()" class="member-name-link">requiresOrder</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#requiresOrder()" class="member-name-link">requiresOrder</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns whether this is a window function that requires ordering.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#requiresOver()" class="member-name-link">requiresOver</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#requiresOver()" class="member-name-link">requiresOver</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns whether this is a window function that requires an OVER clause.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reverse()" class="member-name-link">reverse</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reverse()" class="member-name-link">reverse</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the operator that has the same effect as this operator
  if its arguments are reversed.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rewriteCall(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.SqlCall)" class="member-name-link">rewriteCall</a><wbr>(<a href="validate/SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rewriteCall(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.SqlCall)" class="member-name-link">rewriteCall</a><wbr>(<a href="validate/SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
  <a href="SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Rewrites a call to this operator.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>protected static int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#rightPrec(int,boolean)" class="member-name-link">rightPrec</a><wbr>(int&nbsp;prec,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>protected static int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#rightPrec(int,boolean)" class="member-name-link">rightPrec</a><wbr>(int&nbsp;prec,
  boolean&nbsp;leftAssoc)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparse(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,int,int)" class="member-name-link">unparse</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparse(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,int,int)" class="member-name-link">unparse</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
  <a href="SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
  int&nbsp;leftPrec,
  int&nbsp;rightPrec)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Writes a SQL representation of a call to this operator to a writer,
  including parentheses if the operators on either side are of greater
  precedence.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code>protected void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#unparseListClause(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode)" class="member-name-link">unparseListClause</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
- <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;clause)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
-<div class="block"><span class="deprecated-label">Deprecated.</span></div>
-</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#unparseListClause(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlKind)" class="member-name-link">unparseListClause</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
- <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;clause,
- @Nullable <a href="SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&nbsp;sepKind)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#unparseListClause(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode)" class="member-name-link">unparseListClause</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+ <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;clause)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
 <div class="block"><span class="deprecated-label">Deprecated.</span></div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateCall(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateCall</a><wbr>(<a href="SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code>protected void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#unparseListClause(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlKind)" class="member-name-link">unparseListClause</a><wbr>(<a href="SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+ <a href="SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;clause,
+ @Nullable <a href="SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&nbsp;sepKind)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateCall(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateCall</a><wbr>(<a href="SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
  <a href="validate/SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
  <a href="validate/SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
  <a href="validate/SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;operandScope)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates a call to this operator.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateOperands(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall)" class="member-name-link">validateOperands</a><wbr>(<a href="validate/SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateOperands(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall)" class="member-name-link">validateOperands</a><wbr>(<a href="validate/SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
  <a href="validate/SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
  <a href="SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates the operands of a call, inferring the return type in the
  process.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validRexOperands(int,org.apache.calcite.util.Litmus)" class="member-name-link">validRexOperands</a><wbr>(int&nbsp;count,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validRexOperands(int,org.apache.calcite.util.Litmus)" class="member-name-link">validRexOperands</a><wbr>(int&nbsp;count,
  <a href="../util/Litmus.html" title="interface in org.apache.calcite.util">Litmus</a>&nbsp;litmus)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns whether the given operands are valid.</div>
 </div>
 </div>
@@ -591,6 +606,20 @@ loadScripts(document, 'script');</script>
 <section class="constructor-details" id="constructor-detail">
 <h2>Constructor Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="&lt;init&gt;(java.lang.String,org.apache.calcite.sql.SqlKind,int,int,org.apache.calcite.sql.type.SqlReturnTypeInference,org.apache.calcite.sql.type.SqlOperandTypeInference,org.apache.calcite.sql.type.SqlOperandTypeChecker,org.apache.calcite.sql.fun.SqlCallFactory)">
+<h3>SqlOperator</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">SqlOperator</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
+ <a href="SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&nbsp;kind,
+ int&nbsp;leftPrecedence,
+ int&nbsp;rightPrecedence,
+ @Nullable <a href="type/SqlReturnTypeInference.html" title="interface in org.apache.calcite.sql.type">SqlReturnTypeInference</a>&nbsp;returnTypeInference,
+ @Nullable <a href="type/SqlOperandTypeInference.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeInference</a>&nbsp;operandTypeInference,
+ @Nullable <a href="type/SqlOperandTypeChecker.html" title="interface in org.apache.calcite.sql.type">SqlOperandTypeChecker</a>&nbsp;operandTypeChecker,
+ <a href="fun/SqlCallFactory.html" title="interface in org.apache.calcite.sql.fun">SqlCallFactory</a>&nbsp;callFactory)</span></div>
+<div class="block">Creates an operator.</div>
+</section>
+</li>
 <li>
 <section class="detail" id="&lt;init&gt;(java.lang.String,org.apache.calcite.sql.SqlKind,int,int,org.apache.calcite.sql.type.SqlReturnTypeInference,org.apache.calcite.sql.type.SqlOperandTypeInference,org.apache.calcite.sql.type.SqlOperandTypeChecker)">
 <h3>SqlOperator</h3>
@@ -706,6 +735,12 @@ loadScripts(document, 'script');</script>
 <h3>getSyntax</h3>
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a href="SqlSyntax.html" title="enum in org.apache.calcite.sql">SqlSyntax</a></span>&nbsp;<span class="element-name">getSyntax</span>()</div>
 <div class="block">Returns the syntactic type of this operator, never null.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getSqlCallFactory()">
+<h3>getSqlCallFactory</h3>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="fun/SqlCallFactory.html" title="interface in org.apache.calcite.sql.fun">SqlCallFactory</a></span>&nbsp;<span class="element-name">getSqlCallFactory</span>()</div>
 </section>
 </li>
 <li>

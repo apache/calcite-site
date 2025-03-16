@@ -120,10 +120,11 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color"><code>protected final @Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
 <div class="col-second even-row-color"><code><a href="#enclosingNode" class="member-name-link">enclosingNode</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>protected <a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#mustFilterFields" class="member-name-link">mustFilterFields</a></code></div>
+<div class="col-first odd-row-color"><code>protected <a href="FilterRequirement.html" title="class in org.apache.calcite.sql.validate">FilterRequirement</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#filterRequirement" class="member-name-link">filterRequirement</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">Ordinals of fields that must be filtered.</div>
+<div class="block">Information about what fields need to be filtered and what bypass fields
+ can defuse the errors if they are filtered on as an alternative.</div>
 </div>
 <div class="col-first even-row-color"><code>protected @Nullable <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
 <div class="col-second even-row-color"><code><a href="#rowType" class="member-name-link">rowType</a></code></div>
@@ -188,11 +189,13 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the parse tree node that at is at the root of this namespace and
  includes all decorations.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMustFilterFields()" class="member-name-link">getMustFilterFields</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="FilterRequirement.html" title="class in org.apache.calcite.sql.validate">FilterRequirement</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFilterRequirement()" class="member-name-link">getFilterRequirement</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the ordinals (in the row type) of the "must-filter" fields,
- fields that that must be filtered in a query.</div>
+<div class="block">Returns a <code>FilterRequirement</code> object describing the "must-filter"
+ fields of this namespace (fields that must be filtered in a query) and
+ "bypass" fields that can remove the requirement that fields are
+ filtered.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRowType()" class="member-name-link">getRowType</a>()</code></div>
@@ -299,11 +302,13 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="mustFilterFields">
-<h3>mustFilterFields</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></span>&nbsp;<span class="element-name">mustFilterFields</span></div>
-<div class="block">Ordinals of fields that must be filtered. Initially the empty set, but
- should typically be re-assigned on validate.</div>
+<section class="detail" id="filterRequirement">
+<h3>filterRequirement</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="FilterRequirement.html" title="class in org.apache.calcite.sql.validate">FilterRequirement</a></span>&nbsp;<span class="element-name">filterRequirement</span></div>
+<div class="block">Information about what fields need to be filtered and what bypass fields
+ can defuse the errors if they are filtered on as an alternative.
+ Initialized as an empty object, but typically re-assigned during
+ validation.</div>
 </section>
 </li>
 <li>
@@ -485,15 +490,17 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getMustFilterFields()">
-<h3>getMustFilterFields</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></span>&nbsp;<span class="element-name">getMustFilterFields</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="SqlValidatorNamespace.html#getMustFilterFields()">SqlValidatorNamespace</a></code></span></div>
-<div class="block">Returns the ordinals (in the row type) of the "must-filter" fields,
- fields that that must be filtered in a query.</div>
+<section class="detail" id="getFilterRequirement()">
+<h3>getFilterRequirement</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="FilterRequirement.html" title="class in org.apache.calcite.sql.validate">FilterRequirement</a></span>&nbsp;<span class="element-name">getFilterRequirement</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="SqlValidatorNamespace.html#getFilterRequirement()">SqlValidatorNamespace</a></code></span></div>
+<div class="block">Returns a <code>FilterRequirement</code> object describing the "must-filter"
+ fields of this namespace (fields that must be filtered in a query) and
+ "bypass" fields that can remove the requirement that fields are
+ filtered.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="SqlValidatorNamespace.html#getMustFilterFields()">getMustFilterFields</a></code>&nbsp;in interface&nbsp;<code><a href="SqlValidatorNamespace.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorNamespace</a></code></dd>
+<dd><code><a href="SqlValidatorNamespace.html#getFilterRequirement()">getFilterRequirement</a></code>&nbsp;in interface&nbsp;<code><a href="SqlValidatorNamespace.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorNamespace</a></code></dd>
 </dl>
 </section>
 </li>

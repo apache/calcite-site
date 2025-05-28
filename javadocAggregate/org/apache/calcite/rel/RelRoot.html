@@ -199,13 +199,22 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isCollationTrivial()" class="member-name-link">isCollationTrivial</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns true if the embedded relation has a single collation defined which matches the
+ collation of this RelRoot, otherwise false.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isNameTrivial()" class="member-name-link">isNameTrivial</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns true if the field names defined in this RelRoot are the same as the names of the
+ embedded relation, otherwise false.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isRefTrivial()" class="member-name-link">isRefTrivial</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns true if the embedded relation is either a DML relation or if the field order defined
+ in this RelRoot is the same as the field order of the embedded relation, otherwise false.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RelRoot.html" title="class in org.apache.calcite.rel">RelRoot</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.sql.SqlKind)" class="member-name-link">of</a><wbr>(<a href="RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rel,
  <a href="type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
@@ -414,18 +423,74 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="isNameTrivial()">
 <h3>isNameTrivial</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isNameTrivial</span>()</div>
+<div class="block">Returns true if the field names defined in this RelRoot are the same as the names of the
+ embedded relation, otherwise false.
+
+ <p>Positive example (same names):
+
+ <blockquote><code>RelRoot: {
+   rel: Project(empno)
+          TableScan(EMP)
+   fields: [0 -&gt; empno]
+   collation: []
+ }</code></blockquote>
+
+ <p>Negative example (different names):
+
+ <blockquote><code>RelRoot: {
+   rel: Project(empno)
+          TableScan(EMP)
+   fields: [0 -&gt; empid]
+   collation: []
+ }</code></blockquote></div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if the field names are the same as in the embedded relation, otherwise false</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isRefTrivial()">
 <h3>isRefTrivial</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isRefTrivial</span>()</div>
+<div class="block">Returns true if the embedded relation is either a DML relation or if the field order defined
+ in this RelRoot is the same as the field order of the embedded relation, otherwise false.
+
+ <p>Positive example (same order):
+
+ <blockquote><code>RelRoot: {
+   rel: Project(name, empno)
+          TableScan(EMP)
+   fields: [0 -&gt; name, 1 -&gt; empno]
+   collation: []
+ }</code></blockquote>
+
+ <p>Negative example (different order):
+
+ <blockquote><code>RelRoot: {
+   rel: Project(name, empno)
+          TableScan(EMP)
+   fields: [0 -&gt; empno, 1 -&gt; name]
+   collation: []
+ }</code></blockquote></div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if the embedded relation is a DML relation or if the field names of the RelRoot
+   are in the same order as in the embedded relation, otherwise false</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isCollationTrivial()">
 <h3>isCollationTrivial</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isCollationTrivial</span>()</div>
+<div class="block">Returns true if the embedded relation has a single collation defined which matches the
+ collation of this RelRoot, otherwise false.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if the embedded relation has a single collation which matches the collation
+   of this RelRoot, otherwise false</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -437,7 +502,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2024 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

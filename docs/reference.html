@@ -451,21 +451,22 @@ finds at most a single row in the right table that has the “closest”
 timestamp value. The matched row on the right side is the closest
 match whose timestamp column is compared using one of the operations
 &lt;, ≤, &gt;, or ≥, as specified by the comparison operator in
-the <code class="language-plaintext highlighter-rouge">MATCH_CONDITION</code> clause.  The comparison is performed using SQL
-semantics, which returns ‘false’ when comparing NULL values with any
+the MATCH_CONDITION clause.  The comparison is performed using SQL
+semantics, which returns ‘false’ when comparing ‘NULL’ values with any
 other values.  Thus a ‘NULL’ timestamp in the left table will not
 match any timestamps in the right table.</p>
 
-<p>ASOF JOIN statements can also be LEFT ASOF JOIN.  In this case, when there
-is no match for a row in the left table, the columns from the right table
-are null-padded.</p>
+<p>ASOF JOIN can be used in an OUTER JOIN form as LEFT ASOF JOIN.  In this case,
+when there is no match for a row in the left table, the columns from
+the right table are null-padded.  There are no RIGHT ASOF joins.</p>
 
-<p>There are no RIGHT ASOF joins.</p>
+<p>Example:</p>
 
-<p>SELECT *
-FROM left_table [ LEFT ] ASOF JOIN right_table
-MATCH_CONDITION ( left_table.timecol &amp;leq; right_table.timecol )
-ON left_table.col = right_table.col</p>
+<pre><code class="language-SQL">SELECT *
+FROM left_table LEFT ASOF JOIN right_table
+MATCH_CONDITION left_table.timecol &lt;= right_table.timecol
+ON left_table.col = right_table.col
+</code></pre>
 
 <h2 id="keywords">Keywords</h2>
 
@@ -5715,6 +5716,7 @@ connect string parameter.</p>
   <li>‘p’ for PostgreSQL (‘fun=postgresql’ in the connect string),</li>
   <li>‘r’ for Amazon RedShift (‘fun=redshift’ in the connect string),</li>
   <li>’s’ for Apache Spark (‘fun=spark’ in the connect string).</li>
+  <li>‘i’ for ClickHouse(‘fun=clickhouse’ in the connect string).</li>
 </ul>
 
 <p>One operator name may correspond to multiple SQL dialects, but with different
@@ -6652,6 +6654,11 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">s</td>
       <td style="text-align: left">SUBSTRING_INDEX(string, delim, count)</td>
       <td style="text-align: left">Returns the substring from <em>string</em> before <em>count</em> occurrences of the delimiter <em>delim</em>. If <em>count</em> is positive, everything to the left of the final delimiter (counting from the left) is returned. If <em>count</em> is negative, everything to the right of the final delimiter (counting from the right) is returned. The function substring_index performs a case-sensitive match when searching for <em>delim</em>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p r</td>
+      <td style="text-align: left">STRING_TO_ARRAY(string, delimiter [, nullString ])</td>
+      <td style="text-align: left">Returns a one-dimensional string[] array by splitting the input string value into subvalues using the specified string value as the “delimiter”. Optionally, allows a specified string value to be interpreted as NULL.</td>
     </tr>
     <tr>
       <td style="text-align: left">b m p r s h</td>
@@ -7946,7 +7953,7 @@ and <em>minRepeat</em> and <em>maxRepeat</em> are non-negative integers.</p>
 
 <p>DDL extensions are only available in the calcite-server module.
 To enable, include <code class="language-plaintext highlighter-rouge">calcite-server.jar</code> in your class path, and add
-<code class="language-plaintext highlighter-rouge">parserFactory=org.apache.calcite.sql.parser.ddl.SqlDdlParserImpl#FACTORY</code>
+<code class="language-plaintext highlighter-rouge">parserFactory=org.apache.calcite.server.ServerDdlExecutor#PARSER_FACTORY</code>
 to the JDBC connect string (see connect string property
 <a href="/javadocAggregate/org/apache/calcite/config/CalciteConnectionProperty.html#PARSER_FACTORY">parserFactory</a>).</p>
 

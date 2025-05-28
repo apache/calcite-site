@@ -93,6 +93,10 @@ loadScripts(document, 'script');</script>
 </div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Direct Known Subclasses:</dt>
+<dd><code><a href="TrinoSqlDialect.html" title="class in org.apache.calcite.sql.dialect">TrinoSqlDialect</a></code></dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">PrestoSqlDialect</span>
 <span class="extends-implements">extends <a href="../SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a></span></div>
@@ -124,6 +128,9 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color"><code>static final <a href="../SqlDialect.Context.html" title="interface in org.apache.calcite.sql">SqlDialect.Context</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#DEFAULT_CONTEXT" class="member-name-link">DEFAULT_CONTEXT</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>static final <a href="../../rel/type/RelDataTypeSystem.html" title="interface in org.apache.calcite.rel.type">RelDataTypeSystem</a></code></div>
+<div class="col-second even-row-color"><code><a href="#TYPE_SYSTEM" class="member-name-link">TYPE_SYSTEM</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-org.apache.calcite.sql.SqlDialect">Fields inherited from class&nbsp;org.apache.calcite.sql.<a href="../SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a></h3>
@@ -150,28 +157,40 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel">
 <div class="summary-table three-column-summary" aria-labelledby="method-summary-table-tab0">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#emulateNullDirection(org.apache.calcite.sql.SqlNode,boolean,boolean)" class="member-name-link">emulateNullDirection</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#convertMapValueCall(org.apache.calcite.sql.SqlCall)" class="member-name-link">convertMapValueCall</a><wbr>(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Converts a Presto MapValue call
+ from <code>MAP['k1', 'v1', 'k2', 'v2']</code>
+ to <code>MAP[ARRAY['k1', 'k2'], ARRAY['v1', 'v2']]</code>.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#emulateNullDirection(org.apache.calcite.sql.SqlNode,boolean,boolean)" class="member-name-link">emulateNullDirection</a><wbr>(<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node,
  boolean&nbsp;nullsFirst,
  boolean&nbsp;desc)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the SqlNode for emulating the null direction for the given field
  or <code>null</code> if no emulation needs to be done.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SqlDialect.CalendarPolicy.html" title="enum in org.apache.calcite.sql">SqlDialect.CalendarPolicy</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCalendarPolicy()" class="member-name-link">getCalendarPolicy</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCastSpec(org.apache.calcite.rel.type.RelDataType)" class="member-name-link">getCastSpec</a><wbr>(<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SqlDialect.CalendarPolicy.html" title="enum in org.apache.calcite.sql">SqlDialect.CalendarPolicy</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCalendarPolicy()" class="member-name-link">getCalendarPolicy</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCastSpec(org.apache.calcite.rel.type.RelDataType)" class="member-name-link">getCastSpec</a><wbr>(<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns SqlNode for type in "cast(column as type)", which might be
  different between databases by type name, precision etc.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#prepareUnparse(org.apache.calcite.rex.RexNode)" class="member-name-link">prepareUnparse</a><wbr>(<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;rexNode)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Converts <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex"><code>RexNode</code></a> expression to <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex"><code>RexNode</code></a> expression before unparse.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#requiresAliasForFromItems()" class="member-name-link">requiresAliasForFromItems</a>()</code></div>
@@ -225,18 +244,26 @@ loadScripts(document, 'script');</script>
  int&nbsp;leftPrec,
  int&nbsp;rightPrec)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseOffsetFetch(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)" class="member-name-link">unparseOffsetFetch</a><wbr>(<a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
- @Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset,
- @Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Converts an offset and fetch into SQL.</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unparseMapValue(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,int,int)" class="member-name-link">unparseMapValue</a><wbr>(<a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+ <a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
+ int&nbsp;leftPrec,
+ int&nbsp;rightPrec)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">change map open/close symbol from default [] to ().</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseSqlIntervalQualifier(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlIntervalQualifier,org.apache.calcite.rel.type.RelDataTypeSystem)" class="member-name-link">unparseSqlIntervalQualifier</a><wbr>(<a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseOffsetFetch(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)" class="member-name-link">unparseOffsetFetch</a><wbr>(<a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+ @Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;offset,
+ @Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;fetch)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Converts an offset and fetch into SQL.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparseSqlIntervalQualifier(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlIntervalQualifier,org.apache.calcite.rel.type.RelDataTypeSystem)" class="member-name-link">unparseSqlIntervalQualifier</a><wbr>(<a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
  <a href="../SqlIntervalQualifier.html" title="class in org.apache.calcite.sql">SqlIntervalQualifier</a>&nbsp;qualifier,
  <a href="../../rel/type/RelDataTypeSystem.html" title="interface in org.apache.calcite.rel.type">RelDataTypeSystem</a>&nbsp;typeSystem)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Converts an interval qualifier to a SQL string.</div>
 </div>
 </div>
@@ -259,6 +286,12 @@ loadScripts(document, 'script');</script>
 <section class="field-details" id="field-detail">
 <h2>Field Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="TYPE_SYSTEM">
+<h3>TYPE_SYSTEM</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="../../rel/type/RelDataTypeSystem.html" title="interface in org.apache.calcite.rel.type">RelDataTypeSystem</a></span>&nbsp;<span class="element-name">TYPE_SYSTEM</span></div>
+</section>
+</li>
 <li>
 <section class="detail" id="DEFAULT_CONTEXT">
 <h3>DEFAULT_CONTEXT</h3>
@@ -538,6 +571,18 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="prepareUnparse(org.apache.calcite.rex.RexNode)">
+<h3>prepareUnparse</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="element-name">prepareUnparse</span><wbr><span class="parameters">(<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;rexNode)</span></div>
+<div class="block"><span class="description-from-type-label">Description copied from class:&nbsp;<code><a href="../SqlDialect.html#prepareUnparse(org.apache.calcite.rex.RexNode)">SqlDialect</a></code></span></div>
+<div class="block">Converts <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex"><code>RexNode</code></a> expression to <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex"><code>RexNode</code></a> expression before unparse.</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="../SqlDialect.html#prepareUnparse(org.apache.calcite.rex.RexNode)">prepareUnparse</a></code>&nbsp;in class&nbsp;<code><a href="../SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="unparseCall(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,int,int)">
 <h3>unparseCall</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">unparseCall</span><wbr><span class="parameters">(<a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
@@ -566,6 +611,25 @@ loadScripts(document, 'script');</script>
 </dl>
 </section>
 </li>
+<li>
+<section class="detail" id="unparseMapValue(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,int,int)">
+<h3>unparseMapValue</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">unparseMapValue</span><wbr><span class="parameters">(<a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+ <a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
+ int&nbsp;leftPrec,
+ int&nbsp;rightPrec)</span></div>
+<div class="block">change map open/close symbol from default [] to ().</div>
+</section>
+</li>
+<li>
+<section class="detail" id="convertMapValueCall(org.apache.calcite.sql.SqlCall)">
+<h3>convertMapValueCall</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a></span>&nbsp;<span class="element-name">convertMapValueCall</span><wbr><span class="parameters">(<a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call)</span></div>
+<div class="block">Converts a Presto MapValue call
+ from <code>MAP['k1', 'v1', 'k2', 'v2']</code>
+ to <code>MAP[ARRAY['k1', 'k2'], ARRAY['v1', 'v2']]</code>.</div>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -575,7 +639,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2024 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

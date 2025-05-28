@@ -147,11 +147,16 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Derives the type of a call to this operator.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#tryDeriveTypeForCollection(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall)" class="member-name-link">tryDeriveTypeForCollection</a><wbr>(<a href="../validate/SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#not()" class="member-name-link">not</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the operator that is the logical inverse of this operator.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#tryDeriveTypeForCollection(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.SqlCall)" class="member-name-link">tryDeriveTypeForCollection</a><wbr>(<a href="../validate/SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
  <a href="../validate/SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
  <a href="../SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Derive type for SOME(collection expression), ANY (collection expression).</div>
 </div>
 </div>
@@ -159,7 +164,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-org.apache.calcite.sql.fun.SqlInOperator">Methods inherited from class&nbsp;org.apache.calcite.sql.fun.<a href="SqlInOperator.html" title="class in org.apache.calcite.sql.fun">SqlInOperator</a></h3>
-<code><a href="SqlInOperator.html#argumentMustBeScalar(int)">argumentMustBeScalar</a>, <a href="SqlInOperator.html#isNotIn()">isNotIn</a>, <a href="SqlInOperator.html#not()">not</a>, <a href="SqlInOperator.html#validRexOperands(int,org.apache.calcite.util.Litmus)">validRexOperands</a></code></div>
+<code><a href="SqlInOperator.html#argumentMustBeScalar(int)">argumentMustBeScalar</a>, <a href="SqlInOperator.html#isNotIn()">isNotIn</a>, <a href="SqlInOperator.html#validRexOperands(int,org.apache.calcite.util.Litmus)">validRexOperands</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-org.apache.calcite.sql.SqlBinaryOperator">Methods inherited from class&nbsp;org.apache.calcite.sql.<a href="../SqlBinaryOperator.html" title="class in org.apache.calcite.sql">SqlBinaryOperator</a></h3>
 <code><a href="../SqlBinaryOperator.html#adjustType(org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.SqlCall,org.apache.calcite.rel.type.RelDataType)">adjustType</a>, <a href="../SqlBinaryOperator.html#getMonotonicity(org.apache.calcite.sql.SqlOperatorBinding)">getMonotonicity</a>, <a href="../SqlBinaryOperator.html#getSignatureTemplate(int)">getSignatureTemplate</a>, <a href="../SqlBinaryOperator.html#getSyntax()">getSyntax</a>, <a href="../SqlBinaryOperator.html#reverse()">reverse</a></code></div>
@@ -236,6 +241,30 @@ loadScripts(document, 'script');</script>
 </dl>
 </section>
 </li>
+<li>
+<section class="detail" id="not()">
+<h3>not</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a></span>&nbsp;<span class="element-name">not</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from class:&nbsp;<code><a href="../SqlOperator.html#not()">SqlOperator</a></code></span></div>
+<div class="block">Returns the operator that is the logical inverse of this operator.
+
+ <p>For example, <code>SqlStdOperatorTable.LIKE.not()</code> returns
+ <code>SqlStdOperatorTable.NOT_LIKE</code>, and vice versa.
+
+ <p>By default, returns <code>null</code>, which means there is no inverse
+ operator.</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="SqlInOperator.html#not()">not</a></code>&nbsp;in class&nbsp;<code><a href="SqlInOperator.html" title="class in org.apache.calcite.sql.fun">SqlInOperator</a></code></dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="../SqlOperator.html#reverse()"><code>SqlOperator.reverse()</code></a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -245,7 +274,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2024 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

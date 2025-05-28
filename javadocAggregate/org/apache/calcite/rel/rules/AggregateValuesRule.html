@@ -104,8 +104,10 @@ loadScripts(document, 'script');</script>
 </span><span class="modifiers">public class </span><span class="element-name type-name-label">AggregateValuesRule</span>
 <span class="extends-implements">extends <a href="../../plan/RelRule.html" title="class in org.apache.calcite.plan">RelRule</a>&lt;<a href="AggregateValuesRule.Config.html" title="interface in org.apache.calcite.rel.rules">AggregateValuesRule.Config</a>&gt;
 implements <a href="SubstitutionRule.html" title="interface in org.apache.calcite.rel.rules">SubstitutionRule</a></span></div>
-<div class="block">Rule that applies <a href="../core/Aggregate.html" title="class in org.apache.calcite.rel.core"><code>Aggregate</code></a> to a <a href="../core/Values.html" title="class in org.apache.calcite.rel.core"><code>Values</code></a> (currently just an
+<div class="block">Rule that
+ 1. applies <a href="../core/Aggregate.html" title="class in org.apache.calcite.rel.core"><code>Aggregate</code></a> to a <a href="../core/Values.html" title="class in org.apache.calcite.rel.core"><code>Values</code></a> (currently just an
  empty <code>Value</code>s).
+ 2. <a href="../core/Aggregate.html" title="class in org.apache.calcite.rel.core"><code>Aggregate</code></a> and <a href="../core/Values.html" title="class in org.apache.calcite.rel.core"><code>Values</code></a> to a distinct <a href="../core/Values.html" title="class in org.apache.calcite.rel.core"><code>Values</code></a>.
 
  <p>This is still useful because <a href="PruneEmptyRules.html#AGGREGATE_INSTANCE"><code>PruneEmptyRules.AGGREGATE_INSTANCE</code></a>
  doesn't handle <code>Aggregate</code>, which is in turn because <code>Aggregate</code>
@@ -119,7 +121,21 @@ implements <a href="SubstitutionRule.html" title="interface in org.apache.calcit
 
  <p>This rule only applies to "grand totals", that is, <code>GROUP BY ()</code>.
  Any non-empty <code>GROUP BY</code> clause will return one row per group key
- value, and each group will consist of at least one row.</div>
+ value, and each group will consist of at least one row.
+
+ <p>This is useful because <a href="SubQueryRemoveRule.html" title="class in org.apache.calcite.rel.rules"><code>SubQueryRemoveRule</code></a>
+ doesn't remove duplicates for IN filter values.
+
+ <blockquote><code>
+ LogicalAggregate(group=[{0}])
+   LogicalValues(tuples=[[{ 1 }, { 1 }, { 3 }]])
+ </code></blockquote>
+
+ <p>With the Rule would deduplicate the values and convert to:
+
+ <blockquote><code>
+ LogicalValues(tuples=[[{ 1 }, { 3 }]])
+ </code></blockquote></div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -286,7 +302,7 @@ implements <a href="SubstitutionRule.html" title="interface in org.apache.calcit
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2024 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

@@ -99,7 +99,7 @@ loadScripts(document, 'script');</script>
  <p>It is useful for the many algorithms that care whether a join has an
  equi-join condition.
 
- <p>You can create one using <a href="#of(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode)"><code>of(org.apache.calcite.rel.RelNode, org.apache.calcite.rel.RelNode, org.apache.calcite.rex.RexNode)</code></a>, or call
+ <p>You can create one using <a href="#createWithStrictEquality(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode)"><code>createWithStrictEquality(org.apache.calcite.rel.RelNode, org.apache.calcite.rel.RelNode, org.apache.calcite.rex.RexNode)</code></a>, or call
  <a href="Join.html#analyzeCondition()"><code>Join.analyzeCondition()</code></a>; many kinds of join cache their
  join info, especially those that are equi-joins.</div>
 <dl class="notes">
@@ -164,48 +164,55 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getEquiCondition(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexBuilder)" class="member-name-link">getEquiCondition</a><wbr>(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;left,
- <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;right,
- <a href="../../rex/RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#getRemaining(org.apache.calcite.rex.RexBuilder)" class="member-name-link">getRemaining</a><wbr>(<a href="../../rex/RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
-<div class="block"><span class="deprecated-label">Deprecated.</span></div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isEqui()" class="member-name-link">isEqui</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns whether this is an equi-join.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#keys()" class="member-name-link">keys</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#leftSet()" class="member-name-link">leftSet</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="JoinInfo.html" title="class in org.apache.calcite.rel.core">JoinInfo</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode)" class="member-name-link">of</a><wbr>(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;left,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="JoinInfo.html" title="class in org.apache.calcite.rel.core">JoinInfo</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#createWithStrictEquality(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode)" class="member-name-link">createWithStrictEquality</a><wbr>(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;left,
  <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;right,
  <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Creates a <code>JoinInfo</code> by analyzing a condition.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getEquiCondition(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexBuilder)" class="member-name-link">getEquiCondition</a><wbr>(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;left,
+ <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;right,
+ <a href="../../rex/RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#getRemaining(org.apache.calcite.rex.RexBuilder)" class="member-name-link">getRemaining</a><wbr>(<a href="../../rex/RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isEqui()" class="member-name-link">isEqui</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns whether this is an equi-join.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#keys()" class="member-name-link">keys</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#leftSet()" class="member-name-link">leftSet</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="JoinInfo.html" title="class in org.apache.calcite.rel.core">JoinInfo</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(org.apache.calcite.util.ImmutableIntList,org.apache.calcite.util.ImmutableIntList)" class="member-name-link">of</a><wbr>(<a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;leftKeys,
- <a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;rightKeys)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode)" class="member-name-link">of</a><wbr>(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;left,
+ <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;right,
+ <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Creates a <code>JoinInfo</code> by analyzing a condition.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="JoinInfo.html" title="class in org.apache.calcite.rel.core">JoinInfo</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(org.apache.calcite.util.ImmutableIntList,org.apache.calcite.util.ImmutableIntList)" class="member-name-link">of</a><wbr>(<a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;leftKeys,
+ <a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;rightKeys)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Creates an equi-join.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../util/mapping/IntPair.html" title="class in org.apache.calcite.util.mapping">IntPair</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#pairs()" class="member-name-link">pairs</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../util/mapping/IntPair.html" title="class in org.apache.calcite.util.mapping">IntPair</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#pairs()" class="member-name-link">pairs</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a list of (left, right) key ordinals.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rightSet()" class="member-name-link">rightSet</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#rightSet()" class="member-name-link">rightSet</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -276,6 +283,19 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="createWithStrictEquality(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode)">
+<h3>createWithStrictEquality</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="JoinInfo.html" title="class in org.apache.calcite.rel.core">JoinInfo</a></span>&nbsp;<span class="element-name">createWithStrictEquality</span><wbr><span class="parameters">(<a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;left,
+ <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;right,
+ <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition)</span></div>
+<div class="block">Creates a <code>JoinInfo</code> by analyzing a condition.
+ A JoinInfo created using this method only considers
+ EQUALS operations equi-conditions; in contrast
+ IS_NOT_DISTINCT_FROM operations are NOT considered equalities;
+ they are inserted in the nonEquiList.</div>
+</section>
+</li>
+<li>
 <section class="detail" id="of(org.apache.calcite.util.ImmutableIntList,org.apache.calcite.util.ImmutableIntList)">
 <h3>of</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="JoinInfo.html" title="class in org.apache.calcite.rel.core">JoinInfo</a></span>&nbsp;<span class="element-name">of</span><wbr><span class="parameters">(<a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;leftKeys,
@@ -340,7 +360,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2024 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

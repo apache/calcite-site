@@ -149,13 +149,31 @@ loadScripts(document, 'script');</script>
 <div class="block">For usage of TRIM, LTRIM and RTRIM in Hive, see
  <a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF">Hive UDF usage</a>.</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unparseIsTrueOrFalse(org.apache.calcite.rex.RexNode)" class="member-name-link">unparseIsTrueOrFalse</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;rexNode)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Unparses IS TRUE,IS FALSE,IS NOT TRUE and IS NOT FALSE.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unparseSparkArrayAndMap(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,int,int)" class="member-name-link">unparseSparkArrayAndMap</a><wbr>(<a href="../sql/SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+ <a href="../sql/SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
+ int&nbsp;leftPrec,
+ int&nbsp;rightPrec)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Unparses Array and Map value constructor.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unparseSparkArrayAndMap(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,int,int)" class="member-name-link">unparseSparkArrayAndMap</a><wbr>(<a href="../sql/SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#unparseTrimLR(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,int,int)" class="member-name-link">unparseTrimLR</a><wbr>(<a href="../sql/SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
  <a href="../sql/SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
  int&nbsp;leftPrec,
  int&nbsp;rightPrec)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Unparses Array and Map value constructor.</div>
+<div class="block">For usage of TRIM(LEADING 'A' FROM 'ABCA') convert to TRIM, LTRIM and RTRIM,
+ can refer to BigQuery and Presto documents:
+ <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/functions-and-operators#trim">
+ BigQuery Trim Function</a>,
+ <a href="https://prestodb.io/docs/current/functions/string.html#trim-string-varchar">
+ Presto Trim Function</a>.</div>
 </div>
 </div>
 </div>
@@ -197,6 +215,43 @@ loadScripts(document, 'script');</script>
  int&nbsp;rightPrec)</span></div>
 <div class="block">For usage of TRIM, LTRIM and RTRIM in Hive, see
  <a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF">Hive UDF usage</a>.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="unparseTrimLR(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,int,int)">
+<h3>unparseTrimLR</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">unparseTrimLR</span><wbr><span class="parameters">(<a href="../sql/SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+ <a href="../sql/SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
+ int&nbsp;leftPrec,
+ int&nbsp;rightPrec)</span></div>
+<div class="block">For usage of TRIM(LEADING 'A' FROM 'ABCA') convert to TRIM, LTRIM and RTRIM,
+ can refer to BigQuery and Presto documents:
+ <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/functions-and-operators#trim">
+ BigQuery Trim Function</a>,
+ <a href="https://prestodb.io/docs/current/functions/string.html#trim-string-varchar">
+ Presto Trim Function</a>.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="unparseIsTrueOrFalse(org.apache.calcite.rex.RexNode)">
+<h3>unparseIsTrueOrFalse</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="element-name">unparseIsTrueOrFalse</span><wbr><span class="parameters">(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;rexNode)</span></div>
+<div class="block">Unparses IS TRUE,IS FALSE,IS NOT TRUE and IS NOT FALSE.
+
+ <p>For example :
+
+ <blockquote><pre>
+ A IS TRUE &rarr; A IS NOT NUL AND A
+ A IS FALSE &rarr; A IS NOT NUL AND NOT A
+ A IS NOT TRUE &rarr; A IS NUL OR NOT A
+ A IS NOT FALSE &rarr; A IS NUL OR A
+
+ an exception will be thrown when A is a non-deterministic function such as RAND_INTEGER.
+ </pre></blockquote></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>rexNode</code> - rexNode</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -266,7 +321,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2024 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

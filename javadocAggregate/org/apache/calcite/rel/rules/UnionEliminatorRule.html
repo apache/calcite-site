@@ -106,7 +106,10 @@ loadScripts(document, 'script');</script>
 implements <a href="SubstitutionRule.html" title="interface in org.apache.calcite.rel.rules">SubstitutionRule</a></span></div>
 <div class="block"><code>UnionEliminatorRule</code> checks to see if its possible to optimize a
  Union call by eliminating the Union operator altogether in the case the call
- consists of only one input.</div>
+ consists of only one input.
+
+ <p>Originally written for <a href="../core/Union.html" title="class in org.apache.calcite.rel.core"><code>Union</code></a> (hence the name),
+ but now also applies to <a href="../core/Intersect.html" title="class in org.apache.calcite.rel.core"><code>Intersect</code></a> and <a href="../core/Minus.html" title="class in org.apache.calcite.rel.core"><code>Minus</code></a>.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -163,14 +166,21 @@ implements <a href="SubstitutionRule.html" title="interface in org.apache.calcit
 <div class="table-header col-second">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>&nbsp;</code></div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.Class,org.apache.calcite.tools.RelBuilderFactory)" class="member-name-link">UnionEliminatorRule</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="../core/Union.html" title="class in org.apache.calcite.rel.core">Union</a>&gt;&nbsp;unionClass,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.Class,java.lang.String,org.apache.calcite.tools.RelBuilderFactory)" class="member-name-link">UnionEliminatorRule</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="../core/SetOp.html" title="class in org.apache.calcite.rel.core">SetOp</a>&gt;&nbsp;setOpClass,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;description,
  <a href="../../tools/RelBuilderFactory.html" title="interface in org.apache.calcite.tools">RelBuilderFactory</a>&nbsp;relBuilderFactory)</code></div>
 <div class="col-last even-row-color">
 <div class="block"><span class="deprecated-label">Deprecated.</span></div>
 </div>
-<div class="col-first odd-row-color"><code>protected </code></div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.rel.rules.UnionEliminatorRule.Config)" class="member-name-link">UnionEliminatorRule</a><wbr>(<a href="UnionEliminatorRule.Config.html" title="interface in org.apache.calcite.rel.rules">UnionEliminatorRule.Config</a>&nbsp;config)</code></div>
+<div class="col-first odd-row-color"><code>&nbsp;</code></div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.Class,org.apache.calcite.tools.RelBuilderFactory)" class="member-name-link">UnionEliminatorRule</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="../core/Union.html" title="class in org.apache.calcite.rel.core">Union</a>&gt;&nbsp;unionClass,
+ <a href="../../tools/RelBuilderFactory.html" title="interface in org.apache.calcite.tools">RelBuilderFactory</a>&nbsp;relBuilderFactory)</code></div>
 <div class="col-last odd-row-color">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+</div>
+<div class="col-first even-row-color"><code>protected </code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.rel.rules.UnionEliminatorRule.Config)" class="member-name-link">UnionEliminatorRule</a><wbr>(<a href="UnionEliminatorRule.Config.html" title="interface in org.apache.calcite.rel.rules">UnionEliminatorRule.Config</a>&nbsp;config)</code></div>
+<div class="col-last even-row-color">
 <div class="block">Creates a UnionEliminatorRule.</div>
 </div>
 </div>
@@ -228,6 +238,16 @@ implements <a href="SubstitutionRule.html" title="interface in org.apache.calcit
 <h3>UnionEliminatorRule</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">UnionEliminatorRule</span><wbr><span class="parameters">(<a href="UnionEliminatorRule.Config.html" title="interface in org.apache.calcite.rel.rules">UnionEliminatorRule.Config</a>&nbsp;config)</span></div>
 <div class="block">Creates a UnionEliminatorRule.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(java.lang.Class,java.lang.String,org.apache.calcite.tools.RelBuilderFactory)">
+<h3>UnionEliminatorRule</h3>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public</span>&nbsp;<span class="element-name">UnionEliminatorRule</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="../core/SetOp.html" title="class in org.apache.calcite.rel.core">SetOp</a>&gt;&nbsp;setOpClass,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;description,
+ <a href="../../tools/RelBuilderFactory.html" title="interface in org.apache.calcite.tools">RelBuilderFactory</a>&nbsp;relBuilderFactory)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
@@ -346,7 +366,7 @@ implements <a href="SubstitutionRule.html" title="interface in org.apache.calcit
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2024 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

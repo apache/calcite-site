@@ -95,6 +95,10 @@ loadScripts(document, 'script');</script>
 </div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>Direct Known Subclasses:</dt>
+<dd><code><a href="DorisSqlDialect.html" title="class in org.apache.calcite.sql.dialect">DorisSqlDialect</a></code></dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">StarRocksSqlDialect</span>
 <span class="extends-implements">extends <a href="MysqlSqlDialect.html" title="class in org.apache.calcite.sql.dialect">MysqlSqlDialect</a></span></div>
@@ -172,16 +176,26 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns SqlNode for type in "cast(column as type)", which might be
  different between databases by type name, precision etc.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#supportsApproxCountDistinct()" class="member-name-link">supportsApproxCountDistinct</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#prepareUnparse(org.apache.calcite.rex.RexNode)" class="member-name-link">prepareUnparse</a><wbr>(<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;arg)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns whether this dialect supports APPROX_COUNT_DISTINCT functions.</div>
+<div class="block">Converts <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex"><code>RexNode</code></a> expression to <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex"><code>RexNode</code></a> expression before unparse.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#supportsGroupByWithRollup()" class="member-name-link">supportsGroupByWithRollup</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#supportsApproxCountDistinct()" class="member-name-link">supportsApproxCountDistinct</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns whether this dialect supports APPROX_COUNT_DISTINCT functions.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#supportsGroupByWithRollup()" class="member-name-link">supportsGroupByWithRollup</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns whether this dialect supports "WITH ROLLUP" in the "GROUP BY"
  clause.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#supportsJoinType(org.apache.calcite.rel.core.JoinRelType)" class="member-name-link">supportsJoinType</a><wbr>(<a href="../../rel/core/JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a>&nbsp;joinType)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns whether this dialect support the specified type of join.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#supportsTimestampPrecision()" class="member-name-link">supportsTimestampPrecision</a>()</code></div>
@@ -205,7 +219,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-org.apache.calcite.sql.dialect.MysqlSqlDialect">Methods inherited from class&nbsp;org.apache.calcite.sql.dialect.<a href="MysqlSqlDialect.html" title="class in org.apache.calcite.sql.dialect">MysqlSqlDialect</a></h3>
-<code><a href="MysqlSqlDialect.html#emulateNullDirection(org.apache.calcite.sql.SqlNode,boolean,boolean)">emulateNullDirection</a>, <a href="MysqlSqlDialect.html#getCalendarPolicy()">getCalendarPolicy</a>, <a href="MysqlSqlDialect.html#requiresAliasForFromItems()">requiresAliasForFromItems</a>, <a href="MysqlSqlDialect.html#rewriteSingleValueExpr(org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.type.RelDataType)">rewriteSingleValueExpr</a>, <a href="MysqlSqlDialect.html#supportsAggregateFunction(org.apache.calcite.sql.SqlKind)">supportsAggregateFunction</a>, <a href="MysqlSqlDialect.html#supportsAggregateFunctionFilter()">supportsAggregateFunctionFilter</a>, <a href="MysqlSqlDialect.html#supportsAliasedValues()">supportsAliasedValues</a>, <a href="MysqlSqlDialect.html#supportsCharSet()">supportsCharSet</a>, <a href="MysqlSqlDialect.html#supportsJoinType(org.apache.calcite.rel.core.JoinRelType)">supportsJoinType</a>, <a href="MysqlSqlDialect.html#supportsNestedAggregations()">supportsNestedAggregations</a>, <a href="MysqlSqlDialect.html#unparseOffsetFetch(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)">unparseOffsetFetch</a>, <a href="MysqlSqlDialect.html#unparseSqlIntervalQualifier(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlIntervalQualifier,org.apache.calcite.rel.type.RelDataTypeSystem)">unparseSqlIntervalQualifier</a></code></div>
+<code><a href="MysqlSqlDialect.html#emulateNullDirection(org.apache.calcite.sql.SqlNode,boolean,boolean)">emulateNullDirection</a>, <a href="MysqlSqlDialect.html#getCalendarPolicy()">getCalendarPolicy</a>, <a href="MysqlSqlDialect.html#requiresAliasForFromItems()">requiresAliasForFromItems</a>, <a href="MysqlSqlDialect.html#rewriteSingleValueExpr(org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.type.RelDataType)">rewriteSingleValueExpr</a>, <a href="MysqlSqlDialect.html#supportsAggregateFunction(org.apache.calcite.sql.SqlKind)">supportsAggregateFunction</a>, <a href="MysqlSqlDialect.html#supportsAggregateFunctionFilter()">supportsAggregateFunctionFilter</a>, <a href="MysqlSqlDialect.html#supportsAliasedValues()">supportsAliasedValues</a>, <a href="MysqlSqlDialect.html#supportsCharSet()">supportsCharSet</a>, <a href="MysqlSqlDialect.html#supportsNestedAggregations()">supportsNestedAggregations</a>, <a href="MysqlSqlDialect.html#unparseOffsetFetch(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)">unparseOffsetFetch</a>, <a href="MysqlSqlDialect.html#unparseSqlIntervalQualifier(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlIntervalQualifier,org.apache.calcite.rel.type.RelDataTypeSystem)">unparseSqlIntervalQualifier</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-org.apache.calcite.sql.SqlDialect">Methods inherited from class&nbsp;org.apache.calcite.sql.<a href="../SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a></h3>
 <code><a href="../SqlDialect.html#allowsAs()">allowsAs</a>, <a href="../SqlDialect.html#configureParser(org.apache.calcite.sql.parser.SqlParser.Config)">configureParser</a>, <a href="../SqlDialect.html#configureParser(org.apache.calcite.sql.parser.SqlParser.ConfigBuilder)">configureParser</a>, <a href="../SqlDialect.html#containsNonAscii(java.lang.String)">containsNonAscii</a>, <a href="../SqlDialect.html#create(java.sql.DatabaseMetaData)">create</a>, <a href="../SqlDialect.html#defaultNullDirection(org.apache.calcite.rel.RelFieldCollation.Direction)">defaultNullDirection</a>, <a href="../SqlDialect.html#emulateJoinTypeForCrossJoin()">emulateJoinTypeForCrossJoin</a>, <a href="../SqlDialect.html#emulateNullDirectionWithIsNull(org.apache.calcite.sql.SqlNode,boolean,boolean)">emulateNullDirectionWithIsNull</a>, <a href="../SqlDialect.html#getConformance()">getConformance</a>, <a href="../SqlDialect.html#getDatabaseProduct()">getDatabaseProduct</a>, <a href="../SqlDialect.html#getFormatModel()">getFormatModel</a>, <a href="../SqlDialect.html#getNullCollation()">getNullCollation</a>, <a href="../SqlDialect.html#getProduct(java.lang.String,java.lang.String)">getProduct</a>, <a href="../SqlDialect.html#getQuotedCasing()">getQuotedCasing</a>, <a href="../SqlDialect.html#getQuoting()">getQuoting</a>, <a href="../SqlDialect.html#getSingleRowTableName()">getSingleRowTableName</a>, <a href="../SqlDialect.html#getTypeSystem()">getTypeSystem</a>, <a href="../SqlDialect.html#getUnquotedCasing()">getUnquotedCasing</a>, <a href="../SqlDialect.html#hasImplicitTableAlias()">hasImplicitTableAlias</a>, <a href="../SqlDialect.html#identifierNeedsQuote(java.lang.String)">identifierNeedsQuote</a>, <a href="../SqlDialect.html#isCaseSensitive()">isCaseSensitive</a>, <a href="../SqlDialect.html#quoteIdentifier(java.lang.String)">quoteIdentifier</a>, <a href="../SqlDialect.html#quoteIdentifier(java.lang.StringBuilder,java.lang.String)">quoteIdentifier</a>, <a href="../SqlDialect.html#quoteIdentifier(java.lang.StringBuilder,java.util.List)">quoteIdentifier</a>, <a href="../SqlDialect.html#quoteStringLiteral(java.lang.String)">quoteStringLiteral</a>, <a href="../SqlDialect.html#quoteStringLiteral(java.lang.StringBuilder,java.lang.String,java.lang.String)">quoteStringLiteral</a>, <a href="../SqlDialect.html#quoteStringLiteralUnicode(java.lang.StringBuilder,java.lang.String)">quoteStringLiteralUnicode</a>, <a href="../SqlDialect.html#quoteTimestampLiteral(java.sql.Timestamp)">quoteTimestampLiteral</a>, <a href="../SqlDialect.html#rewriteMaxMin(org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.type.RelDataType)">rewriteMaxMin</a>, <a href="../SqlDialect.html#rewriteMaxMinExpr(org.apache.calcite.sql.SqlNode,org.apache.calcite.rel.type.RelDataType)">rewriteMaxMinExpr</a>, <a href="../SqlDialect.html#supportBooleanCaseWhen()">supportBooleanCaseWhen</a>, <a href="../SqlDialect.html#supportsDataType(org.apache.calcite.rel.type.RelDataType)">supportsDataType</a>, <a href="../SqlDialect.html#supportsFunction(org.apache.calcite.sql.SqlOperator,org.apache.calcite.rel.type.RelDataType,java.util.List)">supportsFunction</a>, <a href="../SqlDialect.html#supportsGroupByLiteral()">supportsGroupByLiteral</a>, <a href="../SqlDialect.html#supportsGroupByWithCube()">supportsGroupByWithCube</a>, <a href="../SqlDialect.html#supportsImplicitTypeCoercion(org.apache.calcite.rex.RexCall)">supportsImplicitTypeCoercion</a>, <a href="../SqlDialect.html#supportsOffsetFetch()">supportsOffsetFetch</a>, <a href="../SqlDialect.html#supportsWindowFunctions()">supportsWindowFunctions</a>, <a href="../SqlDialect.html#unparseBoolLiteral(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlLiteral,int,int)">unparseBoolLiteral</a>, <a href="../SqlDialect.html#unparseFetchUsingAnsi(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)">unparseFetchUsingAnsi</a>, <a href="../SqlDialect.html#unparseFetchUsingLimit(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)">unparseFetchUsingLimit</a>, <a href="../SqlDialect.html#unparseLimit(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode)">unparseLimit</a>, <a href="../SqlDialect.html#unparseNumericLiteral(org.apache.calcite.sql.SqlWriter,java.lang.String,int,int)">unparseNumericLiteral</a>, <a href="../SqlDialect.html#unparseOffset(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode)">unparseOffset</a>, <a href="../SqlDialect.html#unparseSqlDatetimeArithmetic(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.SqlKind,int,int)">unparseSqlDatetimeArithmetic</a>, <a href="../SqlDialect.html#unparseSqlIntervalLiteral(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlIntervalLiteral,int,int)">unparseSqlIntervalLiteral</a>, <a href="../SqlDialect.html#unparseSqlSetOption(org.apache.calcite.sql.SqlWriter,int,int,org.apache.calcite.sql.SqlSetOption)">unparseSqlSetOption</a>, <a href="../SqlDialect.html#unparseTableScanHints(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNodeList,int,int)">unparseTableScanHints</a>, <a href="../SqlDialect.html#unparseTopN(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlNode,org.apache.calcite.sql.SqlNode)">unparseTopN</a>, <a href="../SqlDialect.html#unquoteStringLiteral(java.lang.String)">unquoteStringLiteral</a></code></div>
@@ -330,6 +344,30 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="supportsJoinType(org.apache.calcite.rel.core.JoinRelType)">
+<h3>supportsJoinType</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">supportsJoinType</span><wbr><span class="parameters">(<a href="../../rel/core/JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a>&nbsp;joinType)</span></div>
+<div class="block"><span class="description-from-type-label">Description copied from class:&nbsp;<code><a href="../SqlDialect.html#supportsJoinType(org.apache.calcite.rel.core.JoinRelType)">SqlDialect</a></code></span></div>
+<div class="block">Returns whether this dialect support the specified type of join.</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="MysqlSqlDialect.html#supportsJoinType(org.apache.calcite.rel.core.JoinRelType)">supportsJoinType</a></code>&nbsp;in class&nbsp;<code><a href="MysqlSqlDialect.html" title="class in org.apache.calcite.sql.dialect">MysqlSqlDialect</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="prepareUnparse(org.apache.calcite.rex.RexNode)">
+<h3>prepareUnparse</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="element-name">prepareUnparse</span><wbr><span class="parameters">(<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;arg)</span></div>
+<div class="block"><span class="description-from-type-label">Description copied from class:&nbsp;<code><a href="../SqlDialect.html#prepareUnparse(org.apache.calcite.rex.RexNode)">SqlDialect</a></code></span></div>
+<div class="block">Converts <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex"><code>RexNode</code></a> expression to <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex"><code>RexNode</code></a> expression before unparse.</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="../SqlDialect.html#prepareUnparse(org.apache.calcite.rex.RexNode)">prepareUnparse</a></code>&nbsp;in class&nbsp;<code><a href="../SqlDialect.html" title="class in org.apache.calcite.sql">SqlDialect</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="unparseCall(org.apache.calcite.sql.SqlWriter,org.apache.calcite.sql.SqlCall,int,int)">
 <h3>unparseCall</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">unparseCall</span><wbr><span class="parameters">(<a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
@@ -381,7 +419,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2024 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

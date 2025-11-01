@@ -360,12 +360,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getSourceSelect()">
 <h3>getSourceSelect</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a></span>&nbsp;<span class="element-name">getSourceSelect</span>()</div>
-<div class="block">Gets the source SELECT expression for the data to be deleted. This
- returns null before the condition has been expanded by
- <a href="validate/SqlValidatorImpl.html#performUnconditionalRewrites(org.apache.calcite.sql.SqlNode,boolean)"><code>SqlValidatorImpl.performUnconditionalRewrites(SqlNode, boolean)</code></a>.</div>
+<div class="block">Gets the source SELECT expression for the data to be deleted. The SELECT contains target
+ table columns, for example <code>SELECT * FROM target</code>.
+ Returns null before the statement has been expanded by
+ <a href="validate/SqlValidatorImpl.html#performUnconditionalRewrites(org.apache.calcite.sql.SqlNode,boolean)"><code>SqlValidatorImpl.performUnconditionalRewrites(SqlNode, boolean)</code></a> or
+ <a href="validate/SqlValidatorImpl.html#createSourceSelectForDelete(org.apache.calcite.sql.SqlDelete)"><code>SqlValidatorImpl.createSourceSelectForDelete(SqlDelete)</code></a>.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the source SELECT for the data to be inserted</dd>
+<dd>the source SELECT for the data to be deleted.</dd>
 </dl>
 </section>
 </li>

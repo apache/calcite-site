@@ -106,8 +106,12 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(long,long,org.apache.calcite.rel.core.JoinRelType,org.apache.calcite.rex.RexNode)" class="member-name-link">HyperEdge</a><wbr>(long&nbsp;leftNodeBits,
- long&nbsp;rightNodeBits,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.rel.rules.HyperEdge.TotalEligibilitySet,java.util.List,long,long,long,long,org.apache.calcite.rel.core.JoinRelType,org.apache.calcite.rex.RexNode)" class="member-name-link">HyperEdge</a><wbr>(org.apache.calcite.rel.rules.HyperEdge.TotalEligibilitySet&nbsp;tes,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ConflictRule.html" title="class in org.apache.calcite.rel.rules">ConflictRule</a>&gt;&nbsp;conflictRules,
+ long&nbsp;leftNodeUsedInPredicate,
+ long&nbsp;rightNodeUsedInPredicate,
+ long&nbsp;initialLeftNodeBits,
+ long&nbsp;initialRightNodeBits,
  <a href="../core/JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a>&nbsp;joinType,
  <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
@@ -119,26 +123,62 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel">
 <div class="summary-table three-column-summary" aria-labelledby="method-summary-table-tab0">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCondition()" class="member-name-link">getCondition</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="HyperEdge.html" title="class in org.apache.calcite.rel.rules">HyperEdge</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#accept(org.apache.calcite.rex.RexShuttle)" class="member-name-link">accept</a><wbr>(<a href="../../rex/RexShuttle.html" title="class in org.apache.calcite.rex">RexShuttle</a>&nbsp;shuttle)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../core/JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getJoinType()" class="member-name-link">getJoinType</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="HyperEdge.html" title="class in org.apache.calcite.rel.rules">HyperEdge</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#adjustNodeBit(int)" class="member-name-link">adjustNodeBit</a><wbr>(int&nbsp;nodeOffset)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">When <a href="JoinToHyperGraphRule.html" title="class in org.apache.calcite.rel.rules"><code>JoinToHyperGraphRule</code></a> constructs a hypergraph , if the right child of Join is a
+ HyperGraph class, all bitmaps related to inputs in this right child need to be shifted
+ according to the number of inputs in the left child of Join.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="HyperEdge.html" title="class in org.apache.calcite.rel.rules">HyperEdge</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#createHyperEdgesFromJoinConds(java.util.Map,java.util.Map,java.util.List,java.util.List,org.apache.calcite.rel.core.JoinRelType,int,int)" class="member-name-link">createHyperEdgesFromJoinConds</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;inputRefToNodeIndexMap,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;inputRefToFieldIndexMap,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;joinConds,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ConflictRule.html" title="class in org.apache.calcite.rel.rules">ConflictRule</a>&gt;&nbsp;conflictRules,
+ <a href="../core/JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a>&nbsp;joinType,
+ int&nbsp;leftNodeCount,
+ int&nbsp;nodeCount)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Build hyperedges corresponding to a join operator.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCondition()" class="member-name-link">getCondition</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLeftNodeBitmap()" class="member-name-link">getLeftNodeBitmap</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ConflictRule.html" title="class in org.apache.calcite.rel.rules">ConflictRule</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getConflictRules()" class="member-name-link">getConflictRules</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNodeBitmap()" class="member-name-link">getNodeBitmap</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getEndpoint()" class="member-name-link">getEndpoint</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRightNodeBitmap()" class="member-name-link">getRightNodeBitmap</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getInitialLeftNodeBits()" class="member-name-link">getInitialLeftNodeBits</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getInitialRightNodeBits()" class="member-name-link">getInitialRightNodeBits</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../core/JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getJoinType()" class="member-name-link">getJoinType</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLeftEndpoint()" class="member-name-link">getLeftEndpoint</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLeftNodeUsedInPredicate()" class="member-name-link">getLeftNodeUsedInPredicate</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRightEndpoint()" class="member-name-link">getRightEndpoint</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRightNodeUsedInPredicate()" class="member-name-link">getRightNodeUsedInPredicate</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isSimple()" class="member-name-link">isSimple</a>()</code></div>
@@ -164,10 +204,14 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(long,long,org.apache.calcite.rel.core.JoinRelType,org.apache.calcite.rex.RexNode)">
+<section class="detail" id="&lt;init&gt;(org.apache.calcite.rel.rules.HyperEdge.TotalEligibilitySet,java.util.List,long,long,long,long,org.apache.calcite.rel.core.JoinRelType,org.apache.calcite.rex.RexNode)">
 <h3>HyperEdge</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">HyperEdge</span><wbr><span class="parameters">(long&nbsp;leftNodeBits,
- long&nbsp;rightNodeBits,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">HyperEdge</span><wbr><span class="parameters">(org.apache.calcite.rel.rules.HyperEdge.TotalEligibilitySet&nbsp;tes,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ConflictRule.html" title="class in org.apache.calcite.rel.rules">ConflictRule</a>&gt;&nbsp;conflictRules,
+ long&nbsp;leftNodeUsedInPredicate,
+ long&nbsp;rightNodeUsedInPredicate,
+ long&nbsp;initialLeftNodeBits,
+ long&nbsp;initialRightNodeBits,
  <a href="../core/JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a>&nbsp;joinType,
  <a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition)</span></div>
 </section>
@@ -181,21 +225,51 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getNodeBitmap()">
-<h3>getNodeBitmap</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getNodeBitmap</span>()</div>
+<section class="detail" id="getEndpoint()">
+<h3>getEndpoint</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getEndpoint</span>()</div>
 </section>
 </li>
 <li>
-<section class="detail" id="getLeftNodeBitmap()">
-<h3>getLeftNodeBitmap</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getLeftNodeBitmap</span>()</div>
+<section class="detail" id="getLeftEndpoint()">
+<h3>getLeftEndpoint</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getLeftEndpoint</span>()</div>
 </section>
 </li>
 <li>
-<section class="detail" id="getRightNodeBitmap()">
-<h3>getRightNodeBitmap</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getRightNodeBitmap</span>()</div>
+<section class="detail" id="getRightEndpoint()">
+<h3>getRightEndpoint</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getRightEndpoint</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getLeftNodeUsedInPredicate()">
+<h3>getLeftNodeUsedInPredicate</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getLeftNodeUsedInPredicate</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getRightNodeUsedInPredicate()">
+<h3>getRightNodeUsedInPredicate</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getRightNodeUsedInPredicate</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getConflictRules()">
+<h3>getConflictRules</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ConflictRule.html" title="class in org.apache.calcite.rel.rules">ConflictRule</a>&gt;</span>&nbsp;<span class="element-name">getConflictRules</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getInitialLeftNodeBits()">
+<h3>getInitialLeftNodeBits</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getInitialLeftNodeBits</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getInitialRightNodeBits()">
+<h3>getInitialRightNodeBits</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getInitialRightNodeBits</span>()</div>
 </section>
 </li>
 <li>
@@ -223,6 +297,54 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="accept(org.apache.calcite.rex.RexShuttle)">
+<h3>accept</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="HyperEdge.html" title="class in org.apache.calcite.rel.rules">HyperEdge</a></span>&nbsp;<span class="element-name">accept</span><wbr><span class="parameters">(<a href="../../rex/RexShuttle.html" title="class in org.apache.calcite.rex">RexShuttle</a>&nbsp;shuttle)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="adjustNodeBit(int)">
+<h3>adjustNodeBit</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="HyperEdge.html" title="class in org.apache.calcite.rel.rules">HyperEdge</a></span>&nbsp;<span class="element-name">adjustNodeBit</span><wbr><span class="parameters">(int&nbsp;nodeOffset)</span></div>
+<div class="block">When <a href="JoinToHyperGraphRule.html" title="class in org.apache.calcite.rel.rules"><code>JoinToHyperGraphRule</code></a> constructs a hypergraph , if the right child of Join is a
+ HyperGraph class, all bitmaps related to inputs in this right child need to be shifted
+ according to the number of inputs in the left child of Join.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>nodeOffset</code> - number of inputs in the left child</dd>
+<dt>Returns:</dt>
+<dd>HyperEdge produced after shifting</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="createHyperEdgesFromJoinConds(java.util.Map,java.util.Map,java.util.List,java.util.List,org.apache.calcite.rel.core.JoinRelType,int,int)">
+<h3>createHyperEdgesFromJoinConds</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="HyperEdge.html" title="class in org.apache.calcite.rel.rules">HyperEdge</a>&gt;</span>&nbsp;<span class="element-name">createHyperEdgesFromJoinConds</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;inputRefToNodeIndexMap,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;inputRefToFieldIndexMap,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;joinConds,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ConflictRule.html" title="class in org.apache.calcite.rel.rules">ConflictRule</a>&gt;&nbsp;conflictRules,
+ <a href="../core/JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a>&nbsp;joinType,
+ int&nbsp;leftNodeCount,
+ int&nbsp;nodeCount)</span></div>
+<div class="block">Build hyperedges corresponding to a join operator. The construction of a HyperEdge includes
+ total eligibility set, conflict rules, node-related bitmaps, predicate expressions (RexInputRef
+ is replaced by RexNodeAndFieldIndex) and join type.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>inputRefToNodeIndexMap</code> - a map from inputRef to node index</dd>
+<dd><code>inputRefToFieldIndexMap</code> - a map from inputRef to field index</dd>
+<dd><code>joinConds</code> - join conditions</dd>
+<dd><code>conflictRules</code> - all conflict rules</dd>
+<dd><code>joinType</code> - join type</dd>
+<dd><code>leftNodeCount</code> - number of inputs in the left child of Join</dd>
+<dd><code>nodeCount</code> - number of inputs of Join</dd>
+<dt>Returns:</dt>
+<dd>HyperEdge list</dd>
 </dl>
 </section>
 </li>

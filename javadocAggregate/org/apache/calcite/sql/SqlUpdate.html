@@ -398,9 +398,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getSourceSelect()">
 <h3>getSourceSelect</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a></span>&nbsp;<span class="element-name">getSourceSelect</span>()</div>
-<div class="block">Gets the source SELECT expression for the data to be updated. Returns
- null before the statement has been expanded by
- <a href="validate/SqlValidatorImpl.html#performUnconditionalRewrites(org.apache.calcite.sql.SqlNode,boolean)"><code>SqlValidatorImpl.performUnconditionalRewrites(SqlNode, boolean)</code></a>.</div>
+<div class="block">Gets the source SELECT expression for the data to be updated. The SELECT contains the target
+ table columns followed by the source expressions. For example, for <code>UPDATE target SET
+ column1 = source_expr1, column5 = source_expr2</code> the source select is
+ <code>SELECT *, source_expr1, source_expr2</code>.
+ Returns null before the statement has been expanded by
+ <a href="validate/SqlValidatorImpl.html#performUnconditionalRewrites(org.apache.calcite.sql.SqlNode,boolean)"><code>SqlValidatorImpl.performUnconditionalRewrites(SqlNode, boolean)</code></a> and
+ <a href="validate/SqlValidatorImpl.html#createSourceSelectForUpdate(org.apache.calcite.sql.SqlUpdate)"><code>SqlValidatorImpl.createSourceSelectForUpdate(SqlUpdate)</code></a>.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the source SELECT for the data to be updated</dd>

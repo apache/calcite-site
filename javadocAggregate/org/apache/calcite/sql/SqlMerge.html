@@ -410,11 +410,20 @@ loadScripts(document, 'script');</script>
 <h3>getSourceSelect</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a></span>&nbsp;<span class="element-name">getSourceSelect</span>()</div>
 <div class="block">Gets the source SELECT expression for the data to be updated/inserted.
+
+ <p>The source SELECT column order:
+ <ul>
+   <li>`WHEN NOT MATCHED THEN INSERT` only: [new values...]</li>
+   <li>`WHEN MATCHED THEN UPDATE` only: [old table columns..., updated new values...]</li>
+   <li>Both `NOT MATCHED THEN INSERT` and `WHEN MATCHED THEN UPDATE`: [insert new values...,
+   old table columns..., updated new values...]</li>
+ </ul>
  Returns null before the statement has been expanded by
- <a href="validate/SqlValidatorImpl.html#performUnconditionalRewrites(org.apache.calcite.sql.SqlNode,boolean)"><code>SqlValidatorImpl.performUnconditionalRewrites(SqlNode, boolean)</code></a>.</div>
+ <a href="validate/SqlValidatorImpl.html#performUnconditionalRewrites(org.apache.calcite.sql.SqlNode,boolean)"><code>SqlValidatorImpl.performUnconditionalRewrites(SqlNode, boolean)</code></a> and
+ <code>SqlValidatorImpl.rewriteMerge(SqlMerge)</code>.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the source SELECT for the data to be updated</dd>
+<dd>the source SELECT for the data to be updated/inserted</dd>
 </dl>
 </section>
 </li>

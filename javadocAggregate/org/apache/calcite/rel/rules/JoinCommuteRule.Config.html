@@ -117,8 +117,11 @@ extends <a href="../../plan/RelRule.Config.html" title="interface in org.apache.
 <div class="col-second even-row-color"><code><a href="#DEFAULT" class="member-name-link">DEFAULT</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>static final <a href="JoinCommuteRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinCommuteRule.Config</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#SWAP_OUTER" class="member-name-link">SWAP_OUTER</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#RIGHT_TO_LEFT_ONLY" class="member-name-link">RIGHT_TO_LEFT_ONLY</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>static final <a href="JoinCommuteRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinCommuteRule.Config</a></code></div>
+<div class="col-second even-row-color"><code><a href="#SWAP_OUTER" class="member-name-link">SWAP_OUTER</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -140,24 +143,34 @@ extends <a href="../../plan/RelRule.Config.html" title="interface in org.apache.
  (that is, cartesian joins); default true.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#isSwapOuter()" class="member-name-link">isSwapOuter</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#isRightToLeftOnly()" class="member-name-link">isRightToLeftOnly</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">If true, only RIGHT JOIN will be swapped; default false.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#isSwapOuter()" class="member-name-link">isSwapOuter</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Whether to swap outer joins; default false.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="JoinCommuteRule.html" title="class in org.apache.calcite.rel.rules">JoinCommuteRule</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#toRule()" class="member-name-link">toRule</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="JoinCommuteRule.html" title="class in org.apache.calcite.rel.rules">JoinCommuteRule</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#toRule()" class="member-name-link">toRule</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Creates a rule that uses this configuration.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="JoinCommuteRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinCommuteRule.Config</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withAllowAlwaysTrueCondition(boolean)" class="member-name-link">withAllowAlwaysTrueCondition</a><wbr>(boolean&nbsp;allowAlwaysTrueCondition)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="JoinCommuteRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinCommuteRule.Config</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withAllowAlwaysTrueCondition(boolean)" class="member-name-link">withAllowAlwaysTrueCondition</a><wbr>(boolean&nbsp;allowAlwaysTrueCondition)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Sets <a href="#isAllowAlwaysTrueCondition()"><code>isAllowAlwaysTrueCondition()</code></a>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="JoinCommuteRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinCommuteRule.Config</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#withOperandFor(java.lang.Class)" class="member-name-link">withOperandFor</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="../core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&gt;&nbsp;joinClass)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="JoinCommuteRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinCommuteRule.Config</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#withOperandFor(java.lang.Class)" class="member-name-link">withOperandFor</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="../core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&gt;&nbsp;joinClass)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Defines an operand tree for the given classes.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="JoinCommuteRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinCommuteRule.Config</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withRightToLeftOnly(boolean)" class="member-name-link">withRightToLeftOnly</a><wbr>(boolean&nbsp;isRightToLeftOnly)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Sets <a href="#isRightToLeftOnly()"><code>isRightToLeftOnly()</code></a>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="JoinCommuteRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinCommuteRule.Config</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#withSwapOuter(boolean)" class="member-name-link">withSwapOuter</a><wbr>(boolean&nbsp;swapOuter)</code></div>
@@ -191,6 +204,12 @@ extends <a href="../../plan/RelRule.Config.html" title="interface in org.apache.
 <section class="detail" id="SWAP_OUTER">
 <h3>SWAP_OUTER</h3>
 <div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type"><a href="JoinCommuteRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinCommuteRule.Config</a></span>&nbsp;<span class="element-name">SWAP_OUTER</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="RIGHT_TO_LEFT_ONLY">
+<h3>RIGHT_TO_LEFT_ONLY</h3>
+<div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type"><a href="JoinCommuteRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinCommuteRule.Config</a></span>&nbsp;<span class="element-name">RIGHT_TO_LEFT_ONLY</span></div>
 </section>
 </li>
 </ul>
@@ -249,6 +268,21 @@ extends <a href="../../plan/RelRule.Config.html" title="interface in org.apache.
 <h3>withAllowAlwaysTrueCondition</h3>
 <div class="member-signature"><span class="return-type"><a href="JoinCommuteRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinCommuteRule.Config</a></span>&nbsp;<span class="element-name">withAllowAlwaysTrueCondition</span><wbr><span class="parameters">(boolean&nbsp;allowAlwaysTrueCondition)</span></div>
 <div class="block">Sets <a href="#isAllowAlwaysTrueCondition()"><code>isAllowAlwaysTrueCondition()</code></a>.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="isRightToLeftOnly()">
+<h3>isRightToLeftOnly</h3>
+<div class="member-signature"><span class="annotations">@Default
+</span><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isRightToLeftOnly</span>()</div>
+<div class="block">If true, only RIGHT JOIN will be swapped; default false.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="withRightToLeftOnly(boolean)">
+<h3>withRightToLeftOnly</h3>
+<div class="member-signature"><span class="return-type"><a href="JoinCommuteRule.Config.html" title="interface in org.apache.calcite.rel.rules">JoinCommuteRule.Config</a></span>&nbsp;<span class="element-name">withRightToLeftOnly</span><wbr><span class="parameters">(boolean&nbsp;isRightToLeftOnly)</span></div>
+<div class="block">Sets <a href="#isRightToLeftOnly()"><code>isRightToLeftOnly()</code></a>.</div>
 </section>
 </li>
 </ul>

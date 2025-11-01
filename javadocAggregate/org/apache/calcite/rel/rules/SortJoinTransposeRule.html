@@ -104,12 +104,35 @@ loadScripts(document, 'script');</script>
 </span><span class="modifiers">public class </span><span class="element-name type-name-label">SortJoinTransposeRule</span>
 <span class="extends-implements">extends <a href="../../plan/RelRule.html" title="class in org.apache.calcite.plan">RelRule</a>&lt;<a href="SortJoinTransposeRule.Config.html" title="interface in org.apache.calcite.rel.rules">SortJoinTransposeRule.Config</a>&gt;
 implements <a href="TransformationRule.html" title="interface in org.apache.calcite.rel.rules">TransformationRule</a></span></div>
-<div class="block">Planner rule that pushes a <a href="../core/Sort.html" title="class in org.apache.calcite.rel.core"><code>Sort</code></a> past a
- <a href="../core/Join.html" title="class in org.apache.calcite.rel.core"><code>Join</code></a>.
+<div class="block">Planner rule that pushes a <a href="../core/Sort.html" title="class in org.apache.calcite.rel.core"><code>Sort</code></a> past a <a href="../core/Join.html" title="class in org.apache.calcite.rel.core"><code>Join</code></a>.
 
- <p>At the moment, we only consider left/right outer joins.
- However, an extension for full outer joins for this rule could be envisioned.
- Special attention should be paid to null values for correctness issues.</div>
+ <p>This rule applies to left/right outer joins, and only pushes the sort if its keys are
+ entirely from one input. It will not fire if the sort uses dynamic parameters or the input
+ is already sorted and limited. However, an extension for full outer joins for this rule could
+ be envisioned.
+
+ <p>For example, given the SQL:
+ <pre>
+   select d.deptno, empno from sales.dept d
+   right join sales.emp e using (deptno) limit 10 offset 2
+ </pre>
+ The initial plan:
+ <pre>
+   LogicalProject(DEPTNO=[$0], EMPNO=[$2])
+     LogicalSort(offset=[2], fetch=[10])
+       LogicalJoin(condition=[=($0, $9)], joinType=[right])
+         LogicalTableScan(table=[[CATALOG, SALES, DEPT]])
+         LogicalTableScan(table=[[CATALOG, SALES, EMP]])
+ </pre>
+ After applying this rule:
+ <pre>
+   LogicalProject(DEPTNO=[$0], EMPNO=[$2])
+     LogicalSort(offset=[2], fetch=[10])
+       LogicalJoin(condition=[=($0, $9)], joinType=[right])
+         LogicalTableScan(table=[[CATALOG, SALES, DEPT]])
+         LogicalSort(fetch=[12])
+           LogicalTableScan(table=[[CATALOG, SALES, EMP]])
+ </pre></div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>

@@ -103,7 +103,8 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">FunctionSqlType</span>
 <span class="extends-implements">extends <a href="AbstractSqlType.html" title="class in org.apache.calcite.sql.type">AbstractSqlType</a></span></div>
 <div class="block">Function type.
- The type of lambda expression can be represented by a function type.</div>
+
+ <p>The type of lambda expression can be represented by a function type.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -138,9 +139,11 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">FunctionSqlType</a><wbr>(<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;parameterType,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">FunctionSqlType</a><wbr>(<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;parameterTypes,
  <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;returnType)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Constructs a new function SQL type.</div>
+</div>
 </div>
 </section>
 </li>
@@ -167,8 +170,15 @@ loadScripts(document, 'script');</script>
 <div class="block">Gets a canonical object representing the family of this type.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getReturnType()" class="member-name-link">getReturnType</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getParameterTypes()" class="member-name-link">getParameterTypes</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the parameter types of the function.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getReturnType()" class="member-name-link">getReturnType</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the return type of the function.</div>
+</div>
 </div>
 </div>
 </div>
@@ -198,8 +208,14 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rel.type.RelDataType)">
 <h3>FunctionSqlType</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">FunctionSqlType</span><wbr><span class="parameters">(<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;parameterType,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">FunctionSqlType</span><wbr><span class="parameters">(<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;parameterTypes,
  <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;returnType)</span></div>
+<div class="block">Constructs a new function SQL type. This should only be called from a factory method.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>parameterTypes</code> - a struct type wrapping function's input parameter types.</dd>
+<dd><code>returnType</code> - function's return type.</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -246,9 +262,25 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="getParameterTypes()">
+<h3>getParameterTypes</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></span>&nbsp;<span class="element-name">getParameterTypes</span>()</div>
+<div class="block">Returns the parameter types of the function.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>a struct wrapping function's parameter types.</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="getReturnType()">
 <h3>getReturnType</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></span>&nbsp;<span class="element-name">getReturnType</span>()</div>
+<div class="block">Returns the return type of the function.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the function's return type.</dd>
+</dl>
 </section>
 </li>
 </ul>

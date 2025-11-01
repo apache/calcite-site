@@ -115,7 +115,18 @@ loadScripts(document, 'script');</script>
  <ul>
  <li>For <code>INSERT</code>, those rows are the new values;
  <li>for <code>DELETE</code>, the old values;
- <li>for <code>UPDATE</code>, all old values plus updated new values.
+ <li>for <code>UPDATE</code>, all old values plus updated new values;
+ <li>for <code>MERGE</code>, the rows may contain fields for both <code>INSERT</code> and <code>UPDATE</code>
+     operations, depending on the clauses specified:
+     <ul>
+       <li>If only `WHEN MATCHED THEN UPDATE` is specified, the row contains all old values plus
+       updated new values (like <code>UPDATE</code>).</li>
+       <li>If only `WHEN NOT MATCHED THEN INSERT` is specified, the row contains new values to be
+       inserted (like <code>INSERT</code>).</li>
+       <li>If both `WHEN MATCHED THEN UPDATE` and `WHEN NOT MATCHED THEN INSERT` are specified,
+       the row contains: new values to be inserted, all old values, updated new values.
+     </ul>
+   </li>
  </ul></div>
 </section>
 <section class="summary">

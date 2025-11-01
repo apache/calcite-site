@@ -136,16 +136,18 @@ implements <a href="TransformationRule.html" title="interface in org.apache.calc
 
  <p>Plan after conversion:
  <pre><code>
- LogicalProject(ENAME=[CAST($0):VARCHAR])
-   LogicalAggregate(group=[{0}])
-     LogicalJoin(condition=[&lt;=&gt;(CAST($0):VARCHAR, CAST($1):VARCHAR)], joinType=[semi])
-       LogicalJoin(condition=[=(CAST($0):VARCHAR, $1)], joinType=[semi])
+ LogicalAggregate(group=[{0}])
+   LogicalJoin(condition=[IS NOT DISTINCT FROM($0, $1)], joinType=[semi])
+     LogicalJoin(condition=[IS NOT DISTINCT FROM($0, $1)], joinType=[semi])
+       LogicalProject(ENAME=[CAST($0):VARCHAR])
          LogicalProject(ENAME=[$1])
            LogicalFilter(condition=[=($7, 10)])
              LogicalTableScan(table=[[CATALOG, SALES, EMP]])
+       LogicalProject(ENAME=[CAST($0):VARCHAR])
          LogicalProject(DEPTNO=[CAST($7):VARCHAR NOT NULL])
            LogicalFilter(condition=[OR(=($1, 'a'), =($1, 'b'))])
              LogicalTableScan(table=[[CATALOG, SALES, EMP]])
+     LogicalProject(ENAME=[CAST($0):VARCHAR])
        LogicalProject(ENAME=[$1])
          LogicalTableScan(table=[[CATALOG, SALES, EMPNULLABLES]])
  </code></pre></div>

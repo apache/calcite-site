@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -109,13 +109,13 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttpClient.html" title="interface in org.apache.calcite.avatica.remote">AvaticaHttpClient</a>, <a href="../../../../../org/apache/calcite/avatica/remote/GSSAuthenticateable.html" title="interface in org.apache.calcite.avatica.remote">GSSAuthenticateable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/HttpClientPoolConfigurable.html" title="interface in org.apache.calcite.avatica.remote">HttpClientPoolConfigurable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/UsernamePasswordAuthenticateable.html" title="interface in org.apache.calcite.avatica.remote">UsernamePasswordAuthenticateable</a></dd>
+<dd><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttpClient.html" title="interface in org.apache.calcite.avatica.remote">AvaticaHttpClient</a>, <a href="../../../../../org/apache/calcite/avatica/remote/BearerAuthenticateable.html" title="interface in org.apache.calcite.avatica.remote">BearerAuthenticateable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/GSSAuthenticateable.html" title="interface in org.apache.calcite.avatica.remote">GSSAuthenticateable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/HttpClientPoolConfigurable.html" title="interface in org.apache.calcite.avatica.remote">HttpClientPoolConfigurable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/UsernamePasswordAuthenticateable.html" title="interface in org.apache.calcite.avatica.remote">UsernamePasswordAuthenticateable</a></dd>
 </dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">AvaticaCommonsHttpClientImpl</span>
 extends <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>
-implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttpClient.html" title="interface in org.apache.calcite.avatica.remote">AvaticaHttpClient</a>, <a href="../../../../../org/apache/calcite/avatica/remote/HttpClientPoolConfigurable.html" title="interface in org.apache.calcite.avatica.remote">HttpClientPoolConfigurable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/UsernamePasswordAuthenticateable.html" title="interface in org.apache.calcite.avatica.remote">UsernamePasswordAuthenticateable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/GSSAuthenticateable.html" title="interface in org.apache.calcite.avatica.remote">GSSAuthenticateable</a></pre>
+implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttpClient.html" title="interface in org.apache.calcite.avatica.remote">AvaticaHttpClient</a>, <a href="../../../../../org/apache/calcite/avatica/remote/HttpClientPoolConfigurable.html" title="interface in org.apache.calcite.avatica.remote">HttpClientPoolConfigurable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/UsernamePasswordAuthenticateable.html" title="interface in org.apache.calcite.avatica.remote">UsernamePasswordAuthenticateable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/GSSAuthenticateable.html" title="interface in org.apache.calcite.avatica.remote">GSSAuthenticateable</a>, <a href="../../../../../org/apache/calcite/avatica/remote/BearerAuthenticateable.html" title="interface in org.apache.calcite.avatica.remote">BearerAuthenticateable</a></pre>
 <div class="block">A common class to invoke HTTP requests against the Avatica server agnostic of the data being
  sent and received across the wire.</div>
 </li>
@@ -248,6 +248,13 @@ implements <a href="../../../../../org/apache/calcite/avatica/remote/AvaticaHttp
 </td>
 </tr>
 <tr id="i4" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#setTokenProvider-java.lang.String-org.apache.calcite.avatica.remote.BearerTokenProvider-">setTokenProvider</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;username,
+                <a href="../../../../../org/apache/calcite/avatica/remote/BearerTokenProvider.html" title="interface in org.apache.calcite.avatica.remote">BearerTokenProvider</a>&nbsp;tokenProvider)</code>
+<div class="block">Sets the username, tokenProvider to be used for authentication.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/apache/calcite/avatica/remote/AvaticaCommonsHttpClientImpl.html#setUsernamePassword-org.apache.calcite.avatica.remote.AuthenticationType-java.lang.String-java.lang.String-">setUsernamePassword</a></span>(<a href="../../../../../org/apache/calcite/avatica/remote/AuthenticationType.html" title="enum in org.apache.calcite.avatica.remote">AuthenticationType</a>&nbsp;authType,
                    <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;username,
@@ -489,6 +496,25 @@ public&nbsp;AvaticaCommonsHttpClientImpl(<a href="https://docs.oracle.com/javase
 </dl>
 </li>
 </ul>
+<a name="setTokenProvider-java.lang.String-org.apache.calcite.avatica.remote.BearerTokenProvider-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setTokenProvider</h4>
+<pre>public&nbsp;void&nbsp;setTokenProvider(<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;username,
+                             <a href="../../../../../org/apache/calcite/avatica/remote/BearerTokenProvider.html" title="interface in org.apache.calcite.avatica.remote">BearerTokenProvider</a>&nbsp;tokenProvider)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../org/apache/calcite/avatica/remote/BearerAuthenticateable.html#setTokenProvider-java.lang.String-org.apache.calcite.avatica.remote.BearerTokenProvider-">BearerAuthenticateable</a></code></span></div>
+<div class="block">Sets the username, tokenProvider to be used for authentication.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../org/apache/calcite/avatica/remote/BearerAuthenticateable.html#setTokenProvider-java.lang.String-org.apache.calcite.avatica.remote.BearerTokenProvider-">setTokenProvider</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../org/apache/calcite/avatica/remote/BearerAuthenticateable.html" title="interface in org.apache.calcite.avatica.remote">BearerAuthenticateable</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>username</code> - Username</dd>
+<dd><code>tokenProvider</code> - Bearer Token Provider</dd>
+</dl>
+</li>
+</ul>
 <a name="setHttpClientPool-org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager-org.apache.calcite.avatica.ConnectionConfig-">
 <!--   -->
 </a>
@@ -578,6 +604,6 @@ public&nbsp;AvaticaCommonsHttpClientImpl(<a href="https://docs.oracle.com/javase
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legalCopy"><small>Copyright &copy; 2012-2026 Apache Software Foundation. All Rights Reserved.</small></p>
 </body>
 </html>

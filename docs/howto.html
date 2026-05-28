@@ -880,7 +880,12 @@ git clean <span class="nt">-xn</span>
   <li>Send an email to <a href="mailto:dev@calcite.apache.org">dev@calcite.apache.org</a> notifying that RC build process
 is starting and therefore <code class="language-plaintext highlighter-rouge">main</code> branch is in code freeze until further notice.</li>
   <li>Set up signing keys as described above.</li>
-  <li>Make sure you are using JDK 8. (Compiling with JDK 21 causes
+  <li>Generate a report of vulnerabilities that occur among dependencies,
+using <code class="language-plaintext highlighter-rouge">./gradlew dependencyCheckUpdate dependencyCheckAggregate</code>.
+Report to <a href="mailto:private@calcite.apache.org">private@calcite.apache.org</a>
+if new critical vulnerabilities are found among dependencies.
+The task requires a JDK 11 or later so it doesn’t appear when using older versions.</li>
+  <li>Make sure you are using JDK 8 for all subsequent steps. (Compiling with JDK 21 causes
 [<a href="https://issues.apache.org/jira/browse/CALCITE-6616">CALCITE-6616</a>].)</li>
   <li>Check that <code class="language-plaintext highlighter-rouge">README</code> and <code class="language-plaintext highlighter-rouge">site/_docs/howto.md</code> have the correct version number.</li>
   <li>Check that <code class="language-plaintext highlighter-rouge">site/_docs/howto.md</code> has the correct Gradle version.</li>
@@ -889,10 +894,6 @@ is starting and therefore <code class="language-plaintext highlighter-rouge">mai
   <li>Make sure build and tests succeed</li>
   <li>Make sure that <code class="language-plaintext highlighter-rouge">./gradlew javadoc</code> succeeds
 (i.e. gives no errors; warnings are OK)</li>
-  <li>Generate a report of vulnerabilities that occur among dependencies,
-using <code class="language-plaintext highlighter-rouge">./gradlew dependencyCheckUpdate dependencyCheckAggregate</code>.
-Report to <a href="mailto:private@calcite.apache.org">private@calcite.apache.org</a>
-if new critical vulnerabilities are found among dependencies.</li>
   <li>Decide the supported configurations of JDK, operating system and
 Guava.  These will probably be the same as those described in the
 release notes of the previous release.  Document them in the release

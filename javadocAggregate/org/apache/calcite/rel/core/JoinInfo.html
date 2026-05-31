@@ -97,9 +97,10 @@ loadScripts(document, 'script');</script>
 <div class="block">An analyzed join condition.
 
  <p>It is useful for the many algorithms that care whether a join has an
- equi-join condition.
+ equi-join condition (contains EQUALS and IS NOT DISTINCT FROM).
 
- <p>You can create one using <a href="#createWithStrictEquality(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode)"><code>createWithStrictEquality(org.apache.calcite.rel.RelNode, org.apache.calcite.rel.RelNode, org.apache.calcite.rex.RexNode)</code></a>, or call
+ <p>You can create one using <a href="#of(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode)"><code>of(RelNode, RelNode, RexNode)</code></a>,
+ <a href="#createWithStrictEquality(org.apache.calcite.rel.RelNode,org.apache.calcite.rel.RelNode,org.apache.calcite.rex.RexNode)"><code>createWithStrictEquality(org.apache.calcite.rel.RelNode, org.apache.calcite.rel.RelNode, org.apache.calcite.rex.RexNode)</code></a>, or call
  <a href="Join.html#analyzeCondition()"><code>Join.analyzeCondition()</code></a>; many kinds of join cache their
  join info, especially those that are equi-joins.</div>
 <dl class="notes">
@@ -128,9 +129,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color"><code>final com.google.common.collect.ImmutableList&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
 <div class="col-second odd-row-color"><code><a href="#nonEquiConditions" class="member-name-link">nonEquiConditions</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>final <a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a></code></div>
-<div class="col-second even-row-color"><code><a href="#rightKeys" class="member-name-link">rightKeys</a></code></div>
+<div class="col-first even-row-color"><code>final com.google.common.collect.ImmutableList&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</code></div>
+<div class="col-second even-row-color"><code><a href="#nullExclusionFlags" class="member-name-link">nullExclusionFlags</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>final <a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#rightKeys" class="member-name-link">rightKeys</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -144,8 +148,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>protected </code></div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.util.ImmutableIntList,org.apache.calcite.util.ImmutableIntList,com.google.common.collect.ImmutableList)" class="member-name-link">JoinInfo</a><wbr>(<a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;leftKeys,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.util.ImmutableIntList,org.apache.calcite.util.ImmutableIntList,com.google.common.collect.ImmutableList,com.google.common.collect.ImmutableList)" class="member-name-link">JoinInfo</a><wbr>(<a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;leftKeys,
  <a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;rightKeys,
+ com.google.common.collect.ImmutableList&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;&nbsp;nullExclusionFlags,
  com.google.common.collect.ImmutableList&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nonEquiConditions)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Creates a JoinInfo.</div>
@@ -203,7 +208,7 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(org.apache.calcite.util.ImmutableIntList,org.apache.calcite.util.ImmutableIntList)" class="member-name-link">of</a><wbr>(<a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;leftKeys,
  <a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;rightKeys)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Creates an equi-join.</div>
+<div class="block">Creates an equi-join (only considers EQUALS operations).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../util/mapping/IntPair.html" title="class in org.apache.calcite.util.mapping">IntPair</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#pairs()" class="member-name-link">pairs</a>()</code></div>
@@ -243,6 +248,12 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="nullExclusionFlags">
+<h3>nullExclusionFlags</h3>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">com.google.common.collect.ImmutableList&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</span>&nbsp;<span class="element-name">nullExclusionFlags</span></div>
+</section>
+</li>
+<li>
 <section class="detail" id="nonEquiConditions">
 <h3>nonEquiConditions</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">com.google.common.collect.ImmutableList&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</span>&nbsp;<span class="element-name">nonEquiConditions</span></div>
@@ -257,10 +268,11 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(org.apache.calcite.util.ImmutableIntList,org.apache.calcite.util.ImmutableIntList,com.google.common.collect.ImmutableList)">
+<section class="detail" id="&lt;init&gt;(org.apache.calcite.util.ImmutableIntList,org.apache.calcite.util.ImmutableIntList,com.google.common.collect.ImmutableList,com.google.common.collect.ImmutableList)">
 <h3>JoinInfo</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">JoinInfo</span><wbr><span class="parameters">(<a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;leftKeys,
  <a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;rightKeys,
+ com.google.common.collect.ImmutableList&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;&nbsp;nullExclusionFlags,
  com.google.common.collect.ImmutableList&lt;<a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nonEquiConditions)</span></div>
 <div class="block">Creates a JoinInfo.</div>
 </section>
@@ -300,7 +312,7 @@ loadScripts(document, 'script');</script>
 <h3>of</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="JoinInfo.html" title="class in org.apache.calcite.rel.core">JoinInfo</a></span>&nbsp;<span class="element-name">of</span><wbr><span class="parameters">(<a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;leftKeys,
  <a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;rightKeys)</span></div>
-<div class="block">Creates an equi-join.</div>
+<div class="block">Creates an equi-join (only considers EQUALS operations).</div>
 </section>
 </li>
 <li>
@@ -360,7 +372,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2026 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

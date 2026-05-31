@@ -145,12 +145,17 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color">
 <div class="block">The left version of an ASOF join, where each row from the left table is part of the output.</div>
 </div>
-<div class="col-first even-row-color"><code><a href="#RIGHT" class="member-name-link">RIGHT</a></code></div>
+<div class="col-first even-row-color"><code><a href="#LEFT_MARK" class="member-name-link">LEFT_MARK</a></code></div>
 <div class="col-last even-row-color">
+<div class="block">An LEFT MARK JOIN will keep all rows from the left side and creates a new attribute to mark a
+ tuple as having join partners from right side or not.</div>
+</div>
+<div class="col-first odd-row-color"><code><a href="#RIGHT" class="member-name-link">RIGHT</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Right-outer join.</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="#SEMI" class="member-name-link">SEMI</a></code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code><a href="#SEMI" class="member-name-link">SEMI</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Semi-join.</div>
 </div>
 </div>
@@ -295,6 +300,33 @@ the order they are declared.</div>
 <div class="block">The left version of an ASOF join, where each row from the left table is part of the output.</div>
 </section>
 </li>
+<li>
+<section class="detail" id="LEFT_MARK">
+<h3>LEFT_MARK</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="JoinType.html" title="enum in org.apache.calcite.linq4j">JoinType</a></span>&nbsp;<span class="element-name">LEFT_MARK</span></div>
+<div class="block">An LEFT MARK JOIN will keep all rows from the left side and creates a new attribute to mark a
+ tuple as having join partners from right side or not. Refer to
+ <a href="https://dl.gi.de/items/c5f7c49f-1572-490e-976a-cc4292519bdd">
+   The Complete Story of Joins (in HyPer)</a>.
+
+ <p>Example:
+ <blockquote><pre>
+ SELECT EMPNO FROM EMP
+ WHERE EXISTS (SELECT 1 FROM DEPT
+     WHERE DEPT.DEPTNO = EMP.DEPTNO)
+     OR EMPNO &gt; 1
+
+ LogicalProject(EMPNO=[$0])
+   LogicalFilter(condition=[OR($9, &gt;($0, 1))])
+     LogicalJoin(condition=[IS NOT DISTINCT FROM($7, $9)], joinType=[left_mark])
+       LogicalTableScan(table=[[CATALOG, SALES, EMP]])
+       LogicalTableScan(table=[[CATALOG, SALES, DEPT]])
+ </pre></blockquote>
+
+ <p> If the marker is used on only conjunctive predicates the optimizer will try to translate
+ the mark join into semi or anti join.</div>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -359,7 +391,7 @@ not permitted.)</div>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2026 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

@@ -241,7 +241,8 @@ form.</p>
 
 <span class="k">select</span><span class="p">:</span>
       <span class="k">SELECT</span> <span class="p">[</span> <span class="n">hintComment</span> <span class="p">]</span> <span class="p">[</span> <span class="n">STREAM</span> <span class="p">]</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span>
-          <span class="p">{</span> <span class="o">*</span> <span class="o">|</span> <span class="n">projectItem</span> <span class="p">[,</span> <span class="n">projectItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">}</span>
+          <span class="p">{</span> <span class="n">starWithExclude</span> <span class="o">|</span> <span class="n">projectItem</span> <span class="p">[,</span> <span class="n">projectItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">}</span>
+      <span class="p">[</span> <span class="k">BY</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
       <span class="k">FROM</span> <span class="n">tableExpression</span>
       <span class="p">[</span> <span class="k">WHERE</span> <span class="n">booleanExpression</span> <span class="p">]</span>
       <span class="p">[</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span> <span class="p">{</span> <span class="n">groupItem</span> <span class="p">[,</span> <span class="n">groupItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">}</span> <span class="p">]</span>
@@ -249,134 +250,167 @@ form.</p>
       <span class="p">[</span> <span class="k">WINDOW</span> <span class="n">windowName</span> <span class="k">AS</span> <span class="n">windowSpec</span> <span class="p">[,</span> <span class="n">windowName</span> <span class="k">AS</span> <span class="n">windowSpec</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
       <span class="p">[</span> <span class="n">QUALIFY</span> <span class="n">booleanExpression</span> <span class="p">]</span>
 
+<span class="n">The</span> <span class="n">optional</span><span class="p">,</span> <span class="n">non</span><span class="o">-</span><span class="n">standard</span> <span class="nv">`BY`</span> <span class="n">clause</span> <span class="n">groups</span> <span class="k">and</span> <span class="n">orders</span> <span class="n">the</span> <span class="n">query</span> <span class="k">by</span>
+<span class="n">the</span> <span class="n">specified</span> <span class="n">expressions</span><span class="p">,</span> <span class="k">and</span> <span class="n">automatically</span> <span class="n">adds</span> <span class="n">them</span> <span class="k">to</span> <span class="n">the</span> <span class="k">SELECT</span> <span class="n">list</span>
+<span class="k">for</span> <span class="n">naming</span> <span class="k">and</span> <span class="n">positional</span> <span class="n">reference</span><span class="p">.</span> <span class="n">But</span> <span class="nv">`SELECT ... BY`</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">combined</span>
+<span class="k">with</span> <span class="n">an</span> <span class="n">explicit</span> <span class="nv">`GROUP BY`</span> <span class="k">or</span> <span class="nv">`ORDER BY`</span> <span class="n">clause</span> <span class="k">in</span> <span class="n">the</span> <span class="n">same</span> <span class="n">query</span><span class="p">.</span>
+<span class="nv">`SELECT ... BY`</span> <span class="k">is</span> <span class="n">recognized</span> <span class="k">only</span> <span class="k">when</span> <span class="n">the</span> <span class="n">Babel</span> <span class="n">parser</span> <span class="k">is</span> <span class="n">enabled</span><span class="p">.</span> <span class="n">It</span> <span class="k">sets</span> <span class="n">the</span> <span class="k">generated</span> <span class="n">parser</span> <span class="n">configuration</span> <span class="n">flag</span> <span class="nv">`includeSelectBy`</span> <span class="k">to</span> <span class="nv">`true`</span><span class="p">.</span>
+
+<span class="k">For</span> <span class="n">example</span><span class="p">:</span>
+
+
+<span class="o">&lt;</span><span class="n">figure</span> <span class="k">class</span><span class="o">=</span><span class="nv">"highlight"</span><span class="o">&gt;&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span> <span class="k">class</span><span class="o">=</span><span class="nv">"language-sql"</span> <span class="k">data</span><span class="o">-</span><span class="n">lang</span><span class="o">=</span><span class="nv">"sql"</span><span class="o">&gt;&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"k"</span><span class="o">&gt;</span><span class="k">SELECT</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"n"</span><span class="o">&gt;</span><span class="n">ename</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"p"</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"n"</span><span class="o">&gt;</span><span class="n">empno</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"k"</span><span class="o">&gt;</span><span class="k">BY</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"n"</span><span class="o">&gt;</span><span class="n">deptno</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"k"</span><span class="o">&gt;</span><span class="k">FROM</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"n"</span><span class="o">&gt;</span><span class="n">emp</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;&lt;/</span><span class="n">figure</span><span class="o">&gt;</span>
+
+
+<span class="k">is</span> <span class="n">equivalent</span> <span class="k">to</span><span class="p">:</span>
+
+
+<span class="o">&lt;</span><span class="n">figure</span> <span class="k">class</span><span class="o">=</span><span class="nv">"highlight"</span><span class="o">&gt;&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span> <span class="k">class</span><span class="o">=</span><span class="nv">"language-sql"</span> <span class="k">data</span><span class="o">-</span><span class="n">lang</span><span class="o">=</span><span class="nv">"sql"</span><span class="o">&gt;&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"k"</span><span class="o">&gt;</span><span class="k">SELECT</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"n"</span><span class="o">&gt;</span><span class="n">deptno</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"p"</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"n"</span><span class="o">&gt;</span><span class="n">ename</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"p"</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"n"</span><span class="o">&gt;</span><span class="n">empno</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"k"</span><span class="o">&gt;</span><span class="k">FROM</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"n"</span><span class="o">&gt;</span><span class="n">emp</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"k"</span><span class="o">&gt;</span><span class="k">GROUP</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"k"</span><span class="o">&gt;</span><span class="k">BY</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"n"</span><span class="o">&gt;</span><span class="n">deptno</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"k"</span><span class="o">&gt;</span><span class="k">ORDER</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"k"</span><span class="o">&gt;</span><span class="k">BY</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">span</span> <span class="k">class</span><span class="o">=</span><span class="nv">"n"</span><span class="o">&gt;</span><span class="n">deptno</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;&lt;/</span><span class="n">figure</span><span class="o">&gt;</span>
+
+
 <span class="n">selectWithoutFrom</span><span class="p">:</span>
       <span class="k">SELECT</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span>
           <span class="p">{</span> <span class="o">*</span> <span class="o">|</span> <span class="n">projectItem</span> <span class="p">[,</span> <span class="n">projectItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">}</span>
 
-<span class="n">projectItem</span><span class="p">:</span>
-      <span class="n">expression</span> <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="n">columnAlias</span> <span class="p">]</span>
-  <span class="o">|</span>   <span class="n">tableAlias</span> <span class="p">.</span> <span class="o">*</span>
+<span class="n">starWithExclude</span><span class="p">:</span>
+      <span class="o">*</span>
+  <span class="o">|</span>   <span class="o">*</span> <span class="n">EXCLUDE</span> <span class="s1">'('</span> <span class="k">column</span> <span class="p">[,</span> <span class="k">column</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
 
-<span class="n">tableExpression</span><span class="p">:</span>
-      <span class="n">tableReference</span> <span class="p">[,</span> <span class="n">tableReference</span> <span class="p">]</span><span class="o">*</span>
-  <span class="o">|</span>   <span class="n">tableExpression</span> <span class="p">[</span> <span class="k">NATURAL</span> <span class="p">]</span> <span class="p">[</span> <span class="p">{</span> <span class="k">LEFT</span> <span class="o">|</span> <span class="k">RIGHT</span> <span class="o">|</span> <span class="k">FULL</span> <span class="p">}</span> <span class="p">[</span> <span class="k">OUTER</span> <span class="p">]</span> <span class="p">]</span> <span class="p">[</span> <span class="n">ASOF</span> <span class="p">]</span> <span class="k">JOIN</span> <span class="n">tableExpression</span> <span class="p">[</span> <span class="n">joinCondition</span> <span class="p">]</span>
-  <span class="o">|</span>   <span class="n">tableExpression</span> <span class="k">CROSS</span> <span class="k">JOIN</span> <span class="n">tableExpression</span>
-  <span class="o">|</span>   <span class="n">tableExpression</span> <span class="p">[</span> <span class="k">CROSS</span> <span class="o">|</span> <span class="k">OUTER</span> <span class="p">]</span> <span class="n">APPLY</span> <span class="n">tableExpression</span>
+<span class="n">starWithReplace</span><span class="p">:</span>
+      <span class="o">*</span>
+  <span class="o">|</span>   <span class="o">*</span> <span class="k">REPLACE</span> <span class="s1">'('</span> <span class="n">expression</span> <span class="k">AS</span> <span class="k">column</span> <span class="p">[,</span> <span class="n">expression</span> <span class="k">AS</span> <span class="k">column</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
 
-<span class="n">joinCondition</span><span class="p">:</span>
-      <span class="k">ON</span> <span class="n">booleanExpression</span>
-  <span class="o">|</span>   <span class="n">MATCH_CONDITION</span> <span class="n">booleanExpression</span> <span class="k">ON</span> <span class="n">booleanExpression</span>
-  <span class="o">|</span>   <span class="k">USING</span> <span class="s1">'('</span> <span class="k">column</span> <span class="p">[,</span> <span class="k">column</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
+<span class="n">Note</span><span class="p">:</span>
 
-<span class="n">tableReference</span><span class="p">:</span>
-      <span class="n">tablePrimary</span>
-      <span class="p">[</span> <span class="k">FOR</span> <span class="n">SYSTEM_TIME</span> <span class="k">AS</span> <span class="k">OF</span> <span class="n">expression</span> <span class="p">]</span>
-      <span class="p">[</span> <span class="n">pivot</span> <span class="p">]</span>
-      <span class="p">[</span> <span class="n">unpivot</span> <span class="p">]</span>
-      <span class="p">[</span> <span class="n">matchRecognize</span> <span class="p">]</span>
-      <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="k">alias</span> <span class="p">[</span> <span class="s1">'('</span> <span class="n">columnAlias</span> <span class="p">[,</span> <span class="n">columnAlias</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="p">]</span> <span class="p">]</span>
+<span class="o">*</span> <span class="nv">`SELECT * EXCLUDE (...)`</span> <span class="k">and</span> <span class="nv">`SELECT * REPLACE (...)`</span> <span class="k">are</span> <span class="n">recognized</span> <span class="k">only</span> <span class="k">when</span> <span class="n">the</span> <span class="n">Babel</span> <span class="n">parser</span> <span class="k">is</span> <span class="n">enabled</span><span class="p">.</span> <span class="nv">`EXCLUDE`</span> <span class="p">(</span><span class="k">or</span> <span class="n">the</span> <span class="k">alias</span> <span class="nv">`EXCEPT`</span><span class="p">)</span> <span class="n">removes</span> <span class="n">the</span> <span class="n">specified</span> <span class="n">columns</span> <span class="k">from</span> <span class="n">the</span> <span class="n">star</span> <span class="n">expansion</span><span class="p">;</span> <span class="nv">`REPLACE`</span> <span class="n">substitutes</span> <span class="n">the</span> <span class="n">given</span> <span class="n">expressions</span> <span class="k">for</span> <span class="n">the</span> <span class="n">matching</span> <span class="n">columns</span> <span class="n">while</span> <span class="n">keeping</span> <span class="n">the</span> <span class="n">original</span> <span class="k">column</span> <span class="k">order</span><span class="p">.</span> <span class="k">For</span> <span class="nv">`REPLACE`</span><span class="p">,</span> <span class="n">the</span> <span class="k">column</span> <span class="k">alias</span> <span class="n">must</span> <span class="n">either</span> <span class="n">be</span> <span class="n">a</span> <span class="k">simple</span> <span class="n">identifier</span> <span class="k">or</span><span class="p">,</span> <span class="k">for</span> <span class="n">a</span> <span class="k">table</span><span class="o">-</span><span class="n">qualified</span> <span class="n">star</span> <span class="n">such</span> <span class="k">as</span> <span class="nv">`t.*`</span><span class="p">,</span> <span class="n">a</span> <span class="n">qualified</span> <span class="n">identifier</span> <span class="n">whose</span> <span class="k">prefix</span> <span class="n">matches</span> <span class="n">the</span> <span class="n">star</span><span class="s1">'s table alias.
 
-<span class="n">tablePrimary</span><span class="p">:</span>
-      <span class="p">[</span> <span class="p">[</span> <span class="n">catalogName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">schemaName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">tableName</span>
-      <span class="s1">'('</span> <span class="k">TABLE</span> <span class="p">[</span> <span class="p">[</span> <span class="n">catalogName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">schemaName</span> <span class="p">.</span> <span class="p">]</span> <span class="n">tableName</span> <span class="s1">')'</span>
-  <span class="o">|</span>   <span class="n">tablePrimary</span> <span class="p">[</span> <span class="n">hintComment</span> <span class="p">]</span> <span class="p">[</span> <span class="n">EXTEND</span> <span class="p">]</span> <span class="s1">'('</span> <span class="n">columnDecl</span> <span class="p">[,</span> <span class="n">columnDecl</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
-  <span class="o">|</span>   <span class="p">[</span> <span class="k">LATERAL</span> <span class="p">]</span> <span class="s1">'('</span> <span class="n">query</span> <span class="s1">')'</span>
-  <span class="o">|</span>   <span class="k">UNNEST</span> <span class="s1">'('</span> <span class="n">expression</span> <span class="s1">')'</span> <span class="p">[</span> <span class="k">WITH</span> <span class="k">ORDINALITY</span> <span class="p">]</span>
-  <span class="o">|</span>   <span class="p">[</span> <span class="k">LATERAL</span> <span class="p">]</span> <span class="k">TABLE</span> <span class="s1">'('</span> <span class="p">[</span> <span class="k">SPECIFIC</span> <span class="p">]</span> <span class="n">functionName</span> <span class="s1">'('</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="s1">')'</span>
+projectItem:
+      expression [ [ AS ] columnAlias ]
+  |   tableAlias . *
 
-<span class="n">columnDecl</span><span class="p">:</span>
-      <span class="k">column</span> <span class="k">type</span> <span class="p">[</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">]</span>
+tableExpression:
+      tableReference [, tableReference ]*
+  |   tableExpression [ NATURAL ] [ { LEFT | RIGHT | FULL } [ OUTER ] ] [ ASOF ] JOIN tableExpression [ joinCondition ]
+  |   tableExpression CROSS JOIN tableExpression
+  |   tableExpression [ CROSS | OUTER ] APPLY tableExpression
 
-<span class="n">hint</span><span class="p">:</span>
-      <span class="n">hintName</span>
-  <span class="o">|</span>   <span class="n">hintName</span> <span class="s1">'('</span> <span class="n">hintOptions</span> <span class="s1">')'</span>
+joinCondition:
+      ON booleanExpression
+  |   MATCH_CONDITION booleanExpression ON booleanExpression
+  |   USING '</span><span class="p">(</span><span class="s1">' column [, column ]* '</span><span class="p">)</span><span class="s1">'
 
-<span class="n">hintOptions</span><span class="p">:</span>
-      <span class="n">hintKVOption</span> <span class="p">[,</span> <span class="n">hintKVOption</span> <span class="p">]</span><span class="o">*</span>
-  <span class="o">|</span>   <span class="n">optionName</span> <span class="p">[,</span> <span class="n">optionName</span> <span class="p">]</span><span class="o">*</span>
-  <span class="o">|</span>   <span class="n">optionValue</span> <span class="p">[,</span> <span class="n">optionValue</span> <span class="p">]</span><span class="o">*</span>
+tableReference:
+      tablePrimary
+      [ FOR SYSTEM_TIME AS OF expression ]
+      [ pivot ]
+      [ unpivot ]
+      [ matchRecognize ]
+      [ [ AS ] alias [ '</span><span class="p">(</span><span class="s1">' columnAlias [, columnAlias ]* '</span><span class="p">)</span><span class="s1">' ] ]
 
-<span class="n">hintKVOption</span><span class="p">:</span>
-      <span class="n">optionName</span> <span class="s1">'='</span> <span class="n">stringLiteral</span>
-  <span class="o">|</span>   <span class="n">stringLiteral</span> <span class="s1">'='</span> <span class="n">stringLiteral</span>
+tablePrimary:
+      [ [ catalogName . ] schemaName . ] tableName
+      '</span><span class="p">(</span><span class="s1">' TABLE [ [ catalogName . ] schemaName . ] tableName '</span><span class="p">)</span><span class="s1">'
+  |   tablePrimary [ hintComment ] [ EXTEND ] '</span><span class="p">(</span><span class="s1">' columnDecl [, columnDecl ]* '</span><span class="p">)</span><span class="s1">'
+  |   [ LATERAL ] '</span><span class="p">(</span><span class="s1">' query '</span><span class="p">)</span><span class="s1">'
+  |   UNNEST '</span><span class="p">(</span><span class="s1">' expression '</span><span class="p">)</span><span class="s1">' [ WITH ORDINALITY ]
+  |   [ LATERAL ] TABLE '</span><span class="p">(</span><span class="s1">' [ SPECIFIC ] functionName '</span><span class="p">(</span><span class="s1">' expression [, expression ]* '</span><span class="p">)</span><span class="s1">' '</span><span class="p">)</span><span class="s1">'
 
-<span class="n">optionValue</span><span class="p">:</span>
-      <span class="n">stringLiteral</span>
-  <span class="o">|</span>   <span class="n">numericLiteral</span>
+columnDecl:
+      column type [ NOT NULL ]
 
-<span class="n">columnOrList</span><span class="p">:</span>
-      <span class="k">column</span>
-  <span class="o">|</span>   <span class="s1">'('</span> <span class="k">column</span> <span class="p">[,</span> <span class="k">column</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
+hint:
+      hintName
+  |   hintName '</span><span class="p">(</span><span class="s1">' hintOptions '</span><span class="p">)</span><span class="s1">'
 
-<span class="n">exprOrList</span><span class="p">:</span>
-      <span class="n">expr</span>
-  <span class="o">|</span>   <span class="s1">'('</span> <span class="n">expr</span> <span class="p">[,</span> <span class="n">expr</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
+hintOptions:
+      hintKVOption [, hintKVOption ]*
+  |   optionName [, optionName ]*
+  |   optionValue [, optionValue ]*
 
-<span class="n">pivot</span><span class="p">:</span>
-      <span class="n">PIVOT</span> <span class="s1">'('</span>
-      <span class="n">pivotAgg</span> <span class="p">[,</span> <span class="n">pivotAgg</span> <span class="p">]</span><span class="o">*</span>
-      <span class="k">FOR</span> <span class="n">pivotList</span>
-      <span class="k">IN</span> <span class="s1">'('</span> <span class="n">pivotExpr</span> <span class="p">[,</span> <span class="n">pivotExpr</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
-      <span class="s1">')'</span>
+hintKVOption:
+      optionName '</span><span class="o">=</span><span class="s1">' stringLiteral
+  |   stringLiteral '</span><span class="o">=</span><span class="s1">' stringLiteral
 
-<span class="n">pivotAgg</span><span class="p">:</span>
-      <span class="n">agg</span> <span class="s1">'('</span> <span class="p">[</span> <span class="k">ALL</span> <span class="o">|</span> <span class="k">DISTINCT</span> <span class="p">]</span> <span class="n">value</span> <span class="p">[,</span> <span class="n">value</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
-      <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="k">alias</span> <span class="p">]</span>
+optionValue:
+      stringLiteral
+  |   numericLiteral
 
-<span class="n">pivotList</span><span class="p">:</span>
-      <span class="n">columnOrList</span>
+columnOrList:
+      column
+  |   '</span><span class="p">(</span><span class="s1">' column [, column ]* '</span><span class="p">)</span><span class="s1">'
 
-<span class="n">pivotExpr</span><span class="p">:</span>
-      <span class="n">exprOrList</span> <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="k">alias</span> <span class="p">]</span>
+exprOrList:
+      expr
+  |   '</span><span class="p">(</span><span class="s1">' expr [, expr ]* '</span><span class="p">)</span><span class="s1">'
 
-<span class="n">unpivot</span><span class="p">:</span>
-      <span class="n">UNPIVOT</span> <span class="p">[</span> <span class="k">INCLUDING</span> <span class="n">NULLS</span> <span class="o">|</span> <span class="k">EXCLUDING</span> <span class="n">NULLS</span> <span class="p">]</span> <span class="s1">'('</span>
-      <span class="n">unpivotMeasureList</span>
-      <span class="k">FOR</span> <span class="n">unpivotAxisList</span>
-      <span class="k">IN</span> <span class="s1">'('</span> <span class="n">unpivotValue</span> <span class="p">[,</span> <span class="n">unpivotValue</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
-      <span class="s1">')'</span>
+pivot:
+      PIVOT '</span><span class="p">(</span><span class="s1">'
+      pivotAgg [, pivotAgg ]*
+      FOR pivotList
+      IN '</span><span class="p">(</span><span class="s1">' pivotExpr [, pivotExpr ]* '</span><span class="p">)</span><span class="s1">'
+      '</span><span class="p">)</span><span class="s1">'
 
-<span class="n">unpivotMeasureList</span><span class="p">:</span>
-      <span class="n">columnOrList</span>
+pivotAgg:
+      agg '</span><span class="p">(</span><span class="s1">' [ ALL | DISTINCT ] value [, value ]* '</span><span class="p">)</span><span class="s1">'
+      [ [ AS ] alias ]
 
-<span class="n">unpivotAxisList</span><span class="p">:</span>
-      <span class="n">columnOrList</span>
+pivotList:
+      columnOrList
 
-<span class="n">unpivotValue</span><span class="p">:</span>
-      <span class="k">column</span> <span class="p">[</span> <span class="k">AS</span> <span class="n">literal</span> <span class="p">]</span>
-  <span class="o">|</span>   <span class="s1">'('</span> <span class="k">column</span> <span class="p">[,</span> <span class="k">column</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="p">[</span> <span class="k">AS</span> <span class="s1">'('</span> <span class="n">literal</span> <span class="p">[,</span> <span class="n">literal</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span> <span class="p">]</span>
+pivotExpr:
+      exprOrList [ [ AS ] alias ]
 
-<span class="k">values</span><span class="p">:</span>
-      <span class="p">{</span> <span class="k">VALUES</span> <span class="o">|</span> <span class="n">VALUE</span> <span class="p">}</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span>
+unpivot:
+      UNPIVOT [ INCLUDING NULLS | EXCLUDING NULLS ] '</span><span class="p">(</span><span class="s1">'
+      unpivotMeasureList
+      FOR unpivotAxisList
+      IN '</span><span class="p">(</span><span class="s1">' unpivotValue [, unpivotValue ]* '</span><span class="p">)</span><span class="s1">'
+      '</span><span class="p">)</span><span class="s1">'
 
-<span class="n">groupItem</span><span class="p">:</span>
-      <span class="n">expression</span>
-  <span class="o">|</span>   <span class="s1">'('</span> <span class="s1">')'</span>
-  <span class="o">|</span>   <span class="s1">'('</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
-  <span class="o">|</span>   <span class="k">CUBE</span> <span class="s1">'('</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
-  <span class="o">|</span>   <span class="k">ROLLUP</span> <span class="s1">'('</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
-  <span class="o">|</span>   <span class="k">GROUPING</span> <span class="k">SETS</span> <span class="s1">'('</span> <span class="n">groupItem</span> <span class="p">[,</span> <span class="n">groupItem</span> <span class="p">]</span><span class="o">*</span> <span class="s1">')'</span>
+unpivotMeasureList:
+      columnOrList
 
-<span class="k">window</span><span class="p">:</span>
-      <span class="n">windowName</span>
-  <span class="o">|</span>   <span class="n">windowSpec</span>
+unpivotAxisList:
+      columnOrList
 
-<span class="n">windowSpec</span><span class="p">:</span>
-      <span class="s1">'('</span>
-      <span class="p">[</span> <span class="n">windowName</span> <span class="p">]</span>
-      <span class="p">[</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">orderItem</span> <span class="p">[,</span> <span class="n">orderItem</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
-      <span class="p">[</span> <span class="k">PARTITION</span> <span class="k">BY</span> <span class="n">expression</span> <span class="p">[,</span> <span class="n">expression</span> <span class="p">]</span><span class="o">*</span> <span class="p">]</span>
-      <span class="p">[</span>
-          <span class="k">RANGE</span> <span class="n">numericOrIntervalExpression</span> <span class="p">{</span> <span class="k">PRECEDING</span> <span class="o">|</span> <span class="k">FOLLOWING</span> <span class="p">[</span><span class="n">exclude</span><span class="p">]}</span>
-      <span class="o">|</span>   <span class="k">ROWS</span> <span class="n">numericExpression</span> <span class="p">{</span> <span class="k">PRECEDING</span> <span class="o">|</span> <span class="k">FOLLOWING</span> <span class="p">[</span><span class="n">exclude</span><span class="p">]</span> <span class="p">}</span>
-      <span class="p">]</span>
-      <span class="s1">')'</span>
+unpivotValue:
+      column [ AS literal ]
+  |   '</span><span class="p">(</span><span class="s1">' column [, column ]* '</span><span class="p">)</span><span class="s1">' [ AS '</span><span class="p">(</span><span class="s1">' literal [, literal ]* '</span><span class="p">)</span><span class="s1">' ]
 
-<span class="n">exclude</span><span class="p">:</span>
-      <span class="n">EXCLUDE</span> <span class="k">NO</span> <span class="n">OTHERS</span>
-  <span class="o">|</span>   <span class="n">EXCLUDE</span> <span class="k">CURRENT</span> <span class="k">ROW</span>
-  <span class="o">|</span>   <span class="n">EXCLUDE</span> <span class="k">GROUP</span>
-  <span class="o">|</span>   <span class="n">EXCLUDE</span> <span class="n">TIES</span></code></pre></figure>
+values:
+      { VALUES | VALUE } expression [, expression ]*
+
+groupItem:
+      expression
+  |   '</span><span class="p">(</span><span class="s1">' '</span><span class="p">)</span><span class="s1">'
+  |   '</span><span class="p">(</span><span class="s1">' expression [, expression ]* '</span><span class="p">)</span><span class="s1">'
+  |   CUBE '</span><span class="p">(</span><span class="s1">' expression [, expression ]* '</span><span class="p">)</span><span class="s1">'
+  |   ROLLUP '</span><span class="p">(</span><span class="s1">' expression [, expression ]* '</span><span class="p">)</span><span class="s1">'
+  |   GROUPING SETS '</span><span class="p">(</span><span class="s1">' groupItem [, groupItem ]* '</span><span class="p">)</span><span class="s1">'
+
+window:
+      windowName
+  |   windowSpec
+
+windowSpec:
+      '</span><span class="p">(</span><span class="s1">'
+      [ windowName ]
+      [ ORDER BY orderItem [, orderItem ]* ]
+      [ PARTITION BY expression [, expression ]* ]
+      [
+          RANGE numericOrIntervalExpression { PRECEDING | FOLLOWING [exclude]}
+      |   ROWS numericExpression { PRECEDING | FOLLOWING [exclude] }
+      ]
+      '</span><span class="p">)</span><span class="s1">'
+
+exclude:
+      EXCLUDE NO OTHERS
+  |   EXCLUDE CURRENT ROW
+  |   EXCLUDE GROUP
+  |   EXCLUDE TIES</span></code></pre></figure>
 
 <p>In <em>insert</em>, if the INSERT or UPSERT statement does not specify a
 list of target columns, the query must have the same number of
@@ -1491,6 +1525,12 @@ as equivalent to <code class="language-plaintext highlighter-rouge">variant['fie
 is subject to the capitalization rules of the SQL dialect, so for correct
 operation the field may need to be quoted: <code class="language-plaintext highlighter-rouge">variant."field"</code>
 </li>
+  <li>path access using the colon notation: <code class="language-plaintext highlighter-rouge">variant:field</code>, with bracket
+segments (<code class="language-plaintext highlighter-rouge">variant:['key']</code>, <code class="language-plaintext highlighter-rouge">variant:[0]</code>) and chains
+(<code class="language-plaintext highlighter-rouge">variant:a.b['c'][0]</code>). The result is always a nullable <code class="language-plaintext highlighter-rouge">VARIANT</code>.
+The colon operator is opt-in via the <code class="language-plaintext highlighter-rouge">isColonFieldAccessAllowed</code>
+conformance flag; when enabled, JSON object constructors must use the
+<code class="language-plaintext highlighter-rouge">KEY ... VALUE</code> form.</li>
 </ul>
 
 <p>The runtime types do not need to match exactly the compile-time types.
@@ -2478,6 +2518,7 @@ represented using its charset.</p>
 
 <span class="n">timeZone</span><span class="p">:</span>
       <span class="k">WITHOUT</span> <span class="nb">TIME</span> <span class="k">ZONE</span>
+  <span class="o">|</span>   <span class="k">WITH</span> <span class="nb">TIME</span> <span class="k">ZONE</span>
   <span class="o">|</span>   <span class="k">WITH</span> <span class="k">LOCAL</span> <span class="nb">TIME</span> <span class="k">ZONE</span></code></pre></figure>
 
 <h4 id="implicit-type-conversion">Implicit Type Conversion</h4>
@@ -6515,7 +6556,7 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Returns a measure of the similarity of two strings, namely the number of character positions that their <code class="language-plaintext highlighter-rouge">SOUNDEX</code> values have in common: 4 if the <code class="language-plaintext highlighter-rouge">SOUNDEX</code> values are same and 0 if the <code class="language-plaintext highlighter-rouge">SOUNDEX</code> values are totally different</td>
     </tr>
     <tr>
-      <td style="text-align: left">f s</td>
+      <td style="text-align: left">f s i</td>
       <td style="text-align: left">ENDSWITH(string1, string2)</td>
       <td style="text-align: left">Returns whether <em>string2</em> is a suffix of <em>string1</em>
 </td>
@@ -6601,6 +6642,11 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">GETBIT(value, position)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">BIT_GET(value, position)</code>
 </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">s i</td>
+      <td style="text-align: left">HYPOT(numeric1, numeric2)</td>
+      <td style="text-align: left">Returns sqrt(<em>numeric1</em>^2 + <em>numeric2</em>^2) without intermediate overflow or underflow</td>
     </tr>
     <tr>
       <td style="text-align: left">b o p r s h</td>
@@ -6966,7 +7012,7 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Generates a random double between 0 and 1 inclusive</td>
     </tr>
     <tr>
-      <td style="text-align: left">s</td>
+      <td style="text-align: left">s h</td>
       <td style="text-align: left">REGEXP(string, regexp)</td>
       <td style="text-align: left">Equivalent to <code class="language-plaintext highlighter-rouge">string1 RLIKE string2</code>
 </td>
@@ -7162,7 +7208,7 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">Returns the <em>n</em>th field in <em>string</em> using <em>delimiter</em>; returns empty string if <em>n</em> is less than 1 or greater than the number of fields, and the n can be negative to count from the end.</td>
     </tr>
     <tr>
-      <td style="text-align: left">f s</td>
+      <td style="text-align: left">f s i</td>
       <td style="text-align: left">STARTSWITH(string1, string2)</td>
       <td style="text-align: left">Returns whether <em>string2</em> is a prefix of <em>string1</em>
 </td>
@@ -7346,6 +7392,12 @@ function, return a Calcite <code class="language-plaintext highlighter-rouge">TI
       <td style="text-align: left">o p r</td>
       <td style="text-align: left">TO_TIMESTAMP(string, format)</td>
       <td style="text-align: left">Converts <em>string</em> to a timestamp using the format <em>format</em>
+</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">p</td>
+      <td style="text-align: left">AGE(timestamp1 [, timestamp2 ])</td>
+      <td style="text-align: left">Returns a formatted string representing the difference between timestamps (for example, “3 years 11 mons 24 days 0 hours 0 mins 0.0 secs”), not an interval type. With one argument, returns the difference between the current timestamp at midnight UTC and the specified timestamp. With two arguments, returns the difference between <em>timestamp1</em> and <em>timestamp2</em>
 </td>
     </tr>
     <tr>
@@ -7979,6 +8031,10 @@ can specify the name and optionality of each parameter using the
 <a href="/javadocAggregate/org/apache/calcite/linq4j/function/Parameter.html">Parameter</a>
 annotation.</p>
 
+<p>For Java UDFs, <code class="language-plaintext highlighter-rouge">byte[]</code> and <code class="language-plaintext highlighter-rouge">ByteString</code> are supported Java representations of
+SQL <code class="language-plaintext highlighter-rouge">VARBINARY</code> values for parameters and return types. Boxed byte arrays
+(<code class="language-plaintext highlighter-rouge">Byte[]</code>) are not supported.</p>
+
 <h3 id="calling-functions-with-named-and-optional-parameters">Calling functions with named and optional parameters</h3>
 
 <p>Usually when you call a function, you need to specify all of its parameters,
@@ -8092,11 +8148,11 @@ It would be very flexible to profile the resource with hints per query (not the 
   <span class="o">|</span>   <span class="n">stringLiteral</span>
 
 <span class="n">optionVal</span><span class="p">:</span>
-      <span class="n">stringLiteral</span>
+      <span class="n">simpleIdentifier</span>
+  <span class="o">|</span>   <span class="n">stringLiteral</span>
 
 <span class="n">hintOption</span><span class="p">:</span>
       <span class="n">simpleIdentifier</span>
-   <span class="o">|</span>  <span class="n">numericLiteral</span>
    <span class="o">|</span>  <span class="n">stringLiteral</span></code></pre></figure>
 
 <p>It is experimental in Calcite, and yet not fully implemented, what we have implemented are:</p>

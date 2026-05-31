@@ -267,6 +267,12 @@ loadScripts(document, 'script');</script>
 <div class="block">Rule that removes empty children of a
  <a href="../core/Union.html" title="class in org.apache.calcite.rel.core"><code>Union</code></a>.</div>
 </div>
+<div class="col-first odd-row-color"><code>static final <a href="../../plan/RelOptRule.html" title="class in org.apache.calcite.plan">RelOptRule</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#WINDOW_INSTANCE" class="member-name-link">WINDOW_INSTANCE</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">Rule that converts a <a href="../core/Window.html" title="class in org.apache.calcite.rel.core"><code>Window</code></a>
+ to empty if its child is empty.</div>
+</div>
 </div>
 </section>
 </li>
@@ -442,6 +448,20 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="WINDOW_INSTANCE">
+<h3>WINDOW_INSTANCE</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="../../plan/RelOptRule.html" title="class in org.apache.calcite.plan">RelOptRule</a></span>&nbsp;<span class="element-name">WINDOW_INSTANCE</span></div>
+<div class="block">Rule that converts a <a href="../core/Window.html" title="class in org.apache.calcite.rel.core"><code>Window</code></a>
+ to empty if its child is empty.
+
+ <p>Examples:
+
+ <ul>
+ <li>Window(Empty) becomes Empty
+ </ul></div>
+</section>
+</li>
+<li>
 <section class="detail" id="JOIN_LEFT_INSTANCE">
 <h3>JOIN_LEFT_INSTANCE</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="../../plan/RelOptRule.html" title="class in org.apache.calcite.plan">RelOptRule</a></span>&nbsp;<span class="element-name">JOIN_LEFT_INSTANCE</span></div>
@@ -472,6 +492,7 @@ loadScripts(document, 'script');</script>
  <li>Join(Scan(Emp), Empty, RIGHT) becomes Empty
  <li>Join(Scan(Emp), Empty, SEMI) becomes Empty
  <li>Join(Scan(Emp), Empty, ANTI) becomes Scan(Emp)
+ <li>Join(Scan(Emp), Empty, LEFT_MARK) becomes Project(Scan(Emp), FALSE)
  </ul></div>
 </section>
 </li>
@@ -521,7 +542,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2026 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

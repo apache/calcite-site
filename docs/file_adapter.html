@@ -326,6 +326,24 @@ sqlline&gt; <span class="k">select </span>distinct deptno from depts<span class=
 +--------+
 3 rows selected <span class="o">(</span>0.985 seconds<span class="o">)</span></code></pre></figure>
 
+<h3 id="csv-custom-separator">CSV Custom Separator</h3>
+
+<p>When using <code class="language-plaintext highlighter-rouge">CsvTableFactory</code> to define a table in a model, you can specify an
+optional <code class="language-plaintext highlighter-rouge">separator</code> operand to use a custom delimiter.</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PIPE_DEPTS"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"factory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"org.apache.calcite.adapter.file.CsvTableFactory"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"operand"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sales-csv/PIPE_DELIMITED.csv"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"separator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"|"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>The separator must be a single character. If not specified, it defaults to a
+comma.</p>
+
 <h2 id="json-files-and-model-free-browsing">JSON files and model-free browsing</h2>
 
 <p>Some files describe their own schema, and for these files, we do not need a model. For example, <code class="language-plaintext highlighter-rouge">DEPTS.json</code> has an integer <code class="language-plaintext highlighter-rouge">DEPTNO</code> column and a string <code class="language-plaintext highlighter-rouge">NAME</code> column:</p>

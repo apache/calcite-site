@@ -199,98 +199,105 @@ implements <a href="PhysType.html" title="interface in org.apache.calcite.adapte
  MergeJoin algorithm: it will not consider two <code>null</code> values as equal.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../linq4j/tree/Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generateSelector(org.apache.calcite.linq4j.tree.ParameterExpression,java.util.List)" class="member-name-link">generateSelector</a><wbr>(<a href="../../linq4j/tree/ParameterExpression.html" title="class in org.apache.calcite.linq4j.tree">ParameterExpression</a>&nbsp;parameter,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;fields)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generateNullAwareAccessor(java.util.List,java.util.List)" class="member-name-link">generateNullAwareAccessor</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;fields,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;&nbsp;nullExclusionFlags)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Similar to <a href="PhysType.html#generateAccessor(java.util.List)"><code>PhysType.generateAccessor(List)</code></a> and <a href="PhysType.html#generateAccessorWithoutNulls(java.util.List)"><code>PhysType.generateAccessorWithoutNulls(List)</code></a>,
+ but it's null-aware.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../linq4j/tree/Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generateSelector(org.apache.calcite.linq4j.tree.ParameterExpression,java.util.List)" class="member-name-link">generateSelector</a><wbr>(<a href="../../linq4j/tree/ParameterExpression.html" title="class in org.apache.calcite.linq4j.tree">ParameterExpression</a>&nbsp;parameter,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;fields)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Generates a selector for the given fields from an expression, with the
  default row format.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../linq4j/tree/Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generateSelector(org.apache.calcite.linq4j.tree.ParameterExpression,java.util.List,java.util.List,org.apache.calcite.adapter.enumerable.JavaRowFormat)" class="member-name-link">generateSelector</a><wbr>(<a href="../../linq4j/tree/ParameterExpression.html" title="class in org.apache.calcite.linq4j.tree">ParameterExpression</a>&nbsp;parameter,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../linq4j/tree/Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generateSelector(org.apache.calcite.linq4j.tree.ParameterExpression,java.util.List,java.util.List,org.apache.calcite.adapter.enumerable.JavaRowFormat)" class="member-name-link">generateSelector</a><wbr>(<a href="../../linq4j/tree/ParameterExpression.html" title="class in org.apache.calcite.linq4j.tree">ParameterExpression</a>&nbsp;parameter,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;fields,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;usedFields,
  <a href="JavaRowFormat.html" title="enum in org.apache.calcite.adapter.enumerable">JavaRowFormat</a>&nbsp;targetFormat)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Generates a lambda expression that is a selector for the given fields from
  an expression.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../linq4j/tree/Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generateSelector(org.apache.calcite.linq4j.tree.ParameterExpression,java.util.List,org.apache.calcite.adapter.enumerable.JavaRowFormat)" class="member-name-link">generateSelector</a><wbr>(<a href="../../linq4j/tree/ParameterExpression.html" title="class in org.apache.calcite.linq4j.tree">ParameterExpression</a>&nbsp;parameter,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../linq4j/tree/Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generateSelector(org.apache.calcite.linq4j.tree.ParameterExpression,java.util.List,org.apache.calcite.adapter.enumerable.JavaRowFormat)" class="member-name-link">generateSelector</a><wbr>(<a href="../../linq4j/tree/ParameterExpression.html" title="class in org.apache.calcite.linq4j.tree">ParameterExpression</a>&nbsp;parameter,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;fields,
  <a href="JavaRowFormat.html" title="enum in org.apache.calcite.adapter.enumerable">JavaRowFormat</a>&nbsp;targetFormat)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Generates a lambda expression that is a selector for the given fields from
  an expression.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="JavaRowFormat.html" title="enum in org.apache.calcite.adapter.enumerable">JavaRowFormat</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFormat()" class="member-name-link">getFormat</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="JavaRowFormat.html" title="enum in org.apache.calcite.adapter.enumerable">JavaRowFormat</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFormat()" class="member-name-link">getFormat</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the format.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getJavaFieldType(int)" class="member-name-link">getJavaFieldType</a><wbr>(int&nbsp;index)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getJavaFieldType(int)" class="member-name-link">getJavaFieldType</a><wbr>(int&nbsp;index)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the Java class that is used to store the field with the given
  ordinal.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getJavaRowType()" class="member-name-link">getJavaRowType</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getJavaRowType()" class="member-name-link">getJavaRowType</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the Java type (often a Class) that represents a row.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRowType()" class="member-name-link">getRowType</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRowType()" class="member-name-link">getRowType</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the SQL row type.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../java/JavaTypeFactory.html" title="interface in org.apache.calcite.adapter.java">JavaTypeFactory</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTypeFactory()" class="member-name-link">getTypeFactory</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../java/JavaTypeFactory.html" title="interface in org.apache.calcite.adapter.java">JavaTypeFactory</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTypeFactory()" class="member-name-link">getTypeFactory</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the type factory.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="PhysType.html" title="interface in org.apache.calcite.adapter.enumerable">PhysType</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#makeNullable(boolean)" class="member-name-link">makeNullable</a><wbr>(boolean&nbsp;nullable)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="PhysType.html" title="interface in org.apache.calcite.adapter.enumerable">PhysType</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#makeNullable(boolean)" class="member-name-link">makeNullable</a><wbr>(boolean&nbsp;nullable)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a copy of this type that allows nulls if <code>nullable</code> is
  true.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="PhysType.html" title="interface in org.apache.calcite.adapter.enumerable">PhysType</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(org.apache.calcite.adapter.java.JavaTypeFactory,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.adapter.enumerable.JavaRowFormat)" class="member-name-link">of</a><wbr>(<a href="../java/JavaTypeFactory.html" title="interface in org.apache.calcite.adapter.java">JavaTypeFactory</a>&nbsp;typeFactory,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="PhysType.html" title="interface in org.apache.calcite.adapter.enumerable">PhysType</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(org.apache.calcite.adapter.java.JavaTypeFactory,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.adapter.enumerable.JavaRowFormat)" class="member-name-link">of</a><wbr>(<a href="../java/JavaTypeFactory.html" title="interface in org.apache.calcite.adapter.java">JavaTypeFactory</a>&nbsp;typeFactory,
  <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
  <a href="JavaRowFormat.html" title="enum in org.apache.calcite.adapter.enumerable">JavaRowFormat</a>&nbsp;format)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="PhysType.html" title="interface in org.apache.calcite.adapter.enumerable">PhysType</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(org.apache.calcite.adapter.java.JavaTypeFactory,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.adapter.enumerable.JavaRowFormat,boolean)" class="member-name-link">of</a><wbr>(<a href="../java/JavaTypeFactory.html" title="interface in org.apache.calcite.adapter.java">JavaTypeFactory</a>&nbsp;typeFactory,
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="PhysType.html" title="interface in org.apache.calcite.adapter.enumerable">PhysType</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(org.apache.calcite.adapter.java.JavaTypeFactory,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.adapter.enumerable.JavaRowFormat,boolean)" class="member-name-link">of</a><wbr>(<a href="../java/JavaTypeFactory.html" title="interface in org.apache.calcite.adapter.java">JavaTypeFactory</a>&nbsp;typeFactory,
  <a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType,
  <a href="JavaRowFormat.html" title="enum in org.apache.calcite.adapter.enumerable">JavaRowFormat</a>&nbsp;format,
  boolean&nbsp;optimize)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="PhysType.html" title="interface in org.apache.calcite.adapter.enumerable">PhysType</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#project(java.util.List,boolean,org.apache.calcite.adapter.enumerable.JavaRowFormat)" class="member-name-link">project</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;integers,
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="PhysType.html" title="interface in org.apache.calcite.adapter.enumerable">PhysType</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#project(java.util.List,boolean,org.apache.calcite.adapter.enumerable.JavaRowFormat)" class="member-name-link">project</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;integers,
  boolean&nbsp;indicator,
  <a href="JavaRowFormat.html" title="enum in org.apache.calcite.adapter.enumerable">JavaRowFormat</a>&nbsp;format)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Projects a given collection of fields from this input record, optionally
  with indicator fields, into a particular preferred output format.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="PhysType.html" title="interface in org.apache.calcite.adapter.enumerable">PhysType</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#project(java.util.List,org.apache.calcite.adapter.enumerable.JavaRowFormat)" class="member-name-link">project</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;integers,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="PhysType.html" title="interface in org.apache.calcite.adapter.enumerable">PhysType</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#project(java.util.List,org.apache.calcite.adapter.enumerable.JavaRowFormat)" class="member-name-link">project</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;integers,
  <a href="JavaRowFormat.html" title="enum in org.apache.calcite.adapter.enumerable">JavaRowFormat</a>&nbsp;format)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Projects a given collection of fields from this input record, into
  a particular preferred output format.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../linq4j/tree/Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#record(java.util.List)" class="member-name-link">record</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../linq4j/tree/Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&gt;&nbsp;expressions)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../linq4j/tree/Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#record(java.util.List)" class="member-name-link">record</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../linq4j/tree/Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&gt;&nbsp;expressions)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Generates an expression that creates a record for a row, initializing
  its fields with the given expressions.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../util/Pair.html" title="class in org.apache.calcite.util">Pair</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../linq4j/tree/Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&gt;&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#selector(org.apache.calcite.linq4j.tree.ParameterExpression,java.util.List,org.apache.calcite.adapter.enumerable.JavaRowFormat)" class="member-name-link">selector</a><wbr>(<a href="../../linq4j/tree/ParameterExpression.html" title="class in org.apache.calcite.linq4j.tree">ParameterExpression</a>&nbsp;parameter,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../util/Pair.html" title="class in org.apache.calcite.util">Pair</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Type.html" title="class or interface in java.lang.reflect" class="external-link">Type</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../linq4j/tree/Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&gt;&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#selector(org.apache.calcite.linq4j.tree.ParameterExpression,java.util.List,org.apache.calcite.adapter.enumerable.JavaRowFormat)" class="member-name-link">selector</a><wbr>(<a href="../../linq4j/tree/ParameterExpression.html" title="class in org.apache.calcite.linq4j.tree">ParameterExpression</a>&nbsp;parameter,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;fields,
  <a href="JavaRowFormat.html" title="enum in org.apache.calcite.adapter.enumerable">JavaRowFormat</a>&nbsp;targetFormat)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Generates a selector for the given fields from an expression.</div>
 </div>
 </div>
@@ -721,6 +728,23 @@ implements <a href="PhysType.html" title="interface in org.apache.calcite.adapte
 </section>
 </li>
 <li>
+<section class="detail" id="generateNullAwareAccessor(java.util.List,java.util.List)">
+<h3>generateNullAwareAccessor</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../linq4j/tree/Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a></span>&nbsp;<span class="element-name">generateNullAwareAccessor</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;fields,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;&nbsp;nullExclusionFlags)</span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="PhysType.html#generateNullAwareAccessor(java.util.List,java.util.List)">PhysType</a></code></span></div>
+<div class="block">Similar to <a href="PhysType.html#generateAccessor(java.util.List)"><code>PhysType.generateAccessor(List)</code></a> and <a href="PhysType.html#generateAccessorWithoutNulls(java.util.List)"><code>PhysType.generateAccessorWithoutNulls(List)</code></a>,
+ but it's null-aware. It returns a Expression which evaluates to null (if one of
+ field is null and it isn't null-safe) or a list of
+ fields that may contain null (no field is null, or there are fields with null but they are
+ null-safe) at runtime.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="PhysType.html#generateNullAwareAccessor(java.util.List,java.util.List)">generateNullAwareAccessor</a></code>&nbsp;in interface&nbsp;<code><a href="PhysType.html" title="interface in org.apache.calcite.adapter.enumerable">PhysType</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="fieldReference(org.apache.calcite.linq4j.tree.Expression,int)">
 <h3>fieldReference</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../linq4j/tree/Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a></span>&nbsp;<span class="element-name">fieldReference</span><wbr><span class="parameters">(<a href="../../linq4j/tree/Expression.html" title="class in org.apache.calcite.linq4j.tree">Expression</a>&nbsp;expression,
@@ -780,7 +804,7 @@ implements <a href="PhysType.html" title="interface in org.apache.calcite.adapte
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2026 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

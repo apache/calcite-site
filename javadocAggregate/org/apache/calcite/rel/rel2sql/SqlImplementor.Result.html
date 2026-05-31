@@ -190,12 +190,18 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the alias of the join or correlate just created.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stripTrivialAliases(org.apache.calcite.sql.SqlNode)" class="member-name-link">stripTrivialAliases</a><wbr>(<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../sql/SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#subSelect()" class="member-name-link">subSelect</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#resetAliasForCorrelation(java.lang.String,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">resetAliasForCorrelation</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
+ <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the alias and forces explicit alias generation in FROM clause.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stripTrivialAliases(org.apache.calcite.sql.SqlNode)" class="member-name-link">stripTrivialAliases</a><wbr>(<a href="../../sql/SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;node)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../sql/SqlSelect.html" title="class in org.apache.calcite.sql">SqlSelect</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#subSelect()" class="member-name-link">subSelect</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -340,6 +346,22 @@ loadScripts(document, 'script');</script>
 </dl>
 </section>
 </li>
+<li>
+<section class="detail" id="resetAliasForCorrelation(java.lang.String,org.apache.calcite.rel.type.RelDataType)">
+<h3>resetAliasForCorrelation</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></span>&nbsp;<span class="element-name">resetAliasForCorrelation</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;alias,
+ <a href="../type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type)</span></div>
+<div class="block">Sets the alias and forces explicit alias generation in FROM clause.
+ Used when correlation requires an explicit table alias.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>alias</code> - New alias to use</dd>
+<dd><code>type</code> - Type of the node associated with the alias</dd>
+<dt>Returns:</dt>
+<dd>New Result with forced explicit alias</dd>
+</dl>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -349,7 +371,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2026 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

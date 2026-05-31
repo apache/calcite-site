@@ -234,15 +234,15 @@ implements <a href="../util/ReflectiveVisitor.html" title="interface in org.apac
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelate(org.apache.calcite.rel.RelNode)" class="member-name-link">decorrelate</a><wbr>(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;root)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelateExpr(org.apache.calcite.rel.RelNode,java.util.Map,org.apache.calcite.sql2rel.RelDecorrelator.CorelMap,org.apache.calcite.rex.RexNode)" class="member-name-link">decorrelateExpr</a><wbr>(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;currentRel,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelate(org.apache.calcite.rel.RelNode,org.apache.calcite.tools.RuleSet)" class="member-name-link">decorrelate</a><wbr>(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;root,
+ @Nullable <a href="../tools/RuleSet.html" title="interface in org.apache.calcite.tools">RuleSet</a>&nbsp;preDecorrelateRules)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelateExpr(org.apache.calcite.rel.RelNode,java.util.Map,org.apache.calcite.sql2rel.RelDecorrelator.CorelMap,org.apache.calcite.rex.RexNode)" class="member-name-link">decorrelateExpr</a><wbr>(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;currentRel,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>,<wbr>org.apache.calcite.sql2rel.RelDecorrelator.Frame&gt;&nbsp;map,
  <a href="RelDecorrelator.CorelMap.html" title="class in org.apache.calcite.sql2rel">RelDecorrelator.CorelMap</a>&nbsp;cm,
  <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;exp)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected @Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelateFetchOneSort(org.apache.calcite.rel.core.Sort,org.apache.calcite.sql2rel.RelDecorrelator.Frame)" class="member-name-link">decorrelateFetchOneSort</a><wbr>(<a href="../rel/core/Sort.html" title="class in org.apache.calcite.rel.core">Sort</a>&nbsp;sort,
- org.apache.calcite.sql2rel.RelDecorrelator.Frame&nbsp;frame)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#decorrelateQuery(org.apache.calcite.rel.RelNode)" class="member-name-link">decorrelateQuery</a><wbr>(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rootRel)</code></div>
@@ -259,35 +259,60 @@ implements <a href="../util/ReflectiveVisitor.html" title="interface in org.apac
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#decorrelateQuery(org.apache.calcite.rel.RelNode,org.apache.calcite.tools.RelBuilder,org.apache.calcite.tools.RuleSet)" class="member-name-link">decorrelateQuery</a><wbr>(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rootRel,
  <a href="../tools/RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a>&nbsp;relBuilder,
  @Nullable <a href="../tools/RuleSet.html" title="interface in org.apache.calcite.tools">RuleSet</a>&nbsp;decorrelationRules)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#decorrelateQuery(org.apache.calcite.rel.RelNode,org.apache.calcite.tools.RelBuilder,org.apache.calcite.tools.RuleSet,org.apache.calcite.tools.RuleSet)" class="member-name-link">decorrelateQuery</a><wbr>(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rootRel,
+ <a href="../tools/RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a>&nbsp;relBuilder,
+ @Nullable <a href="../tools/RuleSet.html" title="interface in org.apache.calcite.tools">RuleSet</a>&nbsp;decorrelationRules,
+ @Nullable <a href="../tools/RuleSet.html" title="interface in org.apache.calcite.tools">RuleSet</a>&nbsp;preDecorrelateRules)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Decorrelates a query specifying a set of rules to be used in the
  "remove correlation via rules" pre-processing.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelateRel(org.apache.calcite.rel.core.Aggregate,boolean,boolean)" class="member-name-link">decorrelateRel</a><wbr>(<a href="../rel/core/Aggregate.html" title="class in org.apache.calcite.rel.core">Aggregate</a>&nbsp;rel,
- boolean&nbsp;isCorVarDefined,
- boolean&nbsp;parentPropagatesNullValues)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelateRel(org.apache.calcite.rel.core.Correlate,boolean,boolean)" class="member-name-link">decorrelateRel</a><wbr>(<a href="../rel/core/Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&nbsp;rel,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelateRel(org.apache.calcite.rel.core.Aggregate,boolean,boolean)" class="member-name-link">decorrelateRel</a><wbr>(<a href="../rel/core/Aggregate.html" title="class in org.apache.calcite.rel.core">Aggregate</a>&nbsp;rel,
  boolean&nbsp;isCorVarDefined,
  boolean&nbsp;parentPropagatesNullValues)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelateRel(org.apache.calcite.rel.core.Filter,boolean,boolean)" class="member-name-link">decorrelateRel</a><wbr>(<a href="../rel/core/Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;rel,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelateRel(org.apache.calcite.rel.core.Correlate,boolean,boolean)" class="member-name-link">decorrelateRel</a><wbr>(<a href="../rel/core/Correlate.html" title="class in org.apache.calcite.rel.core">Correlate</a>&nbsp;rel,
  boolean&nbsp;isCorVarDefined,
  boolean&nbsp;parentPropagatesNullValues)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelateRel(org.apache.calcite.rel.core.Join,boolean,boolean)" class="member-name-link">decorrelateRel</a><wbr>(<a href="../rel/core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&nbsp;rel,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelateRel(org.apache.calcite.rel.core.Filter,boolean,boolean)" class="member-name-link">decorrelateRel</a><wbr>(<a href="../rel/core/Filter.html" title="class in org.apache.calcite.rel.core">Filter</a>&nbsp;rel,
  boolean&nbsp;isCorVarDefined,
  boolean&nbsp;parentPropagatesNullValues)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelateRel(org.apache.calcite.rel.core.Project,boolean,boolean)" class="member-name-link">decorrelateRel</a><wbr>(<a href="../rel/core/Project.html" title="class in org.apache.calcite.rel.core">Project</a>&nbsp;rel,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelateRel(org.apache.calcite.rel.core.Join,boolean,boolean)" class="member-name-link">decorrelateRel</a><wbr>(<a href="../rel/core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&nbsp;rel,
  boolean&nbsp;isCorVarDefined,
  boolean&nbsp;parentPropagatesNullValues)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelateRel(org.apache.calcite.rel.core.Project,boolean,boolean)" class="member-name-link">decorrelateRel</a><wbr>(<a href="../rel/core/Project.html" title="class in org.apache.calcite.rel.core">Project</a>&nbsp;rel,
+ boolean&nbsp;isCorVarDefined,
+ boolean&nbsp;parentPropagatesNullValues)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelateRel(org.apache.calcite.rel.core.SetOp,boolean,boolean)" class="member-name-link">decorrelateRel</a><wbr>(<a href="../rel/core/SetOp.html" title="class in org.apache.calcite.rel.core">SetOp</a>&nbsp;rel,
+ boolean&nbsp;isCorVarDefined,
+ boolean&nbsp;parentPropagatesNullValues)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Given the SQL:
+ SELECT ename,
+    (SELECT sum(c)
+    FROM
+        (SELECT deptno AS c
+        FROM dept
+        WHERE dept.deptno = emp.deptno
+        UNION ALL
+        SELECT 2 AS c
+        FROM bonus
+        WHERE bonus.job = emp.job) AS union_subquery
+    ) AS correlated_sum
+ FROM emp;</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelateRel(org.apache.calcite.rel.core.Sort,boolean,boolean)" class="member-name-link">decorrelateRel</a><wbr>(<a href="../rel/core/Sort.html" title="class in org.apache.calcite.rel.core">Sort</a>&nbsp;rel,
  boolean&nbsp;isCorVarDefined,
@@ -339,55 +364,59 @@ implements <a href="../util/ReflectiveVisitor.html" title="interface in org.apac
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelateSortAsAggregate(org.apache.calcite.rel.core.Sort,org.apache.calcite.sql2rel.RelDecorrelator.Frame)" class="member-name-link">decorrelateSortAsAggregate</a><wbr>(<a href="../rel/core/Sort.html" title="class in org.apache.calcite.rel.core">Sort</a>&nbsp;sort,
  org.apache.calcite.sql2rel.RelDecorrelator.Frame&nbsp;frame)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getInvoke(org.apache.calcite.rel.RelNode,boolean,org.apache.calcite.rel.RelNode,boolean)" class="member-name-link">getInvoke</a><wbr>(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;r,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected @Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#decorrelateSortWithRowNumber(org.apache.calcite.rel.core.Sort,org.apache.calcite.sql2rel.RelDecorrelator.Frame)" class="member-name-link">decorrelateSortWithRowNumber</a><wbr>(<a href="../rel/core/Sort.html" title="class in org.apache.calcite.rel.core">Sort</a>&nbsp;sort,
+ org.apache.calcite.sql2rel.RelDecorrelator.Frame&nbsp;frame)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getInvoke(org.apache.calcite.rel.RelNode,boolean,org.apache.calcite.rel.RelNode,boolean)" class="member-name-link">getInvoke</a><wbr>(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;r,
  boolean&nbsp;isCorVarDefined,
  @Nullable <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;parent,
  boolean&nbsp;parentPropagatesNullValues)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Invokes decorrelation logic for a given relational expression.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../plan/RelOptRule.html" title="class in org.apache.calcite.plan">RelOptRule</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPostDecorrelateRules()" class="member-name-link">getPostDecorrelateRules</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../plan/RelOptRule.html" title="class in org.apache.calcite.plan">RelOptRule</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPostDecorrelateRules()" class="member-name-link">getPostDecorrelateRules</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the rules applied on the rel after decorrelation, never null.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="RelDecorrelator.html" title="class in org.apache.calcite.sql2rel">RelDecorrelator</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVisitor()" class="member-name-link">getVisitor</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="RelDecorrelator.html" title="class in org.apache.calcite.sql2rel">RelDecorrelator</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVisitor()" class="member-name-link">getVisitor</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the <code>visitor</code> on which the <code>MethodDispatcher</code> dispatches
  each <code>decorrelateRel</code> method, the default implementation returns this instance,
  if you got a sub-class, override this method to replace the <code>visitor</code> as the
  sub-class instance.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../tools/RelBuilderFactory.html" title="interface in org.apache.calcite.tools">RelBuilderFactory</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#relBuilderFactory()" class="member-name-link">relBuilderFactory</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeCorrelationExpr(org.apache.calcite.rex.RexNode,boolean)" class="member-name-link">removeCorrelationExpr</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;exp,
- boolean&nbsp;projectPulledAboveLeftCorrelator)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../tools/RelBuilderFactory.html" title="interface in org.apache.calcite.tools">RelBuilderFactory</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#relBuilderFactory()" class="member-name-link">relBuilderFactory</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeCorrelationExpr(org.apache.calcite.rex.RexNode,boolean,java.util.Set)" class="member-name-link">removeCorrelationExpr</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;exp,
- boolean&nbsp;projectPulledAboveLeftCorrelator,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;isCount)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeCorrelationExpr(org.apache.calcite.rex.RexNode,boolean)" class="member-name-link">removeCorrelationExpr</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;exp,
+ boolean&nbsp;projectPulledAboveLeftCorrelator)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeCorrelationExpr(org.apache.calcite.rex.RexNode,boolean,org.apache.calcite.rex.RexInputRef)" class="member-name-link">removeCorrelationExpr</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;exp,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeCorrelationExpr(org.apache.calcite.rex.RexNode,boolean,java.util.Set)" class="member-name-link">removeCorrelationExpr</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;exp,
+ boolean&nbsp;projectPulledAboveLeftCorrelator,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;&nbsp;isCount)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeCorrelationExpr(org.apache.calcite.rex.RexNode,boolean,org.apache.calcite.rex.RexInputRef)" class="member-name-link">removeCorrelationExpr</a><wbr>(<a href="../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;exp,
  boolean&nbsp;projectPulledAboveLeftCorrelator,
  <a href="../rex/RexInputRef.html" title="class in org.apache.calcite.rex">RexInputRef</a>&nbsp;nullIndicator)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeCorrelationViaRule(org.apache.calcite.rel.RelNode)" class="member-name-link">removeCorrelationViaRule</a><wbr>(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;root)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeCorrelationViaRule(org.apache.calcite.rel.RelNode)" class="member-name-link">removeCorrelationViaRule</a><wbr>(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;root)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Remove some instances of <a href="../rel/core/Correlate.html" title="class in org.apache.calcite.rel.core"><code>Correlate</code></a> from a query plan
  by applying a default set of rules (only some of the
  <a href="../rel/core/Correlate.html" title="class in org.apache.calcite.rel.core"><code>Correlate</code></a>s might be removable in such way).</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeCorrelationViaRule(org.apache.calcite.rel.RelNode,org.apache.calcite.tools.RuleSet)" class="member-name-link">removeCorrelationViaRule</a><wbr>(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;root,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeCorrelationViaRule(org.apache.calcite.rel.RelNode,org.apache.calcite.tools.RuleSet)" class="member-name-link">removeCorrelationViaRule</a><wbr>(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;root,
  <a href="../tools/RuleSet.html" title="interface in org.apache.calcite.tools">RuleSet</a>&nbsp;ruleSet)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Remove some instances of <a href="../rel/core/Correlate.html" title="class in org.apache.calcite.rel.core"><code>Correlate</code></a> from a query plan
  by applying a certain <a href="../tools/RuleSet.html" title="interface in org.apache.calcite.tools"><code>RuleSet</code></a> (only some of the
  <a href="../rel/core/Correlate.html" title="class in org.apache.calcite.rel.core"><code>Correlate</code></a>s might be removable in such way).</div>
@@ -518,14 +547,25 @@ implements <a href="../util/ReflectiveVisitor.html" title="interface in org.apac
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></span>&nbsp;<span class="element-name">decorrelateQuery</span><wbr><span class="parameters">(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rootRel,
  <a href="../tools/RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a>&nbsp;relBuilder,
  @Nullable <a href="../tools/RuleSet.html" title="interface in org.apache.calcite.tools">RuleSet</a>&nbsp;decorrelationRules)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="decorrelateQuery(org.apache.calcite.rel.RelNode,org.apache.calcite.tools.RelBuilder,org.apache.calcite.tools.RuleSet,org.apache.calcite.tools.RuleSet)">
+<h3>decorrelateQuery</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></span>&nbsp;<span class="element-name">decorrelateQuery</span><wbr><span class="parameters">(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;rootRel,
+ <a href="../tools/RelBuilder.html" title="class in org.apache.calcite.tools">RelBuilder</a>&nbsp;relBuilder,
+ @Nullable <a href="../tools/RuleSet.html" title="interface in org.apache.calcite.tools">RuleSet</a>&nbsp;decorrelationRules,
+ @Nullable <a href="../tools/RuleSet.html" title="interface in org.apache.calcite.tools">RuleSet</a>&nbsp;preDecorrelateRules)</span></div>
 <div class="block">Decorrelates a query specifying a set of rules to be used in the
  "remove correlation via rules" pre-processing.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>rootRel</code> - Root node of the query</dd>
 <dd><code>relBuilder</code> - Builder for relational expressions</dd>
-<dd><code>decorrelationRules</code> - Rules to be used in the decorrelation, if <code>null</code>
-                            a default rule set will be used</dd>
+<dd><code>decorrelationRules</code> - Rules to attempt some initial rule-based-decorrelation conversions,
+                            if <code>null</code> a default rule set will be used</dd>
+<dd><code>preDecorrelateRules</code> - Pre-process rules to be used before the main decorrelation
+                            procedure, if <code>null</code> a default rule set will be used</dd>
 <dt>Returns:</dt>
 <dd>Equivalent query with all
  <a href="../rel/core/Correlate.html" title="class in org.apache.calcite.rel.core"><code>Correlate</code></a> instances removed</dd>
@@ -548,6 +588,13 @@ implements <a href="../util/ReflectiveVisitor.html" title="interface in org.apac
 <section class="detail" id="decorrelate(org.apache.calcite.rel.RelNode)">
 <h3>decorrelate</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></span>&nbsp;<span class="element-name">decorrelate</span><wbr><span class="parameters">(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;root)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="decorrelate(org.apache.calcite.rel.RelNode,org.apache.calcite.tools.RuleSet)">
+<h3>decorrelate</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></span>&nbsp;<span class="element-name">decorrelate</span><wbr><span class="parameters">(<a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;root,
+ @Nullable <a href="../tools/RuleSet.html" title="interface in org.apache.calcite.tools">RuleSet</a>&nbsp;preDecorrelateRules)</span></div>
 </section>
 </li>
 <li>
@@ -650,9 +697,9 @@ implements <a href="../util/ReflectiveVisitor.html" title="interface in org.apac
 </section>
 </li>
 <li>
-<section class="detail" id="decorrelateFetchOneSort(org.apache.calcite.rel.core.Sort,org.apache.calcite.sql2rel.RelDecorrelator.Frame)">
-<h3>decorrelateFetchOneSort</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="element-name">decorrelateFetchOneSort</span><wbr><span class="parameters">(<a href="../rel/core/Sort.html" title="class in org.apache.calcite.rel.core">Sort</a>&nbsp;sort,
+<section class="detail" id="decorrelateSortWithRowNumber(org.apache.calcite.rel.core.Sort,org.apache.calcite.sql2rel.RelDecorrelator.Frame)">
+<h3>decorrelateSortWithRowNumber</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="element-name">decorrelateSortWithRowNumber</span><wbr><span class="parameters">(<a href="../rel/core/Sort.html" title="class in org.apache.calcite.rel.core">Sort</a>&nbsp;sort,
  org.apache.calcite.sql2rel.RelDecorrelator.Frame&nbsp;frame)</span></div>
 </section>
 </li>
@@ -661,6 +708,54 @@ implements <a href="../util/ReflectiveVisitor.html" title="interface in org.apac
 <h3>decorrelateSortAsAggregate</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="element-name">decorrelateSortAsAggregate</span><wbr><span class="parameters">(<a href="../rel/core/Sort.html" title="class in org.apache.calcite.rel.core">Sort</a>&nbsp;sort,
  org.apache.calcite.sql2rel.RelDecorrelator.Frame&nbsp;frame)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="decorrelateRel(org.apache.calcite.rel.core.SetOp,boolean,boolean)">
+<h3>decorrelateRel</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable org.apache.calcite.sql2rel.RelDecorrelator.Frame</span>&nbsp;<span class="element-name">decorrelateRel</span><wbr><span class="parameters">(<a href="../rel/core/SetOp.html" title="class in org.apache.calcite.rel.core">SetOp</a>&nbsp;rel,
+ boolean&nbsp;isCorVarDefined,
+ boolean&nbsp;parentPropagatesNullValues)</span></div>
+<div class="block">Given the SQL:
+ SELECT ename,
+    (SELECT sum(c)
+    FROM
+        (SELECT deptno AS c
+        FROM dept
+        WHERE dept.deptno = emp.deptno
+        UNION ALL
+        SELECT 2 AS c
+        FROM bonus
+        WHERE bonus.job = emp.job) AS union_subquery
+    ) AS correlated_sum
+ FROM emp;
+
+ <p>from:
+ LogicalUnion(all=[true])
+   LogicalProject(C=[CAST($0):INTEGER NOT NULL])
+     LogicalFilter(condition=[=($0, $cor0.DEPTNO)])
+       LogicalTableScan(table=[[scott, DEPT]])
+   LogicalProject(C=[2])
+     LogicalFilter(condition=[=($1, $cor0.JOB)])
+       LogicalTableScan(table=[[scott, BONUS]])
+
+ <p>to:
+ LogicalUnion(all=[true])
+   LogicalProject(JOB=[$0], DEPTNO=[$1], C=[$2])
+     LogicalJoin(condition=[IS NOT DISTINCT FROM($1, $3)], joinType=[inner])
+       LogicalAggregate(group=[{0, 1}])
+         LogicalProject(JOB=[$2], DEPTNO=[$7])
+           LogicalTableScan(table=[[scott, EMP]])
+       LogicalProject(C=[CAST($0):INTEGER NOT NULL], DEPTNO=[$0])
+         LogicalTableScan(table=[[scott, DEPT]])
+   LogicalProject(JOB=[$0], DEPTNO=[$1], C=[$2])
+     LogicalJoin(condition=[IS NOT DISTINCT FROM($0, $3)], joinType=[inner])
+       LogicalAggregate(group=[{0, 1}])
+         LogicalProject(JOB=[$2], DEPTNO=[$7])
+           LogicalTableScan(table=[[scott, EMP]])
+       LogicalProject(C=[2], JOB=[$1])
+         LogicalFilter(condition=[IS NOT NULL($1)])
+           LogicalTableScan(table=[[scott, BONUS]])</div>
 </section>
 </li>
 <li>
@@ -769,7 +864,7 @@ implements <a href="../util/ReflectiveVisitor.html" title="interface in org.apac
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2026 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

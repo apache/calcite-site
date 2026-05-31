@@ -40,7 +40,7 @@ loadScripts(document, 'script');</script>
 <li>
 <p>Summary:</p>
 <ul>
-<li>Nested</li>
+<li><a href="#nested-class-summary">Nested</a></li>
 <li>Field</li>
 <li>Constr</li>
 <li><a href="#method-summary">Method</a></li>
@@ -60,7 +60,7 @@ loadScripts(document, 'script');</script>
 <div id="navbar-sub-list">
 <ul class="sub-nav-list">
 <li>Summary:&nbsp;</li>
-<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#nested-class-summary">Nested</a>&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method-summary">Method</a></li>
@@ -101,10 +101,34 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ArrowTable</span>
 <span class="extends-implements">extends <a href="../../schema/impl/AbstractTable.html" title="class in org.apache.calcite.schema.impl">AbstractTable</a>
 implements <a href="../../schema/TranslatableTable.html" title="interface in org.apache.calcite.schema">TranslatableTable</a>, <a href="../../schema/QueryableTable.html" title="interface in org.apache.calcite.schema">QueryableTable</a></span></div>
-<div class="block">Arrow Table.</div>
+<div class="block">Table backed by an Apache Arrow file.
+
+ <p>Reads data from an Arrow IPC file on disk and supports projection
+ and filter push-down via the Gandiva expression compiler.
+
+ <p>Implements <a href="../../schema/TranslatableTable.html" title="interface in org.apache.calcite.schema"><code>TranslatableTable</code></a> so that it can be converted into
+ an <code>ArrowTableScan</code> for query planning, and <a href="../../schema/QueryableTable.html" title="interface in org.apache.calcite.schema"><code>QueryableTable</code></a>
+ so that it can be used via the <a href="../../linq4j/package-summary.html"><code>org.apache.calcite.linq4j</code></a> API.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+<li>
+<section class="nested-class-summary" id="nested-class-summary">
+<h2>Nested Class Summary</h2>
+<div class="caption"><span>Nested Classes</span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Class</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>static class&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="ArrowTable.ArrowQueryable.html" class="type-name-link" title="class in org.apache.calcite.adapter.arrow">ArrowTable.ArrowQueryable</a>&lt;<a href="ArrowTable.ArrowQueryable.html" title="type parameter in ArrowTable.ArrowQueryable">T</a>&gt;</code></div>
+<div class="col-last even-row-color">
+<div class="block">Implementation of <a href="../../linq4j/Queryable.html" title="interface in org.apache.calcite.linq4j"><code>Queryable</code></a> based on a <a href="ArrowTable.html" title="class in org.apache.calcite.adapter.arrow"><code>ArrowTable</code></a>.</div>
+</div>
+</div>
+</section>
+</li>
 <!-- ========== METHOD SUMMARY =========== -->
 <li>
 <section class="method-summary" id="method-summary">
@@ -145,7 +169,7 @@ implements <a href="../../schema/TranslatableTable.html" title="interface in org
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../linq4j/Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#query(org.apache.calcite.DataContext,org.apache.calcite.util.ImmutableIntList,java.util.List)" class="member-name-link">query</a><wbr>(<a href="../../DataContext.html" title="interface in org.apache.calcite">DataContext</a>&nbsp;root,
  <a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;fields,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;conditions)</code></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&gt;&gt;&nbsp;conditions)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Called via code generation; see uses of
  <code>ArrowMethod.ARROW_QUERY</code>.</div>
@@ -229,7 +253,7 @@ implements <a href="../../schema/TranslatableTable.html" title="interface in org
 <h3>query</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../linq4j/Enumerable.html" title="interface in org.apache.calcite.linq4j">Enumerable</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name">query</span><wbr><span class="parameters">(<a href="../../DataContext.html" title="interface in org.apache.calcite">DataContext</a>&nbsp;root,
  <a href="../../util/ImmutableIntList.html" title="class in org.apache.calcite.util">ImmutableIntList</a>&nbsp;fields,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;conditions)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&gt;&gt;&nbsp;conditions)</span></div>
 <div class="block">Called via code generation; see uses of
  <code>ArrowMethod.ARROW_QUERY</code>.</div>
 </section>
@@ -283,7 +307,7 @@ implements <a href="../../schema/TranslatableTable.html" title="interface in org
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2026 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

@@ -181,7 +181,7 @@ Additionally, the rule can rewrite expressions rooted at an Aggregate operator, 
 
 <p>Let us illustrate with some examples the coverage of the view rewriting algorithm implemented in <code class="language-plaintext highlighter-rouge">MaterializedViewRule</code>. The examples are based on the following database schema.</p>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">depts</span><span class="p">(</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">depts</span><span class="p">(</span>
   <span class="n">deptno</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
   <span class="n">deptname</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
   <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">deptno</span><span class="p">)</span>
@@ -200,8 +200,7 @@ Additionally, the rule can rewrite expressions rooted at an Aggregate operator, 
   <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">empid</span><span class="p">),</span>
   <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">deptno</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">depts</span><span class="p">(</span><span class="n">deptno</span><span class="p">),</span>
   <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">locationid</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">locations</span><span class="p">(</span><span class="n">locationid</span><span class="p">)</span>
-<span class="p">);</span>
-</code></pre></div></div>
+<span class="p">);</span></code></pre></figure>
 
 <h6 id="join-rewriting">Join rewriting</h6>
 
@@ -211,32 +210,29 @@ Additionally, the rule can rewrite expressions rooted at an Aggregate operator, 
   <li>Query:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">empid</span>
 <span class="k">FROM</span> <span class="n">depts</span>
 <span class="k">JOIN</span> <span class="p">(</span>
   <span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span>
   <span class="k">FROM</span> <span class="n">emps</span>
   <span class="k">WHERE</span> <span class="n">empid</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">AS</span> <span class="n">subq</span>
-<span class="k">ON</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">subq</span><span class="p">.</span><span class="n">deptno</span>
-</code></pre></div></div>
+<span class="k">ON</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">subq</span><span class="p">.</span><span class="n">deptno</span></code></pre></figure>
 
 <ul>
   <li>Materialized view definition:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">empid</span>
 <span class="k">FROM</span> <span class="n">emps</span>
-<span class="k">JOIN</span> <span class="n">depts</span> <span class="k">USING</span> <span class="p">(</span><span class="n">deptno</span><span class="p">)</span>
-</code></pre></div></div>
+<span class="k">JOIN</span> <span class="n">depts</span> <span class="k">USING</span> <span class="p">(</span><span class="n">deptno</span><span class="p">)</span></code></pre></figure>
 
 <ul>
   <li>Rewriting:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">empid</span>
 <span class="k">FROM</span> <span class="n">mv</span>
-<span class="k">WHERE</span> <span class="n">empid</span> <span class="o">=</span> <span class="mi">1</span>
-</code></pre></div></div>
+<span class="k">WHERE</span> <span class="n">empid</span> <span class="o">=</span> <span class="mi">1</span></code></pre></figure>
 
 <h6 id="aggregate-rewriting">Aggregate rewriting</h6>
 
@@ -244,31 +240,28 @@ Additionally, the rule can rewrite expressions rooted at an Aggregate operator, 
   <li>Query:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptno</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">deptno</span>
 <span class="k">FROM</span> <span class="n">emps</span>
 <span class="k">WHERE</span> <span class="n">deptno</span> <span class="o">&gt;</span> <span class="mi">10</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span>
-</code></pre></div></div>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span></code></pre></figure>
 
 <ul>
   <li>Materialized view definition:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span>
 <span class="k">FROM</span> <span class="n">emps</span>
 <span class="k">WHERE</span> <span class="n">deptno</span> <span class="o">&gt;</span> <span class="mi">5</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span>
-</code></pre></div></div>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span></code></pre></figure>
 
 <ul>
   <li>Rewriting:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptno</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">deptno</span>
 <span class="k">FROM</span> <span class="n">mv</span>
 <span class="k">WHERE</span> <span class="n">deptno</span> <span class="o">&gt;</span> <span class="mi">10</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span>
-</code></pre></div></div>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span></code></pre></figure>
 
 <h6 id="aggregate-rewriting-with-aggregation-rollup">Aggregate rewriting (with aggregation rollup)</h6>
 
@@ -276,28 +269,25 @@ Additionally, the rule can rewrite expressions rooted at an Aggregate operator, 
   <li>Query:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="k">c</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="k">c</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
 <span class="k">FROM</span> <span class="n">emps</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span>
-</code></pre></div></div>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span></code></pre></figure>
 
 <ul>
   <li>Materialized view definition:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="k">c</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="k">c</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
 <span class="k">FROM</span> <span class="n">emps</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span>
-</code></pre></div></div>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span></code></pre></figure>
 
 <ul>
   <li>Rewriting:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="k">c</span><span class="p">),</span> <span class="k">SUM</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="k">c</span><span class="p">),</span> <span class="k">SUM</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 <span class="k">FROM</span> <span class="n">mv</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span>
-</code></pre></div></div>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span></code></pre></figure>
 
 <h6 id="query-partial-rewriting">Query partial rewriting</h6>
 
@@ -307,29 +297,26 @@ Additionally, the rule can rewrite expressions rooted at an Aggregate operator, 
   <li>Query:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
 <span class="k">FROM</span> <span class="n">emps</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span>
-</code></pre></div></div>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span></code></pre></figure>
 
 <ul>
   <li>Materialized view definition:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="k">c</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="k">c</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
 <span class="k">FROM</span> <span class="n">emps</span>
 <span class="k">JOIN</span> <span class="n">depts</span> <span class="k">USING</span> <span class="p">(</span><span class="n">deptno</span><span class="p">)</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span>
-</code></pre></div></div>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span></code></pre></figure>
 
 <ul>
   <li>Rewriting:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="k">c</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="k">c</span><span class="p">)</span>
 <span class="k">FROM</span> <span class="n">mv</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span>
-</code></pre></div></div>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span></code></pre></figure>
 
 <h6 id="view-partial-rewriting">View partial rewriting</h6>
 
@@ -337,32 +324,29 @@ Additionally, the rule can rewrite expressions rooted at an Aggregate operator, 
   <li>Query:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">state</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">state</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
 <span class="k">FROM</span> <span class="n">emps</span>
 <span class="k">JOIN</span> <span class="n">depts</span> <span class="k">ON</span> <span class="n">emps</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span>
 <span class="k">JOIN</span> <span class="n">locations</span> <span class="k">ON</span> <span class="n">emps</span><span class="p">.</span><span class="n">locationid</span> <span class="o">=</span> <span class="n">locations</span><span class="p">.</span><span class="n">locationid</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">state</span>
-</code></pre></div></div>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">state</span></code></pre></figure>
 
 <ul>
   <li>Materialized view definition:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">state</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">state</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
 <span class="k">FROM</span> <span class="n">emps</span>
 <span class="k">JOIN</span> <span class="n">locations</span> <span class="k">ON</span> <span class="n">emps</span><span class="p">.</span><span class="n">locationid</span> <span class="o">=</span> <span class="n">locations</span><span class="p">.</span><span class="n">locationid</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">state</span>
-</code></pre></div></div>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">state</span></code></pre></figure>
 
 <ul>
   <li>Rewriting:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">state</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">state</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 <span class="k">FROM</span> <span class="n">mv</span>
 <span class="k">JOIN</span> <span class="n">depts</span> <span class="k">ON</span> <span class="n">mv</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">state</span>
-</code></pre></div></div>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">state</span></code></pre></figure>
 
 <h6 id="union-rewriting">Union rewriting</h6>
 
@@ -370,34 +354,31 @@ Additionally, the rule can rewrite expressions rooted at an Aggregate operator, 
   <li>Query:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span>
 <span class="k">FROM</span> <span class="n">emps</span>
 <span class="k">JOIN</span> <span class="n">depts</span> <span class="k">ON</span> <span class="n">emps</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span>
-<span class="k">WHERE</span> <span class="n">salary</span> <span class="o">&gt;</span> <span class="mi">10000</span>
-</code></pre></div></div>
+<span class="k">WHERE</span> <span class="n">salary</span> <span class="o">&gt;</span> <span class="mi">10000</span></code></pre></figure>
 
 <ul>
   <li>Materialized view definition:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span>
 <span class="k">FROM</span> <span class="n">emps</span>
 <span class="k">JOIN</span> <span class="n">depts</span> <span class="k">ON</span> <span class="n">emps</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span>
-<span class="k">WHERE</span> <span class="n">salary</span> <span class="o">&gt;</span> <span class="mi">12000</span>
-</code></pre></div></div>
+<span class="k">WHERE</span> <span class="n">salary</span> <span class="o">&gt;</span> <span class="mi">12000</span></code></pre></figure>
 
 <ul>
   <li>Rewriting:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span>
 <span class="k">FROM</span> <span class="n">mv</span>
 <span class="k">UNION</span> <span class="k">ALL</span>
 <span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span>
 <span class="k">FROM</span> <span class="n">emps</span>
 <span class="k">JOIN</span> <span class="n">depts</span> <span class="k">ON</span> <span class="n">emps</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span>
-<span class="k">WHERE</span> <span class="n">salary</span> <span class="o">&gt;</span> <span class="mi">10000</span> <span class="k">AND</span> <span class="n">salary</span> <span class="o">&lt;=</span> <span class="mi">12000</span>
-</code></pre></div></div>
+<span class="k">WHERE</span> <span class="n">salary</span> <span class="o">&gt;</span> <span class="mi">10000</span> <span class="k">AND</span> <span class="n">salary</span> <span class="o">&lt;=</span> <span class="mi">12000</span></code></pre></figure>
 
 <h6 id="union-rewriting-with-aggregate">Union rewriting with aggregate</h6>
 
@@ -405,29 +386,27 @@ Additionally, the rule can rewrite expressions rooted at an Aggregate operator, 
   <li>Query:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
 <span class="k">FROM</span> <span class="n">emps</span>
 <span class="k">JOIN</span> <span class="n">depts</span> <span class="k">ON</span> <span class="n">emps</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span>
 <span class="k">WHERE</span> <span class="n">salary</span> <span class="o">&gt;</span> <span class="mi">10000</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span>
-</code></pre></div></div>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span></code></pre></figure>
 
 <ul>
   <li>Materialized view definition:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span> <span class="n">s</span>
 <span class="k">FROM</span> <span class="n">emps</span>
 <span class="k">JOIN</span> <span class="n">depts</span> <span class="k">ON</span> <span class="n">emps</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span>
 <span class="k">WHERE</span> <span class="n">salary</span> <span class="o">&gt;</span> <span class="mi">12000</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span>
-</code></pre></div></div>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span></code></pre></figure>
 
 <ul>
   <li>Rewriting:</li>
 </ul>
 
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span><span class="p">,</span> <span class="k">SUM</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 <span class="k">FROM</span> <span class="p">(</span>
   <span class="k">SELECT</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span><span class="p">,</span> <span class="n">s</span>
   <span class="k">FROM</span> <span class="n">mv</span>
@@ -437,8 +416,7 @@ Additionally, the rule can rewrite expressions rooted at an Aggregate operator, 
   <span class="k">JOIN</span> <span class="n">depts</span> <span class="k">ON</span> <span class="n">emps</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">depts</span><span class="p">.</span><span class="n">deptno</span>
   <span class="k">WHERE</span> <span class="n">salary</span> <span class="o">&gt;</span> <span class="mi">10000</span> <span class="k">AND</span> <span class="n">salary</span> <span class="o">&lt;=</span> <span class="mi">12000</span>
   <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span><span class="p">)</span> <span class="k">AS</span> <span class="n">subq</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span>
-</code></pre></div></div>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">empid</span><span class="p">,</span> <span class="n">deptname</span></code></pre></figure>
 
 <h5 id="limitations">Limitations</h5>
 

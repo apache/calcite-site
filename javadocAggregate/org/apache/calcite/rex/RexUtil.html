@@ -341,168 +341,182 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns whether an expression contains a <a href="RexCorrelVariable.html" title="class in org.apache.calcite.rex"><code>RexCorrelVariable</code></a>.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#containsFieldAccess(org.apache.calcite.rex.RexNode)" class="member-name-link">containsFieldAccess</a><wbr>(<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#containsCorrelation(org.apache.calcite.rex.RexNode,java.util.Set)" class="member-name-link">containsCorrelation</a><wbr>(<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../rel/core/CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>&gt;&nbsp;ids)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Returns whether an expression references a <a href="RexCorrelVariable.html" title="class in org.apache.calcite.rex"><code>RexCorrelVariable</code></a>
+ whose id is in <code>ids</code>, either directly (typically through a
+ <a href="RexFieldAccess.html" title="class in org.apache.calcite.rex"><code>RexFieldAccess</code></a>) or transitively via the inner plan of a
+ <a href="RexSubQuery.html" title="class in org.apache.calcite.rex"><code>RexSubQuery</code></a>.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#containsFieldAccess(org.apache.calcite.rex.RexNode)" class="member-name-link">containsFieldAccess</a><wbr>(<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns whether a given tree contains any
  <a href="RexFieldAccess.html" title="class in org.apache.calcite.rex"><code>RexFieldAccess</code></a> nodes.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#containsInputRef(org.apache.calcite.rex.RexNode)" class="member-name-link">containsInputRef</a><wbr>(<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#containsInputRef(org.apache.calcite.rex.RexNode)" class="member-name-link">containsInputRef</a><wbr>(<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns whether a given tree contains any {link RexInputRef} nodes.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#containsTableInputRef(java.util.List)" class="member-name-link">containsTableInputRef</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nodes)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#containsTableInputRef(java.util.List)" class="member-name-link">containsTableInputRef</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nodes)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns whether any of the given expression trees contains a
  {link RexTableInputRef} node.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @Nullable <a href="RexTableInputRef.html" title="class in org.apache.calcite.rex">RexTableInputRef</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#containsTableInputRef(org.apache.calcite.rex.RexNode)" class="member-name-link">containsTableInputRef</a><wbr>(<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @Nullable <a href="RexTableInputRef.html" title="class in org.apache.calcite.rex">RexTableInputRef</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#containsTableInputRef(org.apache.calcite.rex.RexNode)" class="member-name-link">containsTableInputRef</a><wbr>(<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns whether a given tree contains any {link RexTableInputRef} nodes.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#createStructType(org.apache.calcite.rel.type.RelDataTypeFactory,java.util.List,java.util.List,org.apache.calcite.sql.validate.SqlValidatorUtil.Suggester)" class="member-name-link">createStructType</a><wbr>(<a href="../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#createStructType(org.apache.calcite.rel.type.RelDataTypeFactory,java.util.List,java.util.List,org.apache.calcite.sql.validate.SqlValidatorUtil.Suggester)" class="member-name-link">createStructType</a><wbr>(<a href="../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;exprs,
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;names,
  @Nullable <a href="../sql/validate/SqlValidatorUtil.Suggester.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorUtil.Suggester</a>&nbsp;suggester)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Creates a record type with specified field names.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#createStructType(org.apache.calcite.rel.type.RelDataTypeFactory,java.util.List,java.util.List)" class="member-name-link">createStructType</a><wbr>(<a href="../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#createStructType(org.apache.calcite.rel.type.RelDataTypeFactory,java.util.List,java.util.List)" class="member-name-link">createStructType</a><wbr>(<a href="../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;exprs,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;names)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
 <div class="block"><span class="deprecated-label">Deprecated.</span></div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#createStructType(org.apache.calcite.rel.type.RelDataTypeFactory,java.util.List)" class="member-name-link">createStructType</a><wbr>(<a href="../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#createStructType(org.apache.calcite.rel.type.RelDataTypeFactory,java.util.List)" class="member-name-link">createStructType</a><wbr>(<a href="../rel/type/RelDataTypeFactory.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFactory</a>&nbsp;typeFactory,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;exprs)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Creates a record type with anonymous field names.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#eq(org.apache.calcite.rex.RexNode,org.apache.calcite.rex.RexNode)" class="member-name-link">eq</a><wbr>(<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;e1,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#eq(org.apache.calcite.rex.RexNode,org.apache.calcite.rex.RexNode)" class="member-name-link">eq</a><wbr>(<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;e1,
  <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;e2)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
 <div class="block"><span class="deprecated-label">Deprecated.</span></div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;E&gt;&nbsp;boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#exists(java.util.List,org.apache.calcite.linq4j.function.Predicate1)" class="member-name-link">exists</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends E&gt;&nbsp;list,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;E&gt;&nbsp;boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#exists(java.util.List,org.apache.calcite.linq4j.function.Predicate1)" class="member-name-link">exists</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends E&gt;&nbsp;list,
  <a href="../linq4j/function/Predicate1.html" title="interface in org.apache.calcite.linq4j.function">Predicate1</a>&lt;E&gt;&nbsp;predicate)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns whether there is an element in <code>list</code> for which
  <code>predicate</code> is true.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#expandSearch(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexProgram,org.apache.calcite.rex.RexNode)" class="member-name-link">expandSearch</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#expandSearch(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexProgram,org.apache.calcite.rex.RexNode)" class="member-name-link">expandSearch</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
  @Nullable <a href="RexProgram.html" title="class in org.apache.calcite.rex">RexProgram</a>&nbsp;program,
  <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Expands all the calls to <a href="../sql/fun/SqlStdOperatorTable.html#SEARCH"><code>SqlStdOperatorTable.SEARCH</code></a> in an expression.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#expandSearch(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexProgram,org.apache.calcite.rex.RexNode,int)" class="member-name-link">expandSearch</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#expandSearch(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexProgram,org.apache.calcite.rex.RexNode,int)" class="member-name-link">expandSearch</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
  @Nullable <a href="RexProgram.html" title="class in org.apache.calcite.rex">RexProgram</a>&nbsp;program,
  <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node,
  int&nbsp;maxComplexity)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Expands calls to <a href="../sql/fun/SqlStdOperatorTable.html#SEARCH"><code>SqlStdOperatorTable.SEARCH</code></a>
  whose complexity is greater than <code>maxComplexity</code> in an expression.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../rel/type/RelDataTypeFamily.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFamily</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#families(java.util.List)" class="member-name-link">families</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;types)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RexUtil.RexFinder.html" title="class in org.apache.calcite.rex">RexUtil.RexFinder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#find(java.util.Set)" class="member-name-link">find</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../sql/SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&gt;&nbsp;kinds)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../rel/type/RelDataTypeFamily.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFamily</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#families(java.util.List)" class="member-name-link">families</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;types)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RexUtil.RexFinder.html" title="class in org.apache.calcite.rex">RexUtil.RexFinder</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#find(java.util.Set)" class="member-name-link">find</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../sql/SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&gt;&nbsp;kinds)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns a visitor that finds nodes of given <a href="../sql/SqlKind.html" title="enum in org.apache.calcite.sql"><code>SqlKind</code></a>s.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RexUtil.RexFinder.html" title="class in org.apache.calcite.rex">RexUtil.RexFinder</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#find(org.apache.calcite.rex.RexInputRef)" class="member-name-link">find</a><wbr>(<a href="RexInputRef.html" title="class in org.apache.calcite.rex">RexInputRef</a>&nbsp;ref)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RexUtil.RexFinder.html" title="class in org.apache.calcite.rex">RexUtil.RexFinder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#find(org.apache.calcite.rex.RexInputRef)" class="member-name-link">find</a><wbr>(<a href="RexInputRef.html" title="class in org.apache.calcite.rex">RexInputRef</a>&nbsp;ref)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns a visitor that finds a particular <a href="RexInputRef.html" title="class in org.apache.calcite.rex"><code>RexInputRef</code></a>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RexUtil.RexFinder.html" title="class in org.apache.calcite.rex">RexUtil.RexFinder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#find(org.apache.calcite.sql.SqlKind)" class="member-name-link">find</a><wbr>(<a href="../sql/SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&nbsp;kind)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RexUtil.RexFinder.html" title="class in org.apache.calcite.rex">RexUtil.RexFinder</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#find(org.apache.calcite.sql.SqlKind)" class="member-name-link">find</a><wbr>(<a href="../sql/SqlKind.html" title="enum in org.apache.calcite.sql">SqlKind</a>&nbsp;kind)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns a visitor that finds nodes of a given <a href="../sql/SqlKind.html" title="enum in org.apache.calcite.sql"><code>SqlKind</code></a>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @Nullable <a href="RexCall.html" title="class in org.apache.calcite.rex">RexCall</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#findOperatorCall(org.apache.calcite.sql.SqlOperator,org.apache.calcite.rex.RexNode)" class="member-name-link">findOperatorCall</a><wbr>(<a href="../sql/SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>&nbsp;operator,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static @Nullable <a href="RexCall.html" title="class in org.apache.calcite.rex">RexCall</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#findOperatorCall(org.apache.calcite.sql.SqlOperator,org.apache.calcite.rex.RexNode)" class="member-name-link">findOperatorCall</a><wbr>(<a href="../sql/SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>&nbsp;operator,
  <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns whether a given node contains a RexCall with a specified operator.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#fixUp(org.apache.calcite.rex.RexBuilder,java.util.List,java.util.List)" class="member-name-link">fixUp</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#fixUp(org.apache.calcite.rex.RexBuilder,java.util.List,java.util.List)" class="member-name-link">fixUp</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nodes,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&gt;&nbsp;fieldTypes)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Fixes up the type of all <a href="RexInputRef.html" title="class in org.apache.calcite.rex"><code>RexInputRef</code></a>s in an
  expression to match differences in nullability.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#fixUp(org.apache.calcite.rex.RexBuilder,java.util.List,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">fixUp</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#fixUp(org.apache.calcite.rex.RexBuilder,java.util.List,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">fixUp</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nodes,
  <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rowType)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
 <div class="block"><span class="deprecated-label">Deprecated.</span></div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#flatten(java.util.List,org.apache.calcite.sql.SqlOperator)" class="member-name-link">flatten</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;exprs,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#flatten(java.util.List,org.apache.calcite.sql.SqlOperator)" class="member-name-link">flatten</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;exprs,
  <a href="../sql/SqlOperator.html" title="class in org.apache.calcite.sql">SqlOperator</a>&nbsp;op)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Converts a list of operands into a list that is flat with respect to
  the given operator.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#flatten(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexNode)" class="member-name-link">flatten</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#flatten(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexNode)" class="member-name-link">flatten</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
  <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Flattens an expression.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static com.google.common.collect.ImmutableList&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#flattenAnd(java.lang.Iterable)" class="member-name-link">flattenAnd</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends @Nullable <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nodes)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static com.google.common.collect.ImmutableList&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#flattenAnd(java.lang.Iterable)" class="member-name-link">flattenAnd</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends @Nullable <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nodes)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Flattens a list of AND nodes.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static com.google.common.collect.ImmutableList&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#flattenOr(java.lang.Iterable)" class="member-name-link">flattenOr</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nodes)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static com.google.common.collect.ImmutableList&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#flattenOr(java.lang.Iterable)" class="member-name-link">flattenOr</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;? extends <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nodes)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Flattens a list of OR nodes.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="RexTableInputRef.RelTableRef.html" title="class in org.apache.calcite.rex">RexTableInputRef.RelTableRef</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#gatherTableReferences(java.util.List)" class="member-name-link">gatherTableReferences</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nodes)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="RexTableInputRef.RelTableRef.html" title="class in org.apache.calcite.rex">RexTableInputRef.RelTableRef</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#gatherTableReferences(java.util.List)" class="member-name-link">gatherTableReferences</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nodes)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Gather all table references in input expressions.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#generateCastExpressions(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rel.type.RelDataType,java.util.List)" class="member-name-link">generateCastExpressions</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#generateCastExpressions(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rel.type.RelDataType,java.util.List)" class="member-name-link">generateCastExpressions</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
  <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;lhsRowType,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;rhsExps)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Generates a cast for a row type.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#generateCastExpressions(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">generateCastExpressions</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#generateCastExpressions(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rel.type.RelDataType)" class="member-name-link">generateCastExpressions</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
  <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;lhsRowType,
  <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;rhsRowType)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Generates a cast from one row type to another.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getNonConstColumns(java.util.List)" class="member-name-link">getNonConstColumns</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;expressions)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getNonConstColumns(java.util.List)" class="member-name-link">getNonConstColumns</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;expressions)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Given some expressions, gets the indices of the non-constant ones.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getNonConstColumns(org.apache.calcite.util.ImmutableBitSet,java.util.List)" class="member-name-link">getNonConstColumns</a><wbr>(<a href="../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&nbsp;columns,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getNonConstColumns(org.apache.calcite.util.ImmutableBitSet,java.util.List)" class="member-name-link">getNonConstColumns</a><wbr>(<a href="../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a>&nbsp;columns,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;expressions)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Given some expressions and columns, gets the indices of the non-constant ones.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getPos(org.apache.calcite.rex.RexNode)" class="member-name-link">getPos</a><wbr>(<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;e)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">If the RexNode contains position information, return it.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getSelectivity(org.apache.calcite.rex.RexNode)" class="member-name-link">getSelectivity</a><wbr>(@Nullable <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;exp)</code></div>
@@ -688,53 +702,78 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#retainDeterministic(java.util.List)" class="member-name-link">retainDeterministic</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;list)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;C extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;C&gt;&gt;<br><a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#sargRef(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexNode,org.apache.calcite.util.Sarg,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexUnknownAs)" class="member-name-link">sargRef</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static &lt;C extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;C&gt;&gt;<br><a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#sargRef(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexNode,org.apache.calcite.util.Sarg,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexUnknownAs)" class="member-name-link">sargRef</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
  <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;ref,
  <a href="../util/Sarg.html" title="class in org.apache.calcite.util">Sarg</a>&lt;C&gt;&nbsp;sarg,
  <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type,
  <a href="RexUnknownAs.html" title="enum in org.apache.calcite.rex">RexUnknownAs</a>&nbsp;unknownAs)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RexShuttle.html" title="class in org.apache.calcite.rex">RexShuttle</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#searchShuttle(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexProgram,int)" class="member-name-link">searchShuttle</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span>
+<div class="deprecation-comment">Use
+ <a href="#sargRef(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexNode,org.apache.calcite.util.Sarg,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexUnknownAs)"><code>sargRef(SqlParserPos, RexBuilder, RexNode, Sarg, RelDataType, RexUnknownAs)</code></a>.</div>
+</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;C extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;C&gt;&gt;<br><a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#sargRef(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexNode,org.apache.calcite.util.Sarg,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexUnknownAs)" class="member-name-link">sargRef</a><wbr>(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
+ <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;ref,
+ <a href="../util/Sarg.html" title="class in org.apache.calcite.util">Sarg</a>&lt;C&gt;&nbsp;sarg,
+ <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type,
+ <a href="RexUnknownAs.html" title="enum in org.apache.calcite.rex">RexUnknownAs</a>&nbsp;unknownAs)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RexShuttle.html" title="class in org.apache.calcite.rex">RexShuttle</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#searchShuttle(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexProgram,int)" class="member-name-link">searchShuttle</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
  @Nullable <a href="RexProgram.html" title="class in org.apache.calcite.rex">RexProgram</a>&nbsp;program,
  int&nbsp;maxComplexity)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Creates a shuttle that expands calls to
  <a href="../sql/fun/SqlStdOperatorTable.html#SEARCH"><code>SqlStdOperatorTable.SEARCH</code></a>.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#shift(java.lang.Iterable,int)" class="member-name-link">shift</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nodes,
- int&nbsp;offset)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Shifts every <a href="RexInputRef.html" title="class in org.apache.calcite.rex"><code>RexInputRef</code></a> in an expression by <code>offset</code>.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#shift(org.apache.calcite.rex.RexNode,int)" class="member-name-link">shift</a><wbr>(<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#shift(java.lang.Iterable,int)" class="member-name-link">shift</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&gt;&nbsp;nodes,
  int&nbsp;offset)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Shifts every <a href="RexInputRef.html" title="class in org.apache.calcite.rex"><code>RexInputRef</code></a> in an expression by <code>offset</code>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#shift(org.apache.calcite.rex.RexNode,int,int)" class="member-name-link">shift</a><wbr>(<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node,
- int&nbsp;start,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#shift(org.apache.calcite.rex.RexNode,int)" class="member-name-link">shift</a><wbr>(<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node,
  int&nbsp;offset)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Shifts every <a href="RexInputRef.html" title="class in org.apache.calcite.rex"><code>RexInputRef</code></a> in an expression by <code>offset</code>.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#shift(org.apache.calcite.rex.RexNode,int,int)" class="member-name-link">shift</a><wbr>(<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;node,
+ int&nbsp;start,
+ int&nbsp;offset)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Shifts every <a href="RexInputRef.html" title="class in org.apache.calcite.rex"><code>RexInputRef</code></a> in an expression higher than <code>start</code>
  by <code>offset</code>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#shiftFieldAccess(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rel.RelNode,org.apache.calcite.rel.core.CorrelationId,org.apache.calcite.rel.RelNode,int)" class="member-name-link">shiftFieldAccess</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#shiftFieldAccess(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rel.RelNode,org.apache.calcite.rel.core.CorrelationId,org.apache.calcite.rel.RelNode,int)" class="member-name-link">shiftFieldAccess</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
  <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;node,
  <a href="../rel/core/CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>&nbsp;id,
  <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;outer,
  int&nbsp;offset)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Shifts every <a href="RexFieldAccess.html" title="class in org.apache.calcite.rex"><code>RexFieldAccess</code></a> with <a href="../rel/core/CorrelationId.html" title="class in org.apache.calcite.rel.core"><code>CorrelationId</code></a>
  in an <a href="../rel/RelNode.html" title="interface in org.apache.calcite.rel"><code>RelNode</code></a> by <code>offset</code>.</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static &lt;C extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;C&gt;&gt;<br><a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#simpleSarg(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexNode,org.apache.calcite.util.Sarg,org.apache.calcite.rex.RexUnknownAs)" class="member-name-link">simpleSarg</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
+ <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;ref,
+ <a href="../util/Sarg.html" title="class in org.apache.calcite.util">Sarg</a>&lt;C&gt;&nbsp;sarg,
+ <a href="RexUnknownAs.html" title="enum in org.apache.calcite.rex">RexUnknownAs</a>&nbsp;unknownAs)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span>
+<div class="deprecation-comment">Use
+ <a href="#simpleSarg(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexNode,org.apache.calcite.util.Sarg,org.apache.calcite.rex.RexUnknownAs)"><code>simpleSarg(SqlParserPos, RexBuilder, RexNode, Sarg, RexUnknownAs)</code></a></div>
+</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;C extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;C&gt;&gt;<br><a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#simpleSarg(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexNode,org.apache.calcite.util.Sarg,org.apache.calcite.rex.RexUnknownAs)" class="member-name-link">simpleSarg</a><wbr>(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#simpleSarg(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexNode,org.apache.calcite.util.Sarg,org.apache.calcite.rex.RexUnknownAs)" class="member-name-link">simpleSarg</a><wbr>(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
  <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;ref,
  <a href="../util/Sarg.html" title="class in org.apache.calcite.util">Sarg</a>&lt;C&gt;&nbsp;sarg,
  <a href="RexUnknownAs.html" title="enum in org.apache.calcite.rex">RexUnknownAs</a>&nbsp;unknownAs)</code></div>
@@ -1189,9 +1228,10 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="sargRef(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexNode,org.apache.calcite.util.Sarg,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexUnknownAs)">
+<section class="detail" id="sargRef(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexNode,org.apache.calcite.util.Sarg,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexUnknownAs)">
 <h3>sargRef</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;C extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;C&gt;&gt;</span>&nbsp;<span class="return-type"><a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="element-name">sargRef</span><wbr><span class="parameters">(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;C extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;C&gt;&gt;</span>&nbsp;<span class="return-type"><a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="element-name">sargRef</span><wbr><span class="parameters">(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
  <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;ref,
  <a href="../util/Sarg.html" title="class in org.apache.calcite.util">Sarg</a>&lt;C&gt;&nbsp;sarg,
  <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type,
@@ -1199,9 +1239,39 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="sargRef(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexNode,org.apache.calcite.util.Sarg,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexUnknownAs)">
+<h3>sargRef</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;C extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;C&gt;&gt;</span>&nbsp;<span class="return-type"><a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="element-name">sargRef</span><wbr><span class="parameters">(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
+ <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;ref,
+ <a href="../util/Sarg.html" title="class in org.apache.calcite.util">Sarg</a>&lt;C&gt;&nbsp;sarg,
+ <a href="../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a>&nbsp;type,
+ <a href="RexUnknownAs.html" title="enum in org.apache.calcite.rex">RexUnknownAs</a>&nbsp;unknownAs)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span>
+<div class="deprecation-comment">Use
+ <a href="#sargRef(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexNode,org.apache.calcite.util.Sarg,org.apache.calcite.rel.type.RelDataType,org.apache.calcite.rex.RexUnknownAs)"><code>sargRef(SqlParserPos, RexBuilder, RexNode, Sarg, RelDataType, RexUnknownAs)</code></a>.</div>
+</div>
+<div class="block">Create a sargRef object.</div>
+</section>
+</li>
+<li>
 <section class="detail" id="simpleSarg(org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexNode,org.apache.calcite.util.Sarg,org.apache.calcite.rex.RexUnknownAs)">
 <h3>simpleSarg</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;C extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;C&gt;&gt;</span>&nbsp;<span class="return-type"><a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="element-name">simpleSarg</span><wbr><span class="parameters">(<a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
+ <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;ref,
+ <a href="../util/Sarg.html" title="class in org.apache.calcite.util">Sarg</a>&lt;C&gt;&nbsp;sarg,
+ <a href="RexUnknownAs.html" title="enum in org.apache.calcite.rex">RexUnknownAs</a>&nbsp;unknownAs)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span>
+<div class="deprecation-comment">Use
+ <a href="#simpleSarg(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexNode,org.apache.calcite.util.Sarg,org.apache.calcite.rex.RexUnknownAs)"><code>simpleSarg(SqlParserPos, RexBuilder, RexNode, Sarg, RexUnknownAs)</code></a></div>
+</div>
+<div class="block">Expands an 'all' or 'none' sarg.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="simpleSarg(org.apache.calcite.sql.parser.SqlParserPos,org.apache.calcite.rex.RexBuilder,org.apache.calcite.rex.RexNode,org.apache.calcite.util.Sarg,org.apache.calcite.rex.RexUnknownAs)">
+<h3>simpleSarg</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;C extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;C&gt;&gt;</span>&nbsp;<span class="return-type"><a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="element-name">simpleSarg</span><wbr><span class="parameters">(<a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a>&nbsp;pos,
+ <a href="RexBuilder.html" title="class in org.apache.calcite.rex">RexBuilder</a>&nbsp;rexBuilder,
  <a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;ref,
  <a href="../util/Sarg.html" title="class in org.apache.calcite.util">Sarg</a>&lt;C&gt;&nbsp;sarg,
  <a href="RexUnknownAs.html" title="enum in org.apache.calcite.rex">RexUnknownAs</a>&nbsp;unknownAs)</span></div>
@@ -2214,10 +2284,29 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="getPos(org.apache.calcite.rex.RexNode)">
+<h3>getPos</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../sql/parser/SqlParserPos.html" title="class in org.apache.calcite.sql.parser">SqlParserPos</a></span>&nbsp;<span class="element-name">getPos</span><wbr><span class="parameters">(<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;e)</span></div>
+<div class="block">If the RexNode contains position information, return it.
+ Otherwise, return SqlParserPos.ZERO.</div>
+</section>
+</li>
+<li>
 <section class="detail" id="containsCorrelation(org.apache.calcite.rex.RexNode)">
 <h3>containsCorrelation</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">containsCorrelation</span><wbr><span class="parameters">(<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition)</span></div>
 <div class="block">Returns whether an expression contains a <a href="RexCorrelVariable.html" title="class in org.apache.calcite.rex"><code>RexCorrelVariable</code></a>.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="containsCorrelation(org.apache.calcite.rex.RexNode,java.util.Set)">
+<h3>containsCorrelation</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">containsCorrelation</span><wbr><span class="parameters">(<a href="RexNode.html" title="class in org.apache.calcite.rex">RexNode</a>&nbsp;condition,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../rel/core/CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>&gt;&nbsp;ids)</span></div>
+<div class="block">Returns whether an expression references a <a href="RexCorrelVariable.html" title="class in org.apache.calcite.rex"><code>RexCorrelVariable</code></a>
+ whose id is in <code>ids</code>, either directly (typically through a
+ <a href="RexFieldAccess.html" title="class in org.apache.calcite.rex"><code>RexFieldAccess</code></a>) or transitively via the inner plan of a
+ <a href="RexSubQuery.html" title="class in org.apache.calcite.rex"><code>RexSubQuery</code></a>.</div>
 </section>
 </li>
 <li>
@@ -2311,7 +2400,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2026 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

@@ -101,7 +101,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <dl class="notes">
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="../../adapter/enumerable/EnumerableCorrelate.html" title="class in org.apache.calcite.adapter.enumerable">EnumerableCorrelate</a></code>, <code><a href="../logical/LogicalCorrelate.html" title="class in org.apache.calcite.rel.logical">LogicalCorrelate</a></code>, <code><a href="../../test/SqlToRelTestBase.CustomCorrelate.html" title="class in org.apache.calcite.test">SqlToRelTestBase.CustomCorrelate</a></code></dd>
+<dd><code><a href="ConditionalCorrelate.html" title="class in org.apache.calcite.rel.core">ConditionalCorrelate</a></code>, <code><a href="../../adapter/enumerable/EnumerableCorrelate.html" title="class in org.apache.calcite.adapter.enumerable">EnumerableCorrelate</a></code>, <code><a href="../logical/LogicalCorrelate.html" title="class in org.apache.calcite.rel.logical">LogicalCorrelate</a></code>, <code><a href="../../test/SqlToRelTestBase.CustomCorrelate.html" title="class in org.apache.calcite.test">SqlToRelTestBase.CustomCorrelate</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">Correlate</span>
@@ -266,43 +266,46 @@ implements <a href="../hint/Hintable.html" title="interface in org.apache.calcit
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Describes the inputs and attributes of this relational expression.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCorrelationId()" class="member-name-link">getCorrelationId</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCondition()" class="member-name-link">getCondition</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCorrelationId()" class="member-name-link">getCorrelationId</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the correlating expressions.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCorrelVariable()" class="member-name-link">getCorrelVariable</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCorrelVariable()" class="member-name-link">getCorrelVariable</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the name of the variable which is to be implicitly set at runtime
  each time a row is returned from the first input of this relational
  expression; or null if there is no variable.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>com.google.common.collect.ImmutableList&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getHints()" class="member-name-link">getHints</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>com.google.common.collect.ImmutableList&lt;<a href="../hint/RelHint.html" title="class in org.apache.calcite.rel.hint">RelHint</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getHints()" class="member-name-link">getHints</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the hints of this relational expressions as an immutable list.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getJoinType()" class="member-name-link">getJoinType</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRequiredColumns()" class="member-name-link">getRequiredColumns</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="JoinRelType.html" title="enum in org.apache.calcite.rel.core">JoinRelType</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getJoinType()" class="member-name-link">getJoinType</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../util/ImmutableBitSet.html" title="class in org.apache.calcite.util">ImmutableBitSet</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRequiredColumns()" class="member-name-link">getRequiredColumns</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the required columns in left relation required for the correlation
  in the right.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVariablesSet()" class="member-name-link">getVariablesSet</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVariablesSet()" class="member-name-link">getVariablesSet</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the variables that are set in this relational
  expression but also used and therefore not available to parents of this
  relational expression.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isValid(org.apache.calcite.util.Litmus,org.apache.calcite.rel.RelNode.Context)" class="member-name-link">isValid</a><wbr>(<a href="../../util/Litmus.html" title="interface in org.apache.calcite.util">Litmus</a>&nbsp;litmus,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isValid(org.apache.calcite.util.Litmus,org.apache.calcite.rel.RelNode.Context)" class="member-name-link">isValid</a><wbr>(<a href="../../util/Litmus.html" title="interface in org.apache.calcite.util">Litmus</a>&nbsp;litmus,
  @Nullable <a href="../RelNode.Context.html" title="interface in org.apache.calcite.rel">RelNode.Context</a>&nbsp;context)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns whether this relational expression is valid.</div>
 </div>
 </div>
@@ -567,6 +570,12 @@ implements <a href="../hint/Hintable.html" title="interface in org.apache.calcit
 </section>
 </li>
 <li>
+<section class="detail" id="getCondition()">
+<h3>getCondition</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../rex/RexNode.html" title="class in org.apache.calcite.rex">RexNode</a></span>&nbsp;<span class="element-name">getCondition</span>()</div>
+</section>
+</li>
+<li>
 <section class="detail" id="getVariablesSet()">
 <h3>getVariablesSet</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="CorrelationId.html" title="class in org.apache.calcite.rel.core">CorrelationId</a>&gt;</span>&nbsp;<span class="element-name">getVariablesSet</span>()</div>
@@ -655,7 +664,7 @@ implements <a href="../hint/Hintable.html" title="interface in org.apache.calcit
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2026 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

@@ -208,8 +208,7 @@ last relational expression, namely the root of the tree.</p>
 straight, you can remove expressions from the stack. For example, here we are
 building a bushy join:</p>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text">.
-               join
+<figure class="highlight"><pre><code class="language-text" data-lang="text">               join
              /      \
         join          join
       /      \      /      \
@@ -260,8 +259,8 @@ each of the scalar expressions.</p>
 
 <p>The field names of an operator are guaranteed to be unique, but sometimes that
 means that the names are not exactly what you expect. For example, when you
-join EMP to DEPT, one of the output fields will be called DEPTNO and another
-will be called something like DEPTNO_1.</p>
+join <code class="language-plaintext highlighter-rouge">EMP</code> to <code class="language-plaintext highlighter-rouge">DEPT</code>, one of the output fields will be called <code class="language-plaintext highlighter-rouge">DEPTNO</code> and another
+will be called something like <code class="language-plaintext highlighter-rouge">DEPTNO_1</code>.</p>
 
 <p>Some relational expression methods give you more control over field names:</p>
 
@@ -291,38 +290,38 @@ At that point it is better to reference fields by ordinal.</p>
 you need to build field references that take that into account. This occurs
 most often when building join conditions.</p>
 
-<p>Suppose you are building a join on EMP,
-which has 8 fields [EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO]
-and DEPT,
-which has 3 fields [DEPTNO, DNAME, LOC].
+<p>Suppose you are building a join on <code class="language-plaintext highlighter-rouge">EMP</code>,
+which has 8 fields [<code class="language-plaintext highlighter-rouge">EMPNO</code>, <code class="language-plaintext highlighter-rouge">ENAME</code>, <code class="language-plaintext highlighter-rouge">JOB</code>, <code class="language-plaintext highlighter-rouge">MGR</code>, <code class="language-plaintext highlighter-rouge">HIREDATE</code>, <code class="language-plaintext highlighter-rouge">SAL</code>, <code class="language-plaintext highlighter-rouge">COMM</code>, <code class="language-plaintext highlighter-rouge">DEPTNO</code>]
+and <code class="language-plaintext highlighter-rouge">DEPT</code>,
+which has 3 fields [<code class="language-plaintext highlighter-rouge">DEPTNO</code>, <code class="language-plaintext highlighter-rouge">DNAME</code>, <code class="language-plaintext highlighter-rouge">LOC</code>].
 Internally, Calcite represents those fields as offsets into
 a combined input row with 11 fields: the first field of the left input is
-field #0 (0-based, remember), and the first field of the right input is
-field #8.</p>
+field <code class="language-plaintext highlighter-rouge">#0 (0-based, remember)</code>, and the first field of the right input is
+field <code class="language-plaintext highlighter-rouge">#8</code>.</p>
 
 <p>But through the builder API, you specify which field of which input.
-To reference “SAL”, internal field #5,
+To reference <code class="language-plaintext highlighter-rouge">SAL</code>, internal field <code class="language-plaintext highlighter-rouge">#5</code>,
 write <code class="language-plaintext highlighter-rouge">builder.field(2, 0, "SAL")</code>, <code class="language-plaintext highlighter-rouge">builder.field(2, "EMP", "SAL")</code>,
 or <code class="language-plaintext highlighter-rouge">builder.field(2, 0, 5)</code>.
-This means “the field #5 of input #0 of two inputs”.
+This means “the field <code class="language-plaintext highlighter-rouge">#5</code> of input <code class="language-plaintext highlighter-rouge">#0</code> of two inputs”.
 (Why does it need to know that there are two inputs? Because they are stored on
-the stack; input #1 is at the top of the stack, and input #0 is below it.
+the stack; input <code class="language-plaintext highlighter-rouge">#1</code> is at the top of the stack, and input <code class="language-plaintext highlighter-rouge">#0</code> is below it.
 If we did not tell the builder that were two inputs, it would not know how deep
-to go for input #0.)</p>
+to go for input <code class="language-plaintext highlighter-rouge">#0</code>.)</p>
 
-<p>Similarly, to reference “DNAME”, internal field #9 (8 + 1),
+<p>Similarly, to reference <code class="language-plaintext highlighter-rouge">DNAME</code>, internal field <code class="language-plaintext highlighter-rouge">#9 (8 + 1)</code>,
 write <code class="language-plaintext highlighter-rouge">builder.field(2, 1, "DNAME")</code>, <code class="language-plaintext highlighter-rouge">builder.field(2, "DEPT", "DNAME")</code>,
 or <code class="language-plaintext highlighter-rouge">builder.field(2, 1, 1)</code>.</p>
 
 <h3 id="recursive-queries">Recursive Queries</h3>
 
 <p>Warning: The current API is experimental and subject to change without notice.
-A SQL recursive query, e.g. this one that generates the sequence 1, 2, 3, …10:</p>
+A SQL recursive query, e.g. this one that generates the sequence 1, 2, 3, …, 10:</p>
 
 <figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">WITH</span> <span class="k">RECURSIVE</span> <span class="n">aux</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">AS</span> <span class="p">(</span>
   <span class="k">VALUES</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
   <span class="k">UNION</span> <span class="k">ALL</span>
-  <span class="k">SELECT</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="k">FROM</span> <span class="n">aux</span> <span class="k">WHERE</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span>
+  <span class="k">SELECT</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">FROM</span> <span class="n">aux</span> <span class="k">WHERE</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span>
 <span class="p">)</span>
 <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">aux</span></code></pre></figure>
 
@@ -663,7 +662,7 @@ expression on the stack:</p>
 (<a href="/javadocAggregate/org/apache/calcite/rex/RexNode.html">RexNode</a>).</p>
 
 <p>Many of them use the contents of the stack. For example, <code class="language-plaintext highlighter-rouge">field("DEPTNO")</code>
-returns a reference to the “DEPTNO” field of the relational expression just
+returns a reference to the <code class="language-plaintext highlighter-rouge">DEPTNO</code> field of the relational expression just
 added to the stack.</p>
 
 <div class="scroll-table-style"><table>
@@ -789,7 +788,7 @@ added to the stack.</p>
 
 <p>The following methods convert a sub-query into a scalar value (a <code class="language-plaintext highlighter-rouge">BOOLEAN</code> in
 the case of <code class="language-plaintext highlighter-rouge">in</code>, <code class="language-plaintext highlighter-rouge">exists</code>, <code class="language-plaintext highlighter-rouge">some</code>, <code class="language-plaintext highlighter-rouge">all</code>, <code class="language-plaintext highlighter-rouge">unique</code>;
-any scalar type for <code class="language-plaintext highlighter-rouge">scalarQuery</code>).
+any scalar type for <code class="language-plaintext highlighter-rouge">scalarQuery</code>),
 an <code class="language-plaintext highlighter-rouge">ARRAY</code> for <code class="language-plaintext highlighter-rouge">arrayQuery</code>,
 a <code class="language-plaintext highlighter-rouge">MAP</code> for <code class="language-plaintext highlighter-rouge">mapQuery</code>,
 and a <code class="language-plaintext highlighter-rouge">MULTISET</code> for <code class="language-plaintext highlighter-rouge">multisetQuery</code>).</p>

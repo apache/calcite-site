@@ -101,7 +101,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <dl class="notes">
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="SemiJoinRule.JoinOnUniqueToSemiJoinRule.html" title="class in org.apache.calcite.rel.rules">SemiJoinRule.JoinOnUniqueToSemiJoinRule</a></code>, <code><a href="SemiJoinRule.JoinToSemiJoinRule.html" title="class in org.apache.calcite.rel.rules">SemiJoinRule.JoinToSemiJoinRule</a></code>, <code><a href="SemiJoinRule.ProjectToSemiJoinRule.html" title="class in org.apache.calcite.rel.rules">SemiJoinRule.ProjectToSemiJoinRule</a></code></dd>
+<dd><code><a href="SemiJoinRule.AggregateToSemiJoinRule.html" title="class in org.apache.calcite.rel.rules">SemiJoinRule.AggregateToSemiJoinRule</a></code>, <code><a href="SemiJoinRule.JoinOnUniqueToSemiJoinRule.html" title="class in org.apache.calcite.rel.rules">SemiJoinRule.JoinOnUniqueToSemiJoinRule</a></code>, <code><a href="SemiJoinRule.JoinToSemiJoinRule.html" title="class in org.apache.calcite.rel.rules">SemiJoinRule.JoinToSemiJoinRule</a></code>, <code><a href="SemiJoinRule.ProjectToSemiJoinRule.html" title="class in org.apache.calcite.rel.rules">SemiJoinRule.ProjectToSemiJoinRule</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">SemiJoinRule</span>
@@ -124,26 +124,32 @@ implements <a href="TransformationRule.html" title="interface in org.apache.calc
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Class</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>static interface&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="SemiJoinRule.Config.html" class="type-name-link" title="interface in org.apache.calcite.rel.rules">SemiJoinRule.Config</a></code></div>
+<div class="col-first even-row-color"><code>static class&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="SemiJoinRule.AggregateToSemiJoinRule.html" class="type-name-link" title="class in org.apache.calcite.rel.rules">SemiJoinRule.AggregateToSemiJoinRule</a></code></div>
 <div class="col-last even-row-color">
+<div class="block">SemiJoinRule that matches a Aggregate on top of a Join with an Aggregate
+ as its right child.</div>
+</div>
+<div class="col-first odd-row-color"><code>static interface&nbsp;</code></div>
+<div class="col-second odd-row-color"><code><a href="SemiJoinRule.Config.html" class="type-name-link" title="interface in org.apache.calcite.rel.rules">SemiJoinRule.Config</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Rule configuration.</div>
 </div>
-<div class="col-first odd-row-color"><code>static class&nbsp;</code></div>
-<div class="col-second odd-row-color"><code><a href="SemiJoinRule.JoinOnUniqueToSemiJoinRule.html" class="type-name-link" title="class in org.apache.calcite.rel.rules">SemiJoinRule.JoinOnUniqueToSemiJoinRule</a></code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code>static class&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="SemiJoinRule.JoinOnUniqueToSemiJoinRule.html" class="type-name-link" title="class in org.apache.calcite.rel.rules">SemiJoinRule.JoinOnUniqueToSemiJoinRule</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">SemiJoinRule that matches a Project on top of a Join with a RelNode
  which is unique for Join's right keys.</div>
 </div>
-<div class="col-first even-row-color"><code>static class&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="SemiJoinRule.JoinToSemiJoinRule.html" class="type-name-link" title="class in org.apache.calcite.rel.rules">SemiJoinRule.JoinToSemiJoinRule</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code>static class&nbsp;</code></div>
+<div class="col-second odd-row-color"><code><a href="SemiJoinRule.JoinToSemiJoinRule.html" class="type-name-link" title="class in org.apache.calcite.rel.rules">SemiJoinRule.JoinToSemiJoinRule</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">SemiJoinRule that matches a Join with an empty Aggregate as its right
  input.</div>
 </div>
-<div class="col-first odd-row-color"><code>static class&nbsp;</code></div>
-<div class="col-second odd-row-color"><code><a href="SemiJoinRule.ProjectToSemiJoinRule.html" class="type-name-link" title="class in org.apache.calcite.rel.rules">SemiJoinRule.ProjectToSemiJoinRule</a></code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code>static class&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="SemiJoinRule.ProjectToSemiJoinRule.html" class="type-name-link" title="class in org.apache.calcite.rel.rules">SemiJoinRule.ProjectToSemiJoinRule</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">SemiJoinRule that matches a Project on top of a Join with an Aggregate
  as its right child.</div>
 </div>
@@ -197,8 +203,8 @@ implements <a href="TransformationRule.html" title="interface in org.apache.calc
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#perform(org.apache.calcite.plan.RelOptRuleCall,org.apache.calcite.rel.core.Project,org.apache.calcite.rel.core.Join,org.apache.calcite.rel.RelNode,org.apache.calcite.rel.core.Aggregate)" class="member-name-link">perform</a><wbr>(<a href="../../plan/RelOptRuleCall.html" title="class in org.apache.calcite.plan">RelOptRuleCall</a>&nbsp;call,
- @Nullable <a href="../core/Project.html" title="class in org.apache.calcite.rel.core">Project</a>&nbsp;project,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#perform(org.apache.calcite.plan.RelOptRuleCall,org.apache.calcite.rel.RelNode,org.apache.calcite.rel.core.Join,org.apache.calcite.rel.RelNode,org.apache.calcite.rel.core.Aggregate)" class="member-name-link">perform</a><wbr>(<a href="../../plan/RelOptRuleCall.html" title="class in org.apache.calcite.plan">RelOptRuleCall</a>&nbsp;call,
+ @Nullable <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;topRel,
  <a href="../core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&nbsp;join,
  <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;left,
  <a href="../core/Aggregate.html" title="class in org.apache.calcite.rel.core">Aggregate</a>&nbsp;aggregate)</code></div>
@@ -239,10 +245,10 @@ implements <a href="TransformationRule.html" title="interface in org.apache.calc
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="perform(org.apache.calcite.plan.RelOptRuleCall,org.apache.calcite.rel.core.Project,org.apache.calcite.rel.core.Join,org.apache.calcite.rel.RelNode,org.apache.calcite.rel.core.Aggregate)">
+<section class="detail" id="perform(org.apache.calcite.plan.RelOptRuleCall,org.apache.calcite.rel.RelNode,org.apache.calcite.rel.core.Join,org.apache.calcite.rel.RelNode,org.apache.calcite.rel.core.Aggregate)">
 <h3>perform</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">perform</span><wbr><span class="parameters">(<a href="../../plan/RelOptRuleCall.html" title="class in org.apache.calcite.plan">RelOptRuleCall</a>&nbsp;call,
- @Nullable <a href="../core/Project.html" title="class in org.apache.calcite.rel.core">Project</a>&nbsp;project,
+ @Nullable <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;topRel,
  <a href="../core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&nbsp;join,
  <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;left,
  <a href="../core/Aggregate.html" title="class in org.apache.calcite.rel.core">Aggregate</a>&nbsp;aggregate)</span></div>
@@ -257,7 +263,7 @@ implements <a href="TransformationRule.html" title="interface in org.apache.calc
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2026 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

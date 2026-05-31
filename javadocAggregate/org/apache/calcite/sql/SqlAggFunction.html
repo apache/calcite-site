@@ -265,18 +265,23 @@ implements <a href="../plan/Context.html" title="interface in org.apache.calcite
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns whether this is a window function that requires an OVER clause.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;@Nullable T</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unwrap(java.lang.Class)" class="member-name-link">unwrap</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;clazz)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#skipsNullInputs()" class="member-name-link">skipsNullInputs</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns whether this aggregate function skips NULL input values.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;@Nullable T</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unwrap(java.lang.Class)" class="member-name-link">unwrap</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;clazz)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Finds an instance of an interface implemented by this object,
  or returns null if this object does not support that interface.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateCall(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateCall</a><wbr>(<a href="SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#validateCall(org.apache.calcite.sql.SqlCall,org.apache.calcite.sql.validate.SqlValidator,org.apache.calcite.sql.validate.SqlValidatorScope,org.apache.calcite.sql.validate.SqlValidatorScope)" class="member-name-link">validateCall</a><wbr>(<a href="SqlCall.html" title="class in org.apache.calcite.sql">SqlCall</a>&nbsp;call,
  <a href="validate/SqlValidator.html" title="interface in org.apache.calcite.sql.validate">SqlValidator</a>&nbsp;validator,
  <a href="validate/SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;scope,
  <a href="validate/SqlValidatorScope.html" title="interface in org.apache.calcite.sql.validate">SqlValidatorScope</a>&nbsp;operandScope)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Validates a call to this operator.</div>
 </div>
 </div>
@@ -605,6 +610,31 @@ implements <a href="../plan/Context.html" title="interface in org.apache.calcite
 </section>
 </li>
 <li>
+<section class="detail" id="skipsNullInputs()">
+<h3>skipsNullInputs</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">skipsNullInputs</span>()</div>
+<div class="block">Returns whether this aggregate function skips NULL input values.
+
+ <p>Standard SQL aggregate functions skip NULL input values:
+ <code>SUM(x)</code>, <code>AVG(x)</code>, <code>MIN(x)</code>, <code>MAX(x)</code>,
+ <code>COUNT(x)</code>, etc. For example, <code>SUM(x)</code> only sums non-NULL
+ values of x.
+
+ <p>This property is only relevant for aggregate functions that accept
+ value arguments. Functions like <code>COUNT(*)</code> that count rows rather
+ than values are not affected by this property.
+
+ <p>Custom user-defined aggregate functions may treat NULL values as
+ semantically significant inputs. Such functions should override this
+ method to return <code>false</code>.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true if NULL input values are skipped (standard SQL behavior),
+         false if NULL input values have semantic significance</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="getRollup()">
 <h3>getRollup</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">@Nullable <a href="SqlAggFunction.html" title="class in org.apache.calcite.sql">SqlAggFunction</a></span>&nbsp;<span class="element-name">getRollup</span>()</div>
@@ -631,7 +661,7 @@ implements <a href="../plan/Context.html" title="interface in org.apache.calcite
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2026 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

@@ -123,7 +123,7 @@ loadScripts(document, 'script');</script>
 <code><a href="AbstractSqlType.html#isNullable">isNullable</a>, <a href="AbstractSqlType.html#typeName">typeName</a></code></div>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-org.apache.calcite.rel.type.RelDataTypeImpl">Fields inherited from class&nbsp;org.apache.calcite.rel.type.<a href="../../rel/type/RelDataTypeImpl.html" title="class in org.apache.calcite.rel.type">RelDataTypeImpl</a></h3>
-<code><a href="../../rel/type/RelDataTypeImpl.html#digest">digest</a>, <a href="../../rel/type/RelDataTypeImpl.html#fieldList">fieldList</a>, <a href="../../rel/type/RelDataTypeImpl.html#NON_NULLABLE_SUFFIX">NON_NULLABLE_SUFFIX</a></code></div>
+<code><a href="../../rel/type/RelDataTypeImpl.html#digest">digest</a>, <a href="../../rel/type/RelDataTypeImpl.html#fieldList">fieldList</a>, <a href="../../rel/type/RelDataTypeImpl.html#innerDigest">innerDigest</a>, <a href="../../rel/type/RelDataTypeImpl.html#NON_NULLABLE_SUFFIX">NON_NULLABLE_SUFFIX</a></code></div>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-org.apache.calcite.rel.type.RelDataType">Fields inherited from interface&nbsp;org.apache.calcite.rel.type.<a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></h3>
 <code><a href="../../rel/type/RelDataType.html#PRECISION_NOT_SPECIFIED">PRECISION_NOT_SPECIFIED</a>, <a href="../../rel/type/RelDataType.html#SCALE_NOT_SPECIFIED">SCALE_NOT_SPECIFIED</a></code></div>
@@ -157,6 +157,16 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#deepEquals(java.lang.Object)" class="member-name-link">deepEquals</a><wbr>(@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;obj)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Deep equality check for RelDataType digest.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#deepHashCode()" class="member-name-link">deepHashCode</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Compute deep hash code for RelDataType digest.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generateTypeString(java.lang.StringBuilder,boolean)" class="member-name-link">generateTypeString</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/StringBuilder.html" title="class or interface in java.lang" class="external-link">StringBuilder</a>&nbsp;sb,
  boolean&nbsp;withDetail)</code></div>
@@ -186,7 +196,7 @@ loadScripts(document, 'script');</script>
 <code><a href="AbstractSqlType.html#getPrecedenceList()">getPrecedenceList</a>, <a href="AbstractSqlType.html#getSqlTypeName()">getSqlTypeName</a>, <a href="AbstractSqlType.html#isNullable()">isNullable</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-org.apache.calcite.rel.type.RelDataTypeImpl">Methods inherited from class&nbsp;org.apache.calcite.rel.type.<a href="../../rel/type/RelDataTypeImpl.html" title="class in org.apache.calcite.rel.type">RelDataTypeImpl</a></h3>
-<code><a href="../../rel/type/RelDataTypeImpl.html#computeDigest()">computeDigest</a>, <a href="../../rel/type/RelDataTypeImpl.html#equals(java.lang.Object)">equals</a>, <a href="../../rel/type/RelDataTypeImpl.html#extra(org.apache.calcite.rel.type.RelDataType)">extra</a>, <a href="../../rel/type/RelDataTypeImpl.html#getCharset()">getCharset</a>, <a href="../../rel/type/RelDataTypeImpl.html#getCollation()">getCollation</a>, <a href="../../rel/type/RelDataTypeImpl.html#getComparability()">getComparability</a>, <a href="../../rel/type/RelDataTypeImpl.html#getComponentType()">getComponentType</a>, <a href="../../rel/type/RelDataTypeImpl.html#getField(java.lang.String,boolean,boolean)">getField</a>, <a href="../../rel/type/RelDataTypeImpl.html#getFieldCount()">getFieldCount</a>, <a href="../../rel/type/RelDataTypeImpl.html#getFieldList()">getFieldList</a>, <a href="../../rel/type/RelDataTypeImpl.html#getFieldMap()">getFieldMap</a>, <a href="../../rel/type/RelDataTypeImpl.html#getFieldNames()">getFieldNames</a>, <a href="../../rel/type/RelDataTypeImpl.html#getFullTypeString()">getFullTypeString</a>, <a href="../../rel/type/RelDataTypeImpl.html#getIntervalQualifier()">getIntervalQualifier</a>, <a href="../../rel/type/RelDataTypeImpl.html#getPrecision()">getPrecision</a>, <a href="../../rel/type/RelDataTypeImpl.html#getScale()">getScale</a>, <a href="../../rel/type/RelDataTypeImpl.html#getSqlIdentifier()">getSqlIdentifier</a>, <a href="../../rel/type/RelDataTypeImpl.html#getStructKind()">getStructKind</a>, <a href="../../rel/type/RelDataTypeImpl.html#hashCode()">hashCode</a>, <a href="../../rel/type/RelDataTypeImpl.html#isDynamicStruct()">isDynamicStruct</a>, <a href="../../rel/type/RelDataTypeImpl.html#isStruct()">isStruct</a>, <a href="../../rel/type/RelDataTypeImpl.html#proto(org.apache.calcite.rel.type.RelDataType)">proto</a>, <a href="../../rel/type/RelDataTypeImpl.html#proto(org.apache.calcite.sql.type.SqlTypeName,boolean)">proto</a>, <a href="../../rel/type/RelDataTypeImpl.html#proto(org.apache.calcite.sql.type.SqlTypeName,int,boolean)">proto</a>, <a href="../../rel/type/RelDataTypeImpl.html#proto(org.apache.calcite.sql.type.SqlTypeName,int,int,boolean)">proto</a>, <a href="../../rel/type/RelDataTypeImpl.html#toString()">toString</a></code></div>
+<code><a href="../../rel/type/RelDataTypeImpl.html#computeDigest()">computeDigest</a>, <a href="../../rel/type/RelDataTypeImpl.html#equals(java.lang.Object)">equals</a>, <a href="../../rel/type/RelDataTypeImpl.html#extra(org.apache.calcite.rel.type.RelDataType)">extra</a>, <a href="../../rel/type/RelDataTypeImpl.html#getCharset()">getCharset</a>, <a href="../../rel/type/RelDataTypeImpl.html#getCollation()">getCollation</a>, <a href="../../rel/type/RelDataTypeImpl.html#getComparability()">getComparability</a>, <a href="../../rel/type/RelDataTypeImpl.html#getComponentType()">getComponentType</a>, <a href="../../rel/type/RelDataTypeImpl.html#getDigest()">getDigest</a>, <a href="../../rel/type/RelDataTypeImpl.html#getField(java.lang.String,boolean,boolean)">getField</a>, <a href="../../rel/type/RelDataTypeImpl.html#getFieldCount()">getFieldCount</a>, <a href="../../rel/type/RelDataTypeImpl.html#getFieldList()">getFieldList</a>, <a href="../../rel/type/RelDataTypeImpl.html#getFieldMap()">getFieldMap</a>, <a href="../../rel/type/RelDataTypeImpl.html#getFieldNames()">getFieldNames</a>, <a href="../../rel/type/RelDataTypeImpl.html#getFullTypeString()">getFullTypeString</a>, <a href="../../rel/type/RelDataTypeImpl.html#getIntervalQualifier()">getIntervalQualifier</a>, <a href="../../rel/type/RelDataTypeImpl.html#getPrecision()">getPrecision</a>, <a href="../../rel/type/RelDataTypeImpl.html#getScale()">getScale</a>, <a href="../../rel/type/RelDataTypeImpl.html#getSqlIdentifier()">getSqlIdentifier</a>, <a href="../../rel/type/RelDataTypeImpl.html#getStructKind()">getStructKind</a>, <a href="../../rel/type/RelDataTypeImpl.html#hashCode()">hashCode</a>, <a href="../../rel/type/RelDataTypeImpl.html#isDynamicStruct()">isDynamicStruct</a>, <a href="../../rel/type/RelDataTypeImpl.html#isStruct()">isStruct</a>, <a href="../../rel/type/RelDataTypeImpl.html#proto(org.apache.calcite.rel.type.RelDataType)">proto</a>, <a href="../../rel/type/RelDataTypeImpl.html#proto(org.apache.calcite.sql.type.SqlTypeName,boolean)">proto</a>, <a href="../../rel/type/RelDataTypeImpl.html#proto(org.apache.calcite.sql.type.SqlTypeName,int,boolean)">proto</a>, <a href="../../rel/type/RelDataTypeImpl.html#proto(org.apache.calcite.sql.type.SqlTypeName,int,int,boolean)">proto</a>, <a href="../../rel/type/RelDataTypeImpl.html#toString()">toString</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
@@ -273,6 +283,48 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="deepEquals(java.lang.Object)">
+<h3>deepEquals</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">deepEquals</span><wbr><span class="parameters">(@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;obj)</span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../../rel/type/RelDataType.html#deepEquals(java.lang.Object)">RelDataType</a></code></span></div>
+<div class="block">Deep equality check for RelDataType digest.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../../rel/type/RelDataType.html#deepEquals(java.lang.Object)">deepEquals</a></code>&nbsp;in interface&nbsp;<code><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></dd>
+<dt>Overrides:</dt>
+<dd><code><a href="../../rel/type/RelDataTypeImpl.html#deepEquals(java.lang.Object)">deepEquals</a></code>&nbsp;in class&nbsp;<code><a href="../../rel/type/RelDataTypeImpl.html" title="class in org.apache.calcite.rel.type">RelDataTypeImpl</a></code></dd>
+<dt>Returns:</dt>
+<dd>Whether the 2 RelDataTypes are equivalent or have the same digest.</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="../../rel/type/RelDataType.html#deepHashCode()"><code>RelDataType.deepHashCode()</code></a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="deepHashCode()">
+<h3>deepHashCode</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">deepHashCode</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../../rel/type/RelDataType.html#deepHashCode()">RelDataType</a></code></span></div>
+<div class="block">Compute deep hash code for RelDataType digest.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../../rel/type/RelDataType.html#deepHashCode()">deepHashCode</a></code>&nbsp;in interface&nbsp;<code><a href="../../rel/type/RelDataType.html" title="interface in org.apache.calcite.rel.type">RelDataType</a></code></dd>
+<dt>Overrides:</dt>
+<dd><code><a href="../../rel/type/RelDataTypeImpl.html#deepHashCode()">deepHashCode</a></code>&nbsp;in class&nbsp;<code><a href="../../rel/type/RelDataTypeImpl.html" title="class in org.apache.calcite.rel.type">RelDataTypeImpl</a></code></dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list">
+<li><a href="../../rel/type/RelDataType.html#deepEquals(java.lang.Object)"><code>RelDataType.deepEquals(Object)</code></a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="getFamily()">
 <h3>getFamily</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../rel/type/RelDataTypeFamily.html" title="interface in org.apache.calcite.rel.type">RelDataTypeFamily</a></span>&nbsp;<span class="element-name">getFamily</span>()</div>
@@ -298,7 +350,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2026 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

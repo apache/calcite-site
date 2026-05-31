@@ -249,7 +249,7 @@ implements <a href="../../util/ReflectiveVisitor.html" title="interface in org.a
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.rel.core.Project)" class="member-name-link">visit</a><wbr>(<a href="../core/Project.html" title="class in org.apache.calcite.rel.core">Project</a>&nbsp;e)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Visits a Project; called by <a href="#dispatch(org.apache.calcite.rel.RelNode)"><code>dispatch(org.apache.calcite.rel.RelNode)</code></a> via reflection.</div>
+<div class="block">Visits a <a href="../core/Project.html" title="class in org.apache.calcite.rel.core"><code>Project</code></a> and converts it to a <a href="../../sql/SqlSelect.html" title="class in org.apache.calcite.sql"><code>SqlSelect</code></a>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.rel.core.Sample)" class="member-name-link">visit</a><wbr>(<a href="../core/Sample.html" title="class in org.apache.calcite.rel.core">Sample</a>&nbsp;e)</code></div>
@@ -309,6 +309,13 @@ implements <a href="../../util/ReflectiveVisitor.html" title="interface in org.a
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Visits the <code>i</code>th input of <code>e</code>, the current relational
  expression.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#wrapNestedJoin(org.apache.calcite.rel.rel2sql.SqlImplementor.Result,org.apache.calcite.rel.RelNode,java.lang.String)" class="member-name-link">wrapNestedJoin</a><wbr>(<a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a>&nbsp;input,
+ <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;inputRel,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;outerAlias)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Wraps a nested join into a subquery with explicit column aliases.</div>
 </div>
 </div>
 </div>
@@ -453,6 +460,29 @@ implements <a href="../../util/ReflectiveVisitor.html" title="interface in org.a
 </section>
 </li>
 <li>
+<section class="detail" id="wrapNestedJoin(org.apache.calcite.rel.rel2sql.SqlImplementor.Result,org.apache.calcite.rel.RelNode,java.lang.String)">
+<h3>wrapNestedJoin</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></span>&nbsp;<span class="element-name">wrapNestedJoin</span><wbr><span class="parameters">(<a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a>&nbsp;input,
+ <a href="../RelNode.html" title="interface in org.apache.calcite.rel">RelNode</a>&nbsp;inputRel,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;outerAlias)</span></div>
+<div class="block">Wraps a nested join into a subquery with explicit column aliases.
+
+ <p>This is specifically required for dialects like ClickHouse where the
+ identifier resolver cannot resolve columns with internal table qualifiers
+ (e.g., 'd1.loc') when they are wrapped in a subquery alias. By forcing
+ an explicit 'AS' projection for every column, we ensure the identifiers
+ are flattened and visible to the outer query block.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>input</code> - The Result of the nested join branch</dd>
+<dd><code>inputRel</code> - The RelNode representing the join branch to extract row types</dd>
+<dd><code>outerAlias</code> - The alias to be assigned to the wrapped subquery</dd>
+<dt>Returns:</dt>
+<dd>A new Result containing the wrapped SQL with explicit aliases</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="visit(org.apache.calcite.rel.core.Join)">
 <h3>visit</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></span>&nbsp;<span class="element-name">visit</span><wbr><span class="parameters">(<a href="../core/Join.html" title="class in org.apache.calcite.rel.core">Join</a>&nbsp;e)</span></div>
@@ -483,7 +513,17 @@ implements <a href="../../util/ReflectiveVisitor.html" title="interface in org.a
 <section class="detail" id="visit(org.apache.calcite.rel.core.Project)">
 <h3>visit</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="SqlImplementor.Result.html" title="class in org.apache.calcite.rel.rel2sql">SqlImplementor.Result</a></span>&nbsp;<span class="element-name">visit</span><wbr><span class="parameters">(<a href="../core/Project.html" title="class in org.apache.calcite.rel.core">Project</a>&nbsp;e)</span></div>
-<div class="block">Visits a Project; called by <a href="#dispatch(org.apache.calcite.rel.RelNode)"><code>dispatch(org.apache.calcite.rel.RelNode)</code></a> via reflection.</div>
+<div class="block">Visits a <a href="../core/Project.html" title="class in org.apache.calcite.rel.core"><code>Project</code></a> and converts it to a <a href="../../sql/SqlSelect.html" title="class in org.apache.calcite.sql"><code>SqlSelect</code></a>.
+
+ <p>If the project defines correlation variables (e.g., via <code>$cor0</code>),
+ this method ensures that the input relation is assigned a stable alias
+ (either the natural table name or a synthetic alias like 't').
+ This enables nested correlated subqueries to correctly qualify their
+ column references back to this project's scope.
+
+ <p>For simple table scans, it avoids forcing an explicit 'AS' clause
+ to maintain compatibility with DML statements (like UPDATE/DELETE)
+ in certain SQL dialects.</div>
 </section>
 </li>
 <li>
@@ -661,7 +701,7 @@ implements <a href="../../util/ReflectiveVisitor.html" title="interface in org.a
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2026 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

@@ -145,8 +145,8 @@ loadScripts(document, 'script');</script>
  boolean&nbsp;volatile_,
  boolean&nbsp;ifNotExists,
  <a href="../SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;name,
- <a href="../SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;columnList,
- <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;query)</code></div>
+ @Nullable <a href="../SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;columnList,
+ @Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;query)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Creates a SqlBabelCreateTable.</div>
 </div>
@@ -164,19 +164,21 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparse(org.apache.calcite.sql.SqlWriter,int,int)" class="member-name-link">unparse</a><wbr>(<a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOperandList()" class="member-name-link">getOperandList</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the list of operands.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#unparse(org.apache.calcite.sql.SqlWriter,int,int)" class="member-name-link">unparse</a><wbr>(<a href="../SqlWriter.html" title="interface in org.apache.calcite.sql">SqlWriter</a>&nbsp;writer,
  int&nbsp;leftPrec,
  int&nbsp;rightPrec)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Writes a SQL representation of this node to a writer.</div>
 </div>
 </div>
 </div>
 </div>
-<div class="inherited-list">
-<h3 id="methods-inherited-from-class-org.apache.calcite.sql.ddl.SqlCreateTable">Methods inherited from class&nbsp;org.apache.calcite.sql.ddl.<a href="../ddl/SqlCreateTable.html" title="class in org.apache.calcite.sql.ddl">SqlCreateTable</a></h3>
-<code><a href="../ddl/SqlCreateTable.html#getOperandList()">getOperandList</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-org.apache.calcite.sql.SqlCreate">Methods inherited from class&nbsp;org.apache.calcite.sql.<a href="../SqlCreate.html" title="class in org.apache.calcite.sql">SqlCreate</a></h3>
 <code><a href="../SqlCreate.html#getReplace()">getReplace</a>, <a href="../SqlCreate.html#setReplace(boolean)">setReplace</a></code></div>
@@ -212,8 +214,8 @@ loadScripts(document, 'script');</script>
  boolean&nbsp;volatile_,
  boolean&nbsp;ifNotExists,
  <a href="../SqlIdentifier.html" title="class in org.apache.calcite.sql">SqlIdentifier</a>&nbsp;name,
- <a href="../SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;columnList,
- <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;query)</span></div>
+ @Nullable <a href="../SqlNodeList.html" title="class in org.apache.calcite.sql">SqlNodeList</a>&nbsp;columnList,
+ @Nullable <a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&nbsp;query)</span></div>
 <div class="block">Creates a SqlBabelCreateTable.</div>
 </section>
 </li>
@@ -225,6 +227,24 @@ loadScripts(document, 'script');</script>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="getOperandList()">
+<h3>getOperandList</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../SqlNode.html" title="class in org.apache.calcite.sql">SqlNode</a>&gt;</span>&nbsp;<span class="element-name">getOperandList</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from class:&nbsp;<code><a href="../SqlCall.html#getOperandList()">SqlCall</a></code></span></div>
+<div class="block">Returns the list of operands. The set and order of operands is
+ call-specific.
+
+ <p>Note: the proper type would be <code>List&lt;@Nullable SqlNode&gt;</code>, however,
+ it would trigger too many changes to the current codebase.</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="../ddl/SqlCreateTable.html#getOperandList()">getOperandList</a></code>&nbsp;in class&nbsp;<code><a href="../ddl/SqlCreateTable.html" title="class in org.apache.calcite.sql.ddl">SqlCreateTable</a></code></dd>
+<dt>Returns:</dt>
+<dd>the list of call operands, never null, the operands can be null</dd>
+</dl>
+</section>
+</li>
 <li>
 <section class="detail" id="unparse(org.apache.calcite.sql.SqlWriter,int,int)">
 <h3>unparse</h3>
@@ -268,7 +288,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2026 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

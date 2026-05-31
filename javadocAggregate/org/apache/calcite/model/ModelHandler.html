@@ -131,7 +131,17 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.schema.SchemaPlus,java.lang.String)" class="member-name-link">ModelHandler</a><wbr>(<a href="../schema/SchemaPlus.html" title="interface in org.apache.calcite.schema">SchemaPlus</a>&nbsp;rootSchema,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;uri)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Creates a <code>ModelHandler</code> that uses the
+ standard class-name filter.</div>
+</div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.apache.calcite.schema.SchemaPlus,java.lang.String,org.apache.calcite.model.ClassNameFilter)" class="member-name-link">ModelHandler</a><wbr>(<a href="../schema/SchemaPlus.html" title="interface in org.apache.calcite.schema">SchemaPlus</a>&nbsp;rootSchema,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;uri,
+ org.apache.calcite.model.ClassNameFilter&nbsp;classNameFilter)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Creates a <code>ModelHandler</code> that validates every class loaded
+ by reflection from the model against <code>classNameFilter</code>.</div>
+</div>
 </div>
 </section>
 </li>
@@ -147,75 +157,87 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#addFunctions(org.apache.calcite.schema.SchemaPlus,java.lang.String,java.util.List,java.lang.String,java.lang.String,boolean)" class="member-name-link">addFunctions</a><wbr>(<a href="../schema/SchemaPlus.html" title="interface in org.apache.calcite.schema">SchemaPlus</a>&nbsp;schema,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#addFunctions(org.apache.calcite.model.ClassNameFilter,org.apache.calcite.schema.SchemaPlus,java.lang.String,java.lang.String,java.lang.String,boolean)" class="member-name-link">addFunctions</a><wbr>(org.apache.calcite.model.ClassNameFilter&nbsp;filter,
+ <a href="../schema/SchemaPlus.html" title="interface in org.apache.calcite.schema">SchemaPlus</a>&nbsp;schema,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;functionName,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;className,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;methodName,
+ boolean&nbsp;upCase)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Creates and validates a <a href="../schema/impl/ScalarFunctionImpl.html" title="class in org.apache.calcite.schema.impl"><code>ScalarFunctionImpl</code></a> and adds it to a
+ schema, after asking <code>filter</code> to accept <code>className</code>.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#addFunctions(org.apache.calcite.schema.SchemaPlus,java.lang.String,java.util.List,java.lang.String,java.lang.String,boolean)" class="member-name-link">addFunctions</a><wbr>(<a href="../schema/SchemaPlus.html" title="interface in org.apache.calcite.schema">SchemaPlus</a>&nbsp;schema,
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;functionName,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;unusedPath,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;className,
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;methodName,
  boolean&nbsp;upCase)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Creates and validates a <a href="../schema/impl/ScalarFunctionImpl.html" title="class in org.apache.calcite.schema.impl"><code>ScalarFunctionImpl</code></a>, and adds it to a
- schema.</div>
+ schema, using the standard
+ class-name filter.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#create(org.apache.calcite.schema.SchemaPlus,java.lang.String,java.util.List,java.lang.String,java.lang.String)" class="member-name-link">create</a><wbr>(<a href="../schema/SchemaPlus.html" title="interface in org.apache.calcite.schema">SchemaPlus</a>&nbsp;schema,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#create(org.apache.calcite.schema.SchemaPlus,java.lang.String,java.util.List,java.lang.String,java.lang.String)" class="member-name-link">create</a><wbr>(<a href="../schema/SchemaPlus.html" title="interface in org.apache.calcite.schema">SchemaPlus</a>&nbsp;schema,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;functionName,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;path,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;className,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;methodName)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
 <div class="block"><span class="deprecated-label">Deprecated.</span>
 <div class="deprecation-comment">Use <a href="#addFunctions(org.apache.calcite.schema.SchemaPlus,java.lang.String,java.util.List,java.lang.String,java.lang.String,boolean)"><code>addFunctions(org.apache.calcite.schema.SchemaPlus, java.lang.String, java.util.List&lt;java.lang.String&gt;, java.lang.String, java.lang.String, boolean)</code></a>.</div>
 </div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#defaultSchemaName()" class="member-name-link">defaultSchemaName</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#operandMap(org.apache.calcite.model.JsonSchema,java.util.Map)" class="member-name-link">operandMap</a><wbr>(@Nullable <a href="JsonSchema.html" title="class in org.apache.calcite.model">JsonSchema</a>&nbsp;jsonSchema,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#defaultSchemaName()" class="member-name-link">defaultSchemaName</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#operandMap(org.apache.calcite.model.JsonSchema,java.util.Map)" class="member-name-link">operandMap</a><wbr>(@Nullable <a href="JsonSchema.html" title="class in org.apache.calcite.model">JsonSchema</a>&nbsp;jsonSchema,
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;operand)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Adds extra entries to an operand to a custom schema.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonColumn)" class="member-name-link">visit</a><wbr>(<a href="JsonColumn.html" title="class in org.apache.calcite.model">JsonColumn</a>&nbsp;jsonColumn)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonCustomSchema)" class="member-name-link">visit</a><wbr>(<a href="JsonCustomSchema.html" title="class in org.apache.calcite.model">JsonCustomSchema</a>&nbsp;jsonSchema)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonColumn)" class="member-name-link">visit</a><wbr>(<a href="JsonColumn.html" title="class in org.apache.calcite.model">JsonColumn</a>&nbsp;jsonColumn)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonCustomTable)" class="member-name-link">visit</a><wbr>(<a href="JsonCustomTable.html" title="class in org.apache.calcite.model">JsonCustomTable</a>&nbsp;jsonTable)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonCustomSchema)" class="member-name-link">visit</a><wbr>(<a href="JsonCustomSchema.html" title="class in org.apache.calcite.model">JsonCustomSchema</a>&nbsp;jsonSchema)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonFunction)" class="member-name-link">visit</a><wbr>(<a href="JsonFunction.html" title="class in org.apache.calcite.model">JsonFunction</a>&nbsp;jsonFunction)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonCustomTable)" class="member-name-link">visit</a><wbr>(<a href="JsonCustomTable.html" title="class in org.apache.calcite.model">JsonCustomTable</a>&nbsp;jsonTable)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonJdbcSchema)" class="member-name-link">visit</a><wbr>(<a href="JsonJdbcSchema.html" title="class in org.apache.calcite.model">JsonJdbcSchema</a>&nbsp;jsonSchema)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonFunction)" class="member-name-link">visit</a><wbr>(<a href="JsonFunction.html" title="class in org.apache.calcite.model">JsonFunction</a>&nbsp;jsonFunction)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonLattice)" class="member-name-link">visit</a><wbr>(<a href="JsonLattice.html" title="class in org.apache.calcite.model">JsonLattice</a>&nbsp;jsonLattice)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonJdbcSchema)" class="member-name-link">visit</a><wbr>(<a href="JsonJdbcSchema.html" title="class in org.apache.calcite.model">JsonJdbcSchema</a>&nbsp;jsonSchema)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonMapSchema)" class="member-name-link">visit</a><wbr>(<a href="JsonMapSchema.html" title="class in org.apache.calcite.model">JsonMapSchema</a>&nbsp;jsonSchema)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonLattice)" class="member-name-link">visit</a><wbr>(<a href="JsonLattice.html" title="class in org.apache.calcite.model">JsonLattice</a>&nbsp;jsonLattice)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonMaterialization)" class="member-name-link">visit</a><wbr>(<a href="JsonMaterialization.html" title="class in org.apache.calcite.model">JsonMaterialization</a>&nbsp;jsonMaterialization)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonMapSchema)" class="member-name-link">visit</a><wbr>(<a href="JsonMapSchema.html" title="class in org.apache.calcite.model">JsonMapSchema</a>&nbsp;jsonSchema)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonMeasure)" class="member-name-link">visit</a><wbr>(<a href="JsonMeasure.html" title="class in org.apache.calcite.model">JsonMeasure</a>&nbsp;jsonMeasure)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonMaterialization)" class="member-name-link">visit</a><wbr>(<a href="JsonMaterialization.html" title="class in org.apache.calcite.model">JsonMaterialization</a>&nbsp;jsonMaterialization)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonRoot)" class="member-name-link">visit</a><wbr>(<a href="JsonRoot.html" title="class in org.apache.calcite.model">JsonRoot</a>&nbsp;jsonRoot)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonMeasure)" class="member-name-link">visit</a><wbr>(<a href="JsonMeasure.html" title="class in org.apache.calcite.model">JsonMeasure</a>&nbsp;jsonMeasure)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonTile)" class="member-name-link">visit</a><wbr>(<a href="JsonTile.html" title="class in org.apache.calcite.model">JsonTile</a>&nbsp;jsonTile)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonRoot)" class="member-name-link">visit</a><wbr>(<a href="JsonRoot.html" title="class in org.apache.calcite.model">JsonRoot</a>&nbsp;jsonRoot)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonType)" class="member-name-link">visit</a><wbr>(<a href="JsonType.html" title="class in org.apache.calcite.model">JsonType</a>&nbsp;jsonType)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonTile)" class="member-name-link">visit</a><wbr>(<a href="JsonTile.html" title="class in org.apache.calcite.model">JsonTile</a>&nbsp;jsonTile)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonView)" class="member-name-link">visit</a><wbr>(<a href="JsonView.html" title="class in org.apache.calcite.model">JsonView</a>&nbsp;jsonView)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonType)" class="member-name-link">visit</a><wbr>(<a href="JsonType.html" title="class in org.apache.calcite.model">JsonType</a>&nbsp;jsonType)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#visit(org.apache.calcite.model.JsonView)" class="member-name-link">visit</a><wbr>(<a href="JsonView.html" title="class in org.apache.calcite.model">JsonView</a>&nbsp;jsonView)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -239,6 +261,25 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ModelHandler</span><wbr><span class="parameters">(<a href="../schema/SchemaPlus.html" title="interface in org.apache.calcite.schema">SchemaPlus</a>&nbsp;rootSchema,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;uri)</span>
              throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
+<div class="block">Creates a <code>ModelHandler</code> that uses the
+ standard class-name filter.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(org.apache.calcite.schema.SchemaPlus,java.lang.String,org.apache.calcite.model.ClassNameFilter)">
+<h3>ModelHandler</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ModelHandler</span><wbr><span class="parameters">(<a href="../schema/SchemaPlus.html" title="interface in org.apache.calcite.schema">SchemaPlus</a>&nbsp;rootSchema,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;uri,
+ org.apache.calcite.model.ClassNameFilter&nbsp;classNameFilter)</span>
+             throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></span></div>
+<div class="block">Creates a <code>ModelHandler</code> that validates every class loaded
+ by reflection from the model against <code>classNameFilter</code>. Use
+ this to apply a stricter (or more permissive) filter than the
+ standard one.</div>
 <dl class="notes">
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code></dd>
@@ -291,7 +332,12 @@ loadScripts(document, 'script');</script>
  @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;methodName,
  boolean&nbsp;upCase)</span></div>
 <div class="block">Creates and validates a <a href="../schema/impl/ScalarFunctionImpl.html" title="class in org.apache.calcite.schema.impl"><code>ScalarFunctionImpl</code></a>, and adds it to a
- schema. If <code>methodName</code> is "*", may add more than one function.</div>
+ schema, using the standard
+ class-name filter. Kept for backwards compatibility; prefer the
+ filter-taking overload of <code>addFunctions</code>, which lets callers
+ supply their own filter.
+
+ <p>If <code>methodName</code> is "*", may add more than one function.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>schema</code> - Schema to add to</dd>
@@ -305,6 +351,19 @@ loadScripts(document, 'script');</script>
 <dd><code>upCase</code> - Whether to convert method names to upper case, so that they
                can be called without using quotes</dd>
 </dl>
+</section>
+</li>
+<li>
+<section class="detail" id="addFunctions(org.apache.calcite.model.ClassNameFilter,org.apache.calcite.schema.SchemaPlus,java.lang.String,java.lang.String,java.lang.String,boolean)">
+<h3>addFunctions</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addFunctions</span><wbr><span class="parameters">(org.apache.calcite.model.ClassNameFilter&nbsp;filter,
+ <a href="../schema/SchemaPlus.html" title="interface in org.apache.calcite.schema">SchemaPlus</a>&nbsp;schema,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;functionName,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;className,
+ @Nullable <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;methodName,
+ boolean&nbsp;upCase)</span></div>
+<div class="block">Creates and validates a <a href="../schema/impl/ScalarFunctionImpl.html" title="class in org.apache.calcite.schema.impl"><code>ScalarFunctionImpl</code></a> and adds it to a
+ schema, after asking <code>filter</code> to accept <code>className</code>.</div>
 </section>
 </li>
 <li>
@@ -408,7 +467,7 @@ loadScripts(document, 'script');</script>
 </main>
 <footer role="contentinfo">
 <hr>
-<p class="legal-copy"><small>Copyright &copy; 2012-2025 Apache Software Foundation. All Rights Reserved.</small></p>
+<p class="legal-copy"><small>Copyright &copy; 2012-2026 Apache Software Foundation. All Rights Reserved.</small></p>
 </footer>
 </div>
 </div>

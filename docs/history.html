@@ -216,6 +216,24 @@ Changes the type of the <code class="language-plaintext highlighter-rouge">WINDO
 the table functions <code class="language-plaintext highlighter-rouge">HOP</code>, <code class="language-plaintext highlighter-rouge">TUMBLE</code>, <code class="language-plaintext highlighter-rouge">SESSION</code> to match the original
 type of the timestamp column.  These types used to be hardwired to
 <code class="language-plaintext highlighter-rouge">TIMESTAMP(3)</code>.</li>
+  <li>[<a href="https://issues.apache.org/jira/browse/CALCITE-7511">CALCITE-7511</a>]
+This change adds new <code class="language-plaintext highlighter-rouge">visit(X)</code> overloads on <code class="language-plaintext highlighter-rouge">RelShuttle</code> for <code class="language-plaintext highlighter-rouge">TableFunctionScan</code>,
+<code class="language-plaintext highlighter-rouge">Window</code>, <code class="language-plaintext highlighter-rouge">Snapshot</code>, <code class="language-plaintext highlighter-rouge">Collect</code>, <code class="language-plaintext highlighter-rouge">Sample</code>, <code class="language-plaintext highlighter-rouge">Uncollect</code>, <code class="language-plaintext highlighter-rouge">Combine</code>, <code class="language-plaintext highlighter-rouge">ConditionalCorrelate</code>,
+<code class="language-plaintext highlighter-rouge">SortExchange</code>, and <code class="language-plaintext highlighter-rouge">TableSpool</code>. The corresponding rel class (or its abstract parent)
+now overrides <code class="language-plaintext highlighter-rouge">accept(RelShuttle)</code> so dispatch routes through the type-specific overload
+instead of <code class="language-plaintext highlighter-rouge">visit(RelNode other)</code>. Default implementations are provided in <code class="language-plaintext highlighter-rouge">RelShuttleImpl</code>
+and <code class="language-plaintext highlighter-rouge">RelHomogeneousShuttle</code>. Callers that implement <code class="language-plaintext highlighter-rouge">RelShuttle</code> directly must add the
+new <code class="language-plaintext highlighter-rouge">visit(X)</code> methods; the compiler will flag missing overrides. Callers that subclassed
+<code class="language-plaintext highlighter-rouge">RelShuttleImpl</code> (or <code class="language-plaintext highlighter-rouge">RelHomogeneousShuttle</code>) and handled any of these types via <code class="language-plaintext highlighter-rouge">instanceof</code>
+checks inside <code class="language-plaintext highlighter-rouge">visit(RelNode)</code> should migrate that logic to the matching <code class="language-plaintext highlighter-rouge">visit(X)</code> override —
+those <code class="language-plaintext highlighter-rouge">instanceof</code> branches will silently stop firing for the affected types. Because the
+<code class="language-plaintext highlighter-rouge">accept(RelShuttle)</code> override is placed on the abstract parent where one exists, <strong>all</strong>
+subclasses now dispatch through the type-specific overload, including <code class="language-plaintext highlighter-rouge">Enumerable*</code> and
+engine-specific variants; for example, <code class="language-plaintext highlighter-rouge">EnumerableTableFunctionScan</code> now also routes through
+<code class="language-plaintext highlighter-rouge">visit(TableFunctionScan)</code>. This change also adds the previously-missing
+<code class="language-plaintext highlighter-rouge">RelHomogeneousShuttle.visit(LogicalAsofJoin)</code> forwarding override; subclasses that relied
+on <code class="language-plaintext highlighter-rouge">LogicalAsofJoin</code> not being routed through their <code class="language-plaintext highlighter-rouge">visit(RelNode)</code> override will now see
+it routed there, matching every other rel type in the homogeneous shuttle.</li>
 </ul>
 
 <h4 id="new-features-1-42-0">New features</h4>

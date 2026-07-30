@@ -1,0 +1,846 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <title>Security threat model</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="generator" content="Jekyll v4.4.1">
+  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!-- Matomo -->
+  <script>
+      var _paq = window._paq = window._paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(["setDoNotTrack", true]);
+      _paq.push(["disableCookies"]);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+          var u="https://analytics.apache.org/";
+          _paq.push(['setTrackerUrl', u+'matomo.php']);
+          _paq.push(['setSiteId', '64']);
+          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+          g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+
+
+<body class="wrap">
+  <header role="banner">
+  <div class="grid">
+    <div class="unit center-on-mobiles">
+      <h1>
+        <a href="/">
+          <span class="sr-only">Apache Calcite</span>
+          <img src="/img/logo.svg" alt="Calcite Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav">
+      <ul>
+  <li class="">
+    <a href="/">Home</a>
+  </li>
+  <li class="">
+    <a href="/downloads/">Download</a>
+  </li>
+  <li class="">
+    <a href="/community/">Community</a>
+  </li>
+  <li class="">
+    <a href="/develop/">Develop</a>
+  </li>
+  <li class="">
+    <a href="/news/">News</a>
+  </li>
+  <li class="current">
+    <a href="/docs/">Docs</a>
+  </li>
+</ul>
+
+    </nav>
+  </div>
+</header>
+
+
+    <section class="docs">
+    <div class="grid">
+
+      <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select onchange="if (this.value) window.location.href=this.value">
+    <option value="">Navigate the docs…</option>
+        <optgroup label="Overview">      
+    </optgroup>
+    <optgroup label="Advanced">      
+    </optgroup>
+    <optgroup label="Avatica">      
+    </optgroup>
+    <optgroup label="Reference">      
+    </optgroup>
+    <optgroup label="Security">      
+    </optgroup>
+    <optgroup label="Meta">      
+    </optgroup>
+
+  </select>
+</div>
+
+
+      <div class="unit four-fifths">
+        <article>
+          <h1>Security threat model</h1>
+          <!--
+
+-->
+
+<p>Calcite is an embedded library: it runs inside a host application’s JVM and
+exposes no network port of its own. This threat model covers what an attacker
+who reaches that embedded engine over a JDBC connection can and cannot do.</p>
+
+<p>Calcite treats the behaviors below as security vulnerabilities, so that
+reporters and committers triage them the same way. A report that
+contradicts this model is a feature request or a documentation gap, not a
+vulnerability.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#attacker-and-trust-boundary" id="markdown-toc-attacker-and-trust-boundary">Attacker and trust boundary</a></li>
+  <li><a href="#assets" id="markdown-toc-assets">Assets</a></li>
+  <li><a href="#inputs" id="markdown-toc-inputs">Inputs</a></li>
+  <li><a href="#security-properties" id="markdown-toc-security-properties">Security properties</a></li>
+  <li><a href="#always-a-vulnerability" id="markdown-toc-always-a-vulnerability">Always a vulnerability</a></li>
+  <li><a href="#not-a-vulnerability" id="markdown-toc-not-a-vulnerability">Not a vulnerability</a></li>
+  <li><a href="#downstream-responsibilities" id="markdown-toc-downstream-responsibilities">Downstream responsibilities</a></li>
+  <li>
+<a href="#surprising-vs-unsurprising-class-loading" id="markdown-toc-surprising-vs-unsurprising-class-loading">Surprising vs unsurprising class loading</a>    <ul>
+      <li><a href="#triage-rule-for-class-loading-sinks" id="markdown-toc-triage-rule-for-class-loading-sinks">Triage rule for class-loading sinks</a></li>
+    </ul>
+  </li>
+  <li><a href="#denial-of-service" id="markdown-toc-denial-of-service">Denial of service</a></li>
+  <li><a href="#triage-dispositions" id="markdown-toc-triage-dispositions">Triage dispositions</a></li>
+</ul>
+
+<h2 id="attacker-and-trust-boundary">Attacker and trust boundary</h2>
+
+<p>One attacker profile: a <em>query author</em> who reaches Calcite over a JDBC
+connection.</p>
+
+<p>The attacker can:</p>
+
+<ul>
+  <li>set any connection property to any value: <code class="language-plaintext highlighter-rouge">model</code>, <code class="language-plaintext highlighter-rouge">parserFactory</code>,
+<code class="language-plaintext highlighter-rouge">schemaFactory</code>, <code class="language-plaintext highlighter-rouge">fun</code>, <code class="language-plaintext highlighter-rouge">typeSystem</code>, <code class="language-plaintext highlighter-rouge">dataSource</code>, <code class="language-plaintext highlighter-rouge">jdbcUrl</code>, and the
+rest;</li>
+  <li>execute any SQL, including DDL.</li>
+</ul>
+
+<p>The attacker cannot:</p>
+
+<ul>
+  <li>change JVM system properties;</li>
+  <li>change the classpath (add or replace classes or JARs).</li>
+</ul>
+
+<p>Out of scope by definition: the configuration and behavior of a
+third-party driver or service that a <a href="/docs/model.html">model</a>
+points at. If a model references h2, h2’s own settings and behavior are
+h2’s concern, not Calcite’s.</p>
+
+<h2 id="assets">Assets</h2>
+
+<ul>
+  <li>the host running Calcite: no code execution, and no file access beyond
+what an adapter is configured to perform;</li>
+  <li>the internal network reachable from that host: no attacker-directed
+outbound requests.</li>
+</ul>
+
+<h2 id="inputs">Inputs</h2>
+
+<p>Everything the attacker controls resolves to one of P1–P4 or to an explicit
+carve-out below. A report that reaches a sink not covered here is a model gap
+(see <a href="#triage-dispositions">Triage dispositions</a>).</p>
+
+<div class="scroll-table-style"><table>
+  <thead>
+    <tr>
+      <th>Input</th>
+      <th>How it is supplied</th>
+      <th>What it feeds</th>
+      <th>Governing rule</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SQL text, including DDL</td>
+      <td>any statement on the connection</td>
+      <td>parser → validator → planner → generated code</td>
+      <td>P1–P4; parser nesting depth is a DoS surface (see <a href="#denial-of-service">Denial of service</a>)</td>
+    </tr>
+    <tr>
+      <td>Class-naming connection properties — <code class="language-plaintext highlighter-rouge">schemaFactory</code>, <code class="language-plaintext highlighter-rouge">parserFactory</code>, <code class="language-plaintext highlighter-rouge">typeSystem</code>, <code class="language-plaintext highlighter-rouge">metaTableFactory</code>, <code class="language-plaintext highlighter-rouge">metaColumnFactory</code>
+</td>
+      <td>connection property or <code class="language-plaintext highlighter-rouge">model</code>
+</td>
+      <td>a class loaded through a Calcite SPI</td>
+      <td>
+<a href="#surprising-vs-unsurprising-class-loading">Surprising vs unsurprising class loading</a> (P1)</td>
+    </tr>
+    <tr>
+      <td>
+<code class="language-plaintext highlighter-rouge">tableFactory</code> and function classes</td>
+      <td><code class="language-plaintext highlighter-rouge">model</code></td>
+      <td>a class loaded through a Calcite table or function SPI</td>
+      <td>Surprising vs unsurprising class loading (P1)</td>
+    </tr>
+    <tr>
+      <td>
+<code class="language-plaintext highlighter-rouge">dataSource</code>, <code class="language-plaintext highlighter-rouge">jdbcDriver</code>
+</td>
+      <td>connection property or <code class="language-plaintext highlighter-rouge">model</code>
+</td>
+      <td>a class loaded through a standard-Java SPI (<code class="language-plaintext highlighter-rouge">javax.sql.DataSource</code>, <code class="language-plaintext highlighter-rouge">java.sql.Driver</code>)</td>
+      <td>Surprising vs unsurprising class loading (P1); the host it then dials is P3</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">fun</code></td>
+      <td>connection property</td>
+      <td>selects built-in function libraries by name</td>
+      <td>no class loading; ordinary SQL semantics under P1–P4</td>
+    </tr>
+    <tr>
+      <td>
+<code class="language-plaintext highlighter-rouge">model</code> — inline JSON, a <code class="language-plaintext highlighter-rouge">file:</code> path, or a URL</td>
+      <td>connection property</td>
+      <td>schema/table factories and adapter operands</td>
+      <td>P1 (factories via SPI), P2 (local-file operands), P3 (a URL model, or a URL-fetching adapter)</td>
+    </tr>
+    <tr>
+      <td>A serialized RelNode plan (<code class="language-plaintext highlighter-rouge">RelJson</code>) — types and operators</td>
+      <td>any path that reconstructs a plan from attacker input</td>
+      <td>type and operator class resolution</td>
+      <td>Surprising vs unsurprising class loading (P1)</td>
+    </tr>
+    <tr>
+      <td>Adapter operands — e.g. a file/CSV/JSON path, or the os-adapter</td>
+      <td>
+<code class="language-plaintext highlighter-rouge">model</code> or SQL</td>
+      <td>the adapter’s configured resource</td>
+      <td>P2 for a configured local path (opt-in ⇒ not a vulnerability); the os-adapter is opt-in (not a vulnerability)</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<h2 id="security-properties">Security properties</h2>
+
+<ul>
+  <li>
+<strong>P1: no code execution.</strong> Neither connecting nor running SQL may
+execute code outside Calcite’s query-processing semantics. This covers
+<code class="language-plaintext highlighter-rouge">Runtime.exec</code> and <code class="language-plaintext highlighter-rouge">ProcessBuilder</code>, and the weaker primitive of loading
+an attacker-named class so that its static initializer, constructor, or
+an accessed static field runs. Exception: the os-adapter.</li>
+  <li>
+<strong>P2: no incidental file access.</strong> Neither connecting nor running
+SQL may read or create a file, except where a file-oriented adapter or
+table function reads the local path it was explicitly configured with. The
+carve-out covers local filesystem paths only; a file adapter that fetches a
+URL (<code class="language-plaintext highlighter-rouge">http://</code>, <code class="language-plaintext highlighter-rouge">https://</code>) is making a network request and falls under P3.</li>
+  <li>
+<strong>P3: no server-side request forgery.</strong> Neither connecting nor
+running SQL may open a network connection to an attacker-chosen host.</li>
+  <li>
+<strong>P4: no escape from the configured schemas.</strong> Neither connecting nor
+running SQL may read data outside the schemas the connection exposes. A query
+that reaches another schema, a file, or a catalog that the connection’s root
+schema does not make visible is a vulnerability.</li>
+</ul>
+
+<h2 id="always-a-vulnerability">Always a vulnerability</h2>
+
+<ol>
+  <li>
+<strong>Code execution</strong> that results from connecting or running SQL, except
+through the os-adapter. The bar is the primitive, not a full chain: a
+reachable sink that loads an attacker-named class qualifies, because
+class loading runs the static initializer before any type check.</li>
+  <li>
+<strong>Arbitrary file read or write</strong> that no explicitly-configured file
+adapter was asked to perform.</li>
+  <li>
+<strong>Server-side request forgery</strong>, forcing Calcite to connect to a
+host the attacker chooses (internal services, cloud metadata endpoints,
+port scans).</li>
+  <li>
+<strong>Reading beyond the configured schemas</strong>, reaching another schema,
+a file, or a catalog that the connection’s root schema does not make
+visible.</li>
+</ol>
+
+<h2 id="not-a-vulnerability">Not a vulnerability</h2>
+
+<ul>
+  <li>The os-adapter running OS commands. It exists to do that, and an operator
+must add it on purpose.</li>
+  <li>A file, CSV, or JSON adapter reading the local path it was configured
+with. Opt-in, by the same reasoning as the os-adapter.</li>
+  <li>Anything that needs a changed system property or classpath. Both are
+outside the attacker’s reach by assumption.</li>
+  <li>The behavior of a third-party driver once Calcite has connected to the
+endpoint it was configured with.</li>
+  <li>SQL that Calcite pushes down to a configured backend. Calcite generates the
+text and sends it to the endpoint the operator configured, and the query
+author can already reach that endpoint’s data through the visible schemas. A
+pushdown bug that reads beyond the configured schemas is P4 and a
+vulnerability; the generated SQL reaching the configured backend is not.</li>
+  <li>Cross-tenant reads that follow from the embedder exposing more than one
+principal’s schemas on a single connection. Calcite has no authentication or
+authorization; scoping each connection’s root schema to what its principal may
+see is the embedder’s job. P4 applies where the user submits only SQL; a user
+who also sets connection properties configures their own schema visibility.</li>
+</ul>
+
+<h2 id="downstream-responsibilities">Downstream responsibilities</h2>
+
+<p>Calcite is embedded, so several controls belong to the host or the operator,
+not to the library. A finding that lands in one of these is not a Calcite
+vulnerability.</p>
+
+<ul>
+  <li>
+<strong>Transport and identity.</strong> Calcite opens no socket. TLS, the network
+perimeter, authentication, and authorization live in the host. A host that
+lets an untrusted principal set connection properties hands that principal the
+full capability in <a href="#attacker-and-trust-boundary">Attacker and trust boundary</a>.</li>
+  <li>
+<strong>Schema scoping.</strong> Scope each connection’s root schema to what its principal
+may see; Calcite has no authentication or authorization. Cross-tenant reads
+across schemas exposed on one connection are the embedder’s to prevent (see
+<a href="#not-a-vulnerability">Not a vulnerability</a>).</li>
+  <li>
+<strong>Adapter selection.</strong> Add the os-adapter and the file, CSV, or JSON adapters
+only where the query author is trusted to reach what they expose.</li>
+  <li>
+<strong>Classpath.</strong> The operator owns the classpath. Calcite gates class loading by
+SPI; which classes are present is the operator’s trust decision.</li>
+  <li>
+<strong>What a <code class="language-plaintext highlighter-rouge">model</code> points at.</strong> A third-party driver or service a <code class="language-plaintext highlighter-rouge">model</code>
+references is configured and patched by the operator; its behavior past the
+connection boundary is out of this model.</li>
+</ul>
+
+<h2 id="surprising-vs-unsurprising-class-loading">Surprising vs unsurprising class loading</h2>
+
+<p>Calcite loads a class named in a connection property or in SQL only to use it
+through a specific SPI: a schema factory, table factory, function, operator,
+data source, or driver. The security boundary follows that contract, not a
+blanket trust of the classpath or of SQL.</p>
+
+<ul>
+  <li>
+<strong>Unsurprising.</strong> The class implements the SPI interface for the position it
+was named in, and Calcite invokes it through that interface. This is working
+as designed, even when the class is otherwise dangerous. The operator who
+placed the class on the classpath, and the author of the class, own that
+contract.</li>
+  <li>
+<strong>Surprising.</strong> Naming a class runs the class’s own code (a static
+initializer, constructor, method, or static-field read) even though it
+does not implement the SPI for that position. <code class="language-plaintext highlighter-rouge">java.lang.Runtime</code>,
+<code class="language-plaintext highlighter-rouge">org.springframework.boot.SpringApplication</code>, and <code class="language-plaintext highlighter-rouge">javax.naming.InitialContext</code>
+are surprising in a <code class="language-plaintext highlighter-rouge">SchemaFactory</code> slot. Surprising class loading is always a
+vulnerability.</li>
+</ul>
+
+<p>This boundary lets three goals hold at once:</p>
+
+<ul>
+  <li>untrusted classes may sit on the classpath; a dangerous class that does
+not implement a Calcite SPI is never instantiated by name, so the operator
+need not audit every class;</li>
+  <li>SQL may be arbitrary; it can name SPI classes, but only SPI
+implementations run, and only through their SPI;</li>
+  <li>a reasonable-looking query cannot trigger an unexpected process launch, file
+read, or network call, because the interface gate rejects the classes that
+would cause one.</li>
+</ul>
+
+<p>The same rule governs any path that reconstructs objects or loads classes from
+attacker-controlled input, including JSON plan deserialization.</p>
+
+<p><strong>Mechanism.</strong> Load with <code class="language-plaintext highlighter-rouge">Class.forName(name, false, loader)</code>, check
+<code class="language-plaintext highlighter-rouge">pluginClass.isAssignableFrom(clazz)</code>, and only then initialize and instantiate.
+A class that fails the check never runs its static initializer.</p>
+
+<p><strong>Standard-Java SPIs.</strong> The gate is tightest when the SPI is a Calcite interface
+(<code class="language-plaintext highlighter-rouge">SchemaFactory</code>, <code class="language-plaintext highlighter-rouge">TableFactory</code>, <code class="language-plaintext highlighter-rouge">Function</code>, <code class="language-plaintext highlighter-rouge">SqlOperator</code>): only a class
+written to be a Calcite plugin passes. Two positions name a standard Java
+interface instead, <code class="language-plaintext highlighter-rouge">dataSource</code> (<code class="language-plaintext highlighter-rouge">javax.sql.DataSource</code>) and <code class="language-plaintext highlighter-rouge">jdbcDriver</code>
+(<code class="language-plaintext highlighter-rouge">java.sql.Driver</code>), which many unrelated libraries implement. The
+interface gate still blocks the surprising case, since <code class="language-plaintext highlighter-rouge">java.lang.Runtime</code>
+implements neither, so naming a <code class="language-plaintext highlighter-rouge">DataSource</code> or <code class="language-plaintext highlighter-rouge">Driver</code> implementation is the
+documented feature, not a vulnerability. An allowlist of permitted
+implementations is optional hardening for these positions, not a security
+boundary. The host a driver then connects to is governed by P3, independently of
+which class is named.</p>
+
+<h3 id="triage-rule-for-class-loading-sinks">Triage rule for class-loading sinks</h3>
+
+<p>A reachable sink that loads an attacker-named class is a vulnerability on
+its own. A reporter need not demonstrate end-to-end remote code execution
+on a specific classpath: the demonstrated primitive (a static
+initializer, a constructor, or a static-field read on an attacker-named
+class) is enough to require a fix. The fix loads with
+<code class="language-plaintext highlighter-rouge">initialize=false</code>, gates on the expected interface (or an allowlist), and
+then instantiates.</p>
+
+<h2 id="denial-of-service">Denial of service</h2>
+
+<p>A single query should not be able to exhaust the host. This is in scope as a
+hardening goal. The controls are not all in place yet, so treat the gaps below
+as known limitations rather than per-report vulnerabilities until the controls
+land.</p>
+
+<ul>
+  <li>
+<strong>Planning.</strong> A crafted query can drive the planner into a combinatorial
+blow-up. The fix is a set of bounds: a planning deadline, a cap on rule
+firings, and a cap on the number of explored alternatives. Calcite already
+carries a <code class="language-plaintext highlighter-rouge">CancelFlag</code> in the planner context, so a deadline can build on it;
+the firing and size caps are new.</li>
+  <li>
+<strong>Execution.</strong> Catastrophic regex backtracking in <code class="language-plaintext highlighter-rouge">LIKE</code>, <code class="language-plaintext highlighter-rouge">SIMILAR TO</code>, or
+<code class="language-plaintext highlighter-rouge">RLIKE</code>, or an unbounded join, exhausts resources at run time. Planning bounds
+do not help here; the mitigation is a match-time limit or a backtracking-free
+regex engine.</li>
+  <li>
+<strong>Parsing.</strong> Deeply nested expressions can overflow the parser stack. The
+mitigation is a nesting-depth limit.</li>
+</ul>
+
+<p>Once the planning bounds exist, a single reasonably-sized query that exceeds
+them is a configuration choice, not a vulnerability.</p>
+
+<h2 id="triage-dispositions">Triage dispositions</h2>
+
+<p>Every security report against Calcite resolves to exactly one of:</p>
+
+<ul>
+  <li>
+<strong>Valid</strong> — violates P1–P4, or matches an item in
+<a href="#always-a-vulnerability">Always a vulnerability</a>. Gets a fix. A demonstrated
+class-loading primitive qualifies on its own (see
+<a href="#triage-rule-for-class-loading-sinks">Triage rule for class-loading sinks</a>);
+it need not be chained to end-to-end RCE.</li>
+  <li>
+<strong>Not a vulnerability (by design)</strong> — matches an item in
+<a href="#not-a-vulnerability">Not a vulnerability</a>: the os-adapter, an opt-in
+file/CSV/JSON adapter reading its configured path, third-party driver or
+pushed-down SQL behavior past the connection, or cross-tenant reads that
+follow from the embedder’s schema exposure. Close with a pointer to this
+model.</li>
+  <li>
+<strong>Out of model</strong> — requires a capability the attacker does not have (changing
+a JVM system property or the classpath), or lands in a layer this model
+assigns to the host (network transport, TLS, authentication, authorization).
+Close; redirect to the operator or embedder.</li>
+  <li>
+<strong>Known limitation</strong> — a <a href="#denial-of-service">Denial of service</a> gap whose
+control has not landed yet. Tracked as hardening, not a per-report
+vulnerability, until the bound exists.</li>
+  <li>
+<strong>Duplicate</strong> — the same sink or root cause is already tracked in an open
+Jira. Link and close.</li>
+  <li>
+<strong>Model gap</strong> — plausible, but this model does not clearly place it in or out.
+Escalate to the PMC to decide, then update this document with the ruling so
+the next report of its kind is no longer a gap.</li>
+</ul>
+
+          
+
+
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="section-nav">
+      <div class="left align-right">
+          
+            
+            
+            <a href="/docs/howto.html" class="prev">Previous</a>
+          
+      </div>
+      <div class="right align-left">
+          
+            
+            
+
+            
+            <a href="/docs/history.html" class="next">Next</a>
+          
+      </div>
+    </div>
+    <div class="clear"></div>
+    
+
+        </article>
+      </div>
+
+      <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    
+    <h4>Overview</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/index.html">Background</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/tutorial.html">Tutorial</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/algebra.html">Algebra</a></li>
+
+
+</ul>
+
+    
+    <h4>Advanced</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/adapter.html">Adapters</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/spatial.html">Spatial</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/stream.html">Streaming</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/materialized_views.html">Materialized Views</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/lattice.html">Lattices</a></li>
+
+
+</ul>
+
+    
+    <h4>Avatica</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_overview.html">Overview</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_roadmap.html">Roadmap</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_json_reference.html">JSON Reference</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/avatica_protobuf_reference.html">Protobuf Reference</a></li>
+
+
+</ul>
+
+    
+    <h4>Reference</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/reference.html">SQL language</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/model.html">JSON/YAML models</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/howto.html">HOWTO</a></li>
+
+
+</ul>
+
+    
+    <h4>Security</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class="current"><a href="/docs/security_threat_model.html">Security threat model</a></li>
+
+
+</ul>
+
+    
+    <h4>Meta</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/history.html">History</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/docs/powered_by.html">Powered by Calcite</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/javadocAggregate">API</a></li>
+
+
+</ul>
+
+    
+  </aside>
+</div>
+
+
+      <div class="clear"></div>
+
+    </div>
+  </section>
+
+
+  <footer role="contentinfo">
+  <div id="poweredby">
+    <a href="http://www.apache.org/">
+      <span class="sr-only">Apache</span>
+      <img src="https://www.apache.org/img/asf_logo.png" width="147" height="77" alt="Apache Logo"></a>
+  </div>
+  <div id="copyright">
+  <p>The contents of this website are Copyright © 2026
+     <a href="https://www.apache.org/">Apache Software Foundation</a>
+     under the terms of
+     the <a href="https://www.apache.org/licenses/">
+     Apache License v2</a>. Apache Calcite and its logo are
+     trademarks of the Apache Software Foundation.
+  </p>
+  <p>
+      <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a>
+  </p>
+  </div>
+</footer>
+
+  <script>
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
+    anchor.title = "Permalink";
+    return anchor;
+  };
+
+  var linkifyAnchors = function (level, containingElement) {
+    var headers = containingElement.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.appendChild(anchorForId(header.id));
+      }
+    }
+  };
+
+  document.onreadystatechange = function () {
+    if (this.readyState === "complete") {
+      var contentBlock = document.getElementsByClassName("docs")[0] || document.getElementsByClassName("news")[0];
+      if (!contentBlock) {
+        return;
+      }
+      for (var level = 1; level <= 6; level++) {
+        linkifyAnchors(level, contentBlock);
+      }
+    }
+  };
+</script>
+
+
+</body>
+</html>

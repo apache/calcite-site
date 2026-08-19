@@ -1390,7 +1390,7 @@ name will have been converted to upper case also.</p>
     <tr>
       <td style="text-align: left">UUID</td>
       <td style="text-align: left">An 128-bit UUID</td>
-      <td style="text-align: left">Example: UUID ‘123e4567-e89b-12d3-a456-426655440000’</td>
+      <td style="text-align: left">Example: UUID ‘123e4567-e89b-12d3-a456-426655440000’. A string converts to a <code class="language-plaintext highlighter-rouge">UUID</code> if it holds 32 hexadecimal digits of either case, optionally enclosed in braces, optionally separated by a hyphen after any complete group of four digits; a binary converts if it is exactly 16 bytes. Anything else is an error. Blanks are not trimmed.</td>
     </tr>
     <tr>
       <td style="text-align: left">INTERVAL timeUnit [ TO timeUnit ]</td>
@@ -3281,7 +3281,8 @@ string operand to data type of the other numeric operand;</li>
   <li>Binary comparison (<code class="language-plaintext highlighter-rouge">=</code>, <code class="language-plaintext highlighter-rouge">&lt;</code>, <code class="language-plaintext highlighter-rouge">&lt;=</code>, <code class="language-plaintext highlighter-rouge">&lt;&gt;</code>, <code class="language-plaintext highlighter-rouge">&gt;</code>, <code class="language-plaintext highlighter-rouge">&gt;=</code>):
 if operands are <code class="language-plaintext highlighter-rouge">STRING</code> and <code class="language-plaintext highlighter-rouge">TIMESTAMP</code>, promote to <code class="language-plaintext highlighter-rouge">TIMESTAMP</code>;
 make <code class="language-plaintext highlighter-rouge">1 = true</code> and <code class="language-plaintext highlighter-rouge">0 = false</code> always evaluate to <code class="language-plaintext highlighter-rouge">TRUE</code>;
-if there is numeric type operand, find common type for both operands.</li>
+if there is numeric type operand, find common type for both operands;
+if operands are <code class="language-plaintext highlighter-rouge">UUID</code> and <code class="language-plaintext highlighter-rouge">CHARACTER</code> or <code class="language-plaintext highlighter-rouge">BINARY</code>, promote to <code class="language-plaintext highlighter-rouge">UUID</code>.</li>
   <li>
 <code class="language-plaintext highlighter-rouge">IN</code> sub-query: compare type of LHS and RHS, and find the common type;
 if it is struct type, find wider type for every field;</li>

@@ -1,0 +1,1648 @@
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one or more
+  ~ contributor license agreements.  See the NOTICE file distributed with
+  ~ this work for additional information regarding copyright ownership.
+  ~ The ASF licenses this file to you under the Apache License, Version 2.0
+  ~ (the "License"); you may not use this file except in compliance with
+  ~ the License.  You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>Security threat model</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="generator" content="Jekyll v4.4.1">
+  <link rel="stylesheet" href="/avatica/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/avatica/favicon.ico">
+</head>
+
+
+<body class="wrap">
+  <header role="banner">
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li class="">
+    <a href="/avatica/">Home</a>
+  </li>
+  <li class="">
+    <a href="/avatica/downloads/">Download</a>
+  </li>
+  <li class="">
+    <a href="/avatica/community/">Community</a>
+  </li>
+  <li class="">
+    <a href="/avatica/develop/">Develop</a>
+  </li>
+  <li class="">
+    <a href="/avatica/news/">News</a>
+  </li>
+  <li class="current">
+    <a href="/avatica/docs/">Docs</a>
+  </li>
+</ul>
+
+  </nav>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <h1>
+        <a href="/avatica/">
+          <span class="sr-only">Apache Calcite Avatica</span>
+          <img src="/avatica/img/logo.png" width="226" height="140" alt="Calcite Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav unit two-thirds hide-on-mobiles">
+      <ul>
+  <li class="">
+    <a href="/avatica/">Home</a>
+  </li>
+  <li class="">
+    <a href="/avatica/downloads/">Download</a>
+  </li>
+  <li class="">
+    <a href="/avatica/community/">Community</a>
+  </li>
+  <li class="">
+    <a href="/avatica/develop/">Develop</a>
+  </li>
+  <li class="">
+    <a href="/avatica/news/">News</a>
+  </li>
+  <li class="current">
+    <a href="/avatica/docs/">Docs</a>
+  </li>
+</ul>
+
+    </nav>
+  </div>
+</header>
+
+
+    <section class="docs">
+    <div class="grid">
+
+      <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select onchange="if (this.value) window.location.href=this.value">
+    <option value="">Navigate the docs…</option>
+    
+    <optgroup label="Overview">
+      
+
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+    </optgroup>
+    
+    <optgroup label="Avatica Reference">
+      
+
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+    </optgroup>
+    
+    <optgroup label="Avatica Go Client Reference">
+      
+
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+    </optgroup>
+    
+    <optgroup label="Security">
+      
+
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+    </optgroup>
+    
+    <optgroup label="Avatica Meta">
+      
+
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+    </optgroup>
+    
+    <optgroup label="Avatica Go Client Meta">
+      
+
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+    </optgroup>
+    
+  </select>
+</div>
+
+
+      <div class="unit four-fifths">
+        <article>
+          <h1>Security threat model</h1>
+          <!--
+
+-->
+
+<p>Apache Avatica is a JDBC/ODBC wire-protocol layer: a server that fronts a
+local JDBC <code class="language-plaintext highlighter-rouge">DataSource</code> (typically Apache Calcite, but any JDBC driver
+is supported), and a client-side JDBC driver that speaks the Avatica
+wire protocol over HTTP or HTTPS. This threat model covers what an
+attacker who reaches an Avatica server over the wire, or who tricks an
+Avatica client into connecting to a server, can and cannot do.
+This model covers the Java server and the Java (JDBC) client in this
+repository. <code class="language-plaintext highlighter-rouge">apache/calcite-avatica-go</code>
+is a separate implementation that speaks the same wire protocol; it
+is not covered here and would need its own model.</p>
+
+<p>Avatica treats the behaviors below as security vulnerabilities, so that
+reporters and committers triage them the same way. A report that
+contradicts this model is a feature request or a documentation gap, not a
+vulnerability.</p>
+
+<p>Companion documents:</p>
+
+<ul id="markdown-toc">
+  <li><a href="#attacker-and-trust-boundary" id="markdown-toc-attacker-and-trust-boundary">Attacker and trust boundary</a></li>
+  <li><a href="#assets" id="markdown-toc-assets">Assets</a></li>
+  <li><a href="#inputs" id="markdown-toc-inputs">Inputs</a></li>
+  <li><a href="#security-properties" id="markdown-toc-security-properties">Security properties</a></li>
+  <li><a href="#always-a-vulnerability" id="markdown-toc-always-a-vulnerability">Always a vulnerability</a></li>
+  <li><a href="#not-a-vulnerability" id="markdown-toc-not-a-vulnerability">Not a vulnerability</a></li>
+  <li><a href="#downstream-responsibilities" id="markdown-toc-downstream-responsibilities">Downstream responsibilities</a></li>
+  <li><a href="#surprising-vs-unsurprising-class-loading" id="markdown-toc-surprising-vs-unsurprising-class-loading">Surprising vs unsurprising class loading</a>    <ul>
+      <li><a href="#client-side-surprising-class-loading" id="markdown-toc-client-side-surprising-class-loading">Client-side surprising class loading</a></li>
+    </ul>
+  </li>
+  <li><a href="#impersonation" id="markdown-toc-impersonation">Impersonation</a></li>
+  <li><a href="#denial-of-service" id="markdown-toc-denial-of-service">Denial of service</a></li>
+  <li><a href="#historical-cves" id="markdown-toc-historical-cves">Historical CVEs</a></li>
+  <li><a href="#triage-dispositions" id="markdown-toc-triage-dispositions">Triage dispositions</a></li>
+</ul>
+
+<h2 id="attacker-and-trust-boundary">Attacker and trust boundary</h2>
+
+<p>Avatica has two deployment shapes and therefore two attacker profiles:</p>
+
+<p><strong>Server-side attacker: an HTTP client</strong> that can reach an Avatica
+server over the network.</p>
+
+<p>The attacker can:</p>
+
+<ul>
+  <li>open TCP connections to the server’s listening port;</li>
+  <li>send arbitrary HTTP requests, including well-formed and malformed
+Avatica protocol frames (JSON or Protobuf);</li>
+  <li>if the server has no authentication configured, be treated as
+authenticated;</li>
+  <li>if the server has authentication configured, attempt to authenticate
+and observe responses; a valid credential upgrades the attacker to
+the <em>authenticated caller</em> profile.</li>
+</ul>
+
+<p>The attacker cannot:</p>
+
+<ul>
+  <li>change JVM system properties, <code class="language-plaintext highlighter-rouge">avatica-server</code> command-line
+arguments, <code class="language-plaintext highlighter-rouge">HttpServer.Builder</code> configuration, or the classpath;</li>
+  <li>obtain valid authentication credentials without an out-of-band step
+(that step is outside this model — see <a href="#downstream-responsibilities">Downstream
+responsibilities</a>).</li>
+</ul>
+
+<p><strong>Authenticated caller:</strong> the profile above plus a valid credential.
+An authenticated caller can:</p>
+
+<ul>
+  <li>execute any SQL the underlying JDBC driver accepts, subject to the
+underlying driver’s own authorization model (Avatica has none of its
+own — see <a href="#downstream-responsibilities">Downstream
+responsibilities</a>);</li>
+  <li>set any Avatica connection property that is not restricted by the
+server’s configuration.</li>
+</ul>
+
+<p><strong>Client-side attacker: a hostile Avatica server</strong>, or a network
+attacker between the client and a legitimate server.</p>
+
+<p>The attacker can:</p>
+
+<ul>
+  <li>return arbitrary bytes on the HTTP response body, including malformed
+or crafted Avatica protocol frames;</li>
+  <li>if hostname verification or truststore validation is disabled or
+weakened by the client’s configuration, present any TLS certificate.</li>
+</ul>
+
+<p>The attacker cannot:</p>
+
+<ul>
+  <li>choose the client’s JVM system properties, connection-string
+properties, or classpath — those are operator- and application-level
+decisions.</li>
+</ul>
+
+<h2 id="assets">Assets</h2>
+
+<ul>
+  <li><strong>The Avatica server host.</strong> No code execution outside the query
+path Avatica is configured to expose; no incidental file or network
+access.</li>
+  <li><strong>The credentials Avatica handles.</strong> BASIC and DIGEST passwords in
+transit, Bearer tokens, Kerberos tickets, and the passwords for
+configured keystores and truststores.</li>
+  <li><strong>The backend JDBC driver’s data.</strong> Avatica is a wire layer, not an
+access-control layer; the driver’s own authorization model governs
+what data is reachable, but the <em>identity</em> Avatica hands to the
+driver via impersonation must correctly reflect the authenticated
+caller.</li>
+  <li><strong>The Avatica client’s JVM.</strong> No code execution triggered by
+content on the wire; no incidental file or network access.</li>
+</ul>
+
+<h2 id="inputs">Inputs</h2>
+
+<p>Everything the attacker controls resolves to one of P1–P5 or to an explicit
+carve-out below. A report that reaches a sink not covered here is a model gap
+(see <a href="#triage-dispositions">Triage dispositions</a>).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Input</th>
+      <th>How it is supplied</th>
+      <th>What it feeds</th>
+      <th>Governing rule</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>HTTP request bytes</td>
+      <td>wire</td>
+      <td>Jetty request parser → Avatica handler → wire deserialization (JSON via Jackson, or Protobuf) → <code class="language-plaintext highlighter-rouge">Service</code> dispatch</td>
+      <td>P1, P2</td>
+    </tr>
+    <tr>
+      <td>Authentication credentials</td>
+      <td>HTTP <code class="language-plaintext highlighter-rouge">Authorization</code> header, query string, SPNEGO negotiation</td>
+      <td>Avatica server configuration → Jetty security handlers</td>
+      <td>P5</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">doAs</code> / impersonation identity</td>
+      <td>either the authenticated principal, or a configurable extractor from HTTP request (e.g. <code class="language-plaintext highlighter-rouge">HttpQueryStringParameterRemoteUserExtractor</code>)</td>
+      <td><code class="language-plaintext highlighter-rouge">DoAsRemoteUserCallback</code> → backend JDBC driver</td>
+      <td>P5 (see <a href="#impersonation">Impersonation</a>)</td>
+    </tr>
+    <tr>
+      <td>SQL text and JDBC parameter values</td>
+      <td>HTTP body</td>
+      <td>Avatica <code class="language-plaintext highlighter-rouge">Service</code> → backend JDBC driver</td>
+      <td>Governed by the backend driver’s own model; Avatica passes it through</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">TypedValue</code> payloads (parameter values, result rows)</td>
+      <td>HTTP body</td>
+      <td><code class="language-plaintext highlighter-rouge">TypedValue.fromProto</code> / <code class="language-plaintext highlighter-rouge">fromJson</code> → <code class="language-plaintext highlighter-rouge">Object</code> in server or client JVM</td>
+      <td>P1</td>
+    </tr>
+    <tr>
+      <td>Class-naming client-side wire fields — e.g. <code class="language-plaintext highlighter-rouge">CursorFactory.className</code></td>
+      <td>HTTP response body from server</td>
+      <td><code class="language-plaintext highlighter-rouge">Class.forName(name)</code> on the client</td>
+      <td>Surprising vs unsurprising class loading (P1); see <a href="#client-side-surprising-class-loading">Client-side surprising class loading</a></td>
+    </tr>
+    <tr>
+      <td>Client-side connection properties — <code class="language-plaintext highlighter-rouge">httpclient_factory</code>, <code class="language-plaintext highlighter-rouge">httpclient_impl</code>, <code class="language-plaintext highlighter-rouge">bearer_token_provider_class</code>, <code class="language-plaintext highlighter-rouge">lb_strategy</code>, <code class="language-plaintext highlighter-rouge">factory</code></td>
+      <td>JDBC connection string, <code class="language-plaintext highlighter-rouge">Properties</code>, or a URL fragment the embedding application composes</td>
+      <td>client-side <code class="language-plaintext highlighter-rouge">AvaticaUtils.instantiatePlugin</code> and equivalents</td>
+      <td>Surprising vs unsurprising class loading (P1)</td>
+    </tr>
+    <tr>
+      <td>TLS material — <code class="language-plaintext highlighter-rouge">truststore</code>, <code class="language-plaintext highlighter-rouge">keystore</code>, passwords, <code class="language-plaintext highlighter-rouge">hostname_verification</code></td>
+      <td>JDBC connection string or <code class="language-plaintext highlighter-rouge">Properties</code></td>
+      <td>client-side TLS setup</td>
+      <td>P5</td>
+    </tr>
+    <tr>
+      <td>Server-side configuration — port, <code class="language-plaintext highlighter-rouge">sslFactory</code>, <code class="language-plaintext highlighter-rouge">withImpersonation</code>, <code class="language-plaintext highlighter-rouge">withCustomAuthentication</code>, <code class="language-plaintext highlighter-rouge">HandlerFactory</code></td>
+      <td><code class="language-plaintext highlighter-rouge">HttpServer.Builder</code> in embedder code</td>
+      <td>Jetty server assembly</td>
+      <td>Operator trust (see <a href="#downstream-responsibilities">Downstream responsibilities</a>)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="security-properties">Security properties</h2>
+
+<ul>
+  <li><strong>P1: no code execution.</strong> Neither receiving a wire frame on either
+end nor decoding it may execute code outside Avatica’s protocol
+semantics. This covers <code class="language-plaintext highlighter-rouge">Runtime.exec</code>, <code class="language-plaintext highlighter-rouge">ProcessBuilder</code>, and the
+weaker primitive of loading an attacker-named class so that its
+static initializer, constructor, or an accessed static field runs.</li>
+  <li><strong>P2: no incidental file access.</strong> Neither receiving a wire frame nor
+decoding it may read or create a file, except for the specific
+configuration files an operator has explicitly named (keystore,
+truststore, keytab, token file). An attacker-controlled path reaching
+a file-read sink is a vulnerability.</li>
+  <li><strong>P3: no server-side request forgery.</strong> Neither receiving a wire
+frame nor decoding it may open an outbound network connection to an
+attacker-chosen host. The Avatica server dials only the JDBC URL its
+operator configured; the Avatica client dials only the URL its own
+operator configured.</li>
+  <li><strong>P4: no impersonation escape.</strong> The identity that Avatica hands to
+the backend JDBC driver, via <code class="language-plaintext highlighter-rouge">DoAsRemoteUserCallback</code> or an
+equivalent, must correspond to the authenticated caller — never to a
+caller-chosen identity in a context where authentication was
+supposed to establish it.</li>
+  <li><strong>P5: no wire secret disclosure.</strong> Credentials on the wire — BASIC
+passwords, Bearer tokens, Kerberos tickets, keystore and truststore
+passwords, session cookies — must not be exposed to a passive
+observer on the network under the configured TLS settings, and must
+not be logged or echoed back to unauthenticated callers.</li>
+</ul>
+
+<h2 id="always-a-vulnerability">Always a vulnerability</h2>
+
+<ol>
+  <li><strong>Code execution</strong> — on the server host, or in the client JVM —
+that results from receiving a wire frame or from decoding it. The
+bar is the primitive, not a full chain: a reachable sink that loads
+an attacker-named class qualifies, because class loading runs the
+static initializer before any type check.</li>
+  <li><strong>Arbitrary file read or write</strong> on either the server host or the
+client JVM, driven by an attacker-controlled input on the wire or
+in a connection property that a caller can set. Reading the
+operator-configured keystore, truststore, keytab, or token file is
+not incidental access.</li>
+  <li><strong>Server-side request forgery</strong> — the Avatica server or client
+opens a network connection to an attacker-chosen host as a result
+of a wire frame or connection property.</li>
+  <li><strong>Impersonation escape.</strong> A caller reaches the backend JDBC driver
+under an identity that is not the identity authentication
+established. Includes: unauthenticated <code class="language-plaintext highlighter-rouge">doAs</code> when authentication
+is meant to be required; a <code class="language-plaintext highlighter-rouge">doAs</code> value the extractor accepts
+without validation against the authenticated principal; a session
+whose identity survives past its authentication.</li>
+  <li><strong>Wire secret disclosure.</strong> Credentials sent over the wire are
+observable by a passive attacker under the deployment’s declared TLS
+settings; or are logged or echoed to a caller who did not
+authenticate; or are stored on the server in a form other than
+what the deployment declared. Falling back to plaintext HTTP for
+an authentication scheme that requires TLS is included.</li>
+  <li><strong>Authentication bypass.</strong> A caller reaches the <code class="language-plaintext highlighter-rouge">Service</code> dispatch
+under a configured authentication mode without supplying a valid
+credential.</li>
+  <li><strong>Denial of service by a single wire frame</strong> — a single request
+parseable within stated size limits should not be able to exhaust
+server resources, except where <a href="#denial-of-service">Denial of service</a>
+records the bound as not yet landed. Combinatorial or unbounded resource
+consumption from a single frame is a vulnerability (see also
+<a href="#denial-of-service">Denial of service</a> for known limitations).</li>
+</ol>
+
+<h2 id="not-a-vulnerability">Not a vulnerability</h2>
+
+<ul>
+  <li><strong>An unauthenticated Avatica server exposed to an untrusted
+network.</strong> <code class="language-plaintext highlighter-rouge">AuthenticationType.NONE</code> is a valid configuration for
+isolated or internally-networked deployments. Reachability of an
+unauthenticated server from the public internet is an operator
+decision (see <a href="#downstream-responsibilities">Downstream
+responsibilities</a>).</li>
+  <li><strong>An unencrypted Avatica server</strong> — running Avatica without
+<code class="language-plaintext highlighter-rouge">sslFactory</code> — exposing HTTP credentials to a network eavesdropper.
+This is an operator decision. Avatica does not force TLS.</li>
+  <li><strong>Backend driver behavior.</strong> Once Avatica has connected to the JDBC
+URL its operator configured, the backend driver’s SQL semantics,
+its authorization model, its own configuration, its bugs and its
+CVEs are that driver’s concern — Avatica passes SQL through.</li>
+  <li><strong>The behavior of the <code class="language-plaintext highlighter-rouge">StandaloneServer</code> demo.</strong> The
+<code class="language-plaintext highlighter-rouge">standalone-server</code> module ships a runnable jar for local
+development and testing. It has no authentication, no TLS, and no
+impersonation by default. Its purpose is to demonstrate the
+protocol; running it in production without additional configuration
+is not supported and not covered by this model.</li>
+  <li><strong>Cross-tenant or cross-schema visibility handled by the backend
+driver.</strong> Avatica has no schema visibility model of its own; the
+backend driver (typically Calcite) is responsible for scoping what
+each authenticated caller may see. See Calcite’s threat model for
+its treatment of this concern.</li>
+  <li><strong>Anything requiring a change to server-side configuration</strong> — port,
+<code class="language-plaintext highlighter-rouge">sslFactory</code>, <code class="language-plaintext highlighter-rouge">HttpServer.Builder</code> options, command-line arguments,
+system properties, or the classpath. Those are operator inputs, not
+attacker inputs, by definition.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">hostname_verification=NONE</code> or an accepted truststore that
+trusts a hostile CA.</strong> Both are documented client-side connection
+properties. A client that configures itself into a weakened trust
+posture accepts that posture. Not a client-side vulnerability.</li>
+</ul>
+
+<h2 id="downstream-responsibilities">Downstream responsibilities</h2>
+
+<p>Several controls belong to the operator or the embedding application, not to
+Avatica itself. A finding that lands in one of these is not an Avatica
+vulnerability.</p>
+
+<ul>
+  <li><strong>Network perimeter.</strong> Deciding who can reach Avatica’s listening
+port is the operator’s job. Avatica has no built-in IP allowlist,
+no rate limiting, and no DDoS protection.</li>
+  <li><strong>Choice of authentication mode.</strong> <code class="language-plaintext highlighter-rouge">AuthenticationType.NONE</code> is
+legal for isolated networks; production deployments on shared or
+public networks should configure BASIC, DIGEST, SPNEGO, Bearer, or a
+<code class="language-plaintext highlighter-rouge">CUSTOM</code> scheme. Avatica does not force a choice.</li>
+  <li><strong>Choice to enable TLS.</strong> <code class="language-plaintext highlighter-rouge">HttpServer.Builder.withSSL(...)</code> opts
+into HTTPS. Deploying without TLS on an untrusted network exposes
+credentials by construction; Avatica does not require TLS.</li>
+  <li><strong>Choice of impersonation extractor.</strong> Configuring
+<code class="language-plaintext highlighter-rouge">HttpQueryStringParameterRemoteUserExtractor</code> or a custom
+<code class="language-plaintext highlighter-rouge">RemoteUserExtractor</code> that trusts a caller-supplied <code class="language-plaintext highlighter-rouge">doAs</code> value
+without authenticating it is an operator misconfiguration — see
+<a href="#impersonation">Impersonation</a> for the boundary.</li>
+  <li><strong>Backend driver selection.</strong> Which JDBC URL Avatica fronts is the
+operator’s choice. The backend driver’s own security posture is out
+of this model.</li>
+  <li><strong>What credentials, keystores, keytabs, and token files exist on
+disk.</strong> The paths Avatica reads are named in the operator’s
+configuration; ensuring those files are readable only by the
+Avatica process is a filesystem-permission concern for the
+operator.</li>
+  <li><strong>Classpath.</strong> The operator owns the classpath. <code class="language-plaintext highlighter-rouge">HttpClient</code>
+factories, <code class="language-plaintext highlighter-rouge">BearerTokenProvider</code> classes, and load-balancing
+strategies are loaded by name; which classes are present is the
+operator’s trust decision.</li>
+  <li><strong>The Avatica client’s connection string.</strong> A JDBC connection
+string may name a <code class="language-plaintext highlighter-rouge">httpclient_factory</code> or a
+<code class="language-plaintext highlighter-rouge">bearer_token_provider_class</code>. If the embedding application lets an
+untrusted caller compose the connection string, that caller has the
+same capability as the operator with respect to class loading.</li>
+</ul>
+
+<h2 id="surprising-vs-unsurprising-class-loading">Surprising vs unsurprising class loading</h2>
+
+<p>Avatica loads a class named in a connection property, in a wire frame,
+or in a configuration file only to use it through a specific SPI:
+<code class="language-plaintext highlighter-rouge">AvaticaHttpClient</code>, <code class="language-plaintext highlighter-rouge">BearerTokenProvider</code>, <code class="language-plaintext highlighter-rouge">LBStrategy</code>, <code class="language-plaintext highlighter-rouge">Meta.Factory</code>,
+<code class="language-plaintext highlighter-rouge">ColumnMetaData.Rep</code> element type. The security boundary follows that
+contract, not a blanket trust of the classpath or of the wire.</p>
+
+<ul>
+  <li><strong>Unsurprising.</strong> The class implements the SPI interface for the
+position it was named in, and Avatica invokes it through that
+interface.</li>
+  <li><strong>Surprising.</strong> Naming a class runs the class’s own code — a static
+initializer, constructor, method, or static-field read — even
+though it does not implement the SPI for that position.
+Surprising class loading is always a vulnerability.</li>
+</ul>
+
+<p><strong>Mechanism.</strong> Load with <code class="language-plaintext highlighter-rouge">Class.forName(name, false, loader)</code>, check
+<code class="language-plaintext highlighter-rouge">pluginClass.isAssignableFrom(clazz)</code>, and only then initialize and
+instantiate. A class that fails the check never runs its static
+initializer.</p>
+
+<h3 id="client-side-surprising-class-loading">Client-side surprising class loading</h3>
+
+<p>The Avatica client reconstructs <code class="language-plaintext highlighter-rouge">Meta.CursorFactory</code> from a wire
+<code class="language-plaintext highlighter-rouge">Common.CursorFactory</code> proto whose <code class="language-plaintext highlighter-rouge">className</code> field is
+attacker-controllable if the server is hostile or the wire is
+tampered with. The current implementation of <code class="language-plaintext highlighter-rouge">CursorFactory.fromProto</code>
+in <code class="language-plaintext highlighter-rouge">Meta</code> calls <code class="language-plaintext highlighter-rouge">Class.forName(name)</code> — which initializes the class
+before any type check.</p>
+
+<p>This sink is tracked as a known open primitive under the P1 triage
+rule: a reachable class-loading sink that fires before an interface
+gate is a vulnerability on its own, whether or not a specific
+end-to-end exploit chain against a specific classpath has been
+demonstrated.</p>
+
+<p>The fix pattern is the same as elsewhere: load with <code class="language-plaintext highlighter-rouge">initialize=false</code>,
+gate on an allowlist of expected element types (<code class="language-plaintext highlighter-rouge">ColumnMetaData.Rep</code>
+values and their corresponding Java classes), and only then initialize.</p>
+
+<h2 id="impersonation">Impersonation</h2>
+
+<p>Avatica supports impersonation: an authenticated caller may execute
+SQL on the backend JDBC driver <em>as</em> another identity, using
+<code class="language-plaintext highlighter-rouge">DoAsRemoteUserCallback</code>. The security boundary here is subtle
+enough to spell out.</p>
+
+<p>The identity Avatica hands to the callback is produced by a
+<code class="language-plaintext highlighter-rouge">RemoteUserExtractor</code>. Three implementations ship with Avatica:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">HttpRequestRemoteUserExtractor</code> — returns
+<code class="language-plaintext highlighter-rouge">HttpServletRequest.getRemoteUser()</code>, i.e. the identity Jetty’s
+security handler established through the configured authentication
+mode. Safe by construction: only reflects a value the caller
+authenticated to.</li>
+  <li><code class="language-plaintext highlighter-rouge">HttpQueryStringParameterRemoteUserExtractor</code> — returns the value
+of a caller-supplied query-string parameter. <strong>This is safe only
+when the caller is authenticated to some other identity</strong> (e.g. a
+Kerberos proxy identity that is separately authorized to impersonate
+other users). Configuring this extractor on an
+<code class="language-plaintext highlighter-rouge">AuthenticationType.NONE</code> server, or on any server where the
+caller’s own authenticated identity is not checked against
+authorization to impersonate the extracted user, is an operator
+misconfiguration that P4 rules out.</li>
+  <li>Any operator-supplied <code class="language-plaintext highlighter-rouge">RemoteUserExtractor</code>. Operator’s
+responsibility.</li>
+</ul>
+
+<p>The boundary: <strong>who is allowed to impersonate whom</strong> is an operator
+policy that Avatica does not enforce. A bug where Avatica accepts an
+impersonation request under a configured mode without applying the
+operator’s declared policy is a P4 vulnerability. An operator who
+configures an extractor that accepts unauthenticated <code class="language-plaintext highlighter-rouge">doAs</code> values
+has misconfigured Avatica; that is not a P4 vulnerability but it <em>is</em>
+an item Avatica’s documentation should call out sharply.</p>
+
+<h2 id="denial-of-service">Denial of service</h2>
+
+<p>A single request within stated size limits should not be able to
+exhaust the server. This is in scope as a hardening goal. The
+controls are not all in place yet, so treat the gaps below as known
+limitations rather than per-report vulnerabilities until the
+controls land.</p>
+
+<ul>
+  <li><strong>Request size.</strong> Jetty’s <code class="language-plaintext highlighter-rouge">maxAllowedHeaderSize</code> configuration on
+<code class="language-plaintext highlighter-rouge">HttpServer.Builder</code> bounds header size; the wire body has no
+explicit Avatica-side cap and inherits Jetty’s default. Very large
+SQL bodies or <code class="language-plaintext highlighter-rouge">TypedValue</code> payloads can exhaust heap.</li>
+  <li><strong>Result-set streaming.</strong> A backend query that returns a very
+large result exhausts server heap unless the caller uses the
+incremental fetch protocol correctly. Operator-tunable via fetch
+size.</li>
+  <li><strong>Connection accumulation.</strong> Long-lived Avatica connections keep
+backend JDBC connections open. A caller that opens many
+connections and never closes them exhausts backend resources.
+Mitigation is an operator-side connection cap.</li>
+</ul>
+
+<p>Once request-size and connection caps exist, a single reasonably-sized
+request that exceeds them is a configuration choice, not a
+vulnerability.</p>
+
+<h2 id="historical-cves">Historical CVEs</h2>
+
+<p>Avatica has published these CVEs relevant to this model, fixed in current releases;
+they are noted here as ground truth for the rule they establish.</p>
+
+<ul>
+  <li><strong>CVE-2022-36364</strong> — an untrusted URL supplied to the Avatica
+JDBC driver could load an arbitrary <code class="language-plaintext highlighter-rouge">httpclient_impl</code> class via
+<code class="language-plaintext highlighter-rouge">Class.forName</code>, without an interface gate. The fix added the
+<code class="language-plaintext highlighter-rouge">asSubclass(AvaticaHttpClient.class)</code> check that is now present in
+<code class="language-plaintext highlighter-rouge">AvaticaHttpClientFactoryImpl</code>. Established the surprising-class-
+loading rule for client-side connection properties.</li>
+</ul>
+
+<h2 id="triage-dispositions">Triage dispositions</h2>
+
+<p>Every security report against Avatica resolves to exactly one of:</p>
+
+<ul>
+  <li><strong>Valid</strong> — violates P1–P5, or matches an item in <a href="#always-a-vulnerability">Always a
+vulnerability</a>. Gets a fix. A demonstrated
+class-loading primitive qualifies on its own.</li>
+  <li><strong>Not a vulnerability (by design)</strong> — matches an item in <a href="#not-a-vulnerability">Not a
+vulnerability</a>: an unauthenticated or
+un-encrypted deployment the operator chose, backend driver
+behavior past the connection, cross-schema visibility that lives
+in the backend driver, <code class="language-plaintext highlighter-rouge">StandaloneServer</code> demo behavior, or a
+client that opted itself into a weakened trust posture. Close with
+a pointer to this model.</li>
+  <li><strong>Out of model</strong> — requires a capability the attacker does not
+have (changing a JVM system property, server-side configuration,
+the classpath), or lands in a layer this model assigns to the
+operator (network perimeter, authentication choice, TLS choice,
+filesystem permissions). Close; redirect to the operator or
+embedder.</li>
+  <li><strong>Backend concern</strong> — the report is really about the backend JDBC
+driver Avatica is fronting. Close; redirect to that project’s
+security process. If the backend is Apache Calcite, redirect to
+<a href="https://calcite.apache.org/docs/security_threat_model.html">Calcite’s threat
+model</a>.</li>
+  <li><strong>Known limitation</strong> — a <a href="#denial-of-service">Denial of service</a>
+gap whose control has not landed yet. Tracked as hardening, not a
+per-report vulnerability, until the bound exists.</li>
+  <li><strong>Duplicate</strong> — the same sink or root cause is already tracked in
+an open Jira. Link and close.</li>
+  <li><strong>Model gap</strong> — plausible, but this model does not clearly place
+it in or out. Escalate to the PMC to decide, then update this
+document with the ruling so the next report of its kind is no
+longer a gap.</li>
+</ul>
+
+          
+
+
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="section-nav">
+      <div class="left align-right">
+          
+            
+            
+            <a href="/avatica/docs/go_howto.html" class="prev">Previous</a>
+          
+      </div>
+      <div class="right align-left">
+          
+            
+            
+
+            
+            <a href="/avatica/docs/history.html" class="next">Next</a>
+          
+      </div>
+    </div>
+    <div class="clear"></div>
+    
+
+        </article>
+      </div>
+
+      <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    
+    <h4>Overview</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/avatica/docs/index.html">Background</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/avatica/docs/roadmap.html">Roadmap</a></li>
+
+
+</ul>
+
+    
+    <h4>Avatica Reference</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/avatica/docs/client_reference.html">Client Reference</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/avatica/docs/json_reference.html">JSON Reference</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/avatica/docs/protobuf_reference.html">Protobuf Reference</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/avatica/docs/howto.html">Avatica HOWTO</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/avatica/docs/security.html">Security</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/avatica/docs/compatibility.html">Compatibility</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/avatica/docs/custom_client_artifacts.html">Custom Client Artifacts</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/avatica/docs/docker.html">Docker Images</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/avatica/docs/protocol_testing.html">Protocol Testing</a></li>
+
+
+</ul>
+
+    
+    <h4>Avatica Go Client Reference</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/avatica/docs/go_client_reference.html">Go Client Reference</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/avatica/docs/go_howto.html">HOWTO</a></li>
+
+
+</ul>
+
+    
+    <h4>Security</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class="current"><a href="/avatica/docs/security_threat_model.html">Threat model</a></li>
+
+
+</ul>
+
+    
+    <h4>Avatica Meta</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/avatica/docs/history.html">History</a></li>
+
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/avatica/docs/api/">API</a></li>
+
+
+</ul>
+
+    
+    <h4>Avatica Go Client Meta</h4>
+    
+
+<ul>
+
+  
+  
+  
+  
+
+  
+
+  <li class=""><a href="/avatica/docs/go_history.html">Go Client History</a></li>
+
+
+</ul>
+
+    
+  </aside>
+</div>
+
+
+      <div class="clear"></div>
+
+    </div>
+  </section>
+
+
+  <footer role="contentinfo">
+  <div id="poweredby">
+    <a href="http://www.apache.org/">
+      <span class="sr-only">Apache</span>
+      <img src="/avatica/img/feather.png" width="190" height="77" alt="Apache Logo"></a>
+  </div>
+  <div id="copyright">
+  <p>The contents of this website are &copy;&nbsp;2026
+     <a href="https://www.apache.org/">Apache Software Foundation</a>
+     under the terms of
+     the <a href="https://www.apache.org/licenses/LICENSE-2.0.html">
+     Apache&nbsp;License&nbsp;v2</a>. Apache Calcite and its logo are
+     trademarks of the Apache Software Foundation.
+  </p>
+  <p>
+      <a href="https://privacy.apache.org/policies/privacy-policy-public.html">Privacy Policy</a>
+  </p>
+  </div>
+</footer>
+
+  <script>
+  var anchorForId = function (id) {
+    var anchor = document.createElement("a");
+    anchor.className = "header-link";
+    anchor.href      = "#" + id;
+    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
+    anchor.title = "Permalink";
+    return anchor;
+  };
+
+  var linkifyAnchors = function (level, containingElement) {
+    var headers = containingElement.getElementsByTagName("h" + level);
+    for (var h = 0; h < headers.length; h++) {
+      var header = headers[h];
+
+      if (typeof header.id !== "undefined" && header.id !== "") {
+        header.appendChild(anchorForId(header.id));
+      }
+    }
+  };
+
+  document.onreadystatechange = function () {
+    if (this.readyState === "complete") {
+      var contentBlock = document.getElementsByClassName("docs")[0] || document.getElementsByClassName("news")[0];
+      if (!contentBlock) {
+        return;
+      }
+      for (var level = 1; level <= 6; level++) {
+        linkifyAnchors(level, contentBlock);
+      }
+    }
+  };
+</script>
+
+
+</body>
+</html>

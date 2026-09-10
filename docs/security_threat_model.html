@@ -286,6 +286,17 @@ visible.</li>
 must add it on purpose.</li>
   <li>A file, CSV, or JSON adapter reading the local path it was configured
 with. Opt-in, by the same reasoning as the os-adapter.</li>
+  <li>The Spark engine and its side effects: a local <code class="language-plaintext highlighter-rouge">JavaSparkContext</code>, a
+local HTTP class server that serves compiled query classes, and setting
+the <code class="language-plaintext highlighter-rouge">spark.repl.class.uri</code> JVM system property. The <code class="language-plaintext highlighter-rouge">spark</code> connection
+property alone does not activate the engine; it additionally requires
+the operator-set JVM system property <code class="language-plaintext highlighter-rouge">calcite.enable.spark=true</code>, a
+capability a query author does not have (see
+<a href="#attacker-and-trust-boundary">Attacker and trust boundary</a>). Opt-in,
+by the same reasoning as the os-adapter.</li>
+  <li>Reading the file or URL named by <code class="language-plaintext highlighter-rouge">model=&lt;uri&gt;</code>. The property names a
+resource the model handler reads on connection; letting an untrusted
+principal set connection properties authorises that read.</li>
   <li>Anything that needs a changed system property or classpath. Both are
 outside the attacker’s reach by assumption.</li>
   <li>The behavior of a third-party driver once Calcite has connected to the

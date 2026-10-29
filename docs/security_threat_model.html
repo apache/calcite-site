@@ -112,7 +112,11 @@ vulnerability.</p>
   <li><a href="#security-properties" id="markdown-toc-security-properties">Security properties</a></li>
   <li><a href="#always-a-vulnerability" id="markdown-toc-always-a-vulnerability">Always a vulnerability</a></li>
   <li><a href="#not-a-vulnerability" id="markdown-toc-not-a-vulnerability">Not a vulnerability</a></li>
-  <li><a href="#downstream-responsibilities" id="markdown-toc-downstream-responsibilities">Downstream responsibilities</a></li>
+  <li>
+<a href="#downstream-responsibilities" id="markdown-toc-downstream-responsibilities">Downstream responsibilities</a>    <ul>
+      <li><a href="#example-modules" id="markdown-toc-example-modules">Example modules</a></li>
+    </ul>
+  </li>
   <li>
 <a href="#surprising-vs-unsurprising-class-loading" id="markdown-toc-surprising-vs-unsurprising-class-loading">Surprising vs unsurprising class loading</a>    <ul>
       <li><a href="#triage-rule-for-class-loading-sinks" id="markdown-toc-triage-rule-for-class-loading-sinks">Triage rule for class-loading sinks</a></li>
@@ -286,6 +290,17 @@ visible.</li>
 must add it on purpose.</li>
   <li>A file, CSV, or JSON adapter reading the local path it was configured
 with. Opt-in, by the same reasoning as the os-adapter.</li>
+  <li>The file adapter dereferencing a remote URL (<code class="language-plaintext highlighter-rouge">http</code>, <code class="language-plaintext highlighter-rouge">https</code>, <code class="language-plaintext highlighter-rouge">ftp</code>, <code class="language-plaintext highlighter-rouge">jar</code>,
+…, or a <code class="language-plaintext highlighter-rouge">file:</code> URL naming a host, which Windows opens over SMB) named in a
+table <code class="language-plaintext highlighter-rouge">url</code> operand, once the URL matches the regular expression that the
+operator has set in the JVM system property <code class="language-plaintext highlighter-rouge">calcite.file.urls.allowed</code>. Only
+local <code class="language-plaintext highlighter-rouge">file:</code> is dereferenced by default; a query author cannot set the property
+(see <a href="#attacker-and-trust-boundary">Attacker and trust boundary</a>), so any
+fetch of an allowed URL is operator-authorised behaviour, not a P3
+violation. This includes any redirect the remote server returns:
+<code class="language-plaintext highlighter-rouge">calcite.file.urls.allowed</code> constrains only the URL in the operand,
+not where the server redirects the request. Opt-in, by the same reasoning
+as the os-adapter.</li>
   <li>The Spark engine and its side effects: a local <code class="language-plaintext highlighter-rouge">JavaSparkContext</code>, a
 local HTTP class server that serves compiled query classes, and setting
 the <code class="language-plaintext highlighter-rouge">spark.repl.class.uri</code> JVM system property. The <code class="language-plaintext highlighter-rouge">spark</code> connection
@@ -341,6 +356,15 @@ SPI; which classes are present is the operator’s trust decision.</li>
 references is configured and patched by the operator; its behavior past the
 connection boundary is out of this model.</li>
 </ul>
+
+<h3 id="example-modules">Example modules</h3>
+
+<p>Modules under <code class="language-plaintext highlighter-rouge">example/</code> (<code class="language-plaintext highlighter-rouge">example-csv</code>, <code class="language-plaintext highlighter-rouge">example-function</code>) are teaching
+artifacts referenced from the <a href="/docs/tutorial.html">tutorial</a>,
+not production adapters. They are held to a lower bar than the rest of Calcite:
+a finding whose only reachable path is through an <code class="language-plaintext highlighter-rouge">example/</code> module, with no
+matching path in a production module, is a documentation issue rather than a
+vulnerability.</p>
 
 <h2 id="surprising-vs-unsurprising-class-loading">Surprising vs unsurprising class loading</h2>
 

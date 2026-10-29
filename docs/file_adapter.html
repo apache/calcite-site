@@ -101,6 +101,12 @@
 <p>The file adapter is able to read files in a variety of formats,
 and can also read files over various protocols, such as HTTP.</p>
 
+<p>The file adapter dereferences only local <code class="language-plaintext highlighter-rouge">file:</code> sources by default. Table <code class="language-plaintext highlighter-rouge">url</code>
+operands naming remote protocols (<code class="language-plaintext highlighter-rouge">http</code>, <code class="language-plaintext highlighter-rouge">https</code>, <code class="language-plaintext highlighter-rouge">ftp</code>, <code class="language-plaintext highlighter-rouge">jar</code>, …) or remote
+<code class="language-plaintext highlighter-rouge">file:</code> URLs (<code class="language-plaintext highlighter-rouge">file://host/...</code>) are
+supported only if the adapter is deployed with the appropriate system
+property, see <a href="#enabling-remote-fetches">Enabling remote fetches</a>.</p>
+
 <p>For example if you define:</p>
 
 <ul>
@@ -227,7 +233,10 @@ sqlline&gt; <span class="k">select</span> <span class="k">*</span> from sales.em
 <p>Now for a more complex example. This time we connect to Wikipedia via
 HTTP, read pages for US states and cities, and extract data from HTML
 tables on those pages. The tables have more complex formats, and the
-file adapter helps us locate and parse data in those tables.</p>
+file adapter helps us locate and parse data in those tables.
+Note: since remote protocols are disabled by default (see
+<a href="#enabling-remote-fetches">Enabling remote fetches</a>), run this example with
+<code class="language-plaintext highlighter-rouge">JAVA_OPTS='-Dcalcite.file.urls.allowed=https?://en\.wikipedia\.org/.*' ./sqlline</code>.</p>
 
 <p>Tables can be simply defined for immediate gratification:</p>
 
@@ -392,6 +401,14 @@ sqlline&gt; <span class="k">select </span>distinct deptno from depts<span class=
 | 30     |
 +--------+
 3 rows selected <span class="o">(</span>0.985 seconds<span class="o">)</span></code></pre></figure>
+
+<h2 id="enabling-remote-fetches">Enabling remote fetches</h2>
+
+<p>From version 1.43.0 onwards, the file adapter dereferences only local <code class="language-plaintext highlighter-rouge">file:</code> sources by default.
+Table <code class="language-plaintext highlighter-rouge">url</code> operands naming remote URLs (<code class="language-plaintext highlighter-rouge">http</code>, <code class="language-plaintext highlighter-rouge">https</code>, <code class="language-plaintext highlighter-rouge">ftp</code>, <code class="language-plaintext highlighter-rouge">jar</code>, <code class="language-plaintext highlighter-rouge">file://host/</code>, …) are
+rejected with <code class="language-plaintext highlighter-rouge">IllegalArgumentException</code> unless they match the regular expression specified by the
+<a href="/javadocAggregate/org/apache/calcite/config/CalciteSystemProperty.html#FILE_URLS_ALLOWED"><code class="language-plaintext highlighter-rouge">calcite.file.urls.allowed</code></a>
+system property.</p>
 
 <h2 id="future-improvements">Future improvements</h2>
 
